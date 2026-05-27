@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form - TradePlus Admin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+               background: #0f1923; color: #e0e0e0; min-height: 100vh; }
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar { width: 240px; background: #1a2744; padding: 24px 0; border-right: 1px solid rgba(255,255,255,0.05); }
+        .sidebar .logo { color: #fff; font-size: 22px; font-weight: 700; padding: 0 24px 24px;
+                         border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px; }
+        .sidebar a { display: block; color: rgba(255,255,255,0.6); text-decoration: none;
+                     padding: 12px 24px; transition: all 0.2s; font-size: 14px; }
+        .sidebar a:hover, .sidebar a.active { color: #4a9eff; background: rgba(74,158,255,0.08); }
+        .main { flex: 1; padding: 32px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .header h1 { color: #fff; font-size: 24px; }
+        .form-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+                     border-radius: 12px; padding: 32px; max-width: 800px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 14px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+            color: #fff; font-size: 15px; outline: none; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #4a9eff; }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-group select { cursor: pointer; }
+        .form-group select option { background: #1a2744; color: #fff; }
+        .btn { display: inline-block; padding: 10px 20px; border-radius: 8px; text-decoration: none;
+               font-size: 14px; font-weight: 500; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, #4a9eff, #2b7de9); color: #fff; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(74,158,255,0.4); }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+        .form-actions { display: flex; gap: 12px; margin-top: 24px; }
+        .image-preview { margin-top: 8px; }
+        .image-preview img { max-width: 200px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <nav class="sidebar">
+            <div class="logo">TradePlus</div>
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/products" class="active">Products</a>
+            <a href="/admin/categories">Categories</a>
+            <a href="/admin/inquiries">Inquiries</a>
+        </nav>
+        <div class="main">
+            <div class="header">
+                <h1 th:text="${product.id != null} ? 'Edit Product' : 'Add Product'">Product Form</h1>
+            </div>
+            <div class="form-card">
+                <form th:action="@{/admin/products/save}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" th:value="${product.id}">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Product Name (Chinese)</label>
+                            <input type="text" name="nameCn" th:value="${product.nameCn}" placeholder="e.g. 智能蓝牙音箱" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Name (English)</label>
+                            <input type="text" name="nameEn" th:value="${product.nameEn}" placeholder="e.g. Smart Bluetooth Speaker" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="categoryId">
+                                <option value="">-- Select Category --</option>
+                                <option th:each="cat : ${categories}"
+                                        th:value="${cat.id}"
+                                        th:text="${cat.nameCn + ' / ' + cat.nameEn}"
+                                        th:selected="${cat.id == product.categoryId}">Category</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="text" name="price" th:value="${product.price}" placeholder="e.g. $29.99 - $89.99">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Chinese)</label>
+                        <textarea name="descriptionCn" th:text="${product.descriptionCn}" placeholder="Product description in Chinese..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Description (English)</label>
+                        <textarea name="descriptionEn" th:text="${product.descriptionEn}" placeholder="Product description in English..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Product Image</label>
+                            <input type="file" name="imageFile" accept="image/*">
+                            <div class="image-preview" th:if="${product.mainImage != null}">
+                                <img th:src="${product.mainImage}" alt="Current image">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select name="status">
+                                <option value="1" th:selected="${product.status == 1}">Active</option>
+                                <option value="0" th:selected="${product.status == 0}">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Sort Order</label>
+                            <input type="number" name="sortOrder" th:value="${product.sortOrder != null} ? ${product.sortOrder} : 0">
+                        </div>
+                        <div class="form-group">
+                            <label>Specifications (JSON)</label>
+                            <textarea name="specifications" th:text="${product.specifications}" placeholder='{"key":"value"}' style="min-height:80px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Product</button>
+                        <a href="/admin/products" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradesite.mapper.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.tradesite.entity.Product">
+        <id column="id" property="id"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="name_cn" property="nameCn"/>
+        <result column="name_en" property="nameEn"/>
+        <result column="description_cn" property="descriptionCn"/>
+        <result column="description_en" property="descriptionEn"/>
+        <result column="main_image" property="mainImage"/>
+        <result column="images" property="images"/>
+        <result column="price" property="price"/>
+        <result column="specifications" property="specifications"/>
+        <result column="status" property="status"/>
+        <result column="sort_order" property="sortOrder"/>
+        <result column="create_time" property="createTime"/>
+        <result column="category_name" property="categoryName"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT p.*, COALESCE(pc.name_cn, '') as category_name
+        FROM product p
+        LEFT JOIN product_category pc ON p.category_id = pc.id
+        ORDER BY p.sort_order ASC, p.create_time DESC
+    </select>
+
+    <select id="findByCategoryId" resultMap="BaseResultMap">
+        SELECT p.*, COALESCE(pc.name_cn, '') as category_name
+        FROM product p
+        LEFT JOIN product_category pc ON p.category_id = pc.id
+        WHERE p.category_id = #{categoryId} AND p.status = 1
+        ORDER BY p.sort_order ASC
+    </select>
+
+    <select id="findFeatured" resultMap="BaseResultMap">
+        SELECT p.*, COALESCE(pc.name_cn, '') as category_name
+        FROM product p
+        LEFT JOIN product_category pc ON p.category_id = pc.id
+        WHERE p.status = 1
+        ORDER BY p.sort_order ASC
+        LIMIT #{limit}
+    </select>
+
+    <select id="findById" resultMap="BaseResultMap">
+        SELECT p.*, COALESCE(pc.name_cn, '') as category_name
+        FROM product p
+        LEFT JOIN product_category pc ON p.category_id = pc.id
+        WHERE p.id = #{id}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM product
+    </select>
+
+    <insert id="insert" parameterType="com.tradesite.entity.Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product (category_id, name_cn, name_en, description_cn, description_en,
+            main_image, images, price, specifications, status, sort_order)
+        VALUES (#{categoryId}, #{nameCn}, #{nameEn}, #{descriptionCn}, #{descriptionEn},
+            #{mainImage}, #{images}, #{price}, #{specifications}, #{status}, #{sortOrder})
+    </insert>
+
+    <update id="update" parameterType="com.tradesite.entity.Product">
+        UPDATE product
+        SET category_id = #{categoryId}, name_cn = #{nameCn}, name_en = #{nameEn},
+            description_cn = #{descriptionCn}, description_en = #{descriptionEn},
+            main_image = #{mainImage}, images = #{images}, price = #{price},
+            specifications = #{specifications}, status = #{status}, sort_order = #{sortOrder}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM product WHERE id = #{id}
+    </delete>
+
+</mapper>

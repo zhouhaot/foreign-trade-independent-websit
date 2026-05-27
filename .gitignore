@@ -1,0 +1,38 @@
+# IDE
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Frontend
+node_modules/
+dist/
+build/
+.vite/
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/

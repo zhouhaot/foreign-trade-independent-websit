@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiry Detail - TradePlus Admin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+               background: #0f1923; color: #e0e0e0; min-height: 100vh; }
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar { width: 240px; background: #1a2744; padding: 24px 0; border-right: 1px solid rgba(255,255,255,0.05); }
+        .sidebar .logo { color: #fff; font-size: 22px; font-weight: 700; padding: 0 24px 24px;
+                         border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px; }
+        .sidebar a { display: block; color: rgba(255,255,255,0.6); text-decoration: none;
+                     padding: 12px 24px; transition: all 0.2s; font-size: 14px; }
+        .sidebar a:hover, .sidebar a.active { color: #4a9eff; background: rgba(74,158,255,0.08); }
+        .main { flex: 1; padding: 32px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .header h1 { color: #fff; font-size: 24px; }
+        .btn { display: inline-block; padding: 10px 20px; border-radius: 8px; text-decoration: none;
+               font-size: 14px; font-weight: 500; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+        .detail-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+                       border-radius: 12px; padding: 32px; max-width: 700px; }
+        .detail-row { display: flex; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-label { width: 140px; color: rgba(255,255,255,0.4); font-size: 14px; flex-shrink: 0; }
+        .detail-value { color: #fff; font-size: 15px; }
+        .detail-value.message { line-height: 1.6; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <nav class="sidebar">
+            <div class="logo">TradePlus</div>
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/products">Products</a>
+            <a href="/admin/categories">Categories</a>
+            <a href="/admin/inquiries" class="active">Inquiries</a>
+        </nav>
+        <div class="main">
+            <div class="header">
+                <h1>Inquiry Detail</h1>
+                <a href="/admin/inquiries" class="btn btn-secondary">Back to List</a>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <div class="detail-label">ID</div>
+                    <div class="detail-value" th:text="${inquiry.id}">1</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Contact Name</div>
+                    <div class="detail-value" th:text="${inquiry.contactName}">-</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Email</div>
+                    <div class="detail-value">
+                        <a th:href="'mailto:' + ${inquiry.email}" style="color:#4a9eff;" th:text="${inquiry.email}">-</a>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Phone</div>
+                    <div class="detail-value" th:text="${inquiry.phone ?: 'N/A'}">-</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Company</div>
+                    <div class="detail-value" th:text="${inquiry.companyName ?: 'N/A'}">-</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Related Product</div>
+                    <div class="detail-value" th:text="${inquiry.productName ?: 'N/A'}">-</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Date</div>
+                    <div class="detail-value" th:text="${#temporals.format(inquiry.createTime, 'yyyy-MM-dd HH:mm:ss')}">-</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Message</div>
+                    <div class="detail-value message" th:text="${inquiry.message}">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
