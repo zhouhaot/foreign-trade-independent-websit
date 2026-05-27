@@ -9,6 +9,7 @@
       <nav class="nav" :class="{ open: menuOpen }">
         <router-link to="/" class="nav-link" @click="menuOpen = false">{{ t('nav.home') }}</router-link>
         <router-link to="/products" class="nav-link" @click="menuOpen = false">{{ t('nav.products') }}</router-link>
+        <router-link to="/news" class="nav-link" @click="menuOpen = false">{{ t('nav.news') }}</router-link>
         <router-link to="/about" class="nav-link" @click="menuOpen = false">{{ t('nav.about') }}</router-link>
         <router-link to="/contact" class="nav-link" @click="menuOpen = false">{{ t('nav.contact') }}</router-link>
       </nav>

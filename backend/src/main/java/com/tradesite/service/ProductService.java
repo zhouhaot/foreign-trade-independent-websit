@@ -21,6 +21,17 @@ public class ProductService {
         return productMapper.findByCategoryId(categoryId);
     }
 
+    public List<Product> search(Integer categoryId, String keyword) {
+        if (keyword != null && !keyword.isEmpty() && categoryId != null) {
+            return productMapper.findByCategoryAndKeyword(categoryId, keyword);
+        } else if (keyword != null && !keyword.isEmpty()) {
+            return productMapper.findByKeyword(keyword);
+        } else if (categoryId != null) {
+            return productMapper.findByCategoryId(categoryId);
+        }
+        return productMapper.findAll();
+    }
+
     public List<Product> findFeatured(int limit) {
         return productMapper.findFeatured(limit);
     }

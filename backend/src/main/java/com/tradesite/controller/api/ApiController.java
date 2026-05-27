@@ -1,9 +1,14 @@
 package com.tradesite.controller.api;
 
 import com.tradesite.common.Result;
+import com.tradesite.entity.Article;
+import com.tradesite.entity.Banner;
 import com.tradesite.entity.Inquiry;
 import com.tradesite.entity.Product;
 import com.tradesite.entity.ProductCategory;
+import com.tradesite.service.ArticleService;
+import com.tradesite.service.BannerService;
+import com.tradesite.service.EmailService;
 import com.tradesite.service.InquiryService;
 import com.tradesite.service.ProductCategoryService;
 import com.tradesite.service.ProductService;
@@ -25,6 +30,22 @@ public class ApiController {
     @Autowired
     private InquiryService inquiryService;
 
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private BannerService bannerService;
+
+    @Autowired
+    private EmailService emailService;
+
+    // ===== Banners =====
+
+    @GetMapping("/banners")
+    public Result<List<Banner>> getBanners() {
+        return Result.success(bannerService.findActive());
+    }
+
     // ===== Categories =====
 
     @GetMapping("/categories")
@@ -35,11 +56,10 @@ public class ApiController {
     // ===== Products =====
 
     @GetMapping("/products")
-    public Result<List<Product>> getProducts(@RequestParam(required = false) Integer categoryId) {
-        if (categoryId != null) {
-            return Result.success(productService.findByCategoryId(categoryId));
-        }
-        return Result.success(productService.findAll());
+    public Result<List<Product>> getProducts(
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false) String keyword) {
+        return Result.success(productService.search(categoryId, keyword));
     }
 
     @GetMapping("/products/featured")
@@ -56,6 +76,22 @@ public class ApiController {
         return Result.success(product);
     }
 
+    // ===== Articles =====
+
+    @GetMapping("/articles")
+    public Result<List<Article>> getArticles(@RequestParam(defaultValue = "10") int limit) {
+        return Result.success(articleService.findPublished(limit));
+    }
+
+    @GetMapping("/articles/{id}")
+    public Result<Article> getArticle(@PathVariable Integer id) {
+        Article article = articleService.findById(id);
+        if (article == null) {
+            return Result.error(404, "Article not found");
+        }
+        return Result.success(article);
+    }
+
     // ===== Inquiries =====
 
     @PostMapping("/inquiries")
@@ -67,6 +103,7 @@ public class ApiController {
             return Result.error("Email is required");
         }
         inquiryService.save(inquiry);
+        emailService.sendInquiryNotification(inquiry);
         return Result.success("Inquiry submitted successfully", null);
     }
 }

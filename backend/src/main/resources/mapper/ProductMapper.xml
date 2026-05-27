@@ -34,6 +34,31 @@
         ORDER BY p.sort_order ASC
     </select>
 
+    <select id="findByKeyword" resultMap="BaseResultMap">
+        SELECT p.*, COALESCE(pc.name_cn, '') as category_name
+        FROM product p
+        LEFT JOIN product_category pc ON p.category_id = pc.id
+        WHERE p.status = 1
+        AND (p.name_cn LIKE '%' || #{keyword} || '%'
+             OR p.name_en LIKE '%' || #{keyword} || '%'
+             OR p.description_cn LIKE '%' || #{keyword} || '%'
+             OR p.description_en LIKE '%' || #{keyword} || '%')
+        ORDER BY p.sort_order ASC
+    </select>
+
+    <select id="findByCategoryAndKeyword" resultMap="BaseResultMap">
+        SELECT p.*, COALESCE(pc.name_cn, '') as category_name
+        FROM product p
+        LEFT JOIN product_category pc ON p.category_id = pc.id
+        WHERE p.status = 1
+        AND p.category_id = #{categoryId}
+        AND (p.name_cn LIKE '%' || #{keyword} || '%'
+             OR p.name_en LIKE '%' || #{keyword} || '%'
+             OR p.description_cn LIKE '%' || #{keyword} || '%'
+             OR p.description_en LIKE '%' || #{keyword} || '%')
+        ORDER BY p.sort_order ASC
+    </select>
+
     <select id="findFeatured" resultMap="BaseResultMap">
         SELECT p.*, COALESCE(pc.name_cn, '') as category_name
         FROM product p

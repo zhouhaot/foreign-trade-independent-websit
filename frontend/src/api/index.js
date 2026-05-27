@@ -9,11 +9,19 @@ const api = axios.create({
 })
 
 export default {
+  // Banners
+  getBanners() {
+    return api.get('/banners')
+  },
+  // Categories
   getCategories() {
     return api.get('/categories')
   },
-  getProducts(categoryId) {
-    const params = categoryId ? { categoryId } : {}
+  // Products
+  getProducts(categoryId, keyword) {
+    const params = {}
+    if (categoryId) params.categoryId = categoryId
+    if (keyword) params.keyword = keyword
     return api.get('/products', { params })
   },
   getFeaturedProducts(limit = 8) {
@@ -22,6 +30,14 @@ export default {
   getProduct(id) {
     return api.get(`/products/${id}`)
   },
+  // Articles
+  getArticles(limit = 10) {
+    return api.get('/articles', { params: { limit } })
+  },
+  getArticle(id) {
+    return api.get(`/articles/${id}`)
+  },
+  // Inquiries
   submitInquiry(data) {
     return api.post('/inquiries', data)
   }

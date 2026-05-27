@@ -9,6 +9,8 @@ import java.util.List;
 public interface ProductMapper {
     List<Product> findAll();
     List<Product> findByCategoryId(@Param("categoryId") Integer categoryId);
+    List<Product> findByKeyword(@Param("keyword") String keyword);
+    List<Product> findByCategoryAndKeyword(@Param("categoryId") Integer categoryId, @Param("keyword") String keyword);
     List<Product> findFeatured(@Param("limit") int limit);
     Product findById(@Param("id") Integer id);
     int count();

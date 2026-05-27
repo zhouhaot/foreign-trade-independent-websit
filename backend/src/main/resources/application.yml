@@ -31,6 +31,19 @@ spring:
       schema-locations: classpath:db/schema.sql
       data-locations: classpath:db/data.sql
 
+  # Mail Configuration
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: your-email@qq.com
+    password: your-smtp-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 # Server
 server:
   port: 8080
@@ -38,3 +51,5 @@ server:
 # File storage
 app:
   upload-dir: src/main/resources/uploads
+  # Admin email for receiving inquiry notifications
+  admin-email: your-email@qq.com

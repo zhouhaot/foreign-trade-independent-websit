@@ -8,22 +8,32 @@
 
     <section class="section">
       <div class="container">
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" v-model="keyword" :placeholder="t('products.search_placeholder')"
+                   @input="handleSearch" class="search-input">
+            <button v-if="keyword" class="search-clear" @click="clearSearch">×</button>
+          </div>
+        </div>
+
         <!-- Category Filter -->
         <div class="filter-bar">
-          <button class="filter-btn" :class="{ active: !selectedCategory }" @click="selectedCategory = null">
+          <button class="filter-btn" :class="{ active: !selectedCategory }" @click="filterByCategory(null)">
             {{ t('products.all_categories') }}
           </button>
           <button v-for="cat in categories" :key="cat.id"
                   class="filter-btn"
                   :class="{ active: selectedCategory === cat.id }"
-                  @click="selectedCategory = cat.id">
+                  @click="filterByCategory(cat.id)">
             {{ locale === 'zh' ? cat.nameCn : cat.nameEn }}
           </button>
         </div>
 
         <!-- Products Grid -->
-        <div class="products-grid" v-if="filteredProducts.length">
-          <div v-for="product in filteredProducts" :key="product.id" class="product-card card">
+        <div class="products-grid" v-if="products.length">
+          <div v-for="product in products" :key="product.id" class="product-card card">
             <router-link :to="`/products/${product.id}`" class="product-image">
               <img :src="product.mainImage || '/uploads/placeholder.png'" :alt="product.nameEn">
             </router-link>
@@ -56,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import api from '../api'
 
@@ -64,20 +74,38 @@ const { t, locale } = useI18n()
 const products = ref([])
 const categories = ref([])
 const selectedCategory = ref(null)
+const keyword = ref('')
+let searchTimer = null
 
-const filteredProducts = computed(() => {
-  if (!selectedCategory.value) return products.value
-  return products.value.filter(p => p.categoryId === selectedCategory.value)
-})
+async function loadProducts() {
+  try {
+    const res = await api.getProducts(selectedCategory.value, keyword.value)
+    products.value = res.data.data || []
+  } catch (e) {
+    console.error('Failed to load products:', e)
+  }
+}
+
+function handleSearch() {
+  clearTimeout(searchTimer)
+  searchTimer = setTimeout(() => loadProducts(), 300)
+}
+
+function clearSearch() {
+  keyword.value = ''
+  loadProducts()
+}
+
+function filterByCategory(catId) {
+  selectedCategory.value = catId
+  loadProducts()
+}
 
 onMounted(async () => {
   try {
-    const [prodRes, catRes] = await Promise.all([
-      api.getProducts(),
-      api.getCategories()
-    ])
-    products.value = prodRes.data.data || []
+    const catRes = await api.getCategories()
     categories.value = catRes.data.data || []
+    await loadProducts()
   } catch (e) {
     console.error('Failed to load data:', e)
   }
@@ -96,6 +124,64 @@ onMounted(async () => {
   color: var(--color-white);
   text-align: center;
 }
+
+.search-bar {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 44px 14px 48px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-white);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus { border-color: var(--color-primary); }
+
+.search-input::placeholder { color: var(--color-text-muted); }
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.search-clear:hover { background: rgba(255, 255, 255, 0.2); }
 
 .filter-bar {
   display: flex;
@@ -116,10 +202,7 @@ onMounted(async () => {
   transition: all 0.2s;
 }
 
-.filter-btn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
+.filter-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
 
 .filter-btn.active {
   background: var(--color-primary);
@@ -133,10 +216,7 @@ onMounted(async () => {
   gap: 24px;
 }
 
-.product-card {
-  display: flex;
-  flex-direction: column;
-}
+.product-card { display: flex; flex-direction: column; }
 
 .product-image {
   display: block;
@@ -152,9 +232,7 @@ onMounted(async () => {
   transition: transform 0.5s;
 }
 
-.product-card:hover .product-image img {
-  transform: scale(1.05);
-}
+.product-card:hover .product-image img { transform: scale(1.05); }
 
 .product-info {
   padding: 24px;
@@ -181,9 +259,7 @@ onMounted(async () => {
   transition: color 0.2s;
 }
 
-.product-name:hover {
-  color: var(--color-primary);
-}
+.product-name:hover { color: var(--color-primary); }
 
 .product-desc {
   font-size: 14px;
@@ -209,25 +285,11 @@ onMounted(async () => {
   color: var(--color-primary);
 }
 
-.btn-sm {
-  padding: 8px 16px;
-  font-size: 13px;
-}
+.btn-sm { padding: 8px 16px; font-size: 13px; }
 
-.empty-state {
-  text-align: center;
-  padding: 80px 0;
-}
-
-.empty-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-
-.empty-state p {
-  color: var(--color-text-muted);
-  font-size: 16px;
-}
+.empty-state { text-align: center; padding: 80px 0; }
+.empty-icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state p { color: var(--color-text-muted); font-size: 16px; }
 
 @media (max-width: 768px) {
   .page-title { font-size: 32px; }

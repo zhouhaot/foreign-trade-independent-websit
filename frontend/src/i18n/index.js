@@ -5,6 +5,7 @@ const messages = {
     nav: {
       home: 'Home',
       products: 'Products',
+      news: 'News',
       about: 'About Us',
       contact: 'Contact'
     },
@@ -30,7 +31,15 @@ const messages = {
       no_products: 'No products found',
       contact_for_price: 'Contact for Price',
       view_detail: 'View Details',
-      specifications: 'Specifications'
+      specifications: 'Specifications',
+      search_placeholder: 'Search products...'
+    },
+    news: {
+      title: 'News & Insights',
+      subtitle: 'Industry news, product updates, and expert insights',
+      no_articles: 'No articles yet',
+      read_more: 'Read More',
+      back: 'Back to News'
     },
     about: {
       title: 'About Us',
@@ -73,6 +82,7 @@ const messages = {
     nav: {
       home: '首页',
       products: '产品中心',
+      news: '新闻资讯',
       about: '关于我们',
       contact: '联系我们'
     },
@@ -98,7 +108,15 @@ const messages = {
       no_products: '暂无产品',
       contact_for_price: '询价',
       view_detail: '查看详情',
-      specifications: '规格参数'
+      specifications: '规格参数',
+      search_placeholder: '搜索产品...'
+    },
+    news: {
+      title: '新闻资讯',
+      subtitle: '行业动态、产品更新与专业见解',
+      no_articles: '暂无文章',
+      read_more: '阅读全文',
+      back: '返回新闻列表'
     },
     about: {
       title: '关于我们',

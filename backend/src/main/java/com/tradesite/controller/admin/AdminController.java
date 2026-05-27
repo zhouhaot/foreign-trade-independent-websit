@@ -1,8 +1,12 @@
 package com.tradesite.controller.admin;
 
+import com.tradesite.entity.Article;
+import com.tradesite.entity.Banner;
 import com.tradesite.entity.Inquiry;
 import com.tradesite.entity.Product;
 import com.tradesite.entity.ProductCategory;
+import com.tradesite.service.ArticleService;
+import com.tradesite.service.BannerService;
 import com.tradesite.service.InquiryService;
 import com.tradesite.service.ProductCategoryService;
 import com.tradesite.service.ProductService;
@@ -32,7 +36,22 @@ public class AdminController {
     @Autowired
     private InquiryService inquiryService;
 
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private BannerService bannerService;
+
     private final Path uploadDir = Paths.get("src/main/resources/uploads");
+
+    private void uploadImage(MultipartFile file, java.util.function.Consumer<String> setter) throws IOException {
+        if (file != null && !file.isEmpty()) {
+            Files.createDirectories(uploadDir);
+            String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            Files.copy(file.getInputStream(), uploadDir.resolve(filename));
+            setter.accept("/uploads/" + filename);
+        }
+    }
 
     // ===== Login =====
 
@@ -49,6 +68,7 @@ public class AdminController {
         model.addAttribute("inquiryCount", inquiryService.count());
         model.addAttribute("unreadCount", inquiryService.countUnread());
         model.addAttribute("categoryCount", categoryService.findAll().size());
+        model.addAttribute("articleCount", articleService.count());
         return "admin/dashboard";
     }
 
@@ -112,12 +132,7 @@ public class AdminController {
     public String saveProduct(Product product,
                               @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
                               RedirectAttributes redirectAttributes) throws IOException {
-        if (imageFile != null && !imageFile.isEmpty()) {
-            Files.createDirectories(uploadDir);
-            String filename = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
-            Files.copy(imageFile.getInputStream(), uploadDir.resolve(filename));
-            product.setMainImage("/uploads/" + filename);
-        }
+        uploadImage(imageFile, product::setMainImage);
         productService.save(product);
         redirectAttributes.addFlashAttribute("success", "Product saved successfully");
         return "redirect:/admin/products";
@@ -150,5 +165,79 @@ public class AdminController {
         inquiryService.deleteById(id);
         redirectAttributes.addFlashAttribute("success", "Inquiry deleted successfully");
         return "redirect:/admin/inquiries";
+    }
+
+    // ===== Articles =====
+
+    @GetMapping("/articles")
+    public String articles(Model model) {
+        model.addAttribute("articles", articleService.findAll());
+        return "admin/articles";
+    }
+
+    @GetMapping("/articles/add")
+    public String addArticleForm(Model model) {
+        model.addAttribute("article", new Article());
+        return "admin/article-form";
+    }
+
+    @GetMapping("/articles/edit/{id}")
+    public String editArticleForm(@PathVariable Integer id, Model model) {
+        model.addAttribute("article", articleService.findById(id));
+        return "admin/article-form";
+    }
+
+    @PostMapping("/articles/save")
+    public String saveArticle(Article article,
+                              @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                              RedirectAttributes redirectAttributes) throws IOException {
+        uploadImage(imageFile, article::setCoverImage);
+        articleService.save(article);
+        redirectAttributes.addFlashAttribute("success", "Article saved successfully");
+        return "redirect:/admin/articles";
+    }
+
+    @PostMapping("/articles/delete/{id}")
+    public String deleteArticle(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        articleService.deleteById(id);
+        redirectAttributes.addFlashAttribute("success", "Article deleted successfully");
+        return "redirect:/admin/articles";
+    }
+
+    // ===== Banners =====
+
+    @GetMapping("/banners")
+    public String banners(Model model) {
+        model.addAttribute("banners", bannerService.findAll());
+        return "admin/banners";
+    }
+
+    @GetMapping("/banners/add")
+    public String addBannerForm(Model model) {
+        model.addAttribute("banner", new Banner());
+        return "admin/banner-form";
+    }
+
+    @GetMapping("/banners/edit/{id}")
+    public String editBannerForm(@PathVariable Integer id, Model model) {
+        model.addAttribute("banner", bannerService.findById(id));
+        return "admin/banner-form";
+    }
+
+    @PostMapping("/banners/save")
+    public String saveBanner(Banner banner,
+                             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                             RedirectAttributes redirectAttributes) throws IOException {
+        uploadImage(imageFile, banner::setImage);
+        bannerService.save(banner);
+        redirectAttributes.addFlashAttribute("success", "Banner saved successfully");
+        return "redirect:/admin/banners";
+    }
+
+    @PostMapping("/banners/delete/{id}")
+    public String deleteBanner(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        bannerService.deleteById(id);
+        redirectAttributes.addFlashAttribute("success", "Banner deleted successfully");
+        return "redirect:/admin/banners";
     }
 }

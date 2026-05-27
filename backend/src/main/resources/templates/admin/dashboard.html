@@ -20,7 +20,7 @@
         .header h1 { color: #fff; font-size: 24px; }
         .header .logout { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; }
         .header .logout:hover { color: #ff4757; }
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
+        .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-bottom: 32px; }
         .stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
                      border-radius: 12px; padding: 24px; }
         .stat-card .label { color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 8px; }
@@ -39,6 +39,8 @@
             <a href="/admin/products">Products</a>
             <a href="/admin/categories">Categories</a>
             <a href="/admin/inquiries">Inquiries</a>
+            <a href="/admin/articles">Articles</a>
+            <a href="/admin/banners">Banners</a>
         </nav>
         <div class="main">
             <div class="header">
@@ -61,6 +63,10 @@
                 <div class="stat-card">
                     <div class="label">Unread Inquiries</div>
                     <div class="value unread" th:text="${unreadCount}">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Articles</div>
+                    <div class="value" th:text="${articleCount}">0</div>
                 </div>
             </div>
             <div class="content">

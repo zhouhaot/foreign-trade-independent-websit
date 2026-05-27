@@ -1,7 +1,40 @@
 <template>
   <div class="home">
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Banner Carousel -->
+    <section class="hero" v-if="banners.length">
+      <div class="hero-bg">
+        <div class="hero-gradient"></div>
+        <div class="hero-grid"></div>
+      </div>
+      <div class="carousel">
+        <div class="carousel-inner" :style="{ transform: `translateX(-${currentBanner * 100}%)` }">
+          <div v-for="(banner, i) in banners" :key="i" class="carousel-slide">
+            <div class="container hero-content">
+              <h1 class="hero-title fade-in-up">
+                {{ locale === 'zh' ? banner.titleCn : banner.titleEn }}
+              </h1>
+              <p class="hero-subtitle fade-in-up fade-in-up-delay-1">
+                {{ locale === 'zh' ? banner.subtitleCn : banner.subtitleEn }}
+              </p>
+              <div class="hero-actions fade-in-up fade-in-up-delay-2">
+                <router-link :to="banner.linkUrl || '/products'" class="btn btn-primary">
+                  {{ t('home.hero_cta') }}
+                  <span>→</span>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots" v-if="banners.length > 1">
+          <button v-for="(_, i) in banners" :key="i"
+                  :class="{ active: currentBanner === i }"
+                  @click="currentBanner = i"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero (fallback when no banners) -->
+    <section class="hero" v-else>
       <div class="hero-bg">
         <div class="hero-gradient"></div>
         <div class="hero-grid"></div>
@@ -22,7 +55,6 @@
     <section class="section">
       <div class="container">
         <h2 class="section-title">{{ t('home.featured') }}</h2>
-        <p class="section-subtitle">{{ t('home.why_quality_desc') }}</p>
         <div class="products-grid">
           <div v-for="product in featuredProducts" :key="product.id" class="product-card card">
             <div class="product-image">
@@ -66,12 +98,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import api from '../api'
 
 const { t, locale } = useI18n()
 const featuredProducts = ref([])
+const banners = ref([])
+const currentBanner = ref(0)
+let bannerTimer = null
 
 const features = [
   { icon: '✦', titleKey: 'home.why_quality', descKey: 'home.why_quality_desc' },
@@ -80,13 +115,30 @@ const features = [
   { icon: '◆', titleKey: 'home.why_price', descKey: 'home.why_price_desc' }
 ]
 
+function startBannerRotation() {
+  if (banners.value.length > 1) {
+    bannerTimer = setInterval(() => {
+      currentBanner.value = (currentBanner.value + 1) % banners.value.length
+    }, 5000)
+  }
+}
+
 onMounted(async () => {
   try {
-    const res = await api.getFeaturedProducts(8)
-    featuredProducts.value = res.data.data || []
+    const [prodRes, bannerRes] = await Promise.all([
+      api.getFeaturedProducts(8),
+      api.getBanners()
+    ])
+    featuredProducts.value = prodRes.data.data || []
+    banners.value = bannerRes.data.data || []
+    startBannerRotation()
   } catch (e) {
-    console.error('Failed to load products:', e)
+    console.error('Failed to load data:', e)
   }
+})
+
+onUnmounted(() => {
+  if (bannerTimer) clearInterval(bannerTimer)
 })
 </script>
 
@@ -118,6 +170,48 @@ onMounted(async () => {
   background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 60px 60px;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.carousel-dots button.active {
+  background: var(--color-primary);
+  width: 28px;
+  border-radius: 5px;
 }
 
 .hero-content {
@@ -160,9 +254,7 @@ onMounted(async () => {
   gap: 24px;
 }
 
-.product-card {
-  cursor: pointer;
-}
+.product-card { cursor: pointer; }
 
 .product-image {
   position: relative;
@@ -178,9 +270,7 @@ onMounted(async () => {
   transition: transform 0.5s;
 }
 
-.product-card:hover .product-image img {
-  transform: scale(1.05);
-}
+.product-card:hover .product-image img { transform: scale(1.05); }
 
 .product-overlay {
   position: absolute;
@@ -193,18 +283,11 @@ onMounted(async () => {
   transition: opacity 0.3s;
 }
 
-.product-card:hover .product-overlay {
-  opacity: 1;
-}
+.product-card:hover .product-overlay { opacity: 1; }
 
-.btn-sm {
-  padding: 10px 20px;
-  font-size: 13px;
-}
+.btn-sm { padding: 10px 20px; font-size: 13px; }
 
-.product-info {
-  padding: 20px;
-}
+.product-info { padding: 20px; }
 
 .product-category {
   font-size: 12px;
@@ -226,15 +309,10 @@ onMounted(async () => {
   color: var(--color-text-secondary);
 }
 
-.section-cta {
-  text-align: center;
-  margin-top: 48px;
-}
+.section-cta { text-align: center; margin-top: 48px; }
 
 /* Features */
-.why-section {
-  background: rgba(255, 255, 255, 0.01);
-}
+.why-section { background: rgba(255, 255, 255, 0.01); }
 
 .features-grid {
   display: grid;
@@ -256,28 +334,12 @@ onMounted(async () => {
   transform: translateY(-4px);
 }
 
-.feature-icon {
-  font-size: 36px;
-  margin-bottom: 20px;
-  color: var(--color-primary);
-}
-
-.feature-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-white);
-  margin-bottom: 12px;
-}
-
-.feature-desc {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-}
+.feature-icon { font-size: 36px; margin-bottom: 20px; color: var(--color-primary); }
+.feature-title { font-size: 18px; font-weight: 600; color: var(--color-white); margin-bottom: 12px; }
+.feature-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
 
 @media (max-width: 768px) {
   .hero-title { font-size: 36px; letter-spacing: -1px; }
-  .hero-subtitle { font-size: 16px; }
   .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .features-grid { grid-template-columns: 1fr; }
 }
