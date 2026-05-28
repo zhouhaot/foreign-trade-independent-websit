@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0f1923"/><stop offset="100%" style="stop-color:#1a2744"/></linearGradient></defs>
+  <rect width="600" height="400" fill="url(#bg)"/>
+  <rect x="160" y="80" width="280" height="190" rx="16" fill="#1e3a5f" stroke="#2a4a6f" stroke-width="1"/>
+  <rect x="180" y="110" width="240" height="100" rx="8" fill="#0f1923"/>
+  <rect x="200" y="125" width="100" height="60" rx="6" fill="#2b7de9" opacity="0.25"/>
+  <text x="250" y="160" text-anchor="middle" fill="#4a9eff" font-family="Arial" font-size="10" font-weight="bold">RT-300</text>
+  <rect x="310" y="130" width="90" height="50" rx="4" fill="#0f1923"/>
+  <rect x="320" y="145" width="70" height="20" rx="2" fill="#4a9eff" opacity="0.3"/>
+  <text x="300" y="310" text-anchor="middle" fill="#4a9eff" font-family="Arial" font-size="24" font-weight="bold">TradePlus</text>
+  <text x="300" y="338" text-anchor="middle" fill="#556677" font-family="Arial" font-size="14">Recounting Machine</text>
+</svg>

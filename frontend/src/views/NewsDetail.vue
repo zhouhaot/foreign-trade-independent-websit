@@ -3,9 +3,11 @@
     <section class="page-hero">
       <div class="container">
         <div class="breadcrumb">
+          <router-link to="/">{{ t('nav.home') }}</router-link>
+          <span class="breadcrumb-sep">/</span>
           <router-link to="/news">{{ t('nav.news') }}</router-link>
-          <span>/</span>
-          <span>{{ locale === 'zh' ? article.titleCn : article.titleEn }}</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-current">{{ locale === 'zh' ? article.titleCn : article.titleEn }}</span>
         </div>
       </div>
     </section>
@@ -13,21 +15,28 @@
     <section class="section" v-if="article.id">
       <div class="container">
         <article class="article-detail">
-          <div class="article-meta">
-            <span class="article-date">{{ formatDate(article.createTime) }}</span>
-          </div>
-          <h1 class="article-title">
-            {{ locale === 'zh' ? article.titleCn : article.titleEn }}
-          </h1>
+          <header class="article-header">
+            <div class="article-meta">
+              <span class="article-date">{{ formatDate(article.createTime) }}</span>
+            </div>
+            <h1 class="article-title">
+              {{ locale === 'zh' ? article.titleCn : article.titleEn }}
+            </h1>
+          </header>
+
           <div class="article-cover" v-if="article.coverImage">
-            <img :src="article.coverImage" :alt="article.titleEn">
+            <img :src="article.coverImage" :alt="article.titleEn" @error="e => e.target.src='/uploads/placeholder.svg'">
           </div>
+
           <div class="article-content">
             <div class="content-cn" v-if="locale === 'zh'" v-html="formatContent(article.contentCn)"></div>
             <div class="content-en" v-else v-html="formatContent(article.contentEn)"></div>
           </div>
+
           <div class="article-footer">
-            <router-link to="/news" class="btn btn-outline">{{ t('news.back') }} →</router-link>
+            <router-link to="/news" class="btn btn-outline">
+              ← {{ t('news.back') }}
+            </router-link>
           </div>
         </article>
       </div>
@@ -91,28 +100,40 @@ onMounted(async () => {
 
 <style scoped>
 .page-hero {
-  padding: 120px 0 40px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(74, 158, 255, 0.06) 0%, transparent 60%);
+  padding: 120px 0 32px;
 }
 
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   font-size: 14px;
   color: var(--color-text-muted);
 }
 
 .breadcrumb a {
   color: var(--color-text-secondary);
+  text-decoration: none;
   transition: color 0.2s;
 }
 
 .breadcrumb a:hover { color: var(--color-primary); }
 
+.breadcrumb-sep { color: var(--color-border); }
+
+.breadcrumb-current {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* ===== Article ===== */
 .article-detail {
-  max-width: 800px;
+  max-width: 780px;
   margin: 0 auto;
+}
+
+.article-header {
+  margin-bottom: 32px;
 }
 
 .article-meta {
@@ -122,83 +143,98 @@ onMounted(async () => {
 .article-date {
   font-size: 14px;
   color: var(--color-text-muted);
+  font-weight: 500;
 }
 
 .article-title {
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--color-white);
-  margin-bottom: 32px;
-  line-height: 1.3;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
 }
 
 .article-cover {
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: 40px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-light);
 }
 
 .article-cover img {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
+  display: block;
 }
 
+/* ===== Article Content ===== */
 .article-content {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--color-text);
-  line-height: 1.8;
+  line-height: 1.85;
   margin-bottom: 48px;
 }
 
 .article-content :deep(h1),
 .article-content :deep(h2),
 .article-content :deep(h3) {
-  color: var(--color-white);
-  margin: 32px 0 16px;
+  color: var(--color-text);
+  margin: 36px 0 16px;
+  line-height: 1.3;
 }
 
-.article-content :deep(h2) { font-size: 24px; }
-.article-content :deep(h3) { font-size: 20px; }
+.article-content :deep(h1) { font-size: 28px; font-weight: 700; }
+.article-content :deep(h2) { font-size: 24px; font-weight: 700; }
+.article-content :deep(h3) { font-size: 20px; font-weight: 600; }
 
 .article-content :deep(p) {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .article-content :deep(strong) {
-  color: var(--color-white);
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 .article-content :deep(ul),
 .article-content :deep(ol) {
-  margin: 16px 0;
+  margin: 20px 0;
   padding-left: 24px;
 }
 
 .article-content :deep(li) {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .article-content :deep(table) {
   width: 100%;
   border-collapse: collapse;
-  margin: 24px 0;
+  margin: 28px 0;
   background: var(--color-bg-card);
-  border-radius: 12px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
-.article-content :deep(td) {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--color-border);
+.article-content :deep(tr:first-child td) {
+  font-weight: 600;
+  background: var(--color-bg-alt);
 }
 
+.article-content :deep(td) {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 14px;
+}
+
+/* ===== Article Footer ===== */
 .article-footer {
   padding-top: 32px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-light);
 }
 
+/* ===== Loading ===== */
 .loading-state {
   text-align: center;
   padding: 80px 0;
@@ -217,7 +253,9 @@ onMounted(async () => {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .article-title { font-size: 28px; }
+  .article-content { font-size: 16px; }
 }
 </style>

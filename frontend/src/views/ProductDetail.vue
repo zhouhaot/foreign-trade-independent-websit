@@ -3,9 +3,11 @@
     <section class="page-hero">
       <div class="container">
         <div class="breadcrumb">
+          <router-link to="/">{{ t('nav.home') }}</router-link>
+          <span class="breadcrumb-sep">/</span>
           <router-link to="/products">{{ t('nav.products') }}</router-link>
-          <span>/</span>
-          <span>{{ locale === 'zh' ? product.nameCn : product.nameEn }}</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-current">{{ locale === 'zh' ? product.nameCn : product.nameEn }}</span>
         </div>
       </div>
     </section>
@@ -16,24 +18,28 @@
           <!-- Image Gallery -->
           <div class="detail-gallery">
             <div class="main-image">
-              <img :src="product.mainImage || '/uploads/placeholder.png'" :alt="product.nameEn">
+              <img :src="product.mainImage || '/uploads/placeholder.svg'" :alt="product.nameEn" @error="e => e.target.src='/uploads/placeholder.svg'">
             </div>
           </div>
 
           <!-- Product Info -->
           <div class="detail-info">
-            <div class="product-category" v-if="product.categoryName">{{ product.categoryName }}</div>
-            <h1 class="product-title">{{ locale === 'zh' ? product.nameCn : product.nameEn }}</h1>
+            <div class="detail-head">
+              <span class="product-category" v-if="product.categoryName">{{ product.categoryName }}</span>
+              <h1 class="product-title">{{ locale === 'zh' ? product.nameCn : product.nameEn }}</h1>
+            </div>
+
             <div class="product-price">{{ product.price || t('products.contact_for_price') }}</div>
+
             <p class="product-description">
               {{ locale === 'zh' ? product.descriptionCn : product.descriptionEn }}
             </p>
 
             <!-- Specifications -->
             <div class="specifications" v-if="specs">
-              <h3>{{ t('products.specifications') }}</h3>
-              <div class="spec-grid">
-                <div v-for="(value, key) in specs" :key="key" class="spec-item">
+              <h3 class="spec-heading">{{ t('products.specifications') }}</h3>
+              <div class="spec-table">
+                <div v-for="(value, key) in specs" :key="key" class="spec-row">
                   <span class="spec-key">{{ key }}</span>
                   <span class="spec-value">{{ value }}</span>
                 </div>
@@ -45,7 +51,23 @@
               <router-link :to="`/contact?product=${product.id}`" class="btn btn-primary btn-lg">
                 {{ t('contact.form_submit') }} →
               </router-link>
+              <span class="cta-note">
+                <span class="cta-check">✓</span> {{ t('contact.success_msg') }}
+              </span>
             </div>
+          </div>
+        </div>
+
+        <!-- Inquiry CTA Banner -->
+        <div class="inquiry-banner">
+          <div class="banner-content">
+            <div class="banner-text">
+              <h3>{{ t('home.hero_title') }}</h3>
+              <p>{{ t('home.hero_subtitle') }}</p>
+            </div>
+            <router-link to="/contact" class="btn btn-accent btn-lg">
+              {{ t('contact.form_submit') }}
+            </router-link>
           </div>
         </div>
       </div>
@@ -94,39 +116,47 @@ onMounted(async () => {
 
 <style scoped>
 .page-hero {
-  padding: 120px 0 40px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(74, 158, 255, 0.06) 0%, transparent 60%);
+  padding: 120px 0 32px;
 }
 
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   font-size: 14px;
   color: var(--color-text-muted);
 }
 
 .breadcrumb a {
   color: var(--color-text-secondary);
+  text-decoration: none;
   transition: color 0.2s;
 }
 
-.breadcrumb a:hover {
-  color: var(--color-primary);
+.breadcrumb a:hover { color: var(--color-primary); }
+
+.breadcrumb-sep {
+  color: var(--color-border);
 }
 
+.breadcrumb-current {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* ===== Detail Layout ===== */
 .detail-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
   align-items: start;
 }
 
 .main-image {
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--color-border);
+  background: #f0f2f5;
+  border: 1px solid var(--color-border-light);
 }
 
 .main-image img {
@@ -135,81 +165,151 @@ onMounted(async () => {
   object-fit: cover;
 }
 
+/* ===== Detail Info ===== */
 .detail-info {
-  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .product-category {
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--color-primary);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 12px;
 }
 
 .product-title {
   font-size: 36px;
   font-weight: 700;
-  color: var(--color-white);
-  margin-bottom: 16px;
+  color: var(--color-text);
   line-height: 1.2;
+  letter-spacing: -0.5px;
 }
 
 .product-price {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--color-primary);
-  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
 .product-description {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--color-text-secondary);
-  line-height: 1.8;
-  margin-bottom: 32px;
+  line-height: 1.7;
 }
 
-.specifications h3 {
-  font-size: 18px;
-  color: var(--color-white);
-  margin-bottom: 16px;
+/* ===== Specifications ===== */
+.specifications {
+  margin-top: 4px;
 }
 
-.spec-grid {
+.spec-heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.spec-table {
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 32px;
 }
 
-.spec-item {
+.spec-row {
   display: flex;
   justify-content: space-between;
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--color-border);
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
-.spec-item:last-child {
-  border-bottom: none;
-}
+.spec-row:last-child { border-bottom: none; }
 
 .spec-key {
-  color: var(--color-text-secondary);
-  font-size: 14px;
+  color: var(--color-text-muted);
+  font-size: 13px;
 }
 
 .spec-value {
-  color: var(--color-white);
-  font-size: 14px;
+  color: var(--color-text);
+  font-size: 13px;
   font-weight: 500;
 }
 
+/* ===== CTA ===== */
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 8px;
+}
+
 .detail-actions .btn-lg {
-  padding: 16px 36px;
+  padding: 16px 40px;
   font-size: 16px;
 }
 
+.cta-note {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cta-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-success-light);
+  color: var(--color-success);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ===== Inquiry CTA Banner ===== */
+.inquiry-banner {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 48px;
+  gap: 32px;
+}
+
+.banner-text h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.banner-text p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+}
+
+/* ===== Loading ===== */
 .loading-state {
   text-align: center;
   padding: 80px 0;
@@ -226,15 +326,22 @@ onMounted(async () => {
   margin: 0 auto 16px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .detail-layout {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  .product-title { font-size: 28px; }
+  .product-title { font-size: 26px; }
+  .product-price { font-size: 22px; }
+  .detail-actions { flex-direction: column; align-items: stretch; }
+  .detail-actions .btn-lg { text-align: center; }
+  .banner-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px;
+  }
 }
 </style>

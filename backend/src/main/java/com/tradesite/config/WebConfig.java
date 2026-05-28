@@ -19,7 +19,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // classpath:/uploads/ resolves to src/main/resources/uploads/ at runtime
+        // file:./uploads/ is for files uploaded at runtime (relative to working directory)
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("classpath:/uploads/", "file:src/main/resources/uploads/");
+                .addResourceLocations("classpath:/uploads/", "file:./uploads/");
     }
 }

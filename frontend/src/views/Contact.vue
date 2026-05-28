@@ -23,56 +23,95 @@
               <div class="form-row">
                 <div class="form-group">
                   <label>{{ t('contact.form_name') }}</label>
-                  <input type="text" v-model="form.contactName" required>
+                  <input type="text" v-model="form.contactName" required placeholder="John Doe">
                 </div>
                 <div class="form-group">
                   <label>{{ t('contact.form_email') }}</label>
-                  <input type="email" v-model="form.email" required>
+                  <input type="email" v-model="form.email" required placeholder="john@company.com">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label>{{ t('contact.form_phone') }}</label>
-                  <input type="tel" v-model="form.phone">
+                  <input type="tel" v-model="form.phone" placeholder="+86 138-0000-0000">
                 </div>
                 <div class="form-group">
                   <label>{{ t('contact.form_company') }}</label>
-                  <input type="text" v-model="form.companyName">
+                  <input type="text" v-model="form.companyName" placeholder="Company Ltd.">
                 </div>
               </div>
               <div class="form-group">
                 <label>{{ t('contact.form_message') }}</label>
-                <textarea v-model="form.message" rows="5" required></textarea>
+                <textarea v-model="form.message" rows="5" required :placeholder="locale === 'zh' ? '请描述您的需求...' : 'Please describe your requirements...'"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary btn-lg" :disabled="sending">
-                {{ sending ? t('contact.form_sending') : t('contact.form_submit') }}
-              </button>
+              <div class="form-footer">
+                <button type="submit" class="btn btn-primary btn-lg" :disabled="sending">
+                  {{ sending ? t('contact.form_sending') : t('contact.form_submit') }}
+                </button>
+                <span class="form-trust">
+                  <span class="trust-icon">🔒</span>
+                  {{ locale === 'zh' ? '您的信息将被严格保密' : 'Your information is secure' }}
+                </span>
+              </div>
             </form>
           </div>
 
-          <!-- Contact Info -->
-          <div class="contact-info fade-in-up fade-in-up-delay-2">
-            <h3>{{ t('contact.info_title') }}</h3>
-            <div class="info-items">
-              <div class="info-item">
-                <div class="info-icon">✉</div>
-                <div>
-                  <div class="info-label">{{ t('contact.info_email') }}</div>
-                  <div class="info-value">info@tradeplus.com</div>
+          <!-- Contact Info Sidebar -->
+          <div class="contact-sidebar fade-in-up fade-in-up-delay-2">
+            <div class="contact-info-card">
+              <h3>{{ t('contact.info_title') }}</h3>
+              <div class="info-items">
+                <div class="info-item">
+                  <div class="info-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                  </div>
+                  <div>
+                    <div class="info-label">{{ t('contact.info_email') }}</div>
+                    <div class="info-value">info@tradeplus.com</div>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+                  </div>
+                  <div>
+                    <div class="info-label">{{ t('contact.info_phone') }}</div>
+                    <div class="info-value">+86 400-888-8888</div>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <div class="info-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="2"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8z"/></svg>
+                  </div>
+                  <div>
+                    <div class="info-label">{{ t('contact.info_address') }}</div>
+                    <div class="info-value">{{ t('contact.info_address_value') }}</div>
+                  </div>
                 </div>
               </div>
-              <div class="info-item">
-                <div class="info-icon">☎</div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+              <div class="trust-badge">
+                <span class="trust-badge-icon">✓</span>
                 <div>
-                  <div class="info-label">{{ t('contact.info_phone') }}</div>
-                  <div class="info-value">+86 400-888-8888</div>
+                  <div class="trust-badge-title">{{ t('home.why_quality') }}</div>
+                  <div class="trust-badge-desc">{{ t('home.why_quality_desc') }}</div>
                 </div>
               </div>
-              <div class="info-item">
-                <div class="info-icon">◎</div>
+              <div class="trust-badge">
+                <span class="trust-badge-icon">🌐</span>
                 <div>
-                  <div class="info-label">{{ t('contact.info_address') }}</div>
-                  <div class="info-value">{{ t('contact.info_address_value') }}</div>
+                  <div class="trust-badge-title">{{ t('home.why_delivery') }}</div>
+                  <div class="trust-badge-desc">{{ t('home.why_delivery_desc') }}</div>
+                </div>
+              </div>
+              <div class="trust-badge">
+                <span class="trust-badge-icon">🕐</span>
+                <div>
+                  <div class="trust-badge-title">{{ t('home.why_support') }}</div>
+                  <div class="trust-badge-desc">{{ t('home.why_support_desc') }}</div>
                 </div>
               </div>
             </div>
@@ -89,7 +128,7 @@ import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import api from '../api'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const sending = ref(false)
 const submitted = ref(false)
@@ -132,14 +171,15 @@ function resetForm() {
 .page-hero {
   padding: 140px 0 60px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(74, 158, 255, 0.08) 0%, transparent 60%);
+  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
 }
 
 .page-title {
   font-size: 48px;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-text);
   margin-bottom: 16px;
+  letter-spacing: -1px;
 }
 
 .page-subtitle {
@@ -147,11 +187,20 @@ function resetForm() {
   color: var(--color-text-secondary);
 }
 
+/* ===== Layout ===== */
 .contact-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
   align-items: start;
+}
+
+/* ===== Form ===== */
+.contact-form-wrapper {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 36px;
 }
 
 .contact-form {
@@ -169,30 +218,37 @@ function resetForm() {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .form-group label {
-  font-size: 14px;
-  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .form-group input,
 .form-group textarea {
-  padding: 14px 16px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  color: var(--color-white);
-  font-size: 15px;
+  padding: 12px 14px;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 14px;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--color-text-muted);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
 }
 
 .form-group textarea {
@@ -200,31 +256,46 @@ function resetForm() {
   min-height: 120px;
 }
 
-.btn-lg {
-  padding: 16px 36px;
-  font-size: 16px;
-  align-self: flex-start;
+.form-footer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.btn-lg:disabled {
+.form-footer .btn-lg {
+  padding: 14px 36px;
+  font-size: 16px;
+}
+
+.form-footer .btn-lg:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
+.form-trust {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trust-icon {
+  font-size: 14px;
+}
+
+/* ===== Success Card ===== */
 .success-card {
   text-align: center;
-  padding: 60px 40px;
-  background: var(--color-bg-card);
-  border: 1px solid rgba(46, 213, 115, 0.2);
-  border-radius: 16px;
+  padding: 40px 24px;
 }
 
 .success-icon {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(46, 213, 115, 0.15);
+  background: var(--color-success-light);
   color: var(--color-success);
   font-size: 28px;
   display: flex;
@@ -234,68 +305,132 @@ function resetForm() {
 }
 
 .success-card h2 {
-  color: var(--color-white);
-  font-size: 24px;
-  margin-bottom: 12px;
+  color: var(--color-text);
+  font-size: 22px;
+  margin-bottom: 10px;
 }
 
 .success-card p {
   color: var(--color-text-secondary);
   margin-bottom: 24px;
+  line-height: 1.6;
 }
 
-.contact-info {
+/* ===== Contact Info Sidebar ===== */
+.contact-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-info-card {
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 32px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 28px;
 }
 
-.contact-info h3 {
-  color: var(--color-white);
-  font-size: 20px;
-  margin-bottom: 24px;
+.contact-info-card h3 {
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .info-items {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .info-item {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   align-items: flex-start;
 }
 
 .info-icon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
-  background: rgba(74, 158, 255, 0.1);
+  background: var(--color-primary-light);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
   flex-shrink: 0;
 }
 
 .info-label {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-text-muted);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  font-weight: 500;
 }
 
 .info-value {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--color-text);
+  font-weight: 500;
 }
 
+/* ===== Trust Badges ===== */
+.trust-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trust-badge {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius);
+  padding: 18px;
+  transition: all var(--transition);
+}
+
+.trust-badge:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.trust-badge-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--color-success-light);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.trust-badge-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.trust-badge-desc {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .page-title { font-size: 32px; }
   .contact-layout { grid-template-columns: 1fr; gap: 32px; }
   .form-row { grid-template-columns: 1fr; }
+  .contact-form-wrapper { padding: 24px; }
+  .form-footer { flex-direction: column; align-items: stretch; }
+  .form-footer .btn-lg { text-align: center; }
 }
 </style>

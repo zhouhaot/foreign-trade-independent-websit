@@ -38,3 +38,7 @@ target/
 # Temporary files
 tmp/
 temp/
+tmp_*.json
+
+# Claude Code
+.claude/

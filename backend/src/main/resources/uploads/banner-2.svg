@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1a"/>
+      <stop offset="100%" style="stop-color:#1a2744"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  <rect x="100" y="100" width="420" height="320" rx="20" fill="#1e3a5f" stroke="#2b7de9" stroke-width="2"/>
+  <rect x="130" y="140" width="360" height="180" rx="10" fill="#0f1923"/>
+  <rect x="155" y="165" width="140" height="110" rx="8" fill="#2b7de9" opacity="0.3"/>
+  <rect x="170" y="180" width="110" height="75" rx="6" fill="#4a9eff" opacity="0.5"/>
+  <text x="225" y="225" text-anchor="middle" fill="#fff" font-family="Arial" font-size="14" font-weight="bold">BC-5200</text>
+  <rect x="305" y="170" width="160" height="100" rx="8" fill="#0f1923"/>
+  <rect x="320" y="185" width="130" height="70" rx="6" fill="#2b7de9" opacity="0.15"/>
+  <text x="385" y="225" text-anchor="middle" fill="#4a9eff" font-family="Arial" font-size="12">WiFi Connected</text>
+  <text x="780" y="200" text-anchor="middle" fill="#fff" font-family="Arial" font-size="36" font-weight="bold">BC-5200</text>
+  <text x="780" y="260" text-anchor="middle" fill="#4a9eff" font-family="Arial" font-size="30" font-weight="600">High Speed Counter</text>
+  <text x="780" y="320" text-anchor="middle" fill="#8899aa" font-family="Arial" font-size="16">1200 notes/min · 32 currencies · WiFi enabled</text>
+  <rect x="640" y="360" width="280" height="50" rx="25" fill="#2b7de9" opacity="0.3" stroke="#4a9eff" stroke-width="1"/>
+  <text x="780" y="392" text-anchor="middle" fill="#fff" font-family="Arial" font-size="16" font-weight="600">NEW ARRIVAL</text>
+</svg>

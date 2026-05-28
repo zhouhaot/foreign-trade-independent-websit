@@ -53,15 +53,17 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 20px 0;
+  padding: 18px 0;
   transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
 }
 
 .header.scrolled {
   padding: 12px 0;
-  background: rgba(10, 15, 26, 0.9);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom-color: var(--color-border-light);
+  box-shadow: var(--shadow-header-scrolled);
 }
 
 .header-inner {
@@ -78,40 +80,40 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .logo-icon {
-  font-size: 24px;
+  font-size: 22px;
   color: var(--color-primary);
 }
 
 .logo-text {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-text);
   letter-spacing: -0.5px;
 }
 
 .nav {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 .nav-link {
-  padding: 8px 18px;
+  padding: 8px 16px;
   color: var(--color-text-secondary);
   font-size: 14px;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: var(--radius);
   transition: all 0.2s;
   text-decoration: none;
 }
 
-.nav-link:hover,
-.nav-link.router-link-active {
-  color: var(--color-white);
-  background: rgba(255, 255, 255, 0.05);
+.nav-link:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .nav-link.router-link-exact-active {
   color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .header-actions {
@@ -123,9 +125,9 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .lang-toggle {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
   color: var(--color-text-secondary);
   font-size: 13px;
   font-weight: 600;
@@ -136,6 +138,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .lang-toggle:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .menu-toggle {
@@ -154,7 +157,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   display: block;
   width: 20px;
   height: 2px;
-  background: var(--color-white);
+  background: var(--color-text);
   transition: all 0.3s;
   position: absolute;
   left: 8px;
@@ -177,11 +180,12 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     right: -100%;
     width: 260px;
     height: 100vh;
-    background: #1a2744;
+    background: var(--color-bg);
     flex-direction: column;
     padding: 80px 24px 24px;
     transition: right 0.3s;
-    gap: 4px;
+    gap: 2px;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
   }
 
   .nav.open { right: 0; }

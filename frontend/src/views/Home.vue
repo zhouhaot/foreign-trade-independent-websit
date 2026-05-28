@@ -4,7 +4,6 @@
     <section class="hero" v-if="banners.length">
       <div class="hero-bg">
         <div class="hero-gradient"></div>
-        <div class="hero-grid"></div>
       </div>
       <div class="carousel">
         <div class="carousel-inner" :style="{ transform: `translateX(-${currentBanner * 100}%)` }">
@@ -17,9 +16,12 @@
                 {{ locale === 'zh' ? banner.subtitleCn : banner.subtitleEn }}
               </p>
               <div class="hero-actions fade-in-up fade-in-up-delay-2">
-                <router-link :to="banner.linkUrl || '/products'" class="btn btn-primary">
+                <router-link :to="banner.linkUrl || '/products'" class="btn btn-primary btn-lg">
                   {{ t('home.hero_cta') }}
                   <span>→</span>
+                </router-link>
+                <router-link to="/contact" class="btn btn-outline btn-lg">
+                  {{ t('contact.form_submit') }}
                 </router-link>
               </div>
             </div>
@@ -37,16 +39,25 @@
     <section class="hero" v-else>
       <div class="hero-bg">
         <div class="hero-gradient"></div>
-        <div class="hero-grid"></div>
       </div>
       <div class="container hero-content">
-        <h1 class="hero-title fade-in-up">{{ t('home.hero_title') }}</h1>
-        <p class="hero-subtitle fade-in-up fade-in-up-delay-1">{{ t('home.hero_subtitle') }}</p>
-        <div class="hero-actions fade-in-up fade-in-up-delay-2">
-          <router-link to="/products" class="btn btn-primary">
+        <div class="hero-badge badge badge-blue fade-in-up">{{ t('home.team_stat_years_label') }}</div>
+        <h1 class="hero-title fade-in-up fade-in-up-delay-1">{{ t('home.hero_title') }}</h1>
+        <p class="hero-subtitle fade-in-up fade-in-up-delay-2">{{ t('home.hero_subtitle') }}</p>
+        <div class="hero-actions fade-in-up fade-in-up-delay-3">
+          <router-link to="/products" class="btn btn-primary btn-lg">
             {{ t('home.hero_cta') }}
             <span>→</span>
           </router-link>
+          <router-link to="/contact" class="btn btn-outline btn-lg">
+            {{ t('contact.form_submit') }}
+          </router-link>
+        </div>
+        <div class="hero-stats fade-in-up fade-in-up-delay-4">
+          <div class="hero-stat" v-for="stat in heroStats" :key="stat.label">
+            <span class="hero-stat-value">{{ stat.value }}</span>
+            <span class="hero-stat-label">{{ stat.label }}</span>
+          </div>
         </div>
       </div>
     </section>
@@ -55,20 +66,26 @@
     <section class="section">
       <div class="container">
         <h2 class="section-title">{{ t('home.featured') }}</h2>
+        <p class="section-subtitle">{{ t('home.hero_subtitle') }}</p>
         <div class="products-grid">
           <div v-for="product in featuredProducts" :key="product.id" class="product-card card">
-            <div class="product-image">
-              <img :src="product.mainImage || '/uploads/placeholder.png'" :alt="product.nameEn">
-              <div class="product-overlay">
-                <router-link :to="`/products/${product.id}`" class="btn btn-primary btn-sm">
+            <router-link :to="`/products/${product.id}`" class="product-image">
+              <img :src="product.mainImage || '/uploads/placeholder.svg'" :alt="product.nameEn" @error="e => e.target.src='/uploads/placeholder.svg'">
+              <div class="product-category-tag">{{ product.categoryName }}</div>
+            </router-link>
+            <div class="product-info">
+              <router-link :to="`/products/${product.id}`" class="product-name">
+                {{ locale === 'zh' ? product.nameCn : product.nameEn }}
+              </router-link>
+              <p class="product-spec-summary" v-if="product.specifications">
+                {{ getSpecSummary(product.specifications) }}
+              </p>
+              <div class="product-footer">
+                <span class="product-price">{{ product.price || t('products.contact_for_price') }}</span>
+                <router-link :to="`/products/${product.id}`" class="btn btn-outline btn-sm">
                   {{ t('products.view_detail') }}
                 </router-link>
               </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category" v-if="product.categoryName">{{ product.categoryName }}</div>
-              <h3 class="product-name">{{ locale === 'zh' ? product.nameCn : product.nameEn }}</h3>
-              <div class="product-price">{{ product.price || t('products.contact_for_price') }}</div>
             </div>
           </div>
         </div>
@@ -81,15 +98,73 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="section why-section">
+    <section class="section-alt">
       <div class="container">
         <h2 class="section-title">{{ t('home.why_title') }}</h2>
         <div class="features-grid">
           <div class="feature-card fade-in-up" v-for="(feature, i) in features" :key="i"
                :class="`fade-in-up-delay-${i + 1}`">
-            <div class="feature-icon">{{ feature.icon }}</div>
+            <div class="feature-icon-wrap">
+              <span class="feature-icon">{{ feature.icon }}</span>
+            </div>
             <h3 class="feature-title">{{ t(feature.titleKey) }}</h3>
             <p class="feature-desc">{{ t(feature.descKey) }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="section">
+      <div class="container">
+        <div class="partners-header">
+          <span class="badge badge-blue">Trusted By</span>
+        </div>
+        <h2 class="section-title">{{ t('home.partners_title') }}</h2>
+        <p class="section-subtitle">{{ t('home.partners_subtitle') }}</p>
+        <div class="partners-grid">
+          <div v-for="brand in partnerBrands" :key="brand" class="partner-logo">
+            <span class="partner-placeholder">{{ brand }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Process -->
+    <section class="section-alt">
+      <div class="container">
+        <h2 class="section-title">{{ t('home.service_title') }}</h2>
+        <p class="section-subtitle">{{ t('home.service_subtitle') }}</p>
+        <div class="process-grid">
+          <div class="process-step" v-for="(step, i) in serviceSteps" :key="i">
+            <div class="step-number">{{ i + 1 }}</div>
+            <h3 class="step-title">{{ t(step.titleKey) }}</h3>
+            <p class="step-desc">{{ t(step.descKey) }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Introduction -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">{{ t('home.team_title') }}</h2>
+        <p class="section-subtitle">{{ t('home.team_subtitle') }}</p>
+        <div class="team-layout">
+          <div class="team-advantages">
+            <div class="advantage-card" v-for="(adv, i) in teamAdvantages" :key="i">
+              <div class="advantage-icon">{{ adv.icon }}</div>
+              <div>
+                <h3 class="advantage-title">{{ t(adv.titleKey) }}</h3>
+                <p class="advantage-desc">{{ t(adv.descKey) }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="team-stats">
+            <div class="stat-card" v-for="(stat, i) in teamStats" :key="i">
+              <div class="stat-number">{{ t(stat.valueKey) }}</div>
+              <div class="stat-label">{{ t(stat.labelKey) }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -114,6 +189,47 @@ const features = [
   { icon: '☎', titleKey: 'home.why_support', descKey: 'home.why_support_desc' },
   { icon: '◆', titleKey: 'home.why_price', descKey: 'home.why_price_desc' }
 ]
+
+const serviceSteps = [
+  { titleKey: 'home.service_step1_title', descKey: 'home.service_step1_desc' },
+  { titleKey: 'home.service_step2_title', descKey: 'home.service_step2_desc' },
+  { titleKey: 'home.service_step3_title', descKey: 'home.service_step3_desc' },
+  { titleKey: 'home.service_step4_title', descKey: 'home.service_step4_desc' }
+]
+
+const teamAdvantages = [
+  { icon: '⚡', titleKey: 'home.team_advantage1_title', descKey: 'home.team_advantage1_desc' },
+  { icon: '✓', titleKey: 'home.team_advantage2_title', descKey: 'home.team_advantage2_desc' },
+  { icon: '🛟', titleKey: 'home.team_advantage3_title', descKey: 'home.team_advantage3_desc' }
+]
+
+const teamStats = [
+  { valueKey: 'home.team_stat_years', labelKey: 'home.team_stat_years_label' },
+  { valueKey: 'home.team_stat_countries', labelKey: 'home.team_stat_countries_label' },
+  { valueKey: 'home.team_stat_customers', labelKey: 'home.team_stat_customers_label' },
+  { valueKey: 'home.team_stat_support', labelKey: 'home.team_stat_support_label' }
+]
+
+const heroStats = [
+  { value: '15+', label: t('home.team_stat_years_label') },
+  { value: '50+', label: t('home.team_stat_countries_label') },
+  { value: '1000+', label: t('home.team_stat_customers_label') }
+]
+
+const partnerBrands = [
+  'ICBC', 'HSBC', 'Bank of America', 'Deutsche Bank', 'BNP Paribas',
+  'Standard Chartered', 'DBS', 'MUFG', 'Santander', 'UBS'
+]
+
+function getSpecSummary(specJson) {
+  try {
+    const specs = JSON.parse(specJson)
+    const keys = Object.keys(specs).slice(0, 3)
+    return keys.map(k => `${k}: ${specs[k]}`).join(' · ')
+  } catch {
+    return ''
+  }
+}
 
 function startBannerRotation() {
   if (banners.value.length > 1) {
@@ -143,33 +259,29 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Hero */
+/* ===== Hero ===== */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: linear-gradient(170deg, #f0f4fb 0%, #ffffff 40%, #f5f7fa 100%);
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
+  pointer-events: none;
 }
 
 .hero-gradient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(74, 158, 255, 0.12) 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 50%, rgba(43, 125, 233, 0.08) 0%, transparent 50%);
-}
-
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                     linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(26, 86, 219, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(26, 86, 219, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(229, 160, 13, 0.03) 0%, transparent 40%);
 }
 
 /* Carousel */
@@ -203,7 +315,7 @@ onUnmounted(() => {
   height: 10px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(26, 86, 219, 0.2);
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -217,27 +329,29 @@ onUnmounted(() => {
 .hero-content {
   position: relative;
   text-align: center;
-  padding: 120px 0;
+  padding: 100px 0;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  margin-bottom: 20px;
 }
 
 .hero-title {
-  font-size: 64px;
-  font-weight: 700;
-  color: var(--color-white);
-  line-height: 1.15;
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.12;
   margin-bottom: 24px;
-  letter-spacing: -2px;
-  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -1.5px;
 }
 
 .hero-subtitle {
   font-size: 18px;
   color: var(--color-text-secondary);
   max-width: 560px;
-  margin: 0 auto 40px;
+  margin: 0 auto 36px;
   line-height: 1.7;
 }
 
@@ -245,21 +359,54 @@ onUnmounted(() => {
   display: flex;
   gap: 16px;
   justify-content: center;
+  margin-bottom: 48px;
 }
 
-/* Products Grid */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-value {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.5px;
+}
+
+.hero-stat-label {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* ===== Products Grid ===== */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
-.product-card { cursor: pointer; }
+.product-card {
+  cursor: pointer;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+}
 
 .product-image {
   position: relative;
-  aspect-ratio: 1;
-  background: rgba(255, 255, 255, 0.03);
+  display: block;
+  aspect-ratio: 4/3;
+  background: #f0f2f5;
   overflow: hidden;
 }
 
@@ -272,48 +419,64 @@ onUnmounted(() => {
 
 .product-card:hover .product-image img { transform: scale(1.05); }
 
-.product-overlay {
+.product-category-tag {
   position: absolute;
-  inset: 0;
-  background: rgba(10, 15, 26, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
 }
 
-.product-card:hover .product-overlay { opacity: 1; }
-
-.btn-sm { padding: 10px 20px; font-size: 13px; }
-
-.product-info { padding: 20px; }
-
-.product-category {
-  font-size: 12px;
-  color: var(--color-primary);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.product-info {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .product-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--color-white);
-  margin-bottom: 8px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+
+.product-name:hover { color: var(--color-primary); }
+
+.product-spec-summary {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border-light);
 }
 
 .product-price {
   font-size: 14px;
-  color: var(--color-text-secondary);
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
 .section-cta { text-align: center; margin-top: 48px; }
 
-/* Features */
-.why-section { background: rgba(255, 255, 255, 0.01); }
-
+/* ===== Features ===== */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -321,31 +484,243 @@ onUnmounted(() => {
 }
 
 .feature-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
   padding: 36px 28px;
   text-align: center;
   transition: all var(--transition);
 }
 
 .feature-card:hover {
-  border-color: rgba(74, 158, 255, 0.2);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-4px);
 }
 
-.feature-icon { font-size: 36px; margin-bottom: 20px; color: var(--color-primary); }
-.feature-title { font-size: 18px; font-weight: 600; color: var(--color-white); margin-bottom: 12px; }
+.feature-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.feature-icon { font-size: 24px; color: var(--color-primary); }
+.feature-title { font-size: 17px; font-weight: 600; color: var(--color-text); margin-bottom: 10px; }
 .feature-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
 
+/* ===== Partners ===== */
+.partners-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.partner-logo {
+  aspect-ratio: 3/1;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.partner-logo:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.partner-placeholder {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ===== Service Process ===== */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.process-step {
+  position: relative;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  transition: all var(--transition);
+}
+
+.process-step:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.step-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== Team Section ===== */
+.team-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.team-advantages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.advantage-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: all var(--transition);
+}
+
+.advantage-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  transform: translateX(4px);
+}
+
+.advantage-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.advantage-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.advantage-desc {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.team-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  transition: all var(--transition);
+}
+
+.stat-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* ===== Section Subtitle (overrides for this page) ===== */
+.section-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  margin-top: -8px;
+  margin-bottom: 48px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .hero-title { font-size: 36px; letter-spacing: -1px; }
+  .hero {
+    min-height: 70vh;
+  }
+  .hero-title { font-size: 32px; letter-spacing: -0.5px; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
   .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .features-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .process-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .team-layout { grid-template-columns: 1fr; gap: 32px; }
+  .team-stats { grid-template-columns: repeat(2, 1fr); }
+  .partners-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .products-grid { grid-template-columns: repeat(3, 1fr); }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .partners-grid { grid-template-columns: repeat(3, 1fr); }
 }
 </style>

@@ -12,13 +12,26 @@
       <div class="container">
         <div class="story-layout">
           <div class="story-content fade-in-up">
-            <h2 class="section-title-left">{{ t('about.story_title') }}</h2>
+            <div class="section-label">
+              <span class="badge badge-blue">{{ t('about.story_title') }}</span>
+            </div>
+            <h2 class="story-heading">{{ t('about.story_title') }}</h2>
             <p class="story-text">{{ t('about.story') }}</p>
+            <div class="story-features">
+              <div class="story-feat" v-for="(feat, i) in storyFeatures" :key="i">
+                <span class="story-feat-icon">{{ feat.icon }}</span>
+                <span>{{ t(feat.key) }}</span>
+              </div>
+            </div>
           </div>
           <div class="story-visual fade-in-up fade-in-up-delay-2">
             <div class="visual-card">
-              <div class="visual-gradient"></div>
-              <div class="visual-icon">◆</div>
+              <div class="visual-bg"></div>
+              <div class="visual-content">
+                <div class="visual-logo">◆</div>
+                <div class="visual-text">TradePlus</div>
+                <div class="visual-sub">Since 2010</div>
+              </div>
             </div>
           </div>
         </div>
@@ -26,7 +39,7 @@
     </section>
 
     <!-- Stats -->
-    <section class="section stats-section">
+    <section class="section-alt">
       <div class="container">
         <div class="stats-grid">
           <div class="stat-card fade-in-up" v-for="(stat, i) in stats" :key="i" :class="`fade-in-up-delay-${i+1}`">
@@ -41,6 +54,9 @@
     <section class="section">
       <div class="container">
         <div class="mission-block">
+          <div class="section-label">
+            <span class="badge badge-gold">{{ t('about.mission_title') }}</span>
+          </div>
           <h2 class="section-title">{{ t('about.mission_title') }}</h2>
           <p class="mission-text">{{ t('about.mission') }}</p>
         </div>
@@ -59,20 +75,27 @@ const stats = [
   { value: '10,000+', key: 'about.stats_orders' },
   { value: '8+', key: 'about.stats_years' }
 ]
+
+const storyFeatures = [
+  { icon: '✓', key: 'home.why_quality' },
+  { icon: '✓', key: 'home.why_delivery' },
+  { icon: '✓', key: 'home.why_support' }
+]
 </script>
 
 <style scoped>
 .page-hero {
   padding: 140px 0 60px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(74, 158, 255, 0.08) 0%, transparent 60%);
+  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
 }
 
 .page-title {
   font-size: 48px;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-text);
   margin-bottom: 16px;
+  letter-spacing: -1px;
 }
 
 .page-subtitle {
@@ -80,55 +103,110 @@ const stats = [
   color: var(--color-text-secondary);
 }
 
+/* ===== Story ===== */
 .story-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 64px;
   align-items: center;
 }
 
-.section-title-left {
+.section-label {
+  margin-bottom: 12px;
+}
+
+.story-heading {
   font-size: 32px;
   font-weight: 700;
-  color: var(--color-white);
-  margin-bottom: 24px;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
 }
 
 .story-text {
   font-size: 16px;
   color: var(--color-text-secondary);
   line-height: 1.8;
+  margin-bottom: 24px;
 }
 
+.story-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.story-feat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.story-feat-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--color-success-light);
+  color: var(--color-success);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ===== Visual Card ===== */
 .visual-card {
   aspect-ratio: 1;
-  border-radius: 20px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   position: relative;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, #e8effc 50%, var(--color-bg) 100%);
 }
 
-.visual-gradient {
+.visual-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(74, 158, 255, 0.15) 0%, transparent 70%);
+  background:
+    radial-gradient(circle at 30% 40%, rgba(26, 86, 219, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(26, 86, 219, 0.04) 0%, transparent 40%);
 }
 
-.visual-icon {
+.visual-content {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 80px;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.visual-logo {
+  font-size: 60px;
   color: var(--color-primary);
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
-.stats-section {
-  background: rgba(255, 255, 255, 0.01);
+.visual-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.5px;
 }
 
+.visual-sub {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* ===== Stats ===== */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -137,34 +215,42 @@ const stats = [
 
 .stat-card {
   text-align: center;
-  padding: 40px 20px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  transition: all 0.3s;
+  padding: 48px 20px 40px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition);
 }
 
 .stat-card:hover {
-  border-color: rgba(74, 158, 255, 0.2);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-4px);
 }
 
 .stat-number {
-  font-size: 42px;
-  font-weight: 700;
+  font-size: 48px;
+  font-weight: 800;
   color: var(--color-primary);
   margin-bottom: 8px;
+  letter-spacing: -1px;
 }
 
 .stat-label {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--color-text-secondary);
+  font-weight: 500;
 }
 
+/* ===== Mission ===== */
 .mission-block {
   text-align: center;
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto;
+}
+
+.mission-block .section-title {
+  margin-bottom: 20px;
 }
 
 .mission-text {
@@ -173,9 +259,13 @@ const stats = [
   line-height: 1.8;
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .page-title { font-size: 32px; }
   .story-layout { grid-template-columns: 1fr; gap: 32px; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .story-heading { font-size: 26px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .stat-card { padding: 32px 16px 28px; }
+  .stat-number { font-size: 36px; }
 }
 </style>

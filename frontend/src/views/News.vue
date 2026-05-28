@@ -13,12 +13,13 @@
           <router-link v-for="article in articles" :key="article.id"
                        :to="`/news/${article.id}`" class="article-card card">
             <div class="article-image">
-              <img :src="article.coverImage || '/uploads/placeholder.png'"
-                   :alt="locale === 'zh' ? article.titleCn : article.titleEn">
+              <img :src="article.coverImage || '/uploads/placeholder.svg'"
+                   :alt="locale === 'zh' ? article.titleCn : article.titleEn"
+                   @error="e => e.target.src='/uploads/placeholder.svg'">
             </div>
             <div class="article-body">
-              <div class="article-date">
-                {{ formatDate(article.createTime) }}
+              <div class="article-meta">
+                <span class="article-date">{{ formatDate(article.createTime) }}</span>
               </div>
               <h3 class="article-title">
                 {{ locale === 'zh' ? article.titleCn : article.titleEn }}
@@ -76,14 +77,15 @@ onMounted(async () => {
 .page-hero {
   padding: 140px 0 60px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(74, 158, 255, 0.08) 0%, transparent 60%);
+  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
 }
 
 .page-title {
   font-size: 48px;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-text);
   margin-bottom: 16px;
+  letter-spacing: -1px;
 }
 
 .page-subtitle {
@@ -91,21 +93,35 @@ onMounted(async () => {
   color: var(--color-text-secondary);
 }
 
+/* ===== Articles Grid ===== */
 .articles-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 28px;
 }
 
 .article-card {
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition);
 }
+
+.article-card:hover {
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.article-card:hover .article-title { color: var(--color-primary); }
 
 .article-image {
   aspect-ratio: 16/9;
-  background: rgba(255, 255, 255, 0.03);
+  background: #f0f2f5;
   overflow: hidden;
 }
 
@@ -119,27 +135,30 @@ onMounted(async () => {
 .article-card:hover .article-image img { transform: scale(1.05); }
 
 .article-body {
-  padding: 24px;
+  padding: 24px 28px 28px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+.article-meta {
+  margin-bottom: 10px;
+}
+
 .article-date {
   font-size: 13px;
   color: var(--color-text-muted);
-  margin-bottom: 12px;
+  font-weight: 500;
 }
 
 .article-title {
   font-size: 20px;
   font-weight: 600;
-  color: var(--color-white);
-  margin-bottom: 12px;
+  color: var(--color-text);
+  margin-bottom: 10px;
   line-height: 1.4;
+  transition: color 0.2s;
 }
-
-.article-card:hover .article-title { color: var(--color-primary); }
 
 .article-excerpt {
   font-size: 14px;
@@ -152,15 +171,19 @@ onMounted(async () => {
 .article-link {
   font-size: 14px;
   color: var(--color-primary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
+/* ===== Empty State ===== */
 .empty-state { text-align: center; padding: 80px 0; }
 .empty-icon { font-size: 48px; margin-bottom: 16px; }
 .empty-state p { color: var(--color-text-muted); font-size: 16px; }
 
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .page-title { font-size: 32px; }
-  .articles-grid { grid-template-columns: 1fr; }
+  .articles-grid { grid-template-columns: 1fr; gap: 20px; }
+  .article-body { padding: 18px 20px 22px; }
+  .article-title { font-size: 18px; }
 }
 </style>

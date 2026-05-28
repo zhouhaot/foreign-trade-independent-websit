@@ -7,12 +7,6 @@ spring:
     url: jdbc:sqlite:tradeplus.db
     driver-class-name: org.sqlite.JDBC
 
-  # MyBatis
-  mybatis:
-    mapper-locations: classpath:mapper/*.xml
-    configuration:
-      map-underscore-to-camel-case: true
-
   # Thymeleaf
   thymeleaf:
     cache: false
@@ -44,12 +38,17 @@ spring:
           starttls:
             enable: true
 
+# MyBatis (top-level, NOT under spring)
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
 # Server
 server:
   port: 8080
 
 # File storage
 app:
-  upload-dir: src/main/resources/uploads
+  upload-dir: ./uploads
   # Admin email for receiving inquiry notifications
   admin-email: your-email@qq.com

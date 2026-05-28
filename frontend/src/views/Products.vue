@@ -3,6 +3,7 @@
     <section class="page-hero">
       <div class="container">
         <h1 class="page-title fade-in-up">{{ t('products.title') }}</h1>
+        <p class="page-subtitle fade-in-up fade-in-up-delay-1">{{ t('home.hero_subtitle') }}</p>
       </div>
     </section>
 
@@ -11,7 +12,9 @@
         <!-- Search Bar -->
         <div class="search-bar">
           <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
             <input type="text" v-model="keyword" :placeholder="t('products.search_placeholder')"
                    @input="handleSearch" class="search-input">
             <button v-if="keyword" class="search-clear" @click="clearSearch">×</button>
@@ -31,22 +34,30 @@
           </button>
         </div>
 
-        <!-- Products Grid -->
+        <!-- Products Grid — Horizontal Cards -->
         <div class="products-grid" v-if="products.length">
           <div v-for="product in products" :key="product.id" class="product-card card">
             <router-link :to="`/products/${product.id}`" class="product-image">
-              <img :src="product.mainImage || '/uploads/placeholder.png'" :alt="product.nameEn">
+              <img :src="product.mainImage || '/uploads/placeholder.svg'" :alt="product.nameEn" @error="e => e.target.src='/uploads/placeholder.svg'">
             </router-link>
-            <div class="product-info">
-              <div class="product-category" v-if="product.categoryName">{{ product.categoryName }}</div>
-              <router-link :to="`/products/${product.id}`" class="product-name">
-                {{ locale === 'zh' ? product.nameCn : product.nameEn }}
-              </router-link>
+            <div class="product-body">
+              <div class="product-head">
+                <span class="product-category" v-if="product.categoryName">{{ product.categoryName }}</span>
+                <router-link :to="`/products/${product.id}`" class="product-name">
+                  {{ locale === 'zh' ? product.nameCn : product.nameEn }}
+                </router-link>
+              </div>
               <p class="product-desc">
                 {{ locale === 'zh' ? product.descriptionCn : product.descriptionEn }}
               </p>
+              <div class="product-specs" v-if="product.specifications">
+                <div class="spec-row" v-for="(value, key, idx) in getSpecEntries(product.specifications)" :key="key">
+                  <span class="spec-key">{{ key }}</span>
+                  <span class="spec-value">{{ value }}</span>
+                </div>
+              </div>
               <div class="product-footer">
-                <div class="product-price">{{ product.price || t('products.contact_for_price') }}</div>
+                <span class="product-price">{{ product.price || t('products.contact_for_price') }}</span>
                 <router-link :to="`/products/${product.id}`" class="btn btn-primary btn-sm">
                   {{ t('products.view_detail') }}
                 </router-link>
@@ -86,6 +97,15 @@ async function loadProducts() {
   }
 }
 
+function getSpecEntries(specJson) {
+  try {
+    const specs = JSON.parse(specJson)
+    return Object.entries(specs).slice(0, 4)
+  } catch {
+    return []
+  }
+}
+
 function handleSearch() {
   clearTimeout(searchTimer)
   searchTimer = setTimeout(() => loadProducts(), 300)
@@ -115,16 +135,24 @@ onMounted(async () => {
 <style scoped>
 .page-hero {
   padding: 140px 0 60px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(74, 158, 255, 0.08) 0%, transparent 60%);
+  text-align: center;
+  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
 }
 
 .page-title {
   font-size: 48px;
   font-weight: 700;
-  color: var(--color-white);
-  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 12px;
+  letter-spacing: -1px;
 }
 
+.page-subtitle {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+}
+
+/* ===== Search Bar ===== */
 .search-bar {
   margin-bottom: 24px;
   display: flex;
@@ -134,7 +162,7 @@ onMounted(async () => {
 .search-input-wrap {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 520px;
 }
 
 .search-icon {
@@ -142,37 +170,38 @@ onMounted(async () => {
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 16px;
-  opacity: 0.5;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
 }
 
 .search-input {
   width: 100%;
-  padding: 14px 44px 14px 48px;
+  padding: 14px 44px 14px 46px;
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  color: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
   font-size: 15px;
   outline: none;
   transition: border-color 0.3s;
 }
 
-.search-input:focus { border-color: var(--color-primary); }
+.search-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-glow); }
 
 .search-input::placeholder { color: var(--color-text-muted); }
 
 .search-clear {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   width: 28px;
   height: 28px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-text-secondary);
+  background: var(--color-border-light);
+  color: var(--color-text-muted);
   font-size: 18px;
   cursor: pointer;
   display: flex;
@@ -181,8 +210,9 @@ onMounted(async () => {
   transition: all 0.2s;
 }
 
-.search-clear:hover { background: rgba(255, 255, 255, 0.2); }
+.search-clear:hover { background: var(--color-border); color: var(--color-text); }
 
+/* ===== Filter Bar ===== */
 .filter-bar {
   display: flex;
   gap: 8px;
@@ -192,12 +222,13 @@ onMounted(async () => {
 }
 
 .filter-btn {
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 8px;
-  border: 1px solid var(--color-border);
-  background: transparent;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg);
   color: var(--color-text-secondary);
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -210,19 +241,33 @@ onMounted(async () => {
   color: var(--color-white);
 }
 
+/* ===== Products Grid — Horizontal Cards ===== */
 .products-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.product-card { display: flex; flex-direction: column; }
+.product-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  overflow: hidden;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition);
+}
+
+.product-card:hover {
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
 
 .product-image {
   display: block;
-  aspect-ratio: 4/3;
-  background: rgba(255, 255, 255, 0.03);
+  background: #f0f2f5;
   overflow: hidden;
+  border-right: 1px solid var(--color-border-light);
 }
 
 .product-image img {
@@ -234,29 +279,34 @@ onMounted(async () => {
 
 .product-card:hover .product-image img { transform: scale(1.05); }
 
-.product-info {
-  padding: 24px;
-  flex: 1;
+.product-body {
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.product-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .product-category {
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 600;
   color: var(--color-primary);
-  margin-bottom: 8px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 .product-name {
-  display: block;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  color: var(--color-white);
-  margin-bottom: 12px;
+  color: var(--color-text);
   text-decoration: none;
   transition: color 0.2s;
+  line-height: 1.3;
 }
 
 .product-name:hover { color: var(--color-primary); }
@@ -265,38 +315,74 @@ onMounted(async () => {
   font-size: 14px;
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin-bottom: 20px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  flex: 1;
+}
+
+.product-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 20px;
+  padding: 12px 16px;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.spec-key {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.spec-value {
+  color: var(--color-text);
+  font-weight: 500;
+  text-align: right;
 }
 
 .product-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 .product-price {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
-.btn-sm { padding: 8px 16px; font-size: 13px; }
+.btn-sm { padding: 8px 18px; font-size: 13px; }
 
+/* ===== Empty State ===== */
 .empty-state { text-align: center; padding: 80px 0; }
 .empty-icon { font-size: 48px; margin-bottom: 16px; }
 .empty-state p { color: var(--color-text-muted); font-size: 16px; }
 
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .page-title { font-size: 32px; }
-  .products-grid { grid-template-columns: 1fr; }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-card {
+    grid-template-columns: 1fr;
+  }
+  .product-image {
+    aspect-ratio: 16/9;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .product-body { padding: 18px; }
+  .product-name { font-size: 17px; }
+  .product-specs { grid-template-columns: 1fr; }
 }
 </style>
