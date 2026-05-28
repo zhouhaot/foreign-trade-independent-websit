@@ -52,3 +52,5 @@ app:
   upload-dir: ./uploads
   # Admin email for receiving inquiry notifications
   admin-email: your-email@qq.com
+  # JWT secret for admin API
+  jwt-secret: TradePlusSecretKey2024ForAdminApiJWT

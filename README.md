@@ -8,7 +8,7 @@ TradePlus 是一款面向中小型外贸企业的独立站系统，用于展示�
 |------|------|
 | **后端** | Spring Boot 3.2 / MyBatis (注解) / SQLite / Spring Security / JavaMail |
 | **前台** | Vue 3 / Vite / Vue Router / Vue I18n / Axios |
-| **后台** | Thymeleaf + Bootstrap (计划迁移至 Vue 3 + Element Plus) |
+| **后台** | Vue 3 + Element Plus (SPA) / JWT 认证 / 若依式布局 |
 | **设计** | Inter 字体 / CSS 自定义属性 / 外贸企业风 (亮色专业 B2B) |
 
 ---
@@ -50,7 +50,8 @@ npm run dev   # http://localhost:5173
 | 入口 | 地址 | 说明 |
 |------|------|------|
 | 前台首页 | http://localhost:5173 | 客户看到的页面，支持中/英切换 |
-| 后台登录 | http://localhost:8080/admin/login | admin / admin123 |
+| 管理后台 | http://localhost:5174 | Vue SPA，admin / admin123 |
+| 后台登录 | http://localhost:8080/admin/login | Thymeleaf 后台（保留兼容） |
 
 ---
 
@@ -100,6 +101,27 @@ npm run dev   # http://localhost:5173
 | `GET /api/articles/:id` | 文章详情 |
 | `GET /api/banners` | 轮播图列表 |
 | `POST /api/inquiries` | 提交询盘 |
+
+### 管理后台 API (`/admin/api/*`)
+
+需 JWT 认证（`Authorization: Bearer <token>`），登录接口除外。
+
+| 端点 | 说明 |
+|------|------|
+| `POST /admin/api/auth/login` | 登录，返回 JWT token |
+| `GET /admin/api/dashboard/stats` | 5 项统计数据 |
+| `GET/POST /admin/api/products` | 产品列表 / 新增 |
+| `GET/PUT/DELETE /admin/api/products/:id` | 产品详情 / 修改 / 删除 |
+| `GET/POST /admin/api/categories` | 分类列表 / 新增 |
+| `GET/PUT/DELETE /admin/api/categories/:id` | 分类详情 / 修改 / 删除 |
+| `GET/POST /admin/api/articles` | 文章列表 / 新增 |
+| `GET/PUT/DELETE /admin/api/articles/:id` | 文章详情 / 修改 / 删除 |
+| `GET/POST /admin/api/banners` | 轮播图列表 / 新增 |
+| `GET/PUT/DELETE /admin/api/banners/:id` | 轮播图详情 / 修改 / 删除 |
+| `GET /admin/api/inquiries` | 询盘列表 |
+| `PUT /admin/api/inquiries/:id/read` | 标记已读 |
+| `DELETE /admin/api/inquiries/:id` | 删除询盘 |
+| `POST /admin/api/upload` | 图片上传 |
 
 ---
 
@@ -155,9 +177,10 @@ TradeSite/
 
 ## 进行中
 
-- [ ] 后台管理迁移至 Vue 3 SPA + Element Plus（若依式布局）
-- [ ] 后台 REST API 层（JWT 认证）
-- [ ] 产品真实图片替换
+- [ ] 后端重启验证（需 IDEA 重启以加载 jjwt 依赖）
+- [ ] 管理后台 SPA 端到端测试
+- [ ] 产品真实图片替换 SVG 占位图
+- [ ] GitHub 推送 Phase 2 + Phase 3 代码
 
 ---
 

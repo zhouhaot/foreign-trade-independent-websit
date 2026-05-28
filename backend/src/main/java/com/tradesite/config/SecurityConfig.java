@@ -7,10 +7,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final AdminApiAuthFilter adminApiAuthFilter;
+
+    public SecurityConfig(AdminApiAuthFilter adminApiAuthFilter) {
+        this.adminApiAuthFilter = adminApiAuthFilter;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -21,10 +28,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
+            .addFilterBefore(adminApiAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/admin/login").permitAll()
+                // Admin API: auth endpoints open, rest need token
+                .requestMatchers("/admin/api/auth/**").permitAll()
+                .requestMatchers("/admin/api/**").authenticated()
+                // Public API
                 .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/uploads/**").permitAll()
+                // Thymeleaf admin: form login
+                .requestMatchers("/admin/login").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .requestMatchers("/admin/**").authenticated()
                 .anyRequest().permitAll()
