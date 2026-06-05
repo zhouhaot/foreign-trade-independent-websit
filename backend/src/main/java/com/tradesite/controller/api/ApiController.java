@@ -70,7 +70,7 @@ public class ApiController {
     @GetMapping("/products/{id}")
     public Result<Product> getProduct(@PathVariable Integer id) {
         Product product = productService.findById(id);
-        if (product == null) {
+        if (product == null || product.getStatus() == null || product.getStatus() != 1) {
             return Result.error(404, "Product not found");
         }
         return Result.success(product);
@@ -86,7 +86,7 @@ public class ApiController {
     @GetMapping("/articles/{id}")
     public Result<Article> getArticle(@PathVariable Integer id) {
         Article article = articleService.findById(id);
-        if (article == null) {
+        if (article == null || article.getStatus() == null || article.getStatus() != 1) {
             return Result.error(404, "Article not found");
         }
         return Result.success(article);

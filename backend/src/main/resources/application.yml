@@ -21,7 +21,7 @@ spring:
   # SQL Init
   sql:
     init:
-      mode: always
+      mode: never
       schema-locations: classpath:db/schema.sql
       data-locations: classpath:db/data.sql
 
@@ -54,3 +54,5 @@ app:
   admin-email: your-email@qq.com
   # JWT secret for admin API
   jwt-secret: TradePlusSecretKey2024ForAdminApiJWT
+  # JWT expiration in milliseconds (default 24h)
+  jwt-expiration-ms: 86400000

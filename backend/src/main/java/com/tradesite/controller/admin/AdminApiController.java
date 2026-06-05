@@ -5,6 +5,7 @@ import com.tradesite.config.JwtTokenProvider;
 import com.tradesite.entity.*;
 import com.tradesite.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +29,16 @@ public class AdminApiController {
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private JwtTokenProvider jwtTokenProvider;
 
-    private final Path uploadDir = Paths.get("src/main/resources/uploads");
+    @Value("${app.upload-dir:./uploads}")
+    private String uploadDirPath;
+
+    private static final Set<String> ALLOWED_EXTENSIONS = Set.of(
+        ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".pdf"
+    );
+    private static final Set<String> ALLOWED_MIME_TYPES = Set.of(
+        "image/jpeg", "image/png", "image/gif", "image/webp",
+        "image/svg+xml", "application/pdf"
+    );
 
     // ===== Auth =====
 
@@ -234,12 +244,34 @@ public class AdminApiController {
         if (file == null || file.isEmpty()) {
             return Result.error(400, "请选择文件");
         }
-        Files.createDirectories(uploadDir);
+
+        // Validate file type by extension
         String originalName = file.getOriginalFilename();
-        String ext = "";
-        if (originalName != null && originalName.contains(".")) {
-            ext = originalName.substring(originalName.lastIndexOf("."));
+        if (originalName == null || originalName.isEmpty()) {
+            return Result.error(400, "文件名不能为空");
         }
+        // Reject path traversal attempts
+        if (originalName.contains("..") || originalName.contains("/") || originalName.contains("\\")) {
+            return Result.error(400, "文件名包含非法字符");
+        }
+        String ext = "";
+        int dotIdx = originalName.lastIndexOf('.');
+        if (dotIdx >= 0) {
+            ext = originalName.substring(dotIdx).toLowerCase();
+        }
+        if (!ALLOWED_EXTENSIONS.contains(ext)) {
+            return Result.error(400, "不支持的文件类型: " + ext + "，仅允许: " + String.join(", ", ALLOWED_EXTENSIONS));
+        }
+
+        // Validate MIME type
+        String contentType = file.getContentType();
+        if (contentType == null || !ALLOWED_MIME_TYPES.contains(contentType)) {
+            return Result.error(400, "不支持的文件格式: " + contentType);
+        }
+
+        // Write to configured upload directory
+        Path uploadDir = Paths.get(uploadDirPath);
+        Files.createDirectories(uploadDir);
         String filename = UUID.randomUUID() + ext;
         Files.copy(file.getInputStream(), uploadDir.resolve(filename));
         return Result.success("/uploads/" + filename);

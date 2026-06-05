@@ -1,13 +1,6 @@
--- Clear old data on every startup (safe for SQLite with IF NOT EXISTS schema)
-DELETE FROM inquiry;
-DELETE FROM article;
-DELETE FROM banner;
-DELETE FROM product;
-DELETE FROM product_category;
-DELETE FROM sys_user;
-
+-- Seed data: only inserts if tables are empty (safe for first-time setup)
 -- ===== Categories =====
-INSERT INTO product_category (id, name_cn, name_en, sort_order) VALUES
+INSERT OR IGNORE INTO product_category (id, name_cn, name_en, sort_order) VALUES
 (1, '混合点钞机', 'Mixed Denomination Counters', 1),
 (2, '清分机', 'Currency Sorters', 2),
 (3, '验钞机', 'Counterfeit Detectors', 3),
@@ -15,7 +8,7 @@ INSERT INTO product_category (id, name_cn, name_en, sort_order) VALUES
 (5, '银行专用设备', 'Banking Equipment', 5);
 
 -- ===== Products (15 items) =====
-INSERT INTO product (id, category_id, name_cn, name_en, description_cn, description_en, main_image, price, specifications, status, sort_order) VALUES
+INSERT OR IGNORE INTO product (id, category_id, name_cn, name_en, description_cn, description_en, main_image, price, specifications, status, sort_order) VALUES
 
 -- 混合点钞机 (1-4)
 (1, 1, '智能混合点钞机 BC-3600', 'Smart Mixed Denomination Counter BC-3600',
@@ -128,7 +121,7 @@ INSERT INTO product (id, category_id, name_cn, name_en, description_cn, descript
  1, 3);
 
 -- ===== Sample Inquiries =====
-INSERT INTO inquiry (id, product_id, company_name, contact_name, email, phone, message, is_read) VALUES
+INSERT OR IGNORE INTO inquiry (id, product_id, company_name, contact_name, email, phone, message, is_read) VALUES
 (1, 1, 'Global Cash Solutions Ltd.', 'Michael Brown', 'michael@globalcash.com', '+1-212-555-0198',
  'We are interested in the BC-3600 Mixed Denomination Counter. We need 200 units for our chain of retail stores across North America. Please provide wholesale pricing and lead time.', 0),
 (2, 5, 'African Banking Corp.', 'Sarah Williams', 'sarah@afribank.co.za', '+27-11-555-0123',
@@ -141,7 +134,7 @@ INSERT INTO inquiry (id, product_id, company_name, contact_name, email, phone, m
  'Interested in portable counters for our mobile sales team. Need 100 units PC-100. What is your MOQ and best price?', 1);
 
 -- ===== Articles (6 articles) =====
-INSERT INTO article (id, title_cn, title_en, content_cn, content_en, cover_image, status) VALUES
+INSERT OR IGNORE INTO article (id, title_cn, title_en, content_cn, content_en, cover_image, status) VALUES
 (1, '如何选择适合您企业的点钞机', 'How to Choose the Right Money Counter for Your Business',
  '在现金处理量大的企业中，一台高效的点钞机是必不可少的工具。本文将从点钞速度、鉴伪能力、面额识别等方面，帮助您选择最适合的机型。
 
@@ -319,7 +312,7 @@ TradePlus 的产品已被多家中央银行和大型商业银行采用，在提�
  '/uploads/article-9.svg', 1);
 
 -- ===== Sample Banners =====
-INSERT INTO banner (id, title_cn, title_en, subtitle_cn, subtitle_en, image, link_url, sort_order, status) VALUES
+INSERT OR IGNORE INTO banner (id, title_cn, title_en, subtitle_cn, subtitle_en, image, link_url, sort_order, status) VALUES
 (1, '智能点钞，精准高效', 'Smart Counting, Precise & Efficient',
  '专业银行级点钞机，为全球企业服务', 'Professional Bank-Grade Counters for Global Business',
  '/uploads/banner-1.svg', '/products', 1, 1),

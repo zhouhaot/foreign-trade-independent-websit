@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 @Component
 public class DataInitConfig implements CommandLineRunner {
 
+    private static final String ENV_ADMIN_PASSWORD = "ADMIN_INITIAL_PASSWORD";
+
     private final PasswordEncoder passwordEncoder;
 
     public DataInitConfig(PasswordEncoder passwordEncoder) {
@@ -20,6 +22,13 @@ public class DataInitConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        String adminPassword = System.getenv(ENV_ADMIN_PASSWORD);
+        if (adminPassword == null || adminPassword.isEmpty()) {
+            System.out.println(">>> ADMIN_INITIAL_PASSWORD not set — skipping admin user creation.");
+            System.out.println(">>> Set the environment variable to create the admin user on first startup.");
+            return;
+        }
+
         try {
             Class.forName("org.sqlite.JDBC");
             try (Connection conn = DriverManager.getConnection("jdbc:sqlite:tradeplus.db")) {
@@ -34,9 +43,9 @@ public class DataInitConfig implements CommandLineRunner {
                     }
                 }
 
-                // Create admin if not exists
+                // Create admin only if not exists
                 if (!exists) {
-                    String encodedPassword = passwordEncoder.encode("admin123");
+                    String encodedPassword = passwordEncoder.encode(adminPassword);
                     try (PreparedStatement ps = conn.prepareStatement(
                             "INSERT INTO sys_user (username, password, role) VALUES (?, ?, ?)")) {
                         ps.setString(1, "admin");
@@ -44,7 +53,7 @@ public class DataInitConfig implements CommandLineRunner {
                         ps.setString(3, "admin");
                         ps.executeUpdate();
                     }
-                    System.out.println(">>> Admin user created (admin / admin123)");
+                    System.out.println(">>> Admin user created successfully.");
                 }
             }
         } catch (Exception e) {

@@ -3,6 +3,8 @@ package com.tradesite.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -12,23 +14,32 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    private static final String SECRET = "TradePlusSecretKey2024ForAdminApiJWT";
-    private static final long EXPIRATION_MS = 24 * 60 * 60 * 1000; // 24 hours
-    private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+    @Value("${app.jwt-secret}")
+    private String secret;
+
+    @Value("${app.jwt-expiration-ms:86400000}")
+    private long expirationMs;
+
+    private SecretKey key;
+
+    @PostConstruct
+    public void init() {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
 
     public String generateToken(String username) {
         Date now = new Date();
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(now)
-                .expiration(new Date(now.getTime() + EXPIRATION_MS))
-                .signWith(KEY)
+                .expiration(new Date(now.getTime() + expirationMs))
+                .signWith(key)
                 .compact();
     }
 
     public Claims validateToken(String token) {
         return Jwts.parser()
-                .verifyWith(KEY)
+                .verifyWith(key)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();

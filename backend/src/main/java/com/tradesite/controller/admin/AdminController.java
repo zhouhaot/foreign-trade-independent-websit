@@ -11,6 +11,7 @@ import com.tradesite.service.InquiryService;
 import com.tradesite.service.ProductCategoryService;
 import com.tradesite.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -42,15 +44,39 @@ public class AdminController {
     @Autowired
     private BannerService bannerService;
 
-    private final Path uploadDir = Paths.get("src/main/resources/uploads");
+    @Value("${app.upload-dir:./uploads}")
+    private String uploadDirPath;
+
+    private static final Set<String> ALLOWED_EXTENSIONS = Set.of(
+        ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".pdf"
+    );
+    private static final Set<String> ALLOWED_MIME_TYPES = Set.of(
+        "image/jpeg", "image/png", "image/gif", "image/webp",
+        "image/svg+xml", "application/pdf"
+    );
 
     private void uploadImage(MultipartFile file, java.util.function.Consumer<String> setter) throws IOException {
-        if (file != null && !file.isEmpty()) {
-            Files.createDirectories(uploadDir);
-            String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-            Files.copy(file.getInputStream(), uploadDir.resolve(filename));
-            setter.accept("/uploads/" + filename);
+        if (file == null || file.isEmpty()) return;
+
+        String originalName = file.getOriginalFilename();
+        if (originalName == null || originalName.isEmpty()) return;
+        if (originalName.contains("..") || originalName.contains("/") || originalName.contains("\\")) return;
+
+        String ext = "";
+        int dotIdx = originalName.lastIndexOf('.');
+        if (dotIdx >= 0) {
+            ext = originalName.substring(dotIdx).toLowerCase();
         }
+        if (!ALLOWED_EXTENSIONS.contains(ext)) return;
+
+        String contentType = file.getContentType();
+        if (contentType == null || !ALLOWED_MIME_TYPES.contains(contentType)) return;
+
+        Path uploadDir = Paths.get(uploadDirPath);
+        Files.createDirectories(uploadDir);
+        String filename = UUID.randomUUID() + ext;
+        Files.copy(file.getInputStream(), uploadDir.resolve(filename));
+        setter.accept("/uploads/" + filename);
     }
 
     // ===== Login =====

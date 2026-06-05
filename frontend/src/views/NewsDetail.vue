@@ -58,6 +58,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import DOMPurify from 'dompurify'
 import api from '../api'
 
 const { t, locale } = useI18n()
@@ -74,7 +75,7 @@ function formatDate(dateStr) {
 
 function formatContent(content) {
   if (!content) return ''
-  return content
+  const html = content
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
@@ -87,6 +88,10 @@ function formatContent(content) {
       const cells = match.split('|').filter(c => c.trim())
       return '<tr>' + cells.map(c => `<td>${c.trim()}</td>`).join('') + '</tr>'
     })
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['h1', 'h2', 'h3', 'p', 'br', 'strong', 'ul', 'ol', 'li', 'table', 'tr', 'td', 'thead', 'tbody'],
+    ALLOWED_ATTR: []
+  })
 }
 
 onMounted(async () => {

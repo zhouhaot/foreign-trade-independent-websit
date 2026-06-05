@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 # Backend (Spring Boot 3.2, JDK 17)
 cd backend
+./mvnw.cmd compile              # Windows
 ./mvnw spring-boot:run          # or run `TradeSiteApplication` in IntelliJ IDEA
 # Starts on http://localhost:8080
 
@@ -14,9 +15,16 @@ cd backend
 cd frontend
 npm install                     # first time only
 npm run dev                     # Starts on http://localhost:5173
+
+# Admin panel (Vue 3 + Element Plus)
+cd frontend-admin
+npm install                     # first time only
+npm run dev                     # Starts on http://localhost:5174
 ```
 
 **Always run the backend from IDEA**, not CLI — the working directory determines where the SQLite database file is created (`tradeplus.db` relative to CWD).
+
+**Maven wrapper**: On Windows use `mvnw.cmd`, on Linux/macOS use `mvnw`. The `.mvn/wrapper/maven-wrapper.properties` file is required for the wrapper to work.
 
 ## Architecture Overview
 
@@ -56,28 +64,31 @@ mybatis:
 
 ### Database Initialization
 
-On every startup (`sql.init.mode: always`):
+`sql.init.mode` is set to `never` — data persists across restarts.
+
+On first startup (empty database):
 1. `schema.sql` runs → `CREATE TABLE IF NOT EXISTS` (idempotent)
-2. `data.sql` runs → `DELETE FROM` all tables, then re-inserts seed data (15 products, 9 articles, 3 banners, 5 categories)
-3. `DataInitConfig` (CommandLineRunner) ensures admin user exists with BCrypt-encoded password
+2. `data.sql` runs → `INSERT OR IGNORE` seed data (15 products, 9 articles, 3 banners, 5 categories)
+3. `DataInitConfig` (CommandLineRunner) checks `ADMIN_INITIAL_PASSWORD` env var — if set, creates admin user with BCrypt-encoded password
 
 **To reset the database**: delete `tradeplus.db` and restart. The file is created at the working directory (usually `E:/TradeSite/tradeplus.db` when run from IDEA).
 
 ### Admin Login
 
 - URL: `http://localhost:8080/admin/login`
-- Credentials: `admin` / `admin123`
+- Credentials: Set `ADMIN_INITIAL_PASSWORD` env var before first startup
 - Password is BCrypt-encoded by `DataInitConfig` at startup (not stored in data.sql)
 - CSRF is disabled in `SecurityConfig`
 - `/api/**`, `/uploads/**`, `/admin/login` are `permitAll`; `/admin/**` requires authentication
 
 ### Static Files & Uploads
 
-- Images served via `classpath:/uploads/` by `WebConfig.addResourceHandlers`
+- Images served via `classpath:/uploads/` + `file:${app.upload-dir}/` by `WebConfig.addResourceHandlers`
 - All seed images are SVGs in `backend/src/main/resources/uploads/`
+- Runtime uploads go to `app.upload-dir` (default `./uploads`, set to absolute path in production)
 - Frontend uses `@error="e => e.target.src='/uploads/placeholder.svg'"` fallback on all `<img>` tags
 - Vite proxies `/uploads` to `localhost:8080`
-- `app.upload-dir` in application.yml is for runtime uploads
+- Upload enforces file extension and MIME type whitelist (images + PDF only)
 
 ### API Response Format
 
