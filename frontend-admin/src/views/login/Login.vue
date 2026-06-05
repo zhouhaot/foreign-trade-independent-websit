@@ -2,7 +2,9 @@
   <div class="login-page">
     <div class="login-card">
       <div class="login-header">
-        <span class="login-logo">◆</span>
+        <span class="login-logo">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 10.5 12 3l9.5 7.5L12 21 2.5 10.5z"/></svg>
+        </span>
         <h1>TradePlus Admin</h1>
         <p>后台管理系统</p>
       </div>
@@ -66,7 +68,8 @@ async function handleLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8effc 100%);
+  background: linear-gradient(135deg, #f1f5f9 0%, #dbeafe 100%);
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .login-card {
@@ -74,7 +77,7 @@ async function handleLogin() {
   padding: 40px;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
 }
 
 .login-header {
@@ -83,22 +86,22 @@ async function handleLogin() {
 }
 
 .login-logo {
-  font-size: 36px;
-  color: #1a56db;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 8px;
 }
 
 .login-header h1 {
   font-size: 22px;
   font-weight: 700;
-  color: #1f2937;
+  color: #0f172a;
   margin: 0 0 4px;
 }
 
 .login-header p {
   font-size: 14px;
-  color: #6b7280;
+  color: #64748b;
   margin: 0;
 }
 </style>

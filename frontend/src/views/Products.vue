@@ -13,11 +13,13 @@
         <div class="search-bar">
           <div class="search-input-wrap">
             <span class="search-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <SvgIcon name="search" :size="18" />
             </span>
             <input type="text" v-model="keyword" :placeholder="t('products.search_placeholder')"
                    @input="handleSearch" class="search-input">
-            <button v-if="keyword" class="search-clear" @click="clearSearch">×</button>
+            <button v-if="keyword" class="search-clear" @click="clearSearch" aria-label="Clear search">
+              <SvgIcon name="x" :size="16" />
+            </button>
           </div>
         </div>
 
@@ -38,7 +40,7 @@
         <div class="products-grid" v-if="products.length">
           <div v-for="product in products" :key="product.id" class="product-card card">
             <router-link :to="`/products/${product.id}`" class="product-image">
-              <img :src="product.mainImage || '/uploads/placeholder.svg'" :alt="product.nameEn" @error="e => e.target.src='/uploads/placeholder.svg'">
+              <img :src="product.mainImage || '/uploads/placeholder.svg'" :alt="product.nameEn" loading="lazy" @error="e => e.target.src='/uploads/placeholder.svg'">
             </router-link>
             <div class="product-body">
               <div class="product-head">
@@ -68,7 +70,7 @@
 
         <!-- Empty State -->
         <div v-else class="empty-state">
-          <div class="empty-icon">📦</div>
+          <SvgIcon name="package" :size="48" class="empty-icon" />
           <p>{{ t('products.no_products') }}</p>
         </div>
       </div>
@@ -133,25 +135,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.page-hero {
-  padding: 140px 0 60px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-}
-
-.page-title {
-  font-size: 48px;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 12px;
-  letter-spacing: -1px;
-}
-
-.page-subtitle {
-  font-size: 18px;
-  color: var(--color-text-secondary);
-}
-
 /* ===== Search Bar ===== */
 .search-bar {
   margin-bottom: 24px;
@@ -183,11 +166,15 @@ onMounted(async () => {
   border-radius: var(--radius);
   color: var(--color-text);
   font-size: 15px;
+  font-family: inherit;
   outline: none;
-  transition: border-color 0.3s;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 
-.search-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-glow); }
+.search-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
 
 .search-input::placeholder { color: var(--color-text-muted); }
 
@@ -202,7 +189,6 @@ onMounted(async () => {
   border: none;
   background: var(--color-border-light);
   color: var(--color-text-muted);
-  font-size: 18px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -231,6 +217,7 @@ onMounted(async () => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: inherit;
 }
 
 .filter-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
@@ -255,6 +242,7 @@ onMounted(async () => {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border-light);
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .product-card:hover {
@@ -265,7 +253,7 @@ onMounted(async () => {
 
 .product-image {
   display: block;
-  background: #f0f2f5;
+  background: #f1f5f9;
   overflow: hidden;
   border-right: 1px solid var(--color-border-light);
 }
@@ -363,16 +351,14 @@ onMounted(async () => {
   color: var(--color-accent);
 }
 
-.btn-sm { padding: 8px 18px; font-size: 13px; }
-
-/* ===== Empty State ===== */
-.empty-state { text-align: center; padding: 80px 0; }
-.empty-icon { font-size: 48px; margin-bottom: 16px; }
-.empty-state p { color: var(--color-text-muted); font-size: 16px; }
+.empty-icon {
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .page-title { font-size: 32px; }
   .product-card {
     grid-template-columns: 1fr;
   }
@@ -384,5 +370,9 @@ onMounted(async () => {
   .product-body { padding: 18px; }
   .product-name { font-size: 17px; }
   .product-specs { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card:hover .product-image img { transform: none; }
 }
 </style>

@@ -13,7 +13,9 @@
           <!-- Form -->
           <div class="contact-form-wrapper fade-in-up">
             <div v-if="submitted" class="success-card">
-              <div class="success-icon">✓</div>
+              <div class="success-icon">
+                <SvgIcon name="check" :size="28" />
+              </div>
               <h2>{{ t('contact.success_title') }}</h2>
               <p>{{ t('contact.success_msg') }}</p>
               <button class="btn btn-outline" @click="resetForm">{{ t('contact.send_another') }}</button>
@@ -22,34 +24,34 @@
             <form v-else @submit.prevent="submitForm" class="contact-form">
               <div class="form-row">
                 <div class="form-group">
-                  <label>{{ t('contact.form_name') }}</label>
-                  <input type="text" v-model="form.contactName" required placeholder="John Doe">
+                  <label for="contact-name">{{ t('contact.form_name') }}</label>
+                  <input id="contact-name" type="text" v-model="form.contactName" required placeholder="John Doe">
                 </div>
                 <div class="form-group">
-                  <label>{{ t('contact.form_email') }}</label>
-                  <input type="email" v-model="form.email" required placeholder="john@company.com">
+                  <label for="contact-email">{{ t('contact.form_email') }}</label>
+                  <input id="contact-email" type="email" v-model="form.email" required placeholder="john@company.com">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
-                  <label>{{ t('contact.form_phone') }}</label>
-                  <input type="tel" v-model="form.phone" placeholder="+86 138-0000-0000">
+                  <label for="contact-phone">{{ t('contact.form_phone') }}</label>
+                  <input id="contact-phone" type="tel" v-model="form.phone" placeholder="+86 138-0000-0000">
                 </div>
                 <div class="form-group">
-                  <label>{{ t('contact.form_company') }}</label>
-                  <input type="text" v-model="form.companyName" placeholder="Company Ltd.">
+                  <label for="contact-company">{{ t('contact.form_company') }}</label>
+                  <input id="contact-company" type="text" v-model="form.companyName" placeholder="Company Ltd.">
                 </div>
               </div>
               <div class="form-group">
-                <label>{{ t('contact.form_message') }}</label>
-                <textarea v-model="form.message" rows="5" required :placeholder="locale === 'zh' ? '请描述您的需求...' : 'Please describe your requirements...'"></textarea>
+                <label for="contact-message">{{ t('contact.form_message') }}</label>
+                <textarea id="contact-message" v-model="form.message" rows="5" required :placeholder="locale === 'zh' ? '请描述您的需求...' : 'Please describe your requirements...'"></textarea>
               </div>
               <div class="form-footer">
                 <button type="submit" class="btn btn-primary btn-lg" :disabled="sending">
                   {{ sending ? t('contact.form_sending') : t('contact.form_submit') }}
                 </button>
                 <span class="form-trust">
-                  <span class="trust-icon">🔒</span>
+                  <SvgIcon name="lock" :size="14" class="trust-icon" />
                   {{ locale === 'zh' ? '您的信息将被严格保密' : 'Your information is secure' }}
                 </span>
               </div>
@@ -63,7 +65,7 @@
               <div class="info-items">
                 <div class="info-item">
                   <div class="info-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                    <SvgIcon name="mail" :size="20" />
                   </div>
                   <div>
                     <div class="info-label">{{ t('contact.info_email') }}</div>
@@ -72,7 +74,7 @@
                 </div>
                 <div class="info-item">
                   <div class="info-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+                    <SvgIcon name="phone" :size="20" />
                   </div>
                   <div>
                     <div class="info-label">{{ t('contact.info_phone') }}</div>
@@ -81,7 +83,7 @@
                 </div>
                 <div class="info-item">
                   <div class="info-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="2"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8z"/></svg>
+                    <SvgIcon name="mapPin" :size="20" />
                   </div>
                   <div>
                     <div class="info-label">{{ t('contact.info_address') }}</div>
@@ -94,21 +96,27 @@
             <!-- Trust Badges -->
             <div class="trust-badges">
               <div class="trust-badge">
-                <span class="trust-badge-icon">✓</span>
+                <span class="trust-badge-icon">
+                  <SvgIcon name="shield" :size="16" />
+                </span>
                 <div>
                   <div class="trust-badge-title">{{ t('home.why_quality') }}</div>
                   <div class="trust-badge-desc">{{ t('home.why_quality_desc') }}</div>
                 </div>
               </div>
               <div class="trust-badge">
-                <span class="trust-badge-icon">🌐</span>
+                <span class="trust-badge-icon">
+                  <SvgIcon name="globe" :size="16" />
+                </span>
                 <div>
                   <div class="trust-badge-title">{{ t('home.why_delivery') }}</div>
                   <div class="trust-badge-desc">{{ t('home.why_delivery_desc') }}</div>
                 </div>
               </div>
               <div class="trust-badge">
-                <span class="trust-badge-icon">🕐</span>
+                <span class="trust-badge-icon">
+                  <SvgIcon name="clock" :size="16" />
+                </span>
                 <div>
                   <div class="trust-badge-title">{{ t('home.why_support') }}</div>
                   <div class="trust-badge-desc">{{ t('home.why_support_desc') }}</div>
@@ -168,25 +176,6 @@ function resetForm() {
 </script>
 
 <style scoped>
-.page-hero {
-  padding: 140px 0 60px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-}
-
-.page-title {
-  font-size: 48px;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 16px;
-  letter-spacing: -1px;
-}
-
-.page-subtitle {
-  font-size: 18px;
-  color: var(--color-text-secondary);
-}
-
 /* ===== Layout ===== */
 .contact-layout {
   display: grid;
@@ -237,7 +226,7 @@ function resetForm() {
   font-size: 14px;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 
 .form-group input::placeholder,
@@ -267,12 +256,6 @@ function resetForm() {
   font-size: 16px;
 }
 
-.form-footer .btn-lg:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
 .form-trust {
   font-size: 13px;
   color: var(--color-text-muted);
@@ -282,7 +265,8 @@ function resetForm() {
 }
 
 .trust-icon {
-  font-size: 14px;
+  flex-shrink: 0;
+  color: var(--color-success);
 }
 
 /* ===== Success Card ===== */
@@ -297,7 +281,6 @@ function resetForm() {
   border-radius: 50%;
   background: var(--color-success-light);
   color: var(--color-success);
-  font-size: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -390,6 +373,7 @@ function resetForm() {
   border-radius: var(--radius);
   padding: 18px;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .trust-badge:hover {
@@ -406,8 +390,6 @@ function resetForm() {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
   flex-shrink: 0;
 }
 
@@ -426,7 +408,6 @@ function resetForm() {
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .page-title { font-size: 32px; }
   .contact-layout { grid-template-columns: 1fr; gap: 32px; }
   .form-row { grid-template-columns: 1fr; }
   .contact-form-wrapper { padding: 24px; }

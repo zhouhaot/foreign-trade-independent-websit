@@ -5,14 +5,20 @@
         <!-- Brand -->
         <div class="footer-col footer-brand">
           <div class="logo">
-            <span class="logo-icon">◆</span>
+            <SvgIcon name="diamond" :size="24" class="logo-icon" />
             <span class="logo-text">TradePlus</span>
           </div>
           <p class="footer-tagline">{{ t('footer.tagline') }}</p>
           <div class="footer-social">
-            <a href="#" class="social-link" aria-label="LinkedIn">in</a>
-            <a href="#" class="social-link" aria-label="YouTube">▶</a>
-            <a href="#" class="social-link" aria-label="WhatsApp">✆</a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <SvgIcon name="linkedin" :size="16" />
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube">
+              <SvgIcon name="youtube" :size="16" />
+            </a>
+            <a href="#" class="social-link" aria-label="WhatsApp">
+              <SvgIcon name="whatsapp" :size="16" />
+            </a>
           </div>
         </div>
 
@@ -38,10 +44,19 @@
         <!-- Contact -->
         <div class="footer-col">
           <h4 class="footer-heading">{{ t('footer.contact') }}</h4>
-          <p class="footer-contact-item">✉ {{ t('footer.email_placeholder') }}</p>
-          <p class="footer-contact-item">✆ {{ t('footer.phone_placeholder') }}</p>
-          <p class="footer-contact-item">⌂ {{ t('footer.address_placeholder') }}</p>
-          <router-link to="/contact" class="footer-cta-link">{{ t('footer.send_inquiry') }} →</router-link>
+          <div class="footer-contact-item">
+            <SvgIcon name="mail" :size="14" class="contact-icon" />
+            <span>{{ t('footer.email_placeholder') }}</span>
+          </div>
+          <div class="footer-contact-item">
+            <SvgIcon name="phone" :size="14" class="contact-icon" />
+            <span>{{ t('footer.phone_placeholder') }}</span>
+          </div>
+          <div class="footer-contact-item">
+            <SvgIcon name="mapPin" :size="14" class="contact-icon" />
+            <span>{{ t('footer.address_placeholder') }}</span>
+          </div>
+          <router-link to="/contact" class="footer-cta-link">{{ t('footer.send_inquiry') }} <SvgIcon name="arrowRight" :size="14" /></router-link>
         </div>
       </div>
 
@@ -63,8 +78,8 @@ const { t } = useI18n()
 
 <style scoped>
 .footer {
-  background: #0f1a2e;
-  color: rgba(255, 255, 255, 0.7);
+  background: #0f172a;
+  color: rgba(255, 255, 255, 0.65);
   padding: 72px 0 0;
 }
 
@@ -90,8 +105,7 @@ const { t } = useI18n()
 }
 
 .logo-icon {
-  font-size: 22px;
-  color: var(--color-primary);
+  color: #60a5fa;
 }
 
 .logo-text {
@@ -103,7 +117,7 @@ const { t } = useI18n()
 .footer-tagline {
   font-size: 14px;
   line-height: 1.6;
-  opacity: 0.6;
+  opacity: 0.5;
   margin-bottom: 4px;
 }
 
@@ -114,24 +128,23 @@ const { t } = useI18n()
 }
 
 .social-link {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.45);
   transition: all 0.2s;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .social-link:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  background: rgba(74, 158, 255, 0.1);
+  border-color: #60a5fa;
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.1);
 }
 
 .footer-heading {
@@ -145,24 +158,36 @@ const { t } = useI18n()
 
 .footer-col a {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.5);
   transition: color 0.2s;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .footer-col a:hover {
-  color: var(--color-primary);
+  color: #60a5fa;
 }
 
 .footer-contact-item {
   font-size: 13px;
-  opacity: 0.5;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
 }
 
 .footer-cta-link {
-  color: var(--color-primary) !important;
+  color: #60a5fa !important;
   font-weight: 500;
   margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .footer-bottom {
@@ -174,7 +199,7 @@ const { t } = useI18n()
 
 .footer-bottom p {
   font-size: 13px;
-  opacity: 0.4;
+  opacity: 0.35;
 }
 
 .footer-bottom-links {
@@ -184,14 +209,15 @@ const { t } = useI18n()
 
 .footer-bottom-links a {
   font-size: 13px;
-  opacity: 0.4;
+  opacity: 0.35;
   transition: opacity 0.2s;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
 }
 
 .footer-bottom-links a:hover {
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
 @media (max-width: 768px) {

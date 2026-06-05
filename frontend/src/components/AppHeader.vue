@@ -2,7 +2,7 @@
   <header class="header" :class="{ scrolled: isScrolled }">
     <div class="container header-inner">
       <router-link to="/" class="logo">
-        <span class="logo-icon">◆</span>
+        <SvgIcon name="diamond" :size="28" class="logo-icon" />
         <span class="logo-text">TradePlus</span>
       </router-link>
 
@@ -15,10 +15,10 @@
       </nav>
 
       <div class="header-actions">
-        <button class="lang-toggle" @click="toggleLang" :title="locale === 'en' ? '切换中文' : 'Switch to English'">
+        <button class="lang-toggle" @click="toggleLang" :aria-label="locale === 'en' ? '切换中文' : 'Switch to English'">
           {{ locale === 'en' ? '中' : 'EN' }}
         </button>
-        <button class="menu-toggle" @click="menuOpen = !menuOpen">
+        <button class="menu-toggle" @click="menuOpen = !menuOpen" :aria-label="menuOpen ? 'Close menu' : 'Open menu'">
           <span :class="{ active: menuOpen }"></span>
         </button>
       </div>
@@ -42,7 +42,7 @@ function handleScroll() {
   isScrolled.value = window.scrollY > 20
 }
 
-onMounted(() => window.addEventListener('scroll', handleScroll))
+onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
@@ -52,10 +52,10 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: var(--z-header);
   padding: 18px 0;
   transition: all 0.3s;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
 }
@@ -80,12 +80,11 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .logo-icon {
-  font-size: 22px;
   color: var(--color-primary);
 }
 
 .logo-text {
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--color-text);
   letter-spacing: -0.5px;
@@ -104,6 +103,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   border-radius: var(--radius);
   transition: all 0.2s;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .nav-link:hover {
@@ -143,12 +143,17 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
 .menu-toggle {
   display: none;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: none;
   background: none;
   cursor: pointer;
   position: relative;
+  border-radius: var(--radius-sm);
+}
+
+.menu-toggle:hover {
+  background: var(--color-bg-alt);
 }
 
 .menu-toggle span,
@@ -158,12 +163,13 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   width: 20px;
   height: 2px;
   background: var(--color-text);
+  border-radius: 2px;
   transition: all 0.3s;
   position: absolute;
-  left: 8px;
+  left: 12px;
 }
 
-.menu-toggle span { top: 17px; }
+.menu-toggle span { top: 21px; }
 .menu-toggle span::before { content: ''; top: -6px; }
 .menu-toggle span::after { content: ''; top: 6px; }
 
@@ -178,14 +184,14 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     position: fixed;
     top: 0;
     right: -100%;
-    width: 260px;
+    width: 280px;
     height: 100vh;
     background: var(--color-bg);
     flex-direction: column;
     padding: 80px 24px 24px;
-    transition: right 0.3s;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     gap: 2px;
-    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.08);
   }
 
   .nav.open { right: 0; }

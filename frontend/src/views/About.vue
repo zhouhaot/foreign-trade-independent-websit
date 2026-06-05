@@ -19,7 +19,7 @@
             <p class="story-text">{{ t('about.story') }}</p>
             <div class="story-features">
               <div class="story-feat" v-for="(feat, i) in storyFeatures" :key="i">
-                <span class="story-feat-icon">{{ feat.icon }}</span>
+                <SvgIcon name="check" :size="14" class="story-feat-icon" />
                 <span>{{ t(feat.key) }}</span>
               </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="visual-card">
               <div class="visual-bg"></div>
               <div class="visual-content">
-                <div class="visual-logo">◆</div>
+                <SvgIcon name="diamond" :size="60" class="visual-logo" />
                 <div class="visual-text">TradePlus</div>
                 <div class="visual-sub">Since 2010</div>
               </div>
@@ -84,25 +84,6 @@ const storyFeatures = [
 </script>
 
 <style scoped>
-.page-hero {
-  padding: 140px 0 60px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-}
-
-.page-title {
-  font-size: 48px;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 16px;
-  letter-spacing: -1px;
-}
-
-.page-subtitle {
-  font-size: 18px;
-  color: var(--color-text-secondary);
-}
-
 /* ===== Story ===== */
 .story-layout {
   display: grid;
@@ -151,8 +132,6 @@ const storyFeatures = [
   border-radius: 6px;
   background: var(--color-success-light);
   color: var(--color-success);
-  font-size: 12px;
-  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -166,15 +145,15 @@ const storyFeatures = [
   overflow: hidden;
   position: relative;
   border: 1px solid var(--color-border-light);
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, #e8effc 50%, var(--color-bg) 100%);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, #dbeafe 50%, var(--color-bg) 100%);
 }
 
 .visual-bg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 30% 40%, rgba(26, 86, 219, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 70% 60%, rgba(26, 86, 219, 0.04) 0%, transparent 40%);
+    radial-gradient(circle at 30% 40%, rgba(30, 64, 175, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(30, 64, 175, 0.03) 0%, transparent 40%);
 }
 
 .visual-content {
@@ -188,9 +167,8 @@ const storyFeatures = [
 }
 
 .visual-logo {
-  font-size: 60px;
   color: var(--color-primary);
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .visual-text {
@@ -220,6 +198,7 @@ const storyFeatures = [
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .stat-card:hover {
@@ -261,7 +240,6 @@ const storyFeatures = [
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .page-title { font-size: 32px; }
   .story-layout { grid-template-columns: 1fr; gap: 32px; }
   .story-heading { font-size: 26px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }

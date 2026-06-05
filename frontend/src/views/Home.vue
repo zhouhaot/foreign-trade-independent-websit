@@ -18,7 +18,7 @@
               <div class="hero-actions fade-in-up fade-in-up-delay-2">
                 <router-link :to="banner.linkUrl || '/products'" class="btn btn-primary btn-lg">
                   {{ t('home.hero_cta') }}
-                  <span>→</span>
+                  <SvgIcon name="arrowRight" :size="18" />
                 </router-link>
                 <router-link to="/contact" class="btn btn-outline btn-lg">
                   {{ t('contact.form_submit') }}
@@ -30,6 +30,7 @@
         <div class="carousel-dots" v-if="banners.length > 1">
           <button v-for="(_, i) in banners" :key="i"
                   :class="{ active: currentBanner === i }"
+                  :aria-label="`Go to slide ${i + 1}`"
                   @click="currentBanner = i"></button>
         </div>
       </div>
@@ -47,7 +48,7 @@
         <div class="hero-actions fade-in-up fade-in-up-delay-3">
           <router-link to="/products" class="btn btn-primary btn-lg">
             {{ t('home.hero_cta') }}
-            <span>→</span>
+            <SvgIcon name="arrowRight" :size="18" />
           </router-link>
           <router-link to="/contact" class="btn btn-outline btn-lg">
             {{ t('contact.form_submit') }}
@@ -70,7 +71,7 @@
         <div class="products-grid">
           <div v-for="product in featuredProducts" :key="product.id" class="product-card card">
             <router-link :to="`/products/${product.id}`" class="product-image">
-              <img :src="product.mainImage || '/uploads/placeholder.svg'" :alt="product.nameEn" @error="e => e.target.src='/uploads/placeholder.svg'">
+              <img :src="product.mainImage || '/uploads/placeholder.svg'" :alt="product.nameEn" loading="lazy" @error="e => e.target.src='/uploads/placeholder.svg'">
               <div class="product-category-tag">{{ product.categoryName }}</div>
             </router-link>
             <div class="product-info">
@@ -105,7 +106,7 @@
           <div class="feature-card fade-in-up" v-for="(feature, i) in features" :key="i"
                :class="`fade-in-up-delay-${i + 1}`">
             <div class="feature-icon-wrap">
-              <span class="feature-icon">{{ feature.icon }}</span>
+              <SvgIcon :name="feature.icon" :size="24" class="feature-icon" />
             </div>
             <h3 class="feature-title">{{ t(feature.titleKey) }}</h3>
             <p class="feature-desc">{{ t(feature.descKey) }}</p>
@@ -153,7 +154,9 @@
         <div class="team-layout">
           <div class="team-advantages">
             <div class="advantage-card" v-for="(adv, i) in teamAdvantages" :key="i">
-              <div class="advantage-icon">{{ adv.icon }}</div>
+              <div class="advantage-icon">
+                <SvgIcon :name="adv.icon" :size="20" />
+              </div>
               <div>
                 <h3 class="advantage-title">{{ t(adv.titleKey) }}</h3>
                 <p class="advantage-desc">{{ t(adv.descKey) }}</p>
@@ -184,10 +187,10 @@ const currentBanner = ref(0)
 let bannerTimer = null
 
 const features = [
-  { icon: '✦', titleKey: 'home.why_quality', descKey: 'home.why_quality_desc' },
-  { icon: '✈', titleKey: 'home.why_delivery', descKey: 'home.why_delivery_desc' },
-  { icon: '☎', titleKey: 'home.why_support', descKey: 'home.why_support_desc' },
-  { icon: '◆', titleKey: 'home.why_price', descKey: 'home.why_price_desc' }
+  { icon: 'shield', titleKey: 'home.why_quality', descKey: 'home.why_quality_desc' },
+  { icon: 'globe', titleKey: 'home.why_delivery', descKey: 'home.why_delivery_desc' },
+  { icon: 'headphones', titleKey: 'home.why_support', descKey: 'home.why_support_desc' },
+  { icon: 'tag', titleKey: 'home.why_price', descKey: 'home.why_price_desc' }
 ]
 
 const serviceSteps = [
@@ -198,9 +201,9 @@ const serviceSteps = [
 ]
 
 const teamAdvantages = [
-  { icon: '⚡', titleKey: 'home.team_advantage1_title', descKey: 'home.team_advantage1_desc' },
-  { icon: '✓', titleKey: 'home.team_advantage2_title', descKey: 'home.team_advantage2_desc' },
-  { icon: '🛟', titleKey: 'home.team_advantage3_title', descKey: 'home.team_advantage3_desc' }
+  { icon: 'zap', titleKey: 'home.team_advantage1_title', descKey: 'home.team_advantage1_desc' },
+  { icon: 'badgeCheck', titleKey: 'home.team_advantage2_title', descKey: 'home.team_advantage2_desc' },
+  { icon: 'lifeBuoy', titleKey: 'home.team_advantage3_title', descKey: 'home.team_advantage3_desc' }
 ]
 
 const teamStats = [
@@ -266,7 +269,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(170deg, #f0f4fb 0%, #ffffff 40%, #f5f7fa 100%);
+  background: linear-gradient(170deg, #eff6ff 0%, #ffffff 40%, #f8fafc 100%);
 }
 
 .hero-bg {
@@ -279,9 +282,9 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(26, 86, 219, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(26, 86, 219, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(229, 160, 13, 0.03) 0%, transparent 40%);
+    radial-gradient(ellipse at 20% 50%, rgba(30, 64, 175, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(30, 64, 175, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(217, 119, 6, 0.03) 0%, transparent 40%);
 }
 
 /* Carousel */
@@ -315,7 +318,7 @@ onUnmounted(() => {
   height: 10px;
   border-radius: 50%;
   border: none;
-  background: rgba(26, 86, 219, 0.2);
+  background: rgba(30, 64, 175, 0.2);
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -397,7 +400,6 @@ onUnmounted(() => {
 }
 
 .product-card {
-  cursor: pointer;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border-light);
 }
@@ -406,7 +408,7 @@ onUnmounted(() => {
   position: relative;
   display: block;
   aspect-ratio: 4/3;
-  background: #f0f2f5;
+  background: #f1f5f9;
   overflow: hidden;
 }
 
@@ -424,7 +426,7 @@ onUnmounted(() => {
   top: 12px;
   left: 12px;
   padding: 4px 10px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--color-primary);
   font-size: 11px;
   font-weight: 600;
@@ -490,6 +492,7 @@ onUnmounted(() => {
   padding: 36px 28px;
   text-align: center;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .feature-card:hover {
@@ -509,7 +512,8 @@ onUnmounted(() => {
   margin: 0 auto 20px;
 }
 
-.feature-icon { font-size: 24px; color: var(--color-primary); }
+.feature-icon { color: var(--color-primary); }
+
 .feature-title { font-size: 17px; font-weight: 600; color: var(--color-text); margin-bottom: 10px; }
 .feature-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
 
@@ -535,6 +539,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .partner-logo:hover {
@@ -564,6 +569,7 @@ onUnmounted(() => {
   padding: 32px 24px;
   text-align: center;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .process-step:hover {
@@ -622,6 +628,7 @@ onUnmounted(() => {
   border-radius: var(--radius-lg);
   padding: 24px;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .advantage-card:hover {
@@ -631,12 +638,12 @@ onUnmounted(() => {
 }
 
 .advantage-icon {
-  font-size: 22px;
   flex-shrink: 0;
   width: 48px;
   height: 48px;
   border-radius: 12px;
   background: var(--color-primary-light);
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -668,6 +675,7 @@ onUnmounted(() => {
   padding: 28px 20px;
   text-align: center;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .stat-card:hover {
@@ -687,19 +695,6 @@ onUnmounted(() => {
 .stat-label {
   font-size: 13px;
   color: var(--color-text-muted);
-}
-
-/* ===== Section Subtitle (overrides for this page) ===== */
-.section-subtitle {
-  text-align: center;
-  font-size: 16px;
-  color: var(--color-text-secondary);
-  margin-top: -8px;
-  margin-bottom: 48px;
-  max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
 }
 
 /* ===== Responsive ===== */
@@ -722,5 +717,9 @@ onUnmounted(() => {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .process-grid { grid-template-columns: repeat(2, 1fr); }
   .partners-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card:hover .product-image img { transform: none; }
 }
 </style>

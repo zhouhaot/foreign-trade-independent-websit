@@ -3,14 +3,16 @@
     <!-- Sidebar -->
     <el-aside :width="isCollapsed ? '64px' : '220px'" class="sidebar">
       <div class="logo">
-        <span class="logo-icon">◆</span>
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 10.5 12 3l9.5 7.5L12 21 2.5 10.5z"/></svg>
+        </span>
         <span class="logo-text" v-show="!isCollapsed">TradePlus</span>
       </div>
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapsed"
         router
-        background-color="#1f2937"
+        background-color="#0f172a"
         text-color="#9ca3af"
         active-text-color="#fff"
         :collapse-transition="false"
@@ -99,9 +101,10 @@ function handleCommand(cmd) {
 }
 
 .sidebar {
-  background: #1f2937;
+  background: #0f172a;
   transition: width 0.3s;
   overflow: hidden;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .logo {
@@ -115,8 +118,9 @@ function handleCommand(cmd) {
 }
 
 .logo-icon {
-  font-size: 20px;
-  color: #1a56db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-text {
@@ -163,7 +167,7 @@ function handleCommand(cmd) {
 }
 
 .avatar {
-  background: #1a56db;
+  background: #1e40af;
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -171,7 +175,7 @@ function handleCommand(cmd) {
 }
 
 .el-main {
-  background: #f5f7fa;
+  background: #f1f5f9;
   padding: 20px;
 }
 </style>

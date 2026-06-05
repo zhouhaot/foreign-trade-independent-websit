@@ -15,6 +15,7 @@
             <div class="article-image">
               <img :src="article.coverImage || '/uploads/placeholder.svg'"
                    :alt="locale === 'zh' ? article.titleCn : article.titleEn"
+                   loading="lazy"
                    @error="e => e.target.src='/uploads/placeholder.svg'">
             </div>
             <div class="article-body">
@@ -33,7 +34,7 @@
         </div>
 
         <div v-else class="empty-state">
-          <div class="empty-icon">📰</div>
+          <SvgIcon name="newspaper" :size="48" class="empty-icon" />
           <p>{{ t('news.no_articles') }}</p>
         </div>
       </div>
@@ -74,25 +75,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.page-hero {
-  padding: 140px 0 60px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-}
-
-.page-title {
-  font-size: 48px;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 16px;
-  letter-spacing: -1px;
-}
-
-.page-subtitle {
-  font-size: 18px;
-  color: var(--color-text-secondary);
-}
-
 /* ===== Articles Grid ===== */
 .articles-grid {
   display: grid;
@@ -121,7 +103,7 @@ onMounted(async () => {
 
 .article-image {
   aspect-ratio: 16/9;
-  background: #f0f2f5;
+  background: #f1f5f9;
   overflow: hidden;
 }
 
@@ -174,16 +156,20 @@ onMounted(async () => {
   font-weight: 600;
 }
 
-/* ===== Empty State ===== */
-.empty-state { text-align: center; padding: 80px 0; }
-.empty-icon { font-size: 48px; margin-bottom: 16px; }
-.empty-state p { color: var(--color-text-muted); font-size: 16px; }
+.empty-icon {
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .page-title { font-size: 32px; }
   .articles-grid { grid-template-columns: 1fr; gap: 20px; }
   .article-body { padding: 18px 20px 22px; }
   .article-title { font-size: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .article-card:hover .article-image img { transform: none; }
 }
 </style>

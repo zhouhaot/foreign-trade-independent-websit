@@ -1,6 +1,6 @@
 <template>
   <div class="detail-page">
-    <section class="page-hero">
+    <section class="page-hero page-hero-compact">
       <div class="container">
         <div class="breadcrumb">
           <router-link to="/">{{ t('nav.home') }}</router-link>
@@ -35,7 +35,8 @@
 
           <div class="article-footer">
             <router-link to="/news" class="btn btn-outline">
-              ← {{ t('news.back') }}
+              <SvgIcon name="arrowLeft" :size="16" />
+              {{ t('news.back') }}
             </router-link>
           </div>
         </article>
@@ -99,33 +100,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.page-hero {
-  padding: 120px 0 32px;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--color-text-muted);
-}
-
-.breadcrumb a {
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.breadcrumb a:hover { color: var(--color-primary); }
-
-.breadcrumb-sep { color: var(--color-border); }
-
-.breadcrumb-current {
-  color: var(--color-text);
-  font-weight: 500;
-}
-
 /* ===== Article ===== */
 .article-detail {
   max-width: 780px;
@@ -165,7 +139,6 @@ onMounted(async () => {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
-  display: block;
 }
 
 /* ===== Article Content ===== */
@@ -233,25 +206,6 @@ onMounted(async () => {
   padding-top: 32px;
   border-top: 1px solid var(--color-border-light);
 }
-
-/* ===== Loading ===== */
-.loading-state {
-  text-align: center;
-  padding: 80px 0;
-  color: var(--color-text-muted);
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--color-border);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {

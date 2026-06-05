@@ -1,6 +1,6 @@
 <template>
   <div class="detail-page">
-    <section class="page-hero">
+    <section class="page-hero page-hero-compact">
       <div class="container">
         <div class="breadcrumb">
           <router-link to="/">{{ t('nav.home') }}</router-link>
@@ -49,10 +49,13 @@
             <!-- CTA -->
             <div class="detail-actions">
               <router-link :to="`/contact?product=${product.id}`" class="btn btn-primary btn-lg">
-                {{ t('contact.form_submit') }} →
+                {{ t('contact.form_submit') }}
+                <SvgIcon name="arrowRight" :size="18" />
               </router-link>
               <span class="cta-note">
-                <span class="cta-check">✓</span> {{ t('contact.success_msg') }}
+                <span class="cta-check">
+                  <SvgIcon name="check" :size="12" />
+                </span> {{ t('contact.success_msg') }}
               </span>
             </div>
           </div>
@@ -115,35 +118,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.page-hero {
-  padding: 120px 0 32px;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--color-text-muted);
-}
-
-.breadcrumb a {
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.breadcrumb a:hover { color: var(--color-primary); }
-
-.breadcrumb-sep {
-  color: var(--color-border);
-}
-
-.breadcrumb-current {
-  color: var(--color-text);
-  font-weight: 500;
-}
-
 /* ===== Detail Layout ===== */
 .detail-layout {
   display: grid;
@@ -155,7 +129,7 @@ onMounted(async () => {
 .main-image {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: #f0f2f5;
+  background: #f1f5f9;
   border: 1px solid var(--color-border-light);
 }
 
@@ -272,8 +246,6 @@ onMounted(async () => {
   border-radius: 50%;
   background: var(--color-success-light);
   color: var(--color-success);
-  font-size: 10px;
-  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -308,25 +280,6 @@ onMounted(async () => {
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
 }
-
-/* ===== Loading ===== */
-.loading-state {
-  text-align: center;
-  padding: 80px 0;
-  color: var(--color-text-muted);
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--color-border);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
