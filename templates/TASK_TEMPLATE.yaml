@@ -1,0 +1,37 @@
+# 任务数据模板，不是Claude Code原生执行配置。
+id: ORD-001
+status: DRAFT
+requirement_ids: []
+summary: 已确认报价生成订单
+owner_role: backend-engineer
+requested_model_label: GLM-5.3
+actual_model_id: null
+reviewer_role: architecture-reviewer
+reviewer_actual_model_id: null
+baseline_commit: null
+branch: null
+worktree: null
+dependencies:
+  - QUO-002
+approved_spec_paths: []
+allowed_paths: []
+forbidden_paths:
+  - .env
+  - .claude/settings.local.json
+acceptance:
+  - 未确认和无权限报价不能成单
+  - 首版同一报价只能生成一张订单
+  - 重复和并发请求不重复落库
+  - 订单与明细及转换标记同一事务提交
+  - 订单保存客户商品和金额快照
+  - 失败整体回滚
+required_test_commands: []
+evidence:
+  output_commit: null
+  test_reports: []
+  test_count: null
+  review_report: null
+  unresolved_issues: []
+external_write_authorization: null
+# actual_model_id、baseline_commit、允许修改路径和具体测试命令等字段
+# 必须在执行前填实，不能保留空值后把任务标记READY。

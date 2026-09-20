@@ -1,44 +1,24 @@
-# IDE
-.idea/
-.vscode/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-logs/
-vite-dev.err
-vite-dev.log
-
-# Environment files
+# Secrets and local configuration
 .env
 .env.*
 !.env.example
-
-# Frontend
-node_modules/
-dist/
-build/
-.vite/
-
-# Java / Maven
-target/
-*.class
-*.jar
-*.war
-*.ear
-
-# Local databases
-*.db
-*.sqlite
-*.sqlite3
-
-# Temporary files
-tmp/
-temp/
-tmp_*.json
-
-# Claude Code
-.claude/
+*.pem
+*.key
+.claude/settings.local.json
+.claude/settings.json
+# Runtime/build artifacts
+**/node_modules/
+**/target/
+**/dist/
+**/coverage/
+**/test-results/
+**/playwright-report/
+*.log
+logs/
+uploads/
+exports/
+backups/
+# Local workflow and editor data
+.worktrees/
+.DS_Store
+.idea/

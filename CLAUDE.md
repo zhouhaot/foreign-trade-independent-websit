@@ -1,123 +1,29 @@
-# CLAUDE.md
+# 项目协作规则
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## 入口
 
-## Build & Run
+依次读取 README.md、docs/PROJECT_BRIEF.md、docs/MODEL_ROUTING.md、docs/WORKFLOW.md、docs/TASK_BACKLOG.md、docs/ACCEPTANCE.md。项目当前仍在构想阶段；文档中标记为建议的内容不是用户已经确认的要求。
 
-```bash
-# Backend (Spring Boot 3.2, JDK 17)
-cd backend
-./mvnw.cmd compile              # Windows
-./mvnw spring-boot:run          # or run `TradeSiteApplication` in IntelliJ IDEA
-# Starts on http://localhost:8080
+## 分工
 
-# Frontend (Vue 3 + Vite)
-cd frontend
-npm install                     # first time only
-npm run dev                     # Starts on http://localhost:5173
+Kimi K3：总控、需求整理、任务拆分、集成验收。
+DeepSeek Pro：架构、数据库、业务规则和独立后端审查；具体模型版本须核实。
+GLM-5.3：Spring Boot 后端实现、单元测试和缺陷修复。
+Qwen3.8-Max：前端实现、页面测试、经验证结果的文档整理。
+上述是初始岗位分配，不是模型性能排名。按项目内实测结果调整。
 
-# Admin panel (Vue 3 + Element Plus)
-cd frontend-admin
-npm install                     # first time only
-npm run dev                     # Starts on http://localhost:5174
-```
+## 执行规则
 
-**Always run the backend from IDEA**, not CLI — the working directory determines where the SQLite database file is created (`tradeplus.db` relative to CWD).
+先理解需求、核实前置依赖和验收标准，再执行。每个任务有唯一负责人、允许修改范围、基线提交、验收用例、独立审查人。
+以正式规格、代码和测试结果为事实来源，不依赖模型之间的聊天记忆。不臆造字段、接口、依赖版本、测试结果、业务事实或参考文献。
+实现者不能作为该改动的唯一审核者。总控组织审核，但不能用“看起来正确”替代测试。审查结论必须绑定被审查的提交。
+先交付一条端到端闭环，再扩展模块；不先生成所有空白页面。客户、报价、订单、单证、收款之间必须有真实数据关联。
+数据库迁移、API 契约和公共组件接口先串行确认，再并行实现。并行写代码必须使用隔离分支/worktree，且从同一个已确认提交开始。路径范围是协作约束，不应冒充安全沙箱。
+模型调用失败、结构化输出无效、证据缺失均记为失败或阻塞，不得自动判定成功。建议同类自动修复最多两轮；仍失败则保存证据交由总控定位，不能无边界循环。
+API Key、账户密码、私钥、生产数据不得进入 Git。仅使用合成测试数据。外部变更限于用户已经明确授权的仓库、分支和操作；未明确前不得 push、合并或部署。不得强推、删除远程仓库或覆盖未知历史。
+已授权的本地可逆编辑、测试、生成副本持续执行，不重复申请同一授权。遇到不可恢复的删除、外部发布或实质业务范围变更，应检查授权边界。
+不得设置全局 bypassPermissions 来换取所谓全自动。凭据不要复制到提示词、报告或日志。
 
-**Maven wrapper**: On Windows use `mvnw.cmd`, on Linux/macOS use `mvnw`. The `.mvn/wrapper/maven-wrapper.properties` file is required for the wrapper to work.
+## 汇报
 
-## Architecture Overview
-
-```
-frontend/  (Vue 3 SPA, port 5173)         backend/  (Spring Boot, port 8080)
-├── src/views/   ← page components        ├── controller/api/   ← REST API (/api/*)
-├── src/api/      ← axios client           ├── controller/admin/ ← Thymeleaf admin panel (/admin/*)
-├── src/router/   ← vue-router             ├── service/          ← business logic
-├── src/i18n/     ← vue-i18n (zh + en)     ├── mapper/           ← MyBatis (annotation-based)
-├── vite.config.js → proxies /api, /uploads to :8080
-│                                           ├── entity/           ← Lombok @Data POJOs
-│                                           ├── config/           ← SecurityConfig, WebConfig, DataInitConfig
-│                                           ├── common/Result.java ← {code, message, data} wrapper
-│                                           └── db/               ← schema.sql + data.sql
-```
-
-**Two frontends coexist:**
-- **Customer-facing SPA**: Vue 3 at `:5173`, bilingual (zh/en via `vue-i18n`), routes: `/`, `/products`, `/news`, `/about`, `/contact`
-- **Admin panel**: Server-rendered Thymeleaf at `:8080/admin/*`, protected by Spring Security form login
-
-## Key Patterns & Gotchas
-
-### MyBatis Configuration (CRITICAL)
-
-`mybatis` must be a **top-level** key in `application.yml`, NOT nested under `spring:`:
-```yaml
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true   # ← top level, NOT spring.mybatis
-```
-
-- **Mappers with `@Results`** (ProductMapper): explicit column → property mapping. Works regardless of config.
-- **Mappers without `@Results`** (ArticleMapper, BannerMapper, ProductCategoryMapper, InquiryMapper): rely entirely on `map-underscore-to-camel-case`. If this setting doesn't load, ALL fields except `id` return `null`.
-- **All mappers use annotations** (`@Select`, `@Insert`, `@Update`, `@Delete`). No XML mapper files — deleted to fix classpath resource loading issues in IDEA.
-- Dynamic SQL uses `<script>` tags in `@Select` annotations.
-- SQLite uses `||` for string concatenation (not `CONCAT()`).
-
-### Database Initialization
-
-`sql.init.mode` is set to `never` — data persists across restarts.
-
-On first startup (empty database):
-1. `schema.sql` runs → `CREATE TABLE IF NOT EXISTS` (idempotent)
-2. `data.sql` runs → `INSERT OR IGNORE` seed data (15 products, 9 articles, 3 banners, 5 categories)
-3. `DataInitConfig` (CommandLineRunner) checks `ADMIN_INITIAL_PASSWORD` env var — if set, creates admin user with BCrypt-encoded password
-
-**To reset the database**: delete `tradeplus.db` and restart. The file is created at the working directory (usually `E:/TradeSite/tradeplus.db` when run from IDEA).
-
-### Admin Login
-
-- URL: `http://localhost:8080/admin/login`
-- Credentials: Set `ADMIN_INITIAL_PASSWORD` env var before first startup
-- Password is BCrypt-encoded by `DataInitConfig` at startup (not stored in data.sql)
-- CSRF is disabled in `SecurityConfig`
-- `/api/**`, `/uploads/**`, `/admin/login` are `permitAll`; `/admin/**` requires authentication
-
-### Static Files & Uploads
-
-- Images served via `classpath:/uploads/` + `file:${app.upload-dir}/` by `WebConfig.addResourceHandlers`
-- All seed images are SVGs in `backend/src/main/resources/uploads/`
-- Runtime uploads go to `app.upload-dir` (default `./uploads`, set to absolute path in production)
-- Frontend uses `@error="e => e.target.src='/uploads/placeholder.svg'"` fallback on all `<img>` tags
-- Vite proxies `/uploads` to `localhost:8080`
-- Upload enforces file extension and MIME type whitelist (images + PDF only)
-
-### API Response Format
-
-All `/api/*` endpoints return `Result<T>`:
-```json
-{"code": 200, "message": "success", "data": [...]}
-```
-Frontend accesses data as `res.data.data` (axios unwraps HTTP body → `.data`, then Result wrapper → `.data`).
-
-### Frontend i18n
-
-Default locale is `zh`. Language-aware display pattern used everywhere:
-```vue
-{{ locale === 'zh' ? item.nameCn : item.nameEn }}
-```
-
-## Project File Map
-
-| Concern | Location |
-|---------|----------|
-| API routes | `backend/.../controller/api/ApiController.java` |
-| Admin routes | `backend/.../controller/admin/AdminController.java` |
-| Auth config | `backend/.../config/SecurityConfig.java` |
-| Admin seeding | `backend/.../config/DataInitConfig.java` |
-| Static resources | `backend/.../config/WebConfig.java` |
-| DB schema | `backend/src/main/resources/db/schema.sql` |
-| Seed data | `backend/src/main/resources/db/data.sql` |
-| App config | `backend/src/main/resources/application.yml` |
-| Vite proxy | `frontend/vite.config.js` |
-| i18n strings | `frontend/src/i18n/index.js` |
-| API client | `frontend/src/api/index.js` |
-| SVG images | `backend/src/main/resources/uploads/` |
+报告已完成内容、相关提交和文件、真实测试命令与结果、未解决事项及下个任务。不把“已生成”“已审查”“已运行”“已验收”“已推送”混为一谈。
