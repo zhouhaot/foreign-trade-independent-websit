@@ -27,10 +27,12 @@ acceptance:
 required_test_commands: []
 evidence:
   output_commit: null
-  test_reports: []
+  test_reports:
+    - "2026-09-20 实测：Explore 子代理请求被网关以 402 余额不足终止，发送至 API 的 model = claude-opus-5（opus 槽位，显示名 glm-5.3）。证明子代理默认路由到 opus 槽位而非继承父会话 fable 槽位，且各槽位配额独立。详见 docs/REVIEW_REQ-001.md"
   test_count: null
-  review_report: null
+  review_report: docs/REVIEW_REQ-001.md
   unresolved_issues:
     - 阻塞原因：冒烟测试需付费模型调用，预算未授权（OPEN_QUESTIONS Q-20）
     - MODEL_ROUTING.md 第37条：未获预算授权时只检查配置，不发起付费测试
+    - 新增：opus 槽位（claude-opus-5）实测 402 配额耗尽，影响子代理与后端岗位；各槽位配额需用户核实
 external_write_authorization: null

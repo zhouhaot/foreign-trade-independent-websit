@@ -11,4 +11,4 @@
 | REQ-001.yaml | 需求规格、范围和疑问 | VERIFYING（草案已出，等用户确认范围与 Q-01～Q-19） |
 | REQ-002.yaml | 权限/状态/字段责任独立复核 | READY |
 | GIT-001.yaml | 检查目标仓库与推送范围 | DONE |
-| GIT-002.yaml | 首次文档基线推送 | RUNNING |
+| GIT-002.yaml | 首次文档基线推送 | DONE（远程 main = 7dbd3b6，已回读核验） |

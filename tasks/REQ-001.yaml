@@ -31,12 +31,14 @@ acceptance:
   - 明确"业务人员"按"业务主管"解释（REQ-AUTH-01）
 required_test_commands: []
 evidence:
-  output_commit: 见本轮推送报告
+  output_commit: 7dbd3b6（草案）+ 本轮修正提交（NFR 表/AC-18 映射修复）
   test_reports:
     - docs/SRS.md
     - docs/OPEN_QUESTIONS.md
+    - docs/REVIEW_REQ-001.md（确定性核查 PASS_WITH_FINDINGS 已修复；独立模型复核 BLOCKED，402 配额）
   test_count: null
-  review_report: null
+  review_report: docs/REVIEW_REQ-001.md
   unresolved_issues:
-    - 等待用户确认首版范围与 Q-01～Q-19；确认后状态转 REVIEWED/DONE
+    - 等待用户确认首版范围与 Q-01～Q-19
+    - 独立模型复核（REQ-002）因 opus 槽位 402 未完成；完成前保持 VERIFYING，不得 DONE
 external_write_authorization: 用户本轮授权推送

@@ -1,5 +1,5 @@
 id: GIT-002
-status: RUNNING
+status: DONE
 requirement_ids: []
 summary: 首次文档基线推送（P0+P1 交付物）
 owner_role: controller
@@ -28,9 +28,13 @@ acceptance:
 required_test_commands:
   - git ls-remote origin main
 evidence:
-  output_commit: 待推送后填实
-  test_reports: []
+  output_commit: 7dbd3b6a4fc9ff483b5c626a7cd9f0035e94bfee
+  test_reports:
+    - "git ls-remote 回读：remote main == local main == 7dbd3b6；tag archive/tradeplus-baseline == 7db41a7（注释对象，指向 21089ca）"
+    - "秘密扫描：git diff 21089ca..HEAD 新增行无 token/私钥命中"
+    - "GitHub Actions：仓库当前 0 个工作流、0 次运行（CI 属 ENG-003，未开始）"
   test_count: null
   review_report: null
-  unresolved_issues: []
+  unresolved_issues:
+    - 推送成功≠CI 通过≠已部署；本仓库尚无 CI 配置
 external_write_authorization: 用户本轮明确授权推送 zhouhaot/foreign-trade-independent-websit main 分支
