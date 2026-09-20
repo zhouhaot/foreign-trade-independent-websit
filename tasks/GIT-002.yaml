@@ -1,0 +1,36 @@
+id: GIT-002
+status: RUNNING
+requirement_ids: []
+summary: 首次文档基线推送（P0+P1 交付物）
+owner_role: controller
+requested_model_label: Kimi K3（实际由 fable 槽位会话执行）
+actual_model_id: claude-fable-5[1M]（网关声明）
+reviewer_role: 用户
+reviewer_actual_model_id: null
+baseline_commit: 2600606（starter 包导入）
+branch: main
+worktree: null
+dependencies:
+  - GIT-001
+  - REQ-001
+approved_spec_paths:
+  - docs/GITHUB_PLAN.md
+allowed_paths:
+  - docs/**
+  - tasks/**
+forbidden_paths:
+  - .env
+  - .claude/settings.local.json
+acceptance:
+  - 远程分支和提交 SHA 与本地一致（推送后 git ls-remote 回读核验）
+  - 暂存内容无密钥、无真实客户数据（仅合成数据与文档）
+  - 推送成功不等同于 CI 通过或已部署（本仓库当前无 CI 配置）
+required_test_commands:
+  - git ls-remote origin main
+evidence:
+  output_commit: 待推送后填实
+  test_reports: []
+  test_count: null
+  review_report: null
+  unresolved_issues: []
+external_write_authorization: 用户本轮明确授权推送 zhouhaot/foreign-trade-independent-websit main 分支

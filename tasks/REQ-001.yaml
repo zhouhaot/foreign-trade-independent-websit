@@ -1,0 +1,42 @@
+id: REQ-001
+status: VERIFYING
+requirement_ids: []
+summary: 需求规格草案、首版范围与疑问清单
+owner_role: controller
+requested_model_label: Kimi K3（实际由 fable 槽位会话执行）
+actual_model_id: claude-fable-5[1M]（网关声明）
+reviewer_role: 用户确认业务范围；DeepSeek 交叉检查一致性
+reviewer_actual_model_id: null
+baseline_commit: 2600606（starter 包导入提交）
+branch: main
+worktree: null
+dependencies:
+  - SET-001
+approved_spec_paths:
+  - docs/PROJECT_BRIEF.md
+  - docs/ACCEPTANCE.md
+allowed_paths:
+  - docs/SRS.md
+  - docs/OPEN_QUESTIONS.md
+  - docs/STATE_TRANSITIONS.md
+  - tasks/REQ-001.yaml
+forbidden_paths:
+  - .env
+  - backend/**
+  - frontend/**
+acceptance:
+  - 五角色、完整询盘到收款范围明确（SRS §1～§9 已覆盖 AUTH/MDM/INQ/QUO/ORD/DOC/FIN/EXC/RPT）
+  - 每条需求有编号、验收标准、AC 映射（SRS §12）
+  - 争议不自行确认，全部进 OPEN_QUESTIONS（Q-01～Q-21）
+  - 明确"业务人员"按"业务主管"解释（REQ-AUTH-01）
+required_test_commands: []
+evidence:
+  output_commit: 见本轮推送报告
+  test_reports:
+    - docs/SRS.md
+    - docs/OPEN_QUESTIONS.md
+  test_count: null
+  review_report: null
+  unresolved_issues:
+    - 等待用户确认首版范围与 Q-01～Q-19；确认后状态转 REVIEWED/DONE
+external_write_authorization: 用户本轮授权推送

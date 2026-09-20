@@ -1,0 +1,36 @@
+id: SET-002
+status: BLOCKED
+requirement_ids: []
+summary: 四模型真实路由和工具链验收（逐模型最小冒烟测试）
+owner_role: controller
+requested_model_label: Kimi K3
+actual_model_id: null
+reviewer_role: 用户 + 独立测试会话
+reviewer_actual_model_id: null
+baseline_commit: null
+branch: null
+worktree: null
+dependencies:
+  - SET-001
+approved_spec_paths:
+  - docs/MODEL_ROUTING.md
+allowed_paths:
+  - docs/PREFLIGHT.md
+  - tasks/SET-002.yaml
+forbidden_paths:
+  - .env
+  - .claude/settings.local.json
+acceptance:
+  - 不凭显示名称判定模型身份；逐模型记录请求 model、响应 model、端点、工具调用能力
+  - 每模型完成最小冒烟闭环：读文件→改夹具→跑测试→读失败输出→修复→结构化证据
+  - 同任务同基线对比首次通过率、严重错误、修复轮数、费用、耗时
+required_test_commands: []
+evidence:
+  output_commit: null
+  test_reports: []
+  test_count: null
+  review_report: null
+  unresolved_issues:
+    - 阻塞原因：冒烟测试需付费模型调用，预算未授权（OPEN_QUESTIONS Q-20）
+    - MODEL_ROUTING.md 第37条：未获预算授权时只检查配置，不发起付费测试
+external_write_authorization: null

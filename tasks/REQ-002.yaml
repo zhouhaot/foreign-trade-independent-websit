@@ -1,0 +1,38 @@
+id: REQ-002
+status: READY
+requirement_ids: []
+summary: 权限/状态/字段责任独立复核（架构岗交叉检查 REQ-001 产物）
+owner_role: architecture-reviewer
+requested_model_label: DeepSeek Pro（sonnet 槽位，显示名 deepseek-v4-pro-0813；实际身份未实测）
+actual_model_id: null
+reviewer_role: Kimi K3（总控核对一致性）
+reviewer_actual_model_id: null
+baseline_commit: 待 REQ-001 用户确认后的提交 SHA
+branch: 待建 feature/REQ-002-review
+worktree: 建议隔离 worktree
+dependencies:
+  - REQ-001
+approved_spec_paths:
+  - docs/SRS.md
+  - docs/PERMISSION_MATRIX.md
+  - docs/STATE_TRANSITIONS.md
+  - docs/FIELD_RESPONSIBILITY.md
+allowed_paths:
+  - docs/REVIEW_REQ-002.md（新建复核报告，按 templates/REVIEW_TEMPLATE.md）
+forbidden_paths:
+  - .env
+  - docs/SRS.md（复核不直接改需求，发现冲突写报告交总控）
+acceptance:
+  - 越权、自审、核心字段限制、异常路径明确（对照 AC-02/07/16/17 逐条核）
+  - 权限矩阵、字段责任表、状态转换表三者口径一致，无矛盾
+  - 复核结论绑定被审提交 SHA
+  - 发现争议列出，不自行改需求
+required_test_commands: []
+evidence:
+  output_commit: null
+  test_reports: []
+  test_count: null
+  review_report: null
+  unresolved_issues:
+    - 需在 REQ-001 用户确认、基线 SHA 固定后填实 baseline_commit 再转 RUNNING
+external_write_authorization: null

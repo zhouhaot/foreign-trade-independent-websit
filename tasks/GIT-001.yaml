@@ -1,0 +1,34 @@
+id: GIT-001
+status: DONE
+requirement_ids: []
+summary: 检查目标仓库与推送范围
+owner_role: controller
+requested_model_label: Kimi K3（实际由 fable 槽位会话执行）
+actual_model_id: claude-fable-5[1M]（网关声明）
+reviewer_role: 用户
+reviewer_actual_model_id: null
+baseline_commit: 21089ca（覆盖前远程 HEAD）
+branch: main
+worktree: null
+dependencies: []
+approved_spec_paths:
+  - docs/GITHUB_PLAN.md
+allowed_paths:
+  - docs/PREFLIGHT.md
+forbidden_paths:
+  - .env
+acceptance:
+  - 不覆盖未知历史（未 force-push；原 HEAD 21089ca 已打 tag archive/tradeplus-baseline 并推送远程）
+  - 认证在本地/连接器完成（gh keyring；无凭据进入对话或日志）
+  - 仓库可见性、内容、连通性已记录（PREFLIGHT §4：公开仓库；SSH 被本机代理拦截，改用 HTTPS）
+required_test_commands:
+  - git ls-remote https://github.com/zhouhaot/foreign-trade-independent-websit.git
+evidence:
+  output_commit: 2600606
+  test_reports:
+    - docs/PREFLIGHT.md §4
+  test_count: null
+  review_report: null
+  unresolved_issues:
+    - 仓库为公开，是否改私有待用户决定（Q-01）
+external_write_authorization: 用户明确授权推送该仓库并覆盖，选择"打 tag 保留基线后覆盖"

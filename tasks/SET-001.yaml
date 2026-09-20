@@ -1,0 +1,33 @@
+id: SET-001
+status: DONE
+requirement_ids: []
+summary: 环境与现有目录检查（本地工具链 + 目标仓库现状）
+owner_role: controller
+requested_model_label: Kimi K3（实际由 fable 槽位会话执行，见 PREFLIGHT §2.3）
+actual_model_id: claude-fable-5[1M]（网关声明；槽位 fable，显示名 qwen3.8-max）
+reviewer_role: 用户（预检结果随本轮报告提交确认）
+reviewer_actual_model_id: null
+baseline_commit: 21089ca25f45ae5391b6f7016ba3e96a0542af82（远程原 HEAD，TradePlus）
+branch: main
+worktree: null
+dependencies: []
+approved_spec_paths:
+  - docs/PREFLIGHT.md
+allowed_paths:
+  - docs/PREFLIGHT.md
+forbidden_paths:
+  - .env
+  - .claude/settings.local.json
+acceptance:
+  - 不覆盖已有工程（远程 TradePlus 已打 tag archive/tradeplus-baseline 保留）
+  - 清楚记录缺失配置（JDK/Maven 缺失、.claude/agents 与 workflows 不存在、模型工具闭环未实测）
+required_test_commands: []
+evidence:
+  output_commit: 见本轮推送报告（PREFLIGHT.md 首次提交）
+  test_reports:
+    - docs/PREFLIGHT.md
+  test_count: null
+  review_report: null
+  unresolved_issues:
+    - JDK/Maven 安装路径待用户选择（Q-02）
+external_write_authorization: 用户本轮授权推送 zhouhaot/foreign-trade-independent-websit（打 tag 保留基线后覆盖）
