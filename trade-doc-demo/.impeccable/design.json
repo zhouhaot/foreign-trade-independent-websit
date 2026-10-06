@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T21:00:22Z",
+  "generatedAt": "2026-10-06T21:47:04Z",
   "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
   "extensions": {
     "colorMeta": {
@@ -600,6 +600,123 @@
         "docFinBoss": "无来源返回有权订单列表"
       },
       "evidence": "194权限/来源+15clean集成为Node；真实财务商品来源往返与主管15终图另见本轮review。"
+    },
+    "customerInquiryWorkspace": {
+      "round": 6,
+      "primaryTasks": {
+        "customer": "维护既有当前客户企业/联系资料，完整候选一次保存；固定身份先见，旧订单参考后置。",
+        "inquiry": "读留言与意向当前参考，生成一份可编辑报价草稿；已有合法关联Q则只查看。"
+      },
+      "customerLayout": {
+        "panelPadding": "20px 24px",
+        "columns": "repeat(2,minmax(0,1fr))",
+        "fieldGap": "12px 20px",
+        "identity": [
+          "c-id readonly",
+          "c-since readonly"
+        ],
+        "groups": [
+          "企业信息h3",
+          "联系信息h3"
+        ],
+        "sectionTop": "16px",
+        "groupHeading": "14px/600",
+        "remarkMinHeight": "66px",
+        "actionsTop": "14px",
+        "primaryLabel": "保存客户资料",
+        "reference": "关联订单参考后置，不改既有交易/冻结纸张。"
+      },
+      "customerValidation": {
+        "scope": "必填+基本邮箱+ABC等级+可读文本；电话国家不编造企业规则，备注多行，不静默截断。",
+        "email": "name@example.com基本格式，非可达/投递/所有权或完整RFC。",
+        "errors": "具名label/aria-invalid，c-email-hint追加error，完整rolealert/首错focus；失败原文dirty保留。",
+        "target": "同sales会话/当前form/token/对象/源内容/路由绑定，失败不按hash猜别客户。",
+        "success": "完整候选实际写入一次后clean重绘；lookup姓名可更新，旧订单对象金额/报价收款/快照不改。"
+      },
+      "inquiryLayout": {
+        "order": [
+          "对象/状态/合成与日期",
+          "生成报价草稿或查看关联Q",
+          "短任务上下文",
+          "意向与当前参考表",
+          "客户留言",
+          "来源参考"
+        ],
+        "context": "13px/浅紫面左紫边/padding14px 18px，单条任务解释不堆说明卡。",
+        "table": "六列min880px放table-wrap横滚，英名/留言自然折行，数值右对齐带币种。",
+        "totalLabel": "参考合计；17px/600/等宽数字，不能冒作已接受交易总额。",
+        "buttons": "页头/一次确认统一生成报价草稿；主管不显示生成/无权客户链接。"
+      },
+      "pricingSource": {
+        "assumption": "H16，同一启用参考币种/H12逐行到分才起草；缺关联/混币种/非法值待核对，无默认USD/换汇。",
+        "existing": "合法双向Q已有则只看；INQ5跟进中仍Q5，原状态不猜改。",
+        "contrast": "INQ2当前20400USD参考与原Q2的19500EUR交易不同，原交易以关联报价为准。",
+        "draft": "一次确认含INQ/客户/明细/参考合计与默认待改条款；生成Q待客户确认/noorder，保存非接受。"
+      },
+      "syntheticSource": {
+        "assumption": "H17仅新增INQ2026006，不改原5询盘/14其它集合初始事实。",
+        "items": "P001100×3.20+P00350×4.50=545USD参考，非实盘/市场定价。",
+        "date": "2026-10-07是样例加入日，非收到客户需求日。",
+        "visible": [
+          "询盘列表/详情/确认合成标识与留言",
+          "新Q列表cell-secondary合成标识",
+          "新Q编辑/详情标题合成标识"
+        ],
+        "independentOfRemark": true,
+        "initialTerms": "FOB上海/30%预付70%见提单副本/创建当天日期及有效期是可编辑初值，不冒称客户接受或企业政策。"
+      },
+      "measuredBottom": {
+        "height": "1000px",
+        "customer1280": "950.50px",
+        "customer1440": "952.50px",
+        "inquiryHeader1280": "215.64px",
+        "inquiryHeader1440": "217.64px",
+        "confirmBothWidths": "786.63px",
+        "newQuoteSave1280": "969.14px",
+        "normalScope": "actual1280/1440/scroll0；新Q补图opacity1/toasts0。",
+        "customerError": "scroll279/保存727.59px可见，非正常首屏0。",
+        "customerDiscard": "modal scroll0/放弃617.80px，源错误body保存1006.59需纵滚。"
+      },
+      "iterationFixes": [
+        "客户高度已满足无需重做分组",
+        "草稿主动作名称统一",
+        "当前合计补参考标签",
+        "合成来源延续newQ列表/编辑/详情",
+        "客户保存按钮对象明确",
+        "新QToast遮footer保过程，仅自然消失后重拍一图"
+      ],
+      "evidence": ".impeccable/review/round-06/browser.json",
+      "verificationCounts": {
+        "distinctRoleRoutes": 115,
+        "actualLayouts": 230,
+        "realInteractions": 13,
+        "processImages": 13,
+        "finalImages": 15,
+        "nodeScripts": 20,
+        "customerScenarios": 51,
+        "inquiryScenarios": 114
+      },
+      "historyEvidence": "同会话实际C001维护→旧D-CI2026003-V2，完整.paper渲染文字逐字相同/原环球买方30500EUR；非HTMLexact/全排列，精确模型快照另有Node。",
+      "measurementCorrections": [
+        "早期fresh-tab1280×720的115条保历史不计最终230",
+        "tab输入timeout切fresh tab，boss1440识别存储session reload后验证23routes，非连续登录通过",
+        "进入动画未稳不写终图",
+        "邮箱inspect有意脱敏，emailCorrect false不判真实失败，不绕过；visible title/B/clean/error与Node精确值分开",
+        "客户返回CUA先279→0，handler捕获0/cancel0，不声称定位前不变",
+        "生成成功后三图与客户刷新/原INQ6样例分阶段",
+        "客户真实save为locator点击，无专门原生Enter保存；旧tab3不在受控会话，close API未确认关闭成功。"
+      ],
+      "reviewScope": "综合/JS同一源route MEDIUM交叉证据只计一根因；两报告Resolved/APPROVE。UI15图逐看、最后只补新Q无Toast，不重测14图。",
+      "notVerified": [
+        "file://",
+        "跨浏览器/旧浏览器",
+        "真读屏/320px或400%重排",
+        "原生refresh-close/运行时减少动效",
+        "邮箱投递/可达/所有权",
+        "真实客户需求/正式单位与定价政策",
+        "真实身份/服务器事务/审计/持久化/NAS/银行",
+        "包装字段或完整真实成交链"
+      ]
     }
   },
   "components": [
@@ -686,7 +803,7 @@
   ],
   "narrative": {
     "northStar": "A · 订单协同工作区",
-    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。 第3轮单证作业区优先本订单版本链、当前资格与岗位主动作；短来源前置，历史事实和live操作资格分开，局部离开确认保护输入，导出仅为演示。 第4轮报价/收款保持各自单一编辑或登记任务；普通十进制、逐行精确到分与live余额明确，非法候选待修正、字段原因具名且失败保留；取消两态暂停新增收款按显式原型规则处理。 第5轮有限作业输入提供具体对象的继续填写/明确放弃选择；短状态不挤主动作，财务局部查历史保表单，岗位链接与商品来源返回均按已有权限接续；本会话已知历史与未知兜底分开。",
+    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。 第3轮单证作业区优先本订单版本链、当前资格与岗位主动作；短来源前置，历史事实和live操作资格分开，局部离开确认保护输入，导出仅为演示。 第4轮报价/收款保持各自单一编辑或登记任务；普通十进制、逐行精确到分与live余额明确，非法候选待修正、字段原因具名且失败保留；取消两态暂停新增收款按显式原型规则处理。 第5轮有限作业输入提供具体对象的继续填写/明确放弃选择；短状态不挤主动作，财务局部查历史保表单，岗位链接与商品来源返回均按已有权限接续；本会话已知历史与未知兜底分开。 第6轮客户维护以固定身份、企业/联系资料和一次保存为主，询盘以留言/意向当前参考起草为主；已关联Q保原交易，合成来源及加入日延续到新Q各入口，参考不冒称接受价。",
     "keyCharacteristics": [
       "默认100px浅紫窄导航保留文字与图标，展开224px，所有角色叶子入口直接可达。",
       "白色平面面板、细边框和适度留白承载高频业务信息。",
@@ -764,6 +881,21 @@
       {
         "name": "来源与可点击权限分开",
         "body": "无权来源保真文字，主管查询不授写入；商品只凭唯一包含该商品的显式订单参数返回，不猜历史。",
+        "section": "components"
+      },
+      {
+        "name": "当前参考与原交易分开",
+        "body": "当前商品参考合计带币种与明确标签，已有Q只查看、原交易以其为准；混参考币种不默认USD或换汇。",
+        "section": "components"
+      },
+      {
+        "name": "合成来源不可被备注抹去",
+        "body": "H17合成/加入日期常显，新Q的独立来源属性延续列表/编辑/详情，生成或保存不登记客户确认/订单。",
+        "section": "components"
+      },
+      {
+        "name": "维护对象与历史快照分开",
+        "body": "客户固定编号/合作起始与企业联系组先核对，基本邮箱非投递认证；当前lookup姓名可更新，旧交易/冻结纸张不得由资料维护改写。",
         "section": "components"
       }
     ],

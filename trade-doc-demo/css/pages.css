@@ -496,3 +496,32 @@
 .page-title-group { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 12px; }
 .page-title-group .draft-status { margin-left: 0; }
 .navigation-error { padding: 10px 14px; margin: 0 0 16px; border: 1px solid var(--orange); border-radius: var(--radius-control); background: var(--orange-bg); color: var(--orange); font-size: 13px; }
+
+/* 第6轮：资料维护与询盘起草以当前对象/候选为主，旧记录与来源为参考。 */
+.customer-register { padding: 20px 24px; }
+.customer-register .form-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 20px; }
+.customer-register .form-item { min-width: 0; }
+.customer-identity { padding: 0 0 14px; border-bottom: 1px solid var(--border); }
+.customer-section { margin-top: 16px; }
+.customer-section h3 { margin-bottom: 10px; font-size: 14px; font-weight: 600; }
+.customer-register .field-error:empty,.cust-effect-error:empty { display: none; }
+.customer-register .textarea { min-height: 66px; }
+.customer-register .form-actions { margin-top: 14px; }
+.cust-effect-error { color: var(--red); font-size: 13px; line-height: 1.7; margin-top: 10px; overflow-wrap: anywhere; }
+.customer-order-reference .card-title { flex-wrap: wrap; gap: 8px; }
+.inquiry-head .actions { align-self: center; }
+.inquiry-task-context { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin-bottom: 16px; padding: 14px 18px; border-left: 3px solid var(--primary); border-radius: var(--radius-control); background: var(--nav-bg); font-size: 13px; }
+.inquiry-task-context span { color: var(--text-sub); line-height: 1.7; }
+.inquiry-items .card-title { align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.inquiry-items .card-title .sub { font-size: 17px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.inquiry-items>.readonly-hint { margin: 0 0 14px; }
+.inquiry-items .table { min-width: 880px; }
+.inquiry-items .table .num { font-variant-numeric: tabular-nums; }
+.inquiry-items .cell-secondary { white-space: normal; overflow-wrap: anywhere; }
+.inquiry-message p { line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
+.inquiry-reference .readonly-hint { margin-top: 10px; }
+.inquiry-confirm-summary { margin-top: 16px; }
+.inquiry-confirm-summary>p:first-child { margin-bottom: 12px; font-size: 16px; font-variant-numeric: tabular-nums; }
+.inquiry-confirm-summary .readonly-hint { margin-top: 14px; line-height: 1.8; }
+.inquiry-action-error { font-size: 13px; line-height: 1.7; margin: 0 0 14px; overflow-wrap: anywhere; white-space: normal; }
+.inquiry-action-error:empty { display: none; }

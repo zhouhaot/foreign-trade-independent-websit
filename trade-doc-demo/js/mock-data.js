@@ -86,7 +86,11 @@
       message: '马克杯与密封罐请报价，询问圣诞节前交期。' },
     { id: 'INQ2026005', customerId: 'C004', salesperson: '陈明', date: '2026-09-01', source: 'WhatsApp', status: '跟进中', quoteId: 'Q2026005',
       items: [{ productId: 'P006', qty: 5000 }],
-      message: '竹砧板询价，客户还在比价，预计本周内回复。' }
+      message: '竹砧板询价，客户还在比价，预计本周内回复。' },
+    /* H17：仅为第6轮合法起草报价的合成演示场景；date是加入样例日期，不是真实收到询盘时间。 */
+    { id: 'INQ2026006', customerId: 'C002', salesperson: '陈明', date: '2026-10-07', source: '合成演示样例', status: '跟进中', quoteId: null, demoSynthetic: true,
+      items: [{ productId: 'P001', qty: 100 }, { productId: 'P003', qty: 50 }],
+      message: '【合成演示，非真实客户需求】用于体验询盘生成报价：示意100个保温杯与50个露营灯；未发生客户确认、订单或单证。' }
   ];
 
   /* ---------- 报价 ---------- */

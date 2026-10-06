@@ -103,8 +103,12 @@ node scripts/verify-payments-contract.cjs
 node scripts/verify-navigation-drafts.cjs
 node scripts/verify-context-navigation.cjs
 node scripts/verify-draft-adapters.cjs
+node scripts/verify-customer-contract.cjs
+node scripts/verify-inquiry-contract.cjs
 ```
 
-前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价/快照/单证与取消、输入/历史保护、岗位上下文、申请防重复及数字/报价/收款提交契约。共18组，不代替浏览器；各轮实际覆盖见迭代报告。
+前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价/快照/单证与取消、输入/历史保护、岗位上下文、申请防重复及数字/报价/收款/客户维护/询盘生成提交契约。共20组，不代替浏览器；各轮实际覆盖见迭代报告。
+
+第6轮体验：业务员在客户详情维护资料，错误保留输入；询盘 INQ2026006 是明确合成需求，可核对参考545USD并生成一次报价草稿，再编辑实际价格与条款。原询盘已有报价只接续查看；草稿没有登记客户确认或直接生成订单。改进与验证边界见 [第6轮材料](docs/iterations/round-06.md)。
 
 `scripts/verify-browser.mjs` 是 Ego Browser 环境下的浏览器回归脚本，需由操作者提供当前授权的 TaskSpace ID，不会自行创建/接管浏览器空间。验证覆盖与已知边界见 `HANDOFF.md` 的 2026-10-04 交接记录。

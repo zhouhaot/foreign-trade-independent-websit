@@ -258,10 +258,14 @@
   };
 
   /* ==================== 客户详情 / 编辑 ==================== */
+  var customerEditSequence = 0, customerEditTicket = null, savedCustomerForms = new WeakSet();
   Views.customerDetail = function (ctx) {
     var c = U.customer(ctx.params[0]);
     if (!c) return Views.notFound('客户不存在：' + ctx.params[0]);
     var editable = ctx.user.role === 'sales';
+    customerEditTicket = editable ? { token: 'customer-' + (++customerEditSequence), id: c.id, customer: c, content: JSON.stringify(c),
+      actor: window.App.user, actorId: ctx.user.id, actorName: ctx.user.name, actorRole: ctx.user.role, route: location.hash } : null;
+    var token = customerEditTicket ? customerEditTicket.token : '';
     var orders = M.orders.filter(function (o) { return o.customerId === c.id; });
     var ro = editable ? '' : 'readonly';
     var orderRows = orders.map(function (o) {
@@ -270,26 +274,30 @@
         '<td class="num">' + U.fmt(fin.total) + ' ' + o.currency + '</td><td class="center">' + tag(o.status) + '</td>' +
         '<td class="center">' + tag(U.payStatus(o)) + '</td></tr>';
     }).join('') || U.emptyRow(5, '该客户暂无订单');
-    return '<div class="page-head"><h2>客户详情 · ' + esc(c.nameCn) + '</h2><div class="actions">' +
+    return '<div class="page-head"><h2>' + (editable ? '维护客户资料' : '客户详情') + ' · ' + esc(c.nameCn) + '</h2><div class="actions">' +
       '<a class="btn" href="#/customers">返回列表</a></div></div>' +
-      '<div class="card"><div class="card-title">基础信息' + (editable ? '<span class="sub">业务员可编辑，保存前进行必填校验</span>' : '<span class="sub">当前角色只读</span>') + '</div>' +
-      '<form id="cust-form"><div class="form-grid">' +
-      U.formItem('客户编号', '<input class="input" value="' + esc(c.id) + '" readonly>') +
+      '<div class="card customer-register"><div class="card-title">客户资料' + (editable ? '<span class="sub">核对客户身份与联系信息后保存；仅本次会话生效</span>' : '<span class="sub">当前角色只读</span>') + '</div>' +
+      '<form id="cust-form" novalidate data-customer-id="' + esc(c.id) + '" data-customer-token="' + esc(token) + '">' +
+      '<div class="form-grid customer-identity">' +
+      U.formItem('客户编号', '<input class="input" id="c-id" value="' + esc(c.id) + '" readonly><div class="readonly-hint">编号固定，保存只更新当前客户</div>') +
+      U.formItem('合作起始', '<input class="input" id="c-since" value="' + esc(c.since) + '" readonly>') +
+      '</div><div class="customer-section"><h3>企业信息</h3><div class="form-grid">' +
       U.formItem('客户中文名', '<input class="input" id="c-nameCn" value="' + esc(c.nameCn) + '" ' + ro + '>', { required: true }) +
       U.formItem('客户英文名', '<input class="input" id="c-nameEn" value="' + esc(c.nameEn) + '" ' + ro + '>', { required: true }) +
       U.formItem('国家', '<input class="input" id="c-country" value="' + esc(c.country) + '" ' + ro + '>', { required: true }) +
-      U.formItem('联系人', '<input class="input" id="c-contact" value="' + esc(c.contact) + '" ' + ro + '>', { required: true }) +
-      U.formItem('邮箱', '<input class="input" id="c-email" value="' + esc(c.email) + '" ' + ro + '>', { required: true }) +
-      U.formItem('电话', '<input class="input" id="c-phone" value="' + esc(c.phone) + '" ' + ro + '>') +
       U.formItem('客户等级', '<select class="select" id="c-level" ' + (editable ? '' : 'disabled') + '>' +
-        ['A', 'B', 'C'].map(function (l) { return '<option ' + (c.level === l ? 'selected' : '') + '>' + l + ' 级</option>'; }).join('') + '</select>') +
-      U.formItem('合作起始', '<input class="input" value="' + esc(c.since) + '" readonly>') +
-      '</div>' +
-      '<div class="form-item mt8"><label>地址</label><input class="input" id="c-addr" value="' + esc(c.addr) + '" ' + ro + '><div class="field-error"></div></div>' +
-      '<div class="form-item mt8"><label>备注</label><textarea class="textarea" id="c-remark" ' + ro + '>' + esc(c.remark) + '</textarea><div class="field-error"></div></div>' +
-      (editable ? '<div class="form-actions"><a class="btn" href="#/customers">取 消</a><button type="submit" class="btn btn-primary" data-loading-text="保存中">保 存</button></div>' : '') +
+        ['A', 'B', 'C'].map(function (l) { return '<option value="' + l + '" ' + (c.level === l ? 'selected' : '') + '>' + l + ' 级</option>'; }).join('') + '</select>') +
+      '</div></div><div class="customer-section"><h3>联系信息</h3><div class="form-grid">' +
+      U.formItem('联系人', '<input class="input" id="c-contact" value="' + esc(c.contact) + '" ' + ro + '>', { required: true }) +
+      U.formItem('邮箱', '<input class="input" id="c-email" type="email" value="' + esc(c.email) + '" ' + ro + ' aria-describedby="c-email-hint"><div class="readonly-hint" id="c-email-hint">核对基本邮箱格式；不验证邮箱是否真实可达</div>', { required: true }) +
+      U.formItem('电话', '<input class="input" id="c-phone" value="' + esc(c.phone) + '" ' + ro + ' placeholder="可选，按客户提供的号码填写">') +
+      U.formItem('地址', '<input class="input" id="c-addr" value="' + esc(c.addr) + '" ' + ro + ' placeholder="可选，填写单行地址">') +
+      '</div></div>' +
+      '<div class="form-item mt8"><label for="c-remark">备注</label><textarea class="textarea" id="c-remark" ' + ro + ' placeholder="可选，支持多行备注">' + esc(c.remark) + '</textarea><div class="field-error"></div></div>' +
+      '<div id="cust-effect-error" class="cust-effect-error" role="alert"></div>' +
+      (editable ? '<div class="form-actions"><a class="btn" href="#/customers">取 消</a><button type="submit" class="btn btn-primary" data-loading-text="保存中">保存客户资料</button></div>' : '') +
       '</form></div>' +
-      '<div class="card"><div class="card-title">该客户订单（' + orders.length + '）</div>' +
+      '<div class="card customer-order-reference"><div class="card-title">关联订单参考（' + orders.length + '）<span class="sub">资料更新不修改已有订单交易或历史单证快照</span></div>' +
       '<div class="table-wrap"><table class="table"><thead><tr><th>订单编号</th><th>创建日期</th><th class="num">订单金额</th><th class="center">订单状态</th><th class="center">收款状态</th></tr></thead>' +
       '<tbody>' + orderRows + '</tbody></table></div></div>';
   };
@@ -297,25 +305,41 @@
     if (e.target.id !== 'cust-form') return;
     e.preventDefault();
     var form = e.target;
+    if (savedCustomerForms.has(form)) return;
     U.clearErrors(form);
-    if (!U.validate([
-      { el: form.querySelector('#c-nameCn'), label: '客户中文名', required: true },
-      { el: form.querySelector('#c-nameEn'), label: '客户英文名', required: true },
-      { el: form.querySelector('#c-country'), label: '国家', required: true },
-      { el: form.querySelector('#c-contact'), label: '联系人', required: true },
-      { el: form.querySelector('#c-email'), label: '邮箱', required: true }
-    ])) return;
-    var c = U.customer(location.hash.split('/')[2]);
-    if (!c) return;
-    c.nameCn = form.querySelector('#c-nameCn').value.trim();
-    c.nameEn = form.querySelector('#c-nameEn').value.trim();
-    c.country = form.querySelector('#c-country').value.trim();
-    c.contact = form.querySelector('#c-contact').value.trim();
-    c.email = form.querySelector('#c-email').value.trim();
-    c.phone = form.querySelector('#c-phone').value.trim();
-    c.level = form.querySelector('#c-level').value;
-    c.addr = form.querySelector('#c-addr').value.trim();
-    c.remark = form.querySelector('#c-remark').value.trim();
+    var errors = [], ticket = customerEditTicket, actor = window.App.user;
+    function issue(key, error) { errors.push({ key: key, error: error }); }
+    if (!actor || actor.role !== 'sales') issue('id', '仅外贸业务员可以保存客户资料，请重新登录业务员账号。');
+    if (!ticket || form.dataset.customerToken !== ticket.token || form.dataset.customerId !== ticket.id) issue('id', '客户表单与资料绑定已失效，请重新打开需要修改的客户。');
+    if (ticket) {
+      if (actor !== ticket.actor || !actor || actor.id !== ticket.actorId || actor.name !== ticket.actorName || actor.role !== ticket.actorRole) issue('id', '当前业务员账号或会话已变化，请重新打开客户资料后核对。');
+      if (location.hash !== ticket.route || ticket.route.split('?')[0] !== '#/customers/' + encodeURIComponent(ticket.id)) issue('id', '客户资料页面已变化，本次未保存，请重新打开原客户核对。');
+      if (U.customer(ticket.id) !== ticket.customer || JSON.stringify(ticket.customer) !== ticket.content) issue('id', '客户对象或完整资料已变化，请重新打开该客户核对后再保存。');
+      var idInput = form.querySelector('#c-id');
+      if (!idInput || idInput.value !== ticket.id) issue('id', '客户编号与原资料不一致，编号只读，不可变更。');
+    }
+    if (!form.isConnected || document.getElementById('cust-form') !== form) issue('id', '客户表单已关闭或更换，本次未保存，请在当前页面核对。');
+    var candidate = {};
+    var labels = { nameCn: '客户中文名', nameEn: '客户英文名', country: '国家', contact: '联系人', email: '邮箱', phone: '电话', addr: '地址', remark: '备注', level: '客户等级' };
+    Object.keys(labels).forEach(function (key) {
+      var input = form.querySelector('#c-' + key), raw = input && input.value;
+      if (typeof raw !== 'string') { issue(key, labels[key] + '必须为文本。'); return; }
+      var text = raw.trim(); candidate[key] = text;
+      if (['nameCn', 'nameEn', 'country', 'contact', 'email'].indexOf(key) >= 0 && !text) { issue(key, labels[key] + '为必填项。'); return; }
+      if ((key === 'remark' ? /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/ : /[\u0000-\u001f\u007f]/).test(text)) { issue(key, labels[key] + (key === 'remark' ? '包含不支持的控制字符，请填写可读文本。' : '必须为单行可读文本，不能包含换行或控制字符。')); return; }
+      if (key === 'email' && !/^[^\s@<>]+@[^\s@<>.]+(?:\.[^\s@<>.]+)+$/.test(text)) issue(key, '邮箱格式不正确，请填写如 name@example.com 的基本邮箱地址。');
+      if (key === 'level' && ['A', 'B', 'C'].indexOf(text) < 0) issue(key, '客户等级只能为 A、B 或 C。');
+    });
+    if (errors.length) {
+      var first = null;
+      errors.forEach(function (problem) { var field = form.querySelector('#c-' + problem.key); if (field) { U.fieldError(field, problem.error); first = first || field; } });
+      var summary = form.querySelector('#cust-effect-error');
+      if (summary) summary.textContent = errors.map(function (problem) { return problem.error; }).join(' ');
+      if (first) first.focus();
+      U.toast('客户资料未保存，请查看表单中的处理说明。', 'error'); return;
+    }
+    Object.assign(ticket.customer, candidate);
+    savedCustomerForms.add(form);
     if (window.App.markDraftClean) window.App.markDraftClean();
     U.toast('客户资料已保存（演示数据仅在本次会话内存中生效）');
     window.App.rerender();

@@ -11,6 +11,61 @@
     role = role || window.App.user.role;
     return roles.indexOf(role) >= 0 ? '<a href="' + esc(hash) + '">' + esc(text) + '</a>' : '<span>' + esc(text) + '</span>';
   }
+  var inquiryBusy = {};
+  function inquirySourceMatches(id, hash) {
+    return typeof hash === 'string' && hash.split('?')[0] === '#/inquiries/' + encodeURIComponent(id);
+  }
+  function inquiryRelation(iq) {
+    if (!iq || M.inquiries.filter(function (other) { return other.id === iq.id; }).length !== 1 || U.inquiry(iq.id) !== iq) return { error: '询盘不存在或编号冲突，请重新核对。' };
+    var linked = M.quotes.filter(function (q) { return q.inquiryId === iq.id; });
+    if (iq.quoteId) {
+      var quotes = M.quotes.filter(function (q) { return q.id === iq.quoteId; });
+      if (quotes.length !== 1 || linked.length !== 1 || linked[0] !== quotes[0] || quotes[0].customerId !== iq.customerId ||
+          M.inquiries.filter(function (other) { return other.quoteId === iq.quoteId; }).length !== 1) return { error: '询盘与报价的来源或客户关联不一致，请先核对，不重复生成。' };
+      return { existing: quotes[0], error: '' };
+    }
+    if (linked.length || iq.status !== '跟进中') return { error: '询盘状态或反向报价关联待核对；只有跟进中且未关联报价的询盘可生成草稿。' };
+    return { existing: null, error: '', canStart: true };
+  }
+  function inquiryCandidate(iq) {
+    if (M.customers.filter(function (c) { return c.id === iq.customerId; }).length !== 1) return { ok: false, error: '询盘客户不存在或编号冲突，请先核对客户资料。' };
+    if (!U.validCalendarDate(iq.date)) return { ok: false, error: '询盘日期无效，请先核对来源记录。' };
+    if (!Array.isArray(iq.items) || !iq.items.length) return { ok: false, error: '询盘至少需要一行意向商品。' };
+    var items = [], currency = '';
+    for (var i = 0; i < iq.items.length; i++) {
+      var item = iq.items[i], products = item && M.products.filter(function (p) { return p.id === item.productId; });
+      if (!products || products.length !== 1) return { ok: false, error: '第 ' + (i + 1) + ' 行商品不存在或编号冲突，请先核对商品资料。' };
+      var product = products[0];
+      if (!U.currencyEnabled(product.currency)) return { ok: false, error: '第 ' + (i + 1) + ' 行参考币种未启用或无效，请核对商品资料。' };
+      if (currency && currency !== product.currency) return { ok: false, error: '意向商品参考币种不一致，不能合并生成报价；请先统一参考币种，本原型不自动换汇。' };
+      currency = product.currency; items.push({ productId: item.productId, qty: item.qty, price: product.refPrice });
+    }
+    var amounts = U.transactionAmounts(items);
+    if (!amounts.ok) return amounts;
+    return { ok: true, items: amounts.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
+      total: amounts.total, currency: currency, tradeTerm: 'FOB 上海', paymentTerm: '30% 预付，70% 见提单副本' };
+  }
+  function inquiryContent(iq) {
+    return JSON.stringify({ inquiry: iq, customers: M.customers.filter(function (c) { return c.id === iq.customerId; }),
+      products: (Array.isArray(iq.items) ? iq.items : []).map(function (it) { return it && M.products.filter(function (p) { return p.id === it.productId; }); }), dicts: M.dicts });
+  }
+  function inquiryError(message, container) {
+    var scope = container || document, node = scope.querySelector('[data-inquiry-error]');
+    if (node) node.textContent = message;
+    U.toast(node ? '未生成报价，请查看处理说明。' : message, 'warning');
+  }
+  function nextInquiryQuoteId() {
+    var prefix = 'Q' + U.today().slice(0, 4), max = 100;
+    for (var i = 0; i < M.quotes.length; i++) {
+      var id = M.quotes[i].id;
+      if (typeof id !== 'string') return null;
+      if (id.indexOf(prefix) !== 0) continue;
+      var suffix = id.slice(prefix.length);
+      if (!/^\d+$/.test(suffix) || !Number.isSafeInteger(Number(suffix))) return null;
+      max = Math.max(max, Number(suffix));
+    }
+    return Number.isSafeInteger(max + 1) ? prefix + (max + 1) : null;
+  }
 
   /* ==================== 询盘列表 ==================== */
   Views.inquiries = function () {
@@ -22,15 +77,16 @@
     }).sort(function (a, b) { return b.date.localeCompare(a.date); });
     var pg = U.page(list, s.page);
     var rows = pg.rows.map(function (i) {
-      return '<tr><td><a href="#/inquiries/' + i.id + '">' + i.id + '</a></td>' +
+      var relation = inquiryRelation(i);
+      return '<tr><td><a href="#/inquiries/' + i.id + '">' + i.id + '</a>' + (i.demoSynthetic ? '<span class="cell-secondary">' + tag('合成演示样例', 'gray') + '</span>' : '') + '</td>' +
         '<td>' + esc(U.customerName(i.customerId)) + '</td>' +
         '<td>' + esc(i.source) + '</td><td>' + esc(i.salesperson) + '</td>' +
-        '<td>' + i.date + '</td><td class="center">' + tag(i.status) + '</td>' +
-        '<td>' + (i.quoteId ? '<a href="#/quotes/' + i.quoteId + '">' + i.quoteId + '</a>' : '<span class="muted">—</span>') + '</td>' +
-        '<td><a class="btn btn-sm" href="#/inquiries/' + i.id + '">查看</a></td></tr>';
+        '<td>' + esc(i.date) + (i.demoSynthetic ? '<span class="cell-secondary">样例加入日期</span>' : '') + '</td><td class="center">' + tag(i.status) + '</td>' +
+        '<td>' + (relation.existing ? '<a href="#/quotes/' + esc(relation.existing.id) + '">' + esc(relation.existing.id) + '</a>' : '<span class="muted">' + (relation.error ? '关联待核对' : '尚未生成') + '</span>') + '</td>' +
+        '<td><a class="btn btn-sm" href="#/inquiries/' + i.id + '">' + (relation.canStart && window.App.user.role === 'sales' ? '核对并报价' : '查看') + '</a></td></tr>';
     }).join('');
     if (!rows) rows = U.emptyRow(8, (f.kw || f.status) ? '没有符合筛选条件的结果' : '暂无询盘记录');
-    return '<div class="page-head"><h2>询盘管理</h2></div>' +
+    return '<div class="page-head inquiry-head"><div><div class="workspace-eyebrow">销售跟进 / INQUIRIES</div><h2>询盘管理</h2><p class="page-description">核对客户需求和参考价格，再接续已有报价或生成新草稿。</p></div></div>' +
       '<div class="filter-bar">' +
       window.__filterInput('询盘编号/客户', 'f-kw', f.kw, '输入关键字') +
       '<div class="form-item"><label>状态</label><select class="select" id="f-status"><option value="">全部</option>' +
@@ -51,54 +107,91 @@
   Views.inquiryDetail = function (ctx) {
     var iq = U.inquiry(ctx.params[0]);
     if (!iq) return Views.notFound('询盘不存在：' + ctx.params[0]);
-    var itemRows = iq.items.map(function (it) {
-      var p = U.product(it.productId);
-      return '<tr><td><a href="#/products/' + p.id + '">' + p.id + '</a></td><td>' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</td>' +
-        '<td>' + esc(p.spec) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td></tr>';
-    }).join('');
-    var canQuote = ctx.user.role === 'sales' && !iq.quoteId;
-    return '<div class="page-head"><h2>询盘详情 · ' + iq.id + '</h2><div class="actions">' +
-      (iq.quoteId
-        ? '<a class="btn btn-primary" href="#/quotes/' + iq.quoteId + '">查看关联报价 ' + iq.quoteId + '</a>'
-        : (canQuote ? '<button class="btn btn-primary" data-action="inq-start-quote" data-id="' + iq.id + '">发起报价</button>' : '')) +
+    var relation = inquiryRelation(iq), candidate = inquiryCandidate(iq);
+    var itemRows = (Array.isArray(iq.items) ? iq.items : []).map(function (item, idx) {
+      var it = item || { productId: '', qty: '' }, p = U.product(it.productId);
+      var line = p && U.transactionAmounts([{ productId: it.productId, qty: it.qty, price: p.refPrice }]);
+      return '<tr><td>' + (p ? '<a href="#/products/' + esc(p.id) + '">' + esc(p.id) + '</a>' : esc(it.productId || '待核对')) + '</td><td>' + esc(p ? p.nameCn : '商品关联待核对') + '<span class="cell-secondary">' + esc(p ? p.nameEn : '') + '</span></td>' +
+        '<td>' + esc(p ? p.spec : '—') + '</td><td class="num">' + esc(it.qty) + ' ' + esc(p ? p.unit : '') + '</td><td class="num">' + (p && U.decimalInput(p.refPrice, '参考单价').ok ? U.fmt(p.refPrice) + ' ' + esc(p.currency) : '待核对') + '</td><td class="num">' + (line && line.ok ? U.fmt(line.total) + ' ' + esc(p.currency) : '待核对') + '</td></tr>';
+    }).join('') || U.emptyRow(6, '询盘暂无有效意向商品');
+    var canQuote = ctx.user.role === 'sales' && relation.canStart && candidate.ok;
+    var reason = relation.error || (!relation.existing && !candidate.ok ? candidate.error : '');
+    return '<div class="page-head inquiry-head"><div><div class="workspace-eyebrow">' + esc(iq.source) + ' / 客户需求</div><h2>询盘 ' + esc(iq.id) + ' ' + tag(iq.status) + (iq.demoSynthetic ? ' ' + tag('合成演示样例', 'gray') : '') + '</h2><p class="page-description">' + esc(U.customerName(iq.customerId)) + ' · ' + (iq.demoSynthetic ? '样例加入日期 ' : '') + esc(iq.date) + '</p></div><div class="actions">' +
+      (relation.existing
+        ? '<a class="btn btn-primary" href="#/quotes/' + esc(relation.existing.id) + '">查看关联报价 ' + esc(relation.existing.id) + '</a>'
+        : (canQuote ? '<button class="btn btn-primary" data-action="inq-start-quote" data-id="' + esc(iq.id) + '">生成报价草稿</button>' : ctx.user.role === 'sales' ? '<button class="btn btn-primary" disabled>生成报价草稿</button>' : '')) +
       '<a class="btn" href="#/inquiries">返回列表</a></div></div>' +
-      '<div class="card"><div class="card-title">询盘信息 ' + tag(iq.status) + '</div><div class="desc-grid">' +
+      '<div class="inquiry-task-context">' + (relation.existing ? '<b>已有报价，不重复生成</b><span>现商品参考价仅供查阅，可能与原报价金额或币种不同；原交易以关联报价为准。</span>' : '<b>' + (ctx.user.role === 'sales' ? '核对意向商品后生成报价草稿' : '当前为主管查阅视角') + '</b><span>参考价只用于草稿起点，实际价格与条款在报价编辑页核对。</span>') + '</div>' +
+      '<div class="field-error inquiry-action-error" data-inquiry-error="1" role="alert">' + esc(reason) + '</div>' +
+      '<section class="card inquiry-items"><div class="card-title">意向商品与参考价格<span class="sub">' + (candidate.ok ? '参考合计 ' + U.fmt(candidate.total) + ' ' + esc(candidate.currency) : '参考合计待核对') + '</span></div>' +
+      '<p class="readonly-hint">数量与参考单价最多 2 位小数，每行须精确到分；不同参考币种不合并、不自动换汇。</p>' +
+      '<div class="table-wrap"><table class="table"><thead><tr><th>商品编号</th><th>商品名称</th><th>规格</th><th class="num">意向数量</th><th class="num">参考单价</th><th class="num">参考金额</th></tr></thead><tbody>' + itemRows + '</tbody></table></div></section>' +
+      '<section class="card inquiry-message"><div class="card-title">客户留言</div><p>' + esc(iq.message) + '</p></section>' +
+      '<section class="card inquiry-reference"><div class="card-title">询盘来源</div><div class="desc-grid">' +
       descItem('询盘编号', iq.id) +
       '<div class="di"><div class="dt">客户</div><div class="dd">' + contextLink('#/customers/' + iq.customerId, U.customerName(iq.customerId), ['sales'], ctx.user.role) + '</div></div>' +
       descItem('来源渠道', iq.source) + descItem('业务员', iq.salesperson) +
-      descItem('询盘日期', iq.date) +
-      descItem('关联报价', iq.quoteId || '尚未报价') +
-      '</div>' +
-      '<div class="mt16 mb8"><b>客户留言</b></div>' +
-      '<div class="card" style="background:#f7f8fb;margin-bottom:0">' + esc(iq.message) + '</div></div>' +
-      '<div class="card"><div class="card-title">意向商品</div>' +
-      '<div class="table-wrap"><table class="table"><thead><tr><th>商品编号</th><th>商品名称</th><th>规格</th><th class="num">意向数量</th></tr></thead>' +
-      '<tbody>' + itemRows + '</tbody></table></div></div>';
+      descItem(iq.demoSynthetic ? '样例加入日期' : '询盘日期', iq.date) +
+      descItem('关联报价', relation.existing ? relation.existing.id : iq.quoteId || '尚未报价') +
+      '</div><p class="readonly-hint">当前为内存演示，刷新恢复样例；客户确认前不生成订单。</p></section>';
   };
   Actions['inq-start-quote'] = function (el) {
     var iq = U.inquiry(el.dataset.id);
+    var actor = window.App.user;
+    if (!actor || actor.role !== 'sales' || !actor.id || !actor.name) { inquiryError('只有已登录的外贸业务员可生成报价草稿。'); return; }
+    var relation = inquiryRelation(iq);
+    if (relation.error || relation.existing) { inquiryError(relation.error || '该询盘已有报价 ' + relation.existing.id + '，请查看已有报价，不重复生成。'); return; }
+    if (!inquirySourceMatches(iq.id, location.hash)) { inquiryError('请从当前询盘详情打开并核对报价草稿，来源页面不一致，本次未生成报价。'); return; }
+    var candidate = inquiryCandidate(iq);
+    if (!candidate.ok) { inquiryError(candidate.error); return; }
+    if (inquiryBusy[iq.id]) return;
+    var context = { id: iq.id, inquiry: iq, actor: actor, actorContent: JSON.stringify(actor), content: inquiryContent(iq), sourceHash: location.hash, invalidated: '', submitted: false };
+    var overlay = null;
+    function contextError() {
+      if (context.invalidated) return context.invalidated;
+      if (location.hash !== context.sourceHash || !inquirySourceMatches(context.id, location.hash)) {
+        context.invalidated = '询盘来源页面已变化，本次未生成报价；请返回该询盘详情重新打开并核对草稿。';
+        return context.invalidated;
+      }
+      if (window.App.user !== actor || JSON.stringify(actor) !== context.actorContent || U.inquiry(context.id) !== iq || iq.id !== context.id || inquiryContent(iq) !== context.content) return '账号、询盘或关联资料已变化，请重新打开并核对，本次未生成报价。';
+      var current = inquiryRelation(iq);
+      return current.error || (current.existing ? '该询盘已关联报价，请查看已有报价。' : '');
+    }
+    var reviewRows = candidate.items.map(function (it) {
+      var p = U.product(it.productId), amount = U.transactionAmounts([it]);
+      return '<tr><td>' + esc(p.nameCn) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td><td class="num">' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(amount.total) + '</td></tr>';
+    }).join('');
     U.confirm({
-      title: '发起报价',
-      message: '将基于询盘 <b>' + iq.id + '</b>（' + esc(U.customerName(iq.customerId)) + '）的意向商品生成报价草稿，报价单生成后可在报价编辑页调整价格与条款。<br><br>主流程：客户需求 → 询盘 → <b>报价</b> → 客户确认 → 生成订单。',
+      title: '生成报价草稿',
+      message: (iq.demoSynthetic ? tag('合成演示样例', 'gray') + '<br>' : '') + '基于询盘 <b>' + esc(iq.id) + '</b> 的需求生成报价草稿。客户：' + esc(U.customerName(iq.customerId)) + '。<br>确认后进入报价编辑页，参考价与默认条款仍需核对；本操作不登记客户确认或生成订单。',
+      extra: '<div class="inquiry-confirm-summary"><p><b>参考合计 ' + U.fmt(candidate.total) + ' ' + esc(candidate.currency) + '</b></p><div class="table-wrap"><table class="table"><thead><tr><th>商品</th><th class="num">数量</th><th class="num">参考单价</th><th class="num">金额</th></tr></thead><tbody>' + reviewRows + '</tbody></table></div>' +
+        '<p class="readonly-hint">草稿默认贸易术语：' + esc(candidate.tradeTerm) + '<br>草稿默认付款条款：' + esc(candidate.paymentTerm) + '<br>草稿日期与有效期初值均为创建当天，请在编辑页按实际需求调整。</p><div class="field-error inquiry-action-error" data-inquiry-error="1" role="alert"></div></div>',
       okText: '生成报价草稿',
       onOk: function () {
-        var qid = 'Q2026' + String(100 + M.quotes.length + 1);
+        if (context.submitted || inquiryBusy[context.id] || overlay && !overlay.isConnected) return false;
+        var error = contextError();
+        if (error) { inquiryError(error, overlay); return false; }
+        var qid = nextInquiryQuoteId();
+        if (!qid || M.quotes.some(function (q) { return q.id === qid; })) { inquiryError('报价编号无法安全生成或已冲突，请先核对现有报价编号。', overlay); return false; }
         var newQ = {
-          id: qid, inquiryId: iq.id, customerId: iq.customerId, salesperson: window.App.user.name,
-          date: U.today(), validUntil: U.today(), currency: 'USD', tradeTerm: 'FOB 上海',
-          paymentTerm: '30% 预付，70% 见提单副本', status: '待客户确认', orderId: null, confirmDate: null,
-          items: iq.items.map(function (it) {
-            var p = U.product(it.productId);
-            return { productId: it.productId, qty: it.qty, price: p ? p.refPrice : 0 };
-          }),
-          remark: '由询盘 ' + iq.id + ' 生成（演示）'
+          id: qid, inquiryId: context.id, customerId: iq.customerId, salesperson: actor.name,
+          date: U.today(), validUntil: U.today(), currency: candidate.currency, tradeTerm: candidate.tradeTerm,
+          paymentTerm: candidate.paymentTerm, status: '待客户确认', orderId: null, confirmDate: null,
+          items: candidate.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
+          remark: iq.demoSynthetic ? '由合成询盘 ' + iq.id + ' 参考生成（演示，非真实客户需求）' : '由询盘 ' + iq.id + ' 生成（演示）'
         };
+        if (iq.demoSynthetic) newQ.demoSynthetic = true;
+        inquiryBusy[context.id] = true;
         M.quotes.push(newQ);
         iq.quoteId = qid; iq.status = '已报价';
+        context.submitted = true; delete inquiryBusy[context.id];
+        if (window.App.markDraftClean) window.App.markDraftClean();
         U.toast('报价草稿 ' + qid + ' 已生成');
-        location.hash = '#/quotes/' + qid + '/edit';
+        if (window.App.requestNavigation) window.App.requestNavigation('#/quotes/' + qid + '/edit');
+        else location.hash = '#/quotes/' + qid + '/edit';
       }
     });
+    var modalRoot = document.getElementById && document.getElementById('modal-root'); overlay = modalRoot ? modalRoot.firstElementChild : null;
   };
 
   /* ==================== 报价列表 ==================== */
@@ -111,7 +204,7 @@
     }).sort(function (a, b) { return b.date.localeCompare(a.date); });
     var pg = U.page(list, s.page);
     var rows = pg.rows.map(function (q) {
-      return '<tr><td><a href="#/quotes/' + q.id + '">' + q.id + '</a></td>' +
+      return '<tr><td><a href="#/quotes/' + q.id + '">' + q.id + '</a>' + (q.demoSynthetic ? '<span class="cell-secondary">' + tag('合成演示样例', 'gray') + '</span>' : '') + '</td>' +
         '<td>' + esc(U.customerName(q.customerId)) + '</td>' +
         '<td>' + esc(q.salesperson) + '</td><td>' + q.date + '</td><td>' + q.validUntil + '</td>' +
         '<td class="num">' + U.fmt(U.quoteTotal(q)) + ' ' + q.currency + '</td>' +
@@ -212,7 +305,7 @@
       actions += '<button class="btn btn-success" data-action="quote-gen-order" data-id="' + q.id + '">生成订单</button>';
     }
     if (q.orderId) actions += '<a class="btn" href="#/orders/' + q.orderId + '">查看订单 ' + q.orderId + '</a>';
-    return '<div class="page-head"><h2>报价详情 · ' + q.id + ' ' + tag(q.status) + '</h2><div class="actions">' + actions +
+    return '<div class="page-head"><h2>报价详情 · ' + q.id + ' ' + tag(q.status) + (q.demoSynthetic ? ' ' + tag('合成演示样例', 'gray') : '') + '</h2><div class="actions">' + actions +
       '<a class="btn" href="#/quotes">返回列表</a></div></div>' +
       (!checked.ok ? '<div class="warn-box" role="alert">报价资料待核对：' + esc(checked.error) + '</div>' : '') +
       '<div class="card"><div class="card-title">报价信息</div><div class="desc-grid">' +
@@ -344,7 +437,7 @@
         '<td class="num"><div class="form-item quote-number"><input class="input qe-input" inputmode="decimal" id="qe-price-' + idx + '" aria-label="第 ' + (idx + 1) + ' 行单价" aria-describedby="qe-number-help" data-idx="' + idx + '" data-field="price" value="' + esc(it.price) + '"><div class="field-error"></div></div></td>' +
         '<td class="num" id="qe-amt-' + idx + '">' + (line.ok ? U.fmt(line.total) : '待修正') + '</td></tr>';
     }).join('');
-    return '<div class="page-head"><h2>编辑报价 · ' + q.id + '</h2><div class="actions"><a class="btn" href="#/quotes/' + q.id + '">返回详情</a></div></div>' +
+    return '<div class="page-head"><h2>编辑报价 · ' + q.id + (q.demoSynthetic ? ' ' + tag('合成演示样例', 'gray') : '') + '</h2><div class="actions"><a class="btn" href="#/quotes/' + q.id + '">返回详情</a></div></div>' +
       '<div class="card"><div class="card-title">报价条款</div>' +
       '<form id="qe-form" data-quote-id="' + esc(q.id) + '" data-quote-token="' + editor.token + '" novalidate><div class="form-grid">' +
       U.formItem('报价编号', '<input class="input" id="qe-id" value="' + q.id + '" readonly>') +

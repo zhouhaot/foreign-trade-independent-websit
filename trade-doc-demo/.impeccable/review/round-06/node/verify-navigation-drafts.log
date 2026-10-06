@@ -1,0 +1,1 @@
+PASS: 33 draft navigation scenarios (actual app handlers; asynchronous Node DOM/history fixture, not browser history certification)
