@@ -93,18 +93,14 @@
     var html = '';
     MENUS.forEach(function (m) {
       if (m.roles.indexOf(role) < 0) return;
-      if (m.children) {
-        var open = m.children.some(function (c) { return matchActive(c.match, segs); });
-        html += '<div class="nav-sub ' + (open || window.AppUI['nav_' + m.label] ? 'open' : '') + '">' +
-          '<button class="nav-sub-title" data-action="nav-toggle" data-key="' + esc(m.label) + '" title="' + esc(m.label) + '" aria-expanded="' + !!(open || window.AppUI['nav_' + m.label]) + '">' +
-          '<span class="ico">' + U.icon(m.icon) + '</span><span class="nav-label">' + esc(m.label) + '</span><span class="arrow">' + U.icon('chevron') + '</span></button>' +
-          '<div class="sub-list">' + m.children.map(function (c) {
-            return '<a class="nav-item ' + (matchActive(c.match, segs) ? 'active' : '') + '" href="' + c.hash + '">' + esc(c.label) + '</a>';
-          }).join('') + '</div></div>';
-      } else {
-        html += '<a class="nav-item ' + (matchActive(m.match, segs) ? 'active' : '') + '" href="' + m.hash + '" title="' + esc(m.label) + '">' +
-          '<span class="ico">' + U.icon(m.icon) + '</span><span class="nav-label">' + esc(m.label) + '</span></a>';
-      }
+      if (m.children) html += '<div class="nav-group-label">' + esc(m.label) + '</div>';
+      (m.children || [m]).forEach(function (item) {
+        var active = matchActive(item.match, segs);
+        var icons = { customers: 'users', products: 'box', inquiries: 'briefcase', quotes: 'file', orders: 'file', users: 'users', roles: 'shield', dicts: 'settings' };
+        var key = item.match[item.match.length - 1];
+        html += '<a class="nav-item ' + (active ? 'active' : '') + '" href="' + item.hash + '" title="' + esc(item.label) + '"' + (active ? ' aria-current="page"' : '') + '>' +
+          '<span class="ico">' + U.icon(icons[key] || m.icon) + '</span><span class="nav-label">' + esc(item.label) + '</span></a>';
+      });
     });
     return html;
   }
@@ -115,23 +111,6 @@
     }
     return true;
   }
-  Actions['nav-toggle'] = function (el) {
-    if (window.AppUI.sidebarCollapsed) {
-      window.AppUI.sidebarCollapsed = false;
-      window.AppUI['nav_' + el.dataset.key] = true;
-      document.querySelector('.layout').classList.remove('sidebar-collapsed');
-      el.closest('.nav-sub').classList.add('open');
-      el.setAttribute('aria-expanded', 'true');
-      var toggle = document.querySelector('[data-action="sidebar-toggle"]');
-      toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', '收起导航');
-      return;
-    }
-    var key = 'nav_' + el.dataset.key;
-    window.AppUI[key] = !window.AppUI[key];
-    el.closest('.nav-sub').classList.toggle('open');
-    el.setAttribute('aria-expanded', el.closest('.nav-sub').classList.contains('open'));
-  };
   Actions['sidebar-toggle'] = function () {
     var main = document.querySelector('.main'), before = main.getBoundingClientRect();
     window.AppUI.sidebarCollapsed = !window.AppUI.sidebarCollapsed;
@@ -161,9 +140,10 @@
         '<span><span>' + esc(t.text) + '</span><span class="muted small dd-sub">' + esc(t.sub) + '</span></span></button>';
     }).join('') : '<div class="dd-empty">暂无待办提醒</div>';
     return '<button class="icon-btn" data-action="sidebar-toggle" aria-label="' + (window.AppUI.sidebarCollapsed ? '展开导航' : '收起导航') + '" aria-expanded="' + !window.AppUI.sidebarCollapsed + '">' + U.icon('panel') + '</button>' +
+      '<a class="workspace-brand" href="#/dashboard">贸易协同</a>' +
       '<div class="breadcrumb">' + crumbHtml + '</div>' +
       '<div class="topbar-right">' +
-        '<button class="search-trigger" data-action="search-open" aria-label="搜索页面、订单或单证">' + U.icon('search') + '<span>搜索工作区</span><kbd>⌘ K</kbd></button>' +
+        '<button class="search-trigger" data-action="search-open" aria-label="搜索页面、订单或单证">' + U.icon('search') + '<span>搜索页面、订单、单证</span><kbd>Ctrl K</kbd></button>' +
         '<span class="current-role" aria-label="当前角色：' + esc(M.roles[user.role]) + '">' + esc(M.roles[user.role]) + '</span>' +
         '<div class="bell" id="bell"><button class="icon-btn" id="bell-toggle" aria-label="待办提醒，' + todos.length + ' 项" aria-expanded="false"><span class="bell-ico">' + U.icon('bell') + '</span></button>' + (todos.length ? '<span class="badge">' + todos.length + '</span>' : '') +
           '<div class="bell-dropdown" id="bell-dd"><div class="dd-head">待办提醒<span class="muted small">' + todos.length + ' 项</span></div>' + ddItems + '</div>' +
@@ -271,6 +251,7 @@
     }
     if (!user) { window.App.user = null; location.hash = '#/login'; return; }
     window.App.user = user;
+    if (window.AppUI.sidebarCollapsed === undefined) window.AppUI.sidebarCollapsed = true;
 
     var ctx = { params: matched.params, query: parsed.query, user: user };
     var body;

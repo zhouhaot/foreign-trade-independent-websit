@@ -28,7 +28,7 @@ web
 
 ## Brand Commitments
 
-已有 Ant Design Pro / Tabler / Metronic 融合参考。2026-10-05 需求方曾在选型页选择 C，随后明确表示“算了，我更倾向于a”，最新方向改为 A：珍珠白、鸢尾紫、薄荷青，以已有 A 概念稿为基准，停止扩展 C 方案。现行 DESIGN.md 和运行实现目前仍是蓝色方案，尚未替换。已有 Logo 仅为候选，未确认接入。
+已有 Ant Design Pro / Tabler / Metronic 融合参考。2026-10-05 需求方改选 A；2026-10-07 再次确认先实现 A 前端。当前已实现珍珠白、鸢尾紫、薄荷青，浅色窄导航与订单列表/详情并排核对，保留完整表格与既有业务字段。设计规范同步到 DESIGN.md。C 仅保留历史。已有 Logo 仅为候选，未确认接入。
 
 ## Evidence on Hand
 

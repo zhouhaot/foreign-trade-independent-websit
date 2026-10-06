@@ -1,6 +1,6 @@
 # 贸易协同 · 外贸订单与单证管理
 
-现代化桌面前端 Demo，运行代码更新至 2026-10-04；设计选择更新至 2026-10-05，跨电脑接续说明更新于 2026-10-06。
+现代化桌面前端 Demo，2026-10-07 第 1 轮落地 A「珍珠白 / 鸢尾紫 / 薄荷青」；每轮改进、验证、复盘见 `docs/iterations/`。
 
 ## 在另一台电脑继续
 
@@ -13,8 +13,8 @@ cd foreign-trade-independent-websit/trade-doc-demo
 
 用编辑器或 Codex 打开这个 `trade-doc-demo` 目录，先读 `AGENTS.md` → `HANDOFF.md` → `PRODUCT.md`，再继续开发。已有克隆且工作区干净时可在仓库内执行 `git pull --ff-only`；有未提交修改时先审查并保留，不直接覆盖。
 
-- 当前可运行页面仍是蓝色现代 UI；顶栏角色只读，切换身份需退出后重新登录。
-- 最新设计方向是 **A：珍珠白 / 鸢尾紫 / 薄荷青**，尚未实现。查看[当前选择](.impeccable/mocks/decision/modern-multicolor/current-direction.json)、[A 概念图](.impeccable/mocks/decision/modern-multicolor/a.png)和[概念偏差说明](.impeccable/mocks/decision/modern-multicolor/README.md)。C 是已被覆盖的历史方案，不继续实施。
+- 当前是 A 浅色现代 UI；顶栏角色只读，切换身份需退出后重新登录。
+- **A 已落地**：100px 浅色窄导航、紫色主操作、薄荷青收款区，订单列表与所选订单三条进度并排。保留完整表格、筛选、分页与六页签详情。查看[实施说明](A-IMPLEMENTATION.md)、[A 概念图](.impeccable/mocks/decision/modern-multicolor/a.png)及[迭代路线](IMPLEMENTATION_ROADMAP.md)。C 为历史方案。
 - 历史单证快照与改价舍入差额仍未修复，详见 `HANDOFF.md` 待办 14、15；不能因现有检查通过而认为已具备上线条件。
 - GitHub 同步不包含 `.backups/`、`delivery/` 的旧包和本机工具临时状态；当前完整源码、设计资产与验证记录均在对应目录。历史记录中的本机绝对路径和临时端口仅用于追溯，不是另一台电脑的运行地址。
 - 本次同步前原 Mac 源目录没有 Git 元数据，因此通过独立克隆整理上传；原目录文件保留。后续建议以新克隆的仓库作为 Git 工作区，不在原目录直接执行 `git pull`。
@@ -86,8 +86,9 @@ node scripts/verify-demo.cjs
 node scripts/verify-views.cjs
 node scripts/verify-login.cjs
 node scripts/verify-session.cjs
+node scripts/verify-order-workspace.cjs
 ```
 
-四个脚本分别检查入口资源与样例金额勾稽；100 组角色/视图输出、订单生成和受控修订及单证编辑权限；登录下拉框的五角色选择与提交保护；只读顶栏身份、退出取消/确认、会话清理、受限路由返回和重新登录。它们不代替浏览器测试。
+前四个脚本检查资源/样例金额、100 组角色视图与关键回调、五角色登录及退出重登。新增工作区脚本检查分栏选择、角色入口、分页空态、视图切换和筛选节点保留。它们不代替浏览器测试；每轮实际浏览器覆盖见对应迭代报告。
 
 `scripts/verify-browser.mjs` 是 Ego Browser 环境下的浏览器回归脚本，需由操作者提供当前授权的 TaskSpace ID，不会自行创建/接管浏览器空间。验证覆盖与已知边界见 `HANDOFF.md` 的 2026-10-04 交接记录。

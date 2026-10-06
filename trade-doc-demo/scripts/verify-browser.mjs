@@ -92,6 +92,7 @@ await check('Order filters, density and sidebar preserve entered text', async ()
   await go('#/orders');
   await page.fill('#o-no','SO2026001');
   await page.click('[data-action="orders-more"]');
+  await page.click('[data-action="orders-view"][data-view="table"]');
   await page.click('[data-action="orders-density"]');
   await page.click('[data-action="sidebar-toggle"]');
   assert(await page.evaluate(()=>document.getElementById('o-no').value==='SO2026001'), 'Input lost');

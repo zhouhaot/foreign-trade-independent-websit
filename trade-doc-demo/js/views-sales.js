@@ -334,6 +334,9 @@
       return true;
     }).sort(function (a, b) { return b.createdAt.localeCompare(a.createdAt); });
     var pg = U.page(list, s.page);
+    s.visibleIds = pg.rows.map(function (o) { return o.id; });
+    var selected = pg.rows.find(function (o) { return o.id === s.selectedId; }) || pg.rows[0];
+    s.selectedId = selected ? selected.id : null;
     var rows = pg.rows.map(function (o) {
       var fin = U.orderFin(o);
       var customer = U.customer(o.customerId);
@@ -360,9 +363,17 @@
     var filterSummary = hasFilter ? '<div class="filter-summary"><span>当前筛选</span>' + Object.keys(f).filter(function (k) { return f[k]; }).map(function (k) {
       return '<span class="filter-chip">' + filterNames[k] + '：' + esc(f[k]) + '</span>';
     }).join('') + '<button class="btn btn-text" data-action="orders-reset">清空筛选</button></div>' : '';
-    return '<div class="page-head"><div><h2>订单列表</h2><p class="page-description">由客户已确认的报价生成，分别跟踪订单、单证与收款进度。</p></div><div class="actions">' +
+    var splitRows = pg.rows.map(function (o) {
+      return '<button type="button" class="order-pick' + (o.id === s.selectedId ? ' selected' : '') + '" data-action="orders-select" data-id="' + esc(o.id) + '" aria-pressed="' + (o.id === s.selectedId) + '" aria-controls="order-inspector">' +
+        '<span class="order-pick-head"><strong>' + esc(o.id) + '</strong><span class="order-pick-amount">' + U.money(U.orderTotal(o), o.currency) + '</span></span>' +
+        '<span class="order-pick-customer">' + esc(U.customerName(o.customerId)) + '</span>' +
+        '<span class="order-pick-meta">' + esc(o.salesperson) + ' · 创建 ' + esc(o.createdAt) + ' · 交期 ' + esc(o.deliveryDate) + '</span>' +
+        '<span class="order-pick-status"><span><small>订单</small>' + tag(o.status) + '</span><span><small>单证</small>' + tag(o.docStatus) + '</span><span><small>收款</small>' + tag(U.payStatus(o)) + '</span></span></button>';
+    }).join('') || '<div class="empty-state">' + (hasFilter ? '没有符合筛选条件的结果，请调整筛选条件' : '暂无订单记录') + '</div>';
+    return '<div class="page-head"><div><div class="workspace-eyebrow">订单协同 / ORDER WORKSPACE</div><h2>订单工作区 <span class="tag tag-gray">原型样例</span></h2><p class="page-description">选择订单，同屏核对订单、单证与收款的独立进度。</p></div><div class="actions">' +
       (window.App.user.role === 'sales' ? '<a class="btn btn-primary" href="#/quotes">新建报价</a>' : '') +
       '</div></div>' +
+      '<div class="orders-stage' + (s.tableView ? ' table-mode' : '') + '" id="orders-stage">' +
       '<div class="filter-bar orders-filter"><div class="filter-primary">' +
       window.__filterInput('订单编号', 'o-no', f.no, '如 SO2026001') +
       window.__filterInput('客户名称', 'o-cust', f.cust, '中/英文名') +
@@ -374,13 +385,64 @@
       '<div class="form-item"><label>收款状态</label>' + sel('o-pay', f.pay, ['未收款', '部分收款', '已结清']) + '</div>' +
       '<div class="form-item"><label>创建日期起</label><input class="input" type="date" id="o-from" value="' + esc(f.from || '') + '"></div>' +
       '<div class="form-item"><label>创建日期止</label><input class="input" type="date" id="o-to" value="' + esc(f.to || '') + '"></div>' +
-      '</div></div>' + filterSummary +
-      '<div class="table-toolbar"><h3>订单记录<span class="record-count">' + list.length + ' 笔</span></h3><button class="btn btn-sm" data-action="orders-density" aria-pressed="' + !!s.compact + '">' + U.icon('rows') + '紧凑行距</button></div>' +
+      '</div>' + filterSummary + '</div>' +
+      '<div class="orders-view-bar"><span class="muted small">共 ' + list.length + ' 笔 · 金额按订单币种展示</span><div class="orders-view-switch" aria-label="订单展示方式"><button class="btn btn-sm" data-action="orders-view" data-view="split" aria-pressed="' + !s.tableView + '">协同视图</button><button class="btn btn-sm" data-action="orders-view" data-view="table" aria-pressed="' + !!s.tableView + '">表格视图</button></div></div>' +
+      '<div class="order-workspace" id="orders-split-view"' + (s.tableView ? ' hidden' : '') + '><section class="order-selection" aria-label="订单选择"><div class="order-selection-title"><h3>订单列表</h3><span class="record-count">' + list.length + ' 笔</span><span class="order-list-hint">本页 ' + pg.rows.length + ' 笔' + (pg.rows.length > 3 ? ' · 向下滚动查看' : '') + '</span></div><div class="order-pick-list">' + splitRows + '</div>' + U.pagination(pg, 'orders-page') + '</section><section class="order-inspector" id="order-inspector" aria-label="所选订单进度">' + orderInspector(selected) + '</section><span class="sr-only" role="status" id="order-selection-status" aria-live="polite" aria-atomic="true"></span></div>' +
+      '<div id="orders-table-view"' + (s.tableView ? '' : ' hidden') + '><div class="table-toolbar"><h3>订单记录<span class="record-count">' + list.length + ' 笔</span></h3><button class="btn btn-sm" data-action="orders-density" aria-pressed="' + !!s.compact + '">' + U.icon('rows') + '紧凑行距</button></div>' +
       '<div class="table-wrap"><table class="table order-table ' + (s.compact ? 'is-compact' : '') + '"><thead><tr>' +
       '<th>订单 / 来源报价</th><th>客户</th><th>业务员</th><th class="num">订单金额</th>' +
       '<th class="center">订单状态</th><th class="center">单证状态</th><th class="center">收款状态</th><th>创建时间</th><th>操作</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-      U.pagination(pg, 'orders-page');
+      U.pagination(pg, 'orders-page') + '</div></div>';
+  };
+  function orderInspector(o) {
+    if (!o) return '<div class="order-inspector-empty">' + U.icon('file') + '<h3>暂无可查看的订单</h3><p>调整或重置筛选后，在左侧选择订单。</p></div>';
+    var fin = U.orderFin(o), role = window.App.user.role;
+    var paySt = U.payStatus(o), pct = fin.total > 0 ? Math.min(100, Math.round(fin.received / fin.total * 100)) : 0;
+    var cancelled = o.status === '已取消' || o.status === '取消申请中';
+    function documentPriority(d) {
+      if (role === 'boss' && d.status === '待审核') return 3;
+      if (role === 'doc' && d.status === '已退回') return 3;
+      if (role === 'doc' && (d.status === '草稿' || d.status === '制作中')) return 2;
+      return 0;
+    }
+    var doc = M.documents.filter(function (d) {
+      return d.orderId === o.id && !M.documents.some(function (other) { return other.no === d.no && other.version > d.version; });
+    }).sort(function (a, b) { return documentPriority(b) - documentPriority(a) || b.version - a.version; })[0];
+    var next = '<a class="btn" href="#/orders/' + esc(o.id) + '">查看完整订单' + U.icon('arrow') + '</a>';
+    if (doc && (role === 'boss' || role === 'doc')) next += '<a class="btn btn-primary" href="#/documents/' + esc(doc.id) + '">' + (role === 'boss' && doc.status === '待审核' ? '查看待审单证' : role === 'doc' && doc.status === '已退回' ? '修订退回单证' : '查看关联单证') + '</a>';
+    if (role === 'fin' && fin.outstanding > 0.005 && o.status !== '已取消') next += '<a class="btn btn-primary" href="#/payments?order=' + esc(o.id) + '">登记收款</a>';
+    return '<div class="inspector-heading"><div><span>当前订单</span><h3>' + esc(o.id) + '</h3></div><div class="inspector-total"><span>订单金额</span><strong>' + U.money(fin.total, o.currency) + '</strong></div></div>' +
+      '<div class="inspector-context"><span>' + esc(U.customerName(o.customerId)) + '</span><span>来源报价 ' + esc(o.quoteId) + ' · 交期 ' + esc(o.deliveryDate) + '</span></div>' +
+      '<div class="inspector-tracks"><section class="inspector-track track-order"><div class="track-title"><h4>订单进度</h4>' + tag(o.status) + '</div>' + stepsHtml(['待执行', '执行中', '已完成'], cancelled ? '' : o.status, {}) + (cancelled ? '<p class="track-note">' + (o.status === '已取消' ? '订单已取消，关联业务终止。' : '取消申请审批中，订单暂缓执行。') + '</p>' : '') + '</section>' +
+      '<section class="inspector-track track-doc"><div class="track-title"><h4>单证进度</h4>' + tag(o.docStatus) + '</div>' + stepsHtml(['未开始', '制作中', '待审核', '已通过'], o.docStatus, { '待审核': true, '已退回': true }) + (o.docStatus === '已退回' ? '<p class="track-note">单证已退回，按审核意见修订后重新送审。</p>' : '') + '</section>' +
+      '<section class="inspector-track track-pay"><div class="track-title"><h4>收款进度</h4>' + tag(paySt) + '</div><div class="progress" role="progressbar" aria-label="订单收款比例" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><div class="bar' + (paySt === '已结清' ? ' green' : '') + '" style="width:' + pct + '%"></div></div><div class="track-money"><div><span>已收</span><strong>' + U.money(fin.received, o.currency) + '</strong></div><div><span>未收</span><strong>' + U.money(fin.outstanding, o.currency) + '</strong></div></div></section></div>' +
+      '<div class="inspector-actions">' + next + '</div><p class="inspector-footnote">单证与收款并行推进，互不阻塞。</p>';
+  }
+  Actions['orders-select'] = function (el) {
+    var s = ui('orders');
+    if (!window.App.user || ['sales', 'doc', 'fin', 'boss'].indexOf(window.App.user.role) < 0 || !s.visibleIds || s.visibleIds.indexOf(el.dataset.id) < 0) return;
+    var o = U.order(el.dataset.id);
+    if (!o) return;
+    s.selectedId = o.id;
+    document.querySelectorAll('.order-pick').forEach(function (row) {
+      var selected = row.dataset.id === o.id;
+      row.classList.toggle('selected', selected);
+      row.setAttribute('aria-pressed', selected);
+    });
+    document.getElementById('order-inspector').innerHTML = orderInspector(o);
+    document.getElementById('order-selection-status').textContent = '已选择订单 ' + o.id + '。右侧显示独立的订单、单证与收款进度。';
+  };
+  Actions['orders-view'] = function (el) {
+    var s = ui('orders');
+    if (el.dataset.view !== 'table' && el.dataset.view !== 'split') return;
+    s.tableView = el.dataset.view === 'table';
+    document.getElementById('orders-stage').classList.toggle('table-mode', s.tableView);
+    document.getElementById('orders-split-view').hidden = s.tableView;
+    document.getElementById('orders-table-view').hidden = !s.tableView;
+    document.querySelectorAll('[data-action="orders-view"]').forEach(function (button) {
+      button.setAttribute('aria-pressed', (button.dataset.view === 'table') === s.tableView);
+    });
   };
   Actions['orders-more'] = function (el) {
     var panel = document.getElementById('orders-advanced');

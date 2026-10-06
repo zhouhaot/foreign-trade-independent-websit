@@ -82,6 +82,7 @@
     var paths = {
       home: '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/>',
       users: '<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/>',
+      box: '<path d="m12 3 9 5v9l-9 5-9-5V8Zm-9 5 9 5 9-5M12 13v9M7.5 5.5l9 5"/>',
       briefcase: '<rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 12a20 20 0 0 0 18 0M10 12h4v3h-4z"/>',
       file: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6M8 13h8M8 17h6"/>',
       edit: '<path d="m15 5 4 4M4 20l4-1L20 7a2.8 2.8 0 0 0-4-4L4 15Z"/>',
@@ -284,7 +285,7 @@
       var bw = Math.min(34, cw * 0.55);
       var x = padL + i * cw + (cw - bw) / 2;
       var bh = H - padB - y(d.value);
-      svg += '<rect x="' + x + '" y="' + y(d.value) + '" width="' + bw + '" height="' + Math.max(1, bh) + '" rx="3" fill="' + (opts.color || '#2f6fed') + '"><title>' + U.esc(d.label + '：' + d.value) + '</title></rect>';
+      svg += '<rect x="' + x + '" y="' + y(d.value) + '" width="' + bw + '" height="' + Math.max(1, bh) + '" rx="3" fill="' + (opts.color || 'var(--primary)') + '"><title>' + U.esc(d.label + '：' + d.value) + '</title></rect>';
       svg += '<text x="' + (x + bw / 2) + '" y="' + (y(d.value) - 5) + '" font-size="10.5" fill="#5a6378" text-anchor="middle">' + d.value + '</text>';
       svg += '<text x="' + (x + bw / 2) + '" y="' + (H - padB + 18) + '" font-size="10.5" fill="#62718a" text-anchor="middle">' + U.esc(d.label) + '</text>';
     });

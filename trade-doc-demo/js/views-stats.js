@@ -87,7 +87,7 @@
         '<div class="stat-card accent-orange"><span class="sc-label">整体收款率</span><span class="sc-value" style="font-size:22px">' + rateText + '</span><span class="sc-foot">已收 / 应收（分币种）</span></div>' +
       '</div>' +
       '<div class="chart-grid">' +
-        '<div class="chart-box"><h4>订单统计 · 月度新增订单（笔）</h4>' + U.barChart(monthData, { color: '#2f6fed' }) + '</div>' +
+        '<div class="chart-box"><h4>订单统计 · 月度新增订单（笔）</h4>' + U.barChart(monthData, { color: 'var(--primary)' }) + '</div>' +
         '<div class="chart-box"><h4>订单统计 · 状态分布（笔）</h4>' + U.barChart(statusRows, { color: '#e8871a' }) + '</div>' +
         '<div class="chart-box"><h4>客户统计 · USD 订单金额 TOP5</h4>' + hbarHtml(topCustomers('USD'), 'USD') + '</div>' +
         '<div class="chart-box"><h4>客户统计 · EUR 订单金额 TOP5</h4>' + hbarHtml(topCustomers('EUR'), 'EUR') + '</div>' +

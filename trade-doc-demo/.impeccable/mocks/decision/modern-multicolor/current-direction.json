@@ -6,6 +6,7 @@
   "userText": "算了,我更倾向于a",
   "supersedes": "challenger-metro",
   "status": "current-design-direction",
-  "runtimeImplemented": false,
-  "note": "Use existing A concept as the baseline. Stop C exploration. No final implementation or functionality approval is implied."
+  "runtimeImplemented": true,
+  "implementedAt": "2026-10-07",
+  "note": "A implemented in round 01 using the concept as the visual baseline. Stop C exploration. Actual verification scope is recorded in docs/iterations/round-01.md; implementation does not imply production or complete functionality approval."
 }

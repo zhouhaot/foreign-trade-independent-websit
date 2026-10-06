@@ -1,28 +1,28 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-04T13:08:12Z",
+  "generatedAt": "2026-10-06T16:33:31Z",
   "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
   "extensions": {
     "colorMeta": {
       "primary": {
         "role": "primary",
-        "displayName": "操作蓝"
+        "displayName": "鸢尾紫"
       },
       "primary-dark": {
         "role": "primary",
-        "displayName": "深操作蓝"
+        "displayName": "深鸢尾紫"
       },
       "nav-bg": {
         "role": "primary",
-        "displayName": "导航与流程深蓝"
+        "displayName": "导航浅紫"
       },
       "nav-bg-deep": {
         "role": "primary",
-        "displayName": "深蓝悬停"
+        "displayName": "导航悬停浅紫"
       },
       "bg": {
         "role": "neutral",
-        "displayName": "工作区灰"
+        "displayName": "珍珠白工作区"
       },
       "card": {
         "role": "neutral",
@@ -64,7 +64,7 @@
       },
       "blue-bg": {
         "role": "primary",
-        "displayName": "浅操作蓝"
+        "displayName": "浅鸢尾紫"
       },
       "gray-bg": {
         "role": "neutral",
@@ -75,6 +75,20 @@
       },
       "purple-bg": {
         "displayName": "浅紫底"
+      },
+      "mint": {
+        "displayName": "薄荷青"
+      },
+      "mint-bg": {
+        "displayName": "薄荷青阅读面"
+      },
+      "surface-subtle": {
+        "displayName": "辅助阅读面",
+        "role": "neutral"
+      },
+      "selection-bg": {
+        "displayName": "所选订单浅紫",
+        "role": "primary"
       }
     },
     "typographyMeta": {
@@ -100,7 +114,7 @@
       },
       "metric": {
         "displayName": "工作台数字",
-        "purpose": "角色概览的32px等宽数字。"
+        "purpose": "角色概览的27px等宽数字，四项并为110px高摘要带。"
       },
       "login-display": {
         "displayName": "登录流程标题",
@@ -134,7 +148,7 @@
       },
       {
         "name": "input-focus",
-        "value": "0 0 0 2px rgba(47,111,237,.12)",
+        "value": "0 0 0 2px rgba(101,66,217,.16)",
         "purpose": "字段聚焦反馈。"
       }
     ],
@@ -155,9 +169,9 @@
         "purpose": "遮罩与通知下拉进入。"
       },
       {
-        "name": "navigation-reveal",
+        "name": "login-connection-delay",
         "value": "200ms",
-        "purpose": "子菜单进入；登录连接线启动延时。"
+        "purpose": "登录连接线启动延时；叶子导航直达，不再存在子菜单展开动画。"
       },
       {
         "name": "sidebar-layout",
@@ -199,7 +213,7 @@
       {
         "name": "desktop-density",
         "value": "1360px",
-        "purpose": "208px侧栏、250px工作台侧列；1001–1360px单证目录移至上方可横向滚动整行，下方为弹性纸张与210px操作区两列。"
+        "purpose": "侧栏保持100px窄栏或224px展开；250px工作台侧列；1001–1360px单证目录移至上方横向整行，下方弹性纸张与210px操作区。"
       },
       {
         "name": "form-columns",
@@ -209,7 +223,7 @@
       {
         "name": "compact-shell",
         "value": "1150px",
-        "purpose": "190px侧栏、图标搜索入口与紧凑登录双列。"
+        "purpose": "图标搜索入口与紧凑登录双列；不缩短导航叶子入口文字。"
       },
       {
         "name": "stacked-content",
@@ -219,7 +233,12 @@
       {
         "name": "narrow-window-fallback",
         "value": "900px",
-        "purpose": "80px侧栏与登录单列；不构成移动端交付承诺。"
+        "purpose": "登录单列；默认100px导航保留文字；不构成移动端交付承诺。"
+      },
+      {
+        "name": "orders-stacked",
+        "value": "1100px",
+        "purpose": "订单选择与核对面板纵向排列，取消右面板sticky，列表最高430px。"
       }
     ]
   },
@@ -230,15 +249,15 @@
       "refersTo": "button-primary",
       "description": "当前流程主要动作。",
       "html": "<button type=\"button\" class=\"ds-primary\">提交审核</button>",
-      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:var(--primary,#2f6fed);border-color:var(--primary,#2f6fed);color:#fff}.ds-primary:hover{background:var(--primary-dark,#2459c4);border-color:var(--primary-dark,#2459c4);color:#fff}.ds-primary:active:not(:disabled){transform:translateY(1px)}.ds-primary:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-primary:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#8b809f);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:var(--primary,#6542d9);border-color:var(--primary,#6542d9);color:#fff}.ds-primary:hover{background:var(--primary-dark,#5030b2);border-color:var(--primary-dark,#5030b2);color:#fff}.ds-primary:active:not(:disabled){transform:translateY(1px)}.ds-primary:focus-visible{outline:2px solid var(--primary,#6542d9);outline-offset:3px}.ds-primary:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
     },
     {
       "name": "次按钮",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "辅助动作默认白底与控件描边；表内普通次级小按钮为透明底、轻描边，悬停浅蓝。此局部规则排除主操作、成功与危险按钮。",
+      "description": "辅助动作默认白底与控件描边；表内普通次级小按钮为透明底、轻描边，悬停浅紫。此局部规则排除主操作、成功与危险按钮。",
       "html": "<button type=\"button\" class=\"ds-secondary\">重置</button>",
-      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:#fff;color:var(--text,#192d4b)}.ds-secondary:hover{border-color:var(--primary,#2f6fed);color:var(--primary,#2f6fed)}.ds-secondary:active:not(:disabled){transform:translateY(1px)}.ds-secondary:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-secondary:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#8b809f);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:#fff;color:var(--text,#211d38)}.ds-secondary:hover{border-color:var(--primary,#6542d9);color:var(--primary,#6542d9)}.ds-secondary:active:not(:disabled){transform:translateY(1px)}.ds-secondary:focus-visible{outline:2px solid var(--primary,#6542d9);outline-offset:3px}.ds-secondary:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
     },
     {
       "name": "危险按钮",
@@ -246,15 +265,15 @@
       "refersTo": "button-danger",
       "description": "取消或作废等动作，必须配合影响说明。",
       "html": "<button type=\"button\" class=\"ds-danger\">作废单证</button>",
-      "css": ".ds-danger{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:#fff;border-color:var(--red,#c0353f);color:var(--red,#c0353f)}.ds-danger:hover{background:var(--red,#c0353f);border-color:var(--red,#c0353f);color:#fff}.ds-danger:active:not(:disabled){transform:translateY(1px)}.ds-danger:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-danger:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-danger{transition:none}}"
+      "css": ".ds-danger{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#8b809f);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:#fff;border-color:var(--red,#c0353f);color:var(--red,#c0353f)}.ds-danger:hover{background:var(--red,#c0353f);border-color:var(--red,#c0353f);color:#fff}.ds-danger:active:not(:disabled){transform:translateY(1px)}.ds-danger:focus-visible{outline:2px solid var(--primary,#6542d9);outline-offset:3px}.ds-danger:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-danger{transition:none}}"
     },
     {
       "name": "通过按钮",
       "kind": "button",
       "refersTo": "button-success",
-      "description": "仅有权限且符合业务条件时出现。",
+      "description": "仅有权限且符合业务条件时出现；默认#187b45、悬停#1c7f48，白字对比分别5.31:1与5.03:1。",
       "html": "<button type=\"button\" class=\"ds-success\">审核通过</button>",
-      "css": ".ds-success{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:var(--green,#187b45);border-color:var(--green,#187b45);color:#fff}.ds-success:hover{background:#188a49;border-color:#188a49;color:#fff}.ds-success:active:not(:disabled){transform:translateY(1px)}.ds-success:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-success:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-success{transition:none}}"
+      "css": ".ds-success{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#8b809f);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:var(--green,#187b45);border-color:var(--green,#187b45);color:#fff}.ds-success:hover{background:#1c7f48;border-color:#1c7f48;color:#fff}.ds-success:active:not(:disabled){transform:translateY(1px)}.ds-success:focus-visible{outline:2px solid var(--primary,#6542d9);outline-offset:3px}.ds-success:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-success{transition:none}}"
     },
     {
       "name": "文字按钮",
@@ -262,23 +281,23 @@
       "refersTo": "button-text",
       "description": "低层级辅助动作。",
       "html": "<button type=\"button\" class=\"ds-text\">查看详情</button>",
-      "css": ".ds-text{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);height:auto;padding:0 5px;border:0;background:transparent;color:var(--primary,#2f6fed)}.ds-text:hover{color:var(--primary,#2f6fed);text-decoration:underline}.ds-text:active:not(:disabled){transform:translateY(1px)}.ds-text:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-text:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-text{transition:none}}"
+      "css": ".ds-text{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#8b809f);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);min-height:24px;height:auto;padding:0 5px;border:0;background:transparent;color:var(--primary,#6542d9)}.ds-text:hover{color:var(--primary,#6542d9);text-decoration:underline}.ds-text:active:not(:disabled){transform:translateY(1px)}.ds-text:focus-visible{outline:2px solid var(--primary,#6542d9);outline-offset:3px}.ds-text:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-text{transition:none}}"
     },
     {
       "name": "输入字段",
       "kind": "input",
       "refersTo": "input",
-      "description": "38px标准字段，蓝色聚焦反馈与具体错误关联。",
+      "description": "38px标准字段，紫色聚焦反馈与具体错误关联。",
       "html": "<label class=\"ds-field\"><span>订单编号</span><input class=\"ds-input\" placeholder=\"如 SO2026001\"></label>",
-      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;color:var(--text,#192d4b);font-family:inherit;font-size:13px}.ds-input{height:38px;padding:0 10px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);background:#fff;color:var(--text,#192d4b);font-family:inherit;font-size:13px;outline:none;caret-color:var(--primary,#2f6fed);transition:border-color var(--duration-fast,140ms),background-color var(--duration-fast,140ms)}.ds-input::placeholder{color:var(--text-sub,#5e6d83);opacity:1}.ds-input:focus,.ds-input:focus-visible{border-color:var(--primary,#2f6fed);box-shadow:0 0 0 2px rgba(47,111,237,.12)}.ds-input[readonly]{background:#f7f8fb;color:var(--text-sub,#5e6d83)}.ds-input[aria-invalid=\"true\"]{border-color:var(--red,#c0353f)}@media(prefers-reduced-motion:reduce){.ds-input{transition:none}}"
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;color:var(--text,#211d38);font-family:inherit;font-size:13px}.ds-input{height:38px;padding:0 10px;border:1px solid var(--border-control,#8b809f);border-radius:var(--radius-control,8px);background:#fff;color:var(--text,#211d38);font-family:inherit;font-size:13px;outline:none;caret-color:var(--primary,#6542d9);transition:border-color var(--duration-fast,140ms),background-color var(--duration-fast,140ms)}.ds-input::placeholder{color:var(--text-sub,#6b647d);opacity:1}.ds-input:focus,.ds-input:focus-visible{border-color:var(--primary,#6542d9);box-shadow:0 0 0 2px rgba(101,66,217,.16)}.ds-input[readonly]{background:var(--surface-subtle,#faf9fd);color:var(--text-sub,#6b647d)}.ds-input[aria-invalid=\"true\"]{border-color:var(--red,#c0353f)}@media(prefers-reduced-motion:reduce){.ds-input{transition:none}}"
     },
     {
       "name": "侧栏导航",
       "kind": "nav",
       "refersTo": "navigation-active",
-      "description": "232px展开侧栏，主蓝选中项与本地SVG线性图标。",
+      "description": "浅紫导航默认100px，保留文字与图标；展开224px且展示分组，所有角色允许的叶子入口直接可达。",
       "html": "<nav class=\"ds-nav\" aria-label=\"主导航\"><a href=\"#/dashboard\" class=\"ds-nav-item ds-selected\" aria-current=\"page\"><svg class=\"ds-nav-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M3 10l9-7 9 7v10H3zM9 20v-7h6v7\"/></svg>工作台</a><a href=\"#/orders\" class=\"ds-nav-item\"><svg class=\"ds-nav-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7\"/></svg>订单查询</a></nav>",
-      "css": ".ds-nav{width:232px;background:var(--nav-bg,#142b50)}.ds-nav-item{display:flex;align-items:center;gap:12px;margin:0 16px 6px;padding:12px 14px;border-radius:8px;background:none;color:#c4d1e5;font-family:inherit;font-size:13px;line-height:1.5;text-decoration:none;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms)}.ds-nav-icon{width:18px;height:18px;flex-shrink:0}.ds-nav-item:hover{background:#203d62;color:#fff}.ds-nav-item.ds-selected{background:var(--primary,#2f6fed);color:#fff;font-weight:600}.ds-nav-item:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-nav-item{transition:none}}"
+      "css": ".ds-nav{width:224px;background:var(--nav-bg,#f0ecfb)}.ds-nav-item{display:flex;align-items:center;gap:12px;margin:0 16px 6px;padding:12px 14px;border-radius:8px;background:none;color:var(--text-sub,#6b647d);font-family:inherit;font-size:13px;line-height:1.5;text-decoration:none;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms)}.ds-nav-icon{width:18px;height:18px;flex-shrink:0}.ds-nav-item:hover{background:var(--nav-bg-deep,#e8e0fa);color:var(--primary,#6542d9)}.ds-nav-item.ds-selected{background:var(--primary,#6542d9);color:#fff;font-weight:600}.ds-nav-item:focus-visible{outline:2px solid var(--primary,#6542d9);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-nav-item{transition:none}}"
     },
     {
       "name": "状态标签",
@@ -286,7 +305,7 @@
       "refersTo": "tag",
       "description": "25px标签，以圆点、文字和浅语义色底共同表达状态。",
       "html": "<div class=\"ds-tags\"><span class=\"ds-tag ds-blue\">执行中</span><span class=\"ds-tag ds-green\">已通过</span><span class=\"ds-tag ds-orange\">部分收款</span><span class=\"ds-tag ds-red\">已退回</span><span class=\"ds-tag ds-gray\">未开始</span><span class=\"ds-tag ds-purple\">改价申请</span></div>",
-      "css": ".ds-tags{display:flex;flex-wrap:wrap;gap:8px}.ds-tag{display:inline-flex;align-items:center;gap:5px;height:25px;padding:0 9px;border-radius:6px;font-family:inherit;font-size:12px;line-height:1;white-space:nowrap}.ds-tag:before{content:\"\";width:5px;height:5px;border-radius:50%;background:currentColor}.ds-blue{background:var(--blue-bg,#e9f0fe);color:var(--primary,#2f6fed)}.ds-green{background:var(--green-bg,#e6f7ee);color:var(--green,#187b45)}.ds-orange{background:var(--orange-bg,#fdf1e2);color:var(--orange,#a75a12)}.ds-red{background:var(--red-bg,#fceaea);color:var(--red,#c0353f)}.ds-gray{background:var(--gray-bg,#eef0f5);color:var(--text-sub,#5e6d83)}.ds-purple{background:var(--purple-bg,#f0ecfe);color:var(--purple,#6850bd)}"
+      "css": ".ds-tags{display:flex;flex-wrap:wrap;gap:8px}.ds-tag{display:inline-flex;align-items:center;gap:5px;height:25px;padding:0 9px;border-radius:6px;font-family:inherit;font-size:12px;line-height:1;white-space:nowrap}.ds-tag:before{content:\"\";width:5px;height:5px;border-radius:50%;background:currentColor}.ds-blue{background:var(--blue-bg,#eee8fc);color:var(--primary,#6542d9)}.ds-green{background:var(--green-bg,#e6f7ee);color:var(--green,#187b45)}.ds-orange{background:var(--orange-bg,#fdf1e2);color:var(--orange,#a75a12)}.ds-red{background:var(--red-bg,#fceaea);color:var(--red,#c0353f)}.ds-gray{background:var(--gray-bg,#efedf3);color:var(--text-sub,#6b647d)}.ds-purple{background:var(--purple-bg,#eee8fc);color:var(--purple,#6542d9)}"
     },
     {
       "name": "业务面板",
@@ -294,7 +313,7 @@
       "refersTo": "card",
       "description": "白底平面面板，以细边框和留白承载内容。系统用户表和权限矩阵使用零内边距表格卡片，内部表格容器零外边距、无重复边框与圆角。财务/审核日期和人员列保持单行，日期使用等宽数字。",
       "html": "<section class=\"ds-card\"><div class=\"ds-card-title\">业务记录<span>共 2 项</span></div><p class=\"ds-card-description\">订单、单证与收款分别记录进展。</p></section>",
-      "css": ".ds-card{padding:20px 22px;border:1px solid var(--border,#e5e8ef);border-radius:var(--radius-panel,12px);background:var(--card,#fff);color:var(--text,#192d4b);font-family:inherit;font-size:14px;line-height:1.5}.ds-card-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border,#e5e8ef);font-size:15px;font-weight:600}.ds-card-title span{color:var(--text-sub,#5e6d83);font-size:12px;font-weight:400}.ds-card-description{margin:0;font-size:13px;color:var(--text-sub,#5e6d83)}"
+      "css": ".ds-card{padding:20px 22px;border:1px solid var(--border,#e6e2ef);border-radius:var(--radius-panel,12px);background:var(--card,#fff);color:var(--text,#211d38);font-family:inherit;font-size:14px;line-height:1.5}.ds-card-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border,#e6e2ef);font-size:15px;font-weight:600}.ds-card-title span{color:var(--text-sub,#6b647d);font-size:12px;font-weight:400}.ds-card-description{margin:0;font-size:13px;color:var(--text-sub,#6b647d)}"
     },
     {
       "name": "登录角色下拉框",
@@ -302,16 +321,16 @@
       "refersTo": "login-role-select",
       "description": "与账号、密码同宽的46px原生下拉框；选项为角色与演示姓名，管理员同名去重。运行页更新下方演示部门，保留输入，提交中禁用选择器。",
       "html": "<div class=\"ds-role-field\"><label class=\"ds-role-label\" for=\"ds-login-role\">演示角色</label><div class=\"ds-role-control\"><select class=\"ds-login-role-select\" id=\"ds-login-role\" aria-describedby=\"ds-role-hint\"><option value=\"admin\">系统管理员</option><option value=\"sales\" selected>外贸业务员 · 陈明</option><option value=\"doc\">单证员 · 王芳</option><option value=\"fin\">财务人员 · 赵倩</option><option value=\"boss\">业务主管 · 周建国</option></select><span class=\"ds-role-chevron\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 5 7 7-7 7\"/></svg></span></div><p class=\"ds-role-hint\" id=\"ds-role-hint\" aria-live=\"polite\">演示部门：外贸一部</p></div>",
-      "css": ".ds-role-field{width:100%;max-width:430px;font-family:inherit;color:var(--text,#192d4b)}.ds-role-label{display:block;font-size:13px;margin-bottom:9px}.ds-role-control{position:relative}.ds-login-role-select{width:100%;height:46px;padding:0 44px 0 14px;border:1px solid #d7dfeb;border-radius:var(--radius-control,8px);background:#fbfcfe;color:var(--text,#192d4b);font-family:inherit;font-size:14px;appearance:none;outline:none;cursor:pointer;transition:border-color var(--duration-fast,140ms),background-color var(--duration-fast,140ms)}.ds-login-role-select:hover:not(:disabled){border-color:#9aaecb}.ds-login-role-select:focus,.ds-login-role-select:focus-visible{border-color:var(--primary,#2f6fed);background:#fff;box-shadow:0 0 0 2px rgba(47,111,237,.12)}.ds-login-role-select:disabled{opacity:.55;cursor:wait}.ds-role-chevron{position:absolute;right:14px;top:50%;display:flex;transform:translateY(-50%) rotate(90deg);color:var(--text-sub,#5e6d83);pointer-events:none}.ds-role-chevron svg{width:16px;height:16px}.ds-role-hint{font-size:12px;margin:12px 0 0;color:var(--text-sub,#5e6d83);min-height:18px}@media(prefers-reduced-motion:reduce){.ds-login-role-select{transition:none}}"
+      "css": ".ds-role-field{width:100%;max-width:470px;font-family:inherit;color:var(--text,#211d38)}.ds-role-label{display:block;font-size:13px;margin-bottom:9px}.ds-role-control{position:relative}.ds-login-role-select{width:100%;height:46px;padding:0 44px 0 14px;border:1px solid #8b809f;border-radius:var(--radius-control,8px);background:#faf9fd;color:var(--text,#211d38);font-family:inherit;font-size:14px;appearance:none;outline:none;cursor:pointer;transition:border-color var(--duration-fast,140ms),background-color var(--duration-fast,140ms)}.ds-login-role-select:hover:not(:disabled){border-color:#6542d9}.ds-login-role-select:focus,.ds-login-role-select:focus-visible{border-color:var(--primary,#6542d9);background:#fff;box-shadow:0 0 0 2px rgba(101,66,217,.16)}.ds-login-role-select:disabled{opacity:.55;cursor:wait}.ds-role-chevron{position:absolute;right:14px;top:50%;display:flex;transform:translateY(-50%) rotate(90deg);color:var(--text-sub,#6b647d);pointer-events:none}.ds-role-chevron svg{width:16px;height:16px}.ds-role-hint{font-size:12px;margin:12px 0 0;color:var(--text-sub,#6b647d);min-height:18px}@media(prefers-reduced-motion:reduce){.ds-login-role-select{transition:none}}"
     }
   ],
   "narrative": {
-    "northStar": "外贸业务操作工作区",
-    "overview": "沿用用户已选定的 Ant Design Pro / Tabler / Metronic 企业后台融合方向：Tabler 的布局与留白、Ant Design Pro 的筛选与业务表格、Metronic 的信息分组共同形成一套本地组件。深蓝导航、操作蓝、灰底与白色面板继续承载五角色工作区；不引入模板代码、品牌资产或依赖。\n\n工作台以角色概览、近期订单与待办帮助用户接续工作，详情分别展示订单、单证、收款进度，审核页面并置文书与操作。界面使用简体中文，单证字段保留外贸英文惯例；动效表达进入、切换、选择与反馈，不延迟业务操作。",
+    "northStar": "A · 订单协同工作区",
+    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。",
     "keyCharacteristics": [
-      "深蓝可收起导航、白色顶栏与角色业务路径构成稳定工作区。",
+      "默认100px浅紫窄导航保留文字与图标，展开224px，所有角色叶子入口直接可达。",
       "白色平面面板、细边框和适度留白承载高频业务信息。",
-      "筛选、表格、工具栏与本地快速检索形成连续的查询工作流。",
+      "筛选、分栏订单核对、完整表格与本地快速检索形成连续查询工作流。",
       "三类订单进度独立展示，单证纸张与权限相关操作同时可见。",
       "状态用文字与颜色共同表达，金额携带币种并右对齐。",
       "键盘焦点、字段反馈与减少动效设置贯穿共享交互。"
@@ -331,10 +350,15 @@
         "name": "平面面板",
         "body": "普通业务面板以边框和留白划分；阴影用于纸张与实际浮层。",
         "section": "elevation"
+      },
+      {
+        "name": "列表滚动可发现",
+        "body": "选择列表显示本页实际笔数；超过三笔提示向下滚动查看，容器预留滚动条空间，不因可视行数少于分页条数误认为记录缺失。",
+        "section": "layout"
       }
     ],
     "dos": [
-      "Do 沿用深蓝导航、操作蓝、灰底、白色平面面板与系统中文字体。",
+      "Do 沿用浅紫导航、鸢尾紫主操作、珍珠白工作区、薄荷青收款阅读面与系统中文字体。",
       "Do 用角色概览、近期订单与待办接续工作，单证页面让纸张与业务操作并置。",
       "Do 用角色与业务状态决定可用动作，让只读、退回、错误和禁用原因可读。",
       "Do 将金额右对齐并保留币种，月份标签保留年份。",
@@ -346,7 +370,8 @@
       "Don't 合并订单、单证、收款状态，或在订单列表增加直接新建订单。",
       "Don't 用颜色替代状态文字，或用不明原因的灰色控件替代权限说明。",
       "Don't 持久化业务写入或把假登录、假分页、导出演示描述为真实后台功能；业务数据刷新后还原。",
-      "Don't 把代码实现、设计规范或静态检查通过写成浏览器、全业务或生产验收通过。"
+      "Don't 把代码实现、设计规范或静态检查通过写成浏览器、全业务或生产验收通过。",
+      "Don't 将薄荷青收款阅读面视作结清状态，或把未来流程节点画成已完成。"
     ]
   }
 }

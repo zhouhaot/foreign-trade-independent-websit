@@ -1,0 +1,64 @@
+{
+  "round": 1,
+  "date": "2026-10-07",
+  "routeChecks": 100,
+  "layoutChecks": 200,
+  "roles": [
+    "admin",
+    "sales",
+    "doc",
+    "fin",
+    "boss"
+  ],
+  "interactions": [
+    {
+      "name": "选择/表格/密度/导航保留筛选输入及选择",
+      "result": "PASS"
+    },
+    {
+      "name": "空结果清除陈旧详情",
+      "result": "PASS"
+    },
+    {
+      "name": "分页切换到当前页可见订单",
+      "result": "PASS"
+    },
+    {
+      "name": "键盘Space选择订单",
+      "result": "PASS"
+    },
+    {
+      "name": "搜索Esc关闭及焦点恢复",
+      "result": "PASS"
+    },
+    {
+      "name": "单证编辑/专注/导航保留唛头输入",
+      "result": "PASS"
+    },
+    {
+      "name": "单证员退回单证优先入口",
+      "result": "PASS"
+    },
+    {
+      "name": "财务所选订单收款入口",
+      "result": "PASS"
+    }
+  ],
+  "failures": [],
+  "console": [],
+  "actualViewports": [
+    {
+      "requested": 1280,
+      "observed": 1280
+    },
+    {
+      "requested": 1440,
+      "observed": 1440
+    }
+  ],
+  "fileProtocol": {
+    "result": "NOT_RUN",
+    "reason": "Browser URL policy allows HTTP/HTTPS only; rejected file://; no workaround attempted"
+  },
+  "totalRenderAttempts": 200
+}
