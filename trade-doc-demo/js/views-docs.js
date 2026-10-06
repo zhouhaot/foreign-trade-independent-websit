@@ -12,7 +12,7 @@
     return M.documents.slice().sort(function (a, b) { return b.updatedAt.localeCompare(a.updatedAt) || b.version - a.version; });
   }
   function canEditDoc(d, user) {
-    return !!(d && user && user.role === 'doc' && ['草稿', '制作中', '已退回'].indexOf(d.status) >= 0);
+    return U.documentPolicy(d, user).canEdit;
   }
   function nextDocVersion(d) {
     return Math.max.apply(null, M.documents.filter(function (x) {
@@ -84,27 +84,35 @@
     var d = U.doc(ctx.params[0]);
     if (!d) return Views.notFound('单证不存在：' + ctx.params[0]);
     var snapshot = U.documentSnapshot(d), order = snapshot.order;
+    var policy = U.documentPolicy(d, ctx.user);
     var role = ctx.user.role;
     var editing = canEditDoc(d, ctx.user) && window.AppUI.docEditing === d.id;
+    var canReadLedger = ['doc', 'boss'].indexOf(role) >= 0;
+    var returnDestination = canReadLedger ? '#/documents' : '#/orders/' + d.orderId;
 
     /* 左：单证选择列表 */
-    var leftItems = sortedDocs().map(function (x) {
-      return '<button class="doc-item ' + (x.id === d.id ? 'active' : '') + '" data-action="doc-goto" data-id="' + x.id + '" aria-pressed="' + (x.id === d.id) + '">' +
+    var siblings = sortedDocs().filter(function (x) { return x.orderId === d.orderId; }).sort(function (a, b) {
+      return (a.type === d.type ? 0 : 1) - (b.type === d.type ? 0 : 1) || a.type.localeCompare(b.type) || b.version - a.version;
+    });
+    var leftItems = siblings.map(function (x) {
+      var itemPolicy = U.documentPolicy(x, ctx.user);
+      return '<button class="doc-item ' + (x.id === d.id ? 'active' : '') + '" data-action="doc-goto" data-id="' + x.id + '" aria-pressed="' + (x.id === d.id) + '"' + (x.id === d.id ? ' aria-current="true"' : '') + '>' +
         '<div class="d-no"><span>' + x.no + ' <span class="muted">V' + x.version + '</span></span>' + tag(x.status) + '</div>' +
-        '<div class="d-sub"><span>' + U.docTypeName(x.type) + '</span><span>' + x.orderId + '</span></div></button>';
+        '<div class="d-sub"><span>' + U.docTypeName(x.type) + '</span><span>' + (itemPolicy.latest ? itemPolicy.isLatest ? '最新版本' : '历史版本' : '版本冲突') + '</span></div>' +
+        (x.id === d.id ? '<span class="doc-current-label">当前查看</span>' : '') + '</button>';
     }).join('');
 
     /* 中：状态横幅 + 纸张预览 */
     var banner = '';
     if (d.status === '已退回') banner = '<div class="doc-status-banner reject"><b>已退回：</b>' + esc(d.opinion || '') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）' + (role === 'doc' ? '<br>请按意见修订后重新提交审核，或申请重新制单生成新版本。' : '') + '</div>';
-    else if (d.status === '已通过') banner = '<div class="doc-status-banner approve"><b>审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '），本版本可导出。</div>';
+    else if (d.status === '已通过') banner = '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (policy.canExport ? '当前满足导出演示条件。' : '历史审核结果保留，当前导出资格见操作区。') + '</div>';
     else if (d.status === '待审核') banner = '<div class="doc-status-banner review"><b>待审核：</b>制单人 ' + esc(d.maker) + ' 已于 ' + esc(d.submittedAt) + ' 提交审核，等待业务主管处理。</div>';
     else banner = '<div class="doc-status-banner draft"><b>' + (d.status === '草稿' ? '草稿' : '制作中') + '：</b>单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。</div>';
 
     var paper = d.type === 'CI' ? renderCI(d, order, editing) : renderPL(d, order, editing);
 
     /* 审核留痕 */
-    var history = d.history.slice().sort(function (a, b) { return b.time.localeCompare(a.time); }).map(function (h) {
+    var history = d.history.slice().reverse().sort(function (a, b) { return b.time.localeCompare(a.time); }).map(function (h) {
       return '<div class="tl-item"><div class="tl-meta"><span>' + esc(h.time) + '</span><span>' + esc(h.person) + '</span></div>' +
         '<div class="tl-content">' + esc(h.action) + '</div>' +
         (h.opinion ? '<div class="tl-opinion">' + esc(h.opinion) + '</div>' : '') + '</div>';
@@ -115,18 +123,35 @@
 
     return '<div class="page-head"><div><h2>' + U.docTypeName(d.type) + ' · ' + d.no + ' <span class="doc-version">V' + d.version + '</span> ' + tag(d.status) + '</h2>' +
       '<p class="page-description">关联订单 ' + d.orderId + ' · 制单人 ' + esc(d.maker) + ' · 本版本交易数据已冻结</p></div>' +
-      '<div class="actions"><button class="btn" data-action="doc-focus" aria-pressed="' + !!window.AppUI.docFocus + '">' + U.icon('expand') + '<span>' + (window.AppUI.docFocus ? '显示单证目录' : '专注预览') + '</span></button><a class="btn" href="#/documents">返回列表</a></div></div>' +
+      '<div class="actions"><button class="btn" data-action="doc-focus" aria-pressed="' + !!window.AppUI.docFocus + '">' + U.icon('expand') + '<span>' + (window.AppUI.docFocus ? '显示单证目录' : '专注预览') + '</span></button><a class="btn" href="' + returnDestination + '" data-action="doc-leave" data-destination="' + returnDestination + '">' + (canReadLedger ? '全部单证台账' : '返回订单') + '</a></div></div>' +
       '<div class="doc-layout ' + (window.AppUI.docFocus ? 'is-focused' : '') + '">' +
-        '<div class="doc-list-panel"><div class="panel-head">单证选择<span class="muted small">' + M.documents.length + ' 份</span></div>' + leftItems + '</div>' +
+        '<nav class="doc-list-panel" aria-label="本订单单证版本"><div class="panel-head">本订单单证<span class="muted small">' + d.orderId + ' · ' + siblings.length + ' 份</span></div>' + leftItems + '</nav>' +
         '<div class="doc-center">' + banner +
           '<div class="preview-toolbar"><b>单证预览</b><span>' + (editing ? '编辑唛头、包装与备注' : '交易字段只读') + '</span></div>' +
           '<div class="doc-preview-wrap"><div class="paper-wrap">' + paper + (d.status === '已通过' ? '<div class="p-stamp">审核通过<br>APPROVED</div>' : '') + '</div></div>' +
           '<div class="card mt16"><div class="card-title">审核与操作留痕</div><div class="timeline">' + history + '</div></div>' +
         '</div>' +
-        '<div class="doc-action-panel"><div class="panel-head">业务操作</div><div class="panel-body">' + right + '</div></div>' +
+        '<aside class="doc-action-panel" aria-label="单证业务操作"><div class="panel-head">当前版本操作<span class="muted small">V' + d.version + '</span></div><div class="panel-body">' + right + '</div></aside>' +
       '</div>';
   };
-  Actions['doc-goto'] = function (el) { location.hash = '#/documents/' + el.dataset.id; };
+  function leaveDocument(destination) {
+    if (location.hash === destination) return;
+    var d = U.doc(window.AppUI.docEditing), opinion = document.getElementById('audit-opinion');
+    var dirty = !!(opinion && opinion.value.trim());
+    if (d) {
+      var fields = { 'df-marks': d.marks, 'df-remark': d.remark };
+      ['cartons', 'package', 'gw', 'nw', 'meas'].forEach(function (key) { fields['df-pk-' + key] = d.packing[key]; });
+      dirty = dirty || Object.keys(fields).some(function (id) {
+        var input = document.getElementById(id);
+        return input && input.value.trim() !== String(fields[id] == null ? '' : fields[id]).trim();
+      });
+    }
+    function navigate() { window.AppUI.docEditing = null; location.hash = destination; }
+    if (!dirty) { navigate(); return; }
+    U.confirm({ title: '离开当前单证？', message: '当前包装、备注或审核意见有未提交内容。离开会丢失这些输入；取消可继续在原版本处理。', okText: '放弃输入并离开', danger: true, onOk: navigate });
+  }
+  Actions['doc-goto'] = function (el) { leaveDocument('#/documents/' + el.dataset.id); };
+  Actions['doc-leave'] = function (el, event) { if (event) event.preventDefault(); leaveDocument(el.dataset.destination); };
   Actions['doc-focus'] = function (el) {
     window.AppUI.docFocus = !window.AppUI.docFocus;
     document.querySelector('.doc-layout').classList.toggle('is-focused', window.AppUI.docFocus);
@@ -135,22 +160,29 @@
   };
 
   function rightPanel(d, order, role, editing) {
-    var html = '';
+    var policy = U.documentPolicy(d, window.App.user);
+    var html = '<div class="doc-operation-context"><span>' + (policy.isLatest ? '最新版本' : policy.latest ? '历史版本' : '版本需核对') + '</span>' +
+      (policy.order ? tag(policy.order.status) : '<span>订单缺失</span>') + '</div>';
     var snapshot = U.documentSnapshot(d);
-    html += '<div class="ablock"><div class="ab-title">单据信息</div>' +
-      '<div class="small">类型：' + U.docTypeName(d.type) + '<br>编号：' + d.no + ' V' + d.version + '<br>关联订单：<a href="#/orders/' + d.orderId + '">' + d.orderId + '</a><br>制单人：' + esc(d.maker) + '<br>更新：' + esc(d.updatedAt) + '</div></div>';
-    html += '<div class="ablock"><div class="ab-title">交易数据来源</div><div class="small">' +
+    html += '<div class="doc-source-hint">交易来源：' + (snapshot.basis === 'demo-baseline' ? '样例基线·非历史签发记录' : '创建时交易快照') + '</div>';
+    var reference = '<div class="ablock doc-reference"><div class="ab-title">版本信息</div>' +
+      '<div class="small">关联订单：<a href="#/orders/' + d.orderId + '" data-action="doc-leave" data-destination="#/orders/' + d.orderId + '">' + d.orderId + '</a><br>制单人：' + esc(d.maker) + '<br>更新：' + esc(d.updatedAt) + '</div></div>';
+    reference += '<div class="ablock doc-reference"><div class="ab-title">交易数据来源</div><div class="small">' +
       (snapshot.basis === 'demo-baseline' ? '样例基线·非历史签发记录' : '创建时交易快照') +
       '<br>冻结时间：<span title="' + esc(snapshot.capturedAt) + '">' + esc(new Date(snapshot.capturedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false })) + '（北京时间）</span></div>' +
       '<details class="snapshot-rules"><summary>查看冻结规则</summary><div class="readonly-hint">' +
       (snapshot.basis === 'demo-baseline' ? '本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。' : '快照保存创建此交易快照时的订单与主数据。') +
       '<br>包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。</div></details></div>';
 
-    if (role === 'doc') {
+    if (policy.blockedReason) {
+      html += '<div class="ablock doc-operation-blocked"><div class="ab-title">当前只读</div><p>' + esc(policy.blockedReason) + '</p>' +
+        (policy.latest && !policy.isLatest ? '<button class="btn btn-primary" data-action="doc-goto" data-id="' + policy.latest.id + '">查看最新 V' + policy.latest.version + '</button>' : '') +
+        '<div class="readonly-hint">历史版本、审核结果和交易快照仍保留。</div></div>';
+    } else if (role === 'doc') {
       if (d.status === '已通过') {
         html += '<div class="ablock"><div class="ab-title">受控修订</div>' +
           '<button class="btn" data-action="doc-revise" data-id="' + d.id + '" aria-label="修订包装与备注，生成新版本 V' + nextDocVersion(d) + '">修订包装与备注 · V' + nextDocVersion(d) + '</button>' +
-          '<div class="readonly-hint">本操作仅修订唛头、包装与备注，沿用此版本交易快照，原版本保留，新版本重新审核。</div></div>';
+          '<div class="readonly-hint">沿用原交易快照，原版本保留；新版本重新审核。</div></div>';
       } else if (d.status === '制作中' || d.status === '草稿' || d.status === '已退回') {
         if (editing) {
           html += '<div class="ablock"><div class="ab-title">编辑中</div>' +
@@ -159,12 +191,13 @@
             '<button class="btn" data-action="doc-cancel-edit">放弃修改</button></div>';
         } else {
           html += '<div class="ablock"><div class="ab-title">制单操作</div>' +
-            '<button class="btn" data-action="doc-edit" data-id="' + d.id + '">编辑</button>' +
+            '<button class="btn" data-action="doc-edit" data-id="' + d.id + '">编辑包装与备注</button>' +
             '<button class="btn btn-primary" data-action="doc-submit" data-id="' + d.id + '">提交审核</button></div>';
         }
         if (d.status === '已退回') {
           html += '<div class="ablock"><div class="ab-title">退回意见</div><div class="small" style="line-height:1.7">' + esc(d.opinion || '') + '</div>' +
-            '<button class="btn mt8" data-action="doc-reform" data-id="' + d.id + '">申请重新制单</button></div>';
+            '<button class="btn mt8" data-action="doc-reform" data-id="' + d.id + '"' + (policy.canReform ? '' : ' disabled') + '>申请重新制单</button>' +
+            (!policy.canReform ? '<div class="readonly-hint">' + esc(policy.reasons.reform) + '</div>' : '') + '</div>';
         }
       }
     } else if (role === 'boss') {
@@ -172,8 +205,8 @@
         if (d.maker === window.App.user.name) {
           html += '<div class="ablock"><div class="ab-title">审核操作</div><div class="readonly-hint">制度要求「不能自制自审」，本单证由您本人制作，请转交其他主管审核。</div></div>';
         } else {
-          html += '<div class="ablock"><div class="ab-title">审核意见</div>' +
-            '<textarea class="textarea" id="audit-opinion" placeholder="通过可不填；退回必须填写具体修改意见"></textarea></div>' +
+          html += '<div class="ablock form-item"><label class="ab-title" for="audit-opinion">审核意见</label>' +
+            '<textarea class="textarea" id="audit-opinion" placeholder="通过可不填；退回请说明具体问题"></textarea><div id="audit-feedback" class="field-error" role="alert"></div></div>' +
             '<div class="ablock"><button class="btn btn-success" data-action="doc-approve" data-id="' + d.id + '">审核通过</button>' +
             '<button class="btn btn-danger" data-action="doc-reject" data-id="' + d.id + '">退回修改</button></div>';
         }
@@ -184,11 +217,12 @@
       html += '<div class="ablock"><div class="ab-title">操作</div><div class="readonly-hint">当前角色对单证为只读查看。</div></div>';
     }
 
-    /* 导出：仅审核通过可用 */
-    var canExport = d.status === '已通过';
+    /* 审核历史与实时订单/版本资格分开判断；导出仍为内存演示。 */
+    var canExport = policy.canExport;
     html += '<div class="ablock"><div class="ab-title">导出</div>' +
-      '<button class="btn ' + (canExport ? 'btn-primary' : '') + '" data-action="doc-export" data-id="' + d.id + '" ' + (canExport ? '' : 'disabled') + '>导出 PDF' + (canExport ? '' : '（需审核通过）') + '</button></div>';
-    return html;
+      '<button class="btn ' + (canExport ? 'btn-primary' : '') + '" data-action="doc-export" data-id="' + d.id + '" ' + (canExport ? '' : 'disabled') + '>导出 PDF（演示）</button>' +
+      '<div class="readonly-hint">' + (canExport ? '满足当前资格；演示仅留痕，不生成文件。' : esc(policy.reasons.export)) + '</div></div>';
+    return html + reference;
   }
 
   /* ---------- 预览排版：商业发票 ---------- */
@@ -280,26 +314,61 @@
       '</div>';
   }
 
-  /* ---------- 读取编辑字段并写回 ---------- */
-  function collectEditValues(d) {
-    var marks = document.getElementById('df-marks');
-    var remark = document.getElementById('df-remark');
-    if (marks) d.marks = marks.value.trim();
-    if (remark) d.remark = remark.value.trim();
-    ['cartons', 'package', 'gw', 'nw', 'meas'].forEach(function (k) {
-      var el = document.getElementById('df-pk-' + k);
-      if (el) d.packing[k] = k === 'cartons' ? (Number(el.value) || el.value) : el.value.trim();
+  /* ---------- 动作资格、确认内容绑定与跨按钮互斥 ---------- */
+  var documentInFlight = Object.create(null);
+  function docApprovalState(d) {
+    return JSON.stringify(M.approvals.filter(function (a) { return a.targetType === 'doc' && a.targetId === d.id; }));
+  }
+  function captureDocAction(el, action, requireEditing) {
+    var d = U.doc(el.dataset.id), user = window.App.user;
+    var policy = U.documentPolicy(d, user);
+    var error = policy.reasons[action];
+    if (!error && el.classList && el.classList.contains('is-loading')) error = '该操作正在处理中，请勿重复提交。';
+    if (!error && documentInFlight[d.id]) error = '该单证正在处理中，请勿重复提交。';
+    if (!error && requireEditing && window.AppUI.docEditing !== d.id) error = '请先由单证员进入当前版本编辑模式。';
+    if (error) { U.toast(error, 'warning'); return null; }
+    return { doc: d, action: action, actor: { id: user.id, name: user.name, role: user.role },
+      order: policy.order, orderStatus: policy.order.status, documentState: JSON.stringify(d),
+      approvals: docApprovalState(d), requireEditing: requireEditing, completed: false };
+  }
+  function validateDocAction(ticket) {
+    var d = ticket.doc, user = window.App.user;
+    var policy = U.documentPolicy(d, user);
+    var error = policy.reasons[ticket.action];
+    if (!error && (!user || user.id !== ticket.actor.id || user.name !== ticket.actor.name || user.role !== ticket.actor.role)) error = '操作者已变化，请重新发起操作。';
+    if (!error && (policy.order !== ticket.order || policy.order.status !== ticket.orderStatus || JSON.stringify(d) !== ticket.documentState || docApprovalState(d) !== ticket.approvals)) error = '单证、关联订单或审核信息已变化，请刷新核对后重新操作。';
+    if (!error && ticket.requireEditing && window.AppUI.docEditing !== d.id) error = '编辑模式已变化，请重新发起保存。';
+    if (error) { U.toast(error, 'warning'); return false; }
+    return true;
+  }
+  function commitDocAction(ticket, effect) {
+    if (ticket.completed || documentInFlight[ticket.doc.id]) return false;
+    if (!validateDocAction(ticket)) return false;
+    documentInFlight[ticket.doc.id] = true;
+    try { effect(ticket.doc); ticket.completed = true; return true; }
+    finally { delete documentInFlight[ticket.doc.id]; }
+  }
+  function readEditValues() {
+    var values = { packing: {} };
+    ['marks', 'remark'].forEach(function (key) {
+      var el = document.getElementById('df-' + key);
+      if (el) values[key] = el.value.trim();
     });
+    ['cartons', 'package', 'gw', 'nw', 'meas'].forEach(function (key) {
+      var el = document.getElementById('df-pk-' + key);
+      if (el) values.packing[key] = key === 'cartons' ? (Number(el.value) || el.value) : el.value.trim();
+    });
+    return values;
+  }
+  function applyEditValues(d, values) {
+    ['marks', 'remark'].forEach(function (key) { if (values[key] !== undefined) d[key] = values[key]; });
+    Object.keys(values.packing).forEach(function (key) { d.packing[key] = values.packing[key]; });
     d.updatedAt = U.today();
   }
-
   Actions['doc-edit'] = function (el) {
-    var d = U.doc(el.dataset.id);
-    if (!canEditDoc(d, window.App.user)) {
-      U.toast('仅单证员可编辑草稿、制作中或已退回的单证', 'warning');
-      return;
-    }
-    window.AppUI.docEditing = el.dataset.id;
+    var ticket = captureDocAction(el, 'edit', false);
+    if (!ticket) return;
+    window.AppUI.docEditing = ticket.doc.id;
     window.App.rerender();
     U.toast('已进入编辑模式：仅唛头、包装与备注字段可修改，订单带入数据只读', 'info');
   };
@@ -308,154 +377,129 @@
     window.App.rerender();
   };
   Actions['doc-save-draft'] = function (el) {
-    var d = U.doc(el.dataset.id);
-    if (!canEditDoc(d, window.App.user) || window.AppUI.docEditing !== d.id) {
-      U.toast('无法保存：请由单证员进入可编辑版本的编辑模式', 'warning');
-      return;
-    }
-    var btn = el;
-    var saved = false;
-    U.withLoading(btn, function () {
-      if (!canEditDoc(d, window.App.user) || window.AppUI.docEditing !== d.id) return;
-      collectEditValues(d);
-      d.history.push({ time: U.now(), person: window.App.user.name, action: '保存草稿（修订唛头/包装/备注）', opinion: '' });
-      window.AppUI.docEditing = null;
-      saved = true;
+    var ticket = captureDocAction(el, 'edit', true);
+    if (!ticket) return;
+    var values = readEditValues();
+    // 锁住排队期间，不能通过另一颗按钮同时保存/导出/送审。
+    documentInFlight[ticket.doc.id] = true;
+    U.withLoading(el, function () {
+      delete documentInFlight[ticket.doc.id];
+      if (commitDocAction(ticket, function (d) {
+        applyEditValues(d, values);
+        d.history.push({ time: U.now(), person: ticket.actor.name, action: '保存草稿（修订唛头/包装/备注）', opinion: '' });
+        window.AppUI.docEditing = null;
+      })) { U.toast('草稿已保存'); window.App.rerender(); }
     });
-    setTimeout(function () { if (saved) { U.toast('草稿已保存'); window.App.rerender(); } }, 480);
   };
   Actions['doc-submit'] = function (el) {
-    var d = U.doc(el.dataset.id);
-    var doSubmit = function () {
-      if (window.AppUI.docEditing === d.id) collectEditValues(d);
-      d.status = '待审核';
-      d.submittedAt = U.today();
-      d.history.push({ time: U.now(), person: window.App.user.name, action: '提交审核', opinion: '' });
-      M.approvals.unshift({
-        id: 'AP' + U.today().replace(/-/g, '') + String(M.approvals.length + 1),
-        type: '单证审核', targetType: 'doc', targetId: d.id,
-        title: U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version + '（订单 ' + d.orderId + '）审核',
-        applicant: window.App.user.name, applyTime: U.now(), reason: '',
-        status: '待处理', handler: null, handleTime: null, opinion: null
-      });
-      syncOrderDocStatus(d.orderId);
-      window.AppUI.docEditing = null;
-    };
-    U.confirm({
-      title: '提交审核',
-      message: '确认将 <b>' + U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version + '</b> 提交业务主管审核？提交后在审核完成前不可再编辑。',
+    var ticket = captureDocAction(el, 'submit', false);
+    if (!ticket) return;
+    var d = ticket.doc, editing = window.AppUI.docEditing === d.id;
+    var values = editing ? readEditValues() : null;
+    U.confirm({ title: '提交审核',
+      message: '确认将 <b>' + esc(U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version) + '</b> 提交业务主管审核？提交后在审核完成前不可再编辑。',
       okText: '提交审核',
       onOk: function () {
-        doSubmit();
-        U.toast('已提交审核，等待业务主管处理');
-        setTimeout(window.App.rerender, 50);
+        return commitDocAction(ticket, function (doc) {
+          if (values) applyEditValues(doc, values);
+          doc.status = '待审核'; doc.submittedAt = U.today();
+          doc.history.push({ time: U.now(), person: ticket.actor.name, action: '提交审核', opinion: '' });
+          M.approvals.unshift({ id: U.newId('AP'), type: '单证审核', targetType: 'doc', targetId: doc.id,
+            title: U.docTypeName(doc.type) + ' ' + doc.no + ' V' + doc.version + '（订单 ' + doc.orderId + '）审核',
+            applicant: ticket.actor.name, applyTime: U.now(), reason: '', status: '待处理', handler: null, handleTime: null, opinion: null });
+          syncOrderDocStatus(doc.orderId); window.AppUI.docEditing = null;
+          U.toast('已提交审核，等待业务主管处理'); window.App.rerender();
+        });
       }
     });
   };
-  /* 已审核单证修改 → 受控修订，生成新版本 */
   Actions['doc-revise'] = function (el) {
-    var d = U.doc(el.dataset.id);
-    if (!d || d.status !== '已通过' || !window.App.user || window.App.user.role !== 'doc') {
-      U.toast('仅单证员可对审核通过的单证发起受控修订', 'warning');
-      return;
-    }
-    var version = nextDocVersion(d), completed = false, actor = window.App.user;
-    U.confirm({
-      title: '受控修订确认',
-      message: '单证 <b>' + d.no + ' V' + d.version + '</b> 已审核通过。<br>确认将<b>生成新版本 V' + version + '</b>（草稿），仅修订唛头、包装与备注，<b>沿用 V' + d.version + ' 交易快照</b>。原版本保留，新版本需重新审核。',
+    var ticket = captureDocAction(el, 'revise', false);
+    if (!ticket) return;
+    var d = ticket.doc, version = nextDocVersion(d);
+    U.confirm({ title: '受控修订确认',
+      message: '单证 <b>' + esc(d.no + ' V' + d.version) + '</b> 已审核通过。<br>确认将<b>生成新版本 V' + version + '</b>（草稿），仅修订唛头、包装与备注，<b>沿用 V' + d.version + ' 交易快照</b>。原版本保留，新版本需重新审核。',
       okText: '生成 V' + version,
       onOk: function () {
-        if (completed || d.status !== '已通过' || window.App.user !== actor || actor.role !== 'doc') return false;
-        if (nextDocVersion(d) !== version) {
-          U.toast('单证版本已变化，请关闭后重新发起修订', 'warning');
-          return false;
-        }
-        var nd = JSON.parse(JSON.stringify(d));
-        nd.id = 'D-' + d.no + '-V' + version;
-        nd.version = version;
-        nd.status = '草稿';
-        nd.createdAt = U.today(); nd.updatedAt = U.today();
-        nd.submittedAt = null; nd.approver = null; nd.approvedAt = null; nd.opinion = null;
-        nd.history = [{ time: U.now(), person: window.App.user.name, action: '创建单证 V' + nd.version + '（受控修订，基于 V' + d.version + '）', opinion: '' }];
-        nd.remark = (nd.remark ? nd.remark + '；' : '') + 'V' + nd.version + '：受控修订';
-        U.inheritDocumentSnapshot(nd, d);
-        M.documents.push(nd);
-        completed = true;
-        syncOrderDocStatus(d.orderId);
-        U.toast('已生成新版本 ' + d.no + ' V' + nd.version + '（草稿）');
-        location.hash = '#/documents/' + nd.id;
+        return commitDocAction(ticket, function (doc) {
+          var nd = JSON.parse(JSON.stringify(doc));
+          nd.id = 'D-' + doc.no + '-V' + version; nd.version = version; nd.status = '草稿';
+          nd.createdAt = U.today(); nd.updatedAt = U.today();
+          nd.submittedAt = null; nd.approver = null; nd.approvedAt = null; nd.opinion = null;
+          nd.history = [{ time: U.now(), person: ticket.actor.name, action: '创建单证 V' + version + '（受控修订，基于 V' + doc.version + '）', opinion: '' }];
+          nd.remark = (nd.remark ? nd.remark + '；' : '') + 'V' + version + '：受控修订';
+          U.inheritDocumentSnapshot(nd, doc); M.documents.push(nd); syncOrderDocStatus(doc.orderId);
+          U.toast('已生成新版本 ' + doc.no + ' V' + version + '（草稿）'); location.hash = '#/documents/' + nd.id;
+        });
       }
     });
   };
-  /* 退回后申请重新制单 */
   Actions['doc-reform'] = function (el) {
-    var d = U.doc(el.dataset.id);
-    U.confirm({
-      title: '申请重新制单',
-      message: '将针对 <b>' + d.no + ' V' + d.version + '</b> 提交「重新制单申请」，由业务主管审批后生成新版本。退回意见：' + esc(d.opinion || ''),
+    var ticket = captureDocAction(el, 'reform', false);
+    if (!ticket) return;
+    var d = ticket.doc;
+    U.confirm({ title: '申请重新制单',
+      message: '将针对 <b>' + esc(d.no + ' V' + d.version) + '</b> 提交「重新制单申请」，由业务主管审批后按当前交易生成新版本。退回意见：' + esc(d.opinion || ''),
       okText: '提交申请',
       onOk: function () {
-        M.approvals.unshift({
-          id: 'AP' + U.today().replace(/-/g, '') + String(M.approvals.length + 1),
-          type: '重新制单申请', targetType: 'doc', targetId: d.id,
-          title: U.docTypeName(d.type) + ' ' + d.no + ' 申请重新制单',
-          applicant: window.App.user.name, applyTime: U.now(),
-          reason: '因审核退回申请重新制单：' + (d.opinion || ''),
-          status: '待处理', handler: null, handleTime: null, opinion: null
+        return commitDocAction(ticket, function (doc) {
+          M.approvals.unshift({ id: U.newId('AP'), type: '重新制单申请', targetType: 'doc', targetId: doc.id,
+            title: U.docTypeName(doc.type) + ' ' + doc.no + ' 申请重新制单', applicant: ticket.actor.name,
+            applyTime: U.now(), reason: '因审核退回申请重新制单：' + (doc.opinion || ''), status: '待处理', handler: null, handleTime: null, opinion: null });
+          U.toast('重新制单申请已提交'); window.App.rerender();
         });
-        U.toast('重新制单申请已提交');
       }
     });
   };
-  /* 主管审核：通过 / 退回 */
   function doAudit(el, pass) {
-    var d = U.doc(el.dataset.id);
-    var opinionEl = document.getElementById('audit-opinion');
+    var ticket = captureDocAction(el, 'audit', false);
+    if (!ticket) return;
+    var d = ticket.doc, opinionEl = document.getElementById('audit-opinion');
     var opinion = opinionEl ? opinionEl.value.trim() : '';
     if (!pass && !opinion) {
-      if (opinionEl) { opinionEl.classList.add('is-error'); opinionEl.focus(); }
-      U.toast('退回修改必须填写具体审核意见', 'error');
-      return;
+      if (opinionEl) { U.fieldError(opinionEl, '退回时必须填写具体审核意见'); opinionEl.focus(); }
+      U.toast('退回修改必须填写具体审核意见', 'error'); return;
     }
-    U.confirm({
-      title: pass ? '审核通过确认' : '退回修改确认',
-      danger: !pass,
-      message: pass
-        ? '确认通过 <b>' + U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version + '</b>？通过后该版本可导出，后续修改须走受控修订。'
-        : '确认退回 <b>' + U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version + '</b>？退回后制单人需按意见修订并重新送审。<br><br>意见：' + esc(opinion),
+    U.confirm({ title: pass ? '审核通过确认' : '退回修改确认', danger: !pass,
+      message: pass ? '确认通过 <b>' + esc(U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version) + '</b>？通过后仅最新版本具有导出演示资格，后续修改须走受控修订。'
+        : '确认退回 <b>' + esc(U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version) + '</b>？退回后制单人需按意见修订并重新送审。<br><br>意见：' + esc(opinion),
       okText: pass ? '审核通过' : '退回修改',
       onOk: function () {
-        d.status = pass ? '已通过' : '已退回';
-        d.approver = window.App.user.name;
-        d.approvedAt = U.today();
-        d.opinion = opinion || (pass ? '同意' : null);
-        d.history.push({ time: U.now(), person: window.App.user.name, action: pass ? '审核通过' : '退回修改', opinion: opinion || (pass ? '同意' : '') });
-        var ap = M.approvals.find(function (a) { return a.targetType === 'doc' && a.targetId === d.id && a.status === '待处理'; });
-        if (ap) {
-          ap.status = pass ? '已通过' : '已退回';
-          ap.handler = window.App.user.name; ap.handleTime = U.now(); ap.opinion = opinion || (pass ? '同意' : '');
-        }
-        syncOrderDocStatus(d.orderId);
-        var order = U.order(d.orderId);
-        if (order) {
-          M.orderLogs[order.id] = (M.orderLogs[order.id] || []).concat([{ time: U.now(), person: window.App.user.name, content: (pass ? '单证 ' + d.no + ' V' + d.version + ' 审核通过' : '单证 ' + d.no + ' V' + d.version + ' 退回修改') + (opinion ? '：' + opinion : '') }]);
-        }
-        U.toast(pass ? '审核已通过，该单证现在可以导出' : '已退回制单人修改');
-        setTimeout(window.App.rerender, 50);
+        return commitDocAction(ticket, function (doc) {
+          doc.status = pass ? '已通过' : '已退回'; doc.approver = ticket.actor.name; doc.approvedAt = U.today();
+          doc.opinion = opinion || (pass ? '同意' : null);
+          doc.history.push({ time: U.now(), person: ticket.actor.name, action: pass ? '审核通过' : '退回修改', opinion: opinion || (pass ? '同意' : '') });
+          M.approvals.filter(function (a) { return a.type === '单证审核' && a.targetType === 'doc' && a.targetId === doc.id && a.status === '待处理'; }).forEach(function (ap) {
+            ap.status = doc.status; ap.handler = ticket.actor.name; ap.handleTime = U.now(); ap.opinion = doc.opinion || '';
+          });
+          syncOrderDocStatus(doc.orderId);
+          M.orderLogs[doc.orderId] = (M.orderLogs[doc.orderId] || []).concat([{ time: U.now(), person: ticket.actor.name,
+            content: '单证 ' + doc.no + ' V' + doc.version + (pass ? ' 审核通过' : ' 退回修改') + (opinion ? '：' + opinion : '') }]);
+          U.toast(pass ? '审核已通过，最新版本具有导出演示资格' : '已退回制单人修改'); window.App.rerender();
+        });
       }
     });
   }
   Actions['doc-approve'] = function (el) { doAudit(el, true); };
   Actions['doc-reject'] = function (el) { doAudit(el, false); };
   Actions['doc-export'] = function (el) {
-    var d = U.doc(el.dataset.id);
-    if (d.status !== '已通过') {
-      U.toast('导出失败：仅「审核通过」状态的单证可导出', 'error');
-      return;
-    }
+    var ticket = captureDocAction(el, 'export', false);
+    if (!ticket) return;
+    documentInFlight[ticket.doc.id] = true;
     U.withLoading(el, function () {
-      d.history.push({ time: U.now(), person: window.App.user.name, action: '导出 PDF（演示）', opinion: '' });
-    }, 700);
-    setTimeout(function () { U.toast(d.no + ' V' + d.version + ' 已导出 PDF（演示环境，未生成真实文件）'); }, 720);
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          delete documentInFlight[ticket.doc.id];
+          var success = commitDocAction(ticket, function (d) {
+            d.history.push({ time: U.now(), person: ticket.actor.name, action: '导出 PDF（演示）', opinion: '' });
+          });
+          if (success) {
+            U.toast(ticket.doc.no + ' V' + ticket.doc.version + ' 导出演示已完成，未生成真实文件');
+            if (location.hash.split('?')[0] === '#/documents/' + ticket.doc.id) window.App.rerender();
+          }
+          resolve();
+        }, 700);
+      });
+    }, 0);
   };
 })();

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T17:47:22Z",
+  "generatedAt": "2026-10-06T18:26:14Z",
   "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
   "extensions": {
     "colorMeta": {
@@ -278,8 +278,8 @@
         "allSent": "两类最新版本均已送审且无退回时，制作与送审完成。",
         "partialSent": "只有一类已送审时为部分进度，紫色虚线标识。",
         "reviewingOrReturned": "待审核时审核warn；含退回时制作warn、送审partial，不画制作/送审完成勾；旁注曾送审及修订后重送。",
-        "allApproved": "两类均通过且订单未取消时审核完成、可导出ready箭头资格；不是已实际导出。",
-        "cancelled": "保留实际审核事实，抑制ready，说明导出资格需重新核对；取消申请的订单分栏/详情均中性暂停。"
+        "allApproved": "两类均通过且订单不处于取消申请中/已取消时，可导出ready箭头资格；审核事实与导出演示完成分开。",
+        "cancelled": "取消申请中/已取消保留审核事实，抑制ready并说明单证操作与导出暂停；订单分栏/详情均中性暂停。"
       },
       "states": {
         "done": "绿色完成勾",
@@ -294,7 +294,7 @@
         "完整订单详情"
       ],
       "accessibilityRequirement": "实际采用role=list/listitem、装饰标记aria-hidden、每节点sr-only文字状态、单一aria-current=step；阶段不进Tab，ready/warn标签正文色；未进行真实读屏测试。",
-      "deferredRisk": "已取消订单深层单证导出动作与资格提示的耦合待后续规则/动作链验证；抑制面板ready不代表全部权限已修复。"
+      "deferredRisk": "第2轮深层取消/导出契约缺口在第3轮当前前端资格/动作中统一并复验；仍不代表服务端授权或生产流程完整。"
     },
     "documentSnapshots": {
       "sourceBlock": "交易数据来源",
@@ -318,7 +318,8 @@
         "groupMarginBottom": "10px",
         "revisionVisibleLabel": "修订包装与备注 · Vn",
         "revisionAccessibleLabel": "修订包装与备注，生成新版本 Vn",
-        "confirmation": "仍说明原版保留、新版重新审核、沿用原交易快照。"
+        "confirmation": "仍说明原版保留、新版重新审核、沿用原交易快照。",
+        "placement": "角色主动作位于版本/订单身份及短来源之后；完整来源/时间参考区后置。"
       },
       "measuredActionsBottom": {
         "viewport": "1280x1000",
@@ -327,7 +328,8 @@
         "docRevision": "829.17px",
         "docExport": "991.34px",
         "disabledExport": "未通过版本禁用导出属于低频参考，在面板下方可滚动访问。"
-      }
+      },
+      "currentWorkspaceRound": 3
     },
     "approvalErrorFeedback": {
       "inline": "完整规则、目标/候选金额、精确差额、不变边界；role=alert。",
@@ -336,6 +338,79 @@
       "measuredToastTop": "922.5px",
       "measuredModalFooterBottom": "879.8px",
       "scope": "本轮1280x1000真实失败交互，无Toast/弹窗footer重叠；不是所有错误组合认证。"
+    },
+    "documentWorkspace": {
+      "round": 3,
+      "directoryScope": "仅本订单；当前文书类型链优先、版本降序，排序不授予资格。",
+      "directoryIdentity": [
+        "真实状态",
+        "编号与Vn",
+        "最新/历史/冲突",
+        "当前查看"
+      ],
+      "directorySemantics": "nav具名本订单单证版本；按钮aria-pressed，当前项aria-current与可见当前查看。",
+      "returnByRole": {
+        "doc": "全部单证台账",
+        "boss": "全部单证台账",
+        "sales": "返回订单",
+        "fin": "返回订单",
+        "admin": "无业务页面/审批权"
+      },
+      "actionOrder": [
+        "当前版本及实时订单状态",
+        "短交易来源",
+        "角色主动作及必要意见",
+        "导出演示/原因",
+        "版本信息",
+        "完整来源及北京时间/原生冻结规则"
+      ],
+      "sourceHint": {
+        "fontSize": "12px",
+        "lineHeight": 1.7,
+        "marginBottom": "14px",
+        "labels": [
+          "样例基线·非历史签发记录",
+          "创建时交易快照"
+        ]
+      },
+      "qualification": "H09取消两态暂停业务/导出演示；H10同订单同类型唯一最新已通过；H11保持既有业务角色，不扩台账权限。",
+      "history": "真实历史状态/审核章/冻结纸张保留；曾通过与当前资格在纸张外分开，历史退回仍是退回。",
+      "conflicts": "同类型不同编号或相同最高版本冲突不猜继承链，保留查看和具体核对原因。",
+      "dirtyInputs": {
+        "protected": [
+          "本订单目录",
+          "页头返回",
+          "右栏订单链接"
+        ],
+        "cancel": "保留审核/包装/唛头/备注、路由与触发焦点。",
+        "discard": "明确确认后才导航，不隐式保存。",
+        "notProtected": [
+          "全局侧栏",
+          "业务路径",
+          "浏览器Back"
+        ]
+      },
+      "feedback": "空退回意见具名内联alert及焦点；导出演示成功才即时刷新同文书timeline，不生成真实文件。",
+      "measuredBottom": {
+        "boss1280": [
+          "727.38px",
+          "773.38px"
+        ],
+        "boss1440": [
+          "573.98px",
+          "619.98px"
+        ],
+        "docRevisionExport1280": [
+          "622.38px",
+          "764.16px"
+        ],
+        "returnedEditSubmit1280": [
+          "622.38px",
+          "668.38px"
+        ]
+      },
+      "evidence": ".impeccable/review/round-03/browser-verification.json",
+      "scope": "HTTP静态Demo；55角色路由/110布局/10实际交互；不代表读屏、缩放、file或生产验证。"
     }
   },
   "components": [
@@ -422,7 +497,7 @@
   ],
   "narrative": {
     "northStar": "A · 订单协同工作区",
-    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。",
+    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。 第3轮单证作业区优先本订单版本链、当前资格与岗位主动作；短来源前置，历史事实和live操作资格分开，局部离开确认保护输入，导出仅为演示。",
     "keyCharacteristics": [
       "默认100px浅紫窄导航保留文字与图标，展开224px，所有角色叶子入口直接可达。",
       "白色平面面板、细边框和适度留白承载高频业务信息。",
@@ -465,6 +540,11 @@
       {
         "name": "文书来源可解释",
         "body": "页面加载样例基线与新创建交易快照明确区分，冻结时间为实际捕获的北京时间，包装备注修订沿用原交易。",
+        "section": "components"
+      },
+      {
+        "name": "历史事实与当前资格分离",
+        "body": "原审核事实/章/快照保留；取消两态暂停单证操作/导出演示，历史只读，唯一最新已通过版本按原角色资格操作。",
         "section": "components"
       }
     ],

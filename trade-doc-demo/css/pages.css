@@ -460,6 +460,13 @@
 .snapshot-rules summary:hover{color:var(--primary-dark);}
 .snapshot-rules .readonly-hint{margin-top:6px;line-height:1.7;}
 .doc-action-panel .ablock{margin-bottom:10px;}
+.doc-operation-context{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;}
+.doc-source-hint{font-size:12px;line-height:1.7;color:var(--text-sub);margin-bottom:14px;}
+.doc-operation-blocked p{font-size:13px;line-height:1.7;margin:0 0 12px;}
+.doc-action-panel .doc-reference .small{line-height:1.7;}
+.doc-current-label{display:block;margin-top:8px;font-size:11px;font-weight:600;color:var(--primary);}
+.doc-list-panel .panel-head{flex-wrap:wrap;gap:6px;}
+.doc-action-panel .form-item label.ab-title{display:block;}
 @media (min-width:1001px) and (max-width:1360px){
   .doc-layout{grid-template-columns:minmax(0,1fr) 210px;}
   .doc-list-panel{grid-column:1/-1;position:static;display:flex;max-height:none;overflow-x:auto;}

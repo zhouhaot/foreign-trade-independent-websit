@@ -29,13 +29,37 @@
     return '';
   }
 
+  function lifecycleApprovalError(a) {
+    if (a.type === '取消申请') {
+      var order = a.targetType === 'order' ? U.order(a.targetId) : null;
+      if (!order) return '关联订单不存在，不能处理取消申请。';
+      if (order.status !== '取消申请中') return '订单当前不是取消申请中，请核对订单状态，不能处理此取消申请。';
+    }
+    if (a.type === '重新制单申请') {
+      var source = a.targetType === 'doc' ? U.doc(a.targetId) : null;
+      if (!source) return '关联单证不存在，不能处理重新制单申请。';
+      var policy = U.documentPolicy(source, window.App.user);
+      if (policy.blockedReason) return policy.blockedReason;
+      if (source.status !== '已退回') return '关联单证已不处于退回状态，请重新核对申请。';
+    }
+    return '';
+  }
+
   // 审批必须针对打开弹窗时展示的申请，不能悄悄批准被改写后的新目标。
   function approvalContext(a) {
-    var fields = ['id', 'type', 'targetType', 'targetId', 'targetAmount', 'currency', 'targetCurrency', 'applicant', 'title', 'reason', 'applyTime'];
+    var fields = ['id', 'type', 'targetType', 'targetId', 'targetAmount', 'currency', 'targetCurrency', 'applicant', 'title', 'reason', 'applyTime', 'priorOrderStatus'];
     var values = fields.map(function (field) { return a[field]; });
     var doc = a.targetType === 'doc' ? U.doc(a.targetId) : null;
     var order = U.order(a.targetType === 'order' ? a.targetId : doc && doc.orderId);
-    values.push(order && order.currency);
+    values.push(order, order && order.currency, order && order.status, doc, doc && doc.status, doc && doc.version);
+    if (doc) {
+      var policy = U.documentPolicy(doc, window.App.user);
+      values.push(policy.latest, policy.blockedReason);
+      // 重新制单复制包装并捕获当前交易；弹窗之后变化的内容必须重新核对。
+      values.push(JSON.stringify(doc), JSON.stringify(order), JSON.stringify(M.seller),
+        JSON.stringify(order && U.customer(order.customerId)),
+        JSON.stringify(order && order.items.map(function (item) { return U.product(item.productId); })));
+    }
     return values;
   }
 
@@ -290,6 +314,7 @@
   Actions['ap-handle'] = function (el) {
     var a = M.approvals.find(function (x) { return x.id === el.dataset.id; });
     var permissionError = approvalPermissionError(a);
+    if (!permissionError) permissionError = lifecycleApprovalError(a);
     if (permissionError) { U.toast(permissionError, 'error'); return; }
     if (processingApprovals[a.id]) { U.toast('该申请正在处理中，请勿重复提交。', 'error'); return; }
     var actor = { id: window.App.user.id, name: window.App.user.name };
@@ -299,7 +324,7 @@
       ? '关联订单：<a href="#/orders/' + a.targetId + '">' + a.targetId + '</a>'
       : '关联单证：' + a.targetId;
     var dangerNote = a.type === '取消申请'
-      ? '<div class="danger-box mt8">通过取消申请后，订单将标记为「已取消」，已收款需另行协商退还，关联单证作废。</div>'
+      ? '<div class="danger-box mt8">通过后订单标记为「已取消」，单证业务操作与导出暂停；原版本、审核结果及交易快照保留。已收款需另行协商退还，本操作不会登记退款。</div>'
       : a.type === '改价申请'
       ? '<div class="warn-box mt8">数量保持不变，单价保留两位小数并按目标等比调整。候选明细合计必须等于目标且不低于已收款，校验通过后才批准并写入日志。</div>'
       : '<div class="warn-box mt8">通过后采用当前订单、客户、商品与卖方交易信息生成新版本草稿；原版本内容保留，由制单人核对包装及退回意见后继续修订。</div>';
@@ -338,8 +363,9 @@
         U.withLoading(btn, function () {
           var error = approvalPermissionError(a, actor);
           if (!error && (M.approvals.find(function (current) { return current.id === approvalId; }) !== a || approvalContextChanged(a, openedContext))) {
-            error = '申请金额、关联对象、币种或申请内容已变化，请关闭弹窗并重新打开，核对最新内容后再处理。';
+            error = '申请金额、关联对象、订单状态、版本、币种或申请内容已变化，请关闭弹窗并重新打开，核对最新内容后再处理。';
           }
+          if (!error) error = lifecycleApprovalError(a);
           var plan = !error && pass && a.type === '改价申请' ? prepareRepricing(a) : null;
           if (plan && plan.error) error = plan.error;
           var document = null;
@@ -384,10 +410,11 @@
     if (a.type === '取消申请' && order) {
       if (pass) {
         order.status = '已取消';
-        pushLog(order.id, '取消申请 ' + a.id + ' 审核通过，订单已取消；已收款 ' + U.fmt(U.orderReceived(order.id)) + ' ' + order.currency + ' 待与客户协商退还');
+        pushLog(order.id, '取消申请 ' + a.id + ' 审核通过，订单已取消；单证操作与导出暂停，历史版本保留；已收款 ' + U.fmt(U.orderReceived(order.id)) + ' ' + order.currency + ' 待与客户协商退还（未登记退款）');
       } else if (order.status === '取消申请中') {
-        order.status = '执行中';
-        pushLog(order.id, '取消申请 ' + a.id + ' 被退回，订单恢复执行：' + (a.opinion || ''));
+        var recorded = ['待执行', '执行中'].indexOf(a.priorOrderStatus) >= 0;
+        order.status = recorded ? a.priorOrderStatus : '执行中';
+        pushLog(order.id, '取消申请 ' + a.id + ' 被退回，订单恢复「' + order.status + '」' + (recorded ? '' : '（旧样例未记录取消前状态，按原型默认恢复执行中）') + '：' + (a.opinion || ''));
       }
     }
     if (a.type === '重新制单申请' && pass) {

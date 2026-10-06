@@ -85,6 +85,41 @@
   // 现有演示历史版本没有当时交易数据：加载时只冻结当前样例基线，不声称恢复历史。
   M.documents.forEach(function (doc) { U.captureDocumentSnapshot(doc, 'demo-baseline'); });
 
+  /* 单证动作资格必须读 live 订单；历史 snapshot.order 不代表当前是否可作业。 */
+  U.documentPolicy = function (doc, user) {
+    var order = doc ? U.order(doc.orderId) : null;
+    var group = doc ? M.documents.filter(function (d) { return d.orderId === doc.orderId && d.type === doc.type; }) : [];
+    var max = group.reduce(function (n, d) { return Math.max(n, d.version); }, 0);
+    var highest = group.filter(function (d) { return d.version === max; });
+    var versionConflict = highest.length > 1 || group.some(function (d) { return !Number.isInteger(d.version) || d.version < 1 || (doc && d.no !== doc.no); });
+    var latest = !versionConflict && highest.length === 1 ? highest[0] : null;
+    var isLatest = !!doc && latest === doc;
+    var orderBlocked = !!order && ['取消申请中', '已取消'].indexOf(order.status) >= 0;
+    var blockedReason = !doc || U.doc(doc.id) !== doc ? '单证不存在或对象已变化，请刷新后重新操作。'
+      : !order ? '关联订单不存在，单证仅可查阅历史内容。'
+      : orderBlocked ? '订单' + order.status + '，单证业务操作与导出演示暂停；历史审核事实保留。'
+      : versionConflict ? '同订单及单证类型存在多编号或最高版本重复冲突，请先核对版本，不能继续操作。'
+      : !isLatest ? '当前为历史旧版，仅可查阅；请前往最新版本 V' + latest.version + ' 操作。' : '';
+    var reasons = {};
+    ['edit', 'submit', 'revise', 'reform', 'audit', 'export'].forEach(function (action) {
+      var error = blockedReason;
+      if (!error && (!user || !user.id || !user.name)) error = '请先登录有效的演示身份。';
+      if (!error && action === 'export' && ['sales', 'doc', 'fin', 'boss'].indexOf(user.role) < 0) error = '当前角色无单证导出演示权限。';
+      if (!error && action !== 'export' && user.role !== (action === 'audit' ? 'boss' : 'doc')) error = action === 'audit' ? '仅业务主管可审核单证。' : '仅单证员可执行该制单操作。';
+      if (!error && ['edit', 'submit'].indexOf(action) >= 0 && ['草稿', '制作中', '已退回'].indexOf(doc.status) < 0) error = '当前单证为' + doc.status + '，仅草稿、制作中或已退回版本可编辑或送审。';
+      if (!error && ['revise', 'export'].indexOf(action) >= 0 && doc.status !== '已通过') error = '当前单证为' + doc.status + '，仅最新审核通过版本可修订或导出演示。';
+      if (!error && action === 'reform' && doc.status !== '已退回') error = '仅已退回的最新单证可申请重新制单。';
+      if (!error && action === 'reform' && M.approvals.some(function (a) { return a.type === '重新制单申请' && a.targetId === doc.id && a.status === '待处理'; })) error = '该单证已有待处理的重新制单申请，请勿重复提交。';
+      if (!error && action === 'audit' && doc.status !== '待审核') error = '当前单证为' + doc.status + '，仅最新待审核版本可审核。';
+      if (!error && action === 'audit' && doc.maker === user.name) error = '不能自制自审，请由其他业务主管审核。';
+      reasons[action] = error;
+    });
+    return { order: order, latest: latest, isLatest: isLatest, orderBlocked: orderBlocked,
+      versionConflict: versionConflict, blockedReason: blockedReason, reasons: reasons,
+      canEdit: !reasons.edit, canSubmit: !reasons.submit, canRevise: !reasons.revise,
+      canReform: !reasons.reform, canAudit: !reasons.audit, canExport: !reasons.export };
+  };
+
   /* ---------- 金额勾稽 ---------- */
   U.orderTotal = function (order) {
     return order.items.reduce(function (s, it) { return s + it.qty * it.price; }, 0);

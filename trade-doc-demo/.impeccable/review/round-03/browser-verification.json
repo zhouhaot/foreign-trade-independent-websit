@@ -1,0 +1,1471 @@
+{
+  "round": 3,
+  "interactions": [
+    {
+      "case": "dirty approval opinion: ledger link and version switch require confirmation; cancel retains value/hash and restores opener focus",
+      "result": "PASS"
+    },
+    {
+      "case": "latest CI approval makes export eligibility enabled; actual export completion checked separately",
+      "result": "PASS"
+    },
+    {
+      "case": "create V2; V1 retains approval/paper and becomes history-only with latest-version link; export/revision blocked",
+      "result": "PASS"
+    },
+    {
+      "case": "dirty packaging version switch: cancel preserves input; explicit discard navigates only after confirm",
+      "result": "PASS"
+    },
+    {
+      "case": "latest approved CI export demo completes; visible timeline updates once and feedback says no real file",
+      "result": "PASS"
+    },
+    {
+      "case": "sales cancellation request pauses doc export; approval/transaction paper remains visible",
+      "result": "PASS"
+    },
+    {
+      "case": "boss approves cancellation; exact original paper unchanged; approved fact retained; export disabled",
+      "result": "PASS",
+      "order": "SO2026002",
+      "paperEqual": true
+    },
+    {
+      "case": "real latest CI: boss rejects → doc edits allowed marks/saves/resubmits → boss approves → export demo completes; amount stays 24100 USD",
+      "result": "PASS",
+      "history": "2026-10-07 02:18\n周建国\n退回修改\n第三轮流程验收：请核对并修订唛头\n2026-10-07 02:18\n王芳\n保存草稿（修订唛头/包装/备注）\n2026-10-07 02:18\n王芳\n提交审核\n2026-10-07 02:18\n周建国\n审核通过\n已核对修订唛头，通过\n2026-10-07 02:18\n周建国\n导出 PDF（演示）\n2026-09-15 09:40\n王芳\n提交审核\n发票与装箱单已按信用证条款核对\n2026-09-10 10:22\n王芳\n创建单证 V1"
+    },
+    {
+      "case": "business user Enter reaches latest V2; finance native snapshot summary Space toggles and return link stays accessible orders",
+      "result": "PASS"
+    },
+    {
+      "case": "empty reject opinion gives labelled inline alert and focus; no audit performed",
+      "result": "PASS"
+    }
+  ],
+  "failures": [],
+  "layout": [
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "forbidden": true,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders/SO2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": 760,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "forbidden": false,
+      "overflow": false,
+      "paperWidth": null,
+      "result": "PASS"
+    }
+  ],
+  "scope": "HTTP static demo; UI actions through CUA only",
+  "images": [
+    {
+      "file": "document-boss-1440.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 573.984375,
+            "enabled": true,
+            "text": "审核通过",
+            "top": 535.984375
+          },
+          {
+            "bottom": 619.984375,
+            "enabled": true,
+            "text": "退回修改",
+            "top": 581.984375
+          },
+          {
+            "bottom": 720.984375,
+            "enabled": false,
+            "text": "导出 PDF（演示）",
+            "top": 682.984375
+          }
+        ],
+        "hash": "#/documents/D-CI2026001-V1",
+        "height": 1000,
+        "returnLink": "全部单证台账",
+        "scrollY": 0,
+        "source": "交易来源：样例基线·非历史签发记录",
+        "width": 1440
+      }
+    },
+    {
+      "file": "document-boss-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 727.375,
+            "enabled": true,
+            "text": "审核通过",
+            "top": 689.375
+          },
+          {
+            "bottom": 773.375,
+            "enabled": true,
+            "text": "退回修改",
+            "top": 735.375
+          },
+          {
+            "bottom": 874.375,
+            "enabled": false,
+            "text": "导出 PDF（演示）",
+            "top": 836.375
+          }
+        ],
+        "hash": "#/documents/D-CI2026001-V1",
+        "height": 1000,
+        "returnLink": "全部单证台账",
+        "scrollY": 0,
+        "source": "交易来源：样例基线·非历史签发记录",
+        "width": 1280
+      }
+    },
+    {
+      "file": "document-doc-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 622.375,
+            "enabled": true,
+            "text": "修订包装与备注 · V2",
+            "top": 584.375
+          },
+          {
+            "bottom": 764.15625,
+            "enabled": true,
+            "text": "导出 PDF（演示）",
+            "top": 726.15625
+          }
+        ],
+        "hash": "#/documents/D-CI2026002-V1",
+        "height": 1000,
+        "returnLink": "全部单证台账",
+        "scrollY": 0,
+        "source": "交易来源：样例基线·非历史签发记录",
+        "width": 1280
+      }
+    },
+    {
+      "file": "document-returned-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 622.375,
+            "enabled": true,
+            "text": "编辑包装与备注",
+            "top": 584.375
+          },
+          {
+            "bottom": 668.375,
+            "enabled": true,
+            "text": "提交审核",
+            "top": 630.375
+          },
+          {
+            "bottom": 838.546875,
+            "enabled": false,
+            "text": "申请重新制单",
+            "top": 800.546875
+          },
+          {
+            "bottom": 980.328125,
+            "enabled": false,
+            "text": "导出 PDF（演示）",
+            "top": 942.328125
+          }
+        ],
+        "hash": "#/documents/D-PL2026004-V1",
+        "height": 1000,
+        "returnLink": "全部单证台账",
+        "scrollY": 0,
+        "source": "交易来源：样例基线·非历史签发记录",
+        "width": 1280
+      }
+    },
+    {
+      "file": "document-sales-history-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 678.5625,
+            "enabled": true,
+            "text": "查看最新 V2",
+            "top": 640.5625
+          },
+          {
+            "bottom": 820.34375,
+            "enabled": false,
+            "text": "导出 PDF（演示）",
+            "top": 782.34375
+          }
+        ],
+        "hash": "#/documents/D-CI2026003-V1",
+        "height": 1000,
+        "returnLink": "返回订单",
+        "scrollY": 0,
+        "source": "交易来源：样例基线·非历史签发记录",
+        "width": 1280
+      }
+    },
+    {
+      "file": "document-fin-1440.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 544.375,
+            "enabled": true,
+            "text": "导出 PDF（演示）",
+            "top": 506.375
+          }
+        ],
+        "hash": "#/documents/D-CI2026002-V1",
+        "height": 1000,
+        "returnLink": "返回订单",
+        "scrollY": 0,
+        "source": "交易来源：样例基线·非历史签发记录",
+        "width": 1440
+      }
+    },
+    {
+      "file": "document-cancelled-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 796.4375,
+            "enabled": false,
+            "text": "导出 PDF（演示）",
+            "top": 758.4375
+          }
+        ],
+        "hash": "#/documents/D-CI2026002-V1",
+        "height": 1000,
+        "returnLink": "全部单证台账",
+        "scrollY": 0,
+        "source": "交易来源：样例基线·非历史签发记录",
+        "width": 1280
+      }
+    }
+  ],
+  "console": [],
+  "routeCombinations": 55,
+  "layoutChecks": 110,
+  "fileProtocol": {
+    "result": "NOT_RUN",
+    "reason": "controlled browser permits HTTP/HTTPS only; no policy bypass"
+  },
+  "testCorrections": [
+    "Export click/eligibility does not prove completion: awaited completion feedback and visible timeline; initial immediate role change was correctly refused.",
+    "The initial export timeline check exposed stale rendered history; same-document completion refresh was implemented and actual UI retested.",
+    "Initial cancellation row text selector assumed spaces between cells; used observed DOM row text before scoped retry."
+  ],
+  "notRun": [
+    "real backend/NAS",
+    "cross browser",
+    "real screen reader",
+    "printing/real PDF",
+    "Ego browser script",
+    "global sidebar/browser-back draft preservation"
+  ]
+}

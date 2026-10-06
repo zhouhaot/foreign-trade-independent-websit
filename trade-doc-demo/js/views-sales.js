@@ -561,7 +561,7 @@
     var reviewing = docs.filter(function (d) { return d.status === '待审核'; }).length;
     var drafting = docs.some(function (d) { return ['草稿', '制作中', '已退回'].indexOf(d.status) >= 0; });
     var allSent = sent === types.length, allApproved = approved === types.length;
-    var exportReady = allApproved && o.status !== '已取消';
+    var exportReady = allApproved && docs.every(function (d) { return U.documentPolicy(d, window.App.user).canExport; });
     var stages = [
       { label: '制作', state: returned ? 'warn' : allSent ? 'done' : sent ? 'partial' : drafting ? 'current' : '' },
       { label: '送审', state: returned ? 'partial' : allSent ? 'done' : sent ? 'partial' : '' },
@@ -570,7 +570,7 @@
     ];
     var note = docs.length ? '最新单证 ' + docs.length + ' 份 · ' + (returned ? '曾送审 ' : '已送审 ') + sent + '/' + types.length + ' 类' +
       (returned ? ' · 含退回 ' + returned + ' 份，修订后重新送审' : reviewing ? ' · 待审核 ' + reviewing + ' 份' : allApproved ? ' · 已满足审核条件' : '') : '尚未制作单证';
-    if (o.status === '已取消') note += ' · 订单已取消，导出资格需重新核对';
+    if (o.status === '已取消' || o.status === '取消申请中') note += ' · 订单' + o.status + '，单证操作与导出暂停';
     var active = returned ? 0 : reviewing ? 2 : drafting ? 0 : exportReady ? 3 : -1;
     return '<div class="steps document-stages" role="list" aria-label="单证阶段">' + stages.map(function (stage, i) {
       var marker = stage.state === 'done' ? '✓' : stage.state === 'ready' ? U.icon('arrow') : stage.state === 'warn' && returned ? '!' : i + 1;
@@ -671,6 +671,12 @@
   /* 申请变更（改价 / 取消） */
   Actions['order-apply-change'] = function (el) {
     var o = U.order(el.dataset.id);
+    var actor = window.App.user;
+    if (!o || !actor || actor.role !== 'sales' || ['待执行', '执行中'].indexOf(o.status) < 0) {
+      U.toast('仅业务员可对待执行或执行中的订单申请变更', 'warning');
+      return;
+    }
+    var openedStatus = o.status, openedCurrency = o.currency, submitted = false;
     var fin = U.orderFin(o);
     var body =
       '<form id="oc-form">' +
@@ -691,7 +697,7 @@
       var isCancel = typeSel.value === '取消申请';
       overlay.querySelector('#oc-amount-wrap').style.display = isCancel ? 'none' : '';
       overlay.querySelector('#oc-danger').innerHTML = isCancel
-        ? '<div class="danger-box mt8">取消订单影响重大：已收款 ' + U.fmt(fin.received) + ' ' + o.currency + ' 需与客户协商退还方式，关联单证将同步作废。申请提交后需业务主管审批方可生效。</div>'
+        ? '<div class="danger-box mt8">提交后订单暂缓执行，单证操作与导出暂停；主管通过后订单取消。历史版本与审核记录保留。已收款 ' + U.fmt(fin.received) + ' ' + o.currency + ' 需另行协商退还，本操作不登记退款。</div>'
         : '';
       var okBtn = overlay.querySelector('[data-ok]');
       okBtn.className = 'btn ' + (isCancel ? 'btn-danger' : 'btn-primary');
@@ -706,26 +712,40 @@
       var rules = [{ el: form.querySelector('#oc-reason'), label: '申请原因', required: true }];
       if (!isCancel) rules.push({ el: form.querySelector('#oc-amount'), label: '变更后订单金额', required: true, number: true, min: 0.01 });
       if (!U.validate(rules)) return;
+      var requestedType = typeSel.value;
+      var requestedAmount = isCancel ? null : Number(form.querySelector('#oc-amount').value);
+      var requestedReason = form.querySelector('#oc-reason').value.trim();
       U.withLoading(btn, function () {
+        if (submitted) return;
+        if (window.App.user !== actor || actor.role !== 'sales' || U.order(o.id) !== o || o.status !== openedStatus || o.currency !== openedCurrency) {
+          U.toast('账号或订单状态已变化，请关闭弹窗后重新核对申请', 'warning');
+          return;
+        }
+        if (M.approvals.some(function (a) { return a.type === requestedType && a.targetId === o.id && a.status === '待处理'; })) {
+          U.toast('该订单已有待处理' + requestedType + '，请查看已有申请', 'warning');
+          return;
+        }
         var title = isCancel
           ? '订单 ' + o.id + ' 申请取消'
-          : '订单 ' + o.id + ' 申请改价至 ' + U.fmt(Number(form.querySelector('#oc-amount').value)) + ' ' + o.currency;
+          : '订单 ' + o.id + ' 申请改价至 ' + U.fmt(requestedAmount) + ' ' + openedCurrency;
         M.approvals.unshift({
           id: 'AP' + U.today().replace(/-/g, '') + String(M.approvals.length + 1),
           type: isCancel ? '取消申请' : '改价申请', targetType: 'order', targetId: o.id,
           title: title, applicant: window.App.user.name, applyTime: U.now(),
-          reason: form.querySelector('#oc-reason').value.trim(),
+          reason: requestedReason,
           status: '待处理', handler: null, handleTime: null, opinion: null,
-          targetAmount: isCancel ? null : Number(form.querySelector('#oc-amount').value)
+          targetAmount: requestedAmount,
+          priorOrderStatus: isCancel ? openedStatus : null
         });
         if (isCancel) o.status = '取消申请中';
         M.orderLogs[o.id] = (M.orderLogs[o.id] || []).concat([{ time: U.now(), person: window.App.user.name, content: '提交' + title }]);
+        submitted = true;
+        setTimeout(function () {
+          U.closeModal();
+          U.toast('变更申请已提交，等待业务主管审批');
+          window.App.rerender();
+        }, 480);
       });
-      setTimeout(function () {
-        U.closeModal();
-        U.toast('变更申请已提交，等待业务主管审批');
-        window.App.rerender();
-      }, 480);
     });
   };
 })();

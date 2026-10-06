@@ -99,10 +99,11 @@ assert.equal(json(approved), originalDoc, 'V1 全对象不被创建 V2 改写');
 const count = M.documents.length;
 c.confirmation.onOk();
 assert.equal(M.documents.length, count, '重复确认不产生新版本');
-// 已经存在 V2 时从 V1 再发起修订分配 V3，避免同一版本 ID。
+// H10：已有 V2 后，V1只读；不能从历史版本继续分叉修订。
+c.confirmation = null;
 Actions['doc-revise']({ dataset: { id: approved.id } });
-c.confirmation.onOk();
-assert.equal(M.documents.at(-1).version, revision.version + 1, '重复修订分配下一可用版本');
+assert.equal(c.confirmation, null, '旧版修订入口拒绝');
+assert.equal(M.documents.length, count, '旧版修订不能新增分叉');
 // 保存新版本的包装/备注不改旧版和核心快照；核心交易不出现编辑 input。
 c.AppUI.docEditing = revision.id;
 c.document.getElementById = id => ({ 'df-marks': { value: 'NEW MARKS' }, 'df-remark': { value: 'NEW REMARK' }, 'df-pk-cartons': { value: '12' } }[id] || null);
@@ -122,6 +123,14 @@ for (const role of Object.keys(M.roles)) {
     assert.equal(json(revision), prior, `${role}: 直接保存拒绝越权`);
   }
 }
+// 只有当前 V2 经审核通过后，合法受控修订才分配 V3；快照仍继承且无共享引用。
+c.App.user = U.roleUser('doc');
+revision.status = '已通过';
+Actions['doc-revise']({ dataset: { id: revision.id } });
+c.confirmation.onOk();
+assert.equal(M.documents.at(-1).version, revision.version + 1, '合法最新链修订分配下一版本');
+assert.equal(json(M.documents.at(-1).snapshot), inherited, '合法V3仍继承核心交易');
+assert.equal(json(approved), originalDoc, 'V3创建仍不改原V1');
 // 新创建单证用当前交易，后续源数据改动仍不能更新它。
 const created = JSON.parse(json(approved));
 created.id = 'D-SNAPSHOT-NEW';

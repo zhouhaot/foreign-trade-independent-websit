@@ -89,7 +89,8 @@ for (const type of ['CI', 'PL']) {
   assert.ok(sample, `存在 ${type} 单证样例`);
   const draft = JSON.parse(JSON.stringify(sample));
   draft.id = `D-VERIFY-${type}`;
-  draft.no = `VERIFY-${type}`;
+  // H10：测试当前文书链的最新版本；制造另一个编号会成为需阻断的版本冲突。
+  draft.version = Math.max(...data.documents.filter(d => d.orderId === sample.orderId && d.type === type).map(d => d.version)) + 1;
   draft.status = '草稿';
   data.documents.push(draft);
   const button = { dataset: { id: draft.id } };
