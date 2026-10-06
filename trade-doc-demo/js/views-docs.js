@@ -181,6 +181,10 @@
         (policy.latest && !policy.isLatest ? '<button class="btn btn-primary" data-action="doc-goto" data-id="' + policy.latest.id + '">查看最新 V' + policy.latest.version + '</button>' : '') +
         '<div class="readonly-hint">历史版本、审核结果和交易快照仍保留。</div></div>';
     } else if (role === 'doc') {
+      if (d.type === 'PL') {
+        var packaging = U.packagingCandidate(d.packing, { requireComplete: true });
+        html += '<div class="packing-readiness small">' + (packaging.ok ? '已保存包装字段已齐；' + (editing ? '当前编辑仍需核对。' : '仍需核对实际货物和测量记录。') : '已保存包装待核对：' + esc(packaging.errors.map(function (item) { return { cartons: '箱数', package: '包装方式', gw: '毛重', nw: '净重', meas: '体积' }[item.field] || '包装'; }).filter(function (label, i, list) { return list.indexOf(label) === i; }).join('、')) + (d.status === '已通过' ? '。请通过受控修订生成草稿，再核对实际货物。' : '。请先编辑包装；草稿可待补，送审须完整。')) + '</div>';
+      }
       if (d.status === '已通过') {
         html += '<div class="ablock"><div class="ab-title">受控修订</div>' +
           '<button class="btn" data-action="doc-revise" data-id="' + d.id + '" aria-label="修订包装与备注，生成新版本 V' + nextDocVersion(d) + '">修订包装与备注 · V' + nextDocVersion(d) + '</button>' +
@@ -218,6 +222,7 @@
     } else {
       html += '<div class="ablock"><div class="ab-title">操作</div><div class="readonly-hint">当前角色对单证为只读查看。</div></div>';
     }
+    if (d.type === 'PL' && role === 'doc') html += '<div id="doc-packing-feedback" class="field-error packing-feedback" role="alert" tabindex="-1"></div>';
 
     /* 审核历史与实时订单/版本资格分开判断；导出仍为内存演示。 */
     var canExport = policy.canExport;
@@ -240,10 +245,10 @@
         '<td class="r">' + U.fmt(it.qty * it.price) + '</td></tr>';
     }).join('');
     var marksHtml = editing
-      ? '<textarea class="edit-area" id="df-marks">' + esc(d.marks) + '</textarea>'
+      ? '<textarea class="edit-area" id="df-marks" aria-label="唛头">' + esc(d.marks) + '</textarea>'
       : esc(d.marks);
     var remarkHtml = editing
-      ? '<textarea class="edit-area" id="df-remark">' + esc(d.remark) + '</textarea>'
+      ? '<textarea class="edit-area" id="df-remark" aria-label="备注">' + esc(d.remark) + '</textarea>'
       : esc(d.remark || '—');
     return '<div class="paper">' +
       '<div class="p-title">商 业 发 票</div><div class="p-title-en">COMMERCIAL INVOICE</div>' +
@@ -280,15 +285,19 @@
         '<td>' + esc(p.nameEn) + '<br><span style="color:#5a6378">' + esc(p.nameCn) + ' · ' + esc(p.spec) + '</span></td>' +
         '<td class="c">' + it.qty + ' ' + esc(p.unit) + '</td></tr>';
     }).join('');
-    var pk = d.packing;
+    var pk = d.packing || {};
     function pf(key, val) {
-      return editing ? '<input class="edit-field" id="df-pk-' + key + '" value="' + esc(val) + '">' : esc(val);
+      var labels = { cartons: '包装件数', package: '包装方式', gw: '毛重', nw: '净重', meas: '体积' };
+      var hints = { cartons: '普通正整数，如 140', package: '包装方式，如纸箱', gw: 'KG/KGS，最多 3 位小数，如 1,680 KGS', nw: 'KG/KGS，最多 3 位小数，不能大于毛重', meas: 'CBM，最多 3 位小数，如 8.6 CBM' };
+      return editing ? '<div class="form-item packing-field"><label class="sr-only" for="df-pk-' + key + '">' + labels[key] + '</label>' +
+        '<input class="edit-field" type="text" id="df-pk-' + key + '"' + (key === 'cartons' ? ' inputmode="numeric"' : '') + ' aria-describedby="df-pk-' + key + '-hint df-pk-' + key + '-error" value="' + esc(val) + '">' +
+        '<span class="packing-hint" id="df-pk-' + key + '-hint">' + hints[key] + '</span><div class="field-error" id="df-pk-' + key + '-error"></div></div>' : val == null || String(val).trim() === '' ? '<span class="packing-pending">待补</span>' : esc(val);
     }
     var marksHtml = editing
-      ? '<textarea class="edit-area" id="df-marks">' + esc(d.marks) + '</textarea>'
+      ? '<textarea class="edit-area" id="df-marks" aria-label="唛头">' + esc(d.marks) + '</textarea>'
       : esc(d.marks);
     var remarkHtml = editing
-      ? '<textarea class="edit-area" id="df-remark">' + esc(d.remark) + '</textarea>'
+      ? '<textarea class="edit-area" id="df-remark" aria-label="备注">' + esc(d.remark) + '</textarea>'
       : esc(d.remark || '—');
     return '<div class="paper">' +
       '<div class="p-title">装 箱 单</div><div class="p-title-en">PACKING LIST</div>' +
@@ -307,7 +316,7 @@
       '<div class="pb-label">唛头 Shipping Marks</div><div class="p-marks">' + marksHtml + '</div>' +
       '<table class="p-items"><thead><tr><th style="width:36px">NO.</th><th>品名描述 DESCRIPTION</th><th style="width:110px">数量 QTY</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table>' +
-      '<table class="p-items"><thead><tr><th>包装件数 PACKAGES</th><th>包装方式 PACKAGE</th><th>毛重 G.W.</th><th>净重 N.W.</th><th>尺码 MEAS.</th></tr></thead>' +
+      '<table class="p-items"><thead><tr><th>包装件数 PACKAGES</th><th>包装方式 PACKAGE</th><th>毛重 G.W. (KG/KGS)</th><th>净重 N.W. (KG/KGS)</th><th>体积 MEAS. (CBM)</th></tr></thead>' +
       '<tbody><tr><td class="c">' + pf('cartons', pk.cartons) + '</td><td class="c">' + pf('package', pk.package) + '</td>' +
       '<td class="c">' + pf('gw', pk.gw) + '</td><td class="c">' + pf('nw', pk.nw) + '</td><td class="c">' + pf('meas', pk.meas) + '</td></tr></tbody></table>' +
       '<div class="pb-label">备注 Remark</div><div class="p-remark">' + remarkHtml + '</div>' +
@@ -330,6 +339,7 @@
     if (!error && requireEditing && window.AppUI.docEditing !== d.id) error = '请先由单证员进入当前版本编辑模式。';
     if (error) { U.toast(error, 'warning'); return null; }
     return { doc: d, action: action, actor: { id: user.id, name: user.name, role: user.role },
+      actorRef: user,
       order: policy.order, orderStatus: policy.order.status, documentState: JSON.stringify(d),
       approvals: docApprovalState(d), requireEditing: requireEditing, completed: false };
   }
@@ -337,10 +347,25 @@
     var d = ticket.doc, user = window.App.user;
     var policy = U.documentPolicy(d, user);
     var error = policy.reasons[ticket.action];
-    if (!error && (!user || user.id !== ticket.actor.id || user.name !== ticket.actor.name || user.role !== ticket.actor.role)) error = '操作者已变化，请重新发起操作。';
+    if (!error && (!user || user !== ticket.actorRef || user.id !== ticket.actor.id || user.name !== ticket.actor.name || user.role !== ticket.actor.role)) error = '操作者已变化，请重新发起操作。';
     if (!error && (policy.order !== ticket.order || policy.order.status !== ticket.orderStatus || JSON.stringify(d) !== ticket.documentState || docApprovalState(d) !== ticket.approvals)) error = '单证、关联订单或审核信息已变化，请刷新核对后重新操作。';
     if (!error && ticket.requireEditing && window.AppUI.docEditing !== d.id) error = '编辑模式已变化，请重新发起保存。';
-    if (error) { U.toast(error, 'warning'); return false; }
+    if (!error && ticket.inputs && (location.hash !== ticket.sourceHash || window.AppUI.docEditing !== ticket.editingId || ticket.inputs.some(function (input) {
+      return document.getElementById(input.id) !== input.node || input.node.isConnected === false || String(input.node.value) !== input.value;
+    }))) error = '当前页面或输入已变化，请核对最新内容后重新保存或送审。';
+    if (error) {
+      var ownsSourceInputs = ticket.inputs && location.hash === ticket.sourceHash && user === ticket.actorRef &&
+        window.AppUI.docEditing === ticket.editingId && document.getElementById('doc-packing-feedback') === ticket.feedbackNode &&
+        ticket.inputs.every(function (input) { return document.getElementById(input.id) === input.node && input.node.isConnected !== false; });
+      if (ownsSourceInputs && d.type === 'PL') {
+        var current = null;
+        if (ticket.editorControls && location.hash === ticket.sourceHash && user === ticket.actorRef && ticket.inputs.every(function (input) { return document.getElementById(input.id) === input.node; })) {
+          current = U.packagingCandidate(Object.assign({}, d.packing, readEditValues(d).packing), { requireComplete: ticket.action === 'submit' });
+        }
+        showPackingErrors({ error: error, contextError: error, errors: current && !current.ok ? current.errors : [] });
+      }
+      U.toast(error, 'warning'); return false;
+    }
     return true;
   }
   function commitDocAction(ticket, effect) {
@@ -350,22 +375,82 @@
     try { effect(ticket.doc); ticket.completed = true; return true; }
     finally { delete documentInFlight[ticket.doc.id]; }
   }
-  function readEditValues() {
+  function bindDocInputs(ticket) {
+    if (typeof location.hash !== 'string' || location.hash.split('?')[0] !== '#/documents/' + encodeURIComponent(ticket.doc.id)) {
+      U.toast('单证来源地址与当前版本不一致，本次未保存或送审；请重新打开该版本核对。', 'warning');
+      return false;
+    }
+    ticket.sourceHash = location.hash; ticket.editingId = window.AppUI.docEditing; ticket.inputs = [];
+    ticket.feedbackNode = document.getElementById('doc-packing-feedback');
+    ticket.editorControls = ticket.requireEditing || ticket.editingId === ticket.doc.id;
+    if (!ticket.editorControls) return true; // 只读送审只取 stored packing，不读取页面上其它控件。
+    var ids = ['df-marks', 'df-remark'];
+    if (ticket.doc.type === 'PL') ['cartons', 'package', 'gw', 'nw', 'meas'].forEach(function (key) { ids.push('df-pk-' + key); });
+    var missing = [];
+    ids.forEach(function (id) {
+      var node = document.getElementById(id);
+      if (!node || node.isConnected === false || typeof node.value !== 'string') missing.push(id);
+      else ticket.inputs.push({ id: id, node: node, value: node.value });
+    });
+    if (missing.length) {
+      var labels = { 'df-marks': '唛头', 'df-remark': '备注', 'df-pk-cartons': '箱数', 'df-pk-package': '包装方式', 'df-pk-gw': '毛重', 'df-pk-nw': '净重', 'df-pk-meas': '体积' };
+      var error = '编辑控件缺失或不可用：' + missing.map(function (id) { return labels[id]; }).join('、') + '。请重新进入本版本编辑后核对，不能使用旧包装值补缺。';
+      if (ticket.doc.type === 'PL') showPackingErrors({ error: error, errors: [] });
+      U.toast(error, 'warning'); return false;
+    }
+    return true;
+  }
+  function readEditValues(d) {
     var values = { packing: {} };
     ['marks', 'remark'].forEach(function (key) {
       var el = document.getElementById('df-' + key);
       if (el) values[key] = el.value.trim();
     });
-    ['cartons', 'package', 'gw', 'nw', 'meas'].forEach(function (key) {
+    if (d.type === 'PL') ['cartons', 'package', 'gw', 'nw', 'meas'].forEach(function (key) {
       var el = document.getElementById('df-pk-' + key);
-      if (el) values.packing[key] = key === 'cartons' ? (Number(el.value) || el.value) : el.value.trim();
+      if (el) values.packing[key] = String(el.value);
     });
     return values;
   }
   function applyEditValues(d, values) {
     ['marks', 'remark'].forEach(function (key) { if (values[key] !== undefined) d[key] = values[key]; });
-    Object.keys(values.packing).forEach(function (key) { d.packing[key] = values.packing[key]; });
+    if (d.type === 'PL') Object.keys(values.packing).forEach(function (key) { d.packing[key] = values.packing[key]; });
     d.updatedAt = U.today();
+  }
+  function showPackingErrors(candidate) {
+    var first = null;
+    var relation = (candidate.errors || []).some(function (item) { return item.field === 'gw' && item.error.indexOf('不能小于') >= 0; }) &&
+      (candidate.errors || []).some(function (item) { return item.field === 'nw' && item.error.indexOf('不能大于') >= 0; });
+    ['cartons', 'package', 'gw', 'nw', 'meas'].forEach(function (key) {
+      var input = document.getElementById('df-pk-' + key), error = document.getElementById('df-pk-' + key + '-error');
+      if (input) { input.classList.remove('is-error'); input.removeAttribute('aria-invalid'); }
+      if (error) error.textContent = '';
+    });
+    (candidate.errors || []).forEach(function (item) {
+      var input = document.getElementById('df-pk-' + item.field);
+      if (input) {
+        U.fieldError(input, relation && (item.field === 'gw' || item.field === 'nw') ? '毛重不能小于净重，请核对两项重量。' : item.error);
+        input.setAttribute('aria-describedby', 'df-pk-' + item.field + '-hint df-pk-' + item.field + '-error');
+        first = first || input;
+      }
+    });
+    var feedback = document.getElementById('doc-packing-feedback');
+    var messages = (candidate.errors || []).map(function (item) {
+      return relation && (item.field === 'gw' || item.field === 'nw') ? '毛重不能小于净重，请核对两项重量。' : item.error;
+    }).filter(function (message, index, list) { return list.indexOf(message) === index; });
+    if (feedback) feedback.textContent = messages.length ? (candidate.contextError ? candidate.contextError + ' ' : '') + messages.join('；') : candidate.error || '';
+    if (first) first.focus(); else if (feedback && candidate.error) feedback.focus();
+  }
+  function packagingValues(d, values, requireComplete) {
+    if (d.type !== 'PL') return { ok: true, values: values, complete: true };
+    var raw = d.packing;
+    if (raw && typeof raw === 'object' && !Array.isArray(raw)) raw = Object.assign({}, raw, values ? values.packing : {});
+    var candidate = U.packagingCandidate(raw, { requireComplete: requireComplete });
+    showPackingErrors(candidate);
+    if (!candidate.ok) { U.toast(requireComplete ? '本次未送审，请查看包装说明。' : '包装未保存，请查看字段和操作区说明。', 'error'); return candidate; }
+    var result = values || { packing: {} };
+    result.packing = candidate.packing;
+    return { ok: true, values: result, complete: candidate.complete };
   }
   Actions['doc-edit'] = function (el) {
     var ticket = captureDocAction(el, 'edit', false);
@@ -384,27 +469,52 @@
   Actions['doc-save-draft'] = function (el) {
     var ticket = captureDocAction(el, 'edit', true);
     if (!ticket) return;
-    var values = readEditValues();
+    if (!bindDocInputs(ticket)) return;
+    var candidate = packagingValues(ticket.doc, readEditValues(ticket.doc), false);
+    if (!candidate.ok) return;
+    var values = candidate.values;
     // 锁住排队期间，不能通过另一颗按钮同时保存/导出/送审。
     documentInFlight[ticket.doc.id] = true;
     U.withLoading(el, function () {
       delete documentInFlight[ticket.doc.id];
+      if (!validateDocAction(ticket)) return;
+      candidate = packagingValues(ticket.doc, readEditValues(ticket.doc), false);
+      if (!candidate.ok) return;
+      values = candidate.values;
       if (commitDocAction(ticket, function (d) {
         applyEditValues(d, values);
         d.history.push({ time: U.now(), person: ticket.actor.name, action: '保存草稿（修订唛头/包装/备注）', opinion: '' });
         window.AppUI.docEditing = null;
-      })) { if (window.App.markDraftClean) window.App.markDraftClean(); U.toast('草稿已保存'); window.App.rerender(); }
+      })) { if (window.App.markDraftClean) window.App.markDraftClean(); U.toast(candidate.complete ? '草稿已保存' : '草稿已保存，包装资料待补齐，完整后才能送审'); window.App.rerender(); }
     });
   };
   Actions['doc-submit'] = function (el) {
     var ticket = captureDocAction(el, 'submit', false);
     if (!ticket) return;
     var d = ticket.doc, editing = window.AppUI.docEditing === d.id;
-    var values = editing ? readEditValues() : null;
+    if (!bindDocInputs(ticket)) return;
+    var candidate = packagingValues(d, editing ? readEditValues(d) : null, true);
+    if (!candidate.ok) return;
+    var values = candidate.values;
+    var packingReview = '';
+    if (d.type === 'PL') {
+      var packingLabels = { cartons: '包装件数', package: '包装方式', gw: '毛重（KG/KGS）', nw: '净重（KG/KGS）', meas: '体积（CBM）' };
+      packingReview = '<div class="packing-confirmation small"><p><b>本次送审包装候选</b> · ' + (editing ? '正在编辑的输入' : '已保存版本') + '</p>' +
+        ['cartons', 'package', 'gw', 'nw', 'meas'].map(function (key) { return '<p><b>' + packingLabels[key] + '：</b>' + esc(values.packing[key]) + '</p>'; }).join('') + '</div>';
+    }
     U.confirm({ title: '提交审核',
       message: '确认将 <b>' + esc(U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version) + '</b> 提交业务主管审核？提交后在审核完成前不可再编辑。',
+      extra: packingReview,
       okText: '提交审核',
       onOk: function () {
+        var modalRoot = document.getElementById('modal-root');
+        if (ticket.confirmOverlay && (!ticket.confirmOverlay.isConnected || !modalRoot || modalRoot.firstElementChild !== ticket.confirmOverlay)) {
+          U.toast('确认窗口已关闭或变化，请重新发起送审。', 'warning'); return false;
+        }
+        if (!validateDocAction(ticket)) return false;
+        candidate = packagingValues(d, editing ? readEditValues(d) : null, true);
+        if (!candidate.ok) return false;
+        values = candidate.values;
         return commitDocAction(ticket, function (doc) {
           if (values) applyEditValues(doc, values);
           doc.status = '待审核'; doc.submittedAt = U.today();
@@ -418,6 +528,8 @@
         });
       }
     });
+    var modalRoot = document.getElementById('modal-root');
+    ticket.confirmOverlay = modalRoot ? modalRoot.firstElementChild : null;
   };
   Actions['doc-revise'] = function (el) {
     var ticket = captureDocAction(el, 'revise', false);

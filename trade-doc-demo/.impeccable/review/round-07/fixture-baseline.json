@@ -1,0 +1,9 @@
+{
+  "baseline": "cff1a0e2445d5bd219947d925cea73aa9949c96d",
+  "nodeGroups": 22,
+  "nodeFailures": 0,
+  "syntaxFiles": 32,
+  "syntaxFailures": 0,
+  "mockSourceIdentical": true,
+  "method": "Git baseline line-for-line text comparison plus git diff zero; helper separately checks all Mock/input nonmutation"
+}

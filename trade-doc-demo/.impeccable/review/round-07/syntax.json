@@ -1,0 +1,130 @@
+[
+  {
+    "file": "app.js",
+    "exitCode": 0
+  },
+  {
+    "file": "mock-data.js",
+    "exitCode": 0
+  },
+  {
+    "file": "utils.js",
+    "exitCode": 0
+  },
+  {
+    "file": "views-core.js",
+    "exitCode": 0
+  },
+  {
+    "file": "views-docs.js",
+    "exitCode": 0
+  },
+  {
+    "file": "views-fin.js",
+    "exitCode": 0
+  },
+  {
+    "file": "views-sales.js",
+    "exitCode": 0
+  },
+  {
+    "file": "views-stats.js",
+    "exitCode": 0
+  },
+  {
+    "file": "views-system.js",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-cancellation.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-change-request.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-context-navigation.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-customer-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-decimal-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-demo.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-document-lifecycle.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-document-snapshots.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-document-workspace.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-draft-adapters.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-inquiry-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-login.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-navigation-drafts.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-order-workspace.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-packaging-actions.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-packaging-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-payments-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-progress-stages.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-quotation-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-repricing.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-session.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-views.cjs",
+    "exitCode": 0
+  },
+  {
+    "file": "verify-browser.mjs",
+    "exitCode": 0
+  }
+]

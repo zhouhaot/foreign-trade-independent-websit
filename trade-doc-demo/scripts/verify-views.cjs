@@ -79,8 +79,19 @@ const editFields = {
   'df-marks': { value: 'VERIFY MARKS' },
   'df-remark': { value: 'VERIFY REMARK' },
   'df-pk-cartons': { value: '9' },
-  'df-pk-package': { value: 'VERIFY PACKAGE' }
+  'df-pk-package': { value: 'VERIFY PACKAGE' },
+  'df-pk-gw': { value: '1,680 KGS' },
+  'df-pk-nw': { value: '1,540 KGS' },
+  'df-pk-meas': { value: '8.6 CBM' }
 };
+// 包装字段反馈现在使用原生 classList/ARIA；只补 DOM 能力，不改变业务输入或断言。
+Object.values(editFields).forEach(input => {
+  input.classList = { add() {}, remove() {}, contains() { return false; } };
+  input.setAttribute = function (key, value) { this[key] = value; };
+  input.removeAttribute = function (key) { delete this[key]; };
+  input.closest = () => ({ querySelector: () => ({ textContent: '', id: '' }) });
+  input.focus = () => {};
+});
 context.document.getElementById = id => editFields[id] || null;
 U.withLoading = (button, fn) => fn();
 const editableStatuses = ['草稿', '制作中', '已退回'];
@@ -93,6 +104,7 @@ for (const type of ['CI', 'PL']) {
   draft.version = Math.max(...data.documents.filter(d => d.orderId === sample.orderId && d.type === type).map(d => d.version)) + 1;
   draft.status = '草稿';
   data.documents.push(draft);
+  context.location.hash = '#/documents/' + encodeURIComponent(draft.id); // 该版本编辑/保存的合法来源。
   const button = { dataset: { id: draft.id } };
   context.App.user = U.roleUser('doc');
   Actions['doc-edit'](button);

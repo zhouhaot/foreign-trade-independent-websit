@@ -525,3 +525,16 @@
 .inquiry-confirm-summary .readonly-hint { margin-top: 14px; line-height: 1.8; }
 .inquiry-action-error { font-size: 13px; line-height: 1.7; margin: 0 0 14px; overflow-wrap: anywhere; white-space: normal; }
 .inquiry-action-error:empty { display: none; }
+
+/* 第7轮：装箱单包装输入保原单位文本，具体错误与字段同处可改。 */
+.packing-field { min-width: 0; margin-bottom: 0; text-align: left; }
+.packing-hint { display: block; margin-top: 6px; color: var(--text-sub); font-size: 12px; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }
+.packing-field .field-error { font-size: 13px; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }
+.packing-field .field-error:empty { display: none; }
+.packing-field .edit-field.is-error { border-color: var(--red); outline-color: var(--red); }
+.packing-feedback { font-size: 13px; line-height: 1.7; white-space: normal; overflow-wrap: anywhere; }
+.packing-feedback:empty { display: none; }
+.packing-readiness { margin: 12px 0; line-height: 1.7; overflow-wrap: anywhere; }
+.packing-confirmation { margin-top: 14px; padding: 12px 14px; border-left: 3px solid var(--primary); border-radius: var(--radius-control); background: var(--nav-bg); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.packing-confirmation p+p { margin-top: 6px; }
+.packing-pending { color: var(--orange); }

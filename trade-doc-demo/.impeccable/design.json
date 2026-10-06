@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T21:47:04Z",
+  "generatedAt": "2026-10-07",
   "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
   "extensions": {
     "colorMeta": {
@@ -717,6 +717,62 @@
         "真实身份/服务器事务/审计/持久化/NAS/银行",
         "包装字段或完整真实成交链"
       ]
+    },
+    "plPackagingWorkspace": {
+      "round": 7,
+      "assumption": "H18仅PL，原型非真实计量/签发；H12交易2dp不变。",
+      "task": "核对五字段→合法部分保存→补齐一次送审；版本/退回/來源支持，长规则/历史后置，A字号纸张与主动作保持。",
+      "fields": {
+        "cartons": "普通正安全整数；空仅草稿可待补，不等商品qty。",
+        "package": "实际可见文字，检查副本不洗合法多语言/emoji原文。",
+        "gwNw": "明确KG/KGS、普通正数最多3dp/标准千分，scale1000有界比较GW>=NW允许相等。",
+        "meas": "体积MEAS./明确CBM、普通正数最多3dp/标准千分。"
+      },
+      "preservation": "合法原字符串仅trim，保单位/大小写/逗号/末尾0；不自动换单位，不洗历史，不假物流匹配。",
+      "state": {
+        "draft": "空待补允许，任意已填非法拒绝；保存不自动改真实退回/制作状态。",
+        "stored": "完整度限定已保存字段，当前编辑仍需核对；部分具体缺项与待补非0。",
+        "submit": "五项完整，确认显示本次正在编辑/已保存候选五项原文本及PL/no/Vn，实际成功才待审核/clean/留痕。",
+        "failure": "保存未保存/本次未送审分开，完整inline cause保输入dirty。",
+        "history": "新修订继承旧交易包装/重制当前交易但包装仍需核对；旧版事实保留，当前资格单独读。"
+      },
+      "semantics": "五具名input+单位hint/error；毛净两字段同中性cause、摘要去重，错误normal折行无横滑；CI/PL唛头备注具名，CI无PL字段/隐藏完整度门槛。",
+      "sourceProtection": "源encoded详情/query、actor引用、编辑态、完整原控件/value/feedback节点与candidate提交重验；跨页失败不清新页错误/焦点。",
+      "measuredBottom": {
+        "height": 1000,
+        "normalScroll": 0,
+        "pl1280Save": 679.97,
+        "pl1280Submit": 725.97,
+        "pl1440Save": 546.97,
+        "pl1440Submit": 592.97,
+        "ci1440Save": 468.98,
+        "ci1440Submit": 514.98,
+        "confirmBothWidths": 711.08,
+        "scrollBoundaries": "error492/partial502/incomplete451/confirm669/boss57/approved55均非正常页首0；readonly登录Toast遮低层参考不遮主动作。"
+      },
+      "verificationCounts": {
+        "distinctRoleRoutes": 135,
+        "actualLayouts": 270,
+        "realInteractions": 17,
+        "processImages": 10,
+        "finalImages": 16,
+        "nodeScripts": 22,
+        "packagingActions": 111,
+        "packagingCandidates": 644,
+        "syntaxChecks": 32
+      },
+      "evidence": ".impeccable/review/round-07/browser.json",
+      "reviewScope": "16终图实读SHIP；综合3MEDIUM与JS专项1MEDIUM分别Resolved/APPROVE；Node候选/控件缺失/旧异步反例不冒原生。",
+      "historyEvidence": "同会话受控V2后旧V1整.paper渲染文字相同，非HTMLexact或全排列。",
+      "nextRisk": "待审核纸张Approved by沿旧退回者姓名为既有展示风险，需后续当前签署/历史人分开；本轮未修不洗历史。",
+      "notVerified": [
+        "file://",
+        "跨浏览器/旧浏览器",
+        "真读屏/400%或320px重排",
+        "减少动效运行/原生刷新关闭",
+        "实际包装测量/单位容差/物流匹配/信用证/签发文件",
+        "后端身份/事务/持久化/银行/NAS"
+      ]
     }
   },
   "components": [
@@ -896,6 +952,11 @@
       {
         "name": "维护对象与历史快照分开",
         "body": "客户固定编号/合作起始与企业联系组先核对，基本邮箱非投递认证；当前lookup姓名可更新，旧交易/冻结纸张不得由资料维护改写。",
+        "section": "components"
+      },
+      {
+        "name": "已保存包装与本次候选分开",
+        "body": "PL五项具名及KG/KGS/CBM，草稿空待补非0、已填非法拒绝；摘要限定已保存，送审确认核对当前候选原文，失败区分未保存/未送审。",
         "section": "components"
       }
     ],

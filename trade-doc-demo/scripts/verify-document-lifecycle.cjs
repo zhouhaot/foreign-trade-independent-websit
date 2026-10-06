@@ -31,6 +31,7 @@ function doc(c, status, type = 'CI') {
   source.status = status;
   c.U.order(source.orderId).status = '执行中';
   c.MOCK.approvals = c.MOCK.approvals.filter(a => a.targetId !== source.id);
+  c.location.hash = '#/documents/' + encodeURIComponent(source.id); // 正常动作来自该版本；错源由专用包装回归覆盖。
   return source;
 }
 function business(c) { return JSON.stringify({ docs: c.MOCK.documents, approvals: c.MOCK.approvals, orders: c.MOCK.orders, payments: c.MOCK.payments, logs: c.MOCK.orderLogs }); }

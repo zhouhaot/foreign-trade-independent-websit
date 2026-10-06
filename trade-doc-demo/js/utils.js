@@ -120,6 +120,53 @@
       canReform: !reasons.reform, canAudit: !reasons.audit, canExport: !reasons.export };
   };
 
+  /* H18：仅PL包装候选；度量三位精度与H12交易数量/金额分开，合法单位原文保留。 */
+  U.packagingCandidate = function (packing, options) {
+    var required = !!(options && options.requireComplete), errors = [], result = {}, scaled = {};
+    var keys = ['cartons', 'package', 'gw', 'nw', 'meas'];
+    var labels = { cartons: '箱数', package: '包装方式', gw: '毛重', nw: '净重', meas: '体积' };
+    function issue(field, reason) { errors.push({ field: field, error: labels[field] + reason }); }
+    if (!packing || typeof packing !== 'object' || Array.isArray(packing)) {
+      issue('package', '资料无效，请重新核对装箱单包装字段。');
+    } else keys.forEach(function (key) {
+      var raw = packing[key], text = raw == null ? '' : typeof raw === 'string' || key === 'cartons' && typeof raw === 'number' ? String(raw) : null;
+      if (text === null) { issue(key, '须填写可读单行文本；箱数为普通正整数。'); return; }
+      if (/[\x00-\x1f\x7f\u2028\u2029]/.test(text)) { issue(key, '须为单行可读文本，不接受换行或隐藏控制字符。'); return; }
+      text = text.trim(); result[key] = text;
+      if (!text) { if (required) issue(key, '未填写，请补齐后提交审核。'); return; }
+      if (key === 'package') {
+        // 只检查有可见文字，不清洗合法多语言文字中的连接/格式字符。
+        if (!text.replace(/[\p{White_Space}\p{Default_Ignorable_Code_Point}]/gu, '')) issue(key, '须填写至少一个可见文字字符，不能只用空白或零宽格式字符。');
+        return;
+      }
+      if (key === 'cartons') {
+        if (!/^\d+$/.test(text)) { issue(key, '须为普通正整数，不接受小数、指数、逗号或十六进制。'); return; }
+        var cartons = BigInt(text);
+        if (cartons <= 0n) issue(key, '必须大于 0；未知箱数请先留空保存草稿。');
+        else if (cartons > BigInt(Number.MAX_SAFE_INTEGER)) issue(key, '超出安全整数范围，请减少数值。');
+        else result[key] = Number(cartons);
+        return;
+      }
+      var match = /^((?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,3})?)\s*(kg|kgs|cbm)$/i.exec(text);
+      var unit = key === 'meas' ? 'CBM' : 'KGS';
+      if (!match || (key === 'meas' ? match[2].toLowerCase() !== 'cbm' : !/^kgs?$/i.test(match[2]))) {
+        issue(key, '格式须为普通正数与明确单位 ' + unit + '，最多 3 位小数，逗号仅作标准千分分组。'); return;
+      }
+      var parts = match[1].replace(/,/g, '').split('.');
+      var value = BigInt(parts[0]) * 1000n + BigInt(((parts[1] || '') + '000').slice(0, 3));
+      if (value <= 0n) issue(key, '必须大于 0；未知值请先留空保存草稿。');
+      else if (value > BigInt(Number.MAX_SAFE_INTEGER)) issue(key, '超出三位度量的安全计算范围，请减少数值。');
+      else scaled[key] = value;
+    });
+    if (scaled.gw !== undefined && scaled.nw !== undefined && scaled.gw < scaled.nw) {
+      issue('gw', '不能小于同票净重，请核对两项重量。');
+      issue('nw', '不能大于同票毛重，请核对两项重量。');
+    }
+    var complete = errors.length === 0 && keys.every(function (key) { return result[key] !== undefined && result[key] !== ''; });
+    return { ok: errors.length === 0, packing: errors.length ? null : result, errors: errors,
+      error: errors.map(function (entry) { return entry.error; }).join('；'), complete: complete };
+  };
+
   /* 新报价/收款的两位十进制契约：不改变通用 U.validate 或历史快照。 */
   U.decimalInput = function (value, label, allowZero) {
     label = label || '数值';

@@ -444,7 +444,7 @@
       ? '<div class="danger-box mt8">通过后订单标记为「已取消」，单证业务操作与导出暂停；原版本、审核结果及交易快照保留。已收款需另行协商退还，本操作不会登记退款。</div>'
       : a.type === '改价申请'
       ? '<div class="warn-box mt8">数量保持不变，单价保留两位小数并按目标等比调整。候选明细合计必须等于目标且不低于已收款，校验通过后才批准并写入日志。</div>'
-      : '<div class="warn-box mt8">通过后采用当前订单、客户、商品与卖方交易信息生成新版本草稿；原版本内容保留，由制单人核对包装及退回意见后继续修订。</div>';
+      : '<div class="warn-box mt8">通过后采用当前订单、客户、商品与卖方交易信息生成新版本草稿；原版本内容保留。装箱单原包装随草稿带入，仍需制单人核对是否符合当前交易并补齐，不能直接视为已核定包装。</div>';
     var repricing = a.type === '改价申请' ? prepareRepricing(a) : null;
     var amountSummary = repricing && repricing.order
       ? '<div class="desc-grid mt8" style="grid-template-columns:1fr 1fr">' +
