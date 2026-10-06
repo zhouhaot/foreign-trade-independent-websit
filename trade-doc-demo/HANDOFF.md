@@ -373,3 +373,9 @@ python3 -m http.server 8000   # 然后浏览器走一遍受影响页面（五类
 - 验证：12组Node与全部运行/脚本语法通过，新增lifecycle90、change-request25、真实app委托workspace、取消/重制全MOCK对照，原8组关键覆盖保留且按H10校正合法fixture/旧版拒绝/合法V2→V3继承。结构8 PASS/1 WARN/0 FAIL。实际HTTP五角色11受影响路由×1280/1440=110检查、55独立role-route；10组真实交互PASS，console/failures空。完整退回→修改/保存→重送→通过→导出演示金额仍24100USD；取消前后原纸张逐字相同，历史已通过保留且导出disabled。
 - 材料：round-03.md列11项改进，3份子任务/规划/UI计划、12组脚本日志、浏览器/audit/代码/UI报告、首轮和7张最终viewport图。file://未验且不绕过受控浏览器策略；无Ego/跨浏览器/真实读屏/打印文件/后端/NAS/生产认证。
 - 后续第4轮：报价/收款有限数字与精度、提交时状态/身份重查、字段级错误及UI打磨；岗位上下文全局连续性另列。用户持续迭代与每轮GitHub授权有效，同步另记完整SHA回执。
+
+### 2026-10-07 | 第3轮GitHub同步回执
+
+- 实现提交：`f4b044e830b773b67ef0d4b97a5a592f76583121`，`Refine document workspace and enforce current version eligibility`。
+- 正常快进推送main，新的ls-remote独立回读与本地HEAD完整SHA一致，推送后工作区干净；无强推/部署/凭据或配置修改。39文件含11项改进、验证/独立复审、5首轮及7终版图，详细commit说明随实现留存。
+- 本回执另作后续文档提交。第4轮进入报价/收款输入与提交契约，用户持续授权有效。
