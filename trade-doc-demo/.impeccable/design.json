@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T19:28:13Z",
+  "generatedAt": "2026-10-06T21:00:22Z",
   "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
   "extensions": {
     "colorMeta": {
@@ -385,10 +385,9 @@
         "cancel": "保留审核/包装/唛头/备注、路由与触发焦点。",
         "discard": "明确确认后才导航，不隐式保存。",
         "notProtected": [
-          "全局侧栏",
-          "业务路径",
-          "浏览器Back"
-        ]
+          "第3轮时全局侧栏/业务路径/浏览器Back未保护；第5轮有限输入统一保护见workspaceDraftGuard。"
+        ],
+        "currentRound": 5
       },
       "feedback": "空退回意见具名内联alert及焦点；导出演示成功才即时刷新同文书timeline，不生成真实文件。",
       "measuredBottom": {
@@ -490,6 +489,117 @@
         "真实商品单位精度/日期商业政策",
         "大额或异币种历史像素态"
       ]
+    },
+    "workspaceDraftGuard": {
+      "round": 5,
+      "assumptions": [
+        "H14有限作业字段离开保护，不是全站草稿管理/自动保存。",
+        "H15本会话已知索引历史与未知地址/输入兜底分开。"
+      ],
+      "protectedFields": [
+        "qe-form",
+        "cust-form",
+        "pay-form",
+        "df-编辑唛头/包装/备注",
+        "audit-opinion"
+      ],
+      "notProtected": [
+        "通用客户确认/订单申请/审批业务弹窗草稿",
+        "跨页面恢复",
+        "持久草稿或浏览器关闭后恢复"
+      ],
+      "status": {
+        "clean": "当前输入未改动",
+        "dirty": "有未提交输入 · 离开前将提示",
+        "placement": "既有page-description或page-title-group左侧；右actions保持靠右，无说明卡。",
+        "fontSize": "12px",
+        "titleGroupGap": "8px 12px",
+        "alignment": "baseline/flex-wrap",
+        "semantics": "role=status，仅clean/dirty文本变化更新，不按每键播整表。"
+      },
+      "baseline": "进入页/实际业务成功时显示字段；恢复原值回clean，只读/禁用字段排除。",
+      "confirmation": {
+        "object": "报价号、客户编号/名称、实际选择收款订单或单证type/no/Vn。",
+        "navigationButtons": [
+          "继续填写",
+          "放弃输入并离开"
+        ],
+        "documentReadonlyButtons": [
+          "继续填写",
+          "放弃修改"
+        ],
+        "message": "只丢未提交输入，已提交业务记录保持；单证放弃修改回同版本只读。",
+        "singleDecision": "统一导航；退出沿用一次退出确认；提交/历史恢复pending等待，不叠窗。"
+      },
+      "cancel": "保同源DOM/字段值/error/hash，当前或最近作业字段（focusin含校验focus）优先，无可用才原触发；不是重建同值表单。",
+      "scroll": "共享close preventScroll + 同源generation/hash guarded RAF恢复handler捕获开窗位置；不承诺CUA定位前坐标不变，旧帧不拉回新页。",
+      "navigation": "应用内先确认再写URL；已知epoch/index历史恢复与新导航/旧确认互斥，未知条目只作记录的地址/输入兜底。",
+      "knownHistoryEvidence": "真实nativeBack重复取消同目标、Forward取消/确认，hash/token/原文/focus/scroll46→46；主管审核取消122→122/整纸exact。",
+      "success": "实际业务写成功才markDraftClean后自动导航/重建，失败仍dirty/原输入，无假成功。",
+      "financeReference": {
+        "scope": "局部pay-records-content替换，原登记form与error/hint/选单保留，不clean。",
+        "geometry": "保已显示minHeight；真实记录区域430.84px到末页仍430.84px。",
+        "focus": "输入焦点不重建；被换页码回新当前页码preventScroll。",
+        "fixtures": "真实7条末页1行；隔离8条末页2行不混淆。",
+        "selectedVsUrl": "未提交SO3/EUR选择可保原SO1 URL；字段/guard以实际SO3，成功才改actualchosen URL。"
+      },
+      "measuredBottom": {
+        "quotation1280": "969.14px",
+        "quotation1440": "971.14px",
+        "payments1280": "775.67px",
+        "payments1440": "672.17px",
+        "documentSave1280": "622.38px",
+        "documentSave1440": "468.98px",
+        "bossApprove1440": "573.98px",
+        "normalScope": "1280/1440×1000，scroll0。",
+        "documentDiscard1280": "scroll275/保存347.38px当时可见，非首屏0。",
+        "invalidAddress1440": "scroll56/保存972.64px此刻可见，异常自然滚态非首屏0；正常971.14未变。"
+      },
+      "evidence": ".impeccable/review/round-05/browser-verification.json",
+      "scope": "100独立role-route/200实际两宽layout、27真实交互，16终图逐看与10过程保留；HTTP静态内存原型。",
+      "truthBoundary": "成功链在刷新前，终图/路由矩阵已恢复样例；audit成功交易HTMLexact保持而Approved by预期更新，不称整纸相同。 非法地址旧Toast未拍到不声称像素反馈，持续inline提示才是补图证据；首次动画未稳探针不计PASS。",
+      "notVerified": [
+        "file://",
+        "跨浏览器/旧浏览器",
+        "真实读屏/320px或400%重排",
+        "原生beforeunload刷新关闭提示",
+        "runtime reduced-motion场景",
+        "未知加载前完整历史栈",
+        "真实服务/银行/NAS/身份事务"
+      ],
+      "invalidAddress": {
+        "preflight": "safe parse/preflight在确认和clean前拒绝无效query编码，不用部分query继续渲染。",
+        "recovery": "direct非法hash保accepted地址/原DOM/dirty，generation与旧票据失效，旧窗关闭不清原输入。",
+        "feedback": "页头下持续role=alert完整原因及当前页面输入已保留；瞬逝Toast不代替它。",
+        "scope": "地址错误不是交易金额错误，不自动重载销毁输入。",
+        "realEvidence": "新增4真实组及16th图；稳定fresh已知Forward56→56，未稳59→56探针不计PASS。",
+        "independentEvidence": "JavaScript专项MEDIUM Resolved/APPROVE，导航31/adapter17/session Node PASS，与历史互斥MEDIUM分开归因。"
+      },
+      "verificationCounts": {
+        "realInteractionGroups": 27,
+        "finalImages": 16,
+        "processImages": 10,
+        "distinctRoleRoutes": 100,
+        "actualLayouts": 200,
+        "navigationScenarios": 33
+      },
+      "modifierNavigation": {
+        "scope": "内部anchor含data-action，Ctrl/Meta/Shift/Alt/非主键/另开target/download提前返回浏览器默认；普通_self当前页仍守卫。",
+        "realEvidence": "nativeCtrl单证台账另开合法roleDoc/heading单证管理/非forbidden，源hash/marks/dirty保且无modal；中枢关闭temp tab。",
+        "boundary": "其它组合键/target/download只有Node与代码边界，不声称逐项原生验证；打开方式由浏览器决定，另页不共享源未提交输入。"
+      }
+    },
+    "roleContextNavigation": {
+      "round": 5,
+      "bossLeaves": "已有允许route新增询盘查询/报价查询/收款与应收；共8叶子，末入口bottom≤708.38/1000。",
+      "rights": "主管报价只查看，财务只读，不扩大ROUTES/客户或商品列表权限。",
+      "unavailableLinks": "无权客户/来源报价/询盘变真实文字，保姓名/编号/事实。",
+      "productSource": "显式order唯一且确实含当前商品才称来源并返回该订单?tab=items；无效说明无法核对，不猜最近历史。",
+      "fallbacks": {
+        "sales": "无来源返回商品列表",
+        "docFinBoss": "无来源返回有权订单列表"
+      },
+      "evidence": "194权限/来源+15clean集成为Node；真实财务商品来源往返与主管15终图另见本轮review。"
     }
   },
   "components": [
@@ -576,7 +686,7 @@
   ],
   "narrative": {
     "northStar": "A · 订单协同工作区",
-    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。 第3轮单证作业区优先本订单版本链、当前资格与岗位主动作；短来源前置，历史事实和live操作资格分开，局部离开确认保护输入，导出仅为演示。 第4轮报价/收款保持各自单一编辑或登记任务；普通十进制、逐行精确到分与live余额明确，非法候选待修正、字段原因具名且失败保留；取消两态暂停新增收款按显式原型规则处理。",
+    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。 第3轮单证作业区优先本订单版本链、当前资格与岗位主动作；短来源前置，历史事实和live操作资格分开，局部离开确认保护输入，导出仅为演示。 第4轮报价/收款保持各自单一编辑或登记任务；普通十进制、逐行精确到分与live余额明确，非法候选待修正、字段原因具名且失败保留；取消两态暂停新增收款按显式原型规则处理。 第5轮有限作业输入提供具体对象的继续填写/明确放弃选择；短状态不挤主动作，财务局部查历史保表单，岗位链接与商品来源返回均按已有权限接续；本会话已知历史与未知兜底分开。",
     "keyCharacteristics": [
       "默认100px浅紫窄导航保留文字与图标，展开224px，所有角色叶子入口直接可达。",
       "白色平面面板、细边框和适度留白承载高频业务信息。",
@@ -639,6 +749,21 @@
       {
         "name": "收款对象与资格可核对",
         "body": "当前live币种/未收决定登记，取消两态暂停且历史保留；URL指定不可登对象不无声换单，成功仍保持实际对象。",
+        "section": "components"
+      },
+      {
+        "name": "未提交状态不冒充保存",
+        "body": "当前输入未改动/有未提交输入短句只描述当前表单；取消保源DOM，实际成功才clean，不承诺跨页或刷新恢复。",
+        "section": "components"
+      },
+      {
+        "name": "具体对象与明确放弃",
+        "body": "离开标题带实际报价/客户/收款订单或单证no-Vn，继续填写/放弃输入并离开；单证回只读为放弃修改。",
+        "section": "components"
+      },
+      {
+        "name": "来源与可点击权限分开",
+        "body": "无权来源保真文字，主管查询不授写入；商品只凭唯一包含该商品的显式订单参数返回，不猜历史。",
         "section": "components"
       }
     ],

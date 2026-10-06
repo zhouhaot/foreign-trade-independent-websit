@@ -316,6 +316,7 @@
     c.level = form.querySelector('#c-level').value;
     c.addr = form.querySelector('#c-addr').value.trim();
     c.remark = form.querySelector('#c-remark').value.trim();
+    if (window.App.markDraftClean) window.App.markDraftClean();
     U.toast('客户资料已保存（演示数据仅在本次会话内存中生效）');
     window.App.rerender();
   });
@@ -354,6 +355,13 @@
   Views.productDetail = function (ctx) {
     var p = U.product(ctx.params[0]);
     if (!p) return Views.notFound('商品不存在：' + ctx.params[0]);
+    var role = ctx.user.role, query = ctx.query || {}, sourceId = query.order;
+    var sourceOrder = sourceId && M.orders.filter(function (o) { return o.id === sourceId; });
+    sourceOrder = sourceOrder && sourceOrder.length === 1 && sourceOrder[0].items.some(function (it) { return it.productId === p.id; }) ? sourceOrder[0] : null;
+    var returnHash = sourceOrder ? '#/orders/' + encodeURIComponent(sourceOrder.id) + '?tab=items' : role === 'sales' ? '#/products' : '#/orders';
+    var returnText = sourceOrder ? '返回来源订单 ' + sourceOrder.id : role === 'sales' ? '返回商品列表' : '返回订单列表';
+    if (['sales', 'doc', 'fin', 'boss'].indexOf(role) < 0) { returnHash = '#/dashboard'; returnText = '返回工作台'; }
+    var contextNote = sourceOrder ? '来源订单 ' + sourceOrder.id + ' · 商品明细' : sourceId ? '来源订单无法核对，请从有权访问的列表重新选择。' : '';
     var used = M.orders.filter(function (o) { return o.items.some(function (it) { return it.productId === p.id; }); });
     var usedRows = used.map(function (o) {
       var it = o.items.find(function (i) { return i.productId === p.id; });
@@ -361,7 +369,7 @@
         '<td class="num">' + it.qty + ' ' + esc(p.unit) + '</td><td class="num">' + U.fmt(it.price) + ' ' + o.currency + '</td>' +
         '<td class="center">' + tag(o.status) + '</td></tr>';
     }).join('') || U.emptyRow(5, '该商品暂无成交订单');
-    return '<div class="page-head"><h2>商品详情 · ' + esc(p.nameCn) + '</h2><div class="actions"><a class="btn" href="#/products">返回列表</a></div></div>' +
+    return '<div class="page-head"><div><h2>商品详情 · ' + esc(p.nameCn) + '</h2>' + (contextNote ? '<p class="page-description">' + esc(contextNote) + '</p>' : '') + '</div><div class="actions"><a class="btn" href="' + esc(returnHash) + '">' + esc(returnText) + '</a></div></div>' +
       '<div class="card"><div class="card-title">基础信息</div><div class="desc-grid">' +
       descItem('商品编号', p.id) + descItem('中文名称', p.nameCn) + descItem('英文名称', p.nameEn) +
       descItem('规格', p.spec) + descItem('单位', p.unit) +

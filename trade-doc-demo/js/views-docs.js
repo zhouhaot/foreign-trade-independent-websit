@@ -135,6 +135,8 @@
       '</div>';
   };
   function leaveDocument(destination) {
+    // 真实应用统一使用路由草稿保护；旧隔离 fixture 没有该 API 时保留原局部契约。
+    if (window.App.requestNavigation) { window.App.requestNavigation(destination); return; }
     if (location.hash === destination) return;
     var d = U.doc(window.AppUI.docEditing), opinion = document.getElementById('audit-opinion');
     var dirty = !!(opinion && opinion.value.trim());
@@ -373,8 +375,11 @@
     U.toast('已进入编辑模式：仅唛头、包装与备注字段可修改，订单带入数据只读', 'info');
   };
   Actions['doc-cancel-edit'] = function () {
-    window.AppUI.docEditing = null;
-    window.App.rerender();
+    function discard() { window.AppUI.docEditing = null; window.App.rerender(); }
+    if (window.App.confirmDiscard) {
+      var d = U.doc(window.AppUI.docEditing);
+      window.App.confirmDiscard(discard, { title: '放弃' + (d ? U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version : '当前单证') + '的修改？', message: '当前唛头、包装或备注有未保存内容。放弃后回到本版本只读预览；继续填写可保留修改。', okText: '放弃修改' });
+    } else discard();
   };
   Actions['doc-save-draft'] = function (el) {
     var ticket = captureDocAction(el, 'edit', true);
@@ -388,7 +393,7 @@
         applyEditValues(d, values);
         d.history.push({ time: U.now(), person: ticket.actor.name, action: '保存草稿（修订唛头/包装/备注）', opinion: '' });
         window.AppUI.docEditing = null;
-      })) { U.toast('草稿已保存'); window.App.rerender(); }
+      })) { if (window.App.markDraftClean) window.App.markDraftClean(); U.toast('草稿已保存'); window.App.rerender(); }
     });
   };
   Actions['doc-submit'] = function (el) {
@@ -408,6 +413,7 @@
             title: U.docTypeName(doc.type) + ' ' + doc.no + ' V' + doc.version + '（订单 ' + doc.orderId + '）审核',
             applicant: ticket.actor.name, applyTime: U.now(), reason: '', status: '待处理', handler: null, handleTime: null, opinion: null });
           syncOrderDocStatus(doc.orderId); window.AppUI.docEditing = null;
+          if (window.App.markDraftClean) window.App.markDraftClean();
           U.toast('已提交审核，等待业务主管处理'); window.App.rerender();
         });
       }
@@ -429,7 +435,10 @@
           nd.history = [{ time: U.now(), person: ticket.actor.name, action: '创建单证 V' + version + '（受控修订，基于 V' + doc.version + '）', opinion: '' }];
           nd.remark = (nd.remark ? nd.remark + '；' : '') + 'V' + version + '：受控修订';
           U.inheritDocumentSnapshot(nd, doc); M.documents.push(nd); syncOrderDocStatus(doc.orderId);
-          U.toast('已生成新版本 ' + doc.no + ' V' + version + '（草稿）'); location.hash = '#/documents/' + nd.id;
+          if (window.App.markDraftClean) window.App.markDraftClean();
+          U.toast('已生成新版本 ' + doc.no + ' V' + version + '（草稿）');
+          if (window.App.requestNavigation) window.App.requestNavigation('#/documents/' + nd.id);
+          else location.hash = '#/documents/' + nd.id;
         });
       }
     });
@@ -446,6 +455,7 @@
           M.approvals.unshift({ id: U.newId('AP'), type: '重新制单申请', targetType: 'doc', targetId: doc.id,
             title: U.docTypeName(doc.type) + ' ' + doc.no + ' 申请重新制单', applicant: ticket.actor.name,
             applyTime: U.now(), reason: '因审核退回申请重新制单：' + (doc.opinion || ''), status: '待处理', handler: null, handleTime: null, opinion: null });
+          if (window.App.markDraftClean) window.App.markDraftClean();
           U.toast('重新制单申请已提交'); window.App.rerender();
         });
       }
@@ -475,6 +485,7 @@
           syncOrderDocStatus(doc.orderId);
           M.orderLogs[doc.orderId] = (M.orderLogs[doc.orderId] || []).concat([{ time: U.now(), person: ticket.actor.name,
             content: '单证 ' + doc.no + ' V' + doc.version + (pass ? ' 审核通过' : ' 退回修改') + (opinion ? '：' + opinion : '') }]);
+          if (window.App.markDraftClean) window.App.markDraftClean();
           U.toast(pass ? '审核已通过，最新版本具有导出演示资格' : '已退回制单人修改'); window.App.rerender();
         });
       }

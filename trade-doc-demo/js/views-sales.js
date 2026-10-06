@@ -6,6 +6,11 @@
   var M = window.MOCK, U = window.U;
   var Views = window.Views, Actions = window.Actions;
   var ui = window.__ui, esc = U.esc, tag = U.tag, val = window.__val, descItem = window.__descItem;
+  /* 与现行 ROUTES 一致：只对可访问岗位展示链接，其余保留来源文字。 */
+  function contextLink(hash, text, roles, role) {
+    role = role || window.App.user.role;
+    return roles.indexOf(role) >= 0 ? '<a href="' + esc(hash) + '">' + esc(text) + '</a>' : '<span>' + esc(text) + '</span>';
+  }
 
   /* ==================== 询盘列表 ==================== */
   Views.inquiries = function () {
@@ -59,7 +64,7 @@
       '<a class="btn" href="#/inquiries">返回列表</a></div></div>' +
       '<div class="card"><div class="card-title">询盘信息 ' + tag(iq.status) + '</div><div class="desc-grid">' +
       descItem('询盘编号', iq.id) +
-      '<div class="di"><div class="dt">客户</div><div class="dd"><a href="#/customers/' + iq.customerId + '">' + esc(U.customerName(iq.customerId)) + '</a></div></div>' +
+      '<div class="di"><div class="dt">客户</div><div class="dd">' + contextLink('#/customers/' + iq.customerId, U.customerName(iq.customerId), ['sales'], ctx.user.role) + '</div></div>' +
       descItem('来源渠道', iq.source) + descItem('业务员', iq.salesperson) +
       descItem('询盘日期', iq.date) +
       descItem('关联报价', iq.quoteId || '尚未报价') +
@@ -113,7 +118,7 @@
         '<td class="center">' + tag(q.status) + '</td>' +
         '<td>' + (q.orderId ? '<a href="#/orders/' + q.orderId + '">' + q.orderId + '</a>' : '<span class="muted">—</span>') + '</td>' +
         '<td class="nowrap"><a class="btn btn-sm" href="#/quotes/' + q.id + '">查看</a> ' +
-        (q.status === '待客户确认' ? '<a class="btn btn-sm" href="#/quotes/' + q.id + '/edit">编辑</a>' : '') + '</td></tr>';
+        (window.App.user.role === 'sales' && q.status === '待客户确认' ? '<a class="btn btn-sm" href="#/quotes/' + q.id + '/edit">编辑</a>' : '') + '</td></tr>';
     }).join('');
     if (!rows) rows = U.emptyRow(9, (f.kw || f.status) ? '没有符合筛选条件的结果' : '暂无报价记录');
     return '<div class="page-head"><h2>报价管理</h2><div class="actions">' +
@@ -212,7 +217,7 @@
       (!checked.ok ? '<div class="warn-box" role="alert">报价资料待核对：' + esc(checked.error) + '</div>' : '') +
       '<div class="card"><div class="card-title">报价信息</div><div class="desc-grid">' +
       descItem('报价编号', q.id) +
-      '<div class="di"><div class="dt">客户</div><div class="dd"><a href="#/customers/' + q.customerId + '">' + esc(U.customerName(q.customerId)) + '</a></div></div>' +
+      '<div class="di"><div class="dt">客户</div><div class="dd">' + contextLink('#/customers/' + q.customerId, U.customerName(q.customerId), ['sales'], ctx.user.role) + '</div></div>' +
       '<div class="di"><div class="dt">来源询盘</div><div class="dd">' + (q.inquiryId ? '<a href="#/inquiries/' + q.inquiryId + '">' + q.inquiryId + '</a>' : '<span class="muted">直接报价</span>') + '</div></div>' +
       descItem('业务员', q.salesperson) +
       descItem('报价日期', q.date) + descItem('有效期至', q.validUntil) +
@@ -265,6 +270,7 @@
           q.status = '已确认'; q.confirmDate = confirmDate;
           if (remark) q.remark = (q.remark ? q.remark + '；' : '') + remark;
           context.submitted = true;
+          if (window.App.markDraftClean) window.App.markDraftClean();
           U.closeModal(); U.toast('已登记客户确认，报价 ' + q.id + ' 现在可以生成订单'); window.App.rerender();
         } finally { delete quoteBusy[context.id]; }
       });
@@ -308,8 +314,10 @@
         q.orderId = oid;
         M.orderLogs[oid] = log;
         context.submitted = true; delete quoteBusy[context.id];
+        if (window.App.markDraftClean) window.App.markDraftClean();
         U.toast('订单 ' + oid + ' 已生成');
-        location.hash = '#/orders/' + oid;
+        if (window.App.requestNavigation) window.App.requestNavigation('#/orders/' + oid);
+        else location.hash = '#/orders/' + oid;
       }
     });
     var modalRoot = document.getElementById && document.getElementById('modal-root');
@@ -438,7 +446,10 @@
         q.validUntil = candidate.validUntil; q.currency = candidate.currency; q.tradeTerm = candidate.tradeTerm;
         q.paymentTerm = candidate.paymentTerm; q.remark = candidate.remark; q.items = savedItems;
         context.submitted = true;
-        U.toast('报价 ' + q.id + ' 已保存'); location.hash = '#/quotes/' + q.id;
+        if (window.App.markDraftClean) window.App.markDraftClean();
+        U.toast('报价 ' + q.id + ' 已保存');
+        if (window.App.requestNavigation) window.App.requestNavigation('#/quotes/' + q.id);
+        else location.hash = '#/quotes/' + q.id;
       } finally { delete quoteBusy[context.id]; }
     });
   });
@@ -464,7 +475,7 @@
       var fin = U.orderFin(o);
       var customer = U.customer(o.customerId);
       return '<tr><td><a href="#/orders/' + o.id + '"><b>' + o.id + '</b></a>' +
-        '<span class="cell-secondary">报价 <a href="#/quotes/' + o.quoteId + '">' + o.quoteId + '</a></span></td>' +
+        '<span class="cell-secondary">报价 ' + contextLink('#/quotes/' + o.quoteId, o.quoteId, ['sales', 'boss']) + '</span></td>' +
         '<td><span>' + esc(customer ? customer.nameCn : o.customerId) + '</span><span class="cell-secondary">' + esc(customer ? customer.nameEn : '') + '</span></td>' +
         '<td>' + esc(o.salesperson) + '</td>' +
         '<td class="num">' + U.fmt(fin.total) + ' ' + o.currency + '</td>' +
@@ -608,7 +619,7 @@
     if (!ORDER_TABS.some(function (t) { return t.key === tab; })) tab = 'overview';
 
     /* 头部操作按钮：按角色 + 状态 */
-    var btns = '<a class="btn" href="#/quotes/' + o.quoteId + '">查看来源报价</a>';
+    var btns = ['sales', 'boss'].indexOf(role) >= 0 ? '<a class="btn" href="#/quotes/' + esc(o.quoteId) + '">查看来源报价</a>' : '';
     if (role === 'doc' && o.docStatus !== '已通过' && o.status !== '取消申请中' && o.status !== '已取消') {
       btns += '<a class="btn btn-primary" href="#/documents">制作单证</a>';
     }
@@ -644,7 +655,7 @@
     return '<div class="order-head-card">' +
       '<div class="order-head-top">' +
         '<div><h2 class="oh-title">订单 ' + o.id + ' ' + tag(o.status) + '</h2>' +
-        '<div class="oh-sub"><span>客户：<a href="#/customers/' + o.customerId + '">' + esc(U.customerName(o.customerId)) + '</a></span>' +
+        '<div class="oh-sub"><span>客户：' + contextLink('#/customers/' + o.customerId, U.customerName(o.customerId), ['sales'], role) + '</span>' +
         '<span>业务员：' + esc(o.salesperson) + '</span><span>创建：' + o.createdAt + '</span></div></div>' +
         '<div class="order-head-actions">' + btns + '</div>' +
       '</div>' +
@@ -708,9 +719,10 @@
     if (tab === 'overview') {
       var q = U.quote(o.quoteId);
       return '<div class="card"><div class="card-title">订单概况</div><div class="desc-grid">' +
-        '<div class="di"><div class="dt">客户</div><div class="dd"><a href="#/customers/' + o.customerId + '">' + esc(U.customerName(o.customerId)) + '</a></div></div>' +
+        '<div class="di"><div class="dt">客户</div><div class="dd">' + contextLink('#/customers/' + o.customerId, U.customerName(o.customerId), ['sales'], ctx.user.role) + '</div></div>' +
         descItem('业务员', o.salesperson) +
-        '<div class="di"><div class="dt">来源报价</div><div class="dd"><a href="#/quotes/' + o.quoteId + '">' + o.quoteId + '</a>' + (q && q.inquiryId ? '（询盘 <a href="#/inquiries/' + q.inquiryId + '">' + q.inquiryId + '</a>）' : '') + '</div></div>' +
+        '<div class="di"><div class="dt">来源报价</div><div class="dd">' + contextLink('#/quotes/' + o.quoteId, o.quoteId, ['sales', 'boss'], ctx.user.role) +
+          (q && q.inquiryId ? '（询盘 ' + contextLink('#/inquiries/' + q.inquiryId, q.inquiryId, ['sales', 'boss'], ctx.user.role) + '）' : '') + '</div></div>' +
         descItem('创建时间', o.createdAt) +
         descItem('要求交期', o.deliveryDate || '—') +
         descItem('币种', o.currency) +
@@ -726,7 +738,7 @@
     if (tab === 'items') {
       var rows = o.items.map(function (it, i) {
         var p = U.product(it.productId);
-        return '<tr><td>' + (i + 1) + '</td><td><a href="#/products/' + p.id + '">' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</a></td>' +
+        return '<tr><td>' + (i + 1) + '</td><td><a href="#/products/' + esc(p.id) + '?order=' + esc(encodeURIComponent(o.id)) + '">' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</a></td>' +
           '<td>' + esc(p.spec) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td>' +
           '<td class="num">' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(it.qty * it.price) + '</td></tr>';
       }).join('');

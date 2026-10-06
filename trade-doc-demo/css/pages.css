@@ -490,3 +490,9 @@
   .doc-list-panel .doc-item .d-sub{font-size:11px;}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+/* 当前作业区状态：保持为就近短句，不占独立卡片或遮挡主动作。 */
+.draft-status { margin-left: 12px; color: var(--text-sub); font-size: 12px; }
+.draft-status.has-changes { color: var(--orange); }
+.page-title-group { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 12px; }
+.page-title-group .draft-status { margin-left: 0; }
+.navigation-error { padding: 10px 14px; margin: 0 0 16px; border: 1px solid var(--orange); border-radius: var(--radius-control); background: var(--orange-bg); color: var(--orange); font-size: 13px; }

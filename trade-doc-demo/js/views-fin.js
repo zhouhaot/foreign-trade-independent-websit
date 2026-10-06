@@ -180,6 +180,21 @@
     return JSON.stringify({ id: order.id, customerId: order.customerId, items: order.items, status: order.status, currency: order.currency,
       payments: M.payments.filter(function (p) { return p.orderId === order.id; }) });
   }
+  function paymentRecordsHtml() {
+    var s = ui('payRecords');
+    var records = M.payments.slice().sort(function (a, b) { return b.date.localeCompare(a.date); });
+    var pg = U.page(records, s.page, 6);
+    s.page = pg.page;
+    var rows = pg.rows.map(function (p) {
+      var linkedOrder = U.order(p.orderId);
+      return '<tr><td>' + esc(p.id) + '</td><td><a href="#/orders/' + esc(p.orderId) + '?tab=pay">' + esc(p.orderId) + '</a></td>' +
+        '<td>' + esc(linkedOrder ? U.customerName(linkedOrder.customerId) : '关联订单缺失') + '</td>' +
+        '<td class="num">' + U.fmt(p.amount) + ' ' + esc(p.currency) + '</td>' +
+        '<td>' + esc(p.method) + '</td><td class="cell-date">' + esc(p.date) + '</td><td>' + esc(p.remark || '—') + '</td><td class="cell-person">' + esc(p.operator) + '</td></tr>';
+    }).join('') || U.emptyRow(8, '暂无收款记录');
+    return '<div class="table-wrap"><table class="table"><thead><tr><th>收款编号</th><th>订单</th><th>客户</th><th class="num">金额</th><th>方式</th><th>日期</th><th>备注</th><th>登记人</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table></div>' + U.pagination(pg, 'pay-page');
+  }
   Views.payments = function (ctx) {
     var role = ctx.user.role;
     if (role !== 'fin' && role !== 'boss') return Views.forbidden('「收款与应收」仅对财务人员与业务主管开放');
@@ -218,18 +233,6 @@
     } else {
       formHtml = '<div class="card"><div class="card-title">收款登记</div><div class="readonly-hint">业务主管视角为只读：收款登记由财务人员操作。</div></div>';
     }
-
-    /* 收款记录 */
-    var s = ui('payRecords');
-    var records = M.payments.slice().sort(function (a, b) { return b.date.localeCompare(a.date); });
-    var pg = U.page(records, s.page, 6);
-    var recRows = pg.rows.map(function (p) {
-      var linkedOrder = U.order(p.orderId);
-      return '<tr><td>' + p.id + '</td><td><a href="#/orders/' + p.orderId + '?tab=pay">' + p.orderId + '</a></td>' +
-        '<td>' + esc(linkedOrder ? U.customerName(linkedOrder.customerId) : '关联订单缺失') + '</td>' +
-        '<td class="num">' + U.fmt(p.amount) + ' ' + p.currency + '</td>' +
-        '<td>' + esc(p.method) + '</td><td class="cell-date">' + p.date + '</td><td>' + esc(p.remark || '—') + '</td><td class="cell-person">' + esc(p.operator) + '</td></tr>';
-    }).join('') || U.emptyRow(8, '暂无收款记录');
 
     /* 订单应收汇总 */
     var sumRows = M.orders.filter(function (o) { return o.status !== '已取消'; }).map(function (o) {
@@ -275,8 +278,7 @@
     return '<div class="page-head"><h2>收款与应收</h2></div>' +
       formHtml +
       '<div class="card"><div class="card-title">收款记录</div>' +
-      '<div class="table-wrap"><table class="table"><thead><tr><th>收款编号</th><th>订单</th><th>客户</th><th class="num">金额</th><th>方式</th><th>日期</th><th>备注</th><th>登记人</th></tr></thead>' +
-      '<tbody>' + recRows + '</tbody></table></div>' + U.pagination(pg, 'pay-page') + '</div>' +
+      '<div id="pay-records-content">' + paymentRecordsHtml() + '</div></div>' +
       '<div class="card"><div class="card-title">订单应收汇总<span class="sub">应收 / 已收 / 未收按订单币种独立统计</span></div>' +
       '<div class="table-wrap"><table class="table"><thead><tr><th>订单编号</th><th>客户</th><th class="center">币种</th><th class="num">应收</th><th class="num">已收</th><th class="num">未收</th><th>收款进度</th></tr></thead>' +
       '<tbody>' + sumRows + '</tbody></table></div></div>' +
@@ -285,7 +287,21 @@
       '<div class="table-wrap"><table class="table"><thead><tr><th>客户</th><th class="center">币种</th><th class="center">未收订单数</th><th class="num">未收合计</th><th>最早订单日期</th><th class="center">账龄风险</th></tr></thead>' +
       '<tbody>' + custRows + '</tbody></table></div></div>';
   };
-  Actions['pay-page'] = function (el) { ui('payRecords').page = +el.dataset.page; window.App.rerender(); };
+  Actions['pay-page'] = function (el) {
+    var container = document.getElementById && document.getElementById('pay-records-content');
+    if (!container) return;
+    var active = document.activeElement, returnFocus = active && container.contains(active);
+    var x = window.scrollX || 0, y = window.scrollY || 0;
+    // 末页记录较少时保留已显示区域高度，避免整页变短夹断滚动位置。
+    if (container.getBoundingClientRect) container.style.minHeight = Math.max(container.getBoundingClientRect().height, parseFloat(container.style.minHeight) || 0) + 'px';
+    ui('payRecords').page = +el.dataset.page;
+    container.innerHTML = paymentRecordsHtml();
+    if (returnFocus) {
+      var current = container.querySelector('[data-action="pay-page"][data-page="' + ui('payRecords').page + '"]');
+      if (current) current.focus({ preventScroll: true });
+    }
+    if (window.scrollTo) window.scrollTo(x, y);
+  };
 
   /* 订单切换时联动币种与未收金额提示 */
   document.addEventListener('change', function (e) {
@@ -349,9 +365,13 @@
       M.orderLogs[order.id] = logs;
       completedPaymentForms.add(form);
       delete processingPayments[paymentOrderId];
+      if (window.App.markDraftClean) window.App.markDraftClean();
       U.toast('收款已登记，订单已收/未收金额已更新');
       var destination = '#/payments?order=' + encodeURIComponent(paymentOrderId);
-      if (window.location && location.hash !== destination) location.hash = destination;
+      if (window.location && location.hash !== destination) {
+        if (window.App.requestNavigation) window.App.requestNavigation(destination);
+        else location.hash = destination;
+      }
       else window.App.rerender();
     });
   });

@@ -1,0 +1,2992 @@
+{
+  "baseline": "6ffd844c097c82b6e9a4f8655dd7d1cd48aff31a",
+  "method": "real IAB HTTP / native locators and browser Back/Forward; read-only DOM evaluation",
+  "interactions": [
+    {
+      "name": "quote sidebar cancellation click-time source retained",
+      "capturedScroll": 60,
+      "after": {
+        "focus": "qe-price-0",
+        "hash": "#/quotes/Q2026004/edit",
+        "price": "Infinity",
+        "scroll": 60,
+        "token": "1"
+      },
+      "pass": true
+    },
+    {
+      "name": "native Back repeated cancellation then confirmed exact target",
+      "before": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "浏览器返回保留输入",
+        "scroll": 46,
+        "token": "1"
+      },
+      "cancel": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "浏览器返回保留输入",
+        "scroll": 46,
+        "token": "1"
+      },
+      "secondBack": {
+        "hash": "#/quotes/Q2026004/edit",
+        "title": "离开报价 Q2026004？",
+        "token": "1"
+      },
+      "pass": true
+    },
+    {
+      "name": "native Forward cancellation then confirmation",
+      "before": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "前进保留输入",
+        "scroll": 46,
+        "token": "3"
+      },
+      "cancel": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "前进保留输入",
+        "scroll": 46,
+        "token": "3"
+      },
+      "pass": true
+    },
+    {
+      "name": "quotation successful save clean then direct detail",
+      "hash": "http://127.0.0.1:8001/index.html#/quotes/Q2026004",
+      "pass": true,
+      "visible": "Q2026004 remark 第5轮真实保存后的说明 and total22500USD; no discard modal"
+    },
+    {
+      "name": "flowbar leave + Escape keeps input",
+      "evidence": {
+        "captured": "0",
+        "hash": "#/quotes/Q2026004/edit",
+        "scroll": 0,
+        "title": "离开报价 Q2026004？"
+      },
+      "pass": true
+    },
+    {
+      "name": "brand leave cancellation",
+      "evidence": {
+        "hash": "#/quotes/Q2026004/edit",
+        "title": "离开报价 Q2026004？"
+      },
+      "pass": true
+    },
+    {
+      "name": "search Enter opens same discard guard and retains source on cancel",
+      "evidence": {
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "全局出口保留输入",
+        "title": "离开报价 Q2026004？"
+      },
+      "pass": true
+    },
+    {
+      "name": "bell target cancel retains source",
+      "evidence": {
+        "hash": "#/quotes/Q2026004/edit",
+        "title": "离开报价 Q2026004？"
+      },
+      "pass": true
+    },
+    {
+      "name": "dirty logout uses existing one confirmation, cancel retains input",
+      "evidence": {
+        "dialogs": 1,
+        "dirtyStatus": "有未提交输入 · 离开前将提示",
+        "title": "退出登录"
+      },
+      "pass": true
+    },
+    {
+      "name": "customer form page return cancel retains current field",
+      "evidence": {
+        "captured": "0",
+        "hash": "#/customers/C001",
+        "title": "离开客户资料？"
+      },
+      "pass": true
+    },
+    {
+      "name": "financial history pagination preserves failed input/errors/context and visited area height",
+      "before": {
+        "amount": "1.005",
+        "currency": "USD",
+        "desc": "p-out-hint p-amount-error",
+        "error": "收款金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "hash": "#/payments",
+        "order": "SO2026001",
+        "recordsHeight": 430.84375,
+        "remark": "分页后仍保留登记说明",
+        "scroll": 257
+      },
+      "after": {
+        "amount": "1.005",
+        "currency": "USD",
+        "desc": "p-out-hint p-amount-error",
+        "error": "收款金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "focusPage": "2",
+        "hash": "#/payments",
+        "minHeight": "430.844px",
+        "order": "SO2026001",
+        "recordsHeight": 430.84375,
+        "remark": "分页后仍保留登记说明",
+        "rows": 1,
+        "scroll": 835
+      },
+      "pass": true
+    },
+    {
+      "name": "financial leave confirmation bound to visible selected order and retains form",
+      "evidence": {
+        "amount": "1.005",
+        "hash": "#/payments",
+        "order": "SO2026001",
+        "sourceScroll": "534",
+        "title": "离开收款登记 · SO2026001？"
+      },
+      "pass": true
+    },
+    {
+      "name": "direct hash unknown fallback restores source URL/input on cancel (history stack not promised)",
+      "before": {
+        "amount": "1.005",
+        "error": "收款金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "hash": "#/payments",
+        "order": "SO2026001",
+        "remark": "分页后仍保留登记说明"
+      },
+      "after": {
+        "amount": "1.005",
+        "error": "收款金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "hash": "#/payments",
+        "order": "SO2026001",
+        "remark": "分页后仍保留登记说明"
+      },
+      "pass": true
+    },
+    {
+      "name": "payment after pagination succeeds once, clean URL preserves selected order",
+      "evidence": {
+        "firstRecord": "PAY202610078SO2026001太平洋进口公司（Pacific Imports LLC）1.00 USD电汇 T/T2026-10-07分页后仍保留登记说明赵倩",
+        "hash": "#/payments?order=SO2026001",
+        "hint": "实时未收 12,099.00 USD",
+        "order": "SO2026001",
+        "status": "当前输入未改动"
+      },
+      "pass": true
+    },
+    {
+      "name": "finance order has no inaccessible source links; product returns explicit order items",
+      "evidence": {
+        "hash": "#/orders/SO2026001?tab=items",
+        "heading": "订单 SO2026001 执行中"
+      },
+      "pass": true
+    },
+    {
+      "name": "document specific discard-modification cancel keeps same version/fields",
+      "before": {
+        "focus": "df-remark",
+        "hash": "#/documents/D-CI2026004-V1",
+        "marks": "ANDES\nSO2026005\nSAN ANTONIO\nC/NO. 1-220",
+        "remark": "第5轮包装备注未提交",
+        "scroll": 667,
+        "version": "V1"
+      },
+      "after": {
+        "focus": "df-remark",
+        "hash": "#/documents/D-CI2026004-V1",
+        "marks": "ANDES\nSO2026005\nSAN ANTONIO\nC/NO. 1-220",
+        "remark": "第5轮包装备注未提交",
+        "scroll": 582,
+        "version": "V1"
+      },
+      "pass": true
+    },
+    {
+      "name": "document global navigation single discard guard",
+      "evidence": {
+        "hash": "#/documents/D-CI2026004-V1",
+        "source": "281",
+        "title": "离开商业发票 CI2026004 V1？"
+      },
+      "pass": true
+    },
+    {
+      "name": "document successful draft save clears dirty and returns same version readonly",
+      "evidence": {
+        "editing": false,
+        "hash": "#/documents/D-CI2026004-V1",
+        "history": "2026-10-07 04:18王芳保存草稿（修订唛头/包装/备注）2026-09-12 15:30王芳创建单证 V1",
+        "modal": false,
+        "remarkVisible": true
+      },
+      "pass": true
+    },
+    {
+      "name": "boss visible existing permissions navigation and no quote edit",
+      "pass": true,
+      "evidence": "8 leaves all bottom≤708.38/1000; zero edit links"
+    },
+    {
+      "name": "boss audit opinion nativeBack cancel retains paper exactly and field/scroll",
+      "guard": {
+        "captured": "122",
+        "hash": "#/documents/D-CI2026001-V1",
+        "title": "离开商业发票 CI2026001 V1？"
+      },
+      "before": {
+        "focus": "audit-opinion",
+        "hash": "#/documents/D-CI2026001-V1",
+        "opinion": "第5轮审核意见未提交验证",
+        "scroll": 122,
+        "paperLength": 2213
+      },
+      "after": {
+        "focus": "audit-opinion",
+        "hash": "#/documents/D-CI2026001-V1",
+        "opinion": "第5轮审核意见未提交验证",
+        "scroll": 122,
+        "paperLength": 2213
+      },
+      "paperEqual": true,
+      "pass": true
+    },
+    {
+      "name": "boss audit success clears input guard with one modal; transaction HTML preserved, signer updated",
+      "evidence": {
+        "hash": "#/documents/D-CI2026001-V1",
+        "history": "2026-10-07 04:20周建国审核通过第5轮审核意见未提交验证2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1",
+        "modal": false,
+        "opinionField": false,
+        "status": "该版本曾审核通过：第5轮审核意见未提交验证（周建国 · 2026-10-07）。当前满足导出演示条件。"
+      },
+      "paperEqual": false,
+      "pass": true,
+      "onlyExpectedSignatureChanged": true
+    },
+    {
+      "name": "unchanged document editor discard returns readonly without confirmation",
+      "pass": true
+    },
+    {
+      "name": "malformed encoded hash rejected before clearing draft; source URL/token/input/status retained",
+      "before": {
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "非法地址仍保留的输入",
+        "status": "有未提交输入 · 离开前将提示",
+        "token": "1"
+      },
+      "after": {
+        "hash": "#/quotes/Q2026004/edit",
+        "modal": false,
+        "remark": "非法地址仍保留的输入",
+        "status": "有未提交输入 · 离开前将提示",
+        "token": "1",
+        "warning": [
+          "页面地址参数的编码无效，请核对地址后重试。"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "name": "malformed UTF8 while existing leave modal invalidates old ticket; valid confirmation still works",
+      "evidence": {
+        "hash": "#/quotes/Q2026004/edit",
+        "loading": 0,
+        "modal": false,
+        "remark": "非法地址仍保留的输入",
+        "status": "有未提交输入 · 离开前将提示",
+        "token": "1"
+      },
+      "pass": true
+    },
+    {
+      "name": "invalid encoded target has persistent nearby full reason without replacing the form",
+      "evidence": {
+        "hash": "#/quotes/Q2026004/edit",
+        "modal": false,
+        "notice": "未前往目标页面：页面地址参数的编码无效，请核对地址后重试。 当前页面输入已保留。",
+        "remark": "无效目标地址不会清除这段输入",
+        "role": "alert",
+        "status": "有未提交输入 · 离开前将提示",
+        "token": "1"
+      },
+      "pass": true
+    },
+    {
+      "name": "post-address-fix native Forward cancellation on settled known history chain",
+      "before": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "修复后的稳定历史输入",
+        "scroll": 56,
+        "token": "2"
+      },
+      "source": {
+        "hash": "#/quotes/Q2026004/edit",
+        "source": "56"
+      },
+      "after": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "修复后的稳定历史输入",
+        "scroll": 56,
+        "token": "2"
+      },
+      "pass": true
+    },
+    {
+      "name": "native Ctrl doc data-action link opens separate permitted ledger, source edit stays untouched",
+      "before": {
+        "hash": "#/documents/D-CI2026004-V1",
+        "marks": "Ctrl另开来源时保留的唛头",
+        "status": "有未提交输入 · 离开前将提示"
+      },
+      "after": {
+        "hash": "#/documents/D-CI2026004-V1",
+        "marks": "Ctrl另开来源时保留的唛头",
+        "modal": false,
+        "status": "有未提交输入 · 离开前将提示"
+      },
+      "newTab": {
+        "forbidden": false,
+        "heading": "单证管理",
+        "role": "单证员"
+      },
+      "pass": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    }
+  ],
+  "images": [
+    {
+      "file": "quotation-first-1280.png",
+      "stage": "process",
+      "hash": "#/quotes/Q2026004/edit",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 46,
+      "actions": [
+        {
+          "name": "保存报价",
+          "bottom": 923.140625
+        }
+      ],
+      "note": "initial layout; scroll46 cannot be called normal first-screen measurement"
+    },
+    {
+      "file": "quotation-leave-first-1280.png",
+      "stage": "process",
+      "hash": "#/quotes/Q2026004/edit",
+      "width": 1280,
+      "height": 1000,
+      "note": "initial sidebar leave modal; before focusin/scroll-method refinements; no exact modal-bottom/scroll measurement recorded"
+    },
+    {
+      "file": "quotation-refined-1280.png",
+      "actions": [
+        {
+          "bottom": 969.140625,
+          "disabled": false,
+          "name": "保存报价"
+        }
+      ],
+      "hash": "#/quotes/Q2026004/edit",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "当前输入未改动",
+      "title": "编辑报价 · Q2026004",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "quotation-leave-refined-1280.png",
+      "actions": [
+        {
+          "bottom": 969.140625,
+          "disabled": false,
+          "name": "保存报价"
+        },
+        {
+          "bottom": 617.80029296875,
+          "disabled": false,
+          "name": "放弃输入并离开"
+        }
+      ],
+      "hash": "#/quotes/Q2026004/edit",
+      "height": 1000,
+      "modal": "离开报价 Q2026004？",
+      "opacity": "1",
+      "scroll": 0,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "编辑报价 · Q2026004",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "payments-first-1280.png",
+      "actions": [
+        {
+          "bottom": 775.671875,
+          "disabled": false,
+          "name": "登记收款"
+        }
+      ],
+      "hash": "#/payments",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "当前输入未改动",
+      "title": "收款与应收",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "payments-history-page2-1280.png",
+      "actions": [
+        {
+          "bottom": -7.234375,
+          "disabled": false,
+          "name": "登记收款"
+        }
+      ],
+      "hash": "#/payments",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 835,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "收款与应收",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "product-order-source-1280.png",
+      "actions": [],
+      "hash": "#/products/P001?order=SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "商品详情 · 不锈钢保温杯",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "document-discard-first-1280.png",
+      "actions": [
+        {
+          "bottom": 341.578125,
+          "disabled": false,
+          "name": "保存草稿"
+        },
+        {
+          "bottom": 617.796875,
+          "disabled": false,
+          "name": "放弃修改"
+        }
+      ],
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modal": "放弃商业发票 CI2026004 V1的修改？",
+      "opacity": "1",
+      "scroll": 582,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "boss-quotes-first-1280.png",
+      "actions": [],
+      "hash": "#/quotes",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "报价管理",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "boss-audit-first-1280.png",
+      "actions": [
+        {
+          "bottom": 605.375,
+          "disabled": false,
+          "name": "审核通过"
+        }
+      ],
+      "hash": "#/documents/D-CI2026001-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 122,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "商业发票 · CI2026001 V1 待审核",
+      "width": 1280,
+      "stage": "process"
+    },
+    {
+      "file": "boss-payments-final-1440.png",
+      "actions": [],
+      "hash": "#/payments",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "收款与应收",
+      "width": 1440,
+      "stage": "final"
+    },
+    {
+      "file": "boss-audit-final-1440.png",
+      "actions": [
+        {
+          "bottom": 573.984375,
+          "disabled": false,
+          "name": "审核通过"
+        }
+      ],
+      "hash": "#/documents/D-CI2026001-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "商业发票 · CI2026001 V1 待审核",
+      "width": 1440,
+      "stage": "final"
+    },
+    {
+      "file": "boss-audit-leave-final-1440.png",
+      "actions": [
+        {
+          "bottom": 573.984375,
+          "disabled": false,
+          "name": "审核通过"
+        },
+        {
+          "bottom": 617.796875,
+          "disabled": false,
+          "name": "放弃输入并离开"
+        }
+      ],
+      "hash": "#/documents/D-CI2026001-V1",
+      "height": 1000,
+      "modal": "离开商业发票 CI2026001 V1？",
+      "opacity": "1",
+      "scroll": 0,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "商业发票 · CI2026001 V1 待审核",
+      "width": 1440,
+      "stage": "final",
+      "modalComputed": {
+        "opacity": "1",
+        "transform": "none"
+      }
+    },
+    {
+      "file": "boss-quotes-final-1280.png",
+      "actions": [],
+      "hash": "#/quotes",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "报价管理",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": null
+    },
+    {
+      "file": "quotation-final-1280.png",
+      "actions": [
+        {
+          "bottom": 969.140625,
+          "disabled": false,
+          "name": "保存报价"
+        }
+      ],
+      "hash": "#/quotes/Q2026004/edit",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "当前输入未改动",
+      "title": "编辑报价 · Q2026004",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": null
+    },
+    {
+      "file": "quotation-final-1440.png",
+      "actions": [
+        {
+          "bottom": 971.140625,
+          "disabled": false,
+          "name": "保存报价"
+        }
+      ],
+      "hash": "#/quotes/Q2026004/edit",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "当前输入未改动",
+      "title": "编辑报价 · Q2026004",
+      "width": 1440,
+      "stage": "final",
+      "modalComputed": null
+    },
+    {
+      "file": "quotation-leave-final-1280.png",
+      "actions": [
+        {
+          "bottom": 969.140625,
+          "disabled": false,
+          "name": "保存报价"
+        },
+        {
+          "bottom": 617.796875,
+          "disabled": false,
+          "name": "放弃输入并离开"
+        }
+      ],
+      "hash": "#/quotes/Q2026004/edit",
+      "height": 1000,
+      "modal": "离开报价 Q2026004？",
+      "opacity": "1",
+      "scroll": 0,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "编辑报价 · Q2026004",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": {
+        "opacity": "1",
+        "transform": "none"
+      }
+    },
+    {
+      "file": "customer-leave-final-1280.png",
+      "actions": [
+        {
+          "bottom": 617.796875,
+          "disabled": false,
+          "name": "放弃输入并离开"
+        }
+      ],
+      "hash": "#/customers/C001",
+      "height": 1000,
+      "modal": "离开客户资料 C001 · 环球贸易公司？",
+      "opacity": "1",
+      "scroll": 0,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "客户详情 · 环球贸易公司",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": {
+        "opacity": "1",
+        "transform": "none"
+      }
+    },
+    {
+      "file": "payments-final-1280.png",
+      "actions": [
+        {
+          "bottom": 775.671875,
+          "disabled": false,
+          "name": "登记收款"
+        }
+      ],
+      "hash": "#/payments?order=SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "当前输入未改动",
+      "title": "收款与应收",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": null
+    },
+    {
+      "file": "payments-final-1440.png",
+      "actions": [
+        {
+          "bottom": 672.171875,
+          "disabled": false,
+          "name": "登记收款"
+        }
+      ],
+      "hash": "#/payments?order=SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "收款与应收",
+      "width": 1440,
+      "stage": "final",
+      "modalComputed": null,
+      "selectedOrder": "SO2026003",
+      "selectedCurrency": "EUR",
+      "note": "selection is unsubmitted; URL still original SO1 query until successful registration"
+    },
+    {
+      "file": "payments-leave-final-1280.png",
+      "actions": [
+        {
+          "bottom": 775.671875,
+          "disabled": false,
+          "name": "登记收款"
+        },
+        {
+          "bottom": 617.796875,
+          "disabled": false,
+          "name": "放弃输入并离开"
+        }
+      ],
+      "hash": "#/payments?order=SO2026001",
+      "height": 1000,
+      "modal": "离开收款登记 · SO2026003？",
+      "opacity": "1",
+      "scroll": 0,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "收款与应收",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": {
+        "opacity": "1",
+        "transform": "none"
+      }
+    },
+    {
+      "file": "product-order-source-final-1280.png",
+      "actions": [],
+      "hash": "#/products/P001?order=SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "商品详情 · 不锈钢保温杯",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": null
+    },
+    {
+      "file": "document-discard-final-1280.png",
+      "actions": [
+        {
+          "bottom": 347.375,
+          "disabled": false,
+          "name": "保存草稿"
+        },
+        {
+          "bottom": 617.796875,
+          "disabled": false,
+          "name": "放弃修改"
+        }
+      ],
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modal": "放弃商业发票 CI2026004 V1的修改？",
+      "opacity": "1",
+      "scroll": 275,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": {
+        "opacity": "1",
+        "transform": "none"
+      }
+    },
+    {
+      "file": "document-edit-final-1280.png",
+      "actions": [
+        {
+          "bottom": 622.375,
+          "disabled": false,
+          "name": "保存草稿"
+        }
+      ],
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "当前输入未改动",
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1280,
+      "stage": "final",
+      "modalComputed": null
+    },
+    {
+      "file": "document-edit-final-1440.png",
+      "actions": [
+        {
+          "bottom": 468.984375,
+          "disabled": false,
+          "name": "保存草稿"
+        }
+      ],
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "status": "当前输入未改动",
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1440,
+      "stage": "final",
+      "modalComputed": null
+    },
+    {
+      "file": "navigation-invalid-address-final-1440.png",
+      "actions": [
+        {
+          "bottom": 972.640625,
+          "disabled": false,
+          "name": "保存报价"
+        }
+      ],
+      "hash": "#/quotes/Q2026004/edit",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 56,
+      "status": "有未提交输入 · 离开前将提示",
+      "title": "编辑报价 · Q2026004",
+      "width": 1440,
+      "stage": "final",
+      "modalComputed": null
+    }
+  ],
+  "corrections": [
+    {
+      "issue": "browser reload retained old base stylesheet: DOM CSSOM no html gutter rule; HTTP direct read served current rule",
+      "action": "verify current assets on fresh loopback origin port8001 with no-store static test server; do not count stale asset attempts as final pass"
+    },
+    {
+      "issue": "pre-locator scroll46 vs after60 initially treated as modal offset",
+      "evidence": "guard DOM captured click-time source scroll60; locator scroll adjustment preceded handler; cancel after60",
+      "resolution": "compare source captured at actual click event; retain field focus and guarded onClose scroll restoration; no claim pre-locator position unchanged"
+    },
+    {
+      "issue": "initial audit-success expectation of identical whole paper HTML was overbroad",
+      "evidence": "actual difference only Approved by pending→周建国; exact comparison with this expected signature replacement succeeds",
+      "action": "do not claim whole paper immutable across approval; verify transaction HTML unchanged with expected signer metadata update"
+    },
+    {
+      "issue": "post-fix native history probe entered an editor and immediately typed while route entrance was settling; scroll59→56 differed",
+      "action": "not counted as pass; repeat on fresh known history chain after workspace opacity1 and compare actual guard source scroll"
+    }
+  ],
+  "unverified": [
+    "file://",
+    "cross-browser",
+    "screen-reader",
+    "unknown pre-load history stack restoration",
+    "production services",
+    "native beforeunload refresh/close dialog",
+    "runtime reduced-motion mode"
+  ],
+  "failures": [],
+  "initialObservations": [
+    {
+      "name": "quotation invalid input + sidebar cancel",
+      "before": {
+        "error": "第 1 行单价必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "focus": "qe-price-0",
+        "hash": "#/quotes/Q2026004/edit",
+        "price": "Infinity",
+        "remark": "第5轮未提交输入",
+        "scroll": 46,
+        "token": "1"
+      },
+      "after": {
+        "error": "第 1 行单价必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "price": "Infinity",
+        "remark": "第5轮未提交输入",
+        "scroll": 60,
+        "token": "1"
+      },
+      "result": "retained hash/token/value/error; focus differed before focusin refinement"
+    },
+    {
+      "name": "quotation invalid sidebar cancel after focus/scroll refinement",
+      "before": {
+        "error": "第 1 行单价必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "focus": "qe-price-0",
+        "hash": "#/quotes/Q2026004/edit",
+        "price": "Infinity",
+        "remark": "第5轮未提交输入",
+        "scroll": 46,
+        "token": "1"
+      },
+      "after": {
+        "error": "第 1 行单价必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "focus": "qe-price-0",
+        "hash": "#/quotes/Q2026004/edit",
+        "price": "Infinity",
+        "remark": "第5轮未提交输入",
+        "scroll": 60,
+        "token": "1"
+      },
+      "pass": false
+    },
+    {
+      "name": "current assets / quotation error sidebar cancel",
+      "before": {
+        "error": "第 1 行单价必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "focus": "qe-price-0",
+        "hash": "#/quotes/Q2026004/edit",
+        "price": "Infinity",
+        "remark": "第5轮保留原错误输入",
+        "scroll": 46,
+        "token": "1"
+      },
+      "after": {
+        "error": "第 1 行单价必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+        "focus": "qe-price-0",
+        "hash": "#/quotes/Q2026004/edit",
+        "price": "Infinity",
+        "remark": "第5轮保留原错误输入",
+        "scroll": 60,
+        "token": "1"
+      },
+      "pass": false
+    },
+    {
+      "name": "native Forward cancellation remains intact after malformed-address recovery",
+      "before": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "地址修复后的历史输入",
+        "scroll": 59,
+        "token": "2"
+      },
+      "after": {
+        "focus": "qe-remark",
+        "hash": "#/quotes/Q2026004/edit",
+        "remark": "地址修复后的历史输入",
+        "scroll": 56,
+        "token": "2"
+      },
+      "pass": false
+    }
+  ],
+  "console": [],
+  "summary": {
+    "distinctRoleRoutes": 100,
+    "actualLayouts": 200,
+    "layoutFailures": 0,
+    "passedInteractionGroups": 27,
+    "finalImages": 16,
+    "processImages": 10
+  },
+  "staticTestOrigin": "http://127.0.0.1:8001",
+  "codeAdjacentUpdate": {
+    "navigationScenarios": 33,
+    "addressValidation": "preflight and safe decode, retains source DOM/draft; persistent nearby full reason",
+    "layoutMatrix": "200 valid-route checks recorded before adjacent parser patch; no role/style path changes; new invalid target and post-fix native history tested separately"
+  }
+}

@@ -295,6 +295,7 @@
     var previousFocus = U.modalReturnFocus || document.activeElement;
     root.innerHTML = '';
     U.modalReturnFocus = previousFocus;
+    U.modalOnClose = opts.onClose || null;
     var overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
     overlay.innerHTML =
@@ -308,7 +309,7 @@
     document.getElementById('app').inert = true;
     document.body.style.overflow = 'hidden';
     var focusTarget = overlay.querySelector('input:not([type="hidden"]),textarea,select') || overlay.querySelector('[data-close]');
-    if (focusTarget) focusTarget.focus();
+    if (focusTarget) focusTarget.focus({ preventScroll: true });
     overlay.addEventListener('mousedown', function (e) {
       if (e.target === overlay && !opts.persistent) U.closeModal();
     });
@@ -323,17 +324,19 @@
     root.innerHTML = '';
     document.getElementById('app').inert = false;
     document.body.style.overflow = '';
-    if (U.modalReturnFocus && U.modalReturnFocus.isConnected) U.modalReturnFocus.focus();
+    if (U.modalReturnFocus && U.modalReturnFocus.isConnected) U.modalReturnFocus.focus({ preventScroll: true });
     U.modalReturnFocus = null;
+    var onClose = U.modalOnClose; U.modalOnClose = null;
+    if (onClose) onClose();
   };
   /* 确认框，onOk 返回 false 可阻止关闭；返回 Promise 时进入 loading */
   U.confirm = function (opts) {
     var boxClass = opts.danger ? 'danger-box' : 'warn-box';
     var body = '<div class="' + boxClass + '">' + opts.message + '</div>' + (opts.extra || '');
     var footer =
-      '<button class="btn" data-close="1">取消</button>' +
+      '<button class="btn" data-close="1">' + U.esc(opts.cancelText || '取消') + '</button>' +
       '<button class="btn ' + (opts.danger ? 'btn-danger' : 'btn-primary') + '" data-ok="1">' + U.esc(opts.okText || '确 定') + '</button>';
-    var overlay = U.openModal({ title: opts.title || '操作确认', body: body, footer: footer, persistent: true });
+    var overlay = U.openModal({ title: opts.title || '操作确认', body: body, footer: footer, persistent: true, onClose: opts.onClose });
     overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
       var btn = e.currentTarget;
       if (!opts.onOk) { U.closeModal(); return; }

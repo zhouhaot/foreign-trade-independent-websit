@@ -1,0 +1,92 @@
+[
+  {
+    "script": "verify-cancellation.cjs",
+    "exitCode": 0,
+    "output": "PASS cancellation/re-document approval, history preservation, delayed guards, duplicate decisions and snapshot creation"
+  },
+  {
+    "script": "verify-change-request.cjs",
+    "exitCode": 0,
+    "output": "PASS: sales change request 25 modal/Promise cases; pending/duplicates, roles/order eligibility, delayed actor/object/status/currency guard, cancellation prior state, immutable submitted inputs, full MOCK refusal atomicity (Node DOM fixture only)"
+  },
+  {
+    "script": "verify-context-navigation.cjs",
+    "exitCode": 0,
+    "output": "PASS: context navigation 194 permitted-link/source cases and 15 successful-clean/failed-dirty integration cases (actual views, submit/modal/Promise Node DOM fixture only)"
+  },
+  {
+    "script": "verify-decimal-contract.cjs",
+    "exitCode": 0,
+    "output": "PASS decimal inputs, fractional quantities/exact lines, overflow, calendar dates, pure calculations and currency/overpayment diagnostics"
+  },
+  {
+    "script": "verify-demo.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"result\": \"PASS\",\n  \"resources\": 12,\n  \"quotes\": 9,\n  \"documents\": 11,\n  \"amounts\": [\n    {\n      \"order\": \"SO2026001\",\n      \"currency\": \"USD\",\n      \"total\": 24100,\n      \"received\": 12000,\n      \"outstanding\": 12100\n    },\n    {\n      \"order\": \"SO2026002\",\n      \"currency\": \"USD\",\n      \"total\": 28400,\n      \"received\": 28400,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026003\",\n      \"currency\": \"EUR\",\n      \"total\": 19500,\n      \"received\": 0,\n      \"outstanding\": 19500\n    },\n    {\n      \"order\": \"SO2026004\",\n      \"currency\": \"EUR\",\n      \"total\": 30500,\n      \"received\": 30500,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026005\",\n      \"currency\": \"USD\",\n      \"total\": 28150,\n      \"received\": 0,\n      \"outstanding\": 28150\n    },\n    {\n      \"order\": \"SO2026006\",\n      \"currency\": \"EUR\",\n      \"total\": 20000,\n      \"received\": 6000,\n      \"outstanding\": 14000\n    },\n    {\n      \"order\": \"SO2026007\",\n      \"currency\": \"USD\",\n      \"total\": 41550,\n      \"received\": 20000,\n      \"outstanding\": 21550\n    }\n  ],\n  \"scope\": \"静态资源、语法及样例金额；不替代浏览器与业务流程验收\"\n}"
+  },
+  {
+    "script": "verify-document-lifecycle.cjs",
+    "exitCode": 0,
+    "output": "PASS: document lifecycle 90 async role/state/cancellation/race cases + normal transitions, immutable snapshots, finance isolation, latest/conflict/reform/audit/export rules (Node VM only)"
+  },
+  {
+    "script": "verify-document-snapshots.cjs",
+    "exitCode": 0,
+    "output": "PASS: all demo CI/PL snapshots survive seller/customer/product/order mutation; inherited revision, finance recreation, immutable detached copies, role edit bounds, totals/currency, refresh reset (Node VM only)"
+  },
+  {
+    "script": "verify-document-workspace.cjs",
+    "exitCode": 0,
+    "output": "PASS: document workspace local version directory/current/latest/history, action precedence, source disclosure, real app delegated anchor preventDefault, dirty audit/packing cancel-confirm navigation, focus node/input preservation (Node DOM fixture only)"
+  },
+  {
+    "script": "verify-draft-adapters.cjs",
+    "exitCode": 0,
+    "output": "PASS: 17 draft adapter scenarios; real app click delegation / submit handlers / Promise timers, local pagination node/input/error/focus preservation (Node DOM fixture; shared guard semantics separately verified)"
+  },
+  {
+    "script": "verify-login.cjs",
+    "exitCode": 0,
+    "output": "PASS: five-role dropdown template, default selection, label and department hint\nPASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state\nPASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard\nPASS: account/password required validation and no login on invalid fields\nPASS: invalid-role submit rejection, feedback and focus\nScope: Node VM template/action checks only; native select interaction and visual layout require browser verification."
+  },
+  {
+    "script": "verify-navigation-drafts.cjs",
+    "exitCode": 0,
+    "output": "PASS: 33 draft navigation scenarios (actual app handlers; asynchronous Node DOM/history fixture, not browser history certification)"
+  },
+  {
+    "script": "verify-order-workspace.cjs",
+    "exitCode": 0,
+    "output": "PASS: A workspace role actions, independent progress and currencies, selection/page/filter empty state, view toggles, draft-input preservation, and unchanged business data (Node VM)"
+  },
+  {
+    "script": "verify-payments-contract.cjs",
+    "exitCode": 0,
+    "output": "PASS: 71 payment contract scenarios; real Promise/timers + native submit/change handlers (Node VM; no browser/server transaction claims)"
+  },
+  {
+    "script": "verify-progress-stages.cjs",
+    "exitCode": 0,
+    "output": "PASS: no-document, mixed returned/drafting, all reviewing, export eligibility, latest-version aggregate and shared detail stages; payment facts unchanged (Node VM)"
+  },
+  {
+    "script": "verify-quotation-contract.cjs",
+    "exitCode": 0,
+    "output": "PASS: quotation contract 103 actual input/submit/modal/Promise cases; decimal preview, fractional-cent/overflow atomic refusal, dates/dictionary/associations, actor/object/content drift, cancel/duplicates, USD/EUR fractional quantity source-consistent order (Node DOM fixture only)"
+  },
+  {
+    "script": "verify-repricing.cjs",
+    "exitCode": 0,
+    "output": "PASS: atomic repricing, precision/non-finite input, USD/EUR isolation, received floor, roles/self-review, duplicate/reject/cancel and deferred revalidation (Node VM)"
+  },
+  {
+    "script": "verify-session.cjs",
+    "exitCode": 0,
+    "output": "PASS: five-role read-only identity, cancellation/logout, storage and transient state clearing, protected-route return, and re-login (Node VM)"
+  },
+  {
+    "script": "verify-views.cjs",
+    "exitCode": 0,
+    "output": "PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)\nPASS: quotation/order and controlled document revision cancellation, reconciliation, and repeat guards\nPASS: CI/PL document editing and saving enforce role, version status, and deferred role changes"
+  }
+]

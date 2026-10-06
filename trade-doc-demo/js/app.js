@@ -22,7 +22,11 @@
     ] },
     { label: '订单查询', icon: 'file', hash: '#/orders', match: ['orders'], roles: ['doc', 'fin', 'boss'] },
     { label: '单证管理', icon: 'edit', hash: '#/documents', match: ['documents'], roles: ['doc', 'boss'] },
-    { label: '收款与应收', icon: 'wallet', hash: '#/payments', match: ['payments'], roles: ['fin'] },
+    { label: '业务查询', icon: 'briefcase', roles: ['boss'], children: [
+      { label: '询盘查询', hash: '#/inquiries', match: ['inquiries'] },
+      { label: '报价查询', hash: '#/quotes', match: ['quotes'] }
+    ] },
+    { label: '收款与应收', icon: 'wallet', hash: '#/payments', match: ['payments'], roles: ['fin', 'boss'] },
     { label: '审核与异常', icon: 'shield', hash: '#/approvals', match: ['approvals'], roles: ['boss', 'sales', 'doc', 'fin'] },
     { label: '统计分析', icon: 'chart', hash: '#/stats', match: ['stats'], roles: ['boss'] },
     { label: '系统管理', icon: 'settings', roles: ['admin'], children: [
@@ -58,17 +62,19 @@
     { seg: ['system', 'dicts'], view: 'sysDicts', roles: ['admin'], crumb: ['系统管理', '基础字典'] }
   ];
 
-  function parseHash() {
-    var raw = location.hash || '#/dashboard';
+  function parseHash(hash) {
+    var raw = (hash === undefined ? location.hash : hash) || '#/dashboard';
     var noHash = raw.replace(/^#/, '');
     var qIdx = noHash.indexOf('?');
     var path = qIdx >= 0 ? noHash.slice(0, qIdx) : noHash;
     var query = {};
     if (qIdx >= 0) {
-      noHash.slice(qIdx + 1).split('&').forEach(function (kv) {
-        var p = kv.split('=');
-        if (p[0]) query[decodeURIComponent(p[0])] = decodeURIComponent(p[1] || '');
-      });
+      try {
+        noHash.slice(qIdx + 1).split('&').forEach(function (kv) {
+          var p = kv.split('=');
+          if (p[0]) query[decodeURIComponent(p[0])] = decodeURIComponent(p[1] || '');
+        });
+      } catch (error) { return { segs: [], query: {}, error: '页面地址参数的编码无效，请核对地址后重试。' }; }
     }
     var segs = path.split('/').filter(function (s) { return s !== ''; });
     return { segs: segs, query: query };
@@ -167,7 +173,7 @@
       return '<a class="flow-step' + (active ? ' active' : '') + '" href="' + item[1] + '"' + (active ? ' aria-current="page"' : '') + '><span class="flow-index">' + (i + 1) + '</span>' + item[0] + '</a>';
     }).join('') + '</div><span class="flow-note">' + note + '</span></nav>';
   }
-  Actions['bell-goto'] = function (el) { location.hash = el.dataset.link; };
+  Actions['bell-goto'] = function (el) { window.App.requestNavigation(el.dataset.link); };
 
   /* 仅索引当前角色可访问的本地样例，不发起接口请求。 */
   function searchEntries() {
@@ -205,13 +211,14 @@
     document.querySelector('.modal').classList.add('search-dialog');
     renderSearch('');
   };
-  Actions['search-goto'] = function (el) { U.closeModal(); location.hash = el.dataset.link; };
+  Actions['search-goto'] = function (el) { U.closeModal(); window.App.requestNavigation(el.dataset.link); };
   Actions['logout'] = function () {
     U.confirm({
       title: '退出登录',
       message: '退出后需重新登录才能进入工作台或使用其他账号。未保存的页面输入将清除；演示期间已提交的内存数据保留到页面刷新前。',
       okText: '退出登录',
       onOk: function () {
+        markDraftClean();
         U.closeModal();
         U.clearUser();
         window.App.user = null;
@@ -227,11 +234,192 @@
 
   /* ---------------- 主渲染 ---------------- */
   var lastRoute = '', lastUser = '';
+  // 仅保留当前 DOM 的进入/成功提交基线，不保存草稿或业务数据。
+  var draftBaseline = [], draftFocus = null, draftGeneration = 0;
+  var navigationEpoch = String(Date.now()) + '-' + Math.random().toString(36).slice(2);
+  var acceptedHash = location.hash || '#/dashboard', acceptedIndex = 0;
+  var restoringHistory = null, approvedHistory = null;
+  function draftControls() {
+    return Array.prototype.filter.call(document.querySelectorAll('input,select,textarea'), function (field) {
+      if (field.disabled || field.readOnly) return false;
+      return !!field.closest('#qe-form,#pay-form,#cust-form') || field.id === 'audit-opinion' || field.id.indexOf('df-') === 0;
+    });
+  }
+  function draftValue(field) {
+    var value = field.type === 'checkbox' || field.type === 'radio' ? String(field.checked) : String(field.value);
+    return field.id.indexOf('df-') === 0 || field.id === 'audit-opinion' ? value.trim() : value;
+  }
+  function draftDirty() {
+    var fields = draftControls();
+    if (fields.length !== draftBaseline.length) return fields.length > 0 || draftBaseline.length > 0;
+    return fields.some(function (field, i) { return field !== draftBaseline[i].field || draftValue(field) !== draftBaseline[i].value; });
+  }
+  function updateDraftStatus() {
+    var status = document.getElementById('draft-status');
+    if (status) {
+      var dirty = draftDirty(), text = dirty ? '有未提交输入 · 离开前将提示' : '当前输入未改动';
+      if (status.textContent !== text) status.textContent = text;
+      status.classList.toggle('has-changes', dirty);
+    }
+  }
+  function markDraftClean() {
+    draftBaseline = draftControls().map(function (field) { return { field: field, value: draftValue(field) }; });
+    draftGeneration++;
+    draftFocus = null;
+    updateDraftStatus();
+  }
+  function installDraftStatus() {
+    markDraftClean();
+    if (!draftBaseline.length) return;
+    var description = document.querySelector('.page-description') || document.querySelector('.page-head');
+    if (!description || !document.createElement) return;
+    var status = document.createElement('span');
+    status.id = 'draft-status'; status.className = 'draft-status'; status.setAttribute('role', 'status');
+    if (description.classList.contains('page-head')) {
+      var heading = description.querySelector('h2'), group = document.createElement('div');
+      group.className = 'page-title-group';
+      if (heading) { description.insertBefore(group, heading); group.appendChild(heading); group.appendChild(status); }
+      else description.appendChild(status);
+    } else description.appendChild(status);
+    updateDraftStatus();
+  }
+  function draftBusy() { var workspace = document.querySelector('.workspace'); return !!(workspace && workspace.querySelector('.is-loading')); }
+  function draftContext() {
+    var quote = document.getElementById('qe-form'), order = document.getElementById('p-order');
+    if (quote) return '报价 ' + (quote.dataset.quoteId || '编辑');
+    if (order) return '收款登记' + (order.value ? ' · ' + order.value : '');
+    if (document.getElementById('cust-form')) {
+      var customer = U.customer(acceptedHash.split('?')[0].split('/')[2]);
+      return '客户资料' + (customer ? ' ' + customer.id + ' · ' + customer.nameCn : '');
+    }
+    var doc = U.doc(acceptedHash.split('?')[0].split('/')[2]);
+    return doc ? U.docTypeName(doc.type) + ' ' + doc.no + ' V' + doc.version : '当前作业区';
+  }
+  function confirmDiscard(callback, options) {
+    options = options || {};
+    if (!draftDirty()) { callback(); return; }
+    if (draftBusy()) { U.toast('当前提交正在处理，请等待结果后再离开。', 'warning'); return; }
+    if (document.querySelector('[data-draft-guard]')) return;
+    var generation = draftGeneration, sourceHash = acceptedHash, sourceScroll = { x: window.scrollX || 0, y: window.scrollY };
+    U.confirm({ title: options.title || '离开' + draftContext() + '？', danger: true, cancelText: '继续填写',
+      message: options.message || '当前有未提交输入。放弃后会丢失本页修改；取消可继续填写。已提交的业务记录保持原样。',
+      okText: options.okText || '放弃输入并离开',
+      onClose: function () {
+        function restoreScroll() { if (generation === draftGeneration && sourceHash === acceptedHash) window.scrollTo(sourceScroll.x, sourceScroll.y); }
+        // 等滚动锁解除后的布局/滚动锚点结算，再恢复源页位置；不拉回已导航的新页。
+        if (window.requestAnimationFrame) window.requestAnimationFrame(restoreScroll);
+        else restoreScroll();
+      },
+      onOk: function () {
+        if (restoringHistory || approvedHistory) { U.toast('正在恢复当前页面，请稍候再确认离开。', 'warning'); return false; }
+        if (generation !== draftGeneration || sourceHash !== acceptedHash) { U.toast('当前页面已变化，请重新核对后离开。', 'warning'); return false; }
+        markDraftClean(); callback();
+      }
+    });
+    var modal = document.querySelector('.modal');
+    if (modal) { modal.setAttribute('data-draft-guard', '1'); modal.setAttribute('data-draft-scroll-y', String(sourceScroll.y)); }
+    if (draftFocus && draftFocus.isConnected) U.modalReturnFocus = draftFocus;
+  }
+  function historyAvailable() { return window.history && typeof window.history.pushState === 'function'; }
+  function historyState(hash, index) {
+    var state = window.history.state, copy = state && typeof state === 'object' ? Object.assign({}, state) : {};
+    copy.tradeNavigation = { epoch: navigationEpoch, index: index, hash: hash };
+    return copy;
+  }
+  function stampHistory() {
+    if (historyAvailable()) window.history.replaceState(historyState(acceptedHash, acceptedIndex), '', acceptedHash);
+  }
+  function acceptCurrent(index) {
+    acceptedHash = location.hash; acceptedIndex = index;
+    window.AppUI.docEditing = null;
+    stampHistory(); render();
+  }
+  function requestNavigation(destination) {
+    if (typeof destination !== 'string' || destination.indexOf('#/') !== 0 || destination === location.hash) return;
+    var parsed = parseHash(destination);
+    if (parsed.error) { showNavigationError(parsed.error); return; }
+    if (restoringHistory || approvedHistory) { U.toast('正在恢复当前页面，请稍候再选择去向。', 'warning'); return; }
+    confirmDiscard(function () {
+      window.AppUI.docEditing = null;
+      if (!historyAvailable()) { location.hash = destination; return; }
+      window.history.pushState(historyState(destination, acceptedIndex + 1), '', destination);
+      acceptedHash = destination; acceptedIndex++;
+      render();
+    });
+  }
+  function showNavigationError(message) {
+    U.toast(message, 'warning');
+    var workspace = document.querySelector('.workspace');
+    if (!workspace) return;
+    var notice = document.getElementById('navigation-error');
+    if (!notice) {
+      notice = document.createElement('div'); notice.id = 'navigation-error'; notice.className = 'navigation-error'; notice.setAttribute('role', 'alert');
+      var head = workspace.querySelector('.page-head');
+      workspace.insertBefore(notice, head && head.parentElement === workspace ? head.nextElementSibling : workspace.firstElementChild);
+    }
+    notice.textContent = '未前往目标页面：' + message + (draftControls().length ? ' 当前页面输入已保留。' : ' 当前页面可继续使用。');
+  }
+  function navigationChanged() {
+    var destination = location.hash;
+    var parsedDestination = parseHash(destination);
+    if (parsedDestination.error) {
+      restoringHistory = null; approvedHistory = null; draftGeneration++;
+      navigationEpoch = String(Date.now()) + '-' + Math.random().toString(36).slice(2); acceptedIndex = 0;
+      if (historyAvailable()) stampHistory(); else location.hash = acceptedHash;
+      if (document.querySelector('[data-draft-guard]')) U.closeModal();
+      showNavigationError(parsedDestination.error);
+      return;
+    }
+    if (restoringHistory) {
+      var restoration = restoringHistory;
+      var restoredState = historyAvailable() && window.history.state && window.history.state.tradeNavigation;
+      if (destination !== restoration.hash || !restoredState || restoredState.epoch !== restoration.epoch || restoredState.index !== restoration.index) return;
+      restoringHistory = null;
+      restoration.after(); return;
+    }
+    if (approvedHistory) {
+      var approvedState = historyAvailable() && window.history.state && window.history.state.tradeNavigation;
+      if (destination !== approvedHistory.hash || !approvedState || approvedState.epoch !== approvedHistory.epoch || approvedState.index !== approvedHistory.index) return;
+      var approved = approvedHistory; approvedHistory = null;
+      acceptCurrent(approved.index); return;
+    }
+    if (destination === acceptedHash) return;
+    var state = historyAvailable() && window.history.state && window.history.state.tradeNavigation;
+    var known = state && state.epoch === navigationEpoch && state.hash === destination && Number.isInteger(state.index);
+    if (!draftDirty()) {
+      if (!known) { navigationEpoch = String(Date.now()) + '-' + Math.random().toString(36).slice(2); }
+      acceptCurrent(known ? state.index : 0); return;
+    }
+    if (known && state.index !== acceptedIndex) {
+      var targetIndex = state.index, sourceIndex = acceptedIndex;
+      restoringHistory = { hash: acceptedHash, epoch: navigationEpoch, index: sourceIndex, after: function () {
+        confirmDiscard(function () {
+          approvedHistory = { hash: destination, epoch: navigationEpoch, index: targetIndex };
+          window.history.go(targetIndex - sourceIndex);
+        });
+      } };
+      window.history.go(sourceIndex - targetIndex);
+      return;
+    }
+    // 加载前/外部建立的未知条目不能推测方向：只恢复地址与原 DOM。
+    if (historyAvailable()) {
+      navigationEpoch = String(Date.now()) + '-' + Math.random().toString(36).slice(2); acceptedIndex = 0; stampHistory();
+      confirmDiscard(function () { requestNavigation(destination); });
+    } else {
+      location.hash = acceptedHash;
+      confirmDiscard(function () { location.hash = destination; });
+    }
+  }
   function render() {
     var parsed = parseHash();
     var segs = parsed.segs;
     var app = document.getElementById('app');
     var user = U.currentUser();
+    if (parsed.error) {
+      acceptedHash = user ? '#/dashboard' : '#/login'; acceptedIndex = 0;
+      if (historyAvailable()) stampHistory(); else location.hash = acceptedHash;
+      render(); showNavigationError(parsed.error); return;
+    }
 
     if (!segs.length) { location.hash = user ? '#/dashboard' : '#/login'; return; }
     var matched = matchRoute(segs);
@@ -247,6 +435,7 @@
       window.App.user = null;
       app.innerHTML = Views.login();
       lastRoute = '#/login'; lastUser = '';
+      markDraftClean();
       return;
     }
     if (!user) { window.App.user = null; location.hash = '#/login'; return; }
@@ -303,16 +492,30 @@
       if (restore) restore.focus({ preventScroll: true });
     }
     lastRoute = location.hash; lastUser = user.id;
+    acceptedHash = location.hash; stampHistory(); installDraftStatus();
   }
 
   window.App = {
     user: null,
-    rerender: render
+    rerender: function () { if (historyAvailable() && location.hash !== acceptedHash) navigationChanged(); else render(); },
+    requestNavigation: requestNavigation,
+    confirmDiscard: confirmDiscard,
+    markDraftClean: markDraftClean,
+    hasDraftChanges: draftDirty
   };
 
   /* ---------------- 全局事件 ---------------- */
   /* data-action 点击委托 */
   document.addEventListener('click', function (e) {
+    var anchor = e.target.closest('a[href]');
+    var anchorHref = anchor && anchor.getAttribute('href'), anchorTarget = anchor && anchor.getAttribute('target');
+    var openElsewhere = e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || (e.button && e.button !== 0) || (anchorTarget && anchorTarget !== '_self') || (anchor && anchor.hasAttribute('download'));
+    // 包含带data-action的单证返回链接：另开目标不销毁当前页，不转成当前页离开动作。
+    if (anchorHref && anchorHref.indexOf('#/') === 0 && openElsewhere) return;
+    if (anchor && !anchor.dataset.action && !e.defaultPrevented && !openElsewhere) {
+      var href = anchorHref;
+      if (href && href.indexOf('#/') === 0) { e.preventDefault(); requestNavigation(href); return; }
+    }
     var el = e.target.closest('[data-action]');
     if (el) {
       var fn = Actions[el.dataset.action];
@@ -339,7 +542,10 @@
   });
   document.addEventListener('input', function (e) {
     if (e.target.id === 'workspace-search') renderSearch(e.target.value);
+    if (draftControls().indexOf(e.target) >= 0) { draftFocus = e.target; updateDraftStatus(); }
   });
+  document.addEventListener('change', function (e) { if (draftControls().indexOf(e.target) >= 0) { draftFocus = e.target; updateDraftStatus(); } });
+  document.addEventListener('focusin', function (e) { if (draftControls().indexOf(e.target) >= 0) draftFocus = e.target; });
   /* 键盘操作和对话框焦点限定均在全局委托，不绑在视图上。 */
   document.addEventListener('keydown', function (e) {
     if (e.isComposing || e.keyCode === 229) return;
@@ -379,6 +585,12 @@
     }
   });
 
-  window.addEventListener('hashchange', render);
+  window.addEventListener('hashchange', navigationChanged);
+  window.addEventListener('popstate', navigationChanged);
+  window.addEventListener('beforeunload', function (e) {
+    if (draftDirty()) { e.preventDefault(); e.returnValue = ''; }
+  });
+  if (historyAvailable() && 'scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+  stampHistory();
   render();
 })();

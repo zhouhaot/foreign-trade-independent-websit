@@ -6,7 +6,7 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 const decode = s => s.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-function fixture(files = ['views-docs', 'app'], sources = {}) {
+function fixture(files = ['views-docs', 'app'], sources = {}, options = {}) {
   const handlers = {}, messages = [];
   let c;
   class Node {
@@ -42,10 +42,12 @@ function fixture(files = ['views-docs', 'app'], sources = {}) {
       }
       this.querySelectorAll('select').forEach(select => { select.value = select.querySelector('option')?.attrs.value || ''; });
     }
-    appendChild(child) { child.parentElement = this; this.children.push(child); return child; }
+    appendChild(child) { if (child.parentElement) child.remove(); child.parentElement = this; this.children.push(child); return child; }
+    insertBefore(child, reference) { if (child.parentElement) child.remove(); child.parentElement = this; this.children.splice(reference == null ? this.children.length : this.children.indexOf(reference), 0, child); return child; }
     remove() { if (this.parentElement) this.parentElement.children = this.parentElement.children.filter(n => n !== this); this.parentElement = null; }
     setAttribute(key, value) { this.attrs[key] = String(value); } removeAttribute(key) { delete this.attrs[key]; }
     getAttribute(key) { return this.attrs[key] ?? null; }
+    hasAttribute(key) { return key in this.attrs; }
     addEventListener(type, fn) { (this.listeners[type] ||= []).push(fn); }
     focus() { document.activeElement = this; }
     contains(n) { return n === this || this.children.some(child => child.contains(n)); }
@@ -70,26 +72,51 @@ function fixture(files = ['views-docs', 'app'], sources = {}) {
     getElementById: id => body.querySelector('#' + id), querySelector: s => body.querySelector(s), querySelectorAll: s => body.querySelectorAll(s),
     addEventListener(type, fn) { (handlers[type] ||= []).push(fn); } };
   const storage = () => ({ getItem() { return null; }, setItem() {}, removeItem() {} });
-  c = vm.createContext({ document, AppUI: {}, App: { user: null, rerender() {} }, location: { hash: '#/login' },
+  c = vm.createContext({ document, AppUI: {}, App: { user: null, rerender() {} }, location: { hash: options.initialHash || '#/login' },
     sessionStorage: storage(), localStorage: storage(), Promise, setTimeout(fn, delay) { return setTimeout(fn, Math.min(delay || 0, 8)); },
     scrollY: 0, scrollTo() {}, matchMedia: () => ({ matches: true }), addEventListener(type, fn) { (handlers[type] ||= []).push(fn); } });
   c.window = c;
+  const historyEntries = [{ hash: c.location.hash, state: null }];
+  const historyCommands = [];
+  let historyPosition = 0;
+  if (options.history) c.history = {
+    get state() { return historyEntries[historyPosition].state; },
+    get length() { return historyEntries.length; },
+    replaceState(state, title, hash) { historyEntries[historyPosition] = { hash, state }; c.location.hash = hash; },
+    pushState(state, title, hash) { historyEntries.splice(historyPosition + 1); historyEntries.push({ hash, state }); historyPosition++; c.location.hash = hash; },
+    go(delta) {
+      const target = historyPosition + delta;
+      if (target < 0 || target >= historyEntries.length) return;
+      const apply = () => {
+        historyPosition = target; c.location.hash = historyEntries[target].hash;
+        for (const fn of handlers.popstate || []) fn({ state: c.history.state });
+        for (const fn of handlers.hashchange || []) fn({});
+      };
+      if (options.manualHistory) historyCommands.push(apply); else setTimeout(apply, 1);
+    }
+  };
   for (const name of ['mock-data', 'utils', 'views-core', ...files]) vm.runInContext(sources[name] || fs.readFileSync(path.join(root, 'js', name + '.js'), 'utf8'), c, { filename: name });
   c.U.toast = (text, type) => messages.push({ text, type });
   let renders = 0; c.App.rerender = () => { renders++; };
   c.App.user = c.U.roleUser('doc');
-  return { c, document, app, modal, messages, get renders() { return renders; },
-    click(node) {
-      assert.ok(node, '点击入口存在'); const event = { target: node, currentTarget: node, defaultPrevented: false, preventDefault() { this.defaultPrevented = true; } };
+  return { c, document, app, modal, messages, handlers, historyEntries, historyCommands, historyStep() { assert.ok(historyCommands.length); historyCommands.shift()(); }, get historyPosition() { return historyPosition; }, get renders() { return renders; },
+    directHash(hash) {
+      if (c.history) { historyEntries.splice(historyPosition + 1); historyEntries.push({ hash, state: c.history.state }); historyPosition++; }
+      c.location.hash = hash;
+      for (const fn of handlers.hashchange || []) fn({});
+    },
+    click(node, options = {}) {
+      assert.ok(node, '点击入口存在'); const event = Object.assign({ target: node, currentTarget: node, defaultPrevented: false, preventDefault() { this.defaultPrevented = true; } }, options);
       for (const fn of node.listeners.click || []) fn(event);
       for (const fn of handlers.click || []) fn(event);
-      const anchor = node.closest('a'); if (anchor && !event.defaultPrevented && anchor.attrs.href) c.location.hash = anchor.attrs.href;
+      const anchor = node.closest('a'); if (anchor && !event.defaultPrevented && anchor.attrs.href && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && !anchor.attrs.target && !anchor.hasAttribute('download')) c.location.hash = anchor.attrs.href;
       return event;
     },
     async flush() { await new Promise(resolve => setTimeout(resolve, 35)); },
     mount(d, role = 'doc', editing = false) {
       c.App.user = c.U.roleUser(role); c.location.hash = '#/documents/' + d.id; c.AppUI.docEditing = editing ? d.id : null;
       app.innerHTML = c.Views.docDetail({ params: [d.id], query: {}, user: c.App.user });
+      if (c.App.markDraftClean) c.App.markDraftClean(); // 手动 mount 等价真实 render 后的进入基线。
     }
   };
 }
