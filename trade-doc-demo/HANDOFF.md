@@ -416,3 +416,7 @@ python3 -m http.server 8000   # 然后浏览器走一遍受影响页面（五类
 ### 2026-10-07 | 第5轮相邻收尾：组合键另开契约
 
 对照已列契约发现普通anchor组合键已放行，但doc-leave data-action链接仍preventDefault。补统一internal anchor先放浏览器另开/组合键/download默认，普通_self仍当前页guard；两个新Node例先RED后GREEN，导航31→最终33，workspace/adapter17相邻回归及代码/JS再次APPROVE。真实Ctrl另开新tab5到合法单证台账，单证员/单证管理/无forbidden，源hash/marks/dirty保且无modal；回读后关闭本次临时tab。browser最终27交互PASS/console[]，200此前矩阵及26图10过程+16终版不重复执行；UI继续SHIP，规范计数同步。其它组合键未全部原生测试，不宣称另页共享草稿；最终18脚本日志在本相邻修改之后再统一更新，推送回执随后追加。
+
+### 2026-10-07 | 第5轮GitHub同步回执
+
+实现 `a16ed3dc1e5c0340a7aa4de1cc7b6e508a2e868e` 正常快进推送main；fetch前0/0，push后独立ls-remote完整SHA等于本地HEAD，工作区干净。56文件含22项说明、33/194+15/17等最终18组Node、27交互/200实际布局/16终图、两独立APPROVE及五视角SHIP，审计8 PASS/1 WARN/0 FAIL。详细回执在round-05.md，本回执另作后续文字提交；第6轮继续客户资料/询盘上游契约与业务员作业区，用户停止前持续授权有效。
