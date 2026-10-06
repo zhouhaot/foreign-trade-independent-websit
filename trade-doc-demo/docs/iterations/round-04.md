@@ -56,3 +56,10 @@ file://受控浏览器只允许HTTP/HTTPS而未验，无策略绕过；未运行
 ## 下一轮与GitHub
 
 继续现实规划推动岗位上下文连续性、全局离开输入保护/导航可达性与单位精度等真实使用问题；不扩后台或部署范围。当前报价/收款失败留输入不等于全站草稿管理。整轮复核后正常快进推送main、独立回读完整SHA，同步回执另记HANDOFF。
+
+### 第4轮推送回执
+
+- 实现提交：`46ef00970ca5537bf8d1850059d011f3cad74a00`，40文件、17项有编号改进。
+- GitHub：[第4轮实现与完整说明](https://github.com/zhouhaot/foreign-trade-independent-websit/commit/46ef00970ca5537bf8d1850059d011f3cad74a00)。
+- 正常快进推送main；推送前fetch核对HEAD与origin/main为0/0。推送后独立ls-remote回读refs/heads/main，完整SHA与本地HEAD一致，工作区干净。
+- 该SHA包含15脚本验证、103报价/71收款案例、200实际布局/权限检查、12真实HTTP交互、9终版图及独立APPROVE/SHIP。同步回执另作文字提交，不改已验证实现。
