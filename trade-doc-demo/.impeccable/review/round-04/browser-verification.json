@@ -1,0 +1,2257 @@
+{
+  "round": 4,
+  "interactions": [
+    {
+      "case": "payment 1.005 rejected with inline cause/focus; amount, remark and selected SO1 retained; no false success",
+      "result": "PASS"
+    },
+    {
+      "case": "URL preselected cancelling SO6 retained as unavailable placeholder; no fallback to another payable order",
+      "result": "PASS"
+    },
+    {
+      "case": "quote Infinity and sub-cent 0.01×0.01 refuse save, show pending total/full field cause and retain original typed values",
+      "result": "PASS"
+    },
+    {
+      "case": "0.01×1 +10.25×4 valid 41.01EUR quote; currency preview sync; Enter save; cancelled confirm no effect; confirm+generate retain source and exact amount",
+      "result": "PASS",
+      "generatedOrderURL": "http://127.0.0.1:8000/index.html#/orders/SO2026008"
+    },
+    {
+      "case": "generated EUR order rejects 41.02 against real 41.01 balance and retains amount/remark",
+      "result": "PASS"
+    },
+    {
+      "case": "Enter pays exact EUR41.01, real calendar future date retained, new order settled without document prerequisites",
+      "result": "PASS",
+      "record": "PAY202610078\tSO2026008\t东方之星公司（Orient Star Ltd）\t41.01 EUR\t其他\t2030-02-28\t第四轮生成订单收款验收\t赵倩"
+    },
+    {
+      "case": "USD12100 settles SO1; EUR payment separate; original CI paper exact HTML preserved",
+      "result": "PASS",
+      "record": "PAY202610079\tSO2026001\t太平洋进口公司（Pacific Imports LLC）\t12,100.00 USD\t电汇 T/T\t2026-10-07\t第四轮USD结清验收\t赵倩",
+      "paperEqual": true
+    },
+    {
+      "case": "paused native disabled→explicit EUR SO3 selection enables; amount error retains live hint; corrected payment keeps chosen SO3 URL/selection and clears only error reference",
+      "result": "PASS"
+    },
+    {
+      "case": "sub-cent row quantity+price both invalid/linked to same cause with original precision help; one row error and price focus; readonly quote context labelled",
+      "result": "PASS"
+    },
+    {
+      "case": "corrected input clears temporary shared error reference while retaining precision help and entered values",
+      "result": "PASS"
+    },
+    {
+      "case": "boss payments read-only with no register form; five-role restrictions also covered in route checks",
+      "result": "PASS"
+    },
+    {
+      "case": "final local error wrapping: full cause within128px field, table scrollWidth equals clientWidth; original fields/focus/cause retained",
+      "result": "PASS",
+      "layout": {
+        "errorScrollWidth": 128,
+        "errorWidth": 128,
+        "tableScrollWidth": 1076,
+        "tableWidth": 1076,
+        "whiteSpace": "normal"
+      }
+    }
+  ],
+  "layout": [
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    }
+  ],
+  "failures": [],
+  "images": [
+    {
+      "file": "quotation-edit-1440.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 971.140625,
+            "enabled": true,
+            "text": "保存报价",
+            "top": 933.140625
+          }
+        ],
+        "amountDescription": null,
+        "hash": "#/quotes/Q2026004/edit",
+        "height": 1000,
+        "order": null,
+        "scrollY": 0,
+        "width": 1440
+      }
+    },
+    {
+      "file": "quotation-edit-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 969.140625,
+            "enabled": true,
+            "text": "保存报价",
+            "top": 931.140625
+          }
+        ],
+        "amountDescription": null,
+        "hash": "#/quotes/Q2026004/edit",
+        "height": 1000,
+        "order": null,
+        "scrollY": 0,
+        "width": 1280
+      }
+    },
+    {
+      "file": "quotation-confirm-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 845.328125,
+            "enabled": true,
+            "text": "确认登记",
+            "top": 807.328125
+          }
+        ],
+        "amountDescription": null,
+        "hash": "#/quotes/Q2026004",
+        "height": 1000,
+        "order": null,
+        "scrollY": 0,
+        "width": 1280
+      }
+    },
+    {
+      "file": "payments-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 775.671875,
+            "enabled": true,
+            "text": "登记收款",
+            "top": 737.671875
+          }
+        ],
+        "amountDescription": "p-out-hint",
+        "hash": "#/payments?order=SO2026001",
+        "height": 1000,
+        "order": "SO2026001",
+        "scrollY": 0,
+        "width": 1280
+      }
+    },
+    {
+      "file": "payments-paused-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 726.390625,
+            "enabled": false,
+            "text": "登记收款",
+            "top": 688.390625
+          }
+        ],
+        "amountDescription": "p-out-hint",
+        "hash": "#/payments?order=SO2026006",
+        "height": 1000,
+        "order": null,
+        "scrollY": 0,
+        "width": 1280
+      }
+    },
+    {
+      "file": "payments-invalid-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 568.765625,
+            "enabled": true,
+            "text": "登记收款",
+            "top": 530.765625
+          }
+        ],
+        "amountDescription": "p-out-hint p-amount-error",
+        "hash": "#/payments?order=SO2026001",
+        "height": 1000,
+        "order": "SO2026001",
+        "scrollY": 259,
+        "width": 1280
+      }
+    },
+    {
+      "file": "payments-1440.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 672.171875,
+            "enabled": true,
+            "text": "登记收款",
+            "top": 634.171875
+          }
+        ],
+        "amountDescription": "p-out-hint",
+        "hash": "#/payments?order=SO2026003",
+        "height": 1000,
+        "order": "SO2026003",
+        "scrollY": 0,
+        "width": 1440
+      }
+    },
+    {
+      "file": "payments-boss-1440.png",
+      "positions": {
+        "actions": [],
+        "amountDescription": null,
+        "hash": "#/payments",
+        "height": 1000,
+        "order": null,
+        "scrollY": 0,
+        "width": 1440
+      }
+    },
+    {
+      "file": "quotation-joint-error-1280.png",
+      "positions": {
+        "actions": [
+          {
+            "bottom": 1039.984375,
+            "enabled": true,
+            "text": "保存报价",
+            "top": 1001.984375
+          }
+        ],
+        "amountDescription": null,
+        "hash": "#/quotes/Q2026004/edit",
+        "height": 1000,
+        "order": null,
+        "scrollY": 46,
+        "width": 1280
+      }
+    }
+  ],
+  "scope": "HTTP static demo; CUA UI-only actions; no real finance/backend",
+  "testCorrections": [
+    "Initial post-navigation click produced no feedback and was not marked PASS; inspected stable DOM and used Enter to verify shared row errors.",
+    "Final image review found inherited numeric-cell nowrap in row error; applied local white-space normal/overflow-wrap and replaced only changed final joint image; eight unchanged images were not repeated."
+  ],
+  "console": [],
+  "routeCombinations": 100,
+  "layoutChecks": 200,
+  "fileProtocol": {
+    "result": "NOT_RUN",
+    "reason": "controlled browser HTTP/HTTPS only; no policy bypass"
+  },
+  "notRun": [
+    "backend/bank/NAS/real identity/transactions",
+    "real screen reader/cross browser",
+    "printing/real PDF",
+    "Ego browser script",
+    "synthetic large-money/foreign-currency history pixel states (covered in isolated Node fixtures)",
+    "formal per-product unit precision or future/expired date business policy"
+  ],
+  "scopeNotes": [
+    "Fractional piece examples test the explicitly assumed prototype precision contract; they are not proof that physical units can be delivered fractionally.",
+    "Successful-payment and quote flows were tested before refresh; refresh intentionally restores sample models."
+  ]
+}

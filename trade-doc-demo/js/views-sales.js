@@ -134,17 +134,69 @@
   Actions['quote-reset'] = function () { window.AppUI.quotes = { page: 1, filters: {} }; window.App.rerender(); };
   Actions['quote-page'] = function (el) { ui('quotes').page = +el.dataset.page; window.App.rerender(); };
 
+  /* 报价动作绑定展示时的对象/主数据；候选全部通过后才写入内存。 */
+  var quoteEditor = null, quoteEditorSequence = 0, quoteBusy = {};
+  function quoteContent(q) {
+    return JSON.stringify({ quote: q, customer: U.customer(q.customerId),
+      products: (Array.isArray(q.items) ? q.items : []).map(function (it) { return it && U.product(it.productId); }),
+      currencies: M.dicts.filter(function (d) { return d.group === '币种'; }) });
+  }
+  function quoteContext(q, actor) {
+    return { id: q.id, quote: q, actor: actor, actorContent: JSON.stringify(actor), content: quoteContent(q), submitted: false };
+  }
+  function quoteEligibility(q, actor, status) {
+    if (!actor || actor.role !== 'sales' || !actor.id || !actor.name) return '只有已登录的外贸业务员可办理报价操作。';
+    if (!q || M.quotes.filter(function (other) { return other.id === q.id; }).length !== 1 || U.quote(q.id) !== q) return '报价不存在或编号冲突，请重新核对。';
+    if (q.status !== status) return '当前报价状态为' + q.status + '，仅' + status + '报价可办理此操作。';
+    if (q.orderId || M.orders.some(function (o) { return o.quoteId === q.id; })) return '该报价已经关联订单，请查看已有订单。';
+    return '';
+  }
+  function quoteContextError(context, status) {
+    if (window.App.user !== context.actor || JSON.stringify(context.actor) !== context.actorContent || U.quote(context.id) !== context.quote ||
+        context.quote.id !== context.id || quoteContent(context.quote) !== context.content) return '账号、报价或关联资料已变化，请重新打开后核对。';
+    return quoteEligibility(context.quote, context.actor, status);
+  }
+  function quoteCandidate(q, changes) {
+    changes = changes || q;
+    if (M.customers.filter(function (c) { return c.id === q.customerId; }).length !== 1) return { ok: false, error: '客户关联缺失或冲突，请先核对客户资料。', field: 'customer' };
+    if (!U.validCalendarDate(q.date)) return { ok: false, error: '报价日期不是有效的日历日期，请先核对报价来源。', field: 'date' };
+    if (!U.validCalendarDate(changes.validUntil)) return { ok: false, error: '有效期至必须为有效的日历日期。', field: 'validUntil' };
+    if (!U.currencyEnabled(changes.currency)) return { ok: false, error: '币种必须为当前启用的字典项。', field: 'currency' };
+    if (typeof changes.tradeTerm !== 'string' || !changes.tradeTerm.trim()) return { ok: false, error: '贸易术语必须为非空文本。', field: 'tradeTerm' };
+    if (typeof changes.paymentTerm !== 'string' || !changes.paymentTerm.trim()) return { ok: false, error: '付款方式必须为非空文本。', field: 'paymentTerm' };
+    var amounts = U.transactionAmounts(changes.items);
+    if (!amounts.ok) return amounts;
+    for (var i = 0; i < amounts.items.length; i++) {
+      if (M.products.filter(function (p) { return p.id === amounts.items[i].productId; }).length !== 1) return { ok: false, error: '第 ' + (i + 1) + ' 行商品关联缺失或冲突，请先核对商品资料。', rowIndex: i, field: 'productId' };
+    }
+    return { ok: true, items: amounts.items, totalCents: amounts.totalCents, total: amounts.total,
+      validUntil: changes.validUntil, currency: changes.currency, tradeTerm: changes.tradeTerm.trim(), paymentTerm: changes.paymentTerm.trim(), remark: String(changes.remark || '').trim() };
+  }
+  function quoteReview(q, candidate) {
+    return '<div class="quote-confirm-summary"><b>' + esc(U.customerName(q.customerId)) + ' · ' + U.fmt(candidate.total) + ' ' + esc(candidate.currency) + '</b>' +
+      '<p class="small">' + esc(candidate.tradeTerm) + ' · ' + esc(candidate.paymentTerm) + '<br>报价：' + esc(q.date) + ' · 有效期至：' + esc(candidate.validUntil) + '</p>' +
+      '<div class="table-wrap"><table class="table"><thead><tr><th>商品</th><th class="num">数量 × 单价</th><th class="num">金额（' + esc(candidate.currency) + '）</th></tr></thead><tbody>' +
+      candidate.items.map(function (it) { return '<tr><td>' + esc(U.product(it.productId).nameCn) + '</td><td class="num">' + it.qty + ' × ' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(it.lineCents / 100) + '</td></tr>'; }).join('') + '</tbody></table></div></div>';
+  }
+  function quoteError(container, message) {
+    var error = container && container.querySelector('[data-quote-error]');
+    if (error) error.textContent = message;
+    U.toast('报价操作未生效，请查看处理说明。', 'warning');
+  }
+
   /* ==================== 报价详情 ==================== */
   Views.quoteDetail = function (ctx) {
     var q = U.quote(ctx.params[0]);
     if (!q) return Views.notFound('报价不存在：' + ctx.params[0]);
     var isSales = ctx.user.role === 'sales';
-    var total = U.quoteTotal(q);
-    var itemRows = q.items.map(function (it, idx) {
+    var checked = quoteCandidate(q), total = checked.ok ? checked.total : null;
+    var itemRows = (Array.isArray(q.items) ? q.items : []).map(function (it, idx) {
+      it = it || { productId: '', qty: '', price: '' };
       var p = U.product(it.productId);
-      return '<tr><td>' + (idx + 1) + '</td><td>' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</td>' +
-        '<td>' + esc(p.spec) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td>' +
-        '<td class="num">' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(it.qty * it.price) + '</td></tr>';
+      var line = U.transactionAmounts([it]);
+      return '<tr><td>' + (idx + 1) + '</td><td>' + esc(p ? p.nameCn : '商品关联待核对') + '（' + esc(p ? p.nameEn : it.productId) + '）</td>' +
+        '<td>' + esc(p ? p.spec : '—') + '</td><td class="num">' + esc(it.qty) + ' ' + esc(p ? p.unit : '') + '</td>' +
+        '<td class="num">' + (U.decimalInput(it.price, '单价').ok ? U.fmt(it.price) : '待修正') + '</td><td class="num">' + (line.ok ? U.fmt(line.total) : '待修正') + '</td></tr>';
     }).join('');
     var actions = '';
     if (isSales && q.status === '待客户确认') {
@@ -157,6 +209,7 @@
     if (q.orderId) actions += '<a class="btn" href="#/orders/' + q.orderId + '">查看订单 ' + q.orderId + '</a>';
     return '<div class="page-head"><h2>报价详情 · ' + q.id + ' ' + tag(q.status) + '</h2><div class="actions">' + actions +
       '<a class="btn" href="#/quotes">返回列表</a></div></div>' +
+      (!checked.ok ? '<div class="warn-box" role="alert">报价资料待核对：' + esc(checked.error) + '</div>' : '') +
       '<div class="card"><div class="card-title">报价信息</div><div class="desc-grid">' +
       descItem('报价编号', q.id) +
       '<div class="di"><div class="dt">客户</div><div class="dd"><a href="#/customers/' + q.customerId + '">' + esc(U.customerName(q.customerId)) + '</a></div></div>' +
@@ -164,7 +217,7 @@
       descItem('业务员', q.salesperson) +
       descItem('报价日期', q.date) + descItem('有效期至', q.validUntil) +
       descItem('币种', q.currency) +
-      '<div class="di"><div class="dt">报价金额</div><div class="dd num"><b>' + U.fmt(total) + ' ' + q.currency + '</b></div></div>' +
+      '<div class="di"><div class="dt">报价金额</div><div class="dd num"><b>' + (checked.ok ? U.fmt(total) + ' ' + esc(q.currency) : '待修正') + '</b></div></div>' +
       descItem('贸易术语', q.tradeTerm) + descItem('付款方式', q.paymentTerm) +
       descItem('确认日期', q.confirmDate || '—') +
       descItem('备注', q.remark || '—') +
@@ -172,68 +225,95 @@
       '<div class="card"><div class="card-title">报价明细</div>' +
       '<div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>商品名称</th><th>规格</th><th class="num">数量</th><th class="num">单价（' + q.currency + '）</th><th class="num">金额（' + q.currency + '）</th></tr></thead>' +
       '<tbody>' + itemRows +
-      '<tr><td colspan="5" class="num"><b>合计</b></td><td class="num"><b>' + U.fmt(total) + ' ' + q.currency + '</b></td></tr>' +
+      '<tr><td colspan="5" class="num"><b>合计</b></td><td class="num"><b>' + (checked.ok ? U.fmt(total) + ' ' + esc(q.currency) : '待修正') + '</b></td></tr>' +
       '</tbody></table></div></div>';
   };
 
   /* 登记客户确认 */
   Actions['quote-confirm'] = function (el) {
     var q = U.quote(el.dataset.id);
+    var actor = window.App.user, eligibility = quoteEligibility(q, actor, '待客户确认');
+    if (eligibility) { U.toast(eligibility, 'warning'); return; }
+    var candidate = quoteCandidate(q);
+    if (!candidate.ok) { U.toast('不能登记客户确认：' + candidate.error, 'warning'); return; }
+    var context = quoteContext(q, actor);
     var body =
       '<div class="warn-box">登记后报价状态将变为「已确认」，可据此生成订单；确认后报价内容不可再编辑。</div>' +
+      quoteReview(q, candidate) +
       '<form id="qc-form">' +
       U.formItem('客户确认日期', '<input class="input" type="date" id="qc-date" value="' + U.today() + '">', { required: true }) +
       '<div class="mt8">' + U.formItem('确认说明', '<textarea class="textarea" id="qc-remark" placeholder="如：客户邮件确认接受报价条款"></textarea>') + '</div>' +
-      '</form>';
+      '<div class="field-error quote-form-error" data-quote-error="1" role="alert"></div></form>';
     var footer = '<button class="btn" data-close="1">取消</button><button class="btn btn-primary" data-ok="1">确认登记</button>';
     var overlay = U.openModal({ title: '登记客户确认 · ' + q.id, body: body, footer: footer, persistent: true });
     overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
       var btn = e.currentTarget;
       var form = overlay.querySelector('#qc-form');
       U.clearErrors(form);
-      if (!U.validate([{ el: form.querySelector('#qc-date'), label: '客户确认日期', required: true }])) return;
+      var date = form.querySelector('#qc-date'), confirmDate = date.value;
+      if (!U.validCalendarDate(confirmDate)) { U.fieldError(date, '客户确认日期必须为有效的日历日期。'); date.focus(); return; }
+      var remark = form.querySelector('#qc-remark').value.trim();
+      if (context.submitted || quoteBusy[context.id] || !overlay.isConnected) return;
+      var error = quoteContextError(context, '待客户确认');
+      if (error) { quoteError(form, error); return; }
+      quoteBusy[context.id] = true;
       U.withLoading(btn, function () {
-        q.status = '已确认';
-        q.confirmDate = form.querySelector('#qc-date').value;
-        if (form.querySelector('#qc-remark').value.trim()) q.remark = (q.remark ? q.remark + '；' : '') + form.querySelector('#qc-remark').value.trim();
+        try {
+          if (context.submitted || !overlay.isConnected) return false;
+          var delayedError = quoteContextError(context, '待客户确认');
+          if (delayedError) { quoteError(form, delayedError); return false; }
+          q.status = '已确认'; q.confirmDate = confirmDate;
+          if (remark) q.remark = (q.remark ? q.remark + '；' : '') + remark;
+          context.submitted = true;
+          U.closeModal(); U.toast('已登记客户确认，报价 ' + q.id + ' 现在可以生成订单'); window.App.rerender();
+        } finally { delete quoteBusy[context.id]; }
       });
-      setTimeout(function () {
-        U.closeModal();
-        U.toast('已登记客户确认，报价 ' + q.id + ' 现在可以生成订单');
-        window.App.rerender();
-      }, 480);
     });
   };
 
   /* 生成订单 */
   Actions['quote-gen-order'] = function (el) {
     var q = U.quote(el.dataset.id);
-    if (!q || q.status !== '已确认' || q.orderId) {
-      U.toast('仅已确认且未生成订单的报价可生成订单', 'warning');
-      return;
-    }
+    var actor = window.App.user, eligibility = quoteEligibility(q, actor, '已确认');
+    if (eligibility) { U.toast(eligibility, 'warning'); return; }
+    var candidate = quoteCandidate(q);
+    if (!candidate.ok || !U.validCalendarDate(q.confirmDate)) { U.toast('不能生成订单：' + (!candidate.ok ? candidate.error : '客户确认日期无效，请核对确认记录。'), 'warning'); return; }
+    var context = quoteContext(q, actor), overlay = null;
     U.confirm({
       title: '生成订单',
-      message: '将基于已确认报价 <b>' + q.id + '</b> 生成新订单，客户、商品明细与金额将由报价带入。<br><br>订单成立后，<b>单证业务</b>（制作→送审→导出）与<b>财务业务</b>（登记收款）两条支线并行推进、互不阻塞。',
+      message: '将基于已确认报价 <b>' + esc(q.id) + '</b> 生成新订单，客户、商品明细与金额将由报价带入。' + quoteReview(q, candidate) +
+        '<p>订单成立后，单证与收款两条支线并行推进、互不阻塞。</p><div class="field-error quote-form-error" data-quote-error="1" role="alert"></div>',
       okText: '生成订单',
       onOk: function () {
-        if (q.status !== '已确认' || q.orderId) return false;
+        if (context.submitted || quoteBusy[context.id] || overlay && !overlay.isConnected) return false;
+        var error = quoteContextError(context, '已确认');
+        if (error) { quoteError(document.getElementById('modal-root'), error); return false; }
         var nums = M.orders.map(function (o) { return parseInt(o.id.slice(2), 10); });
-        var oid = 'SO' + (Math.max.apply(null, nums) + 1);
+        var number = nums.length ? Math.max.apply(null, nums) + 1 : 2026001;
+        if (!Number.isSafeInteger(number) || M.orders.some(function (o) { return !/^SO\d+$/.test(o.id); })) {
+          quoteError(document.getElementById('modal-root'), '现有订单编号无法安全生成下一编号，请先核对。'); return false;
+        }
+        var oid = 'SO' + number;
+        if (M.orders.some(function (o) { return o.id === oid; })) { quoteError(document.getElementById('modal-root'), '订单编号冲突，请先核对。'); return false; }
         var newOrder = {
           id: oid, quoteId: q.id, customerId: q.customerId, salesperson: q.salesperson,
           currency: q.currency, tradeTerm: q.tradeTerm, paymentTerm: q.paymentTerm,
           status: '待执行', docStatus: '未开始', createdAt: U.today(), deliveryDate: '',
-          items: q.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
+          items: candidate.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
           remark: '由报价 ' + q.id + ' 生成（演示）'
         };
+        var log = [{ time: U.now(), person: actor.name, content: '报价 ' + q.id + ' 经客户确认，生成订单 ' + oid }];
+        quoteBusy[context.id] = true;
         M.orders.push(newOrder);
         q.orderId = oid;
-        M.orderLogs[oid] = [{ time: U.now(), person: window.App.user.name, content: '报价 ' + q.id + ' 经客户确认，生成订单 ' + oid }];
+        M.orderLogs[oid] = log;
+        context.submitted = true; delete quoteBusy[context.id];
         U.toast('订单 ' + oid + ' 已生成');
         location.hash = '#/orders/' + oid;
       }
     });
+    var modalRoot = document.getElementById && document.getElementById('modal-root');
+    overlay = modalRoot ? modalRoot.firstElementChild : null;
   };
 
   /* ==================== 报价编辑 ==================== */
@@ -242,82 +322,125 @@
     if (!q) return Views.notFound('报价不存在：' + ctx.params[0]);
     if (ctx.user.role !== 'sales') return Views.forbidden('只有外贸业务员可以编辑报价');
     if (q.status !== '待客户确认') return Views.forbidden('报价已确认，内容不可再编辑。如需调整请走订单变更申请流程');
-    var itemRows = q.items.map(function (it, idx) {
+    var eligible = quoteEligibility(q, ctx.user, '待客户确认');
+    if (eligible) return Views.forbidden(eligible);
+    var editor = quoteContext(q, ctx.user);
+    editor.token = String(++quoteEditorSequence); quoteEditor = editor;
+    var amounts = U.transactionAmounts(q.items);
+    var itemRows = (Array.isArray(q.items) ? q.items : []).map(function (it, idx) {
+      it = it || { productId: '', qty: '', price: '' };
       var p = U.product(it.productId);
-      return '<tr><td>' + (idx + 1) + '</td><td>' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</td>' +
-        '<td class="num"><input class="input qe-input" data-idx="' + idx + '" data-field="qty" value="' + it.qty + '" style="width:90px;text-align:right"></td>' +
-        '<td class="num"><input class="input qe-input" data-idx="' + idx + '" data-field="price" value="' + it.price + '" style="width:100px;text-align:right"></td>' +
-        '<td class="num" id="qe-amt-' + idx + '">' + U.fmt(it.qty * it.price) + '</td></tr>';
+      var line = U.transactionAmounts([it]);
+      return '<tr><td>' + (idx + 1) + '</td><td>' + esc(p ? p.nameCn : '商品关联待核对') + '（' + esc(p ? p.nameEn : it.productId) + '）</td>' +
+        '<td class="num"><div class="form-item quote-number"><input class="input qe-input" inputmode="decimal" id="qe-qty-' + idx + '" aria-label="第 ' + (idx + 1) + ' 行数量" aria-describedby="qe-number-help" data-idx="' + idx + '" data-field="qty" value="' + esc(it.qty) + '"><div class="field-error"></div></div></td>' +
+        '<td class="num"><div class="form-item quote-number"><input class="input qe-input" inputmode="decimal" id="qe-price-' + idx + '" aria-label="第 ' + (idx + 1) + ' 行单价" aria-describedby="qe-number-help" data-idx="' + idx + '" data-field="price" value="' + esc(it.price) + '"><div class="field-error"></div></div></td>' +
+        '<td class="num" id="qe-amt-' + idx + '">' + (line.ok ? U.fmt(line.total) : '待修正') + '</td></tr>';
     }).join('');
     return '<div class="page-head"><h2>编辑报价 · ' + q.id + '</h2><div class="actions"><a class="btn" href="#/quotes/' + q.id + '">返回详情</a></div></div>' +
       '<div class="card"><div class="card-title">报价条款</div>' +
-      '<form id="qe-form"><div class="form-grid">' +
-      U.formItem('报价编号', '<input class="input" value="' + q.id + '" readonly>') +
-      U.formItem('客户', '<input class="input" value="' + esc(U.customerName(q.customerId)) + '" readonly>') +
-      U.formItem('业务员', '<input class="input" value="' + esc(q.salesperson) + '" readonly>') +
-      U.formItem('有效期至', '<input class="input" type="date" id="qe-valid" value="' + q.validUntil + '">', { required: true }) +
-      '<div class="form-item"><label class="required">币种</label><select class="select" id="qe-currency">' +
-        ['USD', 'EUR'].map(function (c) { return '<option ' + (q.currency === c ? 'selected' : '') + '>' + c + '</option>'; }).join('') +
+      '<form id="qe-form" data-quote-id="' + esc(q.id) + '" data-quote-token="' + editor.token + '" novalidate><div class="form-grid">' +
+      U.formItem('报价编号', '<input class="input" id="qe-id" value="' + q.id + '" readonly>') +
+      U.formItem('客户', '<input class="input" id="qe-customer" value="' + esc(U.customerName(q.customerId)) + '" readonly>') +
+      U.formItem('业务员', '<input class="input" id="qe-sales" value="' + esc(q.salesperson) + '" readonly>') +
+      U.formItem('有效期至', '<input class="input" type="date" id="qe-valid" value="' + esc(q.validUntil) + '">', { required: true }) +
+      '<div class="form-item"><label class="required" for="qe-currency">币种</label><select class="select" id="qe-currency">' +
+        (U.currencyEnabled(q.currency) ? '' : '<option value="' + esc(q.currency) + '" selected>当前币种待核对</option>') +
+        M.dicts.filter(function (d) { return d.group === '币种' && d.enabled === true; }).map(function (d) { return '<option value="' + esc(d.code) + '" ' + (q.currency === d.code ? 'selected' : '') + '>' + esc(d.code) + '</option>'; }).join('') +
       '</select><div class="field-error"></div></div>' +
       U.formItem('贸易术语', '<input class="input" id="qe-term" value="' + esc(q.tradeTerm) + '">', { required: true }) +
       '</div>' +
       '<div class="mt8">' + U.formItem('付款方式', '<input class="input" id="qe-pay" value="' + esc(q.paymentTerm) + '">', { required: true }) + '</div>' +
       '<div class="mt8">' + U.formItem('备注', '<textarea class="textarea" id="qe-remark">' + esc(q.remark) + '</textarea>') + '</div>' +
-      '<div class="card-title mt16">报价明细<span class="sub">修改数量或单价后自动重算金额</span></div>' +
+      '<div class="card-title mt16">报价明细<span class="sub">修改数量或单价后自动核对金额</span></div>' +
+      '<p class="readonly-hint" id="qe-number-help">数量、单价至少 0.01，最多 2 位小数；每行金额须精确到分，不自动舍入。小数数量保留。</p>' +
       '<div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>商品名称</th><th class="num">数量</th><th class="num">单价</th><th class="num">金额</th></tr></thead>' +
       '<tbody>' + itemRows +
-      '<tr><td colspan="4" class="num"><b>合计</b></td><td class="num"><b id="qe-total">' + U.fmt(U.quoteTotal(q)) + '</b> <span class="muted">' + q.currency + '</span></td></tr>' +
+      '<tr><td colspan="4" class="num"><b>合计</b></td><td class="num"><b id="qe-total">' + (amounts.ok ? U.fmt(amounts.total) : '待修正') + '</b> <span class="muted" id="qe-total-currency">' + esc(q.currency) + '</span></td></tr>' +
       '</tbody></table></div>' +
+      '<div class="field-error quote-form-error" id="qe-form-error" data-quote-error="1" role="alert"></div>' +
       '<div class="form-actions"><a class="btn" href="#/quotes/' + q.id + '">取 消</a>' +
       '<button type="submit" class="btn btn-primary">保存报价</button></div>' +
       '</form></div>';
   };
-  /* 报价编辑：数量/单价联动重算 */
-  document.addEventListener('input', function (e) {
-    if (!e.target.classList || !e.target.classList.contains('qe-input')) return;
-    var idx = +e.target.dataset.idx;
-    var qtyEl = document.querySelector('.qe-input[data-idx="' + idx + '"][data-field="qty"]');
-    var priceEl = document.querySelector('.qe-input[data-idx="' + idx + '"][data-field="price"]');
-    var qty = Number(qtyEl.value) || 0, price = Number(priceEl.value) || 0;
-    document.getElementById('qe-amt-' + idx).textContent = U.fmt(qty * price);
-    var total = 0;
-    document.querySelectorAll('.qe-input[data-field="qty"]').forEach(function (qEl) {
-      var i = qEl.dataset.idx;
-      var pEl = document.querySelector('.qe-input[data-idx="' + i + '"][data-field="price"]');
-      total += (Number(qEl.value) || 0) * (Number(pEl.value) || 0);
+  function quoteFormItems(form, q) {
+    return (Array.isArray(q.items) ? q.items : []).map(function (it, idx) {
+      var qty = form.querySelector('.qe-input[data-idx="' + idx + '"][data-field="qty"]');
+      var price = form.querySelector('.qe-input[data-idx="' + idx + '"][data-field="price"]');
+      return { productId: it ? it.productId : '', qty: qty ? qty.value : '', price: price ? price.value : '' };
     });
-    document.getElementById('qe-total').textContent = U.fmt(total);
+  }
+  function quotePreview(form) {
+    var context = quoteEditor;
+    if (!context || form.dataset.quoteToken !== context.token) return;
+    var items = quoteFormItems(form, context.quote), amounts = U.transactionAmounts(items);
+    items.forEach(function (it, idx) {
+      var node = form.querySelector('#qe-amt-' + idx), line = U.transactionAmounts([it]);
+      if (node) node.textContent = line.ok ? U.fmt(line.total) : '待修正';
+    });
+    form.querySelector('#qe-total').textContent = amounts.ok ? U.fmt(amounts.total) : '待修正';
+    form.querySelector('#qe-total-currency').textContent = form.querySelector('#qe-currency').value;
+    return amounts;
+  }
+  function quoteCandidateError(form, candidate) {
+    var input = null;
+    var hasRow = Number.isInteger(candidate.rowIndex) && candidate.rowIndex >= 0;
+    if (hasRow && ['qty', 'price', 'amount'].indexOf(candidate.field) >= 0) {
+      input = form.querySelector('.qe-input[data-idx="' + candidate.rowIndex + '"][data-field="' + (candidate.field === 'qty' ? 'qty' : 'price') + '"]');
+    } else {
+      var fields = { validUntil: '#qe-valid', currency: '#qe-currency', tradeTerm: '#qe-term', paymentTerm: '#qe-pay' };
+      if (fields[candidate.field]) input = form.querySelector(fields[candidate.field]);
+    }
+    var message = candidate.error;
+    form.querySelector('#qe-form-error').textContent = message;
+    if (input) {
+      U.fieldError(input, message);
+      if (candidate.field === 'amount' && hasRow) {
+        var qty = form.querySelector('.qe-input[data-idx="' + candidate.rowIndex + '"][data-field="qty"]');
+        if (qty) U.fieldError(qty, message, input.id + '-error');
+      }
+      input.focus();
+    }
+    else form.querySelector('[type="submit"]').focus();
+  }
+  /* 报价编辑：纯数字候选预览，非法值不伪装成零。 */
+  document.addEventListener('input', function (e) {
+    if (!e.target.closest || !e.target.classList || !e.target.classList.contains('qe-input') && e.target.id !== 'qe-currency') return;
+    var form = e.target.closest('#qe-form'); if (!form) return;
+    U.clearErrors(form); quotePreview(form);
   });
   document.addEventListener('submit', function (e) {
     if (e.target.id !== 'qe-form') return;
     e.preventDefault();
     var form = e.target;
     U.clearErrors(form);
-    var rules = [
-      { el: form.querySelector('#qe-valid'), label: '有效期', required: true },
-      { el: form.querySelector('#qe-term'), label: '贸易术语', required: true },
-      { el: form.querySelector('#qe-pay'), label: '付款方式', required: true }
-    ];
-    form.querySelectorAll('.qe-input').forEach(function (inp) {
-      rules.push({ el: inp, label: inp.dataset.field === 'qty' ? '数量' : '单价', required: true, number: true, min: 0.01 });
+    var context = quoteEditor;
+    if (!context || context.submitted || quoteBusy[context.id]) return;
+    if (form.dataset.quoteId !== context.id || form.dataset.quoteToken !== context.token || document.getElementById('qe-form') !== form ||
+        location.hash !== '#/quotes/' + context.id + '/edit') { quoteError(form, '当前表单与报价不一致，请重新打开编辑页。'); return; }
+    var error = quoteContextError(context, '待客户确认');
+    if (error) { quoteError(form, error); return; }
+    var q = context.quote;
+    if (form.querySelectorAll('.qe-input').length !== (Array.isArray(q.items) ? q.items.length : 0) * 2) { quoteError(form, '报价明细表单不完整，请重新打开编辑页。'); return; }
+    var candidate = quoteCandidate(q, { items: quoteFormItems(form, q), validUntil: form.querySelector('#qe-valid').value,
+      currency: form.querySelector('#qe-currency').value, tradeTerm: form.querySelector('#qe-term').value.trim(),
+      paymentTerm: form.querySelector('#qe-pay').value.trim(), remark: form.querySelector('#qe-remark').value.trim() });
+    quotePreview(form);
+    if (!candidate.ok) { quoteCandidateError(form, candidate); return; }
+    var savedItems = candidate.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; });
+    var btn = form.querySelector('[type="submit"]');
+    quoteBusy[context.id] = true;
+    U.withLoading(btn, function () {
+      try {
+        if (context.submitted) return;
+        var delayedError = quoteContextError(context, '待客户确认');
+        if (!delayedError && (!form.isConnected || document.getElementById('qe-form') !== form || quoteEditor !== context || location.hash !== '#/quotes/' + context.id + '/edit')) delayedError = '编辑页面已变化，本次未保存，请重新核对。';
+        if (delayedError) { quoteError(form, delayedError); return; }
+        q.validUntil = candidate.validUntil; q.currency = candidate.currency; q.tradeTerm = candidate.tradeTerm;
+        q.paymentTerm = candidate.paymentTerm; q.remark = candidate.remark; q.items = savedItems;
+        context.submitted = true;
+        U.toast('报价 ' + q.id + ' 已保存'); location.hash = '#/quotes/' + q.id;
+      } finally { delete quoteBusy[context.id]; }
     });
-    if (!U.validate(rules)) {
-      U.toast('请修正表单中标红的字段：数量与单价必须为大于 0 的数字', 'error');
-      return;
-    }
-    var q = U.quote(location.hash.replace(/^#\//, '').split('/')[1]);
-    if (!q) return;
-    q.validUntil = form.querySelector('#qe-valid').value;
-    q.currency = form.querySelector('#qe-currency').value;
-    q.tradeTerm = form.querySelector('#qe-term').value.trim();
-    q.paymentTerm = form.querySelector('#qe-pay').value.trim();
-    q.remark = form.querySelector('#qe-remark').value.trim();
-    q.items.forEach(function (it, idx) {
-      it.qty = Number(form.querySelector('.qe-input[data-idx="' + idx + '"][data-field="qty"]').value);
-      it.price = Number(form.querySelector('.qe-input[data-idx="' + idx + '"][data-field="price"]').value);
-    });
-    U.toast('报价 ' + q.id + ' 已保存');
-    location.hash = '#/quotes/' + q.id;
   });
 
   /* ==================== 订单列表 ==================== */

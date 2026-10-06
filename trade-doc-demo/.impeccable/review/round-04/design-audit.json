@@ -1,0 +1,334 @@
+{
+  "root": "E:\\foreign-trade-independent-websit\\trade-doc-demo",
+  "results": [
+    {
+      "id": "journey_map_structure",
+      "status": "pass",
+      "message": "找到含 persona/scenario/steps 並帶有想法、感受或洞察欄位的 journey/flow 證據。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-03\\design-audit.json",
+          "line": 7,
+          "snippet": "\"message\": \"找到含 persona/scenario/steps 並帶有想法、感受或洞察欄位的 journey/flow 證據。\","
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-03\\design-audit.json",
+          "line": 7,
+          "snippet": "\"message\": \"找到含 persona/scenario/steps 並帶有想法、感受或洞察欄位的 journey/flow 證據。\","
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-03\\design-audit.json",
+          "line": 7,
+          "snippet": "\"message\": \"找到含 persona/scenario/steps 並帶有想法、感受或洞察欄位的 journey/flow 證據。\","
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-03\\design-audit.json",
+          "line": 12,
+          "snippet": "\"snippet\": \"\\\"message\\\": \\\"找到含 persona/scenario/steps 並帶有想法、感受或洞察欄位的 journey/flow 證據。\\\",\""
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-03\\design-audit.json",
+          "line": 7,
+          "snippet": "\"message\": \"找到含 persona/scenario/steps 並帶有想法、感受或洞察欄位的 journey/flow 證據。\","
+        }
+      ]
+    },
+    {
+      "id": "system_status_visibility",
+      "status": "pass",
+      "message": "找到目前步驟、進度或 next/completed 等系統狀態可見性證據。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 36,
+          "snippet": "| 取消申请／已取消 | 对应订单状态 | 明确状态，未来节点不标完成 | 不适用的后续动作 | 查看订单 | 既有审核流程 |"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 55,
+          "snippet": "禁止只换颜色而保留与 A 不符的订单工作区；禁止从图中复制三行样例而删除完整数据；禁止按图像反推角色权限、业务状态、金额或未来完成节点。保留完整表格、分页、筛选及六页签详情。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\AGENTS.md",
+          "line": 4,
+          "snippet": "> **任何代理在开始工作前必须先读本文件和 `HANDOFF.md`；完成任何一个步骤或功能后必须更新 `HANDOFF.md`。**"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\AGENTS.md",
+          "line": 69,
+          "snippet": "- 危险操作（取消订单、变更金额、作废单证）：确认弹窗说明影响 + 提交中按钮 loading 防重复。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\AGENTS.md",
+          "line": 76,
+          "snippet": "## 7. 完成标准（Definition of Done）"
+        }
+      ]
+    },
+    {
+      "id": "workbench_ia_structure",
+      "status": "pass",
+      "message": "找到完整的 workbench IA 證據：primary task、task/state model、IA 表、visibility plan、content audit 與 deferred reveal rationale 都存在。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 7,
+          "snippet": "- Primary task：在订单工作区选择一笔订单，同屏核对订单、单证、收款三条独立进度。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 5,
+          "snippet": "## Task model / 任务层级"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 28,
+          "snippet": "## State model / 状态模型"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 16,
+          "snippet": "## Information architecture / 信息架构"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 18,
+          "snippet": "| 信息项 | Role / 分类 | 频率 | 首屏必须 | 阶段／显示条件 | 容器 | 可收合 |"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 30,
+          "snippet": "| 状态 | 进入条件 | Must-see-now | 隐藏信息 | 主 CTA | 离开条件 |"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 40,
+          "snippet": "| Deferred block | hidden_now_because | reveal_trigger | container |"
+        }
+      ]
+    },
+    {
+      "id": "guideline_doc_structure",
+      "status": "pass",
+      "message": "找到結構完整的 guideline 文件：DESIGN.md。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 392,
+          "snippet": "## Usage / 使用场景"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 228,
+          "snippet": "## Layout"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 396,
+          "snippet": "## Anatomy / 订单工作区组成"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 400,
+          "snippet": "## States / 状态规范"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 411,
+          "snippet": "## Interaction / A 方案操作与可访问性约定"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 429,
+          "snippet": "## Content / 文案与视觉资产"
+        }
+      ]
+    },
+    {
+      "id": "gestalt_proximity_common_region",
+      "status": "pass",
+      "message": "找到以間距、section、fieldset 或群組語意建立鄰近/共同區域的證據。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\design.json",
+          "line": 565,
+          "snippet": "\"html\": \"<section class=\\\"ds-card\\\"><div class=\\\"ds-card-title\\\">业务记录<span>共 2 项</span></div><p class=\\\"ds-card-description\\\">订单、单证与收款分别记录进展。</p></section>\","
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-01-a\\design-audit.json",
+          "line": 145,
+          "snippet": "\"message\": \"找到以間距、section、fieldset 或群組語意建立鄰近/共同區域的證據。\","
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-01-a\\design-audit.json",
+          "line": 150,
+          "snippet": "\"snippet\": \"\\\"html\\\": \\\"<section class=\\\\\\\"ds-card\\\\\\\"><div class=\\\\\\\"ds-card-title\\\\\\\">业务记录<span>共 2 项</span></div><p class=\\\\\\\"ds-card-description\\\\\\\">订单、单证与收"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-01-a\\design-audit.json",
+          "line": 155,
+          "snippet": "\"snippet\": \".paper .p-title{text-align:center;font-size:19px;font-weight:700;letter-spacing:2px;margin-bottom:2px;}\""
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\review\\round-01-a\\design-audit.json",
+          "line": 160,
+          "snippet": "\"snippet\": \".paper .p-title-en{text-align:center;font-size:11px;color:#5a6378;letter-spacing:1px;margin-bottom:20px;}\""
+        }
+      ]
+    },
+    {
+      "id": "gestalt_similarity",
+      "status": "pass",
+      "message": "找到 token、variant 或共享樣式系統，符合相似性原則。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\A-IMPLEMENTATION.md",
+          "line": 47,
+          "snippet": "## Tokens / 组件规范"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 226,
+          "snippet": "**The 金额可比较 Rule.** 金额右对齐并携带币种，使用 `font-variant-numeric: tabular-nums`；不同币种不能合成一个总数。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 388,
+          "snippet": "URL指定暂停/异常/不可登记对象时常显原编号与具体理由，不无声替换其他订单；没有有效选择时原生disabled登记。用户主动选择合法对象后更新币种/余额并恢复操作，成功URL与实际登记对象一致。异常币种/非法历史金额/超收/无法无损显示必须明确待核对并阻断新增，不假0/结清或合并折算；失败保留金额原文、对象、日期、备"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\HANDOFF.md",
+          "line": 18,
+          "snippet": "- Mock 数据勾稽一致：7 笔订单总额 = 明细之和，已收 = 收款记录之和；含 USD / EUR 多币种。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\HANDOFF.md",
+          "line": 26,
+          "snippet": "- 交付：源码入口 `index.html`，运行说明 `README.md`，设计规范 `DESIGN.md` 和 `.impeccable/design.json`；压缩包 `delivery/trade-doc-modern-ui-20261004.zip`。无构建/运行时外部依赖，Mock 源文件与开工副本 S"
+        }
+      ]
+    },
+    {
+      "id": "gestalt_figure_ground",
+      "status": "pass",
+      "message": "找到背景/前景/對比 token 或敘述，符合 figure-ground 原則。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 183,
+          "snippet": "鸢尾紫承担行动与当前定位，浅紫构成导航背景，珍珠白与白色组织阅读面，薄荷青辅助识别收款阅读区；状态色承担业务含义。精确值以上方 frontmatter 为准；`blue-bg` 保留旧 token 名以兼容组件，但实际值为浅紫。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 190,
+          "snippet": "- 导航浅紫（nav-bg / nav-bg-deep）：侧栏背景与非选中导航 hover。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 195,
+          "snippet": "- 工作区灰（bg）与面板白（card）：背景、面板和控件形成清晰分层。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 248,
+          "snippet": "登录页采用鸢尾紫流程说明与珍珠白表单背景双列：左列说明确认报价生成订单以及单证/收款并行关系，右列表单白色面板最大宽（470px），内边距（36px），圆角（12px）；原生输入与按钮留在白色操作区。五角色使用与账号、密码同宽的原生下拉框；选项显示角色与演示姓名，下方显示所选演示部门。"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\DESIGN.md",
+          "line": 310,
+          "snippet": "订单列表提供基本筛选、更多筛选、重置和查询；高级区展开有分隔线。工具栏显示记录数量和紧凑行距状态。表头浅灰底、内边距（14px 16px），默认单元格（16px）；订单表横向（12px），紧凑行纵向（9px）。辅助字段降低颜色层级。页签为浅灰紫连体底座上的白色选中段，以文字和背景共同表示当前页。"
+        }
+      ]
+    },
+    {
+      "id": "gestalt_continuation",
+      "status": "pass",
+      "message": "找到 stepper、timeline、ordered sequence 或連接線等連續性證據。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\design.json",
+          "line": 549,
+          "snippet": "\"html\": \"<nav class=\\\"ds-nav\\\" aria-label=\\\"主导航\\\"><a href=\\\"#/dashboard\\\" class=\\\"ds-nav-item ds-selected\\\" aria-current=\\\"page\\\"><svg class=\\\"ds-nav-icon\\\" vie"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\design.json",
+          "line": 573,
+          "snippet": "\"html\": \"<div class=\\\"ds-role-field\\\"><label class=\\\"ds-role-label\\\" for=\\\"ds-login-role\\\">演示角色</label><div class=\\\"ds-role-control\\\"><select class=\\\"ds-login-r"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\mocks\\decision\\modern-multicolor\\a.source.prompt.txt",
+          "line": 13,
+          "snippet": "Right selected order workspace: a prominent saturated iris header area, restrained 14px corner radius, white text \"SO2026001\", secondary text \"订单金额\", and exact "
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\mocks\\decision\\modern-multicolor\\b.prompt.txt",
+          "line": 18,
+          "snippet": "- Fine divider, then section \"独立业务进度\" with three separate horizontally aligned label/value rows: \"订单进度\" / \"执行中\", \"单证进度\" / \"待审核\", \"收款进度\" / \"部分收款\". These are inde"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\.impeccable\\mocks\\decision\\modern-multicolor\\c.prompt.txt",
+          "line": 4,
+          "snippet": "Structure: A charcoal full-width horizontal top navigation with brand at left, five navigation items, search and account at right. No expanded left sidebar. Bel"
+        }
+      ]
+    },
+    {
+      "id": "anti_pattern_signals",
+      "status": "warn",
+      "message": "偵測到可能的 AI slop / UX copy 反模式，請逐條確認是否違反設計意圖與可讀性。",
+      "evidence": [
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\css\\base.css",
+          "line": 38,
+          "snippet": "[generic-font-stack] font-family:\"PingFang SC\",\"Microsoft YaHei\",\"Helvetica Neue\",Arial,sans-serif;"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\css\\base.css",
+          "line": 9,
+          "snippet": "[pure-black-white] --card:#ffffff;"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\css\\layout.css",
+          "line": 4,
+          "snippet": "[pure-black-white] .sidebar .logo{height:96px;display:flex;align-items:center;padding:0 24px;gap:12px;color:#fff;flex-shrink:0;}"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\css\\pages.css",
+          "line": 4,
+          "snippet": "[pure-black-white] background:#fff;border:1px solid var(--border);border-radius:var(--radius-panel);"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\js\\utils.js",
+          "line": 104,
+          "snippet": "[generic-cta-copy] ['edit', 'submit', 'revise', 'reform', 'audit', 'export'].forEach(function (action) {"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\js\\views-core.js",
+          "line": 290,
+          "snippet": "[generic-cta-copy] (editable ? '<div class=\"form-actions\"><a class=\"btn\" href=\"#/customers\">取 消</a><button type=\"submit\" class=\"btn btn-primary\" data-loading-t"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\js\\views-docs.js",
+          "line": 395,
+          "snippet": "[generic-cta-copy] var ticket = captureDocAction(el, 'submit', false);"
+        },
+        {
+          "path": "E:\\foreign-trade-independent-websit\\trade-doc-demo\\js\\views-fin.js",
+          "line": 216,
+          "snippet": "[generic-cta-copy] '<div class=\"form-actions\"><button type=\"submit\" class=\"btn btn-primary\"' + (first ? '' : ' disabled') + '>登记收款</button></div></form>'"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "pass": 8,
+    "warn": 1,
+    "fail": 0
+  },
+  "manual_review": [
+    "人工確認 Closure：畫面是否靠缺口暗示整體，不靠額外文字補救理解。",
+    "人工確認 Common Fate：動畫或移動中的元素是否真的屬於同一群組，且不會誤導焦點。",
+    "人工確認 Praegnanz：複雜畫面是否被簡化成清楚、可掃描的形狀與層次。",
+    "人工確認 deferred blocks 是否真的有合理的隱藏理由、揭露事件與容器，而不是任意藏起來。"
+  ]
+}

@@ -1,0 +1,95 @@
+Round 04 - actual Node fixtures; not browser/backend certification
+verify-cancellation.cjs exit=0
+PASS cancellation/re-document approval, history preservation, delayed guards, duplicate decisions and snapshot creation
+verify-change-request.cjs exit=0
+PASS: sales change request 25 modal/Promise cases; pending/duplicates, roles/order eligibility, delayed actor/object/status/currency guard, cancellation prior state, immutable submitted inputs, full MOCK refusal atomicity (Node DOM fixture only)
+verify-decimal-contract.cjs exit=0
+PASS decimal inputs, fractional quantities/exact lines, overflow, calendar dates, pure calculations and currency/overpayment diagnostics
+verify-demo.cjs exit=0
+{
+  "result": "PASS",
+  "resources": 12,
+  "quotes": 9,
+  "documents": 11,
+  "amounts": [
+    {
+      "order": "SO2026001",
+      "currency": "USD",
+      "total": 24100,
+      "received": 12000,
+      "outstanding": 12100
+    },
+    {
+      "order": "SO2026002",
+      "currency": "USD",
+      "total": 28400,
+      "received": 28400,
+      "outstanding": 0
+    },
+    {
+      "order": "SO2026003",
+      "currency": "EUR",
+      "total": 19500,
+      "received": 0,
+      "outstanding": 19500
+    },
+    {
+      "order": "SO2026004",
+      "currency": "EUR",
+      "total": 30500,
+      "received": 30500,
+      "outstanding": 0
+    },
+    {
+      "order": "SO2026005",
+      "currency": "USD",
+      "total": 28150,
+      "received": 0,
+      "outstanding": 28150
+    },
+    {
+      "order": "SO2026006",
+      "currency": "EUR",
+      "total": 20000,
+      "received": 6000,
+      "outstanding": 14000
+    },
+    {
+      "order": "SO2026007",
+      "currency": "USD",
+      "total": 41550,
+      "received": 20000,
+      "outstanding": 21550
+    }
+  ],
+  "scope": "静态资源、语法及样例金额；不替代浏览器与业务流程验收"
+}
+verify-document-lifecycle.cjs exit=0
+PASS: document lifecycle 90 async role/state/cancellation/race cases + normal transitions, immutable snapshots, finance isolation, latest/conflict/reform/audit/export rules (Node VM only)
+verify-document-snapshots.cjs exit=0
+PASS: all demo CI/PL snapshots survive seller/customer/product/order mutation; inherited revision, finance recreation, immutable detached copies, role edit bounds, totals/currency, refresh reset (Node VM only)
+verify-document-workspace.cjs exit=0
+PASS: document workspace local version directory/current/latest/history, action precedence, source disclosure, real app delegated anchor preventDefault, dirty audit/packing cancel-confirm navigation, focus node/input preservation (Node DOM fixture only)
+verify-login.cjs exit=0
+PASS: five-role dropdown template, default selection, label and department hint
+PASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state
+PASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard
+PASS: account/password required validation and no login on invalid fields
+PASS: invalid-role submit rejection, feedback and focus
+Scope: Node VM template/action checks only; native select interaction and visual layout require browser verification.
+verify-order-workspace.cjs exit=0
+PASS: A workspace role actions, independent progress and currencies, selection/page/filter empty state, view toggles, draft-input preservation, and unchanged business data (Node VM)
+verify-payments-contract.cjs exit=0
+PASS: 71 payment contract scenarios; real Promise/timers + native submit/change handlers (Node VM; no browser/server transaction claims)
+verify-progress-stages.cjs exit=0
+PASS: no-document, mixed returned/drafting, all reviewing, export eligibility, latest-version aggregate and shared detail stages; payment facts unchanged (Node VM)
+verify-quotation-contract.cjs exit=0
+PASS: quotation contract 103 actual input/submit/modal/Promise cases; decimal preview, fractional-cent/overflow atomic refusal, dates/dictionary/associations, actor/object/content drift, cancel/duplicates, USD/EUR fractional quantity source-consistent order (Node DOM fixture only)
+verify-repricing.cjs exit=0
+PASS: atomic repricing, precision/non-finite input, USD/EUR isolation, received floor, roles/self-review, duplicate/reject/cancel and deferred revalidation (Node VM)
+verify-session.cjs exit=0
+PASS: five-role read-only identity, cancellation/logout, storage and transient state clearing, protected-route return, and re-login (Node VM)
+verify-views.cjs exit=0
+PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)
+PASS: quotation/order and controlled document revision cancellation, reconciliation, and repeat guards
+PASS: CI/PL document editing and saving enforce role, version status, and deferred role changes

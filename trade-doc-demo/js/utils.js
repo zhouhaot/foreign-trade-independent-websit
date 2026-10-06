@@ -120,6 +120,91 @@
       canReform: !reasons.reform, canAudit: !reasons.audit, canExport: !reasons.export };
   };
 
+  /* 新报价/收款的两位十进制契约：不改变通用 U.validate 或历史快照。 */
+  U.decimalInput = function (value, label, allowZero) {
+    label = label || '数值';
+    function invalid(reason) { return { ok: false, units: null, value: null, error: label + reason }; }
+    if (typeof value !== 'string' && typeof value !== 'number') return invalid('必须为普通十进制数字，最多两位小数。');
+    var text = String(value).trim();
+    if (!/^\d+(?:\.\d{1,2})?$/.test(text)) return invalid('必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。');
+    function unitsOf(input) {
+      var parts = input.split('.');
+      return Number(parts[0] + ((parts[1] || '') + '00').slice(0, 2));
+    }
+    var units = unitsOf(text);
+    if (!Number.isSafeInteger(units)) return invalid('超出安全计算范围，请减少数值。');
+    if (units < (allowZero ? 0 : 1)) return invalid(allowZero ? '不能为负数。' : '至少为 0.01。');
+    var normalized = units / 100, normalizedText = String(normalized);
+    if (!/^\d+(?:\.\d{1,2})?$/.test(normalizedText) || unitsOf(normalizedText) !== units) return invalid('超出可无损保存的数值范围，请减少数值。');
+    return { ok: true, units: units, value: normalized, error: '' };
+  };
+  U.transactionAmounts = function (items) {
+    function invalid(error, rowIndex, field) {
+      return { ok: false, error: error, rowIndex: rowIndex, field: field, items: [], totalCents: null, total: NaN };
+    }
+    if (!Array.isArray(items) || !items.length) return invalid('至少需要一行商品明细。', -1, 'items');
+    var result = [], total = 0n, limit = BigInt(Number.MAX_SAFE_INTEGER);
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      if (!item || typeof item !== 'object') return invalid('第 ' + (i + 1) + ' 行明细无效。', i, 'items');
+      var qty = U.decimalInput(item.qty, '数量'), price = U.decimalInput(item.price, '单价');
+      if (!qty.ok || !price.ok) return invalid('第 ' + (i + 1) + ' 行' + (!qty.ok ? qty.error : price.error), i, !qty.ok ? 'qty' : 'price');
+      var scaled = BigInt(qty.units) * BigInt(price.units);
+      if (scaled % 100n !== 0n) return invalid('第 ' + (i + 1) + ' 行金额必须精确到分，请调整数量或单价；当前不支持静默四舍五入。', i, 'amount');
+      var cents = scaled / 100n;
+      if (cents > limit || total + cents > limit) return invalid('第 ' + (i + 1) + ' 行或合计超出安全计算范围。', i, 'amount');
+      var displayLine = U.decimalInput(Number(cents) / 100, '行金额');
+      if (!displayLine.ok || displayLine.units !== Number(cents)) return invalid('第 ' + (i + 1) + ' 行金额超出可无损显示的数值范围。', i, 'amount');
+      total += cents;
+      result.push(Object.assign({}, item, { qty: qty.value, price: price.value, lineCents: Number(cents) }));
+    }
+    var numberTotal = Number(total) / 100, parsedTotal = U.decimalInput(numberTotal, '合计');
+    if (!parsedTotal.ok || parsedTotal.units !== Number(total)) return invalid('明细合计超出可无损显示的数值范围。', -1, 'amount');
+    return { ok: true, error: '', rowIndex: -1, field: '', items: result, totalCents: Number(total), total: numberTotal };
+  };
+  U.currencyEnabled = function (code) {
+    return M.dicts.some(function (entry) { return entry.group === '币种' && entry.code === code && entry.enabled; });
+  };
+  U.validCalendarDate = function (value) {
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+    var parts = value.split('-').map(Number), year = parts[0], month = parts[1], day = parts[2];
+    if (year < 1 || month < 1 || month > 12 || day < 1) return false;
+    var leap = year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
+    return day <= [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+  };
+  U.financialBalance = function (order) {
+    var result = { ok: false, error: '', totalCents: null, receivedCents: null, balanceCents: null, outstandingCents: null,
+      overpaidCents: null, total: NaN, received: NaN, outstanding: NaN, balance: NaN, overpaid: NaN };
+    if (!order) { result.error = '关联订单不存在，请核对收款对象。'; return result; }
+    if (!M.dicts.some(function (entry) { return entry.group === '币种' && entry.code === order.currency; })) {
+      result.error = '订单币种无效，无法计算同币种余额。'; return result;
+    }
+    var amounts = U.transactionAmounts(order.items);
+    if (!amounts.ok) { result.error = '订单明细金额待核对：' + amounts.error; return result; }
+    result.totalCents = amounts.totalCents; result.total = amounts.total;
+    var records = M.payments.filter(function (p) { return p.orderId === order.id; }), received = 0;
+    for (var i = 0; i < records.length; i++) {
+      var p = records[i], parsed = U.decimalInput(p.amount, '收款 ' + p.id + ' 金额');
+      if (p.currency !== order.currency) { result.error = '收款 ' + p.id + ' 币种与订单不一致，不能合并计算，请先核对。'; return result; }
+      if (!parsed.ok) { result.error = parsed.error; return result; }
+      if (!Number.isSafeInteger(received + parsed.units)) { result.error = '收款合计超出安全计算范围。'; return result; }
+      received += parsed.units;
+    }
+    var parsedReceived = U.decimalInput(received / 100, '收款合计', true);
+    if (!parsedReceived.ok || parsedReceived.units !== received) { result.error = '收款合计超出可无损显示的数值范围。'; return result; }
+    result.receivedCents = received; result.received = received / 100;
+    result.balanceCents = result.totalCents - received;
+    result.overpaidCents = Math.max(0, -result.balanceCents);
+    result.outstandingCents = Math.max(0, result.balanceCents);
+    var delta = U.decimalInput(Math.abs(result.balanceCents) / 100, '余额', true);
+    if (!delta.ok || delta.units !== Math.abs(result.balanceCents)) { result.error = '订单余额或超收金额超出可无损显示的数值范围，请先核对，不能继续登记收款。'; return result; }
+    result.balance = result.balanceCents < 0 ? -delta.value : delta.value;
+    result.outstanding = result.balanceCents < 0 ? 0 : delta.value;
+    result.overpaid = result.balanceCents < 0 ? delta.value : 0;
+    if (result.overpaidCents) { result.error = '订单存在超收 ' + U.fmt(result.overpaid) + ' ' + order.currency + '，请先核对，不能继续登记收款。'; return result; }
+    result.ok = true; return result;
+  };
+
   /* ---------- 金额勾稽 ---------- */
   U.orderTotal = function (order) {
     return order.items.reduce(function (s, it) { return s + it.qty * it.price; }, 0);
@@ -128,21 +213,20 @@
     return quote.items.reduce(function (s, it) { return s + it.qty * it.price; }, 0);
   };
   U.orderReceived = function (orderId) {
-    return M.payments.filter(function (p) { return p.orderId === orderId; })
-      .reduce(function (s, p) { return s + p.amount; }, 0);
+    return U.financialBalance(U.order(orderId)).received;
   };
   /* 收款状态：已结清 / 部分收款 / 未收款 */
   U.payStatus = function (order) {
-    var total = U.orderTotal(order);
-    var received = U.orderReceived(order.id);
-    if (received <= 0) return '未收款';
-    if (received >= total - 0.005) return '已结清';
+    var balance = U.financialBalance(order);
+    if (!balance.ok) return balance.overpaidCents > 0 ? '收款异常' : '金额待核对';
+    if (balance.receivedCents === 0) return '未收款';
+    if (balance.balanceCents === 0) return '已结清';
     return '部分收款';
   };
   U.orderFin = function (order) {
-    var total = U.orderTotal(order);
-    var received = U.orderReceived(order.id);
-    return { total: total, received: received, outstanding: Math.max(0, total - received) };
+    var balance = U.financialBalance(order);
+    return { total: balance.total, received: balance.received, outstanding: balance.outstanding,
+      balance: balance.balance, overpaid: balance.overpaid, error: balance.error };
   };
 
   /* ---------- 状态标签 ---------- */
@@ -151,6 +235,7 @@
     '未开始': 'gray', '制作中': 'orange', '待审核': 'orange', '已通过': 'green', '已退回': 'red',
     '草稿': 'gray', '待客户确认': 'orange', '已确认': 'green', '已报价': 'green', '跟进中': 'orange', '待处理': 'orange',
     '未收款': 'red', '部分收款': 'orange', '已结清': 'green',
+    '金额待核对': 'red', '收款异常': 'red',
     '单证审核': 'blue', '改价申请': 'purple', '取消申请': 'red', '重新制单申请': 'orange',
     '商业发票': 'blue', '装箱单': 'purple',
     '启用': 'green', '禁用': 'gray', 'A': 'green', 'B': 'blue', 'C': 'gray'
@@ -278,16 +363,34 @@
 
   /* ---------- 表单校验 ---------- */
   U.clearErrors = function (scope) {
-    scope.querySelectorAll('.is-error').forEach(function (el) { el.classList.remove('is-error'); el.removeAttribute('aria-invalid'); });
+    scope.querySelectorAll('.is-error').forEach(function (el) {
+      el.classList.remove('is-error'); el.removeAttribute('aria-invalid');
+      var errorRef = el.getAttribute ? el.getAttribute('data-field-error-ref') : null;
+      if (errorRef) {
+        var descriptions = (el.getAttribute('aria-describedby') || '').split(/\s+/).filter(function (id) { return id && id !== errorRef; });
+        if (descriptions.length) el.setAttribute('aria-describedby', descriptions.join(' '));
+        else el.removeAttribute('aria-describedby');
+      }
+      el.removeAttribute('data-field-error-ref');
+    });
     scope.querySelectorAll('.field-error').forEach(function (el) { el.textContent = ''; });
   };
-  U.fieldError = function (input, msg) {
+  U.fieldError = function (input, msg, sharedErrorId) {
     input.classList.add('is-error');
     input.setAttribute('aria-invalid', 'true');
     var item = input.closest('.form-item');
-    if (item) {
+    var errorId = sharedErrorId || '';
+    if (item && !sharedErrorId) {
       var err = item.querySelector('.field-error');
-      if (err) { err.textContent = msg; if (input.id) { err.id = input.id + '-error'; input.setAttribute('aria-describedby', err.id); } }
+      if (err) { err.textContent = msg; if (input.id) { err.id = input.id + '-error'; errorId = err.id; } }
+    }
+    if (errorId) {
+      var oldRef = input.getAttribute ? input.getAttribute('data-field-error-ref') : null;
+      var descriptions = input.getAttribute ? (input.getAttribute('aria-describedby') || '').split(/\s+/) : [];
+      descriptions = descriptions.filter(function (id) { return id && id !== oldRef && id !== errorId; });
+      descriptions.push(errorId);
+      input.setAttribute('aria-describedby', descriptions.join(' '));
+      input.setAttribute('data-field-error-ref', errorId);
     }
   };
   /* rules: [{el, label, required, number, min, max}] 返回是否全部通过 */
@@ -310,8 +413,9 @@
   };
   U.formItem = function (label, inner, opts) {
     opts = opts || {};
+    var control = inner.match(/<(?:input|select|textarea)\b[^>]*\bid="([^"]+)"/i);
     return '<div class="form-item">' +
-      '<label class="' + (opts.required ? 'required' : '') + '">' + U.esc(label) + '</label>' +
+      '<label class="' + (opts.required ? 'required' : '') + '"' + (control ? ' for="' + U.esc(control[1]) + '"' : '') + '>' + U.esc(label) + '</label>' +
       inner + '<div class="field-error"></div></div>';
   };
 

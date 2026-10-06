@@ -1,6 +1,6 @@
 # 贸易协同 · 外贸订单与单证管理
 
-现代化桌面前端 Demo，2026-10-07 已完成 A 方案及第3轮单证作业区/最新版本与取消资格；每轮改进、验证、复盘见 `docs/iterations/`。
+现代化桌面前端 Demo，2026-10-07 已完成 A 方案及第4轮报价/收款输入契约与表单打磨；每轮改进、验证、复盘见 `docs/iterations/`。
 
 ## 在另一台电脑继续
 
@@ -17,6 +17,7 @@ cd foreign-trade-independent-websit/trade-doc-demo
 - **A 已落地**：100px 浅色窄导航、紫色主操作、薄荷青收款区，订单列表与所选订单三条进度并排。保留完整表格、筛选、分页与六页签详情。查看[实施说明](A-IMPLEMENTATION.md)、[A 概念图](.impeccable/mocks/decision/modern-multicolor/a.png)及[迭代路线](IMPLEMENTATION_ROADMAP.md)。C 为历史方案。
 - 第2轮已增加单证基线快照、包装修订继承与重新制单当前捕获，防止主数据漂移；改价候选不命中目标时原子拒绝。详见[本轮说明](docs/iterations/round-02.md)。这些是静态原型能力，未知历史数据、服务端事务与真实部署仍需另行验证。
 - 第3轮按本订单切换版本，主动作前置，旧版只读/取消两态暂停动作与导出演示、历史结果保留。局部版本/返回入口保护未提交输入；不代表全局草稿保护。详见[第3轮说明](docs/iterations/round-03.md)，H09-H11为可撤销原型假设。
+- 第4轮严格普通两位十进制/逐行到分、报价完整候选与来源、实时同币种余额与收款提交守卫；失效选择不换单、错误保留输入/具体字段/原提示。详见[第4轮说明](docs/iterations/round-04.md)。H12/H13仍为原型假设，真实商品单位精度及日期等正式规则尚待定义。
 - GitHub 同步不包含 `.backups/`、`delivery/` 的旧包和本机工具临时状态；当前完整源码、设计资产与验证记录均在对应目录。历史记录中的本机绝对路径和临时端口仅用于追溯，不是另一台电脑的运行地址。
 - 本次同步前原 Mac 源目录没有 Git 元数据，因此通过独立克隆整理上传；原目录文件保留。后续建议以新克隆的仓库作为 Git 工作区，不在原目录直接执行 `git pull`。
 
@@ -95,8 +96,11 @@ node scripts/verify-document-lifecycle.cjs
 node scripts/verify-cancellation.cjs
 node scripts/verify-document-workspace.cjs
 node scripts/verify-change-request.cjs
+node scripts/verify-decimal-contract.cjs
+node scripts/verify-quotation-contract.cjs
+node scripts/verify-payments-contract.cjs
 ```
 
-前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价原子性、交易快照与阶段、单证异步资格/取消/局部输入保护/申请防重复。共12组，不代替浏览器；各轮实际覆盖见迭代报告。
+前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价/快照/单证与取消、局部输入、申请防重复及数字/报价/收款提交契约。共15组，不代替浏览器；各轮实际覆盖见迭代报告。
 
 `scripts/verify-browser.mjs` 是 Ego Browser 环境下的浏览器回归脚本，需由操作者提供当前授权的 TaskSpace ID，不会自行创建/接管浏览器空间。验证覆盖与已知边界见 `HANDOFF.md` 的 2026-10-04 交接记录。

@@ -462,6 +462,21 @@
 .doc-action-panel .ablock{margin-bottom:10px;}
 .doc-operation-context{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;}
 .doc-source-hint{font-size:12px;line-height:1.7;color:var(--text-sub);margin-bottom:14px;}
+.quote-number{width:128px;min-width:128px;text-align:left;margin:0 0 0 auto;}
+.quote-number .input{text-align:right;}
+.quote-number .field-error{font-size:12px;line-height:1.6;white-space:normal;overflow-wrap:anywhere;}
+.quote-number .field-error:empty{display:none;}
+#qe-form .table td{padding-top:10px;padding-bottom:10px;}
+#qe-form .table th{padding-top:10px;padding-bottom:10px;}
+#qe-form .form-actions{margin-top:14px;}
+.quote-form-error,.pay-effect-error{font-size:13px;line-height:1.7;color:var(--red);margin-top:12px;}
+.quote-form-error:empty,.pay-effect-error:empty{display:none;}
+.quote-confirm-summary{padding:14px 16px;margin-bottom:16px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--surface-subtle);}
+.quote-confirm-summary p{margin:8px 0 12px;line-height:1.7;}
+.pay-balance-summary{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:18px;padding:16px 0;border-top:1px solid var(--border);font-size:13px;line-height:1.7;}
+.pay-balance-summary span{display:flex;flex-direction:column;gap:4px;color:var(--text-sub);}
+.pay-balance-summary b{color:var(--text);font-size:16px;font-variant-numeric:tabular-nums;}
+.pay-register>.readonly-hint{margin-bottom:16px;}
 .doc-operation-blocked p{font-size:13px;line-height:1.7;margin:0 0 12px;}
 .doc-action-panel .doc-reference .small{line-height:1.7;}
 .doc-current-label{display:block;margin-top:8px;font-size:11px;font-weight:600;color:var(--primary);}

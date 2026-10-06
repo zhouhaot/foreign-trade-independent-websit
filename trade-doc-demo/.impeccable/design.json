@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T18:26:14Z",
+  "generatedAt": "2026-10-06T19:28:13Z",
   "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
   "extensions": {
     "colorMeta": {
@@ -411,6 +411,85 @@
       },
       "evidence": ".impeccable/review/round-03/browser-verification.json",
       "scope": "HTTP静态Demo；55角色路由/110布局/10实际交互；不代表读屏、缩放、file或生产验证。"
+    },
+    "quotationPaymentForms": {
+      "round": 4,
+      "primaryTasks": {
+        "quotation": "核对当前条款/完整明细并保存；确认与仅一次生成留在既有详情/一次弹窗。",
+        "payments": "按实际选择订单、live币种/未收登记；历史收款/应收参考后置。"
+      },
+      "quotationLayout": {
+        "readonlyIdentityIds": [
+          "qe-id",
+          "qe-customer",
+          "qe-sales"
+        ],
+        "numberContainerWidth": "128px",
+        "numberAlignment": "容器及输入值靠右对应th.num",
+        "tableVerticalPadding": "10px",
+        "actionsMarginTop": "14px",
+        "emptyError": "不占高度",
+        "retention": "必填条款、完整商品行和已有商业备注常显；非法行/合计待修正，不伪装0或部分合计。"
+      },
+      "numberContract": {
+        "assumption": "H12显式可撤销原型规则，不能作为计件商品可分割证明或正式单位精度政策。",
+        "inputs": "普通正十进制至少0.01、最多两位；拒绝指数/hex/非有限数/不可无损显示范围。",
+        "lineAmount": "逐行乘积精确到分，不自动舍入；数量0.01按技术候选保留。",
+        "currency": "合法当前币种同步行/合计，USD/EUR独立，不折算合并。",
+        "calendar": "只验证真实日历，不捏造未来/报价到期业务禁令。"
+      },
+      "errors": {
+        "rowNames": "第n行数量/单价",
+        "jointAmount": "两字段aria-invalid、共享一份行原因且保留qe-number-help，焦点price；完整总错误常显。",
+        "descriptionLifecycle": "fieldError追加临时errorRef，clearErrors只清临时引用，保留基础hint。",
+        "paymentAmount": "p-amount始终关联p-out-hint，失败追加p-amount-error。",
+        "pendingPresentation": "行/总额待修正，不用0或旧合法总额；失败保留金额原文/备注/日期/对象。",
+        "errorWrapping": "字段原因white-space:normal/overflow-wrap:anywhere，完整在128px范围折行；表格clientWidth=scrollWidth=1076，不产生错误横滑；错误态自然纵滚保留字号与原因。",
+        "feedback": "完整内联cause与短Toast；role=alert总结，不将整表设assertive live。"
+      },
+      "confirmation": {
+        "container": "一次既有确认弹窗",
+        "mustSee": [
+          "报价号",
+          "客户",
+          "合计及币种",
+          "条款",
+          "日期/有效期",
+          "当前合法明细",
+          "具名确认日期/说明"
+        ],
+        "noExtraGate": true,
+        "atomicity": "原会话/对象/内容绑定并延迟复核；失败不部分写入，loading防重复。"
+      },
+      "payments": {
+        "readonlyRole": "boss；登记只属fin。",
+        "balance": "当前实际订单应收/已收/未收紧凑勾稽，16px等宽数字。",
+        "pause": "H13取消申请中/已取消暂停新增收款；历史保留，不推导退款/核销/银行入账。",
+        "unavailableUrl": "原编号及具体原因保留，无声fallback禁止；无有效选择native disabled，用户主动选合法对象才恢复。",
+        "successObject": "URL与实际选中登记订单保持一致。",
+        "anomaly": "币种/历史金额/超收/无损显示异常明确待核对并阻断新增，历史可看，不假0/结清。"
+      },
+      "measuredBottom": {
+        "normalViewportHeight": "1000px",
+        "quotation1280": "969.14px",
+        "quotation1440": "971.14px",
+        "confirmation1280": "845.33px",
+        "payments1280": "775.67px",
+        "payments1440": "672.17px",
+        "paused1280": "726.39px/native disabled",
+        "jointError1280": "scrollY46/bottom1039.98px，完整错误折行后主操作需自然纵滚，非首屏0；修正清错后正常969.14px。",
+        "paymentError1280": "scrollY259/原生focus自然滚动，非首屏0"
+      },
+      "evidence": ".impeccable/review/round-04/browser-verification.json",
+      "scope": "HTTP静态原型；100独立角色路由/200实际布局、12真实交互。41.01EUR/USD结清在刷新前，终图已复位样例；原CI exactHTML不变来自交互比较。",
+      "notVerified": [
+        "真实后台/银行/NAS/身份事务",
+        "真实读屏/跨浏览器",
+        "400%/320px重排",
+        "真实PDF/file协议",
+        "真实商品单位精度/日期商业政策",
+        "大额或异币种历史像素态"
+      ]
     }
   },
   "components": [
@@ -497,7 +576,7 @@
   ],
   "narrative": {
     "northStar": "A · 订单协同工作区",
-    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。 第3轮单证作业区优先本订单版本链、当前资格与岗位主动作；短来源前置，历史事实和live操作资格分开，局部离开确认保护输入，导出仅为演示。",
+    "overview": "落地用户已确认的 A「珍珠白／鸢尾紫／薄荷青」。浅紫导航、紫色主操作和白色平面面板承载五角色。订单工作区以选择当前订单、同屏核对三条独立进度为主任务；左列筛选、选择与分页，右列订单白底、单证浅紫与收款薄荷青阅读区。完整表格、六页签详情及角色业务入口保持可用。工作台将四项指标压缩为摘要带，登录使用紫色流程说明与白色表单。任务层级、状态模型、信息架构与延后揭露见 A-IMPLEMENTATION.md；本文不推定浏览器或生产验收。 第2轮将单证阶段与真实状态分离，分栏/详情共用最新CI/PL阶段解释；仅通过条件表示可导出资格。订单工作区仅收紧留白，文书新增明确的交易来源与北京时间，示例基线不视作历史签发恢复。 第3轮单证作业区优先本订单版本链、当前资格与岗位主动作；短来源前置，历史事实和live操作资格分开，局部离开确认保护输入，导出仅为演示。 第4轮报价/收款保持各自单一编辑或登记任务；普通十进制、逐行精确到分与live余额明确，非法候选待修正、字段原因具名且失败保留；取消两态暂停新增收款按显式原型规则处理。",
     "keyCharacteristics": [
       "默认100px浅紫窄导航保留文字与图标，展开224px，所有角色叶子入口直接可达。",
       "白色平面面板、细边框和适度留白承载高频业务信息。",
@@ -545,6 +624,21 @@
       {
         "name": "历史事实与当前资格分离",
         "body": "原审核事实/章/快照保留；取消两态暂停单证操作/导出演示，历史只读，唯一最新已通过版本按原角色资格操作。",
+        "section": "components"
+      },
+      {
+        "name": "非法金额不假零",
+        "body": "报价非法行和总额待修正，收款异常待核对；普通十进制与逐行精确到分为显式原型契约，合法范围外不能假0/结清。",
+        "section": "components"
+      },
+      {
+        "name": "错误关联而不丢提示",
+        "body": "单字段错误具名；乘积错误两字段引用一份cause，fieldError追加而clearErrors仅移除临时error，精度/实时额度hint保留。",
+        "section": "components"
+      },
+      {
+        "name": "收款对象与资格可核对",
+        "body": "当前live币种/未收决定登记，取消两态暂停且历史保留；URL指定不可登对象不无声换单，成功仍保持实际对象。",
         "section": "components"
       }
     ],
