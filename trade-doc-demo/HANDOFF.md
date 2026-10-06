@@ -433,3 +433,11 @@ python3 -m http.server 8000   # 然后浏览器走一遍受影响页面（五类
 - 客户C001中文名实际保存后，旧CI2026003V2完整.paper渲染文字逐字相同、原环球买方/30500EUR保留（非HTMLexact、非所有纸张排列）。邮箱浏览器读值脱敏导致初等值false，纠正为可见保存状态/Node精确值，不绕脱敏。原tab3输入timeout，按文档新tab6恢复；新tab1280×720早115尺寸失败保留不计最终，设1000后重跑。1440主管loginwait超时但stored身份成立，reload后23路由真实验证，不称连续登录通过；动画未稳采集拒绝/错误selector等方法纠正留browser。
 - round-06.md列23项改进，客户/询盘/规划/UI计划材料与代码/JS/UI报告、完整日志/browser/audit/fixture/28图齐。未验file://、Ego、跨/旧浏览器、真实读屏、原生关闭/刷新提示、动态减少动效、PDF/打印、DNS/真实邮箱、后端事务/身份/NAS/生产。新建客户等原占位仍保留。
 - 下一轮优先单证包装输入完整候选、KGS/CBM现有格式与GW/NW关系、错误保留及制单员UI；现实规划先证据/显式假设，不改H12/旧快照或单证种类。用户持续开发/逐轮GitHub授权有效；远端回读后另追加回执。
+
+### 第6轮GitHub同步回执（2026-10-07）
+
+实现提交 `d8c4ff3dd660c1fd4bafda7c847d3916db8ab7f5`，标题 `Bind customer saves and inquiry drafts to reviewed source data`，已正常快进推送main。fetch前0/0，push后独立ls-remote完整SHA等于本地HEAD。73文件包含23项说明、20组Node日志、13交互/230最终布局、28PNG（13过程/15终版）、两代码APPROVE与UI SHIP，审计8/1/0。
+
+第一次远端回读时尚有DESIGN一条晚到的验证边界补注（客户locator点击非专门Enter、旧tab关闭未确认），未称工作区已干净。该文字补注与本回执另作封版文档提交并正常推送，第二次完整远端SHA与本地/干净工作区确认由中枢随后回读。没有强推、部署、凭据或系统配置修改。第7轮继续包装候选与单证员作业UI，用户持续授权有效。
+
+回执路径纠正：最初在仓库根运行相对路径，round-06.md追加失败并误建仅含本次回执的根HANDOFF.md；a208643cbffd6376ee7af6a9b8ea47756010f3d5仅提交DESIGN验证边界补注。中枢核对误建文件只含本次文本后移入正确trade-doc-demo两材料并移除该误建文件，未删除既有交接历史。EOF检查阻止空白文档提交，修正后再继续回执提交/推送。
