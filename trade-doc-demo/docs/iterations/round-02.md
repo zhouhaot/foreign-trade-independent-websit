@@ -49,4 +49,4 @@ H06是当前等比候选的安全校验，未求解所有两位单价组合。�
 
 ## GitHub
 
-本轮完成验证与复审后正常快进推送main，独立回读SHA并追加HANDOFF同步回执；具体远端提交以该回执为准。每项子任务材料与本轮复盘随实现一起提交。
+本轮实现提交为[`ad239dbf16ae424a964ec2c86cb15d99ff0e632b`](https://github.com/zhouhaot/foreign-trade-independent-websit/commit/ad239dbf16ae424a964ec2c86cb15d99ff0e632b)。已正常快进推送main，独立`ls-remote`回读与本地HEAD一致，推送后工作区干净。30个文件包含实现、逐项材料、两轮复审、验证及6张最终截图。此段回执另作后续文档提交，不递归声明自己的未来SHA。
