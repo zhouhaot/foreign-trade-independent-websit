@@ -50,3 +50,9 @@ H19为可撤销展示契约，仅当前查看版本status决定纸张表达。�
 ## GitHub同步
 
 此处未提前宣称推送完成。实现提交、正常推送/独立远端SHA及工作区状态实际成功后追加。
+
+### 第8轮GitHub同步回执（2026-10-07）
+
+实现提交 `3e4152509ec72d03c9cba691f2d48b7e273e863d`，标题 `Align document approval display with the viewed version state`，74文件：12项说明、现实/两代码/UI复审及设计规范、23脚本日志、33语法、9真实PASS＋1旧缺陷/290布局、29PNG（9过程/20终版）。综合Cc MEDIUM独立Resolved，代码/JS/CSS补审APPROVE、UI SHIP、审计8/1/0；schema2/原10组件examples保留，Mock和业务动作不变。
+
+fetch前0/0，正常快进push后独立ls-remote完整SHA与本地HEAD相等，工作区干净。此成功后回执另作正常提交/推送并再次回读，未强推、部署或改凭据配置。第9轮按现实候选推进三类业务弹窗填写连续性，先定义源DOM保留/关闭/成功提交区别，再分agent实施并真实验收；原计划尚不是完成状态，用户持续授权有效。

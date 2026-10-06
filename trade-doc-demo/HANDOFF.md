@@ -476,3 +476,9 @@ fetch前HEAD与origin/main为0/0；正常快进push后，独立ls-remote完整SH
 H19纸张审核表达已实现，12项前后说明见round-08.md；仅Views局部renderer/未知横幅与2条CSS状态折行，原Actions/Mock/审批字段/history/交易快照不写。Cc可见性MEDIUM四独立反例补修，131→137（另2可见姓名夹控制码保原文本），综合/JS最终APPROVE、CSS补审APPROVE。23脚本/33语法exit0，原已通过整纸字符串独立各24对照保留。
 
 真实HTTP同IAB9组PASS＋1旧基线缺陷，重送→主管取消意见保留→通过→V2未送审→旧V1全文保留→真实取消申请/已取消仍保同一旧全文。145独立角色路由/290两宽PASS，29PNG=9过程/20终版；4常态页首页首0，footer真实滚态、短Toast低角覆盖均记录。取消异步过早切角色和1280主管login等待超时已实读恢复，不重复申请，不说无恢复。UI逐图20final给SHIP，正在同步最终设计4owned文件；结构审计/推送回执完成后追加。未测正式签署/PDF/长名真实布局/后端/NAS。
+
+### 第8轮GitHub同步回执（2026-10-07）
+
+实现提交 `3e4152509ec72d03c9cba691f2d48b7e273e863d`，标题 `Align document approval display with the viewed version state`，74文件：12项说明、现实/两代码/UI复审及设计规范、23脚本日志、33语法、9真实PASS＋1旧缺陷/290布局、29PNG（9过程/20终版）。综合Cc MEDIUM独立Resolved，代码/JS/CSS补审APPROVE、UI SHIP、审计8/1/0；schema2/原10组件examples保留，Mock和业务动作不变。
+
+fetch前0/0，正常快进push后独立ls-remote完整SHA与本地HEAD相等，工作区干净。此成功后回执另作正常提交/推送并再次回读，未强推、部署或改凭据配置。第9轮按现实候选推进三类业务弹窗填写连续性，先定义源DOM保留/关闭/成功提交区别，再分agent实施并真实验收；原计划尚不是完成状态，用户持续授权有效。
