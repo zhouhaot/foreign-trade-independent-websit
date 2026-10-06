@@ -1,0 +1,11 @@
+{
+  "directionId": "assigned",
+  "label": "A · 珍珠白 × 鸢尾紫 × 薄荷青",
+  "comp": "a.png",
+  "source": "direct-user-message",
+  "userText": "算了,我更倾向于a",
+  "supersedes": "challenger-metro",
+  "status": "current-design-direction",
+  "runtimeImplemented": false,
+  "note": "Use existing A concept as the baseline. Stop C exploration. No final implementation or functionality approval is implied."
+}

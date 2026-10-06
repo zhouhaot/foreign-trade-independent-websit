@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T13:08:12Z",
+  "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "操作蓝"
+      },
+      "primary-dark": {
+        "role": "primary",
+        "displayName": "深操作蓝"
+      },
+      "nav-bg": {
+        "role": "primary",
+        "displayName": "导航与流程深蓝"
+      },
+      "nav-bg-deep": {
+        "role": "primary",
+        "displayName": "深蓝悬停"
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "工作区灰"
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "面板白"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "轻分隔线"
+      },
+      "border-control": {
+        "role": "neutral",
+        "displayName": "控件描边"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "正文深灰"
+      },
+      "text-sub": {
+        "role": "neutral",
+        "displayName": "辅助灰"
+      },
+      "green": {
+        "displayName": "成功绿"
+      },
+      "green-bg": {
+        "displayName": "浅绿底"
+      },
+      "orange": {
+        "displayName": "待处理橙"
+      },
+      "orange-bg": {
+        "displayName": "浅橙底"
+      },
+      "red": {
+        "displayName": "异常红"
+      },
+      "red-bg": {
+        "displayName": "浅红底"
+      },
+      "blue-bg": {
+        "role": "primary",
+        "displayName": "浅操作蓝"
+      },
+      "gray-bg": {
+        "role": "neutral",
+        "displayName": "中性状态底"
+      },
+      "purple": {
+        "displayName": "提示紫"
+      },
+      "purple-bg": {
+        "displayName": "浅紫底"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "页面标题",
+        "purpose": "常规页面标题；工作台字距和订单抬头字号有局部调整。"
+      },
+      "title": {
+        "displayName": "分区标题",
+        "purpose": "普通面板标题；主工作台、侧栏和弹窗分别采用实际局部字号。"
+      },
+      "body": {
+        "displayName": "应用正文",
+        "purpose": "应用基准正文，业务表格与字段使用13px。"
+      },
+      "control": {
+        "displayName": "操作文本",
+        "purpose": "标准按钮文字；输入同字号、常规字重。"
+      },
+      "label": {
+        "displayName": "辅助标签",
+        "purpose": "状态、时间、辅助信息与月度图标签。"
+      },
+      "metric": {
+        "displayName": "工作台数字",
+        "purpose": "角色概览的32px等宽数字。"
+      },
+      "login-display": {
+        "displayName": "登录流程标题",
+        "purpose": "登录左侧流程说明，保持本地中文系统字体。"
+      },
+      "login-title": {
+        "displayName": "登录表单标题",
+        "purpose": "登录右侧表单入口标题。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "paper",
+        "value": "0 4px 18px rgba(20,28,48,.12)",
+        "purpose": "纸张与灰色预览台分离。"
+      },
+      {
+        "name": "modal",
+        "value": "0 24px 80px rgba(13,30,56,.2)",
+        "purpose": "共享弹窗；遮罩为rgba(12,28,52,.42)。"
+      },
+      {
+        "name": "toast",
+        "value": "0 8px 32px rgba(13,30,56,.16)",
+        "purpose": "右下角操作反馈。"
+      },
+      {
+        "name": "notification-dropdown",
+        "value": "0 16px 48px rgba(20,42,70,.2)",
+        "purpose": "顶栏通知下拉。"
+      },
+      {
+        "name": "input-focus",
+        "value": "0 0 0 2px rgba(47,111,237,.12)",
+        "purpose": "字段聚焦反馈。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "进入与布局动画的缓动。"
+      },
+      {
+        "name": "duration-fast",
+        "value": "140ms",
+        "purpose": "控件、导航、页签、表格颜色反馈与Toast离场。"
+      },
+      {
+        "name": "overlay-reveal",
+        "value": "180ms",
+        "purpose": "遮罩与通知下拉进入。"
+      },
+      {
+        "name": "navigation-reveal",
+        "value": "200ms",
+        "purpose": "子菜单进入；登录连接线启动延时。"
+      },
+      {
+        "name": "sidebar-layout",
+        "value": "220ms",
+        "purpose": "Web Animations补间侧栏收起/展开后的主区位置。"
+      },
+      {
+        "name": "duration-base",
+        "value": "240ms",
+        "purpose": "路由内容从opacity .3、translateY(7px)进入；导航箭头旋转。"
+      },
+      {
+        "name": "dialog-and-toast",
+        "value": "280ms",
+        "purpose": "弹窗从translateY(16px) scale(.985)进入；Toast从translateY(12px)进入。"
+      },
+      {
+        "name": "chart-enter",
+        "value": "420ms",
+        "purpose": "横条scaleX与柱形scaleY，从.02到1。"
+      },
+      {
+        "name": "login-branch",
+        "value": "560ms",
+        "purpose": "登录并行支线连接线scaleY展开。"
+      },
+      {
+        "name": "loading-spin",
+        "value": "700ms linear infinite",
+        "purpose": "提交中旋转提示，操作同时禁用。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "CSS关闭动画、过渡和滚动动画；JS跳过侧栏与路由Web Animations。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop-density",
+        "value": "1360px",
+        "purpose": "208px侧栏、250px工作台侧列；1001–1360px单证目录移至上方可横向滚动整行，下方为弹性纸张与210px操作区两列。"
+      },
+      {
+        "name": "form-columns",
+        "value": "1180px",
+        "purpose": "通用表单与描述列表折为两列。"
+      },
+      {
+        "name": "compact-shell",
+        "value": "1150px",
+        "purpose": "190px侧栏、图标搜索入口与紧凑登录双列。"
+      },
+      {
+        "name": "stacked-content",
+        "value": "1000px",
+        "purpose": "工作台折列、单证操作区下移。"
+      },
+      {
+        "name": "narrow-window-fallback",
+        "value": "900px",
+        "purpose": "80px侧栏与登录单列；不构成移动端交付承诺。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "主按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "当前流程主要动作。",
+      "html": "<button type=\"button\" class=\"ds-primary\">提交审核</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:var(--primary,#2f6fed);border-color:var(--primary,#2f6fed);color:#fff}.ds-primary:hover{background:var(--primary-dark,#2459c4);border-color:var(--primary-dark,#2459c4);color:#fff}.ds-primary:active:not(:disabled){transform:translateY(1px)}.ds-primary:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-primary:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "次按钮",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "辅助动作默认白底与控件描边；表内普通次级小按钮为透明底、轻描边，悬停浅蓝。此局部规则排除主操作、成功与危险按钮。",
+      "html": "<button type=\"button\" class=\"ds-secondary\">重置</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:#fff;color:var(--text,#192d4b)}.ds-secondary:hover{border-color:var(--primary,#2f6fed);color:var(--primary,#2f6fed)}.ds-secondary:active:not(:disabled){transform:translateY(1px)}.ds-secondary:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-secondary:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "危险按钮",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "取消或作废等动作，必须配合影响说明。",
+      "html": "<button type=\"button\" class=\"ds-danger\">作废单证</button>",
+      "css": ".ds-danger{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:#fff;border-color:var(--red,#c0353f);color:var(--red,#c0353f)}.ds-danger:hover{background:var(--red,#c0353f);border-color:var(--red,#c0353f);color:#fff}.ds-danger:active:not(:disabled){transform:translateY(1px)}.ds-danger:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-danger:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-danger{transition:none}}"
+    },
+    {
+      "name": "通过按钮",
+      "kind": "button",
+      "refersTo": "button-success",
+      "description": "仅有权限且符合业务条件时出现。",
+      "html": "<button type=\"button\" class=\"ds-success\">审核通过</button>",
+      "css": ".ds-success{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);background:var(--green,#187b45);border-color:var(--green,#187b45);color:#fff}.ds-success:hover{background:#188a49;border-color:#188a49;color:#fff}.ds-success:active:not(:disabled){transform:translateY(1px)}.ds-success:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-success:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-success{transition:none}}"
+    },
+    {
+      "name": "文字按钮",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "低层级辅助动作。",
+      "html": "<button type=\"button\" class=\"ds-text\">查看详情</button>",
+      "css": ".ds-text{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);font-family:inherit;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms),border-color var(--duration-fast,140ms),transform var(--duration-fast,140ms);height:auto;padding:0 5px;border:0;background:transparent;color:var(--primary,#2f6fed)}.ds-text:hover{color:var(--primary,#2f6fed);text-decoration:underline}.ds-text:active:not(:disabled){transform:translateY(1px)}.ds-text:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}.ds-text:disabled{opacity:.55;cursor:not-allowed;pointer-events:none}@media(prefers-reduced-motion:reduce){.ds-text{transition:none}}"
+    },
+    {
+      "name": "输入字段",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "38px标准字段，蓝色聚焦反馈与具体错误关联。",
+      "html": "<label class=\"ds-field\"><span>订单编号</span><input class=\"ds-input\" placeholder=\"如 SO2026001\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;color:var(--text,#192d4b);font-family:inherit;font-size:13px}.ds-input{height:38px;padding:0 10px;border:1px solid var(--border-control,#cbd3df);border-radius:var(--radius-control,8px);background:#fff;color:var(--text,#192d4b);font-family:inherit;font-size:13px;outline:none;caret-color:var(--primary,#2f6fed);transition:border-color var(--duration-fast,140ms),background-color var(--duration-fast,140ms)}.ds-input::placeholder{color:var(--text-sub,#5e6d83);opacity:1}.ds-input:focus,.ds-input:focus-visible{border-color:var(--primary,#2f6fed);box-shadow:0 0 0 2px rgba(47,111,237,.12)}.ds-input[readonly]{background:#f7f8fb;color:var(--text-sub,#5e6d83)}.ds-input[aria-invalid=\"true\"]{border-color:var(--red,#c0353f)}@media(prefers-reduced-motion:reduce){.ds-input{transition:none}}"
+    },
+    {
+      "name": "侧栏导航",
+      "kind": "nav",
+      "refersTo": "navigation-active",
+      "description": "232px展开侧栏，主蓝选中项与本地SVG线性图标。",
+      "html": "<nav class=\"ds-nav\" aria-label=\"主导航\"><a href=\"#/dashboard\" class=\"ds-nav-item ds-selected\" aria-current=\"page\"><svg class=\"ds-nav-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M3 10l9-7 9 7v10H3zM9 20v-7h6v7\"/></svg>工作台</a><a href=\"#/orders\" class=\"ds-nav-item\"><svg class=\"ds-nav-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7\"/></svg>订单查询</a></nav>",
+      "css": ".ds-nav{width:232px;background:var(--nav-bg,#142b50)}.ds-nav-item{display:flex;align-items:center;gap:12px;margin:0 16px 6px;padding:12px 14px;border-radius:8px;background:none;color:#c4d1e5;font-family:inherit;font-size:13px;line-height:1.5;text-decoration:none;cursor:pointer;transition:background-color var(--duration-fast,140ms),color var(--duration-fast,140ms)}.ds-nav-icon{width:18px;height:18px;flex-shrink:0}.ds-nav-item:hover{background:#203d62;color:#fff}.ds-nav-item.ds-selected{background:var(--primary,#2f6fed);color:#fff;font-weight:600}.ds-nav-item:focus-visible{outline:2px solid var(--primary,#2f6fed);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-nav-item{transition:none}}"
+    },
+    {
+      "name": "状态标签",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "25px标签，以圆点、文字和浅语义色底共同表达状态。",
+      "html": "<div class=\"ds-tags\"><span class=\"ds-tag ds-blue\">执行中</span><span class=\"ds-tag ds-green\">已通过</span><span class=\"ds-tag ds-orange\">部分收款</span><span class=\"ds-tag ds-red\">已退回</span><span class=\"ds-tag ds-gray\">未开始</span><span class=\"ds-tag ds-purple\">改价申请</span></div>",
+      "css": ".ds-tags{display:flex;flex-wrap:wrap;gap:8px}.ds-tag{display:inline-flex;align-items:center;gap:5px;height:25px;padding:0 9px;border-radius:6px;font-family:inherit;font-size:12px;line-height:1;white-space:nowrap}.ds-tag:before{content:\"\";width:5px;height:5px;border-radius:50%;background:currentColor}.ds-blue{background:var(--blue-bg,#e9f0fe);color:var(--primary,#2f6fed)}.ds-green{background:var(--green-bg,#e6f7ee);color:var(--green,#187b45)}.ds-orange{background:var(--orange-bg,#fdf1e2);color:var(--orange,#a75a12)}.ds-red{background:var(--red-bg,#fceaea);color:var(--red,#c0353f)}.ds-gray{background:var(--gray-bg,#eef0f5);color:var(--text-sub,#5e6d83)}.ds-purple{background:var(--purple-bg,#f0ecfe);color:var(--purple,#6850bd)}"
+    },
+    {
+      "name": "业务面板",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "白底平面面板，以细边框和留白承载内容。系统用户表和权限矩阵使用零内边距表格卡片，内部表格容器零外边距、无重复边框与圆角。财务/审核日期和人员列保持单行，日期使用等宽数字。",
+      "html": "<section class=\"ds-card\"><div class=\"ds-card-title\">业务记录<span>共 2 项</span></div><p class=\"ds-card-description\">订单、单证与收款分别记录进展。</p></section>",
+      "css": ".ds-card{padding:20px 22px;border:1px solid var(--border,#e5e8ef);border-radius:var(--radius-panel,12px);background:var(--card,#fff);color:var(--text,#192d4b);font-family:inherit;font-size:14px;line-height:1.5}.ds-card-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border,#e5e8ef);font-size:15px;font-weight:600}.ds-card-title span{color:var(--text-sub,#5e6d83);font-size:12px;font-weight:400}.ds-card-description{margin:0;font-size:13px;color:var(--text-sub,#5e6d83)}"
+    },
+    {
+      "name": "登录角色下拉框",
+      "kind": "input",
+      "refersTo": "login-role-select",
+      "description": "与账号、密码同宽的46px原生下拉框；选项为角色与演示姓名，管理员同名去重。运行页更新下方演示部门，保留输入，提交中禁用选择器。",
+      "html": "<div class=\"ds-role-field\"><label class=\"ds-role-label\" for=\"ds-login-role\">演示角色</label><div class=\"ds-role-control\"><select class=\"ds-login-role-select\" id=\"ds-login-role\" aria-describedby=\"ds-role-hint\"><option value=\"admin\">系统管理员</option><option value=\"sales\" selected>外贸业务员 · 陈明</option><option value=\"doc\">单证员 · 王芳</option><option value=\"fin\">财务人员 · 赵倩</option><option value=\"boss\">业务主管 · 周建国</option></select><span class=\"ds-role-chevron\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 5 7 7-7 7\"/></svg></span></div><p class=\"ds-role-hint\" id=\"ds-role-hint\" aria-live=\"polite\">演示部门：外贸一部</p></div>",
+      "css": ".ds-role-field{width:100%;max-width:430px;font-family:inherit;color:var(--text,#192d4b)}.ds-role-label{display:block;font-size:13px;margin-bottom:9px}.ds-role-control{position:relative}.ds-login-role-select{width:100%;height:46px;padding:0 44px 0 14px;border:1px solid #d7dfeb;border-radius:var(--radius-control,8px);background:#fbfcfe;color:var(--text,#192d4b);font-family:inherit;font-size:14px;appearance:none;outline:none;cursor:pointer;transition:border-color var(--duration-fast,140ms),background-color var(--duration-fast,140ms)}.ds-login-role-select:hover:not(:disabled){border-color:#9aaecb}.ds-login-role-select:focus,.ds-login-role-select:focus-visible{border-color:var(--primary,#2f6fed);background:#fff;box-shadow:0 0 0 2px rgba(47,111,237,.12)}.ds-login-role-select:disabled{opacity:.55;cursor:wait}.ds-role-chevron{position:absolute;right:14px;top:50%;display:flex;transform:translateY(-50%) rotate(90deg);color:var(--text-sub,#5e6d83);pointer-events:none}.ds-role-chevron svg{width:16px;height:16px}.ds-role-hint{font-size:12px;margin:12px 0 0;color:var(--text-sub,#5e6d83);min-height:18px}@media(prefers-reduced-motion:reduce){.ds-login-role-select{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "外贸业务操作工作区",
+    "overview": "沿用用户已选定的 Ant Design Pro / Tabler / Metronic 企业后台融合方向：Tabler 的布局与留白、Ant Design Pro 的筛选与业务表格、Metronic 的信息分组共同形成一套本地组件。深蓝导航、操作蓝、灰底与白色面板继续承载五角色工作区；不引入模板代码、品牌资产或依赖。\n\n工作台以角色概览、近期订单与待办帮助用户接续工作，详情分别展示订单、单证、收款进度，审核页面并置文书与操作。界面使用简体中文，单证字段保留外贸英文惯例；动效表达进入、切换、选择与反馈，不延迟业务操作。",
+    "keyCharacteristics": [
+      "深蓝可收起导航、白色顶栏与角色业务路径构成稳定工作区。",
+      "白色平面面板、细边框和适度留白承载高频业务信息。",
+      "筛选、表格、工具栏与本地快速检索形成连续的查询工作流。",
+      "三类订单进度独立展示，单证纸张与权限相关操作同时可见。",
+      "状态用文字与颜色共同表达，金额携带币种并右对齐。",
+      "键盘焦点、字段反馈与减少动效设置贯穿共享交互。"
+    ],
+    "rules": [
+      {
+        "name": "状态双标识",
+        "body": "每个状态必须有可读文字；颜色和圆点只能辅助识别。",
+        "section": "colors"
+      },
+      {
+        "name": "金额可比较",
+        "body": "金额右对齐并携带币种，使用 `font-variant-numeric: tabular-nums`；不同币种不能合成一个总数。",
+        "section": "typography"
+      },
+      {
+        "name": "平面面板",
+        "body": "普通业务面板以边框和留白划分；阴影用于纸张与实际浮层。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 沿用深蓝导航、操作蓝、灰底、白色平面面板与系统中文字体。",
+      "Do 用角色概览、近期订单与待办接续工作，单证页面让纸张与业务操作并置。",
+      "Do 用角色与业务状态决定可用动作，让只读、退回、错误和禁用原因可读。",
+      "Do 将金额右对齐并保留币种，月份标签保留年份。",
+      "Do 保持普通 HTML/CSS/JS、file://、本地 SVG 与全局 data-action 委托。",
+      "Do 保留可见键盘焦点、中文输入法保护和减少动效下的完整操作能力。"
+    ],
+    "donts": [
+      "Don't 因参考模板使用框架而引入框架、构建工具、CDN、外部字体或图片。",
+      "Don't 合并订单、单证、收款状态，或在订单列表增加直接新建订单。",
+      "Don't 用颜色替代状态文字，或用不明原因的灰色控件替代权限说明。",
+      "Don't 持久化业务写入或把假登录、假分页、导出演示描述为真实后台功能；业务数据刷新后还原。",
+      "Don't 把代码实现、设计规范或静态检查通过写成浏览器、全业务或生产验收通过。"
+    ]
+  }
+}

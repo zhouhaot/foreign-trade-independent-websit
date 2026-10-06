@@ -1,4 +1,25 @@
-# 外贸订单与单证管理系统：多模型协作启动包
+# 外贸订单与单证管理系统
+
+## 当前进度与接续入口（2026-10-06）
+
+最新可运行的静态前端位于 [`trade-doc-demo/`](trade-doc-demo/README.md)。运行代码更新至 2026-10-04，最新视觉选择于 2026-10-05 改为 A（珍珠白 / 鸢尾紫 / 薄荷青），尚未应用到页面；当前仍是蓝色现代 UI。没有后端、真实鉴权、数据库或生产部署。
+
+另一台电脑执行：
+
+```sh
+git clone https://github.com/zhouhaot/foreign-trade-independent-websit.git
+cd foreign-trade-independent-websit/trade-doc-demo
+```
+
+双击 `index.html` 即可运行；或按子目录 README 启动本地静态服务器。用编辑器或 Codex 打开 `trade-doc-demo`，先完整阅读 [`AGENTS.md`](trade-doc-demo/AGENTS.md)、[`HANDOFF.md`](trade-doc-demo/HANDOFF.md)、[`PRODUCT.md`](trade-doc-demo/PRODUCT.md)。最新 A 选择、已完成的登录/退出流程、验证覆盖和未解决的业务风险均已记录；不能从历史 C 候选继续实施。
+
+根目录 `docs/`、`tasks/`、`prompts/`、`templates/` 和 `manifest.json` 保留 2026-09-20 的规划包，仅作为历史规划。其候选技术栈、阶段状态和岗位分配不自动覆盖子目录当前规则，也不构成启动后端的授权。当前 Demo 的唯一交接渠道为 `trade-doc-demo/HANDOFF.md`。
+
+本次仅同步源码、说明及设计/验收资产，不启用 GitHub Pages、不部署；旧本机备份、旧 ZIP 与工具临时状态不在仓库中。
+
+---
+
+## 历史启动包（2026-09-20，保留原文）
 
 日期：2026-09-20。状态：P0 预检已执行（JDK/Maven 缺失为硬阻塞）、P1 需求草案已产出待确认；尚未开发业务代码；已推送本仓库（原 TradePlus 项目保留于 tag `archive/tradeplus-baseline`）。
 

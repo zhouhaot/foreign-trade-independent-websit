@@ -1,0 +1,214 @@
+{
+  "title": "贸易协同 · 现代 UI 方向",
+  "question": "三个候选同时改变配色、导航与信息布局。A、C 为概念图；B 图片生成两次网络失败，暂用明确标注的布局示意。均未替换现有界面；图中细节不是业务规格。",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "A · 珍珠白 × 鸢尾紫 × 薄荷青",
+      "kicker": "多轨工作区",
+      "lineage": "多轨调度台：同一订单下的并行业务",
+      "thesis": "把三条独立业务进度放在同一阅读线上，让多色承担分组。",
+      "palette": [
+        "#F6F5FA",
+        "#6E4AE6",
+        "#DDF4EF",
+        "#E6DFFA"
+      ],
+      "materials": [
+        "浅紫导航轨",
+        "连续表格",
+        "柔和模块色面"
+      ],
+      "viewport": "纤细导航 + 通栏工作区；订单选中后，右侧展开关联单证和收款摘要。",
+      "risk": "需要把模块色和审批状态色分清；不能让紫色暗示审核通过。",
+      "raised": [
+        {
+          "from": "数据场",
+          "raise": "长列表维持严格列对齐与数字节奏。"
+        },
+        {
+          "from": "机场导向",
+          "raise": "下一步入口明确，业务分叉不混同串行流程。"
+        },
+        {
+          "from": "图谱",
+          "raise": "版本对照保留同一尺度与稳定位置。"
+        },
+        {
+          "from": "单屏聚焦",
+          "raise": "选中订单有稳定的详情焦点，不强制跳页。"
+        },
+        {
+          "from": "登机信息板",
+          "raise": "状态更新保留行身份，不突然丢失定位。"
+        }
+      ],
+      "comp": ".impeccable/mocks/decision/modern-multicolor/a.png"
+    },
+    {
+      "id": "model-pick",
+      "label": "B · 雾白 × 深墨蓝 × 珊瑚 × 鼠尾草",
+      "kicker": "轻量业务桌面 · 布局示意",
+      "lineage": "桌面文件索引与分栏阅读",
+      "thesis": "浅色侧栏、清晰台账与右侧详情组成轻盈、耐看的日常工作台。",
+      "palette": [
+        "#F6F7F8",
+        "#24384B",
+        "#B4503D",
+        "#DDEADD"
+      ],
+      "materials": [
+        "浅色展开导航",
+        "低饱和区域底色",
+        "横向分栏"
+      ],
+      "viewport": "左侧完整文字导航，中间订单列表，右侧查看当前订单三类独立状态。",
+      "risk": "效果图因两次网络错误未生成；当前只展示配色与布局示意。风格更熟悉。",
+      "wireframe": {"cols":12,"rows":10,"regions":[{"label":"浅色导航","x":0,"y":0,"w":2,"h":10},{"label":"搜索与只读身份","x":2,"y":0,"w":10,"h":1},{"label":"标题 / 筛选","x":2,"y":1,"w":10,"h":1},{"label":"订单列表 / 三类进度","x":2,"y":2,"w":6,"h":8},{"label":"选中订单详情","x":8,"y":2,"w":4,"h":8,"accent":true}]}
+    },
+    {
+      "id": "challenger-metro",
+      "label": "C · 炭黑 × 明青 × 洋红 × 青柠",
+      "verdict": "competitive",
+      "lineage": "平面色块与横向分区导航",
+      "thesis": "以大面积平面色块表达模块，建立最强的视觉辨识度。",
+      "palette": [
+        "#171C20",
+        "#00A8B5",
+        "#B63E85",
+        "#C9E766"
+      ],
+      "materials": [
+        "平面色块",
+        "开放文字导航",
+        "无装饰阴影"
+      ],
+      "viewport": "横向模块导航 + 清晰的大色块入口；下方完整订单表，三种业务状态分列。",
+      "case": "视觉辨识度强；台账可读性依赖严控饱和色使用面积。",
+      "risk": "深底亮色对部分人偏刺激，不默认更适合长时间办公。",
+      "comp": ".impeccable/mocks/decision/modern-multicolor/c.png",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-metro-typographic-tiles-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/digital-design-canon-metro-typographic-tiles.webp"
+    },
+    {
+      "id": "challenger-data",
+      "label": "纯黑白数据场",
+      "verdict": "declined",
+      "thesis": "用极密列网格呈现订单数据。",
+      "palette": [
+        "#000000",
+        "#FFFFFF"
+      ],
+      "materials": [
+        "单色列网格"
+      ],
+      "viewport": "数据列占据整个视窗。",
+      "case": "辨识度与业务理解均弱于并行工作区；纯单色也不回应本轮多元配色。",
+      "kept": "严格对齐，保留密集数据的阅读节奏。",
+      "risk": "不适合以闪烁或反色表达日常状态。"
+    },
+    {
+      "id": "challenger-airport",
+      "label": "机场黄色导向",
+      "verdict": "declined",
+      "thesis": "以连续指示牌呈现下一步任务。",
+      "palette": [
+        "#FFCF00",
+        "#161616",
+        "#FFFFFF"
+      ],
+      "materials": [
+        "指示带",
+        "大号方向信息"
+      ],
+      "viewport": "黄色导航带引导到下一业务动作。",
+      "case": "强制路线隐喻不如并行工作区符合订单与单证、收款的关系。",
+      "kept": "明确下一步，但不强制合并业务进度。",
+      "risk": "黄色容易与待处理语义混淆。"
+    },
+    {
+      "id": "challenger-folio",
+      "label": "阶段图谱",
+      "verdict": "declined",
+      "thesis": "用固定位置的阶段图展示记录变化。",
+      "palette": [
+        "#F2ECDD",
+        "#466249",
+        "#95413C"
+      ],
+      "materials": [
+        "固定标尺",
+        "版本对照"
+      ],
+      "viewport": "订单记录在固定格中按版本比较。",
+      "case": "对通用工作台的认同与即时操作清晰度均较弱。",
+      "kept": "版本比较保持稳定位置。",
+      "risk": "阶段隐喻可能误导为单一顺序流程。"
+    },
+    {
+      "id": "challenger-feed",
+      "label": "单屏聚焦流",
+      "verdict": "declined",
+      "thesis": "一次聚焦一笔订单。",
+      "palette": [
+        "#191919",
+        "#FFFFFF"
+      ],
+      "materials": [
+        "单项满屏",
+        "操作侧轨"
+      ],
+      "viewport": "当前订单占据整个页面。",
+      "case": "横向比较和批量查阅能力弱于并行工作区。",
+      "kept": "选中行有清晰详情焦点。",
+      "risk": "频繁滚动切换增加核对成本。"
+    },
+    {
+      "id": "challenger-board",
+      "label": "出运信息板",
+      "verdict": "declined",
+      "thesis": "按交期排列每笔订单。",
+      "palette": [
+        "#22262B",
+        "#F5F4EF",
+        "#AD493B"
+      ],
+      "materials": [
+        "固定列",
+        "分段详情"
+      ],
+      "viewport": "交期台账与选中订单的分段摘要并置。",
+      "case": "把交期作为唯一主轴，会遮蔽审核和收款任务的独立优先级。",
+      "kept": "状态变化保留行身份。",
+      "risk": "不能把已完成的一条支线等同于整单完成。"
+    }
+  ],
+  "reroll": {
+    "registers": [
+      "safer",
+      "bolder"
+    ]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "保留熟悉的蓝白后台",
+    "thesis": "继续使用深蓝侧栏和标准业务表格。",
+    "palette": [
+      "#142B50",
+      "#2F6FED",
+      "#F3F5F9"
+    ],
+    "materials": [
+      "经典企业导航",
+      "标准表格"
+    ],
+    "viewport": "深色侧栏、白色顶栏、标准筛选和业务表格。",
+    "risk": "操作习惯稳定，但本轮视觉变化最小。",
+    "comp": ".impeccable/mocks/decision/modern-multicolor/canon.png"
+  },
+  "steer": true
+}

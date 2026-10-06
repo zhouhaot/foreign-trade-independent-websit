@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-04",
+  "scope": "Login role dropdown only",
+  "static": {
+    "syntax": "PASS",
+    "resourcesAndAmounts": "PASS",
+    "roleViewCombinations": 100,
+    "loginVmRegression": "PASS"
+  },
+  "browser": {
+    "httpLoginRoles": ["admin", "sales", "doc", "fin", "boss"],
+    "httpRoleIdentityAndDashboard": "PASS",
+    "inputPreservationAndDepartmentUpdate": "PASS",
+    "requiredAccountValidation": "PASS",
+    "selectorDisabledDuringSubmit": "PASS",
+    "passwordEnterLogin": "PASS",
+    "fileProtocolDocLogin": "PASS",
+    "runtimeErrors": [],
+    "viewports": [1440, 1280, 1039],
+    "controlDimensions": {"width": 430, "height": 46},
+    "horizontalPageOverflow": false,
+    "nativeMenuFiveOptions": "Observed via macOS accessibility tree",
+    "nativeMenuArrowKeyboard": "NOT_FULLY_VERIFIED: automation focus did not reliably target the native popup; no app keyboard override added"
+  },
+  "limitations": "Targeted verification only. No new cross-browser certification or complete business-flow rerun."
+}

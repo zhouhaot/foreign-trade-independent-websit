@@ -1,0 +1,16 @@
+{
+  "directionId": "challenger-metro",
+  "seed": "0628e949",
+  "sourceQuestionKey": "f0e89aea",
+  "approvedScope": "visual-direction",
+  "compositionApproved": false,
+  "buildPath": "comp",
+  "buildPathFlipped": false,
+  "comp": "../decision/modern-multicolor/c.png",
+  "confirmedCorrections": [
+    "cyan and lime regions use dark text",
+    "partial payment uses amber status label",
+    "amounts right-aligned",
+    "existing business rules outrank generated image details"
+  ]
+}

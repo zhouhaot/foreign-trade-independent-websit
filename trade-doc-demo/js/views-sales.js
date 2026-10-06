@@ -1,0 +1,637 @@
+/* ============================================================
+ * views-sales.js — 询盘 / 报价 / 订单（含订单详情核心页）
+ * ============================================================ */
+(function () {
+  'use strict';
+  var M = window.MOCK, U = window.U;
+  var Views = window.Views, Actions = window.Actions;
+  var ui = window.__ui, esc = U.esc, tag = U.tag, val = window.__val, descItem = window.__descItem;
+
+  /* ==================== 询盘列表 ==================== */
+  Views.inquiries = function () {
+    var s = ui('inquiries'), f = s.filters;
+    var list = M.inquiries.filter(function (i) {
+      if (f.kw && (i.id + U.customerName(i.customerId)).toLowerCase().indexOf(f.kw.toLowerCase()) < 0) return false;
+      if (f.status && i.status !== f.status) return false;
+      return true;
+    }).sort(function (a, b) { return b.date.localeCompare(a.date); });
+    var pg = U.page(list, s.page);
+    var rows = pg.rows.map(function (i) {
+      return '<tr><td><a href="#/inquiries/' + i.id + '">' + i.id + '</a></td>' +
+        '<td>' + esc(U.customerName(i.customerId)) + '</td>' +
+        '<td>' + esc(i.source) + '</td><td>' + esc(i.salesperson) + '</td>' +
+        '<td>' + i.date + '</td><td class="center">' + tag(i.status) + '</td>' +
+        '<td>' + (i.quoteId ? '<a href="#/quotes/' + i.quoteId + '">' + i.quoteId + '</a>' : '<span class="muted">—</span>') + '</td>' +
+        '<td><a class="btn btn-sm" href="#/inquiries/' + i.id + '">查看</a></td></tr>';
+    }).join('');
+    if (!rows) rows = U.emptyRow(8, (f.kw || f.status) ? '没有符合筛选条件的结果' : '暂无询盘记录');
+    return '<div class="page-head"><h2>询盘管理</h2></div>' +
+      '<div class="filter-bar">' +
+      window.__filterInput('询盘编号/客户', 'f-kw', f.kw, '输入关键字') +
+      '<div class="form-item"><label>状态</label><select class="select" id="f-status"><option value="">全部</option>' +
+      ['跟进中', '已报价'].map(function (v) { return '<option ' + (f.status === v ? 'selected' : '') + '>' + v + '</option>'; }).join('') +
+      '</select></div>' +
+      '<div class="filter-actions"><button class="btn btn-primary" data-action="inq-filter">查 询</button><button class="btn" data-action="inq-reset">重 置</button></div></div>' +
+      '<div class="table-toolbar"><h3>询盘记录<span class="record-count">' + list.length + ' 笔</span></h3><span class="muted small">从客户需求进入报价流程</span></div>' +
+      '<div class="table-wrap"><table class="table"><thead><tr>' +
+      '<th>询盘编号</th><th>客户</th><th>来源</th><th>业务员</th><th>询盘日期</th><th class="center">状态</th><th>关联报价</th><th>操作</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      U.pagination(pg, 'inq-page');
+  };
+  Actions['inq-filter'] = function () { var s = ui('inquiries'); s.filters = { kw: val('f-kw'), status: val('f-status') }; s.page = 1; window.App.rerender(); };
+  Actions['inq-reset'] = function () { window.AppUI.inquiries = { page: 1, filters: {} }; window.App.rerender(); };
+  Actions['inq-page'] = function (el) { ui('inquiries').page = +el.dataset.page; window.App.rerender(); };
+
+  /* ==================== 询盘详情 ==================== */
+  Views.inquiryDetail = function (ctx) {
+    var iq = U.inquiry(ctx.params[0]);
+    if (!iq) return Views.notFound('询盘不存在：' + ctx.params[0]);
+    var itemRows = iq.items.map(function (it) {
+      var p = U.product(it.productId);
+      return '<tr><td><a href="#/products/' + p.id + '">' + p.id + '</a></td><td>' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</td>' +
+        '<td>' + esc(p.spec) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td></tr>';
+    }).join('');
+    var canQuote = ctx.user.role === 'sales' && !iq.quoteId;
+    return '<div class="page-head"><h2>询盘详情 · ' + iq.id + '</h2><div class="actions">' +
+      (iq.quoteId
+        ? '<a class="btn btn-primary" href="#/quotes/' + iq.quoteId + '">查看关联报价 ' + iq.quoteId + '</a>'
+        : (canQuote ? '<button class="btn btn-primary" data-action="inq-start-quote" data-id="' + iq.id + '">发起报价</button>' : '')) +
+      '<a class="btn" href="#/inquiries">返回列表</a></div></div>' +
+      '<div class="card"><div class="card-title">询盘信息 ' + tag(iq.status) + '</div><div class="desc-grid">' +
+      descItem('询盘编号', iq.id) +
+      '<div class="di"><div class="dt">客户</div><div class="dd"><a href="#/customers/' + iq.customerId + '">' + esc(U.customerName(iq.customerId)) + '</a></div></div>' +
+      descItem('来源渠道', iq.source) + descItem('业务员', iq.salesperson) +
+      descItem('询盘日期', iq.date) +
+      descItem('关联报价', iq.quoteId || '尚未报价') +
+      '</div>' +
+      '<div class="mt16 mb8"><b>客户留言</b></div>' +
+      '<div class="card" style="background:#f7f8fb;margin-bottom:0">' + esc(iq.message) + '</div></div>' +
+      '<div class="card"><div class="card-title">意向商品</div>' +
+      '<div class="table-wrap"><table class="table"><thead><tr><th>商品编号</th><th>商品名称</th><th>规格</th><th class="num">意向数量</th></tr></thead>' +
+      '<tbody>' + itemRows + '</tbody></table></div></div>';
+  };
+  Actions['inq-start-quote'] = function (el) {
+    var iq = U.inquiry(el.dataset.id);
+    U.confirm({
+      title: '发起报价',
+      message: '将基于询盘 <b>' + iq.id + '</b>（' + esc(U.customerName(iq.customerId)) + '）的意向商品生成报价草稿，报价单生成后可在报价编辑页调整价格与条款。<br><br>主流程：客户需求 → 询盘 → <b>报价</b> → 客户确认 → 生成订单。',
+      okText: '生成报价草稿',
+      onOk: function () {
+        var qid = 'Q2026' + String(100 + M.quotes.length + 1);
+        var newQ = {
+          id: qid, inquiryId: iq.id, customerId: iq.customerId, salesperson: window.App.user.name,
+          date: U.today(), validUntil: U.today(), currency: 'USD', tradeTerm: 'FOB 上海',
+          paymentTerm: '30% 预付，70% 见提单副本', status: '待客户确认', orderId: null, confirmDate: null,
+          items: iq.items.map(function (it) {
+            var p = U.product(it.productId);
+            return { productId: it.productId, qty: it.qty, price: p ? p.refPrice : 0 };
+          }),
+          remark: '由询盘 ' + iq.id + ' 生成（演示）'
+        };
+        M.quotes.push(newQ);
+        iq.quoteId = qid; iq.status = '已报价';
+        U.toast('报价草稿 ' + qid + ' 已生成');
+        location.hash = '#/quotes/' + qid + '/edit';
+      }
+    });
+  };
+
+  /* ==================== 报价列表 ==================== */
+  Views.quotes = function () {
+    var s = ui('quotes'), f = s.filters;
+    var list = M.quotes.filter(function (q) {
+      if (f.kw && (q.id + U.customerName(q.customerId)).toLowerCase().indexOf(f.kw.toLowerCase()) < 0) return false;
+      if (f.status && q.status !== f.status) return false;
+      return true;
+    }).sort(function (a, b) { return b.date.localeCompare(a.date); });
+    var pg = U.page(list, s.page);
+    var rows = pg.rows.map(function (q) {
+      return '<tr><td><a href="#/quotes/' + q.id + '">' + q.id + '</a></td>' +
+        '<td>' + esc(U.customerName(q.customerId)) + '</td>' +
+        '<td>' + esc(q.salesperson) + '</td><td>' + q.date + '</td><td>' + q.validUntil + '</td>' +
+        '<td class="num">' + U.fmt(U.quoteTotal(q)) + ' ' + q.currency + '</td>' +
+        '<td class="center">' + tag(q.status) + '</td>' +
+        '<td>' + (q.orderId ? '<a href="#/orders/' + q.orderId + '">' + q.orderId + '</a>' : '<span class="muted">—</span>') + '</td>' +
+        '<td class="nowrap"><a class="btn btn-sm" href="#/quotes/' + q.id + '">查看</a> ' +
+        (q.status === '待客户确认' ? '<a class="btn btn-sm" href="#/quotes/' + q.id + '/edit">编辑</a>' : '') + '</td></tr>';
+    }).join('');
+    if (!rows) rows = U.emptyRow(9, (f.kw || f.status) ? '没有符合筛选条件的结果' : '暂无报价记录');
+    return '<div class="page-head"><h2>报价管理</h2><div class="actions">' +
+      '<span class="muted small">报价由询盘发起：询盘 → 报价 → 客户确认 → 生成订单</span></div></div>' +
+      '<div class="filter-bar">' +
+      window.__filterInput('报价编号/客户', 'f-kw', f.kw, '输入关键字') +
+      '<div class="form-item"><label>状态</label><select class="select" id="f-status"><option value="">全部</option>' +
+      ['待客户确认', '已确认'].map(function (v) { return '<option ' + (f.status === v ? 'selected' : '') + '>' + v + '</option>'; }).join('') +
+      '</select></div>' +
+      '<div class="filter-actions"><button class="btn btn-primary" data-action="quote-filter">查 询</button><button class="btn" data-action="quote-reset">重 置</button></div></div>' +
+      '<div class="table-toolbar"><h3>报价记录<span class="record-count">' + list.length + ' 笔</span></h3><span class="muted small">仅已确认报价可生成订单</span></div>' +
+      '<div class="table-wrap"><table class="table"><thead><tr>' +
+      '<th>报价编号</th><th>客户</th><th>业务员</th><th>报价日期</th><th>有效期至</th><th class="num">报价金额</th><th class="center">状态</th><th>关联订单</th><th>操作</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      U.pagination(pg, 'quote-page');
+  };
+  Actions['quote-filter'] = function () { var s = ui('quotes'); s.filters = { kw: val('f-kw'), status: val('f-status') }; s.page = 1; window.App.rerender(); };
+  Actions['quote-reset'] = function () { window.AppUI.quotes = { page: 1, filters: {} }; window.App.rerender(); };
+  Actions['quote-page'] = function (el) { ui('quotes').page = +el.dataset.page; window.App.rerender(); };
+
+  /* ==================== 报价详情 ==================== */
+  Views.quoteDetail = function (ctx) {
+    var q = U.quote(ctx.params[0]);
+    if (!q) return Views.notFound('报价不存在：' + ctx.params[0]);
+    var isSales = ctx.user.role === 'sales';
+    var total = U.quoteTotal(q);
+    var itemRows = q.items.map(function (it, idx) {
+      var p = U.product(it.productId);
+      return '<tr><td>' + (idx + 1) + '</td><td>' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</td>' +
+        '<td>' + esc(p.spec) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td>' +
+        '<td class="num">' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(it.qty * it.price) + '</td></tr>';
+    }).join('');
+    var actions = '';
+    if (isSales && q.status === '待客户确认') {
+      actions += '<a class="btn" href="#/quotes/' + q.id + '/edit">编辑报价</a>' +
+        '<button class="btn btn-primary" data-action="quote-confirm" data-id="' + q.id + '">登记客户确认</button>';
+    }
+    if (isSales && q.status === '已确认' && !q.orderId) {
+      actions += '<button class="btn btn-success" data-action="quote-gen-order" data-id="' + q.id + '">生成订单</button>';
+    }
+    if (q.orderId) actions += '<a class="btn" href="#/orders/' + q.orderId + '">查看订单 ' + q.orderId + '</a>';
+    return '<div class="page-head"><h2>报价详情 · ' + q.id + ' ' + tag(q.status) + '</h2><div class="actions">' + actions +
+      '<a class="btn" href="#/quotes">返回列表</a></div></div>' +
+      '<div class="card"><div class="card-title">报价信息</div><div class="desc-grid">' +
+      descItem('报价编号', q.id) +
+      '<div class="di"><div class="dt">客户</div><div class="dd"><a href="#/customers/' + q.customerId + '">' + esc(U.customerName(q.customerId)) + '</a></div></div>' +
+      '<div class="di"><div class="dt">来源询盘</div><div class="dd">' + (q.inquiryId ? '<a href="#/inquiries/' + q.inquiryId + '">' + q.inquiryId + '</a>' : '<span class="muted">直接报价</span>') + '</div></div>' +
+      descItem('业务员', q.salesperson) +
+      descItem('报价日期', q.date) + descItem('有效期至', q.validUntil) +
+      descItem('币种', q.currency) +
+      '<div class="di"><div class="dt">报价金额</div><div class="dd num"><b>' + U.fmt(total) + ' ' + q.currency + '</b></div></div>' +
+      descItem('贸易术语', q.tradeTerm) + descItem('付款方式', q.paymentTerm) +
+      descItem('确认日期', q.confirmDate || '—') +
+      descItem('备注', q.remark || '—') +
+      '</div></div>' +
+      '<div class="card"><div class="card-title">报价明细</div>' +
+      '<div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>商品名称</th><th>规格</th><th class="num">数量</th><th class="num">单价（' + q.currency + '）</th><th class="num">金额（' + q.currency + '）</th></tr></thead>' +
+      '<tbody>' + itemRows +
+      '<tr><td colspan="5" class="num"><b>合计</b></td><td class="num"><b>' + U.fmt(total) + ' ' + q.currency + '</b></td></tr>' +
+      '</tbody></table></div></div>';
+  };
+
+  /* 登记客户确认 */
+  Actions['quote-confirm'] = function (el) {
+    var q = U.quote(el.dataset.id);
+    var body =
+      '<div class="warn-box">登记后报价状态将变为「已确认」，可据此生成订单；确认后报价内容不可再编辑。</div>' +
+      '<form id="qc-form">' +
+      U.formItem('客户确认日期', '<input class="input" type="date" id="qc-date" value="' + U.today() + '">', { required: true }) +
+      '<div class="mt8">' + U.formItem('确认说明', '<textarea class="textarea" id="qc-remark" placeholder="如：客户邮件确认接受报价条款"></textarea>') + '</div>' +
+      '</form>';
+    var footer = '<button class="btn" data-close="1">取消</button><button class="btn btn-primary" data-ok="1">确认登记</button>';
+    var overlay = U.openModal({ title: '登记客户确认 · ' + q.id, body: body, footer: footer, persistent: true });
+    overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
+      var btn = e.currentTarget;
+      var form = overlay.querySelector('#qc-form');
+      U.clearErrors(form);
+      if (!U.validate([{ el: form.querySelector('#qc-date'), label: '客户确认日期', required: true }])) return;
+      U.withLoading(btn, function () {
+        q.status = '已确认';
+        q.confirmDate = form.querySelector('#qc-date').value;
+        if (form.querySelector('#qc-remark').value.trim()) q.remark = (q.remark ? q.remark + '；' : '') + form.querySelector('#qc-remark').value.trim();
+      });
+      setTimeout(function () {
+        U.closeModal();
+        U.toast('已登记客户确认，报价 ' + q.id + ' 现在可以生成订单');
+        window.App.rerender();
+      }, 480);
+    });
+  };
+
+  /* 生成订单 */
+  Actions['quote-gen-order'] = function (el) {
+    var q = U.quote(el.dataset.id);
+    if (!q || q.status !== '已确认' || q.orderId) {
+      U.toast('仅已确认且未生成订单的报价可生成订单', 'warning');
+      return;
+    }
+    U.confirm({
+      title: '生成订单',
+      message: '将基于已确认报价 <b>' + q.id + '</b> 生成新订单，客户、商品明细与金额将由报价带入。<br><br>订单成立后，<b>单证业务</b>（制作→送审→导出）与<b>财务业务</b>（登记收款）两条支线并行推进、互不阻塞。',
+      okText: '生成订单',
+      onOk: function () {
+        if (q.status !== '已确认' || q.orderId) return false;
+        var nums = M.orders.map(function (o) { return parseInt(o.id.slice(2), 10); });
+        var oid = 'SO' + (Math.max.apply(null, nums) + 1);
+        var newOrder = {
+          id: oid, quoteId: q.id, customerId: q.customerId, salesperson: q.salesperson,
+          currency: q.currency, tradeTerm: q.tradeTerm, paymentTerm: q.paymentTerm,
+          status: '待执行', docStatus: '未开始', createdAt: U.today(), deliveryDate: '',
+          items: q.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
+          remark: '由报价 ' + q.id + ' 生成（演示）'
+        };
+        M.orders.push(newOrder);
+        q.orderId = oid;
+        M.orderLogs[oid] = [{ time: U.now(), person: window.App.user.name, content: '报价 ' + q.id + ' 经客户确认，生成订单 ' + oid }];
+        U.toast('订单 ' + oid + ' 已生成');
+        location.hash = '#/orders/' + oid;
+      }
+    });
+  };
+
+  /* ==================== 报价编辑 ==================== */
+  Views.quoteEdit = function (ctx) {
+    var q = U.quote(ctx.params[0]);
+    if (!q) return Views.notFound('报价不存在：' + ctx.params[0]);
+    if (ctx.user.role !== 'sales') return Views.forbidden('只有外贸业务员可以编辑报价');
+    if (q.status !== '待客户确认') return Views.forbidden('报价已确认，内容不可再编辑。如需调整请走订单变更申请流程');
+    var itemRows = q.items.map(function (it, idx) {
+      var p = U.product(it.productId);
+      return '<tr><td>' + (idx + 1) + '</td><td>' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</td>' +
+        '<td class="num"><input class="input qe-input" data-idx="' + idx + '" data-field="qty" value="' + it.qty + '" style="width:90px;text-align:right"></td>' +
+        '<td class="num"><input class="input qe-input" data-idx="' + idx + '" data-field="price" value="' + it.price + '" style="width:100px;text-align:right"></td>' +
+        '<td class="num" id="qe-amt-' + idx + '">' + U.fmt(it.qty * it.price) + '</td></tr>';
+    }).join('');
+    return '<div class="page-head"><h2>编辑报价 · ' + q.id + '</h2><div class="actions"><a class="btn" href="#/quotes/' + q.id + '">返回详情</a></div></div>' +
+      '<div class="card"><div class="card-title">报价条款</div>' +
+      '<form id="qe-form"><div class="form-grid">' +
+      U.formItem('报价编号', '<input class="input" value="' + q.id + '" readonly>') +
+      U.formItem('客户', '<input class="input" value="' + esc(U.customerName(q.customerId)) + '" readonly>') +
+      U.formItem('业务员', '<input class="input" value="' + esc(q.salesperson) + '" readonly>') +
+      U.formItem('有效期至', '<input class="input" type="date" id="qe-valid" value="' + q.validUntil + '">', { required: true }) +
+      '<div class="form-item"><label class="required">币种</label><select class="select" id="qe-currency">' +
+        ['USD', 'EUR'].map(function (c) { return '<option ' + (q.currency === c ? 'selected' : '') + '>' + c + '</option>'; }).join('') +
+      '</select><div class="field-error"></div></div>' +
+      U.formItem('贸易术语', '<input class="input" id="qe-term" value="' + esc(q.tradeTerm) + '">', { required: true }) +
+      '</div>' +
+      '<div class="mt8">' + U.formItem('付款方式', '<input class="input" id="qe-pay" value="' + esc(q.paymentTerm) + '">', { required: true }) + '</div>' +
+      '<div class="mt8">' + U.formItem('备注', '<textarea class="textarea" id="qe-remark">' + esc(q.remark) + '</textarea>') + '</div>' +
+      '<div class="card-title mt16">报价明细<span class="sub">修改数量或单价后自动重算金额</span></div>' +
+      '<div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>商品名称</th><th class="num">数量</th><th class="num">单价</th><th class="num">金额</th></tr></thead>' +
+      '<tbody>' + itemRows +
+      '<tr><td colspan="4" class="num"><b>合计</b></td><td class="num"><b id="qe-total">' + U.fmt(U.quoteTotal(q)) + '</b> <span class="muted">' + q.currency + '</span></td></tr>' +
+      '</tbody></table></div>' +
+      '<div class="form-actions"><a class="btn" href="#/quotes/' + q.id + '">取 消</a>' +
+      '<button type="submit" class="btn btn-primary">保存报价</button></div>' +
+      '</form></div>';
+  };
+  /* 报价编辑：数量/单价联动重算 */
+  document.addEventListener('input', function (e) {
+    if (!e.target.classList || !e.target.classList.contains('qe-input')) return;
+    var idx = +e.target.dataset.idx;
+    var qtyEl = document.querySelector('.qe-input[data-idx="' + idx + '"][data-field="qty"]');
+    var priceEl = document.querySelector('.qe-input[data-idx="' + idx + '"][data-field="price"]');
+    var qty = Number(qtyEl.value) || 0, price = Number(priceEl.value) || 0;
+    document.getElementById('qe-amt-' + idx).textContent = U.fmt(qty * price);
+    var total = 0;
+    document.querySelectorAll('.qe-input[data-field="qty"]').forEach(function (qEl) {
+      var i = qEl.dataset.idx;
+      var pEl = document.querySelector('.qe-input[data-idx="' + i + '"][data-field="price"]');
+      total += (Number(qEl.value) || 0) * (Number(pEl.value) || 0);
+    });
+    document.getElementById('qe-total').textContent = U.fmt(total);
+  });
+  document.addEventListener('submit', function (e) {
+    if (e.target.id !== 'qe-form') return;
+    e.preventDefault();
+    var form = e.target;
+    U.clearErrors(form);
+    var rules = [
+      { el: form.querySelector('#qe-valid'), label: '有效期', required: true },
+      { el: form.querySelector('#qe-term'), label: '贸易术语', required: true },
+      { el: form.querySelector('#qe-pay'), label: '付款方式', required: true }
+    ];
+    form.querySelectorAll('.qe-input').forEach(function (inp) {
+      rules.push({ el: inp, label: inp.dataset.field === 'qty' ? '数量' : '单价', required: true, number: true, min: 0.01 });
+    });
+    if (!U.validate(rules)) {
+      U.toast('请修正表单中标红的字段：数量与单价必须为大于 0 的数字', 'error');
+      return;
+    }
+    var q = U.quote(location.hash.replace(/^#\//, '').split('/')[1]);
+    if (!q) return;
+    q.validUntil = form.querySelector('#qe-valid').value;
+    q.currency = form.querySelector('#qe-currency').value;
+    q.tradeTerm = form.querySelector('#qe-term').value.trim();
+    q.paymentTerm = form.querySelector('#qe-pay').value.trim();
+    q.remark = form.querySelector('#qe-remark').value.trim();
+    q.items.forEach(function (it, idx) {
+      it.qty = Number(form.querySelector('.qe-input[data-idx="' + idx + '"][data-field="qty"]').value);
+      it.price = Number(form.querySelector('.qe-input[data-idx="' + idx + '"][data-field="price"]').value);
+    });
+    U.toast('报价 ' + q.id + ' 已保存');
+    location.hash = '#/quotes/' + q.id;
+  });
+
+  /* ==================== 订单列表 ==================== */
+  Views.orders = function () {
+    var s = ui('orders'), f = s.filters;
+    var list = M.orders.filter(function (o) {
+      if (f.no && o.id.toLowerCase().indexOf(f.no.toLowerCase()) < 0) return false;
+      if (f.cust && U.customerName(o.customerId).toLowerCase().indexOf(f.cust.toLowerCase()) < 0) return false;
+      if (f.sales && o.salesperson !== f.sales) return false;
+      if (f.status && o.status !== f.status) return false;
+      if (f.pay && U.payStatus(o) !== f.pay) return false;
+      if (f.from && o.createdAt < f.from) return false;
+      if (f.to && o.createdAt > f.to) return false;
+      return true;
+    }).sort(function (a, b) { return b.createdAt.localeCompare(a.createdAt); });
+    var pg = U.page(list, s.page);
+    var rows = pg.rows.map(function (o) {
+      var fin = U.orderFin(o);
+      var customer = U.customer(o.customerId);
+      return '<tr><td><a href="#/orders/' + o.id + '"><b>' + o.id + '</b></a>' +
+        '<span class="cell-secondary">报价 <a href="#/quotes/' + o.quoteId + '">' + o.quoteId + '</a></span></td>' +
+        '<td><span>' + esc(customer ? customer.nameCn : o.customerId) + '</span><span class="cell-secondary">' + esc(customer ? customer.nameEn : '') + '</span></td>' +
+        '<td>' + esc(o.salesperson) + '</td>' +
+        '<td class="num">' + U.fmt(fin.total) + ' ' + o.currency + '</td>' +
+        '<td class="center">' + tag(o.status) + '</td>' +
+        '<td class="center">' + tag(o.docStatus) + '</td>' +
+        '<td class="center">' + tag(U.payStatus(o)) + '</td>' +
+        '<td>' + o.createdAt + '</td>' +
+        '<td><a class="btn btn-sm" href="#/orders/' + o.id + '">查看</a></td></tr>';
+    }).join('');
+    var hasFilter = Object.keys(f).some(function (k) { return f[k]; });
+    if (!rows) rows = U.emptyRow(9, hasFilter ? '没有符合筛选条件的结果，请调整筛选条件' : '暂无订单记录');
+    var salespeople = M.orders.map(function (o) { return o.salesperson; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
+    function sel(id, cur, opts) {
+      return '<select class="select" id="' + id + '"><option value="">全部</option>' +
+        opts.map(function (v) { return '<option ' + (cur === v ? 'selected' : '') + '>' + v + '</option>'; }).join('') + '</select>';
+    }
+    var expanded = !!(s.advanced || f.sales || f.pay || f.from || f.to);
+    var filterNames = { no: '订单编号', cust: '客户', sales: '业务员', status: '订单状态', pay: '收款状态', from: '创建日期起', to: '创建日期止' };
+    var filterSummary = hasFilter ? '<div class="filter-summary"><span>当前筛选</span>' + Object.keys(f).filter(function (k) { return f[k]; }).map(function (k) {
+      return '<span class="filter-chip">' + filterNames[k] + '：' + esc(f[k]) + '</span>';
+    }).join('') + '<button class="btn btn-text" data-action="orders-reset">清空筛选</button></div>' : '';
+    return '<div class="page-head"><div><h2>订单列表</h2><p class="page-description">由客户已确认的报价生成，分别跟踪订单、单证与收款进度。</p></div><div class="actions">' +
+      (window.App.user.role === 'sales' ? '<a class="btn btn-primary" href="#/quotes">新建报价</a>' : '') +
+      '</div></div>' +
+      '<div class="filter-bar orders-filter"><div class="filter-primary">' +
+      window.__filterInput('订单编号', 'o-no', f.no, '如 SO2026001') +
+      window.__filterInput('客户名称', 'o-cust', f.cust, '中/英文名') +
+      '<div class="form-item"><label>订单状态</label>' + sel('o-status', f.status, ['待执行', '执行中', '已完成', '取消申请中']) + '</div>' +
+      '</div><div class="filter-actions"><button class="btn" data-action="orders-reset">重置</button><button class="btn btn-primary" data-action="orders-filter">查询</button>' +
+      '<button class="btn btn-text" data-action="orders-more" aria-expanded="' + expanded + '" aria-controls="orders-advanced">' + (expanded ? '收起筛选' : '更多筛选') + '</button></div>' +
+      '<div class="filter-advanced" id="orders-advanced" ' + (expanded ? '' : 'hidden') + '>' +
+      '<div class="form-item"><label>业务员</label>' + sel('o-sales', f.sales, salespeople) + '</div>' +
+      '<div class="form-item"><label>收款状态</label>' + sel('o-pay', f.pay, ['未收款', '部分收款', '已结清']) + '</div>' +
+      '<div class="form-item"><label>创建日期起</label><input class="input" type="date" id="o-from" value="' + esc(f.from || '') + '"></div>' +
+      '<div class="form-item"><label>创建日期止</label><input class="input" type="date" id="o-to" value="' + esc(f.to || '') + '"></div>' +
+      '</div></div>' + filterSummary +
+      '<div class="table-toolbar"><h3>订单记录<span class="record-count">' + list.length + ' 笔</span></h3><button class="btn btn-sm" data-action="orders-density" aria-pressed="' + !!s.compact + '">' + U.icon('rows') + '紧凑行距</button></div>' +
+      '<div class="table-wrap"><table class="table order-table ' + (s.compact ? 'is-compact' : '') + '"><thead><tr>' +
+      '<th>订单 / 来源报价</th><th>客户</th><th>业务员</th><th class="num">订单金额</th>' +
+      '<th class="center">订单状态</th><th class="center">单证状态</th><th class="center">收款状态</th><th>创建时间</th><th>操作</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      U.pagination(pg, 'orders-page');
+  };
+  Actions['orders-more'] = function (el) {
+    var panel = document.getElementById('orders-advanced');
+    panel.hidden = !panel.hidden;
+    ui('orders').advanced = !panel.hidden;
+    el.setAttribute('aria-expanded', !panel.hidden);
+    el.textContent = panel.hidden ? '更多筛选' : '收起筛选';
+  };
+  Actions['orders-density'] = function (el) {
+    var s = ui('orders');
+    s.compact = !s.compact;
+    document.querySelector('.order-table').classList.toggle('is-compact', s.compact);
+    el.setAttribute('aria-pressed', s.compact);
+  };
+  Actions['orders-filter'] = function () {
+    var s = ui('orders');
+    s.filters = { no: val('o-no'), cust: val('o-cust'), sales: val('o-sales'), status: val('o-status'), pay: val('o-pay'), from: val('o-from'), to: val('o-to') };
+    s.page = 1; window.App.rerender();
+  };
+  Actions['orders-reset'] = function () { window.AppUI.orders = { page: 1, filters: {} }; window.App.rerender(); };
+  Actions['orders-page'] = function (el) { ui('orders').page = +el.dataset.page; window.App.rerender(); };
+
+  /* ==================== 订单详情（核心页） ==================== */
+  var ORDER_TABS = [
+    { key: 'overview', name: '订单概况' },
+    { key: 'items', name: '商品明细' },
+    { key: 'docs', name: '关联单证' },
+    { key: 'pay', name: '收款情况' },
+    { key: 'changes', name: '审核与变更记录' },
+    { key: 'logs', name: '操作日志' }
+  ];
+
+  Views.orderDetail = function (ctx) {
+    var o = U.order(ctx.params[0]);
+    if (!o) return Views.notFound('订单不存在：' + ctx.params[0]);
+    var role = ctx.user.role;
+    var fin = U.orderFin(o);
+    var paySt = U.payStatus(o);
+    var tab = ctx.query.tab || 'overview';
+    if (!ORDER_TABS.some(function (t) { return t.key === tab; })) tab = 'overview';
+
+    /* 头部操作按钮：按角色 + 状态 */
+    var btns = '<a class="btn" href="#/quotes/' + o.quoteId + '">查看来源报价</a>';
+    if (role === 'doc' && o.docStatus !== '已通过' && o.status !== '取消申请中' && o.status !== '已取消') {
+      btns += '<a class="btn btn-primary" href="#/documents">制作单证</a>';
+    }
+    if (role === 'fin' && fin.outstanding > 0.005 && o.status !== '已取消') {
+      btns += '<a class="btn btn-primary" href="#/payments?order=' + o.id + '">登记收款</a>';
+    }
+    if (role === 'sales' && (o.status === '执行中' || o.status === '待执行')) {
+      btns += '<button class="btn btn-danger" data-action="order-apply-change" data-id="' + o.id + '">申请变更</button>';
+    }
+
+    /* 三条独立进度 */
+    var orderStepsHtml = stepsHtml(['待执行', '执行中', '已完成'], o.status, {});
+    var cancelNote = '';
+    if (o.status === '取消申请中') {
+      orderStepsHtml = stepsHtml(['待执行', '执行中', '已完成'], '执行中', {});
+      cancelNote = '<div class="mt8">' + tag('取消申请中') + ' <span class="muted small">取消申请审批中，订单暂缓执行</span></div>';
+    }
+    if (o.status === '已取消') {
+      orderStepsHtml = stepsHtml(['待执行', '执行中', '已完成'], '', {});
+      cancelNote = '<div class="mt8">' + tag('已取消') + ' <span class="muted small">订单已取消，关联业务终止</span></div>';
+    }
+    var docStepsHtml = stepsHtml(['未开始', '制作中', '待审核', '已通过'], o.docStatus, {});
+    var pct = fin.total > 0 ? Math.min(100, Math.round(fin.received / fin.total * 100)) : 0;
+    var barCls = paySt === '已结清' ? 'green' : paySt === '部分收款' ? 'orange' : '';
+    var payHtml =
+      '<div class="progress"><div class="bar ' + barCls + '" style="width:' + pct + '%"></div></div>' +
+      '<div class="progress-info"><span>已收 ' + U.fmt(fin.received) + ' / ' + U.fmt(fin.total) + ' ' + o.currency + '（' + pct + '%）</span><span>' + tag(paySt) + '</span></div>';
+
+    var tabsHtml = ORDER_TABS.map(function (t) {
+      return '<button class="tab ' + (t.key === tab ? 'active' : '') + '" data-action="order-tab" data-id="' + o.id + '" data-tab="' + t.key + '" aria-pressed="' + (t.key === tab) + '">' + t.name + '</button>';
+    }).join('');
+
+    return '<div class="order-head-card">' +
+      '<div class="order-head-top">' +
+        '<div><h2 class="oh-title">订单 ' + o.id + ' ' + tag(o.status) + '</h2>' +
+        '<div class="oh-sub"><span>客户：<a href="#/customers/' + o.customerId + '">' + esc(U.customerName(o.customerId)) + '</a></span>' +
+        '<span>业务员：' + esc(o.salesperson) + '</span><span>创建：' + o.createdAt + '</span></div></div>' +
+        '<div class="order-head-actions">' + btns + '</div>' +
+      '</div>' +
+      '<div class="order-summary"><div><span>订单金额</span><strong>' + U.money(fin.total, o.currency) + '</strong></div>' +
+        '<div><span>已收金额</span><strong>' + U.money(fin.received, o.currency) + '</strong></div><div><span>未收金额</span><strong>' + U.money(fin.outstanding, o.currency) + '</strong></div>' +
+        '<div class="summary-term"><span>贸易与付款条款</span><b>' + esc(o.tradeTerm) + ' · ' + esc(o.paymentTerm) + '</b></div></div>' +
+      '<div class="progress-triple">' +
+        '<div class="pt-block"><div class="pt-label"><b>订单进度</b>' + tag(o.status) + '</div>' + orderStepsHtml + cancelNote + '</div>' +
+        '<div class="pt-block"><div class="pt-label"><b>单证进度</b>' + tag(o.docStatus) + '</div>' + docStepsHtml + '</div>' +
+        '<div class="pt-block"><div class="pt-label"><b>收款进度</b><span class="muted">未收 ' + U.fmt(fin.outstanding) + ' ' + o.currency + '</span></div>' + payHtml + '</div>' +
+      '</div></div>' +
+      '<div class="tabs">' + tabsHtml + '</div>' +
+      '<div id="order-tab-body">' + orderTabBody(o, tab, ctx) + '</div>';
+  };
+  Actions['order-tab'] = function (el) {
+    location.hash = '#/orders/' + el.dataset.id + '?tab=' + el.dataset.tab;
+  };
+
+  function stepsHtml(steps, current, warnMap) {
+    var curIdx = steps.indexOf(current);
+    return '<div class="steps">' + steps.map(function (s, i) {
+      var cls = i < curIdx ? 'done' : i === curIdx ? (warnMap[current] !== undefined ? 'warn' : (current === '已通过' || current === '已完成' ? 'done' : 'current')) : '';
+      return '<div class="step ' + cls + '"><div class="dot">' + (i < curIdx || cls === 'done' ? '✓' : (i + 1)) + '</div><div class="label">' + s + '</div></div>';
+    }).join('') + '</div>';
+  }
+
+  function orderTabBody(o, tab, ctx) {
+    var fin = U.orderFin(o);
+    if (tab === 'overview') {
+      var q = U.quote(o.quoteId);
+      return '<div class="card"><div class="card-title">订单概况</div><div class="desc-grid">' +
+        '<div class="di"><div class="dt">客户</div><div class="dd"><a href="#/customers/' + o.customerId + '">' + esc(U.customerName(o.customerId)) + '</a></div></div>' +
+        descItem('业务员', o.salesperson) +
+        '<div class="di"><div class="dt">来源报价</div><div class="dd"><a href="#/quotes/' + o.quoteId + '">' + o.quoteId + '</a>' + (q && q.inquiryId ? '（询盘 <a href="#/inquiries/' + q.inquiryId + '">' + q.inquiryId + '</a>）' : '') + '</div></div>' +
+        descItem('创建时间', o.createdAt) +
+        descItem('要求交期', o.deliveryDate || '—') +
+        descItem('币种', o.currency) +
+        '<div class="di"><div class="dt">订单金额</div><div class="dd num"><b>' + U.fmt(fin.total) + ' ' + o.currency + '</b></div></div>' +
+        descItem('付款方式', o.paymentTerm) +
+        descItem('贸易术语', o.tradeTerm) +
+        descItem('订单状态', o.status) +
+        descItem('单证状态', o.docStatus) +
+        descItem('备注', o.remark || '—') +
+        '</div>' +
+        '<div class="muted small mt8">提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。</div></div>';
+    }
+    if (tab === 'items') {
+      var rows = o.items.map(function (it, i) {
+        var p = U.product(it.productId);
+        return '<tr><td>' + (i + 1) + '</td><td><a href="#/products/' + p.id + '">' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</a></td>' +
+          '<td>' + esc(p.spec) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td>' +
+          '<td class="num">' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(it.qty * it.price) + '</td></tr>';
+      }).join('');
+      return '<div class="card"><div class="card-title">商品明细</div>' +
+        '<div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>商品名称</th><th>规格</th><th class="num">数量</th><th class="num">成交单价（' + o.currency + '）</th><th class="num">金额（' + o.currency + '）</th></tr></thead>' +
+        '<tbody>' + rows +
+        '<tr><td colspan="5" class="num"><b>合计</b></td><td class="num"><b>' + U.fmt(fin.total) + ' ' + o.currency + '</b></td></tr>' +
+        '</tbody></table></div></div>';
+    }
+    if (tab === 'docs') {
+      var docs = M.documents.filter(function (d) { return d.orderId === o.id; });
+      var drows = docs.map(function (d) {
+        return '<tr><td class="center">' + tag(U.docTypeName(d.type)) + '</td><td><a href="#/documents/' + d.id + '">' + d.no + '</a></td>' +
+          '<td class="center">V' + d.version + '</td><td class="center">' + tag(d.status) + '</td>' +
+          '<td>' + esc(d.maker) + '</td><td>' + esc(d.updatedAt) + '</td>' +
+          '<td><a class="btn btn-sm" href="#/documents/' + d.id + '">' + (ctx.user.role === 'boss' && d.status === '待审核' ? '去审核' : '查看') + '</a></td></tr>';
+      }).join('') || U.emptyRow(7, '该订单尚未创建单证');
+      return '<div class="card"><div class="card-title">关联单证<span class="sub">同一单证号的多个版本会分别列出，受控修订生成新版本</span></div>' +
+        '<div class="table-wrap"><table class="table"><thead><tr><th class="center">类型</th><th>单证编号</th><th class="center">版本</th><th class="center">审核状态</th><th>制单人</th><th>更新时间</th><th>操作</th></tr></thead>' +
+        '<tbody>' + drows + '</tbody></table></div></div>';
+    }
+    if (tab === 'pay') {
+      var records = M.payments.filter(function (p) { return p.orderId === o.id; }).sort(function (a, b) { return a.date.localeCompare(b.date); });
+      var rrows = records.map(function (p) {
+        return '<tr><td>' + p.id + '</td><td>' + p.date + '</td><td class="num">' + U.fmt(p.amount) + ' ' + p.currency + '</td>' +
+          '<td>' + esc(p.method) + '</td><td>' + esc(p.remark || '—') + '</td><td>' + esc(p.operator) + '</td></tr>';
+      }).join('') || U.emptyRow(6, '暂无收款记录');
+      var pct = fin.total > 0 ? Math.min(100, Math.round(fin.received / fin.total * 100)) : 0;
+      return '<div class="fin-summary">' +
+        '<div class="stat-card accent-blue"><span class="sc-label">应收金额</span><span class="sc-value num" style="font-size:22px">' + U.fmt(fin.total) + '</span><span class="sc-foot">' + o.currency + '</span></div>' +
+        '<div class="stat-card accent-green"><span class="sc-label">已收金额（收款记录合计）</span><span class="sc-value num" style="font-size:22px">' + U.fmt(fin.received) + '</span><span class="sc-foot">' + o.currency + ' · 共 ' + records.length + ' 笔</span></div>' +
+        '<div class="stat-card accent-red"><span class="sc-label">未收金额</span><span class="sc-value num" style="font-size:22px">' + U.fmt(fin.outstanding) + '</span><span class="sc-foot">' + o.currency + '</span></div>' +
+        '</div>' +
+        '<div class="card"><div class="card-title">收款进度 ' + tag(U.payStatus(o)) + '</div>' +
+        '<div class="progress"><div class="bar ' + (pct >= 100 ? 'green' : pct > 0 ? 'orange' : '') + '" style="width:' + pct + '%"></div></div>' +
+        '<div class="progress-info"><span>' + pct + '%（进度条仅辅助，以金额数字为准）</span><span>不同币种分别统计，不合并折算</span></div></div>' +
+        '<div class="card"><div class="card-title">收款记录</div>' +
+        '<div class="table-wrap"><table class="table"><thead><tr><th>收款编号</th><th>收款日期</th><th class="num">金额</th><th>方式</th><th>备注</th><th>登记人</th></tr></thead>' +
+        '<tbody>' + rrows + '</tbody></table></div></div>';
+    }
+    if (tab === 'changes') {
+      var related = M.approvals.filter(function (a) {
+        if (a.targetType === 'order' && a.targetId === o.id) return true;
+        if (a.targetType === 'doc') { var d = U.doc(a.targetId); return d && d.orderId === o.id; }
+        return false;
+      });
+      var crows = related.map(function (a) {
+        return '<tr><td class="center">' + tag(a.type) + '</td><td>' + esc(a.title) + '</td>' +
+          '<td>' + esc(a.applicant) + '</td><td>' + esc(a.applyTime) + '</td><td class="center">' + tag(a.status) + '</td>' +
+          '<td>' + esc(a.handler || '—') + '</td><td>' + esc(a.handleTime || '—') + '</td><td>' + esc(a.opinion || '—') + '</td></tr>';
+      }).join('') || U.emptyRow(8, '暂无审核与变更记录');
+      return '<div class="card"><div class="card-title">审核与变更记录</div>' +
+        '<div class="table-wrap"><table class="table"><thead><tr><th class="center">类型</th><th>事项</th><th>申请人</th><th>申请时间</th><th class="center">结果</th><th>处理人</th><th>处理时间</th><th>处理意见</th></tr></thead>' +
+        '<tbody>' + crows + '</tbody></table></div></div>';
+    }
+    /* logs */
+    var logs = (M.orderLogs[o.id] || []).slice().sort(function (a, b) { return b.time.localeCompare(a.time); });
+    var lhtml = logs.map(function (l) {
+      return '<div class="tl-item"><div class="tl-meta"><span>' + esc(l.time) + '</span><span>' + esc(l.person) + '</span></div>' +
+        '<div class="tl-content">' + esc(l.content) + '</div></div>';
+    }).join('') || '<div class="empty-state">暂无操作日志</div>';
+    return '<div class="card"><div class="card-title">操作日志</div><div class="timeline">' + lhtml + '</div></div>';
+  }
+
+  /* 申请变更（改价 / 取消） */
+  Actions['order-apply-change'] = function (el) {
+    var o = U.order(el.dataset.id);
+    var fin = U.orderFin(o);
+    var body =
+      '<form id="oc-form">' +
+      '<div class="form-item"><label class="required">变更类型</label>' +
+      '<select class="select" id="oc-type"><option value="改价申请">改价申请（调整订单金额）</option><option value="取消申请">取消申请（取消整笔订单）</option></select>' +
+      '<div class="field-error"></div></div>' +
+      '<div class="form-item mt8" id="oc-amount-wrap">' + '<label class="required">变更后订单金额（' + o.currency + '）</label>' +
+      '<input class="input" id="oc-amount" value="' + fin.total.toFixed(2) + '">' +
+      '<div class="readonly-hint">当前订单金额：' + U.fmt(fin.total) + ' ' + o.currency + '</div><div class="field-error"></div></div>' +
+      '<div class="form-item mt8"><label class="required">申请原因</label>' +
+      '<textarea class="textarea" id="oc-reason" placeholder="请说明变更背景、与客户的协商结果"></textarea><div class="field-error"></div></div>' +
+      '<div id="oc-danger"></div>' +
+      '</form>';
+    var footer = '<button class="btn" data-close="1">取消</button><button class="btn btn-primary" data-ok="1">提交申请</button>';
+    var overlay = U.openModal({ title: '申请变更 · 订单 ' + o.id, body: body, footer: footer, persistent: true });
+    var typeSel = overlay.querySelector('#oc-type');
+    function refreshType() {
+      var isCancel = typeSel.value === '取消申请';
+      overlay.querySelector('#oc-amount-wrap').style.display = isCancel ? 'none' : '';
+      overlay.querySelector('#oc-danger').innerHTML = isCancel
+        ? '<div class="danger-box mt8">取消订单影响重大：已收款 ' + U.fmt(fin.received) + ' ' + o.currency + ' 需与客户协商退还方式，关联单证将同步作废。申请提交后需业务主管审批方可生效。</div>'
+        : '';
+      var okBtn = overlay.querySelector('[data-ok]');
+      okBtn.className = 'btn ' + (isCancel ? 'btn-danger' : 'btn-primary');
+    }
+    typeSel.addEventListener('change', refreshType);
+    refreshType();
+    overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
+      var btn = e.currentTarget;
+      var form = overlay.querySelector('#oc-form');
+      U.clearErrors(form);
+      var isCancel = typeSel.value === '取消申请';
+      var rules = [{ el: form.querySelector('#oc-reason'), label: '申请原因', required: true }];
+      if (!isCancel) rules.push({ el: form.querySelector('#oc-amount'), label: '变更后订单金额', required: true, number: true, min: 0.01 });
+      if (!U.validate(rules)) return;
+      U.withLoading(btn, function () {
+        var title = isCancel
+          ? '订单 ' + o.id + ' 申请取消'
+          : '订单 ' + o.id + ' 申请改价至 ' + U.fmt(Number(form.querySelector('#oc-amount').value)) + ' ' + o.currency;
+        M.approvals.unshift({
+          id: 'AP' + U.today().replace(/-/g, '') + String(M.approvals.length + 1),
+          type: isCancel ? '取消申请' : '改价申请', targetType: 'order', targetId: o.id,
+          title: title, applicant: window.App.user.name, applyTime: U.now(),
+          reason: form.querySelector('#oc-reason').value.trim(),
+          status: '待处理', handler: null, handleTime: null, opinion: null,
+          targetAmount: isCancel ? null : Number(form.querySelector('#oc-amount').value)
+        });
+        if (isCancel) o.status = '取消申请中';
+        M.orderLogs[o.id] = (M.orderLogs[o.id] || []).concat([{ time: U.now(), person: window.App.user.name, content: '提交' + title }]);
+      });
+      setTimeout(function () {
+        U.closeModal();
+        U.toast('变更申请已提交，等待业务主管审批');
+        window.App.rerender();
+      }, 480);
+    });
+  };
+})();

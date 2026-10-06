@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-04",
+  "scope": "顶栏姓名缩写与既有演示账号，非全量业务验收",
+  "result": "PASS",
+  "httpRoleSwitch": [
+    {"role": "admin", "initials": "ADM", "account": "admin"},
+    {"role": "sales", "initials": "CM", "account": "chenming"},
+    {"role": "doc", "initials": "WF", "account": "wangfang"},
+    {"role": "fin", "initials": "ZQ", "account": "zhaoqian"},
+    {"role": "boss", "initials": "ZJG", "account": "zhoujg"}
+  ],
+  "legacySessionReload": "PASS; session without account or initials",
+  "topbarWidths": [1039, 1280, 1440],
+  "topbarLayout": "PASS; account visible, controls within viewport and not overlapping",
+  "screenshots": ["topbar-identity-1039.png", "topbar-identity-1440.png"],
+  "fileProtocol": "PASS; document clerk identity and switch to supervisor",
+  "staticChecks": ["changed JS syntax", "verify-demo.cjs", "verify-views.cjs", "verify-login.cjs"],
+  "independentReview": "PASS; seven profiles, legacy/stale session fields, missing/unknown ID, alternate sales user, escaping",
+  "limitations": "No cross-browser, mobile, full business-flow or accessibility certification. Earlier delivery ZIPs unchanged."
+}

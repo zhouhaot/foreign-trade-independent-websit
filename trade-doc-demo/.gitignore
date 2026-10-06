@@ -1,0 +1,20 @@
+# Keep machine-local and historical delivery artifacts on this computer only.
+.DS_Store
+.backups/
+delivery/
+.impeccable/questions/
+.impeccable/build/
+
+# Never publish local credentials, logs, or generated dependency/build output.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.log
+.claude/settings.local.json
+.claude/settings.json
+node_modules/
+coverage/
+test-results/
+playwright-report/

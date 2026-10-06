@@ -1,5 +1,9 @@
 # 项目协作规则
 
+## 当前工作区范围（2026-10-06）
+
+最新静态前端在 `trade-doc-demo/`，进入该目录工作前必须先读其中的 `AGENTS.md` 与 `HANDOFF.md`。该子目录的前端约束、最新用户选择和交接记录优先用于当前 Demo；下方及根 `docs/` 中的 2026-09-20 阶段/岗位/技术建议作为历史规划保留，不表示当前仍未编写前端，也不授权引入后端、构建工具或改写 Demo 约束。当前最新视觉方向为 A、尚未实施，C 仅为历史候选。
+
 ## 入口
 
 依次读取 README.md、docs/PROJECT_BRIEF.md、docs/MODEL_ROUTING.md、docs/WORKFLOW.md、docs/TASK_BACKLOG.md、docs/ACCEPTANCE.md。项目当前仍在构想阶段；文档中标记为建议的内容不是用户已经确认的要求。

@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-04T12:43:37.810Z",
+  "routeChecks": 100,
+  "layoutChecks": 200,
+  "interactions": [
+    {
+      "name": "Search filters role permissions, keyboard selection, empty state and focus return",
+      "result": "PASS"
+    },
+    {
+      "name": "Order filters, density and sidebar preserve entered text",
+      "result": "PASS"
+    },
+    {
+      "name": "Six order tabs and three independent progress tracks",
+      "result": "PASS"
+    },
+    {
+      "name": "Real confirmation cancel/confirm and quotation-derived order reconciliation",
+      "result": "PASS"
+    },
+    {
+      "name": "Document editing preserves text through focus mode; role change removes edit controls",
+      "result": "PASS"
+    },
+    {
+      "name": "Approved document revision creates V2 and preserves V1",
+      "result": "PASS"
+    },
+    {
+      "name": "Payment field validation and receipt reconciliation",
+      "result": "PASS"
+    },
+    {
+      "name": "Reduced motion disables authored movement; normal mode animates route",
+      "result": "PASS"
+    },
+    {
+      "name": "Document submit and supervisor approval with independent receipts",
+      "result": "PASS"
+    }
+  ],
+  "failures": [],
+  "result": "PASS",
+  "finishFixChecks": {
+    "result": "PASS",
+    "scope": "Targeted recapture and computed-style checks after F1-F3 fixes; not a second full regression run",
+    "approvalButtons": "Five visible blue primary buttons; white labels retained on hover",
+    "systemTables": "Users and role matrix: zero card padding and table margin, no body overflow at 1280px",
+    "datesAndPeople": "Payments and approvals use nowrap cells; descriptions remain wrappable",
+    "stylesheets": "All three stylesheets loaded before final recaptures"
+  },
+  "fileProtocol": {
+    "result": "PASS",
+    "role": "doc",
+    "route": "#/documents/D-PL2026004-V1",
+    "resources": {
+      "scripts": 9,
+      "stylesheets": 3
+    },
+    "loginRoleKeyboard": "PASS"
+  }
+}
