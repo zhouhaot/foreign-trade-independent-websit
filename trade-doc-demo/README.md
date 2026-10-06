@@ -108,14 +108,19 @@ node scripts/verify-inquiry-contract.cjs
 node scripts/verify-packaging-contract.cjs
 node scripts/verify-packaging-actions.cjs
 node scripts/verify-document-approval-display.cjs
+node scripts/verify-modal-drafts.cjs
+node scripts/verify-sales-modal-drafts.cjs
+node scripts/verify-approval-modal-drafts.cjs
 ```
 
-前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价/快照/单证与取消、输入/历史保护、岗位上下文、申请防重复及数字/报价/收款/客户维护/询盘生成/包装保存送审/纸张审核表达契约。共23组，不代替浏览器；各轮实际覆盖见迭代报告。
+前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价/快照/单证与取消、输入/历史保护、岗位上下文、申请防重复、数字/报价/收款/客户维护/询盘/包装/纸张审核及三业务弹窗关闭契约。共26组，不代替浏览器；各轮实际覆盖见迭代报告。
 
 第6轮体验：业务员在客户详情维护资料，错误保留输入；询盘 INQ2026006 是明确合成需求，可核对参考545USD并生成一次报价草稿，再编辑实际价格与条款。原询盘已有报价只接续查看；草稿没有登记客户确认或直接生成订单。改进与验证边界见 [第6轮材料](docs/iterations/round-06.md)。
 
 第7轮体验：单证员进入退回PL2026004编辑包装。普通正整数箱数、明确KG/KGS重量和CBM体积可保存；空毛重等资料显示待补，送审须五项完整且毛重不小于净重。度量最多3位为H18原型假设，合法原文保留；确认窗口核对全部候选，修订继承包装仍需核对实际货物。CI仅编辑唛头与备注，不受隐藏包装门槛。改进与验证边界见 [第7轮材料](docs/iterations/round-07.md)。
 
 第8轮体验：CI/PL纸张审核栏按当前查看版本区分未送审、等待本次审核、退回未通过；该版本已通过才显示其批准人。原退回记录、旧通过姓名/章和交易快照保留，当前导出资格独立；缺姓名/日期只提示待核对，模板签字线不代表实际签署。改进与验证边界见 [第8轮材料](docs/iterations/round-08.md)。
+
+第9轮体验：客户确认、订单变更或主管处理弹窗填写后误关，可选择继续填写或明确放弃；清洁直接关闭。继续保原内容、错误、焦点和滚动，处理中等待结果，成功仅关闭源窗口。H20不代表自动保存或撤回已提交业务，其它弹窗／页面导航／刷新不在此保证内。改进与实际边界见 [第9轮材料](docs/iterations/round-09.md)。
 
 `scripts/verify-browser.mjs` 是 Ego Browser 环境下的浏览器回归脚本，需由操作者提供当前授权的 TaskSpace ID，不会自行创建/接管浏览器空间。验证覆盖与已知边界见 `HANDOFF.md` 的 2026-10-04 交接记录。

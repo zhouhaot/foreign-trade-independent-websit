@@ -458,27 +458,39 @@
       '</div>' +
       '<div class="card mt8" style="background:#f7f8fb;margin-bottom:0"><b>申请理由：</b>' + esc(a.reason || '—') + '</div>' +
       dangerNote + amountSummary + '<div class="field-error mt8" id="ap-effect-error" role="alert">' + esc(repricing && repricing.error || '') + '</div>' +
-      '<div class="form-item mt8"><label>处理意见（退回时必填）</label><textarea class="textarea" id="ap-opinion"></textarea><div class="field-error"></div></div>';
+      '<div class="form-item mt8"><label for="ap-opinion">处理意见（退回时必填）</label><textarea class="textarea" id="ap-opinion" aria-describedby="ap-opinion-hint"></textarea><div class="readonly-hint" id="ap-opinion-hint">退回需填写具体处理意见；未提交的填写可继续保留或明确放弃。</div><div class="field-error" id="ap-opinion-error"></div></div>';
     var footer = '<button class="btn" data-close="1">取消</button>' +
       '<button class="btn btn-danger" data-act="reject">退 回</button>' +
       '<button class="btn btn-success" data-act="approve">通 过</button>';
     var overlay = U.openModal({ title: '处理申请 · ' + a.id, body: body, footer: footer, large: true, persistent: true });
+    var opinionInput = overlay.querySelector('#ap-opinion');
+    if (!U.bindModalDraft(overlay, { label: '申请 ' + approvalId + ' 的处理意见', controls: [opinionInput] })) return;
 
     overlay.querySelectorAll('[data-act]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        if (processingApprovals[approvalId] || a.status !== '待处理') return;
+        if (!U.isModalCurrent(overlay) || processingApprovals[approvalId] || a.status !== '待处理') return;
         var pass = btn.dataset.act === 'approve';
         var opinionEl = overlay.querySelector('#ap-opinion');
-        var opinion = opinionEl.value.trim();
+        if (opinionEl !== opinionInput || !opinionInput.isConnected) {
+          overlay.querySelector('#ap-effect-error').textContent = '处理意见输入节点已变化，本次未处理，请关闭弹窗并重新打开申请核对。';
+          U.toast('审批未生效，请查看弹窗中的处理说明。', 'error'); return;
+        }
+        var rawOpinion = opinionEl.value, opinion = rawOpinion.trim();
         if (!pass && !opinion) {
-          opinionEl.classList.add('is-error');
-          overlay.querySelector('#ap-opinion').parentElement.querySelector('.field-error').textContent = '退回时必须填写具体处理意见';
+          U.fieldError(opinionEl, '退回时必须填写具体处理意见');
           opinionEl.focus();
           return;
         }
+        if (btn.classList.contains('is-loading') || !U.setModalBusy(overlay, true)) return;
         processingApprovals[approvalId] = true;
         U.withLoading(btn, function () {
+          if (!U.isModalCurrent(overlay)) {
+            delete processingApprovals[approvalId]; U.setModalBusy(overlay, false); return;
+          }
           var error = approvalPermissionError(a, actor);
+          if (!error && (overlay.querySelector('#ap-opinion') !== opinionInput || !opinionInput.isConnected || opinionInput.value !== rawOpinion)) {
+            error = '处理意见节点或原始填写内容已变化，本次未处理，请核对当前意见后重新提交。';
+          }
           if (!error && (M.approvals.find(function (current) { return current.id === approvalId; }) !== a || approvalContextChanged(a, openedContext))) {
             error = '申请金额、关联对象、订单状态、版本、币种或申请内容已变化，请关闭弹窗并重新打开，核对最新内容后再处理。';
           }
@@ -500,6 +512,7 @@
           }
           if (error) {
             delete processingApprovals[approvalId];
+            U.setModalBusy(overlay, false);
             overlay.querySelector('#ap-effect-error').textContent = error;
             U.toast('审批未生效，请查看弹窗中的处理说明。', 'error');
             return;
@@ -510,7 +523,9 @@
           a.opinion = opinion || (pass ? '同意' : '');
           applyApprovalEffect(a, pass, plan, document);
           delete processingApprovals[approvalId];
-          U.closeModal();
+          U.markModalDraftClean(overlay);
+          U.setModalBusy(overlay, false);
+          U.closeModal(overlay);
           U.toast(pass ? '已通过：' + a.title : '已退回：' + a.title);
           window.App.rerender();
         });

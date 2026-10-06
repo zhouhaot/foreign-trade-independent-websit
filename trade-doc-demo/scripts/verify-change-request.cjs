@@ -46,6 +46,7 @@ async function run() {
   }
   for (const type of ['改价申请', '取消申请']) {
     const t = setup(), before = data(t); open(t, type); t.click(t.modal.querySelector('[data-close]')); await t.flush();
+    const discard = t.modal.querySelector('[data-modal-draft-discard]'); if (discard) { t.click(discard); await t.flush(); }
     assert.equal(data(t), before, '开窗后取消无业务写入'); assert.equal(t.modal.firstElementChild, null); assertNoSuccess(t); cases++;
   }
   for (const type of ['改价申请', '取消申请']) {
@@ -71,16 +72,16 @@ async function run() {
     assert.equal((t.c.MOCK.orderLogs[t.order.id] || []).length, (before.orderLogs[t.order.id] || []).length + 1); cases++;
     assert.equal(t.messages.filter(m => /变更申请已提交/.test(m.text)).length, 1, '同按钮重复点击只能反馈一次已提交');
   }
-  // 点击后输入改变不改变已校验的申请；申请本身不立即改价。
+  // H20 新源填写契约：点击后输入漂移拒绝，不静默提交旧 captured A。
   const t = setup(), before = JSON.parse(data(t)); const ok = open(t);
   t.click(ok);
   t.modal.querySelector('#oc-amount').value = 'Infinity';
   t.modal.querySelector('#oc-reason').value = '点击后更改理由';
   t.modal.querySelector('#oc-type').value = '取消申请';
-  await t.flush(); const request = t.c.MOCK.approvals[0];
-  assert.equal(request.type, '改价申请'); assert.equal(request.targetAmount, 24000); assert.equal(request.reason, '已与客户协商并核对');
-  assert.equal(JSON.stringify(t.c.MOCK.orders), JSON.stringify(before.orders), '提交改价仅创建申请，不立即改订单金额');
-  assert.equal(t.c.MOCK.approvals.length, before.approvals.length + 1); cases++;
+  await t.flush();
+  assert.equal(data(t), JSON.stringify(before), '点击后 type/amount/reason 漂移完整 MOCK 不变');
+  assert.equal(t.modal.querySelector('#oc-amount').value, 'Infinity'); assert.equal(t.modal.querySelector('#oc-reason').value, '点击后更改理由');
+  assertNoSuccess(t); cases++;
   const parallel = setup(); const first = open(parallel); const second = open(parallel);
   parallel.click(first); parallel.click(second); await parallel.flush();
   assert.equal(parallel.c.MOCK.approvals.filter(a => a.targetId === parallel.order.id && a.type === '改价申请' && a.status === '待处理').length, 1, '双弹窗也只保留一条同类型申请'); cases++;

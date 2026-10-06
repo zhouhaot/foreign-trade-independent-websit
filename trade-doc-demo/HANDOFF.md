@@ -17,6 +17,7 @@
 - 第7轮：H18包装完整候选、待补草稿/完整送审、候选确认、原控件/身份/来源/延迟票据、同源错误保留与CI隐藏包装隔离已实现。22组Node（候选644/动作111）、32语法通过；135角色路由/270两宽、17实际交互PASS，26PNG（10过程/16终版）。综合三项MEDIUM与专项不可见包装一项均Resolved/APPROVE；UI实读16终图SHIP，审计8/1/0，推送以文末实际回执为准。原Mock无改动，H12不改；继承包装仍需核对实际货物。
 - 每项改进说明与复盘：`docs/iterations/round-01.md`至`round-07.md`；现实路线与显式假设：`IMPLEMENTATION_ROADMAP.md`。下一轮只读规划核查纸张审核姓名与当前制作/待审/退回/通过状态，不清旧决定/历史或冻结快照，不推断正式签署。
 - 第8轮：H19当前版本纸张未送审/等待本次审核/退回未通过、已通过原姓名章/缺记录待核对已实现；纯显示不洗字段/history/冻结交易。Cc MEDIUM修后137、23脚本/33语法通过；145角色路由/290两宽、9实际PASS＋1旧缺陷记录，29PNG（9过程/20终版），综合/JS/CSS补审APPROVE、UI实读20终图SHIP、审计8/1/0。正常通过整纸基线独立各24保留；真实旧V1全文在V2与取消两态保留。同步以文末实际回执为准。
+- 第9轮：H20三个业务弹窗同源填写保护已实现（qc客户确认/oc订单变更/ap主管意见），继续保内容/error/选区/近focus/滚动、busy等结果/失败解锁、成功源Modal clean/close，陈旧回调不串新作业。共享45/sales40/finance21、26脚本/36语法通过；14原生组/145路由290两宽/32PNG（15过程17终版）实际PASS，两独立代码最终APPROVE，透页叠字CSS补修后UI17+3extra实读SHIP。1280矩阵116后身份切换等待已逐步恢复，extra720 body165/textarea362严格保留；同步以文末实际回执为准。
 - 全部规划页面已实现：登录、整体框架、工作台、客户/商品、询盘、报价、订单列表、订单详情（六页签）、单证列表与三栏预览审核页（CI/PL）、收款与应收、审核与异常处理、统计分析、系统管理。
 - 五类角色视角可用；顶栏角色已改为只读，切换身份必须退出后重新登录；权限控制到菜单、按钮和字段级只读，仍是演示流程而非后端鉴权。
 - Mock 数据勾稽一致：7 笔订单总额 = 明细之和，已收 = 收款记录之和；含 USD / EUR 多币种。
@@ -64,6 +65,7 @@
 | 22 | 单证页未提交上下文跨全局导航保留 | 第3轮UI/实际流程复盘 / 第5轮 | 已扩有限报价/财务/客户/单证包装与审核意见，统一侧栏/业务路径/品牌/搜索/待办与已知Back/Forward；H15未知栈只保输入/URL，非全站自动保存 |
 | 23 | 询盘生成报价、客户资料提交及包装单位输入契约 | 第5轮现实复盘 / 第6/7轮 | 询盘/客户H16/H17及包装H18静态契约已修并独立复验；H18正式企业计量政策待定，不擅改H12，前端验证不代表真实货物匹配 |
 | 24 | 纸张审核姓名与当前审核状态表达 | 第7轮实际纸张核对 / 第8轮 | H19有限纯显示已实现并多轮复验，退回/重送不称批准人，正常通过/历史/取消事实保留；模板线非正式签署，同步以实际回执为准 |
+| 25 | 三业务弹窗未提交输入关闭保护 | 第8轮现实复核 / 第9轮 | H20有限qc/oc/ap原节点/raw/busy/source-close已实现多轮验证；仅当前会话，非任意导航/刷新/持久化或已提交撤销；33项说明与推送以实际回执为准 |
 
 ## T0：前端设计与交互设计（2026-09-30 优先级调整）
 
@@ -482,3 +484,21 @@ H19纸张审核表达已实现，12项前后说明见round-08.md；仅Views局�
 实现提交 `3e4152509ec72d03c9cba691f2d48b7e273e863d`，标题 `Align document approval display with the viewed version state`，74文件：12项说明、现实/两代码/UI复审及设计规范、23脚本日志、33语法、9真实PASS＋1旧缺陷/290布局、29PNG（9过程/20终版）。综合Cc MEDIUM独立Resolved，代码/JS/CSS补审APPROVE、UI SHIP、审计8/1/0；schema2/原10组件examples保留，Mock和业务动作不变。
 
 fetch前0/0，正常快进push后独立ls-remote完整SHA与本地HEAD相等，工作区干净。此成功后回执另作正常提交/推送并再次回读，未强推、部署或改凭据配置。第9轮按现实候选推进三类业务弹窗填写连续性，先定义源DOM保留/关闭/成功提交区别，再分agent实施并真实验收；原计划尚不是完成状态，用户持续授权有效。
+
+### 2026-10-07 Codex 第9轮开工与共享关闭保护
+
+基线d03c9a055ec10c1bf0171669ce0d15a90d820e01已正常推送回读且干净。选定H20仅qc-form客户确认、oc-form订单变更、ap-opinion处理意见当前弹窗填写连续性。现实agent保9例X/取消/Esc丢输入及oc/ap旧异步写和误关新窗、oc成功480ms关新窗真实隔离红灯，qc既有source安全对照不当新修复。
+
+中枢单写utils/app/pages CSS和verify-modal-drafts；sales/fin两个worker单写自身adapter/专用脚本/文字；有限旧测试桩/预期更改已逐文件授权并保原业务assert，独立code-reviewer同步复验。共享bind/current/busy/clean/source-close API落地：原.modal与独立alertdialog在同overlay共存，原form inert/aria-hidden暂避、继续恢复原attrs/内容/error/selection/body-scroll/最后输入focus，主继续/次明确放弃。Esc选择中继续，普通重复close幂等。无需离开基线/恢复原值不拦，处理中close等待；成功只源Modal clean，旧close不关新窗，无参legacy force保留不扩全站/持久化。
+
+共享API缺失先RED→37→40；fin集成发现重复普通close不应隐式继续，新增3真实接口反例先RED→43，普通重复幂等而Esc显式continueDraft。中枢另真实复现同源已继续后旧discard可关窗/旧continue可恢复新guard，绑定该guard节点后2场景RED→45。CSS最初误用不存在surface变量，在真实UI前核实改既有card变量，未宣称旧样式验收。
+
+独立reviewer发现sales失败后450ms loading期间快速键盘重试可永久busy，worker两handler入口防is-loading、原timers实际RED→21GREEN，旧quotation/context新H20预期正在有限适配。fin21专项与相邻回归已交付、材料9项齐；现在准备首轮原生UI。上述Node证明不能冒读屏/键盘/生产并发；整轮尚未封版或推送。
+
+### 2026-10-07 Codex 第9轮冻码与两轮UI收尾
+
+33项改进说明（shared10/sales11/finance9及总材料3有限UI/证据条目）见round-09.md和分材料。26脚本/36语法全0；共享45、sales40、finance21，综合原retry MEDIUM独立Resolved、root旧choice另实复验，综合44额外/JS39额外按独立Node不重计；四JS冻结指纹保留。旧quote/change/context/reprice/cancel/snapshot桩/时序期待按明确H20有限更改，非原assert全不变。无Mock源码/资源/业务制度变更。
+
+首12原生图UI发现源整体opacity透页叠字，root保opaque父白卡只淡内容，CSS独立补审APPROVE；17终图及3额外720过程实读SHIP。14原生PASS、145角色路由/290两宽0fail、console[]；32PNG15过程17终。原生AP fast Enter与OC已commit closing-delay Esc明确范围，qc只登记不生成订单；AP页/body/textarea三个滚动域分开，extra body165/textarea362/selection0严格恢复。1280财务→主管wait超时在116后，实际finPL2/console空，native观察退出标题→登录补29；1440逐次读title/截图后confirm全145，无连续无恢复或猜因声明。
+
+设计4owned材料已同步并停止写入，schema2/原10组件examples保留。结构审计、源基线校验和本轮正常Git提交/推送/独立SHA回读由中枢封版后追加；当前未提前说已推送。正式身份/后端/全读屏/其它弹窗和导航/持久化不由此认证。

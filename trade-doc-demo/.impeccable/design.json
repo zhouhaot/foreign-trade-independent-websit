@@ -839,6 +839,77 @@
         "信用证/真实历史签发/后端身份事务/NAS"
       ],
       "anomalyScope": "控制/缺姓名日期/未知/长名仅隔离Node，未注正式Mock造原生图。"
+    },
+    "businessModalDraftGuard": {
+      "round": 9,
+      "assumption": "H20仅qc/oc/ap本会话填写，非撤回提交制度/页面导航/跨页恢复/持久化。",
+      "fields": {
+        "qc": [
+          "qc-date",
+          "qc-remark"
+        ],
+        "oc": [
+          "oc-type",
+          "oc-amount",
+          "oc-reason"
+        ],
+        "ap": [
+          "ap-opinion"
+        ]
+      },
+      "state": {
+        "clean": "raw基线未变/全恢复直接关闭，错误DOM不算输入。",
+        "dirty": "独立具名alertdialog与原modal同overlay，具体对象/尚未提交范围、主继续次明确放弃。",
+        "continue": "保原DOM/值/error/hint/近字段focus/selection/bodytextarea scroll，普通重复close幂等，guardEsc继续。",
+        "busy": "排队前同步等待结果，关闭不撤销；失败释放原锁可改。",
+        "success": "业务commit后只源Modal clean/close，不洗page或自动订单。",
+        "obsolete": "旧actor内容/控件identity/value/候选/guard/sourcecallback/timer不触新作业。"
+      },
+      "layout": {
+        "guardWidth": "min(440px,calc(100vw - 40px))",
+        "padding": "24px",
+        "source": "opaque白卡/opacity1，仅直接modal-head/body/foot opacity.24；暂inert/aria-hidden，sibling guard不淡化。",
+        "semantics": "guard alertdialog名称/描述与两按钮，原.modal存在不代表当前可达；oc/ap label-for/hint+error，active层优先Tab。"
+      },
+      "nativeScope": "QC Tab/ShiftTab/Esc/selection、错误继续/放弃/clean/确认仅生成入口；OC取消type/隐藏金额原因继续/clean/实际取消申请；APrawspace+error/hint/焦点、720原生滚动恢复/Enterfailedretry/真实退回及订单财务独立。",
+      "timingBoundary": "原生fastretry为AP，sales450MEDIUM只Node真实timers；OCbusyEsc是在已commit closingdelay480，不证明可撤事务。",
+      "scrollBoundary": {
+        "desktopHeight": 1000,
+        "qcOc": "page0/body0",
+        "apNormal": "page22/body0",
+        "apGuardContinue": "page13/body0",
+        "extra720": "page157/body165/textarea362/start=end0/raw length494前后相同；额外场景非矩阵。"
+      },
+      "verificationCounts": {
+        "realInteractionPassGroups": 14,
+        "processImages": 15,
+        "finalImages": 17,
+        "nodeScripts": 26,
+        "sharedScenarios": 45,
+        "salesScenarios": 40,
+        "approvalScenarios": 21,
+        "syntaxChecks": 36,
+        "layoutStatus": "PASS; actual1280/1440 height1000, 0fail, console[]",
+        "distinctRoleRoutes": 145,
+        "actualLayouts": 290,
+        "realInteractionFailGroups": 0
+      },
+      "reviewScope": "17final+3extra实读UI SHIP，ghostUI发现Resolved/有限CSS补审；综合唯一salesloadingMEDIUMResolved，JS交叉APPROVE不重计。",
+      "evidence": ".impeccable/review/round-09/browser.json",
+      "proofBoundary": "相同id/raw/focus不是nodeidentity，inert属性空串/aria-hidden与调试树无名source不是AT只一dialog；源identity/actor/微任务旧timer/模型原子归Node直接对照。",
+      "legacyTests": "6旧脚本有限plain桩/API与H20冲突期待适配获授权，原assert并非全部未改；原金额角色/历史快照保。",
+      "notVerified": [
+        "file://",
+        "跨/旧浏览器/读屏/400%或320px",
+        "减少动效运行/原生刷新关闭",
+        "持久草稿/跨页恢复/其它modal",
+        "后端身份/事务/真实并发/银行/NAS/PDF正式签署"
+      ],
+      "measurementCorrections": [
+        "1280完成admin/sales/doc/fin116后bosslogin-rolewait超时实际finPL2/console空；原生注销观察退出登录确认到login，再boss补29。",
+        "1440每次观察logouttitle/截图再confirm完成145；不称连续五角色无恢复，不猜wait根因。",
+        "3张1280x720为额外process不混290桌面矩阵；17final+3extra图未变不重读。"
+      ]
     }
   },
   "components": [
@@ -1028,6 +1099,11 @@
       {
         "name": "纸张当前审核与历史决定分开",
         "body": "未送审/待本次/退回不填旧处理人Approved by；仅本版已通过原姓名章，历史取消保事实，缺记录待核对，空签字线不冒真实署名。",
+        "section": "components"
+      },
+      {
+        "name": "弹窗放弃填写不同撤销业务",
+        "body": "qc/oc/ap未提交误关闭原DOM继续或明确放弃；busy等结果，成功仅源modal clean，旧回调不关新窗；原白卡opaque避免透页叠字。",
         "section": "components"
       }
     ],

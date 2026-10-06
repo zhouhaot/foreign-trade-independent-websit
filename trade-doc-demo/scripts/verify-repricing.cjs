@@ -8,6 +8,7 @@ const root = path.resolve(__dirname, '..');
 
 function fixture() {
   const timers = [], messages = [], overlays = [];
+  let currentOverlay = null;
   const context = vm.createContext({
     console, Promise, AppUI: {}, App: { user: null, rerender() {} },
     document: { addEventListener() {} }, setTimeout(fn) { timers.push(fn); }
@@ -18,10 +19,16 @@ function fixture() {
   }
   context.App.user = context.U.roleUser('boss');
   context.U.toast = (message, type) => messages.push({ message, type });
-  context.U.closeModal = () => {};
+  // 这里只建模当前源身份/busy/clean，真实 DOM 草稿关闭由专用脚本覆盖。
+  context.U.isModalCurrent = overlay => currentOverlay === overlay;
+  context.U.bindModalDraft = (overlay, options) => { overlay.draftControls = options.controls; return true; };
+  context.U.setModalBusy = (overlay, busy) => { if (busy && (overlay.busy || currentOverlay !== overlay)) return false; overlay.busy = busy; return true; };
+  context.U.markModalDraftClean = overlay => { overlay.cleaned = true; };
+  context.U.closeModal = overlay => { if (!overlay || currentOverlay === overlay) currentOverlay = null; };
   context.U.openModal = options => {
     const error = { textContent: '' };
-    const opinion = { value: '', classList: { add() {}, remove() {} }, focus() {}, parentElement: { querySelector: () => error } };
+    const item = { querySelector: () => error };
+    const opinion = { id: 'ap-opinion', isConnected: true, value: '', classList: { add() {}, remove() {} }, setAttribute() {}, removeAttribute() {}, focus() {}, closest: () => item, parentElement: item };
     const buttons = ['approve', 'reject'].map(act => {
       const classes = new Set();
       return { dataset: { act }, innerHTML: act, disabled: false,
@@ -31,7 +38,7 @@ function fixture() {
     const overlay = { options, buttons,
       querySelector: selector => selector === '#ap-opinion' ? opinion : error,
       querySelectorAll: () => buttons };
-    overlays.push(overlay);
+    currentOverlay = overlay; overlays.push(overlay);
     return overlay;
   };
   return { c: context, messages, overlays,
@@ -125,8 +132,10 @@ async function refused(setup, pattern) {
   }
   const parallel = fixture(); parallel.approval().targetAmount = 14075;
   const first = parallel.open(), second = parallel.open();
-  first.buttons[0].click(); second.querySelector('#ap-opinion').value = '不能重复退回'; second.buttons[1].click();
-  await parallel.flush(); assert.equal(parallel.approval().status, '已通过', '同申请两弹窗只执行首次决策');
+  const beforeOld = snapshot(parallel); first.buttons[0].click(); await parallel.flush();
+  assert.equal(snapshot(parallel), beforeOld, 'H20: 已替换旧 first 不能写；原 first 通过期待已按新源绑定契约纠正');
+  second.querySelector('#ap-opinion').value = '当前作业退回'; second.buttons[1].click(); second.buttons[0].click(); second.buttons[1].click();
+  await parallel.flush(); assert.equal(parallel.approval().status, '已退回', '同申请只有当前 second 的首次决策生效，重复与相反决定仍互斥');
   const noOpinion = fixture(), rejectOverlay = noOpinion.open(), unmodified = snapshot(noOpinion);
   rejectOverlay.buttons[1].click(); await noOpinion.flush(); assert.equal(snapshot(noOpinion), unmodified, '无处理意见不得退回');
   assert.match(rejectOverlay.querySelector('.field-error').textContent, /必须填写/);

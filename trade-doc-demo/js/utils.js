@@ -337,6 +337,88 @@
   };
 
   /* ---------- 弹窗 ---------- */
+  var modalDrafts = new WeakMap();
+  function currentModal(overlay) {
+    var root = document.getElementById('modal-root');
+    return !!(overlay && root && root.firstElementChild === overlay && overlay.isConnected !== false);
+  }
+  function modalControlValue(control) {
+    return control.type === 'checkbox' || control.type === 'radio' ? !!control.checked : control.value;
+  }
+  U.isModalCurrent = function (overlay) {
+    var state = overlay && modalDrafts.get(overlay);
+    return currentModal(overlay) && !(state && state.guard);
+  };
+  U.bindModalDraft = function (overlay, options) {
+    var controls = options && options.controls ? Array.prototype.slice.call(options.controls) : [];
+    if (!currentModal(overlay) || modalDrafts.has(overlay) || !controls.length || controls.some(function (control, i) {
+      return !control || control.isConnected === false || !overlay.contains(control) || control.disabled || control.readOnly ||
+        controls.indexOf(control) !== i || typeof control.value !== 'string';
+    })) return false;
+    var state = { controls: controls, baseline: controls.map(modalControlValue),
+      label: options && typeof options.label === 'string' ? options.label : '当前作业', busy: false, guard: null, focus: controls[0] };
+    modalDrafts.set(overlay, state);
+    overlay.addEventListener('focusin', function (event) {
+      if (!state.guard && controls.indexOf(event.target) >= 0) state.focus = event.target;
+    });
+    return true;
+  };
+  U.setModalBusy = function (overlay, busy) {
+    var state = overlay && modalDrafts.get(overlay);
+    if (!U.isModalCurrent(overlay) || !state || busy && state.busy) return false;
+    state.busy = !!busy; return true;
+  };
+  U.markModalDraftClean = function (overlay) {
+    var state = overlay && modalDrafts.get(overlay);
+    if (!U.isModalCurrent(overlay) || !state) return false;
+    state.baseline = state.controls.map(modalControlValue); return true;
+  };
+  function restoreModalDraft(overlay, state) {
+    if (!currentModal(overlay) || !state.guard) return false;
+    var saved = state.saved, modal = overlay.querySelector('.modal');
+    state.guard.remove(); state.guard = null;
+    modal.classList.remove('is-draft-obscured'); modal.inert = saved.inert;
+    if (saved.hidden === null) modal.removeAttribute('aria-hidden'); else modal.setAttribute('aria-hidden', saved.hidden);
+    if (saved.focus && saved.focus.isConnected !== false && overlay.contains(saved.focus)) {
+      saved.focus.focus({ preventScroll: true });
+      if (typeof saved.start === 'number' && typeof saved.focus.setSelectionRange === 'function') saved.focus.setSelectionRange(saved.start, saved.end);
+    }
+    if (saved.body) { saved.body.scrollTop = saved.top; saved.body.scrollLeft = saved.left; }
+    state.saved = null; return true;
+  }
+  U.requestModalClose = function (expectedOverlay, options) {
+    var root = document.getElementById('modal-root'), overlay = expectedOverlay || root && root.firstElementChild;
+    if (!currentModal(overlay)) return false;
+    var state = modalDrafts.get(overlay);
+    if (state && state.guard) return options && options.continueDraft ? restoreModalDraft(overlay, state) : false;
+    if (state && state.busy) { U.toast('正在处理，请等待完成后再关闭。', 'warning'); return false; }
+    var dirty = state && state.controls.some(function (control, i) {
+      return control.isConnected === false || !overlay.contains(control) || modalControlValue(control) !== state.baseline[i];
+    });
+    if (!dirty) return U.closeModal(overlay);
+    var modal = overlay.querySelector('.modal'), body = modal.querySelector('.modal-body');
+    var focus = state.controls.indexOf(document.activeElement) >= 0 ? document.activeElement : state.focus;
+    state.saved = { focus: focus, start: focus && focus.selectionStart, end: focus && focus.selectionEnd,
+      body: body, top: body && body.scrollTop, left: body && body.scrollLeft, inert: !!modal.inert, hidden: modal.getAttribute('aria-hidden') };
+    var guard = document.createElement('div'); guard.className = 'modal-draft-dialog';
+    guard.setAttribute('data-modal-draft-guard', '1'); guard.setAttribute('role', 'alertdialog');
+    guard.setAttribute('aria-modal', 'true'); guard.setAttribute('aria-labelledby', 'modal-draft-title');
+    guard.setAttribute('aria-describedby', 'modal-draft-description');
+    guard.innerHTML = '<h3 id="modal-draft-title">保留当前填写？</h3><p id="modal-draft-description">' + U.esc(state.label) +
+      '有尚未提交的输入。继续填写会保留原内容；放弃仅丢弃本次未提交输入，不撤回已提交的业务。</p>' +
+      '<div class="modal-draft-actions"><button class="btn btn-primary" data-modal-draft-continue="1">继续填写</button>' +
+      '<button class="btn" data-modal-draft-discard="1">放弃填写并关闭</button></div>';
+    state.guard = guard; modal.classList.add('is-draft-obscured'); modal.inert = true; modal.setAttribute('aria-hidden', 'true');
+    overlay.appendChild(guard);
+    guard.querySelector('[data-modal-draft-continue]').addEventListener('click', function () {
+      if (state.guard === guard && guard.isConnected !== false) restoreModalDraft(overlay, state);
+    });
+    guard.querySelector('[data-modal-draft-discard]').addEventListener('click', function () {
+      if (state.guard === guard && guard.isConnected !== false && currentModal(overlay)) U.closeModal(overlay);
+    });
+    guard.querySelector('[data-modal-draft-continue]').focus({ preventScroll: true });
+    return false;
+  };
   U.openModal = function (opts) {
     var root = document.getElementById('modal-root');
     var previousFocus = U.modalReturnFocus || document.activeElement;
@@ -358,16 +440,16 @@
     var focusTarget = overlay.querySelector('input:not([type="hidden"]),textarea,select') || overlay.querySelector('[data-close]');
     if (focusTarget) focusTarget.focus({ preventScroll: true });
     overlay.addEventListener('mousedown', function (e) {
-      if (e.target === overlay && !opts.persistent) U.closeModal();
+      if (e.target === overlay && !opts.persistent) U.requestModalClose(overlay);
     });
     overlay.querySelectorAll('[data-close]').forEach(function (b) {
-      b.addEventListener('click', function () { U.closeModal(); });
+      b.addEventListener('click', function () { U.requestModalClose(overlay); });
     });
     return overlay;
   };
-  U.closeModal = function () {
+  U.closeModal = function (expectedOverlay) {
     var root = document.getElementById('modal-root');
-    if (!root.firstElementChild) return;
+    if (!root.firstElementChild || expectedOverlay && !currentModal(expectedOverlay)) return false;
     root.innerHTML = '';
     document.getElementById('app').inert = false;
     document.body.style.overflow = '';
@@ -375,6 +457,7 @@
     U.modalReturnFocus = null;
     var onClose = U.modalOnClose; U.modalOnClose = null;
     if (onClose) onClose();
+    return true;
   };
   /* 确认框，onOk 返回 false 可阻止关闭；返回 Promise 时进入 loading */
   U.confirm = function (opts) {
@@ -386,10 +469,10 @@
     var overlay = U.openModal({ title: opts.title || '操作确认', body: body, footer: footer, persistent: true, onClose: opts.onClose });
     overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
       var btn = e.currentTarget;
-      if (!opts.onOk) { U.closeModal(); return; }
+      if (!opts.onOk) { U.closeModal(overlay); return; }
       U.withLoading(btn, function () {
         return Promise.resolve(opts.onOk()).then(function (r) {
-          if (r !== false && overlay.isConnected) U.closeModal();
+          if (r !== false && currentModal(overlay)) U.closeModal(overlay);
         });
       });
     });

@@ -107,13 +107,16 @@ async function run() {
       const x = setup(); x.c.App.user = x.c.U.roleUser('sales');
       const q = x.c.U.quote('Q2026004'); x.c.location.hash = '#/quotes/' + q.id;
       if (action === 'order') { q.status = '已确认'; q.confirmDate = '2026-10-07'; }
-      const sequence = [], originalHash = x.c.location.hash;
+      const sequence = [], originalHash = x.c.location.hash, sourceClean = [];
+      const markModalClean = x.c.U.markModalDraftClean;
+      x.c.U.markModalDraftClean = overlay => { sourceClean.push(overlay); return markModalClean(overlay); };
       x.c.App.markDraftClean = () => {
         assert.equal(x.c.location.hash, originalHash); assert.ok(action === 'confirm' ? q.status === '已确认' : q.orderId);
         sequence.push('clean');
       };
       x.c.App.rerender = () => sequence.push('rerender');
       x.c.Actions[action === 'confirm' ? 'quote-confirm' : 'quote-gen-order']({ dataset: { id: q.id } });
+      const sourceOverlay = x.modal.firstElementChild;
       if (action === 'confirm') x.modal.querySelector('#qc-date').value = '2026-10-07';
       if (outcome === 'cancel') x.click(x.modal.querySelector('[data-close]'));
       else {
@@ -121,7 +124,8 @@ async function run() {
         if (outcome === 'drift') q.items[0].price = 1.5;
       }
       await x.flush();
-      assert.deepEqual(sequence, outcome !== 'success' ? [] : action === 'confirm' ? ['clean', 'rerender'] : ['clean']); cleanCases++;
+      assert.deepEqual(sourceClean, action === 'confirm' && outcome === 'success' ? [sourceOverlay] : [], '仅成功客户确认清本次来源弹窗');
+      assert.deepEqual(sequence, outcome !== 'success' ? [] : action === 'confirm' ? ['rerender'] : ['clean'], 'H20 confirm只清来源弹窗，order保原page-clean契约'); cleanCases++;
     }
   }
   for (const action of ['save', 'order']) {

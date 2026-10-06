@@ -7,6 +7,7 @@ const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 function fixture() {
   const timers = [], overlays = [], messages = [];
+  let currentOverlay = null;
   const c = vm.createContext({ Promise, AppUI: {}, App: { user: null, rerender() {} },
     document: { addEventListener() {}, getElementById() { return null; } },
     location: { hash: '' }, setTimeout(fn) { timers.push(fn); } });
@@ -16,14 +17,20 @@ function fixture() {
   }
   c.App.user = c.U.roleUser('boss');
   c.U.toast = text => messages.push(text);
-  c.U.closeModal = () => {};
+  // 金额/取消业务桩显式模型化当前源，真实草稿 DOM 保留另由专项脚本证明。
+  c.U.isModalCurrent = overlay => currentOverlay === overlay;
+  c.U.bindModalDraft = (overlay, options) => { overlay.draftControls = options.controls; return true; };
+  c.U.setModalBusy = (overlay, busy) => { if (busy && (overlay.busy || currentOverlay !== overlay)) return false; overlay.busy = busy; return true; };
+  c.U.markModalDraftClean = overlay => { overlay.cleaned = true; };
+  c.U.closeModal = overlay => { if (!overlay || currentOverlay === overlay) currentOverlay = null; };
   c.U.openModal = options => {
-    const error = { textContent: '' }, opinion = { value: '核对完成', classList: { add() {} }, focus() {}, parentElement: { querySelector: () => error } };
+    const error = { textContent: '' }, item = { querySelector: () => error };
+    const opinion = { id: 'ap-opinion', isConnected: true, value: '核对完成', classList: { add() {}, remove() {} }, setAttribute() {}, removeAttribute() {}, focus() {}, closest: () => item, parentElement: item };
     const buttons = ['approve', 'reject'].map(act => ({ dataset: { act }, innerHTML: act,
       classList: { contains() { return false; }, add() {}, remove() {} }, addEventListener(event, fn) { this.click = fn; } }));
     const overlay = { options, buttons, querySelectorAll: () => buttons,
       querySelector: sel => sel === '#ap-opinion' ? opinion : error };
-    overlays.push(overlay); return overlay;
+    currentOverlay = overlay; overlays.push(overlay); return overlay;
   };
   return { c, overlays, messages, open(id) { c.Actions['ap-handle']({ dataset: { id } }); return overlays.at(-1); },
     async flush() { for (let i = 0; i < 8; i++) { await Promise.resolve(); while (timers.length) timers.shift()(); } } };

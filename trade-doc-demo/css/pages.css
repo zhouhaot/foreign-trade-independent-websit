@@ -542,3 +542,13 @@
 /* 第8轮：纸张审核状态保持与原签字模板同宽，长双语文字完整折行。 */
 .paper .paper-review-status { width: 220px; max-width: 100%; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }
 .paper .paper-review-note { max-width: 220px; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }
+
+/* 第9轮：离开选择与原表单同源共存，不重建仍可继续的输入。 */
+.modal.is-draft-obscured { opacity: 1; pointer-events: none; }
+.modal.is-draft-obscured > .modal-head,
+.modal.is-draft-obscured > .modal-body,
+.modal.is-draft-obscured > .modal-foot { opacity: .24; }
+.modal-draft-dialog { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(440px, calc(100vw - 40px)); padding: 24px; border-radius: var(--radius-panel); background: var(--card); box-shadow: 0 24px 80px rgba(13,30,56,.25); }
+.modal-draft-dialog h3 { font-size: 18px; margin: 0 0 12px; }
+.modal-draft-dialog p { font-size: 14px; line-height: 1.8; margin: 0; overflow-wrap: anywhere; }
+.modal-draft-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }

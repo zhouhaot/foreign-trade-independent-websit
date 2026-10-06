@@ -138,8 +138,18 @@ async function run() {
     for (const afterClick of [false, true]) {
       const t = setup(); if (action === 'order') makeConfirmed(t);
       const ok = action === 'confirm' ? openConfirm(t) : openOrder(t), before = data(t);
-      if (afterClick) t.click(ok); t.click(t.modal.querySelector('[data-close]')); await t.flush();
-      assert.equal(data(t), before, `${action}: cancel ${afterClick ? 'after' : 'before'} queued Promise`); noSuccess(t); cases++;
+      const origin = t.modal.firstElementChild;
+      if (afterClick) t.click(ok); t.click(t.modal.querySelector('[data-close]'));
+      const discard = t.modal.querySelector('[data-modal-draft-discard]'); if (discard) t.click(discard);
+      if (action === 'confirm' && afterClick) {
+        assert.equal(t.modal.firstElementChild, origin, 'H20 客户确认busy期间close拒绝');
+        await t.flush(); assert.equal(t.q.status, '已确认');
+        assert.equal(t.messages.filter(m => /已登记客户确认/.test(m.text)).length, 1);
+        assert.equal(JSON.stringify(t.c.MOCK.orders), JSON.stringify(JSON.parse(before).orders), '客户确认不直接生成订单');
+      } else {
+        await t.flush(); assert.equal(data(t), before, `${action}: cancel ${afterClick ? 'after' : 'before'} queued Promise`); noSuccess(t);
+      }
+      cases++;
     }
   }
   for (const date of ['', '2026-02-30', '2025-02-29', 'not-date']) {
@@ -166,6 +176,8 @@ async function run() {
     const first = openConfirm(t), second = openConfirm(t); const before = JSON.parse(data(t));
     t.click(first); t.click(second); t.click(second);
     t.modal.querySelector('#qc-date').value = '2027-01-01'; t.modal.querySelector('#qc-remark').value = '后来修改';
+    await t.flush(); assert.equal(data(t), JSON.stringify(before), 'H20 点击后的QC输入漂移拒绝，不静默提交captured A'); noSuccess(t);
+    const validConfirm = openConfirm(t); t.click(validConfirm);
     await t.flush(); assert.equal(t.q.status, '已确认'); assert.equal(t.q.confirmDate, '2024-02-29');
     assert.match(t.q.remark, /客户确认本次展示的内容/); assert.ok(!t.q.remark.includes('后来修改'));
     assert.equal(t.messages.filter(m => /已登记客户确认/.test(m.text)).length, 1);

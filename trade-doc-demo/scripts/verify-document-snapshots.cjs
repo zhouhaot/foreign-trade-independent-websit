@@ -6,6 +6,7 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 function load() {
+  let currentOverlay = null;
   const c = vm.createContext({ AppUI: {}, App: { user: null, rerender() {} },
     document: { addEventListener() {}, getElementById() { return null; } },
     location: { hash: '' }, setTimeout() {},
@@ -19,17 +20,24 @@ function load() {
   c.U.toast = () => {};
   c.U.withLoading = (btn, fn) => fn();
   c.U.confirm = options => { c.confirmation = options; };
-  c.U.closeModal = () => {};
+  // 快照业务桩模型化当前源；真正的 DOM 保留/关闭保护在 modal-drafts 专项中验证。
+  c.U.isModalCurrent = overlay => currentOverlay === overlay;
+  c.U.bindModalDraft = (overlay, options) => { overlay.draftControls = options.controls; return true; };
+  c.U.setModalBusy = (overlay, busy) => { if (busy && (overlay.busy || currentOverlay !== overlay)) return false; overlay.busy = busy; return true; };
+  c.U.markModalDraftClean = overlay => { overlay.cleaned = true; };
+  c.U.closeModal = overlay => { if (!overlay || currentOverlay === overlay) currentOverlay = null; };
   c.U.openModal = () => {
     const controls = {};
-    const opinion = { value: '', classList: { add() {} }, focus() {}, parentElement: { querySelector() { return { textContent: '' }; } } };
+    const error = { textContent: '' }, item = { querySelector: () => error };
+    const opinion = { id: 'ap-opinion', isConnected: true, value: '', classList: { add() {}, remove() {} }, setAttribute() {}, removeAttribute() {}, focus() {}, closest: () => item, parentElement: item };
     const overlay = {
       querySelectorAll() {
-        return ['approve', 'reject'].map(act => ({ dataset: { act }, addEventListener(event, fn) { controls[act] = fn; } }));
+        return ['approve', 'reject'].map(act => ({ dataset: { act }, classList: { contains() { return false; }, add() {}, remove() {} }, addEventListener(event, fn) { controls[act] = fn; } }));
       },
       querySelector(selector) { return selector === '#ap-opinion' ? opinion : { textContent: '' }; }
     };
     c.modalControls = controls;
+    currentOverlay = overlay;
     return overlay;
   };
   return c;

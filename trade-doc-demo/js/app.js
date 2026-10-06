@@ -555,12 +555,12 @@
       return;
     }
     if (e.key === 'Escape') {
-      U.closeModal();
+      U.requestModalClose(null, { continueDraft: true });
       var dropdown = document.getElementById('bell-dd');
       if (dropdown) { dropdown.classList.remove('show'); document.getElementById('bell-toggle').setAttribute('aria-expanded', 'false'); }
       return;
     }
-    var modal = document.querySelector('.modal');
+    var modal = document.querySelector('[data-modal-draft-guard]') || document.querySelector('.modal');
     if (modal && e.key === 'Tab') {
       var focusable = Array.prototype.filter.call(modal.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled),[tabindex="0"]'), function (item) { return item.getClientRects().length; });
       var first = focusable[0], last = focusable[focusable.length - 1];

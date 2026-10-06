@@ -1,0 +1,4543 @@
+{
+  "baseline": "d03c9a055ec10c1bf0171669ce0d15a90d820e01",
+  "method": "same IAB tab6 HTTP8001 no-store; native actions/read-only DOM",
+  "interactions": [
+    {
+      "id": "qc-guard-native-tab-escape-restore",
+      "status": "PASS",
+      "observed": {
+        "tab": [
+          "放弃填写并关闭",
+          "继续填写",
+          "放弃填写并关闭"
+        ],
+        "before": {
+          "end": 1,
+          "start": 0,
+          "value": "演示：第9轮保留客户确认说明。"
+        },
+        "after": {
+          "active": "qc-remark",
+          "end": 1,
+          "start": 0,
+          "value": "演示：第9轮保留客户确认说明。"
+        }
+      }
+    },
+    {
+      "id": "qc-error-guard-continue",
+      "status": "PASS",
+      "observed": {
+        "before": [
+          "客户确认日期必须为有效的日历日期。",
+          "",
+          ""
+        ],
+        "after": [
+          "客户确认日期必须为有效的日历日期。",
+          "",
+          ""
+        ],
+        "focus": "qc-date"
+      }
+    },
+    {
+      "id": "qc-explicit-discard-no-confirmation",
+      "status": "PASS",
+      "observed": "报价详情 · Q2026004 待客户确认"
+    },
+    {
+      "id": "oc-cancel-type-escape-continue",
+      "status": "PASS",
+      "observed": {
+        "amountDisplay": "none",
+        "focus": "oc-reason",
+        "reason": "演示：第9轮误关闭后继续填写取消原因。",
+        "sourceHidden": null,
+        "sourceInertAttr": null,
+        "type": "取消申请"
+      }
+    },
+    {
+      "id": "ap-raw-space-error-continue",
+      "status": "PASS",
+      "observed": {
+        "before": {
+          "bodyScroll": 0,
+          "description": "ap-opinion-hint ap-opinion-error",
+          "errors": [
+            "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+            "退回时必须填写具体处理意见"
+          ],
+          "invalid": "true",
+          "value": " "
+        },
+        "after": {
+          "bodyScroll": 0,
+          "description": "ap-opinion-hint ap-opinion-error",
+          "errors": [
+            "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+            "退回时必须填写具体处理意见"
+          ],
+          "focus": "ap-opinion",
+          "invalid": "true",
+          "value": " "
+        },
+        "guardSourceInertAttribute": ""
+      }
+    },
+    {
+      "id": "ap-low-height-native-scroll-restore",
+      "status": "PASS",
+      "observed": {
+        "before": {
+          "body": 165,
+          "end": 0,
+          "field": 362,
+          "start": 0,
+          "valueLength": 494
+        },
+        "after": {
+          "body": 165,
+          "end": 0,
+          "field": 362,
+          "focus": "ap-opinion",
+          "start": 0,
+          "valueLength": 494
+        }
+      }
+    },
+    {
+      "id": "ap-native-fast-keyboard-failed-retry",
+      "status": "PASS",
+      "observed": {
+        "classBeforeEnter": "btn btn-success is-loading",
+        "guardAfterClose": 1,
+        "scope": "original AP20.50 rejection; native Enter during loading then close selection available, not sales-specific race recreation"
+      }
+    },
+    {
+      "id": "ap-real-reject-success-closes-source",
+      "status": "PASS",
+      "observed": "改价申请\t订单 SO2026005 申请整体降价 3%\t陈明\t2026-09-16 14:05\t已退回\t周建国\t2026-10-07 07:36\t演示：第9轮处理意见继续填写，目标金额需重新核对。"
+    },
+    {
+      "id": "ap-rejection-order-finance-independent",
+      "status": "PASS",
+      "observed": "Order SO5 still execution, 28,150.00 USD, received0 after rejecting original unachievable repricing; only visible UI evidence."
+    },
+    {
+      "id": "qc-clean-close-no-guard",
+      "status": "PASS"
+    },
+    {
+      "id": "qc-real-confirm-only-success",
+      "status": "PASS",
+      "observed": {
+        "heading": "报价详情 · Q2026004 已确认",
+        "generateOrderButton": 1,
+        "scope": "Registered only, did not click generation; finance/orders unchanged by this observation only independently verified Node."
+      }
+    },
+    {
+      "id": "oc-native-busy-escape-waits",
+      "status": "PASS",
+      "observed": {
+        "queued": {
+          "guard": false,
+          "loading": "btn btn-danger is-loading",
+          "modal": true,
+          "reasonDisabled": true
+        },
+        "afterEscape": {
+          "guard": false,
+          "modal": true,
+          "warning": [
+            "正在处理，请等待完成后再关闭。"
+          ]
+        },
+        "scope": "Already committed source closing delay, not claim ability to abort a transaction."
+      }
+    },
+    {
+      "id": "oc-real-request-success-no-discard",
+      "status": "PASS",
+      "observed": "订单 SO2026001\n取消申请中"
+    },
+    {
+      "id": "oc-clean-close-no-prompt",
+      "status": "PASS"
+    }
+  ],
+  "images": [
+    {
+      "file": "qc-form-first-1440.png",
+      "stage": "process",
+      "activeElement": "qc-date",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 190.671875,
+          "disabled": false,
+          "text": "",
+          "top": 160.671875
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "取消",
+          "top": 807.328125
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "确认登记",
+          "top": 807.328125
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "登记客户确认 · Q2026004",
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "file": "qc-guard-first-1440.png",
+      "stage": "process",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 535.6875
+        },
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 535.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": true,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -97.6875)",
+      "width": 1440
+    },
+    {
+      "file": "qc-continued-first-1440.png",
+      "stage": "process",
+      "activeElement": "qc-remark",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 190.671875,
+          "disabled": false,
+          "text": "",
+          "top": 160.671875
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "取消",
+          "top": 807.328125
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "确认登记",
+          "top": 807.328125
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "登记客户确认 · Q2026004",
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "file": "qc-guard-first-1280.png",
+      "stage": "process",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 535.6875
+        },
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 535.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": true,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -97.6875)",
+      "width": 1280
+    },
+    {
+      "file": "qc-error-first-1280.png",
+      "stage": "process",
+      "activeElement": "qc-date",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 181.671875,
+          "disabled": false,
+          "text": "",
+          "top": 151.671875
+        },
+        {
+          "bottom": 854.328125,
+          "disabled": false,
+          "text": "取消",
+          "top": 816.328125
+        },
+        {
+          "bottom": 854.328125,
+          "disabled": false,
+          "text": "确认登记",
+          "top": 816.328125
+        }
+      ],
+      "fieldErrors": [
+        "客户确认日期必须为有效的日历日期。"
+      ],
+      "guard": false,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "登记客户确认 · Q2026004",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "oc-form-first-1280.png",
+      "stage": "process",
+      "activeElement": "oc-type",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 319.75,
+          "disabled": false,
+          "text": "",
+          "top": 289.75
+        },
+        {
+          "bottom": 716.25,
+          "disabled": false,
+          "text": "取消",
+          "top": 678.25
+        },
+        {
+          "bottom": 716.25,
+          "disabled": false,
+          "text": "提交申请",
+          "top": 678.25
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "申请变更 · 订单 SO2026001",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "oc-guard-first-1280.png",
+      "stage": "process",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 535.6875
+        },
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 535.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": true,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -97.6875)",
+      "width": 1280
+    },
+    {
+      "file": "oc-continued-first-1280.png",
+      "stage": "process",
+      "activeElement": "oc-reason",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 317.296875,
+          "disabled": false,
+          "text": "",
+          "top": 287.296875
+        },
+        {
+          "bottom": 718.6875,
+          "disabled": false,
+          "text": "取消",
+          "top": 680.6875
+        },
+        {
+          "bottom": 718.6875,
+          "disabled": false,
+          "text": "提交申请",
+          "top": 680.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "申请变更 · 订单 SO2026001",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "ap-form-first-1280.png",
+      "stage": "process",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 160.203125,
+          "disabled": false,
+          "text": "",
+          "top": 130.203125
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "取消",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "退 回",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "通 过",
+          "top": 837.796875
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 17,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "ap-error-first-1280.png",
+      "stage": "process",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 151.203125,
+          "disabled": false,
+          "text": "",
+          "top": 121.203125
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "取消",
+          "top": 846.796875
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "退 回",
+          "top": 846.796875
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "通 过",
+          "top": 846.796875
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+        "退回时必须填写具体处理意见"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 17,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "ap-guard-first-1280.png",
+      "stage": "process",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 586.28125,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 548.28125
+        },
+        {
+          "bottom": 586.28125,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 548.28125
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+        "退回时必须填写具体处理意见"
+      ],
+      "guard": true,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 17,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -110.281)",
+      "width": 1280
+    },
+    {
+      "file": "ap-continued-first-1280.png",
+      "stage": "process",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 151.203125,
+          "disabled": false,
+          "text": "",
+          "top": 121.203125
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "取消",
+          "top": 846.796875
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "退 回",
+          "top": 846.796875
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "通 过",
+          "top": 846.796875
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+        "退回时必须填写具体处理意见"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 17,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "ap-long-scrolled-process-1280x720.png",
+      "stage": "process",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 165,
+      "buttons": [
+        {
+          "bottom": 102.40625,
+          "disabled": false,
+          "text": "",
+          "top": 72.40625
+        },
+        {
+          "bottom": 653.59375,
+          "disabled": false,
+          "text": "取消",
+          "top": 615.59375
+        },
+        {
+          "bottom": 653.59375,
+          "disabled": false,
+          "text": "退 回",
+          "top": 615.59375
+        },
+        {
+          "bottom": 653.59375,
+          "disabled": false,
+          "text": "通 过",
+          "top": 615.59375
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 720,
+      "opacity": "1",
+      "scroll": 157,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "ap-long-guard-process-1280x720.png",
+      "stage": "process",
+      "activeElement": "继续填写",
+      "bodyScroll": 165,
+      "buttons": [
+        {
+          "bottom": 446.28125,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 408.28125
+        },
+        {
+          "bottom": 446.28125,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 408.28125
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": true,
+      "hash": "#/approvals",
+      "height": 720,
+      "opacity": "1",
+      "scroll": 157,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -110.281)",
+      "width": 1280
+    },
+    {
+      "file": "ap-long-restored-process-1280x720.png",
+      "stage": "process",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 165,
+      "buttons": [
+        {
+          "bottom": 102.40625,
+          "disabled": false,
+          "text": "",
+          "top": 72.40625
+        },
+        {
+          "bottom": 653.59375,
+          "disabled": false,
+          "text": "取消",
+          "top": 615.59375
+        },
+        {
+          "bottom": 653.59375,
+          "disabled": false,
+          "text": "退 回",
+          "top": 615.59375
+        },
+        {
+          "bottom": 653.59375,
+          "disabled": false,
+          "text": "通 过",
+          "top": 615.59375
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 720,
+      "opacity": "1",
+      "scroll": 157,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "ap-guard-final-1280.png",
+      "stage": "final",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 586.28125,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 548.28125
+        },
+        {
+          "bottom": 586.28125,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 548.28125
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": true,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 13,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -110.281)",
+      "width": 1280
+    },
+    {
+      "file": "ap-guard-final-1440.png",
+      "stage": "final",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 586.28125,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 548.28125
+        },
+        {
+          "bottom": 586.28125,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 548.28125
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": true,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 13,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -110.281)",
+      "width": 1440
+    },
+    {
+      "file": "ap-retry-continued-final-1440.png",
+      "stage": "final",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 160.203125,
+          "disabled": false,
+          "text": "",
+          "top": 130.203125
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "取消",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "退 回",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "通 过",
+          "top": 837.796875
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 13,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "file": "qc-form-final-1440.png",
+      "stage": "final",
+      "activeElement": "qc-date",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 190.671875,
+          "disabled": false,
+          "text": "",
+          "top": 160.671875
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "取消",
+          "top": 807.328125
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "确认登记",
+          "top": 807.328125
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "登记客户确认 · Q2026004",
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "file": "qc-guard-final-1440.png",
+      "stage": "final",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 535.6875
+        },
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 535.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": true,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -97.6875)",
+      "width": 1440
+    },
+    {
+      "file": "qc-guard-final-1280.png",
+      "stage": "final",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 535.6875
+        },
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 535.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": true,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -97.6875)",
+      "width": 1280
+    },
+    {
+      "file": "qc-form-final-1280.png",
+      "stage": "final",
+      "activeElement": "qc-remark",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 190.671875,
+          "disabled": false,
+          "text": "",
+          "top": 160.671875
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "取消",
+          "top": 807.328125
+        },
+        {
+          "bottom": 845.328125,
+          "disabled": false,
+          "text": "确认登记",
+          "top": 807.328125
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "登记客户确认 · Q2026004",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "qc-error-final-1280.png",
+      "stage": "final",
+      "activeElement": "qc-date",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 181.671875,
+          "disabled": false,
+          "text": "",
+          "top": 151.671875
+        },
+        {
+          "bottom": 854.328125,
+          "disabled": false,
+          "text": "取消",
+          "top": 816.328125
+        },
+        {
+          "bottom": 854.328125,
+          "disabled": false,
+          "text": "确认登记",
+          "top": 816.328125
+        }
+      ],
+      "fieldErrors": [
+        "客户确认日期必须为有效的日历日期。"
+      ],
+      "guard": false,
+      "hash": "#/quotes/Q2026004",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "登记客户确认 · Q2026004",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "oc-form-final-1280.png",
+      "stage": "final",
+      "activeElement": "oc-type",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 319.75,
+          "disabled": false,
+          "text": "",
+          "top": 289.75
+        },
+        {
+          "bottom": 716.25,
+          "disabled": false,
+          "text": "取消",
+          "top": 678.25
+        },
+        {
+          "bottom": 716.25,
+          "disabled": false,
+          "text": "提交申请",
+          "top": 678.25
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "申请变更 · 订单 SO2026001",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "oc-guard-final-1280.png",
+      "stage": "final",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 535.6875
+        },
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 535.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": true,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -97.6875)",
+      "width": 1280
+    },
+    {
+      "file": "oc-guard-final-1440.png",
+      "stage": "final",
+      "activeElement": "继续填写",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "继续填写",
+          "top": 535.6875
+        },
+        {
+          "bottom": 573.6875,
+          "disabled": false,
+          "text": "放弃填写并关闭",
+          "top": 535.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": true,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": "true",
+      "title": "保留当前填写？",
+      "transform": "matrix(1, 0, 0, 1, -220, -97.6875)",
+      "width": 1440
+    },
+    {
+      "file": "oc-cancel-continued-final-1440.png",
+      "stage": "final",
+      "activeElement": "oc-reason",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 317.296875,
+          "disabled": false,
+          "text": "",
+          "top": 287.296875
+        },
+        {
+          "bottom": 718.6875,
+          "disabled": false,
+          "text": "取消",
+          "top": 680.6875
+        },
+        {
+          "bottom": 718.6875,
+          "disabled": false,
+          "text": "提交申请",
+          "top": 680.6875
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "申请变更 · 订单 SO2026001",
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "file": "oc-requested-final-1440.png",
+      "stage": "final",
+      "activeElement": "\n贸易协同订单与单证管理工作台客户与商品客户管理商品管理销售业务询盘管理报价管理订单列表审核与异常演示工作区刷新后恢复样例数据贸易协同销售业务/订单列表/订单详情搜索页面、订单、单证Ctrl K外贸业务员3待办提醒3 项报价待确认Q2026005 · 尼罗河贸易公司有效期至 2026-10-04询盘跟进INQ2026005 · 尼罗河贸易公司2026-09-01询盘跟进INQ2026006 · 太平洋进口公司2026-10-07CMchenming退出登录业务路径1客户2询盘3报价确认4订单执行客户确认报价后生成订单订单 SO2026001 取消申请中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20查看来源报价订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度取消申请中1待执行2执行中3已完成取消申请中 取消申请审批中，订单暂缓执行单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份 · 订单取消申请中，单证操作与导出暂停收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态取消申请中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "buttons": [],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": null,
+      "scroll": 0,
+      "transform": null,
+      "width": 1440,
+      "heading": "订单 SO2026001\n取消申请中"
+    },
+    {
+      "file": "oc-form-final-1440.png",
+      "stage": "final",
+      "activeElement": "oc-type",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 319.75,
+          "disabled": false,
+          "text": "",
+          "top": 289.75
+        },
+        {
+          "bottom": 716.25,
+          "disabled": false,
+          "text": "取消",
+          "top": 678.25
+        },
+        {
+          "bottom": 716.25,
+          "disabled": false,
+          "text": "提交申请",
+          "top": 678.25
+        }
+      ],
+      "fieldErrors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "sourceHidden": null,
+      "title": "申请变更 · 订单 SO2026001",
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "file": "ap-form-final-1440.png",
+      "stage": "final",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 160.203125,
+          "disabled": false,
+          "text": "",
+          "top": 130.203125
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "取消",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "退 回",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "通 过",
+          "top": 837.796875
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 22,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "file": "ap-form-final-1280.png",
+      "stage": "final",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 160.203125,
+          "disabled": false,
+          "text": "",
+          "top": 130.203125
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "取消",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "退 回",
+          "top": 837.796875
+        },
+        {
+          "bottom": 875.796875,
+          "disabled": false,
+          "text": "通 过",
+          "top": 837.796875
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 22,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "file": "ap-error-final-1280.png",
+      "stage": "final",
+      "activeElement": "ap-opinion",
+      "bodyScroll": 0,
+      "buttons": [
+        {
+          "bottom": 151.203125,
+          "disabled": false,
+          "text": "",
+          "top": 121.203125
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "取消",
+          "top": 846.796875
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "退 回",
+          "top": 846.796875
+        },
+        {
+          "bottom": 884.796875,
+          "disabled": false,
+          "text": "通 过",
+          "top": 846.796875
+        }
+      ],
+      "fieldErrors": [
+        "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+        "退回时必须填写具体处理意见"
+      ],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 22,
+      "sourceHidden": null,
+      "title": "处理申请 · AP20260903",
+      "transform": "none",
+      "width": 1280
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    }
+  ],
+  "failures": [],
+  "corrections": [
+    "1280 role matrix completed admin/sales/doc/fin 116 then boss login-role wait timed out; actual financial PL2 remained, console empty. Fresh native logout observed actual title, confirmed to visible login; resumed boss only. No assertion of uninterrupted role switching or cause."
+  ],
+  "summary": {
+    "interactionPass": 14,
+    "interactionFail": 0,
+    "distinctRoleRoutes": 145,
+    "layouts": 290,
+    "layoutFailures": 0,
+    "images": 32,
+    "processImages": 15,
+    "finalImages": 17,
+    "failures": 0
+  },
+  "console": [],
+  "finalNotes": [
+    "17 final images after opaque source-modal CSS fix; initial12 retained; extra720px height three process captures reflect native body165/textarea362/selection0 exact restoration, not desktop layout matrix.",
+    "14 PASS actual native groups; AP Enter during is-loading tested, QC/OC exact original450ms bug is independently Node-timed. OC busy Escape was already committed closing delay, not ability to retract a transaction.",
+    "Native same id/raw/connected presence does not establish original object identity; strict identity proved actual code/Node references. Inert actual attribute read empty string, wrapper.inert undefined not used as proof; debug snapshot contains unnamed source not screen-reader certification.",
+    "145 distinct role/routes, 290 actual1280/1440x1000 final layout PASS. 1280 timeout at116 explicitly recovered; 1440 helper observed logout title/screenshot then click; no claim no recovery or identified root cause.",
+    "Prototype refresh reset prior native confirmed/rejected/requested data before final default-data matrix. No persistence/order creation/external action from client confirmation.",
+    "Programmatic success only calls modal-clean API; normal App.rerender still refreshes business page; no arbitrary underlying-form/node retention or full page navigation claim."
+  ]
+}

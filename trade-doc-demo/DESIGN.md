@@ -185,6 +185,17 @@ paper-review-status宽220px/max-width100%，paper-review-note最多220px，两�
 
 本轮20final逐图实读UI SHIP、9PASS真实组+1旧baseline缺陷观察，145distinct角色路由/290双宽布局0fail/console[]、9过程20final共29PNG；23Node脚本/33语法、137专用与唯一Cc-only MEDIUM修复/综合JSAPPROVE为独立代码证据。实际旧V1新V2后及取消两态整.paper渲染文字相同，非所有HTML/正式历史签发。1280角色wait在116后原生恢复boss剩29，不称连续五角色无恢复；异常缺名日期/未知控制码仅Node不注正式Mock。file、跨浏览器/读屏/400%/320px、动态减少动效/刷新关闭、打印PDF/电子签名/企业签署日期制度/后台事务未验。第7轮记录的旧Approved by误读风险在H19显示范围已解决，正式签署仍未认证。详见`.impeccable/review/round-08/design-review.md`。
 
+
+## 第9轮三业务弹窗的未提交填写保护
+
+H20仅qc-form客户确认、oc-form订单变更、ap-opinion主管意见。raw原值未变或恢复可直接关；dirty X/取消/Esc保原modal与独立alertdialog同overlay，原form临时inert/aria-hidden，主继续填写/次放弃填写并关闭。标题/描述明确具体报价订单申请与未提交范围，放弃不等取消业务/退回决定。继续回近原字段/选区/值/error/hint/body与textarea滚动，不重拼表单；普通重复close幂等，guardEsc继续/Tab优先当前层。
+
+440px守卫沿A白卡/原变量、24padding，原作业白底保持opaque、仅modal-head/body/foot24%淡化，避免首图后页文字透进源表单叠字；guard为sibling不被变淡。源码保源DOM/inert/ARIA，源不可用只作上下文，决定所需对象及两按钮在activeguard完整清晰；guard不叫普通.modal，不能只凭selector或调试树认读屏语义。oc三个手写label/ap-opinion具名、hint追加error，QC原formItem关联保持。
+
+busy排队前同步保护，关闭等待结果；失败释放原锁保输入与具体原因，成功业务commit后只源modal clean/close，不清页面draft、不自动生成订单、不承诺持久化。旧回调/源close/guard/timer绑定原节点与候选/actor内容，不能触碰新作业。sales450ms loading快速retry在设置busy前拦旧loading，原综合MEDIUM真实Node计时复验；原生APretry属于另一实际路径。OC原生Esc忙碌证据在已commit后480ms收尾阶段，不能当可撤回事务。无参legacy程序force未扩其它表单范围。
+
+17终图+3额外720过程逐读UI SHIP，最终14nativePASS/0FAIL、145独立角色路由/290实际1280/1440×1000布局0fail/console[]，32PNG=15过程17final，extra720三图仅过程不混桌面矩阵。1280完成116条后bossloginwait超时实际仍finPL2，原生注销读退出登录确认→login再boss补29；1440逐次观察logout标题/截图确认后完成145，不称连续无恢复/不猜超时根因。正常桌面1000高QC/OCpage0/body0，AP表单page22/guard13/body0；720额外page157/body165/textarea362、选区0/0与494raw文字恢复，不称默认720矩阵或400%重排。低角旧成功/登录Toast不盖当前字段/操作但不认全部参考无遮挡。26Node脚本/36语法、共享45/销售40/主管21、综合/JSAPPROVE及CSS补审属独立证据。相同id/raw不证明原nodeidentity；inert空串/aria-hiddentrue及snapshot无名source不替代真读屏只有一dialog。SC1.3.1/2.1.1/2.4.3/7/11/3.3.1/4.1.2/3为对应约束，不认完整AA。file、跨浏览器/真实读屏/400%320px、减少动效运行/原生刷新关闭、持久草稿/后端事务/真实身份并发/银行NAS/PDF签署未验。见`.impeccable/review/round-09/design-review.md`。
+
 ## Overview
 
 **Creative North Star: "A · 订单协同工作区"**

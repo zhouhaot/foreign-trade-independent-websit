@@ -6,6 +6,25 @@
   var M = window.MOCK, U = window.U;
   var Views = window.Views, Actions = window.Actions;
   var ui = window.__ui, esc = U.esc, tag = U.tag, val = window.__val, descItem = window.__descItem;
+  /* 两个可编辑销售弹窗仅绑定本窗原控件，异步候选不回读替换窗口。 */
+  function modalInputs(overlay, ids) { return ids.map(function (id) { return overlay.querySelector('#' + id); }); }
+  function modalInputSnapshot(controls) { return controls.map(function (node) { return { node: node, value: node.value }; }); }
+  function modalControlsCurrent(overlay, controls) {
+    return controls.every(function (node) { return node && typeof node.value === 'string' && node.isConnected !== false && overlay.contains(node) && overlay.querySelector('#' + node.id) === node; });
+  }
+  function modalInputsMatch(overlay, captured) {
+    return captured.every(function (input) {
+      return input.node.isConnected !== false && overlay.contains(input.node) && overlay.querySelector('#' + input.node.id) === input.node && input.node.value === input.value;
+    });
+  }
+  function disableModalInputs(controls) {
+    var disabled = controls.map(function (node) { return node.disabled; });
+    controls.forEach(function (node) { node.disabled = true; }); return disabled;
+  }
+  function restoreModalInputs(overlay, controls, disabled) {
+    if (!U.isModalCurrent(overlay)) return;
+    controls.forEach(function (node, i) { if (overlay.contains(node)) node.disabled = disabled[i]; });
+  }
   /* 与现行 ROUTES 一致：只对可访问岗位展示链接，其余保留来源文字。 */
   function contextLink(hash, text, roles, role) {
     role = role || window.App.user.role;
@@ -344,7 +363,12 @@
       '<div class="field-error quote-form-error" data-quote-error="1" role="alert"></div></form>';
     var footer = '<button class="btn" data-close="1">取消</button><button class="btn btn-primary" data-ok="1">确认登记</button>';
     var overlay = U.openModal({ title: '登记客户确认 · ' + q.id, body: body, footer: footer, persistent: true });
+    var controls = modalInputs(overlay, ['qc-date', 'qc-remark']);
+    if (!U.bindModalDraft(overlay, { label: '客户确认 ' + q.id, controls: controls })) return;
     overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
+      if (e.currentTarget.classList.contains('is-loading')) return;
+      if (!U.isModalCurrent(overlay)) return;
+      if (!modalControlsCurrent(overlay, controls)) { quoteError(overlay, '客户确认控件已变化，请重新打开并核对。'); return; }
       var btn = e.currentTarget;
       var form = overlay.querySelector('#qc-form');
       U.clearErrors(form);
@@ -354,18 +378,22 @@
       if (context.submitted || quoteBusy[context.id] || !overlay.isConnected) return;
       var error = quoteContextError(context, '待客户确认');
       if (error) { quoteError(form, error); return; }
+      var captured = modalInputSnapshot(controls);
+      if (!modalInputsMatch(overlay, captured) || !U.setModalBusy(overlay, true)) return;
+      var disabled = disableModalInputs(controls);
       quoteBusy[context.id] = true;
       U.withLoading(btn, function () {
         try {
-          if (context.submitted || !overlay.isConnected) return false;
+          if (context.submitted || !U.isModalCurrent(overlay)) return false;
+          if (!modalInputsMatch(overlay, captured)) { quoteError(form, '客户确认输入已变化，请核对当前内容后重新登记。'); return false; }
           var delayedError = quoteContextError(context, '待客户确认');
           if (delayedError) { quoteError(form, delayedError); return false; }
           q.status = '已确认'; q.confirmDate = confirmDate;
           if (remark) q.remark = (q.remark ? q.remark + '；' : '') + remark;
           context.submitted = true;
-          if (window.App.markDraftClean) window.App.markDraftClean();
-          U.closeModal(); U.toast('已登记客户确认，报价 ' + q.id + ' 现在可以生成订单'); window.App.rerender();
-        } finally { delete quoteBusy[context.id]; }
+          U.markModalDraftClean(overlay);
+          U.closeModal(overlay); U.toast('已登记客户确认，报价 ' + q.id + ' 现在可以生成订单'); window.App.rerender();
+        } finally { delete quoteBusy[context.id]; U.setModalBusy(overlay, false); restoreModalInputs(overlay, controls, disabled); }
       });
     });
   };
@@ -904,22 +932,25 @@
       U.toast('仅业务员可对待执行或执行中的订单申请变更', 'warning');
       return;
     }
-    var openedStatus = o.status, openedCurrency = o.currency, submitted = false;
+    var openedStatus = o.status, openedCurrency = o.currency, actorContent = JSON.stringify(actor), submitted = false;
     var fin = U.orderFin(o);
     var body =
       '<form id="oc-form">' +
-      '<div class="form-item"><label class="required">变更类型</label>' +
+      '<div class="form-item"><label class="required" for="oc-type">变更类型</label>' +
       '<select class="select" id="oc-type"><option value="改价申请">改价申请（调整订单金额）</option><option value="取消申请">取消申请（取消整笔订单）</option></select>' +
       '<div class="field-error"></div></div>' +
-      '<div class="form-item mt8" id="oc-amount-wrap">' + '<label class="required">变更后订单金额（' + o.currency + '）</label>' +
+      '<div class="form-item mt8" id="oc-amount-wrap">' + '<label class="required" for="oc-amount">变更后订单金额（' + o.currency + '）</label>' +
       '<input class="input" id="oc-amount" value="' + fin.total.toFixed(2) + '">' +
       '<div class="readonly-hint">当前订单金额：' + U.fmt(fin.total) + ' ' + o.currency + '</div><div class="field-error"></div></div>' +
-      '<div class="form-item mt8"><label class="required">申请原因</label>' +
+      '<div class="form-item mt8"><label class="required" for="oc-reason">申请原因</label>' +
       '<textarea class="textarea" id="oc-reason" placeholder="请说明变更背景、与客户的协商结果"></textarea><div class="field-error"></div></div>' +
       '<div id="oc-danger"></div>' +
+      '<div class="field-error" id="oc-feedback" role="alert"></div>' +
       '</form>';
     var footer = '<button class="btn" data-close="1">取消</button><button class="btn btn-primary" data-ok="1">提交申请</button>';
     var overlay = U.openModal({ title: '申请变更 · 订单 ' + o.id, body: body, footer: footer, persistent: true });
+    var controls = modalInputs(overlay, ['oc-type', 'oc-amount', 'oc-reason']);
+    if (!U.bindModalDraft(overlay, { label: '订单变更 ' + o.id, controls: controls })) return;
     var typeSel = overlay.querySelector('#oc-type');
     function refreshType() {
       var isCancel = typeSel.value === '取消申请';
@@ -933,6 +964,9 @@
     typeSel.addEventListener('change', refreshType);
     refreshType();
     overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
+      if (e.currentTarget.classList.contains('is-loading')) return;
+      if (submitted || !U.isModalCurrent(overlay)) return;
+      if (!modalControlsCurrent(overlay, controls)) { overlay.querySelector('#oc-feedback').textContent = '订单变更控件已变化，请重新打开并核对。'; return; }
       var btn = e.currentTarget;
       var form = overlay.querySelector('#oc-form');
       U.clearErrors(form);
@@ -943,36 +977,48 @@
       var requestedType = typeSel.value;
       var requestedAmount = isCancel ? null : Number(form.querySelector('#oc-amount').value);
       var requestedReason = form.querySelector('#oc-reason').value.trim();
+      var captured = modalInputSnapshot(controls);
+      if (!modalInputsMatch(overlay, captured) || !U.setModalBusy(overlay, true)) return;
+      var disabled = disableModalInputs(controls), committed = false;
       U.withLoading(btn, function () {
-        if (submitted) return;
-        if (window.App.user !== actor || actor.role !== 'sales' || U.order(o.id) !== o || o.status !== openedStatus || o.currency !== openedCurrency) {
-          U.toast('账号或订单状态已变化，请关闭弹窗后重新核对申请', 'warning');
-          return;
+        try {
+          if (!U.isModalCurrent(overlay)) return;
+          if (submitted) return;
+          if (!modalInputsMatch(overlay, captured)) { overlay.querySelector('#oc-feedback').textContent = '订单变更输入已变化，请核对当前内容后重新提交。'; U.toast('订单变更输入已变化，请核对当前内容后重新提交。', 'warning'); return; }
+          if (window.App.user !== actor || JSON.stringify(actor) !== actorContent || actor.role !== 'sales' || U.order(o.id) !== o || o.status !== openedStatus || o.currency !== openedCurrency) {
+            U.toast('账号或订单状态已变化，请关闭弹窗后重新核对申请', 'warning');
+            return;
+          }
+          if (M.approvals.some(function (a) { return a.type === requestedType && a.targetId === o.id && a.status === '待处理'; })) {
+            U.toast('该订单已有待处理' + requestedType + '，请查看已有申请', 'warning');
+            return;
+          }
+          var title = isCancel
+            ? '订单 ' + o.id + ' 申请取消'
+            : '订单 ' + o.id + ' 申请改价至 ' + U.fmt(requestedAmount) + ' ' + openedCurrency;
+          M.approvals.unshift({
+            id: 'AP' + U.today().replace(/-/g, '') + String(M.approvals.length + 1),
+            type: isCancel ? '取消申请' : '改价申请', targetType: 'order', targetId: o.id,
+            title: title, applicant: window.App.user.name, applyTime: U.now(),
+            reason: requestedReason,
+            status: '待处理', handler: null, handleTime: null, opinion: null,
+            targetAmount: requestedAmount,
+            priorOrderStatus: isCancel ? openedStatus : null
+          });
+          if (isCancel) o.status = '取消申请中';
+          M.orderLogs[o.id] = (M.orderLogs[o.id] || []).concat([{ time: U.now(), person: window.App.user.name, content: '提交' + title }]);
+          submitted = true;
+          committed = true; U.markModalDraftClean(overlay);
+          setTimeout(function () {
+            if (!U.isModalCurrent(overlay)) return;
+            U.setModalBusy(overlay, false);
+            U.closeModal(overlay);
+            U.toast('变更申请已提交，等待业务主管审批');
+            window.App.rerender();
+          }, 480);
+        } finally {
+          if (!committed) { U.setModalBusy(overlay, false); restoreModalInputs(overlay, controls, disabled); }
         }
-        if (M.approvals.some(function (a) { return a.type === requestedType && a.targetId === o.id && a.status === '待处理'; })) {
-          U.toast('该订单已有待处理' + requestedType + '，请查看已有申请', 'warning');
-          return;
-        }
-        var title = isCancel
-          ? '订单 ' + o.id + ' 申请取消'
-          : '订单 ' + o.id + ' 申请改价至 ' + U.fmt(requestedAmount) + ' ' + openedCurrency;
-        M.approvals.unshift({
-          id: 'AP' + U.today().replace(/-/g, '') + String(M.approvals.length + 1),
-          type: isCancel ? '取消申请' : '改价申请', targetType: 'order', targetId: o.id,
-          title: title, applicant: window.App.user.name, applyTime: U.now(),
-          reason: requestedReason,
-          status: '待处理', handler: null, handleTime: null, opinion: null,
-          targetAmount: requestedAmount,
-          priorOrderStatus: isCancel ? openedStatus : null
-        });
-        if (isCancel) o.status = '取消申请中';
-        M.orderLogs[o.id] = (M.orderLogs[o.id] || []).concat([{ time: U.now(), person: window.App.user.name, content: '提交' + title }]);
-        submitted = true;
-        setTimeout(function () {
-          U.closeModal();
-          U.toast('变更申请已提交，等待业务主管审批');
-          window.App.rerender();
-        }, 480);
       });
     });
   };
