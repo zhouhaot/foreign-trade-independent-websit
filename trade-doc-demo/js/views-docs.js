@@ -107,7 +107,8 @@
     if (d.status === '已退回') banner = '<div class="doc-status-banner reject"><b>已退回：</b>' + esc(d.opinion || '') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）' + (role === 'doc' ? '<br>请按意见修订后重新提交审核，或申请重新制单生成新版本。' : '') + '</div>';
     else if (d.status === '已通过') banner = '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (policy.canExport ? '当前满足导出演示条件。' : '历史审核结果保留，当前导出资格见操作区。') + '</div>';
     else if (d.status === '待审核') banner = '<div class="doc-status-banner review"><b>待审核：</b>制单人 ' + esc(d.maker) + ' 已于 ' + esc(d.submittedAt) + ' 提交审核，等待业务主管处理。</div>';
-    else banner = '<div class="doc-status-banner draft"><b>' + (d.status === '草稿' ? '草稿' : '制作中') + '：</b>单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。</div>';
+    else if (d.status === '草稿' || d.status === '制作中') banner = '<div class="doc-status-banner draft"><b>' + (d.status === '草稿' ? '草稿' : '制作中') + '：</b>单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。</div>';
+    else banner = '<div class="doc-status-banner draft"><b>状态待核对：</b>当前版本状态为「' + esc(d.status) + '」，不能据此推断审核决定。</div>';
 
     var paper = d.type === 'CI' ? renderCI(d, order, editing) : renderPL(d, order, editing);
 
@@ -232,6 +233,29 @@
     return html + reference;
   }
 
+  /* 仅解释当前查看版本的审核状态；旧决定保留在历史，不作为本次批准人。 */
+  function hasVisibleReviewText(value) {
+    // 只处理可见性判断副本，不清洗原字段或合法多语言文本。
+    return typeof value === 'string' && !!value.replace(/[\p{White_Space}\p{Default_Ignorable_Code_Point}\p{Cc}]/gu, '');
+  }
+  function renderDocumentReview(d) {
+    var name = typeof d.approver === 'string' ? d.approver : '';
+    var signature = '<div class="s-line">授权签字 Authorized Signature</div>';
+    if (d.status === '已通过') {
+      if (hasVisibleReviewText(name)) {
+        var missingDate = !hasVisibleReviewText(d.approvedAt);
+        return '<div><div>审核 Approved by：' + esc(name) + '</div>' +
+          (missingDate ? '<div class="paper-review-note">审核日期待核对</div>' : '') + signature + '</div>';
+      }
+      return '<div><div class="paper-review-status">审核状态 Review status：本版本已通过 · 审核记录待核对</div>' + signature + '</div>';
+    }
+    var label = d.status === '草稿' || d.status === '制作中' ? '未送审 / Not submitted'
+      : d.status === '待审核' ? '等待本次审核 / Pending review'
+      : d.status === '已退回' ? '已退回、未通过 / Returned, not approved'
+      : '状态待核对 / Status needs checking';
+    return '<div><div class="paper-review-status">审核状态 Review status：' + label + '</div>' + signature + '</div>';
+  }
+
   /* ---------- 预览排版：商业发票 ---------- */
   function renderCI(d, order, editing) {
     var snapshot = U.documentSnapshot(d), S = snapshot.seller, cust = snapshot.customer;
@@ -272,7 +296,7 @@
       '<div class="p-total-words">SAY TOTAL ' + order.currency + ' ' + U.fmt(total) + ' ONLY.</div>' +
       '<div class="pb-label">备注 Remark</div><div class="p-remark">' + remarkHtml + '</div>' +
       '<div class="p-sign"><div><div>制单 Prepared by：' + esc(d.maker) + '</div><div class="s-line">' + esc(S.nameEn) + '</div></div>' +
-      '<div><div>审核 Approved by：' + esc(d.approver || '（待审核）') + '</div><div class="s-line">授权签字 Authorized Signature</div></div></div>' +
+      renderDocumentReview(d) + '</div>' +
       '</div>';
   }
 
@@ -321,7 +345,7 @@
       '<td class="c">' + pf('gw', pk.gw) + '</td><td class="c">' + pf('nw', pk.nw) + '</td><td class="c">' + pf('meas', pk.meas) + '</td></tr></tbody></table>' +
       '<div class="pb-label">备注 Remark</div><div class="p-remark">' + remarkHtml + '</div>' +
       '<div class="p-sign"><div><div>制单 Prepared by：' + esc(d.maker) + '</div><div class="s-line">' + esc(S.nameEn) + '</div></div>' +
-      '<div><div>审核 Approved by：' + esc(d.approver || '（待审核）') + '</div><div class="s-line">授权签字 Authorized Signature</div></div></div>' +
+      renderDocumentReview(d) + '</div>' +
       '</div>';
   }
 

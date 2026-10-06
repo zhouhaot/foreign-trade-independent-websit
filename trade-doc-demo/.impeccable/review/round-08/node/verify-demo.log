@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "resources": 12,
+  "quotes": 9,
+  "documents": 11,
+  "amounts": [
+    {
+      "order": "SO2026001",
+      "currency": "USD",
+      "total": 24100,
+      "received": 12000,
+      "outstanding": 12100
+    },
+    {
+      "order": "SO2026002",
+      "currency": "USD",
+      "total": 28400,
+      "received": 28400,
+      "outstanding": 0
+    },
+    {
+      "order": "SO2026003",
+      "currency": "EUR",
+      "total": 19500,
+      "received": 0,
+      "outstanding": 19500
+    },
+    {
+      "order": "SO2026004",
+      "currency": "EUR",
+      "total": 30500,
+      "received": 30500,
+      "outstanding": 0
+    },
+    {
+      "order": "SO2026005",
+      "currency": "USD",
+      "total": 28150,
+      "received": 0,
+      "outstanding": 28150
+    },
+    {
+      "order": "SO2026006",
+      "currency": "EUR",
+      "total": 20000,
+      "received": 6000,
+      "outstanding": 14000
+    },
+    {
+      "order": "SO2026007",
+      "currency": "USD",
+      "total": 41550,
+      "received": 20000,
+      "outstanding": 21550
+    }
+  ],
+  "scope": "静态资源、语法及样例金额；不替代浏览器与业务流程验收"
+}

@@ -772,7 +772,73 @@
         "减少动效运行/原生刷新关闭",
         "实际包装测量/单位容差/物流匹配/信用证/签发文件",
         "后端身份/事务/持久化/银行/NAS"
-      ]
+      ],
+      "riskResolution": "第8轮H19状态renderer消除未通过纸张旧Approved by误读；保第7轮风险原记录，正式签署仍未验。"
+    },
+    "documentApprovalDisplay": {
+      "round": 8,
+      "assumption": "H19当前版本原型审核表达，非正式签署/签发制度。",
+      "state": {
+        "草稿/制作中": "未送审 / Not submitted",
+        "待审核": "等待本次审核 / Pending review，无旧处理人Approved by",
+        "已退回": "已退回、未通过 / Returned, not approved",
+        "已通过": "仅当前查看版本原审核姓名/章；历史或取消两态保原事实。",
+        "missingName": "本版本已通过·审核记录待核对，不借其它版本补人。",
+        "missingDate": "保本版本原可见姓名，审核日期待核对，不补日期。",
+        "unknown": "状态待核对 / Status needs checking，未知banner不猜制作中/通过。"
+      },
+      "source": "renderDocumentReview局部CI/PL共享纯显示，业务Actions/资格/历史/快照不写；检查副本排White_Space/Default_Ignorable/Cc，合法多语言原文保留并esc。",
+      "layout": {
+        "statusWidth": "220px",
+        "statusMaxWidth": "100%",
+        "noteMaxWidth": "220px",
+        "lineHeight": 1.6,
+        "whiteSpace": "normal",
+        "overflowWrap": "anywhere",
+        "scope": "仅新状态/缺日期note类，正常已通过原组不套statusCSS；签字模板随内容下移不裁高。",
+        "disclosure": "当前状态在纸张footer，原banner/history承载历史，不新造说明卡；原签字空线不承诺真实署名。"
+      },
+      "normalBottom": {
+        "scroll": 0,
+        "height": 1000,
+        "ci1280Edit": 622.38,
+        "ci1280Submit": 668.38,
+        "ci1440Edit": 468.98,
+        "ci1440Submit": 514.98,
+        "pl1280Edit": 679.97,
+        "pl1280Submit": 725.97,
+        "pl1440Edit": 546.97,
+        "pl1440Submit": 592.97
+      },
+      "footerScroll": "CI531/PLreturned647/pending683/boss808/approved1280:906或1440:781/V2draft467/oldCI658/sales636/cancel781是真实滚态非首屏0；sign宽与scrollWidth220，两行状态完整。",
+      "verificationCounts": {
+        "distinctRoleRoutes": 145,
+        "actualLayouts": 290,
+        "realInteractionPassGroups": 9,
+        "observedBaselineDefects": 1,
+        "processImages": 9,
+        "finalImages": 20,
+        "nodeScripts": 23,
+        "displayScenarios": 137,
+        "syntaxChecks": 33
+      },
+      "evidence": ".impeccable/review/round-08/browser.json",
+      "reviewScope": "20终图实读SHIP；综合唯一Cc-only MEDIUM Resolved，JS交叉复验不重计，CSS补审APPROVE。",
+      "historyEvidence": "原生PL重送/通过/V2后旧V1整.paper渲染文字相同，实际取消申请中/已取消亦保姓名/章和纸张文字且导出禁用；非全HTML/正式历史签发。",
+      "measurementCorrections": [
+        "R7基线毛重待补同会话与freshreload合法GW不同，不误判H19改数据。",
+        "1280矩阵116后bosswait超时，实际fin，原生logout至登录再恢复boss29；1440全145，非连续无恢复。",
+        "取消submit未完提前批量换role工具错误，实读请求成功后不重复申请，等原modal消失恢复。",
+        "首次#workspace无效采集无PNG/业务动作，doc-history undefined未用证据。"
+      ],
+      "notVerified": [
+        "file://",
+        "跨/旧浏览器/真读屏/400%或320px重排",
+        "减少动效运行/原生刷新关闭",
+        "打印PDF/电子签名/正式署名授权/企业姓名日期有效性",
+        "信用证/真实历史签发/后端身份事务/NAS"
+      ],
+      "anomalyScope": "控制/缺姓名日期/未知/长名仅隔离Node，未注正式Mock造原生图。"
     }
   },
   "components": [
@@ -957,6 +1023,11 @@
       {
         "name": "已保存包装与本次候选分开",
         "body": "PL五项具名及KG/KGS/CBM，草稿空待补非0、已填非法拒绝；摘要限定已保存，送审确认核对当前候选原文，失败区分未保存/未送审。",
+        "section": "components"
+      },
+      {
+        "name": "纸张当前审核与历史决定分开",
+        "body": "未送审/待本次/退回不填旧处理人Approved by；仅本版已通过原姓名章，历史取消保事实，缺记录待核对，空签字线不冒真实署名。",
         "section": "components"
       }
     ],

@@ -1,0 +1,94 @@
+[
+  {
+    "script": "verify-cancellation.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-change-request.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-context-navigation.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-customer-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-decimal-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-demo.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-document-approval-display.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-document-lifecycle.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-document-snapshots.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-document-workspace.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-draft-adapters.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-inquiry-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-login.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-navigation-drafts.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-order-workspace.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-packaging-actions.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-packaging-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-payments-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-progress-stages.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-quotation-contract.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-repricing.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-session.cjs",
+    "exitCode": 0
+  },
+  {
+    "script": "verify-views.cjs",
+    "exitCode": 0
+  }
+]

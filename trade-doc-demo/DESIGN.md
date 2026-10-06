@@ -174,6 +174,17 @@ H18是可撤销原型假设：件数普通正安全整数；重量明确KG/KGS�
 
 本轮16终图实读UI SHIP，root记录17真实交互/135角色路由/270布局/0fail/console[]、10过程+16终图；22Node脚本、包装动作111/候选644/语法32和综合3MEDIUM+专项1MEDIUM的Resolved/APPROVE属独立代码证据。旧V1同会话整.paper渲染文字相同不称HTMLexact或全历史排列。语义对应SC1.3.1、3.3.1/2/3、4.1.2/3；原生错误焦点和可见动作不等真读屏/完整WCAG2.2AA。file、跨浏览器/400%或320px、减少动效运行、原生refreshclose、真实计量/物流/签发/身份/后端事务/持久化未验。完整证据见`.impeccable/review/round-07/design-review.md`。
 
+
+## 第8轮纸张当前审核与历史事实
+
+H19仅修当前查看CI/PL纸张审核表达：草稿/制作中未送审，待审等待本次审核，退回未通过；这些状态不填旧处理人作Approved by。当前版本已通过才显示本版本原审核姓名/章，旧已通过或取消两态仍保原事实，历史只读/暂停导出在原操作区说明。没有新增历史说明卡或动作门禁，不清旧姓名/日期/意见/history/快照，不扩签发或电子签名。
+
+缺可见姓名保持本版已通过事实并写审核记录待核对；有名缺可见日期保名提示日期待核对。未知状态/横幅明确待核对，不默认制作中或已通过。可见性只在检查副本排White_Space/Default_Ignorable/Cc，实际原记录/合法多语言姓名保持并转义输出；不作姓名身份或日期格式/有效性认证。原空Authorized Signature线是模板，不加真实已签/未签承诺。
+
+paper-review-status宽220px/max-width100%，paper-review-note最多220px，两者line-height1.6、white-space normal、overflow-wrap anywhere。新双语状态自然两行，签字线随内容下移不固定裁高；正常已通过原组不套statusCSS，原姓名/章与纸张交易布局保留。CI/PL两宽正常页首主动作保持，footer须自然滚动实读，不以底部滚态声称首屏0。成功/登录Toast有时在低层角落，当前审核行/主动作不盖，仍不称全参考无遮挡。
+
+本轮20final逐图实读UI SHIP、9PASS真实组+1旧baseline缺陷观察，145distinct角色路由/290双宽布局0fail/console[]、9过程20final共29PNG；23Node脚本/33语法、137专用与唯一Cc-only MEDIUM修复/综合JSAPPROVE为独立代码证据。实际旧V1新V2后及取消两态整.paper渲染文字相同，非所有HTML/正式历史签发。1280角色wait在116后原生恢复boss剩29，不称连续五角色无恢复；异常缺名日期/未知控制码仅Node不注正式Mock。file、跨浏览器/读屏/400%/320px、动态减少动效/刷新关闭、打印PDF/电子签名/企业签署日期制度/后台事务未验。第7轮记录的旧Approved by误读风险在H19显示范围已解决，正式签署仍未认证。详见`.impeccable/review/round-08/design-review.md`。
+
 ## Overview
 
 **Creative North Star: "A · 订单协同工作区"**

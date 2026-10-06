@@ -538,3 +538,7 @@
 .packing-confirmation { margin-top: 14px; padding: 12px 14px; border-left: 3px solid var(--primary); border-radius: var(--radius-control); background: var(--nav-bg); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
 .packing-confirmation p+p { margin-top: 6px; }
 .packing-pending { color: var(--orange); }
+
+/* 第8轮：纸张审核状态保持与原签字模板同宽，长双语文字完整折行。 */
+.paper .paper-review-status { width: 220px; max-width: 100%; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }
+.paper .paper-review-note { max-width: 220px; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }

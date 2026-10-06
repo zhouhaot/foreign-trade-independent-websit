@@ -1,0 +1,11 @@
+{
+  "baseline": "7d5bbae486e7509044e4e1d1158b3fa9d03ec3aa",
+  "nodeGroups": 23,
+  "nodeFailures": 0,
+  "syntaxFiles": 33,
+  "syntaxFailures": 0,
+  "mockSourceIdentical": true,
+  "businessActionsUnchanged": "Independent reviewers compared complete Actions source against baseline after newline normalization; renderer tests compare full Mock before/after",
+  "approvedPaperBaseline": "Each independent reviewer checked 24 complete approved paper strings exact against baseline",
+  "nativeOldVersion": "Full .paper rendered text exact after V2 and both cancellation states; old V1 already historical/export disabled"
+}

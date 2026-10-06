@@ -1,0 +1,3 @@
+PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)
+PASS: quotation/order and controlled document revision cancellation, reconciliation, and repeat guards
+PASS: CI/PL document editing and saving enforce role, version status, and deferred role changes

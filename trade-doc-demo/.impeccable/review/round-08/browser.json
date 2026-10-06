@@ -1,0 +1,4130 @@
+{
+  "baseline": "7d5bbae486e7509044e4e1d1158b3fa9d03ec3aa",
+  "method": "same IAB tab6 HTTP8001 no-store, native actions/read-only DOM",
+  "interactions": [
+    {
+      "id": "baseline-returned-footer",
+      "status": "OBSERVED_DEFECT",
+      "observed": "Native doc PL4 shows returned state/history but paper Approved by old return handler. Existing round07 same-session partial GW remains pending, not fresh baseline Mock; footer problem independently reproduced by planner VM on original data."
+    },
+    {
+      "id": "unsubmitted-returned-first-render",
+      "status": "PASS",
+      "observed": "Fresh reload resets previous pending GW. CI4 not submitted and PL4 returned/not approved, no paper Approved by; old return handler/opinion still in history/action pane. Two widths footer screenshots actual scrolled positions."
+    },
+    {
+      "id": "returned-resubmit-pending",
+      "status": "PASS",
+      "observed": {
+        "body": true,
+        "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature"
+      }
+    },
+    {
+      "id": "boss-approve-cancel-keeps-opinion",
+      "status": "PASS",
+      "observed": "演示：第8轮核对包装与纸张审核状态。"
+    },
+    {
+      "id": "real-resubmit-approve-footer",
+      "status": "PASS",
+      "observed": {
+        "footer": "制单 Prepared by：王芳\nNINGBO YUANHANG IMP. & EXP. CO., LTD.\n审核 Approved by：周建国\n授权签字 Authorized Signature",
+        "stamp": "审核通过\nAPPROVED",
+        "oldReturnOpinionVisible": 1
+      }
+    },
+    {
+      "id": "revision-new-draft-old-approved",
+      "status": "PASS",
+      "observed": {
+        "oldPaperRenderedTextEqual": true,
+        "oldFooter": "制单 Prepared by：王芳\nNINGBO YUANHANG IMP. & EXP. CO., LTD.\n审核 Approved by：周建国\n授权签字 Authorized Signature",
+        "oldExportDisabled": true
+      }
+    },
+    {
+      "id": "ci-initial-pending-and-old-returned",
+      "status": "PASS",
+      "observed": "CI1 awaiting this review; old returned CI3 V1 explicitly not approved with latest V2 link and export disabled; original history retained."
+    },
+    {
+      "id": "cancel-requested-old-approved-history",
+      "status": "PASS",
+      "observed": {
+        "paperTextEqual": true,
+        "footer": "制单 Prepared by：王芳\nNINGBO YUANHANG IMP. & EXP. CO., LTD.\n审核 Approved by：周建国\n授权签字 Authorized Signature",
+        "stamp": "审核通过\nAPPROVED",
+        "exportDisabled": true
+      }
+    },
+    {
+      "id": "canceled-old-approved-history",
+      "status": "PASS",
+      "observed": {
+        "order": "订单 SO2026005\n已取消",
+        "paperTextEqual": true,
+        "footer": "制单 Prepared by：王芳\nNINGBO YUANHANG IMP. & EXP. CO., LTD.\n审核 Approved by：周建国\n授权签字 Authorized Signature",
+        "stamp": "审核通过\nAPPROVED",
+        "exportDisabled": true
+      }
+    },
+    {
+      "id": "sales-fin-readonly-state",
+      "status": "PASS",
+      "observed": "Sales old returned CI and financial cancellation-requested old approved PL have same current-version facts, no edit/audit fields; export disabled. Native screenshots, whole-model evidence remains Node."
+    }
+  ],
+  "images": [
+    {
+      "file": "pl-returned-baseline-1440.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 395.578125,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 441.578125,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 591.359375,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 733.140625,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核 Approved by：周建国授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 704,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1440
+    },
+    {
+      "file": "pl-returned-first-1440.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 372.984375,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 418.984375,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 568.765625,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 710.546875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 646,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1440
+    },
+    {
+      "file": "ci-making-first-1440.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 321.1875,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 367.1875,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 468.1875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：未送审 / Not submitted授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 529,
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1440
+    },
+    {
+      "file": "ci-making-first-1280.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 341.578125,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 387.578125,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 488.578125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：未送审 / Not submitted授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 529,
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1280
+    },
+    {
+      "file": "pl-returned-first-1280.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 380.984375,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 426.984375,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 597.15625,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 738.9375,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 771,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1280
+    },
+    {
+      "file": "pl-resubmit-confirm-process-1280.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 468.96875,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 514.96875,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 685.140625,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 826.921875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        },
+        {
+          "bottom": 711.078125,
+          "disabled": false,
+          "text": "提交审核"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modal": "提交审核",
+      "modalOpacity": "1",
+      "modalTransform": "none",
+      "opacity": "1",
+      "scroll": 211,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1280
+    },
+    {
+      "file": "pl-resubmitted-first-1280.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 399.171875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 807,
+      "title": "装箱单 · PL2026004 V1 待审核",
+      "width": 1280
+    },
+    {
+      "file": "pl-resubmitted-first-1440.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 378.78125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 682,
+      "title": "装箱单 · PL2026004 V1 待审核",
+      "width": 1440
+    },
+    {
+      "file": "pl-returned-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 373.234375,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 419.234375,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 569.015625,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 710.796875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 647,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1440
+    },
+    {
+      "file": "pl-returned-final-1280.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 399.171875,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 445.171875,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 615.34375,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 757.125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 647,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1280
+    },
+    {
+      "file": "pl-top-final-1280.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 679.96875,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 725.96875,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 896.140625,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 1037.921875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1280
+    },
+    {
+      "file": "pl-top-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 546.96875,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 592.96875,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 742.75,
+          "disabled": true,
+          "text": "申请重新制单"
+        },
+        {
+          "bottom": 884.53125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "装箱单 · PL2026004 V1 已退回",
+      "width": 1440
+    },
+    {
+      "file": "ci-making-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 321.1875,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 367.1875,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 468.1875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：未送审 / Not submitted授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 531,
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1440
+    },
+    {
+      "file": "ci-making-final-1280.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 341.578125,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 387.578125,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 488.578125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：未送审 / Not submitted授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 531,
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1280
+    },
+    {
+      "file": "ci-top-final-1280.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 622.375,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 668.375,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 769.375,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：未送审 / Not submitted授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1280
+    },
+    {
+      "file": "ci-top-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 468.984375,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 514.984375,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 615.984375,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：未送审 / Not submitted授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 0,
+      "title": "商业发票 · CI2026004 V1 制作中",
+      "width": 1440
+    },
+    {
+      "file": "pl-pending-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 378.78125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 683,
+      "title": "装箱单 · PL2026004 V1 待审核",
+      "width": 1440
+    },
+    {
+      "file": "pl-pending-final-1280.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 399.171875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 683,
+      "title": "装箱单 · PL2026004 V1 待审核",
+      "width": 1280
+    },
+    {
+      "file": "boss-pending-final-1280.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 446.578125,
+          "disabled": false,
+          "text": "审核通过"
+        },
+        {
+          "bottom": 492.578125,
+          "disabled": false,
+          "text": "退回修改"
+        },
+        {
+          "bottom": 593.578125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 808,
+      "title": "装箱单 · PL2026004 V1 待审核",
+      "width": 1280
+    },
+    {
+      "file": "boss-approve-confirm-process-1280.png",
+      "stage": "process",
+      "actions": [
+        {
+          "bottom": 446.578125,
+          "disabled": false,
+          "text": "审核通过"
+        },
+        {
+          "bottom": 492.578125,
+          "disabled": false,
+          "text": "退回修改"
+        },
+        {
+          "bottom": 593.578125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        },
+        {
+          "bottom": 617.796875,
+          "disabled": false,
+          "text": "审核通过"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modal": "审核通过确认",
+      "modalOpacity": "1",
+      "modalTransform": "none",
+      "opacity": "1",
+      "scroll": 736,
+      "title": "装箱单 · PL2026004 V1 待审核",
+      "width": 1280
+    },
+    {
+      "file": "pl-approved-final-1280.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 437.359375,
+          "disabled": false,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核 Approved by：周建国授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 906,
+      "stamp": "审核通过APPROVED",
+      "title": "装箱单 · PL2026004 V1 已通过",
+      "width": 1280
+    },
+    {
+      "file": "pl-approved-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 396.578125,
+          "disabled": false,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核 Approved by：周建国授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 781,
+      "stamp": "审核通过APPROVED",
+      "title": "装箱单 · PL2026004 V1 已通过",
+      "width": 1440
+    },
+    {
+      "file": "pl-v2-draft-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 378.78125,
+          "disabled": false,
+          "text": "编辑包装与备注"
+        },
+        {
+          "bottom": 424.78125,
+          "disabled": false,
+          "text": "提交审核"
+        },
+        {
+          "bottom": 525.78125,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：未送审 / Not submitted授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V2",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 467,
+      "title": "装箱单 · PL2026004 V2 草稿",
+      "width": 1440
+    },
+    {
+      "file": "pl-v1-history-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 377.375,
+          "disabled": false,
+          "text": "查看最新 V2"
+        },
+        {
+          "bottom": 519.15625,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核 Approved by：周建国授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 781,
+      "stamp": "审核通过APPROVED",
+      "title": "装箱单 · PL2026004 V1 已通过",
+      "width": 1440
+    },
+    {
+      "file": "ci-first-pending-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 321.1875,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026001-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 630,
+      "title": "商业发票 · CI2026001 V1 待审核",
+      "width": 1440
+    },
+    {
+      "file": "ci-old-returned-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 377.375,
+          "disabled": false,
+          "text": "查看最新 V2"
+        },
+        {
+          "bottom": 519.15625,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 658,
+      "title": "商业发票 · CI2026003 V1 已退回",
+      "width": 1440
+    },
+    {
+      "file": "sales-old-returned-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 377.375,
+          "disabled": false,
+          "text": "查看最新 V2"
+        },
+        {
+          "bottom": 519.15625,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：已退回、未通过 / Returned, not approved授权签字 Authorized Signature",
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 636,
+      "title": "商业发票 · CI2026003 V1 已退回",
+      "width": 1440
+    },
+    {
+      "file": "fin-cancel-requested-history-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 399.46875,
+          "disabled": false,
+          "text": "查看最新 V2"
+        },
+        {
+          "bottom": 541.25,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核 Approved by：周建国授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 781,
+      "stamp": "审核通过APPROVED",
+      "title": "装箱单 · PL2026004 V1 已通过",
+      "width": 1440
+    },
+    {
+      "file": "boss-canceled-history-final-1440.png",
+      "stage": "final",
+      "actions": [
+        {
+          "bottom": 377.375,
+          "disabled": false,
+          "text": "查看最新 V2"
+        },
+        {
+          "bottom": 519.15625,
+          "disabled": true,
+          "text": "导出 PDF（演示）"
+        }
+      ],
+      "footer": "制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核 Approved by：周建国授权签字 Authorized Signature",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "modalOpacity": null,
+      "modalTransform": null,
+      "opacity": "1",
+      "scroll": 781,
+      "stamp": "审核通过APPROVED",
+      "title": "装箱单 · PL2026004 V1 已通过",
+      "width": 1440
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1280,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1280,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/products/P001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/approvals",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/users",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/roles",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/customers/C001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "sales",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/payments",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "doc",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/stats",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "fin",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/dashboard",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/customers/C001",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/products/P001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/quotes/Q2026004/edit",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/orders/SO2026001",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/payments",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/approvals",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/stats",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/users",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/roles",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/system/dicts",
+      "expectedAllowed": false,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": true,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026006",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026002",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/inquiries/INQ2026005",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026001-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026004-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-CI2026003-V2",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    },
+    {
+      "width": 1440,
+      "role": "boss",
+      "hash": "#/documents/D-PL2026002-V1",
+      "expectedAllowed": true,
+      "actualWidth": 1440,
+      "actualHeight": 1000,
+      "overflow": false,
+      "forbidden": false,
+      "result": "PASS"
+    }
+  ],
+  "corrections": [
+    "Initial capture used nonexistent #workspace; read-only metadata failed before PNG/no business action. Corrected to observed .workspace and .doc-action-panel from validated capture helper.",
+    "Cancellation submit asynchronous completion: batched role change ran while original application dialog still present; logout helper found no confirmation data-ok and stopped. Fresh DOM showed request succeeded/cancellation-requested. No repeated application; resumed role change only after dialog gone.",
+    "1280 matrix completed admin/sales/doc/fin 116 layouts, then boss role-change login-role wait timed out; actual page remained financial old approved PL2. Fresh native logout/confirmation showed login page, resumed boss only; no claim uninterrupted five-role login."
+  ],
+  "failures": [],
+  "console": [],
+  "summary": {
+    "observedBaselineDefects": 1,
+    "interactionPass": 9,
+    "interactionFail": 0,
+    "distinctRoleRoutes": 145,
+    "layouts": 290,
+    "images": 29,
+    "processImages": 9,
+    "finalImages": 20,
+    "failures": 0
+  },
+  "finalNotes": [
+    "Final 137-code and two CSS rules were loaded before final screenshots/layouts; normal CI/PL top screenshots scroll0, footer images actual scrolled positions.",
+    "9 PASS native business/render groups plus 1 observed old-baseline defect; repeated resubmit after final CSS is same group, not doubled.",
+    "Approved old V1 full .paper rendered text equal after controlled V2 and in real cancellation-requested/canceled states; actual export disabled, historical approved name/stamp kept.",
+    "Missing name/date/control/unknown/long name data only isolated Node fixtures; no native Mock injections, no formal signature/PDF.",
+    "290 actual layouts at widths1280/1440 height1000, includes two additional known approved CI/PL routes. Role-change recovery at 116 explicitly recorded.",
+    "Initial metadata #workspace selection failed before screenshot; doc-history undefined was not used as proof. Actual old opinion exact visible text count1 after resubmit."
+  ]
+}
