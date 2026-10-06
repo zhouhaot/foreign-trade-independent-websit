@@ -1,6 +1,6 @@
 # 贸易协同 · 外贸订单与单证管理
 
-现代化桌面前端 Demo，2026-10-07 第 1 轮落地 A「珍珠白 / 鸢尾紫 / 薄荷青」；每轮改进、验证、复盘见 `docs/iterations/`。
+现代化桌面前端 Demo，2026-10-07 已完成 A 方案及第2轮金额防错/单证快照/阶段打磨；每轮改进、验证、复盘见 `docs/iterations/`。
 
 ## 在另一台电脑继续
 
@@ -15,7 +15,7 @@ cd foreign-trade-independent-websit/trade-doc-demo
 
 - 当前是 A 浅色现代 UI；顶栏角色只读，切换身份需退出后重新登录。
 - **A 已落地**：100px 浅色窄导航、紫色主操作、薄荷青收款区，订单列表与所选订单三条进度并排。保留完整表格、筛选、分页与六页签详情。查看[实施说明](A-IMPLEMENTATION.md)、[A 概念图](.impeccable/mocks/decision/modern-multicolor/a.png)及[迭代路线](IMPLEMENTATION_ROADMAP.md)。C 为历史方案。
-- 历史单证快照与改价舍入差额仍未修复，详见 `HANDOFF.md` 待办 14、15；不能因现有检查通过而认为已具备上线条件。
+- 第2轮已增加单证基线快照、包装修订继承与重新制单当前捕获，防止主数据漂移；改价候选不命中目标时原子拒绝。详见[本轮说明](docs/iterations/round-02.md)。这些是静态原型能力，未知历史数据、服务端事务与真实部署仍需另行验证。
 - GitHub 同步不包含 `.backups/`、`delivery/` 的旧包和本机工具临时状态；当前完整源码、设计资产与验证记录均在对应目录。历史记录中的本机绝对路径和临时端口仅用于追溯，不是另一台电脑的运行地址。
 - 本次同步前原 Mac 源目录没有 Git 元数据，因此通过独立克隆整理上传；原目录文件保留。后续建议以新克隆的仓库作为 Git 工作区，不在原目录直接执行 `git pull`。
 
@@ -87,8 +87,11 @@ node scripts/verify-views.cjs
 node scripts/verify-login.cjs
 node scripts/verify-session.cjs
 node scripts/verify-order-workspace.cjs
+node scripts/verify-repricing.cjs
+node scripts/verify-document-snapshots.cjs
+node scripts/verify-progress-stages.cjs
 ```
 
-前四个脚本检查资源/样例金额、100 组角色视图与关键回调、五角色登录及退出重登。新增工作区脚本检查分栏选择、角色入口、分页空态、视图切换和筛选节点保留。它们不代替浏览器测试；每轮实际浏览器覆盖见对应迭代报告。
+前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查工作区选择/输入、改价原子性、快照创建/继承/不可变及最新单证阶段。它们不代替浏览器；各轮实际覆盖见对应迭代报告。
 
 `scripts/verify-browser.mjs` 是 Ego Browser 环境下的浏览器回归脚本，需由操作者提供当前授权的 TaskSpace ID，不会自行创建/接管浏览器空间。验证覆盖与已知边界见 `HANDOFF.md` 的 2026-10-04 交接记录。

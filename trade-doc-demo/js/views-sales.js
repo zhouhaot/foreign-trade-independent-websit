@@ -415,7 +415,7 @@
     return '<div class="inspector-heading"><div><span>当前订单</span><h3>' + esc(o.id) + '</h3></div><div class="inspector-total"><span>订单金额</span><strong>' + U.money(fin.total, o.currency) + '</strong></div></div>' +
       '<div class="inspector-context"><span>' + esc(U.customerName(o.customerId)) + '</span><span>来源报价 ' + esc(o.quoteId) + ' · 交期 ' + esc(o.deliveryDate) + '</span></div>' +
       '<div class="inspector-tracks"><section class="inspector-track track-order"><div class="track-title"><h4>订单进度</h4>' + tag(o.status) + '</div>' + stepsHtml(['待执行', '执行中', '已完成'], cancelled ? '' : o.status, {}) + (cancelled ? '<p class="track-note">' + (o.status === '已取消' ? '订单已取消，关联业务终止。' : '取消申请审批中，订单暂缓执行。') + '</p>' : '') + '</section>' +
-      '<section class="inspector-track track-doc"><div class="track-title"><h4>单证进度</h4>' + tag(o.docStatus) + '</div>' + stepsHtml(['未开始', '制作中', '待审核', '已通过'], o.docStatus, { '待审核': true, '已退回': true }) + (o.docStatus === '已退回' ? '<p class="track-note">单证已退回，按审核意见修订后重新送审。</p>' : '') + '</section>' +
+      '<section class="inspector-track track-doc"><div class="track-title"><h4>单证进度</h4>' + tag(o.docStatus) + '</div>' + documentStages(o) + '</section>' +
       '<section class="inspector-track track-pay"><div class="track-title"><h4>收款进度</h4>' + tag(paySt) + '</div><div class="progress" role="progressbar" aria-label="订单收款比例" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><div class="bar' + (paySt === '已结清' ? ' green' : '') + '" style="width:' + pct + '%"></div></div><div class="track-money"><div><span>已收</span><strong>' + U.money(fin.received, o.currency) + '</strong></div><div><span>未收</span><strong>' + U.money(fin.outstanding, o.currency) + '</strong></div></div></section></div>' +
       '<div class="inspector-actions">' + next + '</div><p class="inspector-footnote">单证与收款并行推进，互不阻塞。</p>';
   }
@@ -500,14 +500,14 @@
     var orderStepsHtml = stepsHtml(['待执行', '执行中', '已完成'], o.status, {});
     var cancelNote = '';
     if (o.status === '取消申请中') {
-      orderStepsHtml = stepsHtml(['待执行', '执行中', '已完成'], '执行中', {});
+      orderStepsHtml = stepsHtml(['待执行', '执行中', '已完成'], '', {});
       cancelNote = '<div class="mt8">' + tag('取消申请中') + ' <span class="muted small">取消申请审批中，订单暂缓执行</span></div>';
     }
     if (o.status === '已取消') {
       orderStepsHtml = stepsHtml(['待执行', '执行中', '已完成'], '', {});
       cancelNote = '<div class="mt8">' + tag('已取消') + ' <span class="muted small">订单已取消，关联业务终止</span></div>';
     }
-    var docStepsHtml = stepsHtml(['未开始', '制作中', '待审核', '已通过'], o.docStatus, {});
+    var docStepsHtml = documentStages(o);
     var pct = fin.total > 0 ? Math.min(100, Math.round(fin.received / fin.total * 100)) : 0;
     var barCls = paySt === '已结清' ? 'green' : paySt === '部分收款' ? 'orange' : '';
     var payHtml =
@@ -546,6 +546,38 @@
       var cls = i < curIdx ? 'done' : i === curIdx ? (warnMap[current] !== undefined ? 'warn' : (current === '已通过' || current === '已完成' ? 'done' : 'current')) : '';
       return '<div class="step ' + cls + '"><div class="dot">' + (i < curIdx || cls === 'done' ? '✓' : (i + 1)) + '</div><div class="label">' + s + '</div></div>';
     }).join('') + '</div>';
+  }
+
+  /* 订单汇总只为两类最新单证共同完成的阶段画勾，不从汇总标签推断全部已送审。 */
+  function documentStages(o) {
+    var types = ['CI', 'PL'], latest = {};
+    M.documents.filter(function (d) { return d.orderId === o.id && types.indexOf(d.type) >= 0; }).forEach(function (d) {
+      if (!latest[d.type] || d.version > latest[d.type].version) latest[d.type] = d;
+    });
+    var docs = Object.keys(latest).map(function (type) { return latest[type]; });
+    var sent = docs.filter(function (d) { return ['待审核', '已通过', '已退回'].indexOf(d.status) >= 0; }).length;
+    var approved = docs.filter(function (d) { return d.status === '已通过'; }).length;
+    var returned = docs.filter(function (d) { return d.status === '已退回'; }).length;
+    var reviewing = docs.filter(function (d) { return d.status === '待审核'; }).length;
+    var drafting = docs.some(function (d) { return ['草稿', '制作中', '已退回'].indexOf(d.status) >= 0; });
+    var allSent = sent === types.length, allApproved = approved === types.length;
+    var exportReady = allApproved && o.status !== '已取消';
+    var stages = [
+      { label: '制作', state: returned ? 'warn' : allSent ? 'done' : sent ? 'partial' : drafting ? 'current' : '' },
+      { label: '送审', state: returned ? 'partial' : allSent ? 'done' : sent ? 'partial' : '' },
+      { label: '审核', state: allApproved ? 'done' : returned || reviewing ? 'warn' : approved ? 'partial' : '' },
+      { label: '可导出', state: exportReady ? 'ready' : '' }
+    ];
+    var note = docs.length ? '最新单证 ' + docs.length + ' 份 · ' + (returned ? '曾送审 ' : '已送审 ') + sent + '/' + types.length + ' 类' +
+      (returned ? ' · 含退回 ' + returned + ' 份，修订后重新送审' : reviewing ? ' · 待审核 ' + reviewing + ' 份' : allApproved ? ' · 已满足审核条件' : '') : '尚未制作单证';
+    if (o.status === '已取消') note += ' · 订单已取消，导出资格需重新核对';
+    var active = returned ? 0 : reviewing ? 2 : drafting ? 0 : exportReady ? 3 : -1;
+    return '<div class="steps document-stages" role="list" aria-label="单证阶段">' + stages.map(function (stage, i) {
+      var marker = stage.state === 'done' ? '✓' : stage.state === 'ready' ? U.icon('arrow') : stage.state === 'warn' && returned ? '!' : i + 1;
+      var stateText = stage.state === 'done' ? '已完成' : stage.state === 'partial' ? '部分完成' : stage.state === 'current' ? '正在制作' :
+        stage.state === 'warn' ? (returned ? '有单证退回，需修订后重新送审' : '有单证待审核') : stage.state === 'ready' ? '条件已满足，可导出' : '条件尚未满足';
+      return '<div class="step ' + stage.state + '" role="listitem"' + (i === active ? ' aria-current="step"' : '') + '><div class="dot" aria-hidden="true">' + marker + '</div><div class="label">' + stage.label + '<span class="sr-only">，' + stateText + '</span></div></div>';
+    }).join('') + '</div><p class="document-stage-note">' + note + '</p>';
   }
 
   function orderTabBody(o, tab, ctx) {

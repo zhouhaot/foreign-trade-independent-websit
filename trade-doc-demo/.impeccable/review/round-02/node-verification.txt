@@ -1,0 +1,74 @@
+2026-10-07 round 02 final validation
+PASS: all runtime and verification script syntax
+{
+  "result": "PASS",
+  "resources": 12,
+  "quotes": 9,
+  "documents": 11,
+  "amounts": [
+    {
+      "order": "SO2026001",
+      "currency": "USD",
+      "total": 24100,
+      "received": 12000,
+      "outstanding": 12100
+    },
+    {
+      "order": "SO2026002",
+      "currency": "USD",
+      "total": 28400,
+      "received": 28400,
+      "outstanding": 0
+    },
+    {
+      "order": "SO2026003",
+      "currency": "EUR",
+      "total": 19500,
+      "received": 0,
+      "outstanding": 19500
+    },
+    {
+      "order": "SO2026004",
+      "currency": "EUR",
+      "total": 30500,
+      "received": 30500,
+      "outstanding": 0
+    },
+    {
+      "order": "SO2026005",
+      "currency": "USD",
+      "total": 28150,
+      "received": 0,
+      "outstanding": 28150
+    },
+    {
+      "order": "SO2026006",
+      "currency": "EUR",
+      "total": 20000,
+      "received": 6000,
+      "outstanding": 14000
+    },
+    {
+      "order": "SO2026007",
+      "currency": "USD",
+      "total": 41550,
+      "received": 20000,
+      "outstanding": 21550
+    }
+  ],
+  "scope": "静态资源、语法及样例金额；不替代浏览器与业务流程验收"
+}
+PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)
+PASS: quotation/order and controlled document revision cancellation, reconciliation, and repeat guards
+PASS: CI/PL document editing and saving enforce role, version status, and deferred role changes
+PASS: five-role dropdown template, default selection, label and department hint
+PASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state
+PASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard
+PASS: account/password required validation and no login on invalid fields
+PASS: invalid-role submit rejection, feedback and focus
+Scope: Node VM template/action checks only; native select interaction and visual layout require browser verification.
+PASS: five-role read-only identity, cancellation/logout, storage and transient state clearing, protected-route return, and re-login (Node VM)
+PASS: A workspace role actions, independent progress and currencies, selection/page/filter empty state, view toggles, draft-input preservation, and unchanged business data (Node VM)
+PASS: atomic repricing, precision/non-finite input, USD/EUR isolation, received floor, roles/self-review, duplicate/reject/cancel and deferred revalidation (Node VM)
+PASS: all demo CI/PL snapshots survive seller/customer/product/order mutation; inherited revision, finance recreation, immutable detached copies, role edit bounds, totals/currency, refresh reset (Node VM only)
+PASS: no-document, mixed returned/drafting, all reviewing, export eligibility, latest-version aggregate and shared detail stages; payment facts unchanged (Node VM)

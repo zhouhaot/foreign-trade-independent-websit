@@ -408,6 +408,13 @@
 .inspector-track .steps{margin-block:6px;}
 .inspector-track .step .label{font-size:12px;}
 .inspector-track .step:not(.done):not(.current):not(.warn) .dot{background:var(--card);color:var(--text-sub);border-color:var(--border-control);}
+.document-stages .step.partial .dot{background:var(--blue-bg);color:var(--primary);border-color:var(--primary);border-style:dashed;}
+.document-stages .step.partial .label{color:var(--primary);}
+.document-stages .step.ready .dot{background:var(--green-bg);color:var(--green);border-color:var(--green);}
+.document-stages .step.ready .dot .ui-icon{width:14px;height:14px;}
+.document-stages .step.ready .label{color:var(--green);font-weight:600;}
+.document-stages .step.ready .label,.document-stages .step.warn .label{color:var(--text);}
+.document-stage-note{font-size:11px;color:var(--text-sub);line-height:1.6;margin-top:12px;}
 .track-note{font-size:12px;color:var(--text-sub);margin-top:16px;}
 .track-pay .progress{height:9px;background:var(--border-control);}
 .track-pay .progress .bar{background:var(--mint);}
@@ -433,6 +440,26 @@
 .pt-block:nth-child(3){background:var(--mint-bg);}
 @media(max-width:1360px){.orders-stage{column-gap:16px;}.orders-stage .orders-filter{padding:18px;}.order-pick{padding:18px;}.order-pick-head>strong{font-size:15px;}.order-pick-amount{font-size:13px;}.inspector-heading{padding:20px;}.inspector-heading h3{font-size:21px;}.inspector-total strong{font-size:17px;}.track-money strong{font-size:14px;}}
 @media(max-width:1100px){.orders-stage{display:block;}.orders-stage .orders-filter{grid-template-columns:minmax(0,1fr);}.order-inspector{position:static;margin-top:18px;}.order-pick-list{max-height:430px;}.progress-triple{grid-template-columns:minmax(0,1fr);}.topbar .current-role{display:none;}}
+
+/* 第2轮：保留字号与点击区，通过留白把常见业务操作带回桌面首屏。 */
+.route-orders{padding-top:22px;}
+.route-orders>.page-head{margin-bottom:12px;}
+.route-orders .workspace-eyebrow{margin-bottom:4px;}
+.route-orders .orders-view-bar{margin-bottom:10px;}
+.orders-stage .orders-filter{padding:16px 20px;gap:10px;}
+.inspector-heading{padding:18px 22px;}
+.inspector-context{padding:12px 20px;}
+.inspector-tracks{padding:12px;gap:10px;}
+.inspector-track{padding:14px 16px;}
+.track-title{margin-bottom:16px;}
+.track-money{margin-top:14px;}
+.inspector-actions{padding:6px 16px 12px;}
+.inspector-footnote{padding:0 16px 12px;}
+.snapshot-rules{margin-top:6px;}
+.snapshot-rules summary{min-height:30px;line-height:30px;font-size:12px;color:var(--primary);cursor:pointer;}
+.snapshot-rules summary:hover{color:var(--primary-dark);}
+.snapshot-rules .readonly-hint{margin-top:6px;line-height:1.7;}
+.doc-action-panel .ablock{margin-bottom:10px;}
 @media (min-width:1001px) and (max-width:1360px){
   .doc-layout{grid-template-columns:minmax(0,1fr) 210px;}
   .doc-list-panel{grid-column:1/-1;position:static;display:flex;max-height:none;overflow-x:auto;}

@@ -6,6 +6,93 @@
   var M = window.MOCK, U = window.U;
   var Views = window.Views, Actions = window.Actions;
   var ui = window.__ui, esc = U.esc, tag = U.tag;
+  var processingApprovals = Object.create(null);
+
+  // 金额使用安全整数分校验；不靠展示舍入隐藏目标与明细之间的差额。
+  function amountCents(value) {
+    if (typeof value !== 'number' && typeof value !== 'string') return null;
+    var text = String(value).trim();
+    if (!/^\d+(?:\.\d{1,2})?$/.test(text)) return null;
+    var parts = text.split('.');
+    var cents = Number(parts[0] + ((parts[1] || '') + '00').slice(0, 2));
+    return Number.isSafeInteger(cents) && cents > 0 ? cents : null;
+  }
+
+  function approvalPermissionError(a, actor) {
+    var user = window.App.user;
+    if (!user || user.role !== 'boss') return '仅业务主管可以处理申请，请重新登录主管账号。';
+    if (actor && (actor.id !== user.id || actor.name !== user.name)) return '当前账号已改变，请关闭弹窗后重新处理申请。';
+    if (!a || a.status !== '待处理') return '该申请已处理或不存在，请刷新后查看处理结果。';
+    if (a.applicant === user.name) return '申请人不能自审，请由其他有审批权限的主管处理。';
+    if (a.type === '单证审核') return '单证审核请在关联单证详情页处理。';
+    if (['改价申请', '取消申请', '重新制单申请'].indexOf(a.type) < 0) return '该申请类型不支持在此处理。';
+    return '';
+  }
+
+  // 审批必须针对打开弹窗时展示的申请，不能悄悄批准被改写后的新目标。
+  function approvalContext(a) {
+    var fields = ['id', 'type', 'targetType', 'targetId', 'targetAmount', 'currency', 'targetCurrency', 'applicant', 'title', 'reason', 'applyTime'];
+    var values = fields.map(function (field) { return a[field]; });
+    var doc = a.targetType === 'doc' ? U.doc(a.targetId) : null;
+    var order = U.order(a.targetType === 'order' ? a.targetId : doc && doc.orderId);
+    values.push(order && order.currency);
+    return values;
+  }
+
+  function approvalContextChanged(a, openedContext) {
+    var current = approvalContext(a);
+    return current.some(function (value, index) { return !Object.is(value, openedContext[index]); });
+  }
+
+  function prepareRepricing(a) {
+    var order = a.targetType === 'order' ? U.order(a.targetId) : null;
+    if (!order) return { error: '关联订单不存在，不能批准改价。' };
+    if (order.status === '已取消') return { error: '关联订单已取消，不能批准改价。' };
+    if (!order.currency || (a.currency && a.currency !== order.currency) || (a.targetCurrency && a.targetCurrency !== order.currency)) {
+      return { error: '申请币种与订单币种不一致，不能批准改价。' };
+    }
+    var target = amountCents(a.targetAmount);
+    if (target === null) return { error: '目标金额必须为大于 0、最多两位小数且在安全计算范围内的有限金额。' };
+    if (!Array.isArray(order.items) || !order.items.length) return { error: '订单没有明细，不能计算改价。' };
+    var current = 0, prices = [], error = '';
+    order.items.forEach(function (it, index) {
+      var price = amountCents(it.price);
+      if (!Number.isSafeInteger(it.qty) || it.qty <= 0) error = '第 ' + (index + 1) + ' 行数量必须为正整数；当前数量精度尚不支持改价。';
+      else if (price === null) error = '第 ' + (index + 1) + ' 行单价必须为大于 0、最多两位小数的有限金额。';
+      else if (!Number.isSafeInteger(it.qty * price) || !Number.isSafeInteger(current + it.qty * price)) error = '订单明细金额超出安全计算范围。';
+      else { current += it.qty * price; prices.push(price); }
+    });
+    if (error) return { error: error };
+    var received = 0;
+    M.payments.filter(function (p) { return p.orderId === order.id; }).forEach(function (p) {
+      var cents = amountCents(p.amount);
+      if (p.currency !== order.currency) error = '关联收款存在不同币种，不能合并金额或批准改价，请先核对收款币种。';
+      else if (cents === null || !Number.isSafeInteger(received + cents)) error = '关联收款金额或精度无效，请先核对收款记录。';
+      else received += cents;
+    });
+    if (error) return { error: error };
+    if (target < received) return { error: '目标金额 ' + U.fmt(target / 100) + ' ' + order.currency + ' 低于已收 ' + U.fmt(received / 100) + ' ' + order.currency + '，退款规则未确认，不能批准改价。' };
+    var total = 0;
+    var items = order.items.map(function (it, index) {
+      var cents = Math.round(prices[index] * (target / current));
+      if (!Number.isSafeInteger(cents) || cents <= 0 || !Number.isSafeInteger(cents * it.qty) || !Number.isSafeInteger(total + cents * it.qty)) {
+        error = '第 ' + (index + 1) + ' 行改价后单价或金额超出支持范围，不能批准。';
+      }
+      total += cents * it.qty;
+      var candidate = Object.assign({}, it);
+      candidate.price = cents / 100;
+      if (amountCents(candidate.price) !== cents) error = '第 ' + (index + 1) + ' 行改价后单价无法以当前数值精度保存，不能批准。';
+      return candidate;
+    });
+    if (error) return { error: error };
+    var result = { order: order, items: items, total: total / 100, target: target / 100 };
+    if (total !== target) {
+      result.error = '数量保持不变、单价保留两位小数并等比舍入后，候选金额为 ' + U.fmt(total / 100) + ' ' + order.currency +
+        '，与目标 ' + U.fmt(target / 100) + ' ' + order.currency + ' 相差 ' + U.fmt(Math.abs(total - target) / 100) + ' ' + order.currency +
+        '。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。';
+    }
+    return result;
+  }
 
   /* ==================== 收款与应收 ==================== */
   Views.payments = function (ctx) {
@@ -202,15 +289,25 @@
   /* 主管处理 改价 / 取消 / 重新制单 */
   Actions['ap-handle'] = function (el) {
     var a = M.approvals.find(function (x) { return x.id === el.dataset.id; });
-    if (!a) return;
+    var permissionError = approvalPermissionError(a);
+    if (permissionError) { U.toast(permissionError, 'error'); return; }
+    if (processingApprovals[a.id]) { U.toast('该申请正在处理中，请勿重复提交。', 'error'); return; }
+    var actor = { id: window.App.user.id, name: window.App.user.name };
+    var openedContext = approvalContext(a);
+    var approvalId = a.id;
     var targetInfo = a.targetType === 'order'
       ? '关联订单：<a href="#/orders/' + a.targetId + '">' + a.targetId + '</a>'
       : '关联单证：' + a.targetId;
     var dangerNote = a.type === '取消申请'
       ? '<div class="danger-box mt8">通过取消申请后，订单将标记为「已取消」，已收款需另行协商退还，关联单证作废。</div>'
       : a.type === '改价申请'
-      ? '<div class="warn-box mt8">通过后系统将按申请金额等比调整订单明细单价，并写入操作日志。</div>'
-      : '<div class="warn-box mt8">通过后将基于退回意见生成该单证的新版本（草稿），由制单人继续修订。</div>';
+      ? '<div class="warn-box mt8">数量保持不变，单价保留两位小数并按目标等比调整。候选明细合计必须等于目标且不低于已收款，校验通过后才批准并写入日志。</div>'
+      : '<div class="warn-box mt8">通过后采用当前订单、客户、商品与卖方交易信息生成新版本草稿；原版本内容保留，由制单人核对包装及退回意见后继续修订。</div>';
+    var repricing = a.type === '改价申请' ? prepareRepricing(a) : null;
+    var amountSummary = repricing && repricing.order
+      ? '<div class="desc-grid mt8" style="grid-template-columns:1fr 1fr">' +
+        window.__descItem('申请目标金额', U.fmt(repricing.target) + ' ' + repricing.order.currency) +
+        window.__descItem('两位单价候选合计', U.fmt(repricing.total) + ' ' + repricing.order.currency) + '</div>' : '';
     var body =
       '<div class="desc-grid" style="grid-template-columns:1fr 1fr">' +
       window.__descItem('申请类型', a.type) + window.__descItem('申请人', a.applicant) +
@@ -218,7 +315,7 @@
       '<div class="di"><div class="dt">关联对象</div><div class="dd">' + targetInfo + '</div></div>' +
       '</div>' +
       '<div class="card mt8" style="background:#f7f8fb;margin-bottom:0"><b>申请理由：</b>' + esc(a.reason || '—') + '</div>' +
-      dangerNote +
+      dangerNote + amountSummary + '<div class="field-error mt8" id="ap-effect-error" role="alert">' + esc(repricing && repricing.error || '') + '</div>' +
       '<div class="form-item mt8"><label>处理意见（退回时必填）</label><textarea class="textarea" id="ap-opinion"></textarea><div class="field-error"></div></div>';
     var footer = '<button class="btn" data-close="1">取消</button>' +
       '<button class="btn btn-danger" data-act="reject">退 回</button>' +
@@ -227,39 +324,61 @@
 
     overlay.querySelectorAll('[data-act]').forEach(function (btn) {
       btn.addEventListener('click', function () {
+        if (processingApprovals[approvalId] || a.status !== '待处理') return;
         var pass = btn.dataset.act === 'approve';
         var opinionEl = overlay.querySelector('#ap-opinion');
         var opinion = opinionEl.value.trim();
         if (!pass && !opinion) {
           opinionEl.classList.add('is-error');
-          overlay.querySelector('.field-error').textContent = '退回时必须填写具体处理意见';
+          overlay.querySelector('#ap-opinion').parentElement.querySelector('.field-error').textContent = '退回时必须填写具体处理意见';
           opinionEl.focus();
           return;
         }
+        processingApprovals[approvalId] = true;
         U.withLoading(btn, function () {
+          var error = approvalPermissionError(a, actor);
+          if (!error && (M.approvals.find(function (current) { return current.id === approvalId; }) !== a || approvalContextChanged(a, openedContext))) {
+            error = '申请金额、关联对象、币种或申请内容已变化，请关闭弹窗并重新打开，核对最新内容后再处理。';
+          }
+          var plan = !error && pass && a.type === '改价申请' ? prepareRepricing(a) : null;
+          if (plan && plan.error) error = plan.error;
+          var document = null;
+          if (!error && a.type === '取消申请' && (a.targetType !== 'order' || !U.order(a.targetId))) error = '关联订单不存在，不能处理取消申请。';
+          if (!error && pass && a.type === '重新制单申请') {
+            var source = a.targetType === 'doc' ? U.doc(a.targetId) : null;
+            if (!source) error = '关联单证不存在，不能重新制单。';
+            else {
+              document = JSON.parse(JSON.stringify(source));
+              document.version = M.documents.filter(function (d) { return d.no === source.no; }).reduce(function (max, d) { return Math.max(max, d.version); }, 0) + 1;
+              document.id = 'D-' + source.no + '-V' + document.version;
+              try { U.captureDocumentSnapshot(document); }
+              catch (snapshotError) { error = '无法生成新版本交易快照：' + snapshotError.message; }
+            }
+          }
+          if (error) {
+            delete processingApprovals[approvalId];
+            overlay.querySelector('#ap-effect-error').textContent = error;
+            U.toast('审批未生效，请查看弹窗中的处理说明。', 'error');
+            return;
+          }
           a.status = pass ? '已通过' : '已退回';
           a.handler = window.App.user.name;
           a.handleTime = U.now();
           a.opinion = opinion || (pass ? '同意' : '');
-          applyApprovalEffect(a, pass);
-        });
-        setTimeout(function () {
+          applyApprovalEffect(a, pass, plan, document);
+          delete processingApprovals[approvalId];
           U.closeModal();
           U.toast(pass ? '已通过：' + a.title : '已退回：' + a.title);
           window.App.rerender();
-        }, 500);
+        });
       });
     });
   };
 
-  function applyApprovalEffect(a, pass) {
+  function applyApprovalEffect(a, pass, plan, preparedDocument) {
     var order = a.targetType === 'order' ? U.order(a.targetId) : null;
-    if (a.type === '改价申请' && pass && order && a.targetAmount) {
-      var cur = U.orderTotal(order);
-      if (cur > 0) {
-        var factor = a.targetAmount / cur;
-        order.items.forEach(function (it) { it.price = Math.round(it.price * factor * 100) / 100; });
-      }
+    if (a.type === '改价申请' && pass && plan) {
+      order.items = plan.items;
       pushLog(order.id, '改价申请 ' + a.id + ' 审核通过，订单金额调整为 ' + U.fmt(U.orderTotal(order)) + ' ' + order.currency + (a.opinion ? '（' + a.opinion + '）' : ''));
     }
     if (a.type === '取消申请' && order) {
@@ -274,9 +393,7 @@
     if (a.type === '重新制单申请' && pass) {
       var d = U.doc(a.targetId);
       if (d) {
-        var nd = JSON.parse(JSON.stringify(d));
-        nd.id = 'D-' + d.no + '-V' + (d.version + 1);
-        nd.version = d.version + 1;
+        var nd = preparedDocument;
         nd.status = '草稿';
         nd.createdAt = U.today(); nd.updatedAt = U.today();
         nd.submittedAt = null; nd.approver = null; nd.approvedAt = null; nd.opinion = null;

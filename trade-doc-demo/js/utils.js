@@ -36,6 +36,55 @@
     return c ? c.nameCn + '（' + c.nameEn + '）' : id;
   };
 
+  /* ---------- 单证版本交易快照（仅当前页面内存） ---------- */
+  function copySnapshot(value) { return JSON.parse(JSON.stringify(value)); }
+  function freezeSnapshot(value) {
+    if (value && typeof value === 'object') {
+      Object.keys(value).forEach(function (key) { freezeSnapshot(value[key]); });
+      Object.freeze(value);
+    }
+    return value;
+  }
+  function attachSnapshot(doc, snapshot) {
+    // 新版本 JSON 克隆来的普通属性可替换；已冻结版本禁止重新捕获/覆盖。
+    Object.defineProperty(doc, 'snapshot', {
+      value: freezeSnapshot(copySnapshot(snapshot)), enumerable: true, writable: false, configurable: false
+    });
+    return doc.snapshot;
+  }
+  U.captureDocumentSnapshot = function (doc, basis) {
+    var order = U.order(doc.orderId);
+    if (!order) throw new Error('无法冻结单证：关联订单不存在 ' + doc.orderId);
+    var customer = U.customer(order.customerId);
+    if (!customer) throw new Error('无法冻结单证：订单客户不存在 ' + order.customerId);
+    var transaction = copySnapshot(order);
+    transaction.items = order.items.map(function (item) {
+      var product = U.product(item.productId);
+      if (!product) throw new Error('无法冻结单证：商品不存在 ' + item.productId);
+      var line = copySnapshot(item);
+      line.product = copySnapshot(product);
+      return line;
+    });
+    return attachSnapshot(doc, {
+      schemaVersion: 1,
+      basis: basis === 'demo-baseline' ? 'demo-baseline' : 'creation',
+      capturedAt: new Date().toISOString(),
+      seller: M.seller, customer: customer, order: transaction
+    });
+  };
+  U.documentSnapshot = function (doc) {
+    if (!doc.snapshot) throw new Error('单证缺少交易快照 ' + doc.id);
+    // 支持内存中复制演示版本时重新锁定其已有快照，绝不回读当前主数据。
+    var descriptor = Object.getOwnPropertyDescriptor(doc, 'snapshot');
+    return descriptor && !descriptor.configurable && !descriptor.writable
+      ? doc.snapshot : attachSnapshot(doc, doc.snapshot);
+  };
+  U.inheritDocumentSnapshot = function (target, source) {
+    return attachSnapshot(target, U.documentSnapshot(source));
+  };
+  // 现有演示历史版本没有当时交易数据：加载时只冻结当前样例基线，不声称恢复历史。
+  M.documents.forEach(function (doc) { U.captureDocumentSnapshot(doc, 'demo-baseline'); });
+
   /* ---------- 金额勾稽 ---------- */
   U.orderTotal = function (order) {
     return order.items.reduce(function (s, it) { return s + it.qty * it.price; }, 0);

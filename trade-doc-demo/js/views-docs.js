@@ -14,6 +14,11 @@
   function canEditDoc(d, user) {
     return !!(d && user && user.role === 'doc' && ['草稿', '制作中', '已退回'].indexOf(d.status) >= 0);
   }
+  function nextDocVersion(d) {
+    return Math.max.apply(null, M.documents.filter(function (x) {
+      return x.no === d.no && x.orderId === d.orderId && x.type === d.type;
+    }).map(function (x) { return x.version; })) + 1;
+  }
   /* 根据订单最新版本单证状态回写订单单证状态 */
   function syncOrderDocStatus(orderId) {
     var order = U.order(orderId);
@@ -41,12 +46,12 @@
     });
     var pg = U.page(list, s.page);
     var rows = pg.rows.map(function (d) {
-      var o = U.order(d.orderId);
+      var customer = U.documentSnapshot(d).customer;
       return '<tr><td class="center">' + tag(U.docTypeName(d.type)) + '</td>' +
         '<td><a href="#/documents/' + d.id + '"><b>' + d.no + '</b></a></td>' +
         '<td class="center">V' + d.version + '</td>' +
         '<td><a href="#/orders/' + d.orderId + '">' + d.orderId + '</a></td>' +
-        '<td>' + esc(o ? U.customerName(o.customerId) : '—') + '</td>' +
+        '<td>' + esc(customer.nameCn + '（' + customer.nameEn + '）') + '</td>' +
         '<td class="center">' + tag(d.status) + '</td>' +
         '<td>' + esc(d.maker) + '</td><td>' + esc(d.updatedAt) + '</td>' +
         '<td><a class="btn btn-sm" href="#/documents/' + d.id + '">' + (window.App.user.role === 'boss' && d.status === '待审核' ? '去审核' : '预览') + '</a></td></tr>';
@@ -78,7 +83,7 @@
   Views.docDetail = function (ctx) {
     var d = U.doc(ctx.params[0]);
     if (!d) return Views.notFound('单证不存在：' + ctx.params[0]);
-    var order = U.order(d.orderId);
+    var snapshot = U.documentSnapshot(d), order = snapshot.order;
     var role = ctx.user.role;
     var editing = canEditDoc(d, ctx.user) && window.AppUI.docEditing === d.id;
 
@@ -109,7 +114,7 @@
     var right = rightPanel(d, order, role, editing);
 
     return '<div class="page-head"><div><h2>' + U.docTypeName(d.type) + ' · ' + d.no + ' <span class="doc-version">V' + d.version + '</span> ' + tag(d.status) + '</h2>' +
-      '<p class="page-description">关联订单 ' + d.orderId + ' · 制单人 ' + esc(d.maker) + ' · 核心交易数据由订单带入</p></div>' +
+      '<p class="page-description">关联订单 ' + d.orderId + ' · 制单人 ' + esc(d.maker) + ' · 本版本交易数据已冻结</p></div>' +
       '<div class="actions"><button class="btn" data-action="doc-focus" aria-pressed="' + !!window.AppUI.docFocus + '">' + U.icon('expand') + '<span>' + (window.AppUI.docFocus ? '显示单证目录' : '专注预览') + '</span></button><a class="btn" href="#/documents">返回列表</a></div></div>' +
       '<div class="doc-layout ' + (window.AppUI.docFocus ? 'is-focused' : '') + '">' +
         '<div class="doc-list-panel"><div class="panel-head">单证选择<span class="muted small">' + M.documents.length + ' 份</span></div>' + leftItems + '</div>' +
@@ -131,14 +136,21 @@
 
   function rightPanel(d, order, role, editing) {
     var html = '';
+    var snapshot = U.documentSnapshot(d);
     html += '<div class="ablock"><div class="ab-title">单据信息</div>' +
       '<div class="small">类型：' + U.docTypeName(d.type) + '<br>编号：' + d.no + ' V' + d.version + '<br>关联订单：<a href="#/orders/' + d.orderId + '">' + d.orderId + '</a><br>制单人：' + esc(d.maker) + '<br>更新：' + esc(d.updatedAt) + '</div></div>';
+    html += '<div class="ablock"><div class="ab-title">交易数据来源</div><div class="small">' +
+      (snapshot.basis === 'demo-baseline' ? '样例基线·非历史签发记录' : '创建时交易快照') +
+      '<br>冻结时间：<span title="' + esc(snapshot.capturedAt) + '">' + esc(new Date(snapshot.capturedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false })) + '（北京时间）</span></div>' +
+      '<details class="snapshot-rules"><summary>查看冻结规则</summary><div class="readonly-hint">' +
+      (snapshot.basis === 'demo-baseline' ? '本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。' : '快照保存创建此交易快照时的订单与主数据。') +
+      '<br>包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。</div></details></div>';
 
     if (role === 'doc') {
       if (d.status === '已通过') {
         html += '<div class="ablock"><div class="ab-title">受控修订</div>' +
-          '<button class="btn" data-action="doc-revise" data-id="' + d.id + '">修改（生成新版本 V' + (d.version + 1) + '）</button>' +
-          '<div class="readonly-hint">已审核单证不可直接改动，修改将生成新版本并重新走审核流程。</div></div>';
+          '<button class="btn" data-action="doc-revise" data-id="' + d.id + '" aria-label="修订包装与备注，生成新版本 V' + nextDocVersion(d) + '">修订包装与备注 · V' + nextDocVersion(d) + '</button>' +
+          '<div class="readonly-hint">本操作仅修订唛头、包装与备注，沿用此版本交易快照，原版本保留，新版本重新审核。</div></div>';
       } else if (d.status === '制作中' || d.status === '草稿' || d.status === '已退回') {
         if (editing) {
           html += '<div class="ablock"><div class="ab-title">编辑中</div>' +
@@ -181,13 +193,13 @@
 
   /* ---------- 预览排版：商业发票 ---------- */
   function renderCI(d, order, editing) {
-    var S = M.seller, cust = U.customer(order.customerId);
+    var snapshot = U.documentSnapshot(d), S = snapshot.seller, cust = snapshot.customer;
     var total = U.orderTotal(order);
     var rows = order.items.map(function (it, i) {
-      var p = U.product(it.productId);
+      var p = it.product;
       return '<tr><td class="c">' + (i + 1) + '</td>' +
         '<td>' + esc(p.nameEn) + '<br><span style="color:#5a6378">' + esc(p.nameCn) + ' · ' + esc(p.spec) + '</span></td>' +
-        '<td class="c">' + it.qty + ' ' + esc(p.unit.toUpperCase ? p.unit : p.unit) + '</td>' +
+        '<td class="c">' + it.qty + ' ' + esc(p.unit) + '</td>' +
         '<td class="r">' + U.fmt(it.price) + '</td>' +
         '<td class="r">' + U.fmt(it.qty * it.price) + '</td></tr>';
     }).join('');
@@ -225,9 +237,9 @@
 
   /* ---------- 预览排版：装箱单 ---------- */
   function renderPL(d, order, editing) {
-    var S = M.seller, cust = U.customer(order.customerId);
+    var snapshot = U.documentSnapshot(d), S = snapshot.seller, cust = snapshot.customer;
     var rows = order.items.map(function (it, i) {
-      var p = U.product(it.productId);
+      var p = it.product;
       return '<tr><td class="c">' + (i + 1) + '</td>' +
         '<td>' + esc(p.nameEn) + '<br><span style="color:#5a6378">' + esc(p.nameCn) + ' · ' + esc(p.spec) + '</span></td>' +
         '<td class="c">' + it.qty + ' ' + esc(p.unit) + '</td></tr>';
@@ -343,25 +355,32 @@
   /* 已审核单证修改 → 受控修订，生成新版本 */
   Actions['doc-revise'] = function (el) {
     var d = U.doc(el.dataset.id);
-    if (!d || d.status !== '已通过') {
-      U.toast('仅审核通过的单证可发起受控修订', 'warning');
+    if (!d || d.status !== '已通过' || !window.App.user || window.App.user.role !== 'doc') {
+      U.toast('仅单证员可对审核通过的单证发起受控修订', 'warning');
       return;
     }
+    var version = nextDocVersion(d), completed = false, actor = window.App.user;
     U.confirm({
       title: '受控修订确认',
-      message: '单证 <b>' + d.no + ' V' + d.version + '</b> 已审核通过，不可直接修改。<br>确认修改将<b>生成新版本 V' + (d.version + 1) + '</b>（草稿状态），原版本保留备查，新版本需重新提交审核。',
-      okText: '生成 V' + (d.version + 1),
+      message: '单证 <b>' + d.no + ' V' + d.version + '</b> 已审核通过。<br>确认将<b>生成新版本 V' + version + '</b>（草稿），仅修订唛头、包装与备注，<b>沿用 V' + d.version + ' 交易快照</b>。原版本保留，新版本需重新审核。',
+      okText: '生成 V' + version,
       onOk: function () {
-        if (M.documents.some(function (x) { return x.no === d.no && x.version === d.version + 1; })) return false;
+        if (completed || d.status !== '已通过' || window.App.user !== actor || actor.role !== 'doc') return false;
+        if (nextDocVersion(d) !== version) {
+          U.toast('单证版本已变化，请关闭后重新发起修订', 'warning');
+          return false;
+        }
         var nd = JSON.parse(JSON.stringify(d));
-        nd.id = 'D-' + d.no + '-V' + (d.version + 1);
-        nd.version = d.version + 1;
+        nd.id = 'D-' + d.no + '-V' + version;
+        nd.version = version;
         nd.status = '草稿';
         nd.createdAt = U.today(); nd.updatedAt = U.today();
         nd.submittedAt = null; nd.approver = null; nd.approvedAt = null; nd.opinion = null;
         nd.history = [{ time: U.now(), person: window.App.user.name, action: '创建单证 V' + nd.version + '（受控修订，基于 V' + d.version + '）', opinion: '' }];
         nd.remark = (nd.remark ? nd.remark + '；' : '') + 'V' + nd.version + '：受控修订';
+        U.inheritDocumentSnapshot(nd, d);
         M.documents.push(nd);
+        completed = true;
         syncOrderDocStatus(d.orderId);
         U.toast('已生成新版本 ' + d.no + ' V' + nd.version + '（草稿）');
         location.hash = '#/documents/' + nd.id;

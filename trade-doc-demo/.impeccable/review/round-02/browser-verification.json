@@ -1,0 +1,132 @@
+{
+  "round": 2,
+  "date": "2026-10-07",
+  "interactions": [
+    {
+      "name": "不可命中目标审批无成功反馈并保留弹窗",
+      "result": "PASS",
+      "detail": "数量保持不变、单价保留两位小数并等比舍入后，候选金额为 27,285.00 USD，与目标 27,305.50 USD 相差 20.50 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。"
+    },
+    {
+      "name": "失败改价原订单仍为28150USD",
+      "result": "PASS"
+    },
+    {
+      "name": "精确12050USD改价成功，已收12000保持不变",
+      "result": "PASS"
+    },
+    {
+      "name": "订单通过改价后旧CI纸张逐字保持24100USD",
+      "result": "PASS"
+    },
+    {
+      "name": "制作中与退回混合按最新单证显示，无全部完成误导",
+      "result": "PASS"
+    },
+    {
+      "name": "无单证显示尚未制作且条件未满足",
+      "result": "PASS"
+    },
+    {
+      "name": "可导出仅呈现审核资格并具文字状态",
+      "result": "PASS"
+    },
+    {
+      "name": "原生冻结规则Space展开并保留完整历史边界",
+      "result": "PASS"
+    },
+    {
+      "name": "冻结说明原生展开可读，历史边界保留",
+      "result": "PASS"
+    },
+    {
+      "name": "受控V2继承V1核心交易字段并进入草稿，允许日期/审批/备注变化",
+      "result": "PASS"
+    },
+    {
+      "name": "创建修订版本后原V1纸张未覆盖",
+      "result": "PASS"
+    }
+  ],
+  "failures": [],
+  "layoutFacts": [
+    {
+      "actions": 968.435546875,
+      "height": 1000,
+      "note": "最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份",
+      "scrollY": 0,
+      "width": 1280
+    },
+    {
+      "audit": 993.485107421875,
+      "export": 1146.485107421875,
+      "height": 1000,
+      "panel": 1173.485107421875,
+      "scrollY": 0,
+      "width": 1280
+    },
+    {
+      "actions": 971.8330078125,
+      "height": 1000,
+      "scrollY": 0,
+      "stageText": "✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足",
+      "width": 1440
+    },
+    {
+      "audit": 827.765380859375,
+      "export": 980.765380859375,
+      "height": 1000,
+      "panel": 1007.765380859375,
+      "reject": 873.765380859375,
+      "scrollY": 0,
+      "width": 1440
+    },
+    {
+      "audit": 945.171875,
+      "export": 1098.171875,
+      "height": 1000,
+      "opacity": "1",
+      "reject": 991.171875,
+      "scrollY": 0,
+      "width": 1280
+    },
+    {
+      "export": 991.34375,
+      "revision": 829.171875,
+      "width": 1280
+    },
+    {
+      "audit": 927.171875,
+      "export": 1074.171875,
+      "height": 1000,
+      "reject": 973.171875,
+      "scrollY": 0,
+      "width": 1280
+    }
+  ],
+  "routeChecks": 100,
+  "layoutChecks": 200,
+  "actualViewports": [
+    {
+      "requested": 1280,
+      "observed": 1280
+    },
+    {
+      "requested": 1440,
+      "observed": 1440
+    }
+  ],
+  "testCorrections": [
+    {
+      "name": "新版本继承比较范围",
+      "reason": "完整纸张包括允许变化的日期/审核人/修订备注，应比较核心交易字段；原版仍逐字比较",
+      "verified": true
+    }
+  ],
+  "console": [],
+  "totalRenderAttempts": 200,
+  "fileProtocol": {
+    "result": "NOT_RUN",
+    "reason": "HTTP/HTTPS browser policy; prior file:// rejection, no workaround"
+  }
+}
