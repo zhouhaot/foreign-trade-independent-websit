@@ -840,6 +840,16 @@
       ],
       "anomalyScope": "控制/缺姓名日期/未知/长名仅隔离Node，未注正式Mock造原生图。"
     },
+    "documentWorkSummary": {
+      "round": 12,
+      "assumption": "H23仅doc当前入口，实际actor原policy.canEdit且目标唯一可达；不是maker个人分派/后台通知/SLA或正式权限。",
+      "structure": "当前可办主队列，未完成候选的历史/暂停/待核参考保原status/完整reason；全版本原数字说明含历史，通过不称全可导出，0不称全部完成。",
+      "referenceRow": "78px/minmax(0,1fr)/auto，14gap/16纵padding；reason14px/pre-wrap/anywhere，次按钮min32/max130。doc-only动作ARIA带精确对象，原业务表格保持。",
+      "navigation": "零提醒同页关闭并聚焦参考h3，跨页固定query经原离开guard；取消保原输入，标题可见不保证96px顶位；实际主体纯读不修改原记录。",
+      "scope": "8原生组、40角色路由/80两宽最终0fail，24JPEG8过程16final；DOM1280/1440×1000和实际1272/1432×994分开。",
+      "evidence": ".impeccable/review/round-12/browser.json",
+      "limits": "异常/HTML只隔离Node；参考与V3提醒有正常滚动，Back不保证位置恢复；未认读屏/file/移动/跨浏览器/真实权限或后台。"
+    },
     "approvalContextLedger": {
       "round": 11,
       "assumption": "H22仅台账纯读结果回真实关联作业，非转办/撤回/SLA制度，不扩原本人范围或真实权限。",

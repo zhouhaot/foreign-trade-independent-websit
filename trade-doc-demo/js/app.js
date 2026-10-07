@@ -136,7 +136,7 @@
     var profile = M.users.find(function (u) { return u.id === user.id; });
     var account = profile && profile.account || '账号未配置';
     var identityLabel = '当前用户：' + (profile ? profile.name : user.name) + '，账号：' + account;
-    var todos = U.todosFor(user.role, user.name);
+    var todos = U.todosFor(user.role, user.name, user);
     var crumbHtml = crumb.map(function (c, i) {
       return (i > 0 ? '<span class="sep">/</span>' : '') +
         '<span class="' + (i === crumb.length - 1 ? 'current' : '') + '">' + esc(c) + '</span>';
@@ -144,7 +144,7 @@
     var ddItems = todos.length ? todos.map(function (t) {
       return '<button class="dd-item" data-action="bell-goto" data-link="' + t.link + '">' + U.tag(t.kind) +
         '<span><span>' + esc(t.text) + '</span><span class="muted small dd-sub">' + esc(t.sub) + '</span></span></button>';
-    }).join('') : '<div class="dd-empty">暂无待办提醒</div>';
+    }).join('') : user.role === 'doc' ? '<div class="dd-empty">当前没有可办理制单事项<div class="muted small mt8">历史或暂停记录可在工作台参考区查阅。</div><a href="#/dashboard?focus=doc-work-references" data-action="doc-work-reference-goto">查看工作台参考</a></div>' : '<div class="dd-empty">暂无待办提醒</div>';
     return '<button class="icon-btn" data-action="sidebar-toggle" aria-label="' + (window.AppUI.sidebarCollapsed ? '展开导航' : '收起导航') + '" aria-expanded="' + !window.AppUI.sidebarCollapsed + '">' + U.icon('panel') + '</button>' +
       '<a class="workspace-brand" href="#/dashboard">贸易协同</a>' +
       '<div class="breadcrumb">' + crumbHtml + '</div>' +
@@ -174,6 +174,25 @@
     }).join('') + '</div><span class="flow-note">' + note + '</span></nav>';
   }
   Actions['bell-goto'] = function (el) { window.App.requestNavigation(el.dataset.link); };
+  function focusDocumentWorkReferences(user) {
+    if (!user || user.role !== 'doc') return false;
+    var section = document.querySelector('.doc-work-references');
+    var heading = section && section.querySelector('h3');
+    if (!heading) return false;
+    heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
+    if (section.scrollIntoView) section.scrollIntoView({ block: 'start' });
+    return true;
+  }
+  Actions['doc-work-reference-goto'] = function (el, event) {
+    if (event) event.preventDefault();
+    if (!window.App.user || window.App.user.role !== 'doc') return;
+    var dropdown = document.getElementById('bell-dd'), toggle = document.getElementById('bell-toggle');
+    if (dropdown) dropdown.classList.remove('show');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    if (parseHash().segs.join('/') === 'dashboard' && focusDocumentWorkReferences(window.App.user)) return;
+    window.App.requestNavigation('#/dashboard?focus=doc-work-references');
+  };
 
   /* 仅索引当前角色可访问的本地样例，不发起接口请求。 */
   function searchEntries() {
@@ -493,6 +512,7 @@
     }
     lastRoute = location.hash; lastUser = user.id;
     acceptedHash = location.hash; stampHistory(); installDraftStatus();
+    if (parsed.query.focus === 'doc-work-references') focusDocumentWorkReferences(user);
   }
 
   window.App = {

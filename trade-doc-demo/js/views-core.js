@@ -99,7 +99,8 @@
     var reviewingDocs = M.documents.filter(function (d) { return d.status === '待审核'; });
     var unpaidOrders = M.orders.filter(function (o) { return U.payStatus(o) !== '已结清' && o.status !== '已取消'; });
     var recentOrders = M.orders.slice().sort(function (a, b) { return b.createdAt.localeCompare(a.createdAt); }).slice(0, 4);
-    var myTodos = U.todosFor(role, name);
+    var docWork = role === 'doc' ? U.documentWorkSummary(ctx.user) : null;
+    var myTodos = docWork ? docWork.todos : U.todosFor(role, name);
 
     if (role === 'boss') {
       cards.push(statCard('我的待办', pendingApprovals.length, '待处理审核与异常申请', '#/approvals', 'accent-orange'));
@@ -107,10 +108,10 @@
       cards.push(statCard('待收款订单', unpaidOrders.length, '存在未收金额的订单', '#/orders', 'accent-red'));
       cards.push(statCard('在执行订单', M.orders.filter(function (o) { return o.status === '执行中'; }).length, '当前执行中订单', '#/orders', 'accent-green'));
     } else if (role === 'doc') {
-      cards.push(statCard('我的待办', myTodos.length, '待完成 / 待修订单证', '#/documents', 'accent-orange'));
-      cards.push(statCard('制作中单证', M.documents.filter(function (d) { return d.status === '制作中' || d.status === '草稿'; }).length, '尚未送审', '#/documents', 'accent-blue'));
-      cards.push(statCard('被退回单证', M.documents.filter(function (d) { return d.status === '已退回'; }).length, '需按意见修订', '#/documents', 'accent-red'));
-      cards.push(statCard('已通过单证', M.documents.filter(function (d) { return d.status === '已通过'; }).length, '可导出', '#/documents', 'accent-green'));
+      cards.push(statCard('当前可办理', myTodos.length, '具备当前编辑资格的单证', '#/documents', 'accent-orange'));
+      cards.push(statCard('制作中单证记录', M.documents.filter(function (d) { return d.status === '制作中' || d.status === '草稿'; }).length, '版本记录 · 含历史版本', '#/documents', 'accent-blue'));
+      cards.push(statCard('退回单证记录', M.documents.filter(function (d) { return d.status === '已退回'; }).length, '版本记录 · 含历史版本', '#/documents', 'accent-red'));
+      cards.push(statCard('通过单证记录', M.documents.filter(function (d) { return d.status === '已通过'; }).length, '含历史版本 · 导出资格看单证页', '#/documents', 'accent-green'));
     } else if (role === 'fin') {
       cards.push(statCard('待收款订单', unpaidOrders.length, '存在未收金额', '#/payments', 'accent-red'));
       cards.push(statCard('本月登记收款', M.payments.filter(function (p) { return p.date.slice(0, 7) === '2026-09'; }).length, '2026-09 收款笔数', '#/payments', 'accent-blue'));
@@ -130,10 +131,21 @@
 
     /* 待办列表 */
     var todoHtml = myTodos.length ? myTodos.map(function (t) {
-      return '<div class="todo-item">' + tag(t.kind) +
-        '<div class="t-title"><a href="' + t.link + '">' + esc(t.text) + '</a><div class="t-sub">' + esc(t.sub) + '</div></div>' +
-        '<a class="btn btn-sm" href="' + t.link + '">去处理</a></div>';
+      return '<div class="todo-item"' + (docWork ? ' data-document-id="' + esc(t.documentId) + '"' : '') + '>' + tag(t.kind) +
+        '<div class="t-title"><a href="' + (docWork ? esc(t.link) : t.link) + '">' + esc(t.text) + '</a><div class="t-sub">' + esc(t.sub) + '</div></div>' +
+        '<a class="btn btn-sm" href="' + (docWork ? esc(t.link) : t.link) + '"' + (docWork ? ' aria-label="去处理 · ' + esc(t.text) + '"' : '') + '>去处理</a></div>';
     }).join('') : '<div class="empty-state home-empty"><div class="icon">' + U.icon('check') + '</div><strong>当前没有待办事项</strong><p>可通过右侧业务入口继续查看相关记录。</p></div>';
+    if (docWork && !myTodos.length) {
+      todoHtml = '<div class="empty-state home-empty"><div class="icon">' + U.icon('file') + '</div><strong>' +
+        (docWork.identityError ? '当前制单资格待核对' : '当前没有可办理制单事项') + '</strong><p>' +
+        (docWork.identityError ? esc(docWork.identityError) : '历史与暂停记录仍可查阅，请核对下方参考或单证台账。') + '</p></div>';
+    }
+    var referenceHtml = docWork ? '<section class="card doc-work-references"><div class="card-title home-card-head"><div><h3>历史与暂停参考<span class="record-count">' + docWork.references.length + ' 项</span></h3><p>保留原版本记录，当前办理资格以单证页为准。</p></div></div>' +
+      (docWork.references.length ? docWork.references.map(function (r) {
+        return '<div class="doc-work-reference" data-document-id="' + esc(r.documentId) + '">' + tag(r.kind) +
+          '<div class="doc-work-reference-body"><strong>' + esc(r.text) + '</strong><div class="t-sub">' + esc(r.sub) + '</div><p class="doc-work-reason">' + esc(r.reason) + '</p></div>' +
+          (r.link ? '<a class="btn btn-sm" href="' + esc(r.link) + '" aria-label="查看记录 · ' + esc(r.text) + '">查看记录</a>' : '<a class="home-text-link" href="#/documents" aria-label="核对单证台账 · ' + esc(r.text) + '">核对单证台账</a>') + '</div>';
+      }).join('') : '<div class="empty-state home-empty">当前没有历史或暂停的未完成版本参考。</div>') + '</section>' : '';
 
     /* 最近业务动态：聚合订单日志 */
     var acts = [];
@@ -180,7 +192,7 @@
     var roleDescription = {
       admin: '维护账号、角色与基础配置，让每位协作成员各司其职。',
       sales: '从询盘到成交，把握客户跟进与订单执行的每一步。',
-      doc: '专注单证制作与修订，让每一份交付清晰、准确。',
+      doc: '接续当前可办理的制单事项，历史与暂停记录保留查阅。',
       fin: '跟踪应收与每笔到账，按币种核对订单收款进度。',
       boss: '聚焦审核与异常，统览订单、单证和收款的独立进展。'
     };
@@ -192,7 +204,7 @@
         '<div class="dash-main">' +
           (role !== 'admin' ? '<section class="card recent-orders"><div class="card-title home-card-head"><div><h3>近期订单</h3><p>四笔最新订单，三类进度独立跟踪</p></div><a class="home-text-link" href="#/orders">全部订单' + U.icon('arrow') + '</a></div><div class="table-wrap"><table class="table"><thead><tr><th>订单 / 创建日期</th><th>客户</th><th class="num">成交金额</th><th>订单进度</th><th>单证进度</th><th>收款进度</th></tr></thead><tbody>' + orderRows + '</tbody></table></div></section>' :
             '<section class="card recent-orders"><div class="card-title home-card-head"><div><h3>演示账号</h3><p>按角色检查权限与页面呈现</p></div><a class="home-text-link" href="#/system/users">用户管理' + U.icon('arrow') + '</a></div><div class="table-wrap"><table class="table"><thead><tr><th>姓名</th><th>角色</th><th>部门</th><th>状态</th></tr></thead><tbody>' + userRows + '</tbody></table></div></section>') +
-          '<section class="card work-queue"><div class="card-title home-card-head"><div><h3>待处理事项<span class="record-count">' + myTodos.length + ' 项</span></h3><p>从这里接续你的业务工作</p></div></div>' + todoHtml + '</section>' +
+          '<section class="card work-queue' + (docWork ? ' doc-work-summary' : '') + '"><div class="card-title home-card-head"><div><h3>' + (docWork ? '当前可办理制单事项' : '待处理事项') + '<span class="record-count">' + myTodos.length + ' 项</span></h3><p>' + (docWork ? '仅列具备当前编辑资格的版本，不代表个人分派。' : '从这里接续你的业务工作') + '</p></div></div>' + todoHtml + '</section>' + referenceHtml +
         '</div>' +
         '<aside class="dash-side"><section class="card home-shortcuts"><div class="card-title"><h3>业务入口</h3></div><div class="shortcut-list">' + shortcutHtml + '</div></section>' +
           '<section class="card home-monthly"><div class="card-title"><h3>月度订单</h3><span class="sub">样例 · 笔</span></div>' + monthChart + '</section>' +

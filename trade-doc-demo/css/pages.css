@@ -566,3 +566,16 @@
 .approval-reason-label { color: var(--text-sub); font-size: 13px; }
 .approval-reason { margin-top: 4px; white-space: pre-wrap; overflow-wrap: anywhere; }
 .approval-opinion { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* 第12轮：当前作业和只读参考分层，零可办理不代表业务全部完成。 */
+.doc-work-reference { display: grid; grid-template-columns: 78px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.doc-work-reference:last-child { border-bottom: none; }
+.doc-work-reference > .tag { min-width: 78px; justify-content: center; margin-top: 2px; }
+.doc-work-reference-body { min-width: 0; }
+.doc-work-reference-body strong { display: block; font-size: 14px; font-weight: 600; line-height: 1.6; overflow-wrap: anywhere; }
+.doc-work-reference-body .t-sub { margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--text-sub); }
+.doc-work-reason { margin: 8px 0 0; font-size: 14px; line-height: 1.7; color: var(--text-sub); white-space: pre-wrap; overflow-wrap: anywhere; }
+.doc-work-reference > .btn, .doc-work-reference > .home-text-link { align-self: center; min-height: 32px; }
+.doc-work-reference > .home-text-link { max-width: 130px; line-height: 1.6; }
+.doc-work-summary .home-empty .icon { background: var(--surface-subtle); color: var(--text-sub); }
+.doc-work-references { scroll-margin-top: 96px; }

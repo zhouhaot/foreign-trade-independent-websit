@@ -1,0 +1,420 @@
+{
+  "layouts": [
+    {
+      "role": "doc",
+      "route": "dashboard",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/dashboard",
+      "headings": [
+        "王芳，欢迎回来",
+        "近期订单",
+        "当前可办理制单事项2 项",
+        "历史与暂停参考1 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 1,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents",
+      "headings": [
+        "单证管理",
+        "单证台账11 个版本"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "approvals",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "dashboard",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/dashboard",
+      "headings": [
+        "王芳，欢迎回来",
+        "近期订单",
+        "当前可办理制单事项2 项",
+        "历史与暂停参考1 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 1,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents",
+      "headings": [
+        "单证管理",
+        "单证台账11 个版本"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "approvals",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "failures": [
+        "empty workspace"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "role": "doc",
+      "route": "dashboard",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "orders/SO2026005",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "approvals",
+      "width": 1280,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "dashboard",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "orders/SO2026005",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    },
+    {
+      "role": "doc",
+      "route": "approvals",
+      "width": 1440,
+      "fails": [
+        "empty workspace"
+      ]
+    }
+  ]
+}

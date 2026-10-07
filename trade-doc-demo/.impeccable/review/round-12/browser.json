@@ -1,0 +1,1895 @@
+{
+  "images": [
+    {
+      "name": "doc-dashboard-baseline-1440",
+      "file": "doc-dashboard-baseline-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，3 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-bell-baseline-1440",
+      "file": "doc-bell-baseline-1440.jpg",
+      "stage": "process",
+      "active": "bell-toggle",
+      "bellExpanded": "true",
+      "bellLabel": "待办提醒，3 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-old-v1-readonly-baseline-1440",
+      "file": "doc-old-v1-readonly-baseline-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，3 项",
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-dashboard-first-1440",
+      "file": "doc-dashboard-first-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-reference-first-1440",
+      "file": "doc-reference-first-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 451,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-bell-first-1440",
+      "file": "doc-bell-first-1440.jpg",
+      "stage": "process",
+      "active": "bell-toggle",
+      "bellExpanded": "true",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-paused-zero-first-1440",
+      "file": "doc-paused-zero-first-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-bell-zero-first-1440",
+      "file": "doc-bell-zero-first-1440.jpg",
+      "stage": "process",
+      "active": "bell-toggle",
+      "bellExpanded": "true",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-bell-zero-final-1440",
+      "file": "doc-bell-zero-final-1440.jpg",
+      "stage": "final",
+      "active": "bell-toggle",
+      "bellExpanded": "true",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-reference-zero-final-1440",
+      "file": "doc-reference-zero-final-1440.jpg",
+      "stage": "final",
+      "active": "H3",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 671,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-reference-cross-final-1440",
+      "file": "doc-reference-cross-final-1440.jpg",
+      "stage": "final",
+      "active": "H3",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard?focus=doc-work-references",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 671,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-dashboard-restored-final-1440",
+      "file": "doc-dashboard-restored-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-reference-restored-final-1440",
+      "file": "doc-reference-restored-final-1440.jpg",
+      "stage": "final",
+      "active": "A",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 445,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-bell-restored-final-1440",
+      "file": "doc-bell-restored-final-1440.jpg",
+      "stage": "final",
+      "active": "bell-toggle",
+      "bellExpanded": "true",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-todo-target-final-1440",
+      "file": "doc-todo-target-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440,
+      "encoding": "JPEG",
+      "pixelWidth": 1432,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-cancelled-zero-final-1280",
+      "file": "doc-cancelled-zero-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-bell-zero-final-1280",
+      "file": "doc-bell-zero-final-1280.jpg",
+      "stage": "final",
+      "active": "bell-toggle",
+      "bellExpanded": "true",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-reference-cancelled-final-1280",
+      "file": "doc-reference-cancelled-final-1280.jpg",
+      "stage": "final",
+      "active": "H3",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，0 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 661,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-revision-dashboard-final-1280",
+      "file": "doc-revision-dashboard-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，3 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-revision-reference-final-1280",
+      "file": "doc-revision-reference-final-1280.jpg",
+      "stage": "final",
+      "active": "A",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，3 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 510,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-revision-bell-final-1280",
+      "file": "doc-revision-bell-final-1280.jpg",
+      "stage": "final",
+      "active": "bell-toggle",
+      "bellExpanded": "true",
+      "bellLabel": "待办提醒，3 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 48,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-dashboard-baseline-final-1280",
+      "file": "doc-dashboard-baseline-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-reference-baseline-final-1280",
+      "file": "doc-reference-baseline-final-1280.jpg",
+      "stage": "final",
+      "active": "A",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/dashboard",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 435,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    },
+    {
+      "name": "doc-history-target-final-1280",
+      "file": "doc-history-target-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "bellExpanded": "false",
+      "bellLabel": "待办提醒，2 项",
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280,
+      "encoding": "JPEG",
+      "pixelWidth": 1272,
+      "pixelHeight": 994
+    }
+  ],
+  "interactions": [
+    {
+      "name": "real SO5 cancel-request -> doc current0/reference3/bell0",
+      "pass": true
+    },
+    {
+      "name": "new zero CTA actual native Enter closes bell and focuses visible reference heading without same-page reload",
+      "pass": true,
+      "bottom": 552.1875,
+      "expanded": "false",
+      "focused": true,
+      "hash": "#/dashboard",
+      "heading": "历史与暂停参考3 项",
+      "height": 1000,
+      "scroll": 671,
+      "top": 529.796875
+    },
+    {
+      "name": "paused exact CI4 reference remains read-only; zero CTA from document uses guarded dashboard query and focuses reference",
+      "pass": true,
+      "expanded": "false",
+      "focus": "历史与暂停参考3 项",
+      "hash": "#/dashboard?focus=doc-work-references",
+      "scroll": 674,
+      "top": 529.1865234375
+    },
+    {
+      "name": "original supervisor returns cancellation request; doc current2/reference1/bell2 restored without changing document history",
+      "pass": true,
+      "nativeHistoryScope": "status/cards observed; full source/history equality Node"
+    },
+    {
+      "name": "正常提醒键盘进入 PL2026004 V1",
+      "result": "PASS",
+      "evidence": "Enter 提醒后 Enter 原退回项，原 #/documents/D-PL2026004-V1 可编辑页面，提醒关闭。"
+    },
+    {
+      "name": "原主管通过取消 + 1280 零待办键盘定位",
+      "result": "PASS",
+      "evidence": "原 AP2026100710 已通过，SO5已取消，当前0/参考3，Enter 查看参考关闭提醒并聚焦可见标题；完整数据纯读/留痕一致另由Node验证。"
+    },
+    {
+      "name": "原受控 V2→V3修订后的工作台/提醒/键盘关闭",
+      "result": "PASS",
+      "evidence": "原生成V3按钮创建草稿后当前3/参考1且提示最新V3；提醒含V3不含历史V1；Escape关闭且焦点回bell-toggle，历史交易相等仅Node。"
+    },
+    {
+      "name": "1280参考精确旧版及Back",
+      "result": "PASS",
+      "evidence": "具名查看CI3V1→原确切旧版，无编辑/导出disabled，Back返回当前2/历史1工作台，不承诺滚动恢复。"
+    }
+  ],
+  "layouts": [
+    {
+      "role": "doc",
+      "route": "dashboard",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/dashboard",
+      "headings": [
+        "王芳，欢迎回来",
+        "近期订单",
+        "当前可办理制单事项2 项",
+        "历史与暂停参考1 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 1,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "王芳，欢迎回来接续当前可办理的制单事项，历史与暂停记录保留查阅。单证员·单证部单证制作当前可办理2具备当前编辑资格的单证制作中单证记录1版本记录 · 含历史版本退回单证记录2版本记录 · 含历史版本通过单证记录6含历史版本 · 导出资格看单证页近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents",
+      "headings": [
+        "单证管理",
+        "单证台账11 个版本"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "单证管理支持商业发票与装箱单；审核通过后方可导出单证编号/订单号单证类型全部商业发票装箱单状态全部草稿制作中待审核已通过已退回查 询重 置单证台账11 个版本同一单证的修订版本分别留存类型单证编号版本关联订单客户状态制单人更新时间操作商业发票CI2026004V1SO2026005安第斯零售集团（Andes Retail Group）制作中王芳2026-09-18预览装箱单PL2026004V1S",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 ",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）请按意见修订后重新",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30制作单证订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新送审2送审，",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "approvals",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1272,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核申请编号 AP20260902",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "dashboard",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/dashboard",
+      "headings": [
+        "王芳，欢迎回来",
+        "近期订单",
+        "当前可办理制单事项2 项",
+        "历史与暂停参考1 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 1,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "王芳，欢迎回来接续当前可办理的制单事项，历史与暂停记录保留查阅。单证员·单证部单证制作当前可办理2具备当前编辑资格的单证制作中单证记录1版本记录 · 含历史版本退回单证记录2版本记录 · 含历史版本通过单证记录6含历史版本 · 导出资格看单证页近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents",
+      "headings": [
+        "单证管理",
+        "单证台账11 个版本"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "单证管理支持商业发票与装箱单；审核通过后方可导出单证编号/订单号单证类型全部商业发票装箱单状态全部草稿制作中待审核已通过已退回查 询重 置单证台账11 个版本同一单证的修订版本分别留存类型单证编号版本关联订单客户状态制单人更新时间操作商业发票CI2026004V1SO2026005安第斯零售集团（Andes Retail Group）制作中王芳2026-09-18预览装箱单PL2026004V1S",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 ",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）请按意见修订后重新",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30制作单证订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新送审2送审，",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "approvals",
+      "bell": "待办提醒，2 项",
+      "documentWidth": 1432,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核申请编号 AP20260902",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "dashboard",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/dashboard",
+      "headings": [
+        "陈明，欢迎回来",
+        "近期订单",
+        "待处理事项3 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "陈明，欢迎回来从询盘到成交，把握客户跟进与订单执行的每一步。外贸业务员·外贸一部询盘跟进我的待办3报价确认 / 询盘跟进待确认报价1等待客户确认我的在执行订单3执行中订单近期新增订单4近 4 笔新订单近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,500.00 EUR待执行未开始未收款SO2",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/documents",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「外贸业务员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-0",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 票C",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）单证预览交易字段只读装",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30查看来源报价申请变更订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "approvals",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1272,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请申请编号 AP20260903订单 SO2026005 申请整体降价 3%关联订单：查看关联订单 SO2026005原申请理由客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "dashboard",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/dashboard",
+      "headings": [
+        "陈明，欢迎回来",
+        "近期订单",
+        "待处理事项3 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "陈明，欢迎回来从询盘到成交，把握客户跟进与订单执行的每一步。外贸业务员·外贸一部询盘跟进我的待办3报价确认 / 询盘跟进待确认报价1等待客户确认我的在执行订单3执行中订单近期新增订单4近 4 笔新订单近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,500.00 EUR待执行未开始未收款SO2",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/documents",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「外贸业务员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-0",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 票C",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）单证预览交易字段只读装",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30查看来源报价申请变更订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "approvals",
+      "bell": "待办提醒，3 项",
+      "documentWidth": 1432,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请申请编号 AP20260903订单 SO2026005 申请整体降价 3%关联订单：查看关联订单 SO2026005原申请理由客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "dashboard",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/dashboard",
+      "headings": [
+        "赵倩，欢迎回来",
+        "近期订单",
+        "待处理事项4 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "赵倩，欢迎回来跟踪应收与每笔到账，按币种核对订单收款进度。财务人员·财务部收款与应收待收款订单5存在未收金额本月登记收款12026-09 收款笔数已结清订单2全部收讫近期新增订单4近 4 笔新订单近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,500.00 EUR待执行未开始未收款SO202",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/documents",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「财务人员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-0",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 票C",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）单证预览交易字段只读装",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30登记收款订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新送审2送审，",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "approvals",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1272,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 0 项类型事项申请人申请时间状态处理▤您没有审批中的申请已处理记录类型事项申请人申请时间结果处理人处理时间处理意见▤暂无已处理记录",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "dashboard",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/dashboard",
+      "headings": [
+        "赵倩，欢迎回来",
+        "近期订单",
+        "待处理事项4 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "赵倩，欢迎回来跟踪应收与每笔到账，按币种核对订单收款进度。财务人员·财务部收款与应收待收款订单5存在未收金额本月登记收款12026-09 收款笔数已结清订单2全部收讫近期新增订单4近 4 笔新订单近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,500.00 EUR待执行未开始未收款SO202",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/documents",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「财务人员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-0",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 票C",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）单证预览交易字段只读装",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30登记收款订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新送审2送审，",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "approvals",
+      "bell": "待办提醒，4 项",
+      "documentWidth": 1432,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 0 项类型事项申请人申请时间状态处理▤您没有审批中的申请已处理记录类型事项申请人申请时间结果处理人处理时间处理意见▤暂无已处理记录",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "dashboard",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/dashboard",
+      "headings": [
+        "周建国，欢迎回来",
+        "近期订单",
+        "待处理事项5 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "周建国，欢迎回来聚焦审核与异常，统览订单、单证和收款的独立进展。业务主管·外贸事业部审核与异常我的待办5待处理审核与异常申请待审核单证2等待审核的单证版本待收款订单5存在未收金额的订单在执行订单4当前执行中订单近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,500.00 EUR待执行未开始未",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/documents",
+      "headings": [
+        "单证管理",
+        "单证台账11 个版本"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "单证管理支持商业发票与装箱单；审核通过后方可导出单证编号/订单号单证类型全部商业发票装箱单状态全部草稿制作中待审核已通过已退回查 询重 置单证台账11 个版本同一单证的修订版本分别留存类型单证编号版本关联订单客户状态制单人更新时间操作商业发票CI2026004V1SO2026005安第斯零售集团（Andes Retail Group）制作中王芳2026-09-18预览装箱单PL2026004V1S",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 ",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）单证预览交易字段只",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30查看来源报价订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新送审2送",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "approvals",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1272,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "dashboard",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/dashboard",
+      "headings": [
+        "周建国，欢迎回来",
+        "近期订单",
+        "待处理事项5 项",
+        "业务入口",
+        "月度订单",
+        "最近动态"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "周建国，欢迎回来聚焦审核与异常，统览订单、单证和收款的独立进展。业务主管·外贸事业部审核与异常我的待办5待处理审核与异常申请待审核单证2等待审核的单证版本待收款订单5存在未收金额的订单在执行订单4当前执行中订单近期订单四笔最新订单，三类进度独立跟踪全部订单订单 / 创建日期客户成交金额订单进度单证进度收款进度SO20260032026-08-28环球贸易公司19,500.00 EUR待执行未开始未",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/documents",
+      "headings": [
+        "单证管理",
+        "单证台账11 个版本"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "单证管理支持商业发票与装箱单；审核通过后方可导出单证编号/订单号单证类型全部商业发票装箱单状态全部草稿制作中待审核已通过已退回查 询重 置单证台账11 个版本同一单证的修订版本分别留存类型单证编号版本关联订单客户状态制单人更新时间操作商业发票CI2026004V1SO2026005安第斯零售集团（Andes Retail Group）制作中王芳2026-09-18预览装箱单PL2026004V1S",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。单证预览交易字段只读商 业 发 ",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）单证预览交易字段只",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "订单 SO2026005 执行中"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "订单 SO2026005 执行中客户：安第斯零售集团（Andes Retail Group）业务员：陈明创建：2026-07-30查看来源报价订单金额28,150.00 USD已收金额0.00 USD未收金额28,150.00 USD贸易与付款条款CIF 圣安东尼奥 · 30% 预付，70% 货到 30 天订单进度执行中✓待执行2执行中3已完成单证进度制作中!制作，有单证退回，需修订后重新送审2送",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "approvals",
+      "bell": "待办提醒，5 项",
+      "documentWidth": 1432,
+      "hash": "#/approvals",
+      "headings": [
+        "审核与异常处理"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "dashboard",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/dashboard",
+      "headings": [
+        "系统管理员，欢迎回来",
+        "演示账号",
+        "待处理事项1 项",
+        "业务入口",
+        "月度订单"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "系统管理员，欢迎回来维护账号、角色与基础配置，让每位协作成员各司其职。系统管理员·信息技术部用户管理系统用户7启用 6 人系统角色5五类业务角色字典项20基础数据字典运行状态正常演示环境演示账号按角色检查权限与页面呈现用户管理姓名角色部门状态系统管理员系统管理员信息技术部启用陈明外贸业务员外贸一部启用李婷外贸业务员外贸二部启用王芳单证员单证部启用赵倩财务人员财务部启用周建国业务主管外贸事业部启用孙",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/documents",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "approvals",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1272,
+      "hash": "#/approvals",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1280,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1172,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "dashboard",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/dashboard",
+      "headings": [
+        "系统管理员，欢迎回来",
+        "演示账号",
+        "待处理事项1 项",
+        "业务入口",
+        "月度订单"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "系统管理员，欢迎回来维护账号、角色与基础配置，让每位协作成员各司其职。系统管理员·信息技术部用户管理系统用户7启用 6 人系统角色5五类业务角色字典项20基础数据字典运行状态正常演示环境演示账号按角色检查权限与页面呈现用户管理姓名角色部门状态系统管理员系统管理员信息技术部启用陈明外贸业务员外贸一部启用李婷外贸业务员外贸二部启用王芳单证员单证部启用赵倩财务人员财务部启用周建国业务主管外贸事业部启用孙",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/documents",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V1",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026004-V1",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-PL2026004-V1",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V2",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "orders/SO2026005",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/orders/SO2026005",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "approvals",
+      "bell": "待办提醒，1 项",
+      "documentWidth": 1432,
+      "hash": "#/approvals",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "referenceCount": 0,
+      "referenceOverflow": 0,
+      "width": 1440,
+      "workspaceText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "workspaceWidth": 1332,
+      "failures": []
+    }
+  ],
+  "failures": [],
+  "measurementCorrections": [
+    "首版doc0新CTA在当前dashboard同hash提前return，实际点后expanded仍true/scroll0，参考未定位；这是本轮引入的交互缺口，尚待局部修复，不称原待办政策漏洞。",
+    {
+      "kind": "selector-method",
+      "detail": "首16布局测量误用#workspace，真实DOM为main.workspace，全部empty workspace为测量误红；原记录保存在process，不改产品。"
+    }
+  ],
+  "console": [],
+  "limits": [
+    "40 affected role/route combinations only; reload resets in-memory business before baseline matrix",
+    "native lifecycle visibility is separate from full-model equality in Node",
+    "16 wrong-selector measurements retained in layout-selector-process.json",
+    "No screenreader/file/mobile/cross-browser/backend or production validation"
+  ]
+}

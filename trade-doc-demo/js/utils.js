@@ -626,16 +626,48 @@
   };
 
   /* ---------- 待办（铃铛 & 工作台共用） ---------- */
-  U.todosFor = function (role, userName) {
+  /* H23只汇总制单员当前作业与只读参考；不改变单证动作资格或历史数据。 */
+  U.documentWorkSummary = function (user) {
+    var result = { todos: [], references: [], identityError: '' };
+    if (!user || user.role !== 'doc' || !user.id || !user.name) {
+      result.identityError = '请先登录有效的制单员演示身份。';
+      return result;
+    }
+    function routable(id) {
+      if (typeof id !== 'string' || !id.trim()) return false;
+      try { return encodeURIComponent(id) === id; }
+      catch (error) { return false; }
+    }
+    M.documents.filter(function (d) { return ['制作中', '草稿', '已退回'].indexOf(d.status) >= 0; }).forEach(function (d) {
+      var policy = U.documentPolicy(d, user);
+      var metadata = ['CI', 'PL'].indexOf(d.type) >= 0 && typeof d.no === 'string' && d.no.trim() && Number.isSafeInteger(d.version) && d.version > 0;
+      var unique = M.documents.filter(function (item) { return item.id === d.id; }).length === 1 &&
+        typeof d.orderId === 'string' && d.orderId.trim() && M.orders.filter(function (o) { return o.id === d.orderId; }).length === 1;
+      var canLocate = !!metadata && !!unique && routable(d.id);
+      var type = d.type === 'CI' ? '商业发票' : d.type === 'PL' ? '装箱单' : '单证类型待核对';
+      var no = typeof d.no === 'string' && d.no.trim() ? d.no : d.id || '编号待核对';
+      var version = Number.isSafeInteger(d.version) && d.version > 0 ? 'V' + d.version : '版本待核对';
+      var item = { documentId: d.id, text: type + ' ' + no + ' ' + version + '（' + (d.orderId || '关联订单待核对') + '）', sub: d.status,
+        link: canLocate ? '#/documents/' + encodeURIComponent(d.id) : null };
+      if (policy.canEdit && canLocate) {
+        item.kind = d.status === '已退回' ? '退回待修订' : '待完成制单';
+        result.todos.push(item);
+      } else {
+        item.kind = !canLocate || policy.versionConflict ? '待核对' : policy.orderBlocked ? '操作暂停' : !policy.isLatest && policy.latest ? '历史查阅' : '暂不可办理';
+        item.reason = !canLocate ? (policy.reasons.edit ? policy.reasons.edit + ' ' : '') + '单证关联、版本或当前页面地址无法唯一定位，请从单证台账核查。' : policy.reasons.edit;
+        result.references.push(item);
+      }
+    });
+    return result;
+  };
+  U.todosFor = function (role, userName, user) {
     var todos = [];
     if (role === 'boss') {
       M.approvals.filter(function (a) { return a.status === '待处理'; }).forEach(function (a) {
         todos.push({ kind: a.type, text: a.title, sub: a.applicant + ' · ' + a.applyTime, link: '#/approvals' });
       });
     } else if (role === 'doc') {
-      M.documents.filter(function (d) { return d.status === '制作中' || d.status === '草稿' || d.status === '已退回'; }).forEach(function (d) {
-        todos.push({ kind: d.status === '已退回' ? '退回待修订' : '待完成制单', text: U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version + '（' + d.orderId + '）', sub: d.status, link: '#/documents/' + d.id });
-      });
+      return U.documentWorkSummary(arguments.length >= 3 ? user : U.currentUser()).todos;
     } else if (role === 'fin') {
       M.orders.filter(function (o) { return U.payStatus(o) !== '已结清' && o.status !== '取消申请中' && o.status !== '已取消'; }).forEach(function (o) {
         var fin = U.orderFin(o);

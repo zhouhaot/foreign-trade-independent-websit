@@ -1,0 +1,48 @@
+{
+  "baseline": "77deae8ae937c0c1d005d4b3b019d5d150e623b8",
+  "unchangedFiles": [
+    "js/mock-data.js",
+    "js/views-docs.js",
+    "js/views-sales.js",
+    "js/views-fin.js",
+    "css/base.css",
+    "css/layout.css",
+    "index.html",
+    "AGENTS.md"
+  ],
+  "utilsPolicyPrefixAndSessionTailUnchanged": true,
+  "schemaVersion": 2,
+  "originalComponentsExact": 10,
+  "nodeCommands": 31,
+  "syntax": 41,
+  "READMECommandsExact": true,
+  "nativeGroups": 8,
+  "roleRouteCombinations": 40,
+  "layouts": 80,
+  "layoutFailures": 0,
+  "images": 24,
+  "processImages": 8,
+  "finalImages": 16,
+  "imageFormats": [
+    "JPEG"
+  ],
+  "pixelSizes": [
+    [
+      1272,
+      994
+    ],
+    [
+      1432,
+      994
+    ]
+  ],
+  "runtimeAndNewScriptSHA256": {
+    "js/utils.js": "1a49e13deb94447c474ecebb007221071d40d15890ad56396709c49a402031e3",
+    "js/app.js": "43e47204016de21b3dd96a6f0cd11451622df268d6109037b2e866ff7076a864",
+    "js/views-core.js": "f6ea1abb77bbae195442a43e2ed152f2cb693cb1eec22a066a32bcf5f724048b",
+    "css/pages.css": "fe2fb46e60737dbeffca97d62506ced5dbc195eb7b1ac9a9780421bf5a10da1b",
+    "scripts/verify-document-work-summary.cjs": "d1a1eb1290380db6434754e07f0766b91c19445fc2cc8c04e071234ec45bfb6e",
+    "scripts/verify-document-work-bell.cjs": "dc3af0d3dcae46a792aa801ab40bb535c802ac7466dfaec27d795b4c1ae0134a",
+    "scripts/verify-document-dashboard.cjs": "ac8a436e5d523371fc687c7d790559227bf2df8b8fcf5172991deda8038230d6"
+  }
+}
