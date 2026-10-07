@@ -1,0 +1,1 @@
+PASS: 32 shared document-work summary scenarios; current policy, actual identity, safe exact routes, lifecycle pause/restore, historical references and whole-model read purity (Node fixture only)

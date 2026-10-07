@@ -104,10 +104,10 @@
 
     /* 中：状态横幅 + 纸张预览 */
     var banner = '';
-    if (d.status === '已退回') banner = '<div class="doc-status-banner reject"><b>已退回：</b>' + esc(d.opinion || '') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）' + (role === 'doc' ? '<br>请按意见修订后重新提交审核，或申请重新制单生成新版本。' : '') + '</div>';
+    if (d.status === '已退回') banner = '<div class="doc-status-banner reject"><b>已退回：</b>' + esc(d.opinion || '') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）' + (policy.canEdit && policy.canSubmit ? '<br>请按意见修订后重新提交审核。<br>' + (policy.canReform ? '也可申请重新制单生成新版本。' : esc(policy.reasons.reform)) : '<br>当前只读：' + esc(policy.reasons.edit)) + '</div>';
     else if (d.status === '已通过') banner = '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (policy.canExport ? '当前满足导出演示条件。' : '历史审核结果保留，当前导出资格见操作区。') + '</div>';
     else if (d.status === '待审核') banner = '<div class="doc-status-banner review"><b>待审核：</b>制单人 ' + esc(d.maker) + ' 已于 ' + esc(d.submittedAt) + ' 提交审核，等待业务主管处理。</div>';
-    else if (d.status === '草稿' || d.status === '制作中') banner = '<div class="doc-status-banner draft"><b>' + (d.status === '草稿' ? '草稿' : '制作中') + '：</b>单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。</div>';
+    else if (d.status === '草稿' || d.status === '制作中') banner = '<div class="doc-status-banner draft"><b>' + (d.status === '草稿' ? '草稿' : '制作中') + '：</b>单证尚未送审。订单带入的客户、商品、金额等交易数据只读；' + (policy.canEdit ? (d.type === 'CI' ? '唛头与备注字段可编辑。' : '唛头、包装与备注字段可编辑。') : '当前只读：' + esc(policy.reasons.edit)) + '</div>';
     else banner = '<div class="doc-status-banner draft"><b>状态待核对：</b>当前版本状态为「' + esc(d.status) + '」，不能据此推断审核决定。</div>';
 
     var paper = d.type === 'CI' ? renderCI(d, order, editing) : renderPL(d, order, editing);

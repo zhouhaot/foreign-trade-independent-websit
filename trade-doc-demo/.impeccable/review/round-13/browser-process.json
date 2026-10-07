@@ -1,0 +1,1255 @@
+{
+  "images": [
+    {
+      "name": "doc-history-baseline-1440",
+      "file": "doc-history-baseline-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）请按意见修订后重新提交审核，或申请重新制单生成新版本。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-returned-current-baseline-1440",
+      "file": "doc-returned-current-baseline-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）请按意见修订后重新提交审核，或申请重新制单生成新版本。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "sales-making-readonly-baseline-1440",
+      "file": "sales-making-readonly-baseline-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "boss-making-readonly-baseline-1440",
+      "file": "boss-making-readonly-baseline-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头、包装与备注字段可编辑。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "boss-making-readonly-first-1440",
+      "file": "boss-making-readonly-first-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-history-first-1440",
+      "file": "doc-history-first-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-returned-current-first-1440",
+      "file": "doc-returned-current-first-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）请按意见修订后重新提交审核。该单证已有待处理的重新制单申请，请勿重复提交。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-making-current-first-1440",
+      "file": "doc-making-current-first-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头与备注字段可编辑。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-ci-editor-final-1440",
+      "file": "doc-ci-editor-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头与备注字段可编辑。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-history-final-1440",
+      "file": "doc-history-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-approved-neighbor-final-1440",
+      "file": "doc-approved-neighbor-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026003-V2",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-making-paused-final-1280",
+      "file": "doc-making-paused-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：订单取消申请中，单证业务操作与导出演示暂停；历史审核事实保留。",
+      "bannerTop": 376.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-returned-paused-final-1280",
+      "file": "doc-returned-paused-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）当前只读：订单取消申请中，单证业务操作与导出演示暂停；历史审核事实保留。",
+      "bannerTop": 376.796875,
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-returned-restored-final-1280",
+      "file": "doc-returned-restored-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）请按意见修订后重新提交审核。该单证已有待处理的重新制单申请，请勿重复提交。",
+      "bannerTop": 376.796875,
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "sales-making-readonly-final-1280",
+      "file": "sales-making-readonly-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerTop": 376.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "fin-making-readonly-final-1280",
+      "file": "fin-making-readonly-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerTop": 376.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "boss-making-readonly-final-1440",
+      "file": "boss-making-readonly-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "boss-pending-neighbor-final-1440",
+      "file": "boss-pending-neighbor-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-CI2026001-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-returned-current-final-1440",
+      "file": "doc-returned-current-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）请按意见修订后重新提交审核。该单证已有待处理的重新制单申请，请勿重复提交。",
+      "bannerTop": 243.796875,
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-draft-revision-final-1280",
+      "file": "doc-draft-revision-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "草稿：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头与备注字段可编辑。",
+      "bannerTop": 354.796875,
+      "hash": "#/documents/D-CI2026003-V3",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-history-after-revision-final-1280",
+      "file": "doc-history-after-revision-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V3 操作。",
+      "bannerTop": 376.796875,
+      "hash": "#/documents/D-CI2026003-V1",
+      "height": 1000,
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    }
+  ],
+  "interactions": [
+    {
+      "name": "CI当前提示与原编辑字段",
+      "pass": true,
+      "evidence": "原编辑按钮进入CI，实际仅#df-marks/#df-remark，无packing inputs；banner只唛头备注，原交易表格只读。通用toolbar/Toast/button仍原词，本轮未改。"
+    },
+    {
+      "name": "旧退回事实保且Enter查看最新V2",
+      "pass": true,
+      "evidence": "CI3V1完整意见/name/date、当前只读原reason，无编辑；Enter查看最新V2后原已通过banner/姓名章与导出资格保。完整模型相等由Node。"
+    },
+    {
+      "name": "原取消申请暂停CI/PL作业指导",
+      "pass": true,
+      "evidence": "真实sales原取消申请后docCI4制作中/PL4退回原完整事实保，当前reason订单取消申请中/历史事实保留，无edit/送审/重制并导出disabled。"
+    },
+    {
+      "name": "原主管退回取消恢复当前指导",
+      "pass": true,
+      "evidence": "AP202610079原退回后PL4可编辑/可送审指导恢复，canReform仍原待处理而disabled；原意见name/date仍可见。"
+    },
+    {
+      "name": "销售/财务/主管当前版本原只读",
+      "pass": true,
+      "evidence": "三岗原登录进入CI4，同横幅原身份拒绝原因且无doc-edit，不扩大审批/制单资格；角色内容readback，行为拒绝完整由Node34/独立20。"
+    },
+    {
+      "name": "PL当前指导与原包装编辑",
+      "pass": true,
+      "evidence": "Enter原编辑按钮进入PL：marks/remark加五packing字段均有原input；trade字段只读，重制原pending仍禁用（编辑前核），未写模型。"
+    },
+    {
+      "name": "原受控V3草稿与历史资格最新引用",
+      "pass": true,
+      "evidence": "原V2生成V3草稿后banner只CI唛头备注；Enter原目录历史V1全文意见保、只读指最新V3，没有编辑。正常业务写与纯读数据一致性另由Node。"
+    }
+  ],
+  "layouts": [
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头与备注字段可编辑。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 1,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n请按意见修订后重新提交审核。\n该单证已有待处理的重新制单申请，请勿重复提交。",
+      "bannerHeight": 94,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 1,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；唛头与备注字段可编辑。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 1,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n请按意见修订后重新提交审核。\n该单证已有待处理的重新制单申请，请勿重复提交。",
+      "bannerHeight": 94,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 1,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "doc",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "sales",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、金额",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版本已",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "fin",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 902,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 902,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结当前输入未改动专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026004-V1",
+      "banner": "制作中：单证尚未送审。订单带入的客户、商品、金额等交易数据只读；当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "商业发票 · CI2026004 V1 制作中"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026004 V1 制作中关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份CI2026004 V1制作中商业发票最新版本当前查看PL2026004 V1已退回装箱单最新版本制作中：单证尚未送审。订单带入的客户、商品、",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-PL2026004-V1",
+      "banner": "已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）\n当前只读：仅单证员可执行该制单操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "装箱单 · PL2026004 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V1",
+      "banner": "已退回：买方地址与合同不一致，请按最新合同修订后重新送审（周建国 · 2026-01-06）\n当前只读：当前为历史旧版，仅可查阅；请前往最新版本 V2 操作。",
+      "bannerHeight": 72,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "商业发票 · CI2026003 V1 已退回"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V1 已退回关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本CI2026003 V1已退回商业发票历史版本当前查看PL2026003 V1已通过装箱单最新版",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026003-V2",
+      "banner": "该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "商业发票 · CI2026003 V2 已通过"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "boss",
+      "route": "documents/D-CI2026001-V1",
+      "banner": "待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。",
+      "bannerHeight": 50,
+      "bannerScrollWidth": 820,
+      "bannerWhiteSpace": "normal",
+      "bannerWidth": 820,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "商业发票 · CI2026001 V1 待审核"
+      ],
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结当前输入未改动专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026004-V1",
+      "banner": null,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-PL2026004-V1",
+      "banner": null,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V1",
+      "banner": null,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V2",
+      "banner": null,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026001-V1",
+      "banner": null,
+      "documentWidth": 1272,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1280,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026004-V1",
+      "banner": null,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-PL2026004-V1",
+      "banner": null,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-PL2026004-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V1",
+      "banner": null,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026003-V2",
+      "banner": null,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026003-V2",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1440,
+      "failures": []
+    },
+    {
+      "role": "admin",
+      "route": "documents/D-CI2026001-V1",
+      "banner": null,
+      "documentWidth": 1432,
+      "editButtons": 0,
+      "hash": "#/documents/D-CI2026001-V1",
+      "headings": [
+        "无访问权限"
+      ],
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "width": 1440,
+      "failures": []
+    }
+  ],
+  "failures": [],
+  "measurementCorrections": [
+    {
+      "kind": "heading-method",
+      "detail": "初矩阵只收main h1/h2，管理员原拒权为h3，10测量empty main误红；保layout-heading-process.json，不改权限页面。纠正h1/h2/h3并明确核原无访问权限，仅重测10原拒权组合。"
+    }
+  ],
+  "console": []
+}

@@ -1,0 +1,1 @@
+PASS: 58 initial change-request amount scenarios; seven illegal initial writes refused, safe cents/number roundtrip, corrections, H20 context/source guards and invalid hidden cancellation amount (Node DOM fixture only)

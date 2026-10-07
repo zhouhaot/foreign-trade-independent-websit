@@ -840,6 +840,15 @@
       ],
       "anomalyScope": "控制/缺姓名日期/未知/长名仅隔离Node，未注正式Mock造原生图。"
     },
+    "documentStatusGuidance": {
+      "round": 13,
+      "assumption": "H24仅draft/making/rejected横幅当前指导按本页ctx原policy，不新设权限/分派/审批制度。",
+      "facts": "原退回opinion/name/date事实prefix全文保，当前只读或可修订/送审/重制说明另行，原意见自身送审文字不清洗。",
+      "fields": "实际canEdit真才说CI唛头与备注/PL含包装，阻断原因完整；原PL4 pending重制不再被邀请重复申请。",
+      "preserved": "原通过/待审核/未知三banner、paper/H19/rightPanel/toolbar/Actions和原三栏样式保持。",
+      "evidence": ".impeccable/review/round-13/browser.json",
+      "limits": "原通用CI动作/toolbar/Toast字段文案仍保，异常仅Node；未认证读屏/file/mobile/backend或企业数据。"
+    },
     "documentWorkSummary": {
       "round": 12,
       "assumption": "H23仅doc当前入口，实际actor原policy.canEdit且目标唯一可达；不是maker个人分派/后台通知/SLA或正式权限。",

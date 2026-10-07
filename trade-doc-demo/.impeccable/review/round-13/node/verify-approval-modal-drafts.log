@@ -1,0 +1,1 @@
+PASS: 21 approval modal draft cases: actual actions/modal/keyboard handlers and Promise, source node/value/error/focus/scroll preservation, busy/failure/commit/stale/duplicate (Node DOM fixture only)

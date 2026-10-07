@@ -1,0 +1,1 @@
+PASS: all demo CI/PL snapshots survive seller/customer/product/order mutation; inherited revision, finance recreation, immutable detached copies, role edit bounds, totals/currency, refresh reset (Node VM only)

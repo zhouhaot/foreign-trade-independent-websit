@@ -1,0 +1,41 @@
+{
+  "baseline": "58a65822e400fcd75398b642456648bd558a8e24",
+  "unchangedFiles": [
+    "js/mock-data.js",
+    "js/utils.js",
+    "js/app.js",
+    "js/views-core.js",
+    "js/views-sales.js",
+    "js/views-fin.js",
+    "css/base.css",
+    "css/layout.css",
+    "css/pages.css",
+    "index.html",
+    "AGENTS.md"
+  ],
+  "outsideTwoBannerLinesExact": true,
+  "schemaVersion": 2,
+  "originalComponentsExact": 10,
+  "nodeCommands": 32,
+  "syntax": 42,
+  "READMECommandsExact": true,
+  "nativeGroups": 7,
+  "roleDocumentCombinations": 25,
+  "layouts": 50,
+  "layoutFailures": 0,
+  "images": 21,
+  "processImages": 8,
+  "finalImages": 13,
+  "pixelSizes": [
+    [
+      1272,
+      994
+    ],
+    [
+      1432,
+      994
+    ]
+  ],
+  "sourceSHA256": "fb23ca00d0059c8b958f470fdb76bc42732acadf3e5f7e41cb3681ebe96c1043",
+  "scriptSHA256": "1d7ace304b8daeb20648aff3ea750c102ff7cff96b68f2aea2ad41905af7255b"
+}
