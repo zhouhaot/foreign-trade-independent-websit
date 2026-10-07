@@ -1,0 +1,9 @@
+{
+  "runtimeChanges": [
+    "views-sales.js"
+  ],
+  "finalSalesSha256": "29FB5C3A64232DED67AFC6D4C4EB7FD93DFD35F2258278FEF3781D359DB0E9B7",
+  "syntaxChecks": 37,
+  "nodeScripts": 27,
+  "lateChange": "single hint string only; final 58/40/25 and sales syntax rerun; other 24 scripts unchanged implementation"
+}

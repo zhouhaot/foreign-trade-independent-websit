@@ -940,8 +940,8 @@
       '<select class="select" id="oc-type"><option value="改价申请">改价申请（调整订单金额）</option><option value="取消申请">取消申请（取消整笔订单）</option></select>' +
       '<div class="field-error"></div></div>' +
       '<div class="form-item mt8" id="oc-amount-wrap">' + '<label class="required" for="oc-amount">变更后订单金额（' + o.currency + '）</label>' +
-      '<input class="input" id="oc-amount" value="' + fin.total.toFixed(2) + '">' +
-      '<div class="readonly-hint">当前订单金额：' + U.fmt(fin.total) + ' ' + o.currency + '</div><div class="field-error"></div></div>' +
+      '<input class="input" id="oc-amount" inputmode="decimal" aria-describedby="oc-amount-help" value="' + fin.total.toFixed(2) + '">' +
+      '<div class="readonly-hint" id="oc-amount-help">当前订单金额：' + U.fmt(fin.total) + ' ' + o.currency + '<br>填写至少0.01的金额，最多2位小数，例如24000.00。</div><div class="field-error"></div></div>' +
       '<div class="form-item mt8"><label class="required" for="oc-reason">申请原因</label>' +
       '<textarea class="textarea" id="oc-reason" placeholder="请说明变更背景、与客户的协商结果"></textarea><div class="field-error"></div></div>' +
       '<div id="oc-danger"></div>' +
@@ -955,6 +955,7 @@
     function refreshType() {
       var isCancel = typeSel.value === '取消申请';
       overlay.querySelector('#oc-amount-wrap').style.display = isCancel ? 'none' : '';
+      if (isCancel) U.clearErrors(overlay.querySelector('#oc-amount-wrap'));
       overlay.querySelector('#oc-danger').innerHTML = isCancel
         ? '<div class="danger-box mt8">提交后订单暂缓执行，单证操作与导出暂停；主管通过后订单取消。历史版本与审核记录保留。已收款 ' + U.fmt(fin.received) + ' ' + o.currency + ' 需另行协商退还，本操作不登记退款。</div>'
         : '';
@@ -971,11 +972,16 @@
       var form = overlay.querySelector('#oc-form');
       U.clearErrors(form);
       var isCancel = typeSel.value === '取消申请';
+      var requestedAmount = null;
+      if (!isCancel) {
+        var amount = form.querySelector('#oc-amount');
+        var amountCandidate = U.decimalInput(amount.value, '变更后订单金额');
+        if (!amountCandidate.ok) { U.fieldError(amount, amountCandidate.error); amount.focus(); return; }
+        requestedAmount = amountCandidate.value;
+      }
       var rules = [{ el: form.querySelector('#oc-reason'), label: '申请原因', required: true }];
-      if (!isCancel) rules.push({ el: form.querySelector('#oc-amount'), label: '变更后订单金额', required: true, number: true, min: 0.01 });
       if (!U.validate(rules)) return;
       var requestedType = typeSel.value;
-      var requestedAmount = isCancel ? null : Number(form.querySelector('#oc-amount').value);
       var requestedReason = form.querySelector('#oc-reason').value.trim();
       var captured = modalInputSnapshot(controls);
       if (!modalInputsMatch(overlay, captured) || !U.setModalBusy(overlay, true)) return;

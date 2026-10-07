@@ -1,0 +1,549 @@
+{
+  "images": [
+    {
+      "name": "oc-form-first-1440",
+      "stage": "process",
+      "active": "oc-type",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24100.00"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": ""
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-error-first-1440",
+      "stage": "process",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-guard-first-1440",
+      "stage": "process",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": true,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-error-first-1280",
+      "stage": "process",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-cancel-first-1280",
+      "stage": "process",
+      "active": "BODY",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "取消申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-requested-first-1280",
+      "stage": "process",
+      "active": "BODY",
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001?tab=changes",
+      "height": 1000,
+      "opacity": null,
+      "pageScroll": 0,
+      "values": [],
+      "width": 1280
+    },
+    {
+      "name": "approval-boundary-first-1280",
+      "stage": "process",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "处理申请 · AP202610079",
+      "values": [],
+      "width": 1280
+    },
+    {
+      "name": "oc-form-final-1280",
+      "stage": "final",
+      "active": "oc-type",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24100.00"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": ""
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-error-final-1280",
+      "stage": "final",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-guard-final-1280",
+      "stage": "final",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": true,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-continued-final-1280",
+      "stage": "final",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-error-final-1440",
+      "stage": "final",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-cancel-final-1440",
+      "stage": "final",
+      "active": "BODY",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "取消申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-cancel-requested-final-1440",
+      "stage": "final",
+      "active": "BODY",
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": null,
+      "pageScroll": 0,
+      "values": [],
+      "width": 1440
+    },
+    {
+      "name": "oc-form-final-1440",
+      "stage": "final",
+      "active": "oc-type",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24100.00"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": ""
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-requested-final-1440",
+      "stage": "final",
+      "active": "BODY",
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001?tab=changes",
+      "height": 1000,
+      "opacity": null,
+      "pageScroll": 0,
+      "values": [],
+      "width": 1440
+    },
+    {
+      "name": "approval-boundary-final-1440",
+      "stage": "final",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "处理申请 · AP202610079",
+      "values": [],
+      "width": 1440
+    }
+  ],
+  "interactions": [
+    {
+      "name": "invalid exponent + guard Continue preserves raw/reason/error/focus",
+      "pass": true,
+      "amount": "1e3",
+      "error": "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+      "focus": "oc-amount",
+      "reason": "与客户协商调整金额，保留原始填写用于核对。"
+    },
+    {
+      "name": "cancel hides retained illegal amount and clears amount error; repricing restores raw and rejects again",
+      "pass": true
+    },
+    {
+      "name": "corrected raw 24000.00 creates one pending request; order 24100/received12000 unchanged display",
+      "pass": true,
+      "rows": [
+        "类型事项申请人申请时间结果处理人处理时间处理意见",
+        "改价申请订单 SO2026001 申请改价至 24,000.00 USD陈明2026-10-07 08:09待处理———",
+        "单证审核商业发票 CI2026001（订单 SO2026001）审核王芳2026-09-15 09:40待处理———",
+        "单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理———",
+        "改价申请订单 SO2026001 露营灯单价上调 0.10 USD陈明2026-08-01 09:15已通过周建国2026-08-02 11:20同意按新价执行，注意同步更新合同与单证"
+      ]
+    },
+    {
+      "name": "new legal 24000 request remains pending when original 24010 candidate cannot reach target",
+      "pass": true,
+      "nativeScope": "existing approval failure feedback/retained modal; full Mock identity only Node"
+    },
+    {
+      "name": "final third-decimal error native Tab/ShiftTab/Esc guard preserves raw/error/focus/selection",
+      "pass": true,
+      "selection": {
+        "end": 1,
+        "focus": "oc-amount",
+        "start": 0,
+        "value": "24000.001"
+      }
+    },
+    {
+      "name": "native cancellation submits despite retained hidden 24000.001; order becomes cancel-requested",
+      "pass": true,
+      "hiddenRaw": "24000.001"
+    },
+    {
+      "name": "native invalid hexadecimal then explicit discard leaves order execution/24100 unchanged display",
+      "pass": true
+    }
+  ],
+  "layouts": [],
+  "failures": [],
+  "measurementCorrections": [
+    "键盘前后字段实际相同，首断言错误比较JSON对象键序导致假失败；逐字段value/start/end/focus比对通过，未改实现。"
+  ]
+}

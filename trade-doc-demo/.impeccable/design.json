@@ -840,6 +840,16 @@
       ],
       "anomalyScope": "控制/缺姓名日期/未知/长名仅隔离Node，未注正式Mock造原生图。"
     },
+    "changeRequestInitialAmount": {
+      "round": 10,
+      "assumption": "H21仅新OC改价初值，复用decimalInput普通正十进制至少0.01/最多2位/安全整数分/Number无损；合法不保证原主管可批准。",
+      "ui": "当前金额独立前行，短规则填写至少0.01的金额，最多2位小数，例如24000.00；inputmode decimal与help描述，具体非法格式留字段错误。",
+      "failure": "busy前拒绝，不改金额/原因；focus金额，aria-invalid及help+error关联保，H20继续保原输入和错误。",
+      "cancel": "仅清隐藏金额错误，不洗raw；取消忽略隐藏非法金额，targetAmount null，切回改价重新校验。",
+      "history": "旧申请/title/处理记录、审批算法、收款和冻结单证不清洗。",
+      "evidence": ".impeccable/review/round-10/browser.json",
+      "limits": "仅本轮5角色5相邻路径与两桌面宽度，不是全状态/读屏/跨浏览器/file或真实权限事务验收。"
+    },
     "businessModalDraftGuard": {
       "round": 9,
       "assumption": "H20仅qc/oc/ap本会话填写，非撤回提交制度/页面导航/跨页恢复/持久化。",

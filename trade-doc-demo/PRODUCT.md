@@ -43,6 +43,8 @@ web
 
 ## Evidence on Hand
 
+第10轮H21仅新改价申请初始金额：复用已有decimalInput，普通正十进制至少0.01、最多2位、安全整数分与Number无损往返；候选与标题一致，错误保留原文/原因/焦点。取消隐藏金额不参与，旧target/title/history不清洗；数值合法不保证主管可批准，原已收下限、币种与分摊规则继续成立。正式金额输入口径仍待确认，此假设可调整后续输入而不回写历史。
+
 AGENTS.md、HANDOFF.md、DESIGN.md、js/mock-data.js 和 .impeccable/review/。全部业务数据为原型样例，不是实际经营数据；图片概念稿不构成功能实现或测试证据。
 
 ## Product Principles

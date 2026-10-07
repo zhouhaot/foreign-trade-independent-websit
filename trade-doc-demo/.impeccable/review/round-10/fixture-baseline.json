@@ -1,0 +1,17 @@
+{
+  "baseline": "4e71de03c980fdd15b25bfdce699512ee8111fc5",
+  "unchangedFiles": [
+    "js/mock-data.js",
+    "js/utils.js",
+    "js/app.js",
+    "js/views-fin.js",
+    "css/base.css",
+    "css/layout.css",
+    "css/pages.css",
+    "index.html"
+  ],
+  "componentsPreserved": 10,
+  "schemaVersion": 2,
+  "quotationAndOrderGenerationSourcePreserved": true,
+  "oldTestsChanged": false
+}

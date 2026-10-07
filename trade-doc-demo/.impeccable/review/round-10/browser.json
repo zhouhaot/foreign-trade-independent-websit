@@ -1,0 +1,1314 @@
+{
+  "images": [
+    {
+      "name": "oc-form-first-1440",
+      "stage": "process",
+      "active": "oc-type",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24100.00"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": ""
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-error-first-1440",
+      "stage": "process",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-guard-first-1440",
+      "stage": "process",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": true,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-error-first-1280",
+      "stage": "process",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-cancel-first-1280",
+      "stage": "process",
+      "active": "BODY",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "取消申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "1e3"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原始填写用于核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-requested-first-1280",
+      "stage": "process",
+      "active": "BODY",
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001?tab=changes",
+      "height": 1000,
+      "opacity": null,
+      "pageScroll": 0,
+      "values": [],
+      "width": 1280
+    },
+    {
+      "name": "approval-boundary-first-1280",
+      "stage": "process",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "处理申请 · AP202610079",
+      "values": [],
+      "width": 1280
+    },
+    {
+      "name": "oc-form-final-1280",
+      "stage": "final",
+      "active": "oc-type",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24100.00"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": ""
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-error-final-1280",
+      "stage": "final",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-guard-final-1280",
+      "stage": "final",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": true,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-continued-final-1280",
+      "stage": "final",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1280
+    },
+    {
+      "name": "oc-error-resize-process-1280",
+      "stage": "process",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1440,
+      "pixelSize": [
+        1280,
+        1000
+      ],
+      "note": "DOM already1440 but capture old1280 frame; retained process and not1440 pixel evidence"
+    },
+    {
+      "name": "oc-cancel-final-1440",
+      "stage": "final",
+      "active": "BODY",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "取消申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-cancel-requested-final-1440",
+      "stage": "final",
+      "active": "BODY",
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": null,
+      "pageScroll": 0,
+      "values": [],
+      "width": 1440
+    },
+    {
+      "name": "oc-form-final-1440",
+      "stage": "final",
+      "active": "oc-type",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help",
+          "id": "oc-amount",
+          "invalid": null,
+          "value": "24100.00"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": ""
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "oc-requested-final-1440",
+      "stage": "final",
+      "active": "BODY",
+      "errors": [],
+      "guard": false,
+      "hash": "#/orders/SO2026001?tab=changes",
+      "height": 1000,
+      "opacity": null,
+      "pageScroll": 0,
+      "values": [],
+      "width": 1440
+    },
+    {
+      "name": "approval-boundary-final-1440",
+      "stage": "final",
+      "active": "BUTTON",
+      "bodyScroll": 0,
+      "errors": [],
+      "guard": false,
+      "hash": "#/approvals",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "处理申请 · AP202610079",
+      "values": [],
+      "width": 1440
+    },
+    {
+      "name": "oc-error-final-1440",
+      "stage": "final",
+      "active": "oc-amount",
+      "bodyScroll": 0,
+      "errors": [
+        "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。"
+      ],
+      "guard": false,
+      "hash": "#/orders/SO2026001",
+      "height": 1000,
+      "opacity": "1",
+      "pageScroll": 0,
+      "title": "申请变更 · 订单 SO2026001",
+      "values": [
+        {
+          "describedBy": null,
+          "id": "oc-type",
+          "invalid": null,
+          "value": "改价申请"
+        },
+        {
+          "describedBy": "oc-amount-help oc-amount-error",
+          "id": "oc-amount",
+          "invalid": "true",
+          "value": "24000.001"
+        },
+        {
+          "describedBy": null,
+          "id": "oc-reason",
+          "invalid": null,
+          "value": "与客户协商调整金额，保留原因等待核对。"
+        }
+      ],
+      "width": 1440
+    }
+  ],
+  "interactions": [
+    {
+      "name": "invalid exponent + guard Continue preserves raw/reason/error/focus",
+      "pass": true,
+      "amount": "1e3",
+      "error": "变更后订单金额必须为普通十进制数字，最多两位小数；不接受指数、十六进制或非有限值。",
+      "focus": "oc-amount",
+      "reason": "与客户协商调整金额，保留原始填写用于核对。"
+    },
+    {
+      "name": "cancel hides retained illegal amount and clears amount error; repricing restores raw and rejects again",
+      "pass": true
+    },
+    {
+      "name": "corrected raw 24000.00 creates one pending request; order 24100/received12000 unchanged display",
+      "pass": true,
+      "rows": [
+        "类型事项申请人申请时间结果处理人处理时间处理意见",
+        "改价申请订单 SO2026001 申请改价至 24,000.00 USD陈明2026-10-07 08:09待处理———",
+        "单证审核商业发票 CI2026001（订单 SO2026001）审核王芳2026-09-15 09:40待处理———",
+        "单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理———",
+        "改价申请订单 SO2026001 露营灯单价上调 0.10 USD陈明2026-08-01 09:15已通过周建国2026-08-02 11:20同意按新价执行，注意同步更新合同与单证"
+      ]
+    },
+    {
+      "name": "new legal 24000 request remains pending when original 24010 candidate cannot reach target",
+      "pass": true,
+      "nativeScope": "existing approval failure feedback/retained modal; full Mock identity only Node"
+    },
+    {
+      "name": "final third-decimal error native Tab/ShiftTab/Esc guard preserves raw/error/focus/selection",
+      "pass": true,
+      "selection": {
+        "end": 1,
+        "focus": "oc-amount",
+        "start": 0,
+        "value": "24000.001"
+      }
+    },
+    {
+      "name": "native cancellation submits despite retained hidden 24000.001; order becomes cancel-requested",
+      "pass": true,
+      "hiddenRaw": "24000.001"
+    },
+    {
+      "name": "native invalid hexadecimal then explicit discard leaves order execution/24100 unchanged display",
+      "pass": true
+    }
+  ],
+  "layouts": [
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。新建报价订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20查看来源报价申请变更订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录操作当前角色对单证为只读查看。导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「外贸业务员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请订单 SO2026006 申请取消客户资金链出现问题，正式发函申请取消订单。已收预付款 6,000.00 EUR 的退还方式待与客户协商陈明2026-09-18 10:30待处理等待主管处理已处理记录类型事项申请人申请时间结果处理人处理时间处理意见改价申请订单 SO2026001 露营灯单价上调 0.10 USD陈明2026-08-01 09:15已通过周建国2026-08-02 11:20同意按新价执行，注意同步更新合同与单证取消申请订单 SO2026002 曾申请取消（客户撤回）陈明2026-01-20 16:40已退回周建国2026-01-21 09:05客户已撤回取消意向，订单继续执行",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20制作单证订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「单证员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核商业发票 CI2026001（订单 SO2026001）审核发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理等待主管处理重新制单申请装箱单 PL2026004 申请重新制单因唛头与信用证条款不符被退回，申请基于修订内容重新制单生成 V2王芳2026-09-17 15:02待处理等待主管处理已处理记录类型事项申请人申请时间结果处理人处理时间处理意见单证审核商业发票 CI2026003 V2（订单 SO2026004）审核王芳2026-01-08 08:58已通过周建国2026-01-09 11:20地址已修正，通过",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单登记收款单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20登记收款订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录操作当前角色对单证为只读查看。导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "allowed": true,
+      "heading": "收款与应收",
+      "height": 1000,
+      "mainText": "收款与应收当前输入未改动收款登记登记后实时更新订单已收/未收金额；不同币种独立登记、不合并折算金额至少 0.01，最多两位小数。取消申请中与已取消订单暂停新增收款；历史保留，未登记退款。选择订单SO2026001 · 太平洋进口公司 · 未收 12,100.00 USDSO2026003 · 环球贸易公司 · 未收 19,500.00 EURSO2026005 · 安第斯零售集团 · 未收 28,150.00 USDSO2026007 · 撒哈拉经销公司 · 未收 21,550.00 USD收款金额实时未收 12,100.00 USD币种币种随订单带入，不可修改收款方式电汇 T/T信用证 L/C付款交单 D/P其他收款日期备注应收 24,100.00 USD已收 12,000.00 USD未收 12,100.00 USD登记收款收款记录收款编号订单客户金额方式日期备注登记人PAY2026007SO2026007撒哈拉经销公司（Sahara Distribution SARL）20,000.00 USD信用证 L/C2026-09-01信用证部分议付赵倩PAY2026002SO2026001太平洋进口公司（Pacific Imports LLC）2,000.00 USD电汇 T/T2026-08-15客户补付模具费赵倩PAY2026006SO2026006尼罗河贸易公司（Nile Trading Co.）6,000.00 EUR电汇 T/T2026-07-20预付款赵倩PAY2026001SO2026001太平洋进口公司（Pacific Imports LLC）10,000.00 USD电汇 T/T2026-07-01预付款赵倩PAY2026003SO2026002太平洋进口公司（Pacific Imports LLC）28,400.00 USD信用证 L/C2026-03-05信用证议付赵倩PAY2026005SO2026004环球贸易公司（Global Trade GmbH）15,500.00 EUR电汇 T/T2026-02-10尾款赵倩共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页订单应收汇总应收 / 已收 / 未收按订单币种独立统计订单编号客户币种应收已收未收收款进度SO2026001太平洋进口公司USD24,100.0012,000.0012,100.0050%部分收款SO2026002太平洋进口公司USD28,400.0028,400.000.00100%已结清SO2026003环球贸易公司EUR19,500.000.0019,500.000%未收款SO2026004环球贸易公司EUR30,500.0030,500.000.00100%已结清SO2026005安第斯零售集团USD28,150.000.0028,150.000%未收款SO2026006尼罗河贸易公司EUR20,000.006,000.0014,000.0030%部分收款取消申请中 · 暂停新增收款SO2026007撒哈拉经销公司USD41,550.0020,000.0021,550.0048%部分收款客户未收款视图按客户 × 币种汇总，不同币种不合并客户币种未收订单数未收合计最早订单日期账龄风险太平洋进口公司（Pacific Imports LLC）USD112,100.00 USD2026-06-20关注环球贸易公司（Global Trade GmbH）EUR119,500.00 EUR2026-08-28关注安第斯零售集团（Andes Retail Group）USD128,150.00 USD2026-07-30高风险尼罗河贸易公司（Nile Trading Co.）EUR114,000.00 EUR2026-07-02关注撒哈拉经销公司（Sahara Distribution SARL）USD121,550.00 USD2026-08-15高风险",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 0 项类型事项申请人申请时间状态处理▤您没有审批中的申请已处理记录类型事项申请人申请时间结果处理人处理时间处理意见▤暂无已处理记录",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20查看来源报价订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结当前输入未改动专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录审核意见审核通过退回修改导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "allowed": true,
+      "heading": "收款与应收",
+      "height": 1000,
+      "mainText": "收款与应收收款登记业务主管视角为只读：收款登记由财务人员操作。收款记录收款编号订单客户金额方式日期备注登记人PAY2026007SO2026007撒哈拉经销公司（Sahara Distribution SARL）20,000.00 USD信用证 L/C2026-09-01信用证部分议付赵倩PAY2026002SO2026001太平洋进口公司（Pacific Imports LLC）2,000.00 USD电汇 T/T2026-08-15客户补付模具费赵倩PAY2026006SO2026006尼罗河贸易公司（Nile Trading Co.）6,000.00 EUR电汇 T/T2026-07-20预付款赵倩PAY2026001SO2026001太平洋进口公司（Pacific Imports LLC）10,000.00 USD电汇 T/T2026-07-01预付款赵倩PAY2026003SO2026002太平洋进口公司（Pacific Imports LLC）28,400.00 USD信用证 L/C2026-03-05信用证议付赵倩PAY2026005SO2026004环球贸易公司（Global Trade GmbH）15,500.00 EUR电汇 T/T2026-02-10尾款赵倩共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页订单应收汇总应收 / 已收 / 未收按订单币种独立统计订单编号客户币种应收已收未收收款进度SO2026001太平洋进口公司USD24,100.0012,000.0012,100.0050%部分收款SO2026002太平洋进口公司USD28,400.0028,400.000.00100%已结清SO2026003环球贸易公司EUR19,500.000.0019,500.000%未收款SO2026004环球贸易公司EUR30,500.0030,500.000.00100%已结清SO2026005安第斯零售集团USD28,150.000.0028,150.000%未收款SO2026006尼罗河贸易公司EUR20,000.006,000.0014,000.0030%部分收款取消申请中 · 暂停新增收款SO2026007撒哈拉经销公司USD41,550.0020,000.0021,550.0048%部分收款客户未收款视图按客户 × 币种汇总，不同币种不合并客户币种未收订单数未收合计最早订单日期账龄风险太平洋进口公司（Pacific Imports LLC）USD112,100.00 USD2026-06-20关注环球贸易公司（Global Trade GmbH）EUR119,500.00 EUR2026-08-28关注安第斯零售集团（Andes Retail Group）USD128,150.00 USD2026-07-30高风险尼罗河贸易公司（Nile Trading Co.）EUR114,000.00 EUR2026-07-02关注撒哈拉经销公司（Sahara Distribution SARL）USD121,550.00 USD2026-08-15高风险",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核商业发票 CI2026001（订单 SO2026001）审核发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理处理取消申请订单 SO2026006 申请取消客户资金链出现问题，正式发函申请取消订单。已收预付款 6,000.00 EUR 的退还方式待与客户协商陈明2026-09-18 10:30待处理处理重新制单申请装箱单 PL2026004 申请重新制单因唛头与信用证条款不符被退回，申请基于修订内容重新制单生成 V2王芳2026-09-17 15:02待处理处理已处理记录类型事项申请人申请时间结果处理人处理时间处理意见改价申请订单 SO2026001 露营灯单价上调 0.10 USD陈明2026-08-01 09:15已通过周建国2026-08-02 11:20同意按新价执行，注意同步更新合同与单证取消申请订单 SO2026002 曾申请取消（客户撤回）陈明2026-01-20 16:40已退回周建国2026-01-21 09:05客户已撤回取消意向，订单继续执行单证审核商业发票 CI2026003 V2（订单 SO2026004）审核王芳2026-01-08 08:58已通过周建国2026-01-09 11:20地址已修正，通过",
+      "modal": false,
+      "scrollWidth": 1272,
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。新建报价订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20查看来源报价申请变更订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录操作当前角色对单证为只读查看。导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「外贸业务员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请订单 SO2026006 申请取消客户资金链出现问题，正式发函申请取消订单。已收预付款 6,000.00 EUR 的退还方式待与客户协商陈明2026-09-18 10:30待处理等待主管处理已处理记录类型事项申请人申请时间结果处理人处理时间处理意见改价申请订单 SO2026001 露营灯单价上调 0.10 USD陈明2026-08-01 09:15已通过周建国2026-08-02 11:20同意按新价执行，注意同步更新合同与单证取消申请订单 SO2026002 曾申请取消（客户撤回）陈明2026-01-20 16:40已退回周建国2026-01-21 09:05客户已撤回取消意向，订单继续执行",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20制作单证订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "allowed": false,
+      "heading": "",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「单证员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核商业发票 CI2026001（订单 SO2026001）审核发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理等待主管处理重新制单申请装箱单 PL2026004 申请重新制单因唛头与信用证条款不符被退回，申请基于修订内容重新制单生成 V2王芳2026-09-17 15:02待处理等待主管处理已处理记录类型事项申请人申请时间结果处理人处理时间处理意见单证审核商业发票 CI2026003 V2（订单 SO2026004）审核王芳2026-01-08 08:58已通过周建国2026-01-09 11:20地址已修正，通过",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单登记收款单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20登记收款订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结专注预览返回订单本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录操作当前角色对单证为只读查看。导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "allowed": true,
+      "heading": "收款与应收",
+      "height": 1000,
+      "mainText": "收款与应收当前输入未改动收款登记登记后实时更新订单已收/未收金额；不同币种独立登记、不合并折算金额至少 0.01，最多两位小数。取消申请中与已取消订单暂停新增收款；历史保留，未登记退款。选择订单SO2026001 · 太平洋进口公司 · 未收 12,100.00 USDSO2026003 · 环球贸易公司 · 未收 19,500.00 EURSO2026005 · 安第斯零售集团 · 未收 28,150.00 USDSO2026007 · 撒哈拉经销公司 · 未收 21,550.00 USD收款金额实时未收 12,100.00 USD币种币种随订单带入，不可修改收款方式电汇 T/T信用证 L/C付款交单 D/P其他收款日期备注应收 24,100.00 USD已收 12,000.00 USD未收 12,100.00 USD登记收款收款记录收款编号订单客户金额方式日期备注登记人PAY2026007SO2026007撒哈拉经销公司（Sahara Distribution SARL）20,000.00 USD信用证 L/C2026-09-01信用证部分议付赵倩PAY2026002SO2026001太平洋进口公司（Pacific Imports LLC）2,000.00 USD电汇 T/T2026-08-15客户补付模具费赵倩PAY2026006SO2026006尼罗河贸易公司（Nile Trading Co.）6,000.00 EUR电汇 T/T2026-07-20预付款赵倩PAY2026001SO2026001太平洋进口公司（Pacific Imports LLC）10,000.00 USD电汇 T/T2026-07-01预付款赵倩PAY2026003SO2026002太平洋进口公司（Pacific Imports LLC）28,400.00 USD信用证 L/C2026-03-05信用证议付赵倩PAY2026005SO2026004环球贸易公司（Global Trade GmbH）15,500.00 EUR电汇 T/T2026-02-10尾款赵倩共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页订单应收汇总应收 / 已收 / 未收按订单币种独立统计订单编号客户币种应收已收未收收款进度SO2026001太平洋进口公司USD24,100.0012,000.0012,100.0050%部分收款SO2026002太平洋进口公司USD28,400.0028,400.000.00100%已结清SO2026003环球贸易公司EUR19,500.000.0019,500.000%未收款SO2026004环球贸易公司EUR30,500.0030,500.000.00100%已结清SO2026005安第斯零售集团USD28,150.000.0028,150.000%未收款SO2026006尼罗河贸易公司EUR20,000.006,000.0014,000.0030%部分收款取消申请中 · 暂停新增收款SO2026007撒哈拉经销公司USD41,550.0020,000.0021,550.0048%部分收款客户未收款视图按客户 × 币种汇总，不同币种不合并客户币种未收订单数未收合计最早订单日期账龄风险太平洋进口公司（Pacific Imports LLC）USD112,100.00 USD2026-06-20关注环球贸易公司（Global Trade GmbH）EUR119,500.00 EUR2026-08-28关注安第斯零售集团（Andes Retail Group）USD128,150.00 USD2026-07-30高风险尼罗河贸易公司（Nile Trading Co.）EUR114,000.00 EUR2026-07-02关注撒哈拉经销公司（Sahara Distribution SARL）USD121,550.00 USD2026-08-15高风险",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 0 项类型事项申请人申请时间状态处理▤您没有审批中的申请已处理记录类型事项申请人申请时间结果处理人处理时间处理意见▤暂无已处理记录",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "allowed": true,
+      "heading": "订单工作区 原型样例",
+      "height": 1000,
+      "mainText": "订单协同 / ORDER WORKSPACE订单工作区 原型样例选择订单，同屏核对订单、单证与收款的独立进度。订单编号客户名称订单状态全部待执行执行中已完成取消申请中重置查询更多筛选业务员全部陈明李婷收款状态全部未收款部分收款已结清创建日期起创建日期止共 7 笔 · 金额按订单币种展示协同视图表格视图订单列表7 笔本页 6 笔 · 向下滚动查看SO202600319,500.00 EUR环球贸易公司（Global Trade GmbH）李婷 · 创建 2026-08-28 · 交期 2026-11-20订单待执行单证未开始收款未收款SO202600741,550.00 USD撒哈拉经销公司（Sahara Distribution SARL）李婷 · 创建 2026-08-15 · 交期 2026-11-05订单执行中单证已通过收款部分收款SO202600528,150.00 USD安第斯零售集团（Andes Retail Group）陈明 · 创建 2026-07-30 · 交期 2026-10-30订单执行中单证制作中收款未收款SO202600620,000.00 EUR尼罗河贸易公司（Nile Trading Co.）陈明 · 创建 2026-07-02 · 交期 2026-10-05订单取消申请中单证未开始收款部分收款SO202600124,100.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-06-20 · 交期 2026-10-15订单执行中单证待审核收款部分收款SO202600228,400.00 USD太平洋进口公司（Pacific Imports LLC）陈明 · 创建 2026-01-12 · 交期 2026-03-28订单执行中单证已通过收款已结清共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页当前订单SO2026003订单金额19,500.00 EUR环球贸易公司（Global Trade GmbH）来源报价 Q2026002 · 交期 2026-11-20订单进度待执行1待执行2执行中3已完成单证进度未开始1制作，条件尚未满足2送审，条件尚未满足3审核，条件尚未满足4可导出，条件尚未满足尚未制作单证收款进度未收款已收0.00 EUR未收19,500.00 EUR查看完整订单单证与收款并行推进，互不阻塞。订单记录7 笔紧凑行距订单 / 来源报价客户业务员订单金额订单状态单证状态收款状态创建时间操作SO2026003报价 Q2026002环球贸易公司Global Trade GmbH李婷19,500.00 EUR待执行未开始未收款2026-08-28查看SO2026007报价 Q2026007撒哈拉经销公司Sahara Distribution SARL李婷41,550.00 USD执行中已通过部分收款2026-08-15查看SO2026005报价 Q2026003安第斯零售集团Andes Retail Group陈明28,150.00 USD执行中制作中未收款2026-07-30查看SO2026006报价 Q2026006尼罗河贸易公司Nile Trading Co.陈明20,000.00 EUR取消申请中未开始部分收款2026-07-02查看SO2026001报价 Q2026001太平洋进口公司Pacific Imports LLC陈明24,100.00 USD执行中待审核部分收款2026-06-20查看SO2026002报价 Q2025118太平洋进口公司Pacific Imports LLC陈明28,400.00 USD执行中已通过已结清2026-01-12查看共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "allowed": true,
+      "heading": "订单 SO2026001 执行中",
+      "height": 1000,
+      "mainText": "订单 SO2026001 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-06-20查看来源报价订单金额24,100.00 USD已收金额12,000.00 USD未收金额12,100.00 USD贸易与付款条款FOB 上海 · 30% 预付，70% 见提单副本订单进度执行中✓待执行2执行中3已完成单证进度待审核✓制作，已完成✓送审，已完成3审核，有单证待审核4可导出，条件尚未满足最新单证 2 份 · 已送审 2/2 类 · 待审核 2 份收款进度未收 12,100.00 USD已收 12,000.00 / 24,100.00 USD（50%）部分收款订单概况商品明细关联单证收款情况审核与变更记录操作日志订单概况客户太平洋进口公司（Pacific Imports LLC）业务员陈明来源报价Q2026001（询盘 INQ2026001）创建时间2026-06-20要求交期2026-10-15币种USD订单金额24,100.00 USD付款方式30% 预付，70% 见提单副本贸易术语FOB 上海订单状态执行中单证状态待审核备注客户要求 10 月中旬前出运，分两批提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "allowed": true,
+      "heading": "商业发票 · CI2026001 V1 待审核",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026001 V1 待审核关联订单 SO2026001 · 制单人 王芳 · 本版本交易数据已冻结当前输入未改动专注预览全部单证台账本订单单证SO2026001 · 2 份CI2026001 V1待审核商业发票最新版本当前查看PL2026001 V1待审核装箱单最新版本待审核：制单人 王芳 已于 2026-09-15 提交审核，等待业务主管处理。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 SellerNINGBO YUANHANG IMP. & EXP. CO., LTD.宁波远航进出口有限公司18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINATEL: +86-574-8820-6688买方 BuyerPacific Imports LLC太平洋进口公司2100 Harbor Blvd, Los Angeles, CA 90021, USAATTN: Sarah Johnson发票号 Invoice No.CI2026001发票日期 Date2026-09-15订单号 Order No.SO2026001贸易术语 TermsFOB 上海币种 CurrencyUSD唛头 Shipping MarksPACIFIC\nSO2026001\nLOS ANGELES\nC/NO. 1-140NO.品名描述 DESCRIPTION数量 QTY单价 UNIT PRICE(USD)金额 AMOUNT(USD)1Stainless Steel Vacuum Bottle不锈钢保温杯 · 500ml / 316 不锈钢 / 多色5000 个3.1015,500.002LED Camping LanternLED 露营灯 · USB 充电 / 三档调光2000 个4.308,600.00TOTAL24,100.00SAY TOTAL USD 24,100.00 ONLY.备注 Remark—制单 Prepared by：王芳NINGBO YUANHANG IMP. & EXP. CO., LTD.审核状态 Review status：等待本次审核 / Pending review授权签字 Authorized Signature审核与操作留痕2026-09-15 09:40王芳提交审核发票与装箱单已按信用证条款核对2026-09-10 10:22王芳创建单证 V1当前版本操作V1最新版本执行中交易来源：样例基线·非历史签发记录审核意见审核通过退回修改导出导出 PDF（演示）当前单证为待审核，仅最新审核通过版本可修订或导出演示。版本信息关联订单：SO2026001制单人：王芳更新：2026-09-15交易数据来源样例基线·非历史签发记录冻结时间：2026/10/7 08:15:02（北京时间）查看冻结规则本次页面加载时冻结当前样例交易基线，无法还原历史签发数据。包装与备注修订沿用原版交易快照和冻结时间；订单或客户、商品、卖方信息更新不会改变本版本。旧版本保留，新版本重新审核。重新制单采用创建新快照时的当前交易信息。",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "allowed": true,
+      "heading": "收款与应收",
+      "height": 1000,
+      "mainText": "收款与应收收款登记业务主管视角为只读：收款登记由财务人员操作。收款记录收款编号订单客户金额方式日期备注登记人PAY2026007SO2026007撒哈拉经销公司（Sahara Distribution SARL）20,000.00 USD信用证 L/C2026-09-01信用证部分议付赵倩PAY2026002SO2026001太平洋进口公司（Pacific Imports LLC）2,000.00 USD电汇 T/T2026-08-15客户补付模具费赵倩PAY2026006SO2026006尼罗河贸易公司（Nile Trading Co.）6,000.00 EUR电汇 T/T2026-07-20预付款赵倩PAY2026001SO2026001太平洋进口公司（Pacific Imports LLC）10,000.00 USD电汇 T/T2026-07-01预付款赵倩PAY2026003SO2026002太平洋进口公司（Pacific Imports LLC）28,400.00 USD信用证 L/C2026-03-05信用证议付赵倩PAY2026005SO2026004环球贸易公司（Global Trade GmbH）15,500.00 EUR电汇 T/T2026-02-10尾款赵倩共 7 条记录，每页 6 条，第 1 / 2 页上一页12下一页订单应收汇总应收 / 已收 / 未收按订单币种独立统计订单编号客户币种应收已收未收收款进度SO2026001太平洋进口公司USD24,100.0012,000.0012,100.0050%部分收款SO2026002太平洋进口公司USD28,400.0028,400.000.00100%已结清SO2026003环球贸易公司EUR19,500.000.0019,500.000%未收款SO2026004环球贸易公司EUR30,500.0030,500.000.00100%已结清SO2026005安第斯零售集团USD28,150.000.0028,150.000%未收款SO2026006尼罗河贸易公司EUR20,000.006,000.0014,000.0030%部分收款取消申请中 · 暂停新增收款SO2026007撒哈拉经销公司USD41,550.0020,000.0021,550.0048%部分收款客户未收款视图按客户 × 币种汇总，不同币种不合并客户币种未收订单数未收合计最早订单日期账龄风险太平洋进口公司（Pacific Imports LLC）USD112,100.00 USD2026-06-20关注环球贸易公司（Global Trade GmbH）EUR119,500.00 EUR2026-08-28关注安第斯零售集团（Andes Retail Group）USD128,150.00 USD2026-07-30高风险尼罗河贸易公司（Nile Trading Co.）EUR114,000.00 EUR2026-07-02关注撒哈拉经销公司（Sahara Distribution SARL）USD121,550.00 USD2026-08-15高风险",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "allowed": true,
+      "heading": "审核与异常处理",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核商业发票 CI2026001（订单 SO2026001）审核发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理处理取消申请订单 SO2026006 申请取消客户资金链出现问题，正式发函申请取消订单。已收预付款 6,000.00 EUR 的退还方式待与客户协商陈明2026-09-18 10:30待处理处理重新制单申请装箱单 PL2026004 申请重新制单因唛头与信用证条款不符被退回，申请基于修订内容重新制单生成 V2王芳2026-09-17 15:02待处理处理已处理记录类型事项申请人申请时间结果处理人处理时间处理意见改价申请订单 SO2026001 露营灯单价上调 0.10 USD陈明2026-08-01 09:15已通过周建国2026-08-02 11:20同意按新价执行，注意同步更新合同与单证取消申请订单 SO2026002 曾申请取消（客户撤回）陈明2026-01-20 16:40已退回周建国2026-01-21 09:05客户已撤回取消意向，订单继续执行单证审核商业发票 CI2026003 V2（订单 SO2026004）审核王芳2026-01-08 08:58已通过周建国2026-01-09 11:20地址已修正，通过",
+      "modal": false,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "measurementCorrections": [
+    "键盘前后字段实际相同，首断言错误比较JSON对象键序导致假失败；逐字段value/start/end/focus比对通过，未改实现。",
+    "有限布局首断言强制所有main含h1/h2，14个已正确拒权页面原设计使用普通标题因此假失败；逐个实读保存DOM均无访问权限，按允许页面须heading、拒权页面须明确拒权正文纠正，未改实现或重复运行冒作额外50。",
+    "UI实读发现1440错误图像素1280，保原为resize-process-1280并新原生重拍1440；截图返回JPEG字节沿已有.png命名，尺寸读取Pillow而非假PNG头；两普通结果图1432x994是实际缩放图，不混DOM尺寸。"
+  ],
+  "console": [],
+  "scope": {
+    "roles": 5,
+    "routes": 5,
+    "distinctRoleRoutes": 25,
+    "layouts": 50,
+    "desktopWidths": [
+      1280,
+      1440
+    ],
+    "height": 1000,
+    "realInteractionPassGroups": 7,
+    "processImages": 8,
+    "finalImages": 10
+  },
+  "boundaries": [
+    "H21 only initial new repricing request; lawful input does not assure approval",
+    "browser DOM same ID/raw not strict nodeidentity; full Mock zero-write and identity proven Node",
+    "refresh resets demo memory; not persistence or real backend",
+    "no file:// or reader or cross-browser or production certification"
+  ],
+  "initialLayoutAssertionFailures": [
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "width": 1280,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1280,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "width": 1280,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "width": 1280,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "width": 1280,
+      "heading": "",
+      "mainText": "无访问权限当前角色「外贸业务员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "width": 1280,
+      "heading": "",
+      "mainText": "无访问权限当前角色「单证员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "width": 1440,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1440,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "width": 1440,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "width": 1440,
+      "heading": "",
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "width": 1440,
+      "heading": "",
+      "mainText": "无访问权限当前角色「外贸业务员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "width": 1440,
+      "heading": "",
+      "mainText": "无访问权限当前角色「单证员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台"
+    }
+  ]
+}

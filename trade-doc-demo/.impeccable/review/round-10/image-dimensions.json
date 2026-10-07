@@ -1,0 +1,146 @@
+[
+  {
+    "file": "approval-boundary-final-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "approval-boundary-first-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-cancel-final-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "oc-cancel-first-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-cancel-requested-final-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "oc-continued-final-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-error-final-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-error-final-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "oc-error-first-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-error-first-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "oc-error-resize-process-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-form-final-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-form-final-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "oc-form-first-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "oc-guard-final-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "oc-guard-first-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "oc-requested-final-1440.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "oc-requested-first-1280.png",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  }
+]

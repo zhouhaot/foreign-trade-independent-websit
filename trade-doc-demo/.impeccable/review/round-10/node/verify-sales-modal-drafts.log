@@ -1,0 +1,1 @@
+PASS: 40 sales modal draft scenarios; real qc/oc DOM, X/cancel/Escape continue-discard, busy lock, source-window async isolation, quote/order eligibility and no page-clean side effects (Node fixture only)

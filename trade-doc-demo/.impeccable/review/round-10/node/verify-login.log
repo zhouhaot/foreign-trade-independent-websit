@@ -1,0 +1,6 @@
+PASS: five-role dropdown template, default selection, label and department hint
+PASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state
+PASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard
+PASS: account/password required validation and no login on invalid fields
+PASS: invalid-role submit rejection, feedback and focus
+Scope: Node VM template/action checks only; native select interaction and visual layout require browser verification.
