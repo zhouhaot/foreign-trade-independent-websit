@@ -840,6 +840,14 @@
       ],
       "anomalyScope": "控制/缺姓名日期/未知/长名仅隔离Node，未注正式Mock造原生图。"
     },
+    "documentActionGuidance": {
+      "round": 14,
+      "assumption": "H25仅原五主链字段文字一致，CI唛头与备注、PL含包装，不新设控件/权限/政策。",
+      "surfaces": "edit按钮/编辑toolbar/进入Toast/受控可见与ARIA/confirm，使用真实d或原validated ticket.doc，保原id/下一版本号。",
+      "confirmation": "源版本、草稿、沿用交易快照、原版本保留和重新审核完整保，原commit/取消guard/H24/paper/历史不改。",
+      "evidence": ".impeccable/review/round-14/browser.json",
+      "limits": "首图未捕Toast不称目视；原生DOM反馈与Node模型相等分开，初命中异常根因未定、临时tab/旧helper恢复不是产品修复；不认证真实鉴权/后台/file/读屏。"
+    },
     "documentStatusGuidance": {
       "round": 13,
       "assumption": "H24仅draft/making/rejected横幅当前指导按本页ctx原policy，不新设权限/分派/审批制度。",

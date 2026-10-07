@@ -22,6 +22,7 @@
 - 第11轮：H22纯读审批上下文/原理由/完整意见与真实精确目标查看已实现；67专项、28Node/38语法0，综合APPROVE/JS安全44（34真点链接）APPROVE。9原生组、45角色路由/90两宽0fail、26JPEG8过程18终版、两轮五视角SHIP/审计8/1/0；原Actions/金额支付/Mock与10组件保。原受控修订V3后AP仍指V2历史禁导出，角色范围/旧记录不洗；同步以文末实际回执为准。
 - 第12轮：H23制单当前主队列/历史暂停参考与首页铃铛实际actor同源已实现，原3误导→2可办/1参考、取消后0/3；原状态/动作/四岗保。共享32/首页18/铃铛4、31Node/41语法、两独立APPROVE、8原生/40组合80两宽0fail、24JPEG8过程16终版/两轮UI SHIP；同步以文末实际回执为准。
 - 第13轮：H24仅两行草稿/制作中及退回横幅当前指导已实现；原4业务RED→GREEN34（含原意见同句测试方法补强）。原事实/三分支/纸张/操作/政策精保，32Node42语法与两独立APPROVE；7原生/25组合50两宽0fail、21JPEG8过程13终版，独立两轮UI最终逐13图SHIP、审计8/1/0，推送以文末实际回执为准。
+- 第14轮：H25原五面字段文案一致已实现，CI两字段/PL含包装/源版本及资格保；新29（17实际路径12方法边界）＋旧34保/归档精槽位适配、33Node43语法/两APPROVE；8原生/30组合60两宽0fail、33JPEG14过程19终版、独立UI逐19图SHIP/审计8/1/0。初命中/临时tab/helper纠正保过程，不称产品修复；同步以文末实际回执为准。
 - 全部规划页面已实现：登录、整体框架、工作台、客户/商品、询盘、报价、订单列表、订单详情（六页签）、单证列表与三栏预览审核页（CI/PL）、收款与应收、审核与异常处理、统计分析、系统管理。
 - 五类角色视角可用；顶栏角色已改为只读，切换身份必须退出后重新登录；权限控制到菜单、按钮和字段级只读，仍是演示流程而非后端鉴权。
 - Mock 数据勾稽一致：7 笔订单总额 = 明细之和，已收 = 收款记录之和；含 USD / EUR 多币种。
@@ -74,6 +75,7 @@
 | 27 | 审批结果回关联订单/申请版本 | 第10轮现实复盘 / 第11轮 | H22十项说明/67专项与两轮UI通过；精确申请版本/角色范围/原Actions保、缺重复不可路由待核；推送以实际回执为准 |
 | 28 | 制单员待办与当前可办理资格 | 第11轮现实复盘 / 第12轮 | H23同源32/18/4与两轮UI通过；原3候选仅2可办，旧/暂停参考保，零入口原guard后定位；原四岗/数据保，同步见实际回执 |
 | 29 | 单证状态横幅与当前作业资格一致 | 第12轮现实复盘 / 第13轮 | H24两行已实现，原4业务RED转34GREEN；原事实/动作保、32命令42语法/两APPROVE、7原生50两宽/终图UI SHIP，推送见实际回执 |
+| 30 | CI/PL实际字段与编辑/受控修订文案一致 | 第13轮原生复盘 / 第14轮 | H25五面29/旧34保与明确归档/槽位适配已实现，原业务/控件保；33/43及两APPROVE、8原生60布局/19终图UI SHIP，推送见实际回执 |
 
 ## T0：前端设计与交互设计（2026-09-30 优先级调整）
 
@@ -610,3 +612,23 @@ docs worker只owned Views局部、新status-guidance脚本/分材料，原业务
 实现提交 `4e689b3390d82bc1b5f54802977b79c730173d6d`，标题 `Align document status guidance with current work eligibility`，75文件：逐项实施/现实/两独立代码/两轮五视角UI、32命令42语法日志、7原生25组合50两宽、21JPEG8过程13终版与规范。专项34、综合70/JS20与晚脚本补审APPROVE，独立UI逐13终图SHIP，审计8/1/0；原两行外源码/其他运行文件/schema2/10原组件保。
 
 fetch前0/0，正常push快进后独立ls-remote完整main SHA与本地HEAD一致；推送后状态快照工作区干净，下一规划尚未落盘。成功后本回执另正常提交/推送回读；未强推、部署或改系统代理/凭据。R14现实规划已实际核CI按钮/toolbar/Toast/受控确认泛称packing而CI仅marksremark，财务“本月”固定2026-09另列候选且stats无此缺口；新规划文档排除本轮暂存，未实施，持续授权有效。
+
+### 2026-10-07 Codex 第14轮开工：操作文案对应实际字段
+
+第13轮实现4e689b3390d82bc1b5f54802977b79c730173d6d与回执ac8d5a9cb684964e59d6131ea1719cd6de4cbd6e均正常push、完整main独立回读匹配；回执后仅R14规划未跟踪并排除。现实worker只读原Node核CI实际marks/remark两控件，但原edit按钮/toolbar/Toast/revise可见ARIA/confirm五面泛称packing；PL七控件对照正确含packing。新probe明确原R13基线五面RED exit1/fullMock纯读，仅开编辑/confirm取消，非新业务提交。
+
+H25只这五面当前文案一致，允许private helper按真实d类型，不用role或当前窗口猜对象；CI唛头与备注、PL唛头/包装/备注。原policy/控件/纸张H19/历史/快照/业务Actionscommit/guard和H24两banner保，dirty离开与冻结说明一般范围不在本轮改。财务“本月”固定2026-09一笔样例另候选，stats按非取消订单带年份年月分组且无“本月”，不扩大误判或自改实时月份计算。
+
+旧R13专项的轮次freeze断言会被合法R14UI改动触发，中枢明确批准必要测试范围适配：34行为/同句事实/资格/完整MOCK断言保，原两行source精保改为已发布R13归档对58原源码仍核；当前横幅外HTML只exact doc-edit/编辑toolbar/doc-revise原attrs后的文案槽位白名单规范化，其余整页相等。本轮新专项独立核五面实际文字/控件/原Actions，并严格还原仅H25 helper/文案至R13当前source相等；test-only纯模块导出不能require时偷偷run或循环依赖，不静默删原业务断言。
+
+root六张真实1440基线及DOM读CI2/PL7、Enter编辑/取消confirm已保round-14，PL编辑图scroll28另记，未手改Mock造图；baselineready后才准worker改有限source、旧脚本、新专项/own材料，root单写必要CSS/原生/规范交接/Git，后续复用两独立review/UI。规划先现实、首图后必要打磨、终图再评，每项文字齐后才push，本轮未完成，持续授权有效。
+
+### 2026-10-07 Codex 第14轮冻结与两轮UI复盘
+
+private文字helper＋五面/六个文案出现点已冻结，原CI2/PL7实际控件、H24banner/政策/paper/H19/来源/history/业务commit和所有其他运行文件精保。新29=17实际路径12测试方法边界；旧34完整事实/资格/同句/全模型断言保，当前仅exact三HTML文案槽位及helper/五面源码还原R13，R13归档两行仍对58精保。原新5面/旧4业务RED独立重放保，不用missinghelper冒反例。综合57整View/纯import，JS pure1/HTML24/sourceinverse8/actualActions6独立APPROVE；3最终source/new/old指纹0C04/D2ED/A3E9相同。
+
+完整33Node43语法全0、README33命令一致；三CSS无变化，schema2/10原组件精保、审计8/1/0。原6baseline+8first实读首评无必须微修，不制造新CSS，最终19图逐实读H25 UI SHIP，普通缩图/弹窗全尺寸与DOM另列，部分focus浮滚不认停稳/全纸同屏。33JPEG14过程19终版，8真实组含CI/PL原编辑/受控取消与原生成V3/V2/只读岗位，原生可见事实与Node完整快照/财务相等分别限定。
+
+原5岗6文书30组合60两宽最终0fail/buttonOverflow0/console[]，矩阵前明确reload复位演示业务，新版本图是额外实际阶段。初PL1440按钮可见/未disabled而中心hit main、Enterdeadline/click无modal，未改source后reload命中+Enter成功，final1280及新tab同路径再通过；根因未定不称首次pass或产品修复。临时tab6失效列表空后同browser恢复8，第二旧tab错误为旧capture closure bound6，重建显式tab参数助手，未写错误图/未改产品，不猜用户停止/断线。过程保QA材料。
+
+下一只读规划选finance主label固定2026-09数据却称本月（原foot准确但主label相对），建议仅演示月登记收款、不改计数，stats无同缺陷；新R15规划不纳本轮暂存，尚未实现。本轮Git待正常快进push/完整回读，持续多agent授权有效。

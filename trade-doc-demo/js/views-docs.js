@@ -8,6 +8,9 @@
   var Views = window.Views, Actions = window.Actions;
   var ui = window.__ui, esc = U.esc, tag = U.tag, val = window.__val;
 
+  function editableDocFields(d) {
+    return d.type === 'CI' ? '唛头与备注' : '唛头、包装与备注';
+  }
   function sortedDocs() {
     return M.documents.slice().sort(function (a, b) { return b.updatedAt.localeCompare(a.updatedAt) || b.version - a.version; });
   }
@@ -128,7 +131,7 @@
       '<div class="doc-layout ' + (window.AppUI.docFocus ? 'is-focused' : '') + '">' +
         '<nav class="doc-list-panel" aria-label="本订单单证版本"><div class="panel-head">本订单单证<span class="muted small">' + d.orderId + ' · ' + siblings.length + ' 份</span></div>' + leftItems + '</nav>' +
         '<div class="doc-center">' + banner +
-          '<div class="preview-toolbar"><b>单证预览</b><span>' + (editing ? '编辑唛头、包装与备注' : '交易字段只读') + '</span></div>' +
+          '<div class="preview-toolbar"><b>单证预览</b><span>' + (editing ? '编辑' + editableDocFields(d) : '交易字段只读') + '</span></div>' +
           '<div class="doc-preview-wrap"><div class="paper-wrap">' + paper + (d.status === '已通过' ? '<div class="p-stamp">审核通过<br>APPROVED</div>' : '') + '</div></div>' +
           '<div class="card mt16"><div class="card-title">审核与操作留痕</div><div class="timeline">' + history + '</div></div>' +
         '</div>' +
@@ -188,7 +191,7 @@
       }
       if (d.status === '已通过') {
         html += '<div class="ablock"><div class="ab-title">受控修订</div>' +
-          '<button class="btn" data-action="doc-revise" data-id="' + d.id + '" aria-label="修订包装与备注，生成新版本 V' + nextDocVersion(d) + '">修订包装与备注 · V' + nextDocVersion(d) + '</button>' +
+          '<button class="btn" data-action="doc-revise" data-id="' + d.id + '" aria-label="修订' + editableDocFields(d) + '，生成新版本 V' + nextDocVersion(d) + '">修订' + editableDocFields(d) + ' · V' + nextDocVersion(d) + '</button>' +
           '<div class="readonly-hint">沿用原交易快照，原版本保留；新版本重新审核。</div></div>';
       } else if (d.status === '制作中' || d.status === '草稿' || d.status === '已退回') {
         if (editing) {
@@ -198,7 +201,7 @@
             '<button class="btn" data-action="doc-cancel-edit">放弃修改</button></div>';
         } else {
           html += '<div class="ablock"><div class="ab-title">制单操作</div>' +
-            '<button class="btn" data-action="doc-edit" data-id="' + d.id + '">编辑包装与备注</button>' +
+            '<button class="btn" data-action="doc-edit" data-id="' + d.id + '">编辑' + editableDocFields(d) + '</button>' +
             '<button class="btn btn-primary" data-action="doc-submit" data-id="' + d.id + '">提交审核</button></div>';
         }
         if (d.status === '已退回') {
@@ -481,7 +484,7 @@
     if (!ticket) return;
     window.AppUI.docEditing = ticket.doc.id;
     window.App.rerender();
-    U.toast('已进入编辑模式：仅唛头、包装与备注字段可修改，订单带入数据只读', 'info');
+    U.toast('已进入编辑模式：仅' + editableDocFields(ticket.doc) + '字段可修改，订单带入数据只读', 'info');
   };
   Actions['doc-cancel-edit'] = function () {
     function discard() { window.AppUI.docEditing = null; window.App.rerender(); }
@@ -560,7 +563,7 @@
     if (!ticket) return;
     var d = ticket.doc, version = nextDocVersion(d);
     U.confirm({ title: '受控修订确认',
-      message: '单证 <b>' + esc(d.no + ' V' + d.version) + '</b> 已审核通过。<br>确认将<b>生成新版本 V' + version + '</b>（草稿），仅修订唛头、包装与备注，<b>沿用 V' + d.version + ' 交易快照</b>。原版本保留，新版本需重新审核。',
+      message: '单证 <b>' + esc(d.no + ' V' + d.version) + '</b> 已审核通过。<br>确认将<b>生成新版本 V' + version + '</b>（草稿），仅修订' + editableDocFields(d) + '，<b>沿用 V' + d.version + ' 交易快照</b>。原版本保留，新版本需重新审核。',
       okText: '生成 V' + version,
       onOk: function () {
         return commitDocAction(ticket, function (doc) {

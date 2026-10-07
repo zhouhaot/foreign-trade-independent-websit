@@ -1,0 +1,51 @@
+{
+  "baseline": "ac8d5a9cb684964e59d6131ea1719cd6de4cbd6e",
+  "unchangedFiles": [
+    "js/mock-data.js",
+    "js/utils.js",
+    "js/app.js",
+    "js/views-core.js",
+    "js/views-sales.js",
+    "js/views-fin.js",
+    "css/base.css",
+    "css/layout.css",
+    "css/pages.css",
+    "index.html",
+    "AGENTS.md"
+  ],
+  "schemaVersion": 2,
+  "originalComponentsExact": 10,
+  "nodeCommands": 33,
+  "syntax": 43,
+  "READMECommandsExact": true,
+  "nativeGroups": 8,
+  "roleDocumentCombinations": 30,
+  "layouts": 60,
+  "layoutFailures": 0,
+  "images": 33,
+  "processImages": 14,
+  "finalImages": 19,
+  "pixelSizes": [
+    [
+      1272,
+      994
+    ],
+    [
+      1280,
+      1000
+    ],
+    [
+      1432,
+      994
+    ],
+    [
+      1440,
+      1000
+    ]
+  ],
+  "SHA256": {
+    "js/views-docs.js": "0c04cafaa61b7b83a287f8fa7bfc136101bb411b0173aecb8e1f147659853987",
+    "scripts/verify-document-action-guidance.cjs": "d2ede31065f00b6f868926d375bc48113268531d756679fe7a81cdcc1b0508f9",
+    "scripts/verify-document-status-guidance.cjs": "a3e9faa36f723d7740984e975b9aaa932801c854f746bab1b677d303a64d5a19"
+  }
+}

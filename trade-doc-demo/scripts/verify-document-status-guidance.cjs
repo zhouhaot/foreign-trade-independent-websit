@@ -6,6 +6,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const { execFileSync } = require('node:child_process');
 const { fixture } = require('./verify-document-workspace.cjs');
+const { archivedDocs, normalizeActionGuidanceHtml, normalizeActionGuidanceSource } = require('./verify-document-action-guidance.cjs');
 const root = path.resolve(__dirname, '..');
 const baseline = '58a65822e400fcd75398b642456648bd558a8e24';
 const originalDocs = () => execFileSync('git', ['show', baseline + ':trade-doc-demo/js/views-docs.js'], { cwd: root, encoding: 'utf8' });
@@ -41,7 +42,7 @@ async function run() {
     const view = render(t, id, role), content = text(view.banner), before = model(t);
     const oldHtml = t.originalView({ params: [id], query: {}, user: view.user });
     assert.equal(model(t), before, '新旧真实Views在同一快照/模型中均纯读');
-    assert.equal(view.html.replace(bannerHtml(view.html), ''), oldHtml.replace(bannerHtml(oldHtml), ''), '除横幅外目录/纸张/工具栏/右栏/来源/审核留痕全部HTML保持基线');
+    assert.equal(normalizeActionGuidanceHtml(view.html.replace(bannerHtml(view.html), '')), normalizeActionGuidanceHtml(oldHtml.replace(bannerHtml(oldHtml), '')), '除横幅与H25批准的三个当前动作文案槽位外整页HTML保持基线，id/版本/其它attrs/纸张/来源/历史精保');
     let guidance = bannerHtml(view.html);
     if (view.doc.status === '已退回') {
       const prefix = bannerHtml(oldHtml).split('<br>')[0].replace(/<\/div>$/, '');
@@ -131,7 +132,9 @@ async function run() {
   assert.equal(JSON.stringify(cancelled.c.MOCK.documents), savedDocuments, '取消通过不改历史单证');
   const source = fs.readFileSync(path.join(root, 'js/views-docs.js'), 'utf8').replace(/\r\n/g, '\n'), original = originalDocs().replace(/\r\n/g, '\n');
   const removeOwnedLines = s => s.split('\n').filter(line => !line.includes("if (d.status === '已退回') banner =") && !line.includes("else if (d.status === '草稿' || d.status === '制作中') banner =")).join('\n');
-  assert.equal(removeOwnedLines(source), removeOwnedLines(original), '实际源码仅两个状态分支，其它Views/helper/Actions不变');
+  const publishedR13 = archivedDocs().replace(/\r\n/g, '\n');
+  assert.equal(removeOwnedLines(publishedR13), removeOwnedLines(original), '已发布R13归档仍仅两个横幅分支，其它源码与原58基线精保');
+  assert.equal(normalizeActionGuidanceSource(source), publishedR13, '当前源码仅允许H25私人helper和五主链文案，归一后与已发布R13全文精保');
   console.log(`PASS ${cases} document status guidance scenarios: actual policy/Views/Actions, baseline outside-banner equality, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts (Node fixture only)`);
 }
 (process.argv.includes('--probe-original') ? probeOriginal() : run()).catch(error => { console.error(error.message); process.exitCode = 1; });

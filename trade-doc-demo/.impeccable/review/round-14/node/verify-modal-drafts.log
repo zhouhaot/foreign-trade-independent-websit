@@ -1,0 +1,1 @@
+PASS: 45 shared modal draft cases; clean/dirty/busy/source identity, original DOM/errors/focus/selection/scroll and explicit discard (Node fixture only)
