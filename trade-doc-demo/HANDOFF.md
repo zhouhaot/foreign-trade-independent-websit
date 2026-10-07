@@ -502,3 +502,9 @@ fetch前0/0，正常快进push后独立ls-remote完整SHA与本地HEAD相等，�
 首12原生图UI发现源整体opacity透页叠字，root保opaque父白卡只淡内容，CSS独立补审APPROVE；17终图及3额外720过程实读SHIP。14原生PASS、145角色路由/290两宽0fail、console[]；32PNG15过程17终。原生AP fast Enter与OC已commit closing-delay Esc明确范围，qc只登记不生成订单；AP页/body/textarea三个滚动域分开，extra body165/textarea362/selection0严格恢复。1280财务→主管wait超时在116后，实际finPL2/console空，native观察退出标题→登录补29；1440逐次读title/截图后confirm全145，无连续无恢复或猜因声明。
 
 设计4owned材料已同步并停止写入，schema2/原10组件examples保留。结构审计、源基线校验和本轮正常Git提交/推送/独立SHA回读由中枢封版后追加；当前未提前说已推送。正式身份/后端/全读屏/其它弹窗和导航/持久化不由此认证。
+
+### 第9轮GitHub同步回执（2026-10-07）
+
+实现提交 `72ad56e4e9de0627aeb961325ae70b1060f72aa5`，标题 `Preserve unfinished business modal input on close requests`，93文件包含33项说明／规划／两代码和UI两轮复审／设计规范、26日志／36语法、14实际交互／290布局与32PNG（15过程／17终版）。共享45／sales40／finance21，代码/JS/CSS补审APPROVE、UI SHIP、审计8/1/0；schema2/原10组件examples保留，Mock源码无差异。
+
+fetch前0/0，正常快进push后独立ls-remote完整SHA与本地HEAD相等。当前工作区只有第10轮只读规划文件未跟踪，明确排除本轮暂存，不能说整个工作区干净。本成功后回执将独立正常提交/推送再回读；未强推、部署、修改凭据配置。第10轮只读7非法初值金额候选仍是规划，待中枢选H21后小步实施，用户持续授权有效。
