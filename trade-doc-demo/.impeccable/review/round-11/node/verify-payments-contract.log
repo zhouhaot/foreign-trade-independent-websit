@@ -1,0 +1,1 @@
+PASS: 71 payment contract scenarios; real Promise/timers + native submit/change handlers (Node VM; no browser/server transaction claims)

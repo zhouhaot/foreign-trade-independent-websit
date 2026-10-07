@@ -1,0 +1,18 @@
+{
+  "baseline": "d9b1748c27102c2631dd6aed9df9e4e3af486d9f",
+  "unchangedFiles": [
+    "js/mock-data.js",
+    "js/utils.js",
+    "js/app.js",
+    "js/views-sales.js",
+    "js/views-docs.js",
+    "css/base.css",
+    "css/layout.css",
+    "index.html"
+  ],
+  "allApprovalActionsPreserved": true,
+  "paymentAndMoneySourcePreserved": true,
+  "schemaVersion": 2,
+  "componentsPreserved": 10,
+  "oldTestsChanged": false
+}

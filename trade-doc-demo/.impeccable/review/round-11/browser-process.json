@@ -1,0 +1,399 @@
+{
+  "images": [
+    {
+      "name": "sales-baseline-1440",
+      "file": "sales-baseline-1440.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请订单 SO2026006 申请取消客户资金链出现问题，正式发函申请取消订单。已收预付款 6,000.00 EUR 的退还方式待与客户协商陈明2026-09-18 10:30待",
+      "scroll": 0,
+      "width": 1440
+    },
+    {
+      "name": "sales-baseline-1280",
+      "file": "sales-baseline-1280.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请订单 SO2026006 申请取消客户资金链出现问题，正式发函申请取消订单。已收预付款 6,000.00 EUR 的退还方式待与客户协商陈明2026-09-18 10:30待",
+      "scroll": 0,
+      "width": 1280
+    },
+    {
+      "name": "doc-baseline-1280",
+      "file": "doc-baseline-1280.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核商业发票 CI2026001（订单 SO2026001）审核发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理等待主管处理重新制单申请装箱单 PL2026004 申请重新制单因唛头与信用证条款不符被退回，申请基于修订内容重新制单生成",
+      "scroll": 0,
+      "width": 1280
+    },
+    {
+      "name": "boss-baseline-1280",
+      "file": "boss-baseline-1280.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核商业发票 CI2026001（订单 SO2026001）审核发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价",
+      "scroll": 0,
+      "width": 1280
+    },
+    {
+      "name": "boss-baseline-stable-1280",
+      "file": "boss-baseline-stable-1280.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核商业发票 CI2026001（订单 SO2026001）审核发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核装箱单 PL2026001（订单 SO2026001）审核王芳2026-09-15 09:41待处理处理改价申请订单 SO2026005 申请整体降价 3%客户以首单试单为由要求整体降价",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "boss-context-first-1280",
+      "file": "boss-context-first-1280.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：商业发票 CI2026001 V1查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核申请编号 AP20260902装箱单 PL2026001（订",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "boss-result-first-1280",
+      "file": "boss-result-first-1280.jpg",
+      "stage": "process",
+      "active": "SUMMARY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：商业发票 CI2026001 V1查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核申请编号 AP20260902装箱单 PL2026001（订",
+      "opacity": "1",
+      "scroll": 773,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "boss-context-final-1280",
+      "file": "boss-context-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "boss-result-final-1280",
+      "file": "boss-result-final-1280.jpg",
+      "stage": "final",
+      "active": "SUMMARY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单",
+      "opacity": "1",
+      "scroll": 854,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "sales-context-final-1280",
+      "file": "sales-context-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请申请编号 AP20260903订单 SO2026005 申请整体降价 3%关联订单：查看关联订单 SO2026005原申请理由客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请申请编号 AP20260904订单 SO2026006 申请取消关联订单：查看关联订单 SO",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "sales-result-final-1280",
+      "file": "sales-result-final-1280.jpg",
+      "stage": "final",
+      "active": "SUMMARY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请申请编号 AP20260903订单 SO2026005 申请整体降价 3%关联订单：查看关联订单 SO2026005原申请理由客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请申请编号 AP20260904订单 SO2026006 申请取消关联订单：查看关联订单 SO",
+      "opacity": "1",
+      "scroll": 191,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "sales-target-so2-final-1280",
+      "file": "sales-target-so2-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/orders/SO2026002",
+      "height": 1000,
+      "mainText": "订单 SO2026002 执行中客户：太平洋进口公司（Pacific Imports LLC）业务员：陈明创建：2026-01-12查看来源报价申请变更订单金额28,400.00 USD已收金额28,400.00 USD未收金额0.00 USD贸易与付款条款CIF 洛杉矶 · 100% 不可撤销即期信用证订单进度执行中✓待执行2执行中3已完成单证进度已通过✓制作，已完成✓送审，已完成✓审核，已完成可导出，条件已满足，可导出最新单证 2 份 · 已送审 2/2 类 · 已满足审核条件收款进度未收 ",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-context-final-1280",
+      "file": "doc-context-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单证：查看申请对应单证 PL20260",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-result-final-1280",
+      "file": "doc-result-final-1280.jpg",
+      "stage": "final",
+      "active": "SUMMARY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单证：查看申请对应单证 PL20260",
+      "opacity": "1",
+      "scroll": 166,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-target-ci3v2-current-process-1280",
+      "file": "doc-target-ci3v2-current-process-1280.jpg",
+      "stage": "process",
+      "active": "BODY",
+      "hash": "#/documents/D-CI2026003-V2",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 3 份CI2026003 V2已通过商业发票最新版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。当前满足导出演示条件。单证预览交易字段只读商 业 发 票COMMERCIAL INVOICE卖方 Sell",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-exact-historical-v2-final-1280",
+      "file": "doc-exact-historical-v2-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/documents/D-CI2026003-V2",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 4 份CI2026003 V3草稿商业发票最新版本CI2026003 V2已通过商业发票历史版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。历史审核结果保留，当前导出资格见操作区。单证预览交易字段只读商",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "doc-target-pl4v1-final-1280",
+      "file": "doc-target-pl4v1-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/documents/D-PL2026004-V1",
+      "height": 1000,
+      "mainText": "装箱单 · PL2026004 V1 已退回关联订单 SO2026005 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026005 · 2 份PL2026004 V1已退回装箱单最新版本当前查看CI2026004 V1制作中商业发票最新版本已退回：唛头信息与信用证第 46A 条不符（港口拼写），请核对后重新送审（周建国 · 2026-09-17）请按意见修订后重新提交审核，或申请重新制单生成新版本。单证预览交易字段只读装 箱 单PACKING LIST发货人 S",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "fin-empty-final-1280",
+      "file": "fin-empty-final-1280.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 0 项类型事项申请人申请时间状态处理▤您没有审批中的申请已处理记录类型事项申请人申请时间结果处理人处理时间处理意见▤暂无已处理记录",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1280
+    },
+    {
+      "name": "boss-context-final-1440",
+      "file": "boss-context-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "boss-result-final-1440",
+      "file": "boss-result-final-1440.jpg",
+      "stage": "final",
+      "active": "SUMMARY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审待处理事项共 5 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单",
+      "opacity": "1",
+      "scroll": 784,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "sales-context-final-1440",
+      "file": "sales-context-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请申请编号 AP20260903订单 SO2026005 申请整体降价 3%关联订单：查看关联订单 SO2026005原申请理由客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请申请编号 AP20260904订单 SO2026006 申请取消关联订单：查看关联订单 SO",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "sales-result-final-1440",
+      "file": "sales-result-final-1440.jpg",
+      "stage": "final",
+      "active": "SUMMARY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 2 项类型事项申请人申请时间状态处理改价申请申请编号 AP20260903订单 SO2026005 申请整体降价 3%关联订单：查看关联订单 SO2026005原申请理由客户以首单试单为由要求整体降价 3%，降价后订单金额为 27,305.50 USD，毛利仍在可接受范围陈明2026-09-16 14:05待处理等待主管处理取消申请申请编号 AP20260904订单 SO2026006 申请取消关联订单：查看关联订单 SO",
+      "opacity": "1",
+      "scroll": 138,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-context-final-1440",
+      "file": "doc-context-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单证：查看申请对应单证 PL20260",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-result-final-1440",
+      "file": "doc-result-final-1440.jpg",
+      "stage": "final",
+      "active": "SUMMARY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "审核与异常处理您可以看到自己提交的申请及处理结果我提交的申请（审批中）共 3 项类型事项申请人申请时间状态处理单证审核申请编号 AP20260901商业发票 CI2026001（订单 SO2026001）审核关联单证：查看申请对应单证 CI2026001 V1原申请理由发票与装箱单已按信用证条款核对，请审核王芳2026-09-15 09:40待处理等待主管处理单证审核申请编号 AP20260902装箱单 PL2026001（订单 SO2026001）审核关联单证：查看申请对应单证 PL20260",
+      "opacity": "1",
+      "scroll": 155,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "doc-exact-historical-v2-final-1440",
+      "file": "doc-exact-historical-v2-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/documents/D-CI2026003-V2",
+      "height": 1000,
+      "mainText": "商业发票 · CI2026003 V2 已通过关联订单 SO2026004 · 制单人 王芳 · 本版本交易数据已冻结专注预览全部单证台账本订单单证SO2026004 · 4 份CI2026003 V3草稿商业发票最新版本CI2026003 V2已通过商业发票历史版本当前查看CI2026003 V1已退回商业发票历史版本PL2026003 V1已通过装箱单最新版本该版本曾审核通过：地址已修正，通过（周建国 · 2026-01-09）。历史审核结果保留，当前导出资格见操作区。单证预览交易字段只读商",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    },
+    {
+      "name": "admin-denied-final-1440",
+      "file": "admin-denied-final-1440.jpg",
+      "stage": "final",
+      "active": "BODY",
+      "hash": "#/approvals",
+      "height": 1000,
+      "mainText": "无访问权限当前角色「系统管理员」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。返回工作台",
+      "opacity": "1",
+      "scroll": 0,
+      "transform": "none",
+      "width": 1440
+    }
+  ],
+  "interactions": [
+    {
+      "name": "boss exact 5/3 rows, native Enter opens processed original reason with summary focus",
+      "pass": true,
+      "reason": "客户追加定制功能，双方确认露营灯单价由 4.20 调整为 4.30 USD"
+    },
+    {
+      "name": "sales own cancelled-request returned AP20260102 native Enter original reason and link to SO2 current execution",
+      "pass": true,
+      "reason": "客户临时考虑取消，次日撤回申请",
+      "route": "http://127.0.0.1:8001/index.html#/orders/SO2026002"
+    },
+    {
+      "name": "native Back from SO2 returns sales approval ledger with same 2/2 IDs (details reopen state not promised)",
+      "pass": true
+    },
+    {
+      "name": "sales approved historic AP20260801 native Enter target SO1, no targetAmount fabricated",
+      "pass": true,
+      "route": "http://127.0.0.1:8001/index.html#/orders/SO2026001"
+    },
+    {
+      "name": "doc own AP20260101 native Enter original reason and exact approved CI3V2 target",
+      "pass": true,
+      "route": "http://127.0.0.1:8001/index.html#/documents/D-CI2026003-V2"
+    },
+    {
+      "name": "existing controlled revision creates V3 draft, AP20260101 remains exact V2 historical/approved record with disabled export",
+      "pass": true,
+      "nativeDemoWrite": "original revision only; memory refresh resets",
+      "route": "http://127.0.0.1:8001/index.html#/documents/D-CI2026003-V2",
+      "exportEnabled": false
+    },
+    {
+      "name": "doc reform-request reason says planned V2 but actual association stays returned PL4V1 with existing reform pending",
+      "pass": true,
+      "route": "http://127.0.0.1:8001/index.html#/documents/D-PL2026004-V1"
+    },
+    {
+      "name": "boss primary processing opens original AP20260903 modal, clean Cancel closes without handling",
+      "pass": true,
+      "title": "处理申请 · AP20260903"
+    },
+    {
+      "name": "boss secondary order view SO5 and native Back preserve ledger pending scope",
+      "pass": true
+    }
+  ],
+  "layouts": [],
+  "failures": [],
+  "measurementCorrections": [
+    "原4基线图未核workspace入场opacity，只作过程/链接缺口上下文；后续捕获明确computed opacity1/transformnone，不把动画旧帧当终版。图像按JPEG/PNG真实字节选择扩展名。",
+    "V2历史页首断言错误要求导出按钮不存在；实际既有按钮可见但disabled，改核isEnabled=false及历史提示，未改实现或审批资格。",
+    "1440主管Back后即时捕获被稳态检查拒绝，未落文件/未计终图；下一调用读opacity1/transformnone再捕获，不补睡眠或重跑业务。"
+  ],
+  "scope": {
+    "realInteractionPassGroups": 9,
+    "processImages": 8,
+    "finalImages": 18,
+    "desktopWidths": [
+      1280,
+      1440
+    ],
+    "height": 1000
+  }
+}

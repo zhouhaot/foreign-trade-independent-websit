@@ -1,0 +1,210 @@
+[
+  {
+    "file": "admin-denied-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1440,
+      1000
+    ]
+  },
+  {
+    "file": "boss-baseline-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "boss-baseline-stable-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "boss-context-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "boss-context-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "boss-context-first-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "boss-result-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "boss-result-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "boss-result-first-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "doc-baseline-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "doc-context-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "doc-context-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "doc-exact-historical-v2-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "doc-exact-historical-v2-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "doc-result-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "doc-result-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "doc-target-ci3v2-current-process-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "doc-target-pl4v1-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "fin-empty-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "sales-baseline-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1280,
+      1000
+    ]
+  },
+  {
+    "file": "sales-baseline-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "sales-context-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "sales-context-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "sales-result-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  },
+  {
+    "file": "sales-result-final-1440.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1432,
+      994
+    ]
+  },
+  {
+    "file": "sales-target-so2-final-1280.jpg",
+    "format": "JPEG",
+    "pixelSize": [
+      1272,
+      994
+    ]
+  }
+]

@@ -840,6 +840,17 @@
       ],
       "anomalyScope": "控制/缺姓名日期/未知/长名仅隔离Node，未注正式Mock造原生图。"
     },
+    "approvalContextLedger": {
+      "round": 11,
+      "assumption": "H22仅台账纯读结果回真实关联作业，非转办/撤回/SLA制度，不扩原本人范围或真实权限。",
+      "structure": "保待处理6列/已处理8列；原申请编号、事项、真实目标与次级具名查看；主管主处理另列，原理由具名details完整展开、原意见完整列。",
+      "hierarchy": "事项14px/600，AP与标签13px/text-sub，4px间距；关联前缀与唯一具名查看同parent减少重复，reason/opinion pre-wrap+anywhere，不裁原文本。",
+      "target": "唯一真实order或CI/PL确切版本，校核关联order；固定站内前缀，当前路径不解码的不可路由编号待核而非改router。缺失/重复/未知/孤代理项无死链。",
+      "history": "V3草稿存在仍按AP60101查看V2历史，通过姓名保而导出disabled；重制reason说计划V2仍查看真实PL4V1，不解析title/reason猜目标。",
+      "scope": "9原生组，5角色×9相邻目标45distinct/90两宽，26 JPEG截图8过程18终版；DOM1280/1440与实际1272/1432缩图像素分开。",
+      "evidence": ".impeccable/review/round-11/browser.json",
+      "limits": "boss1280第5条须正常纵滚，same parent未保证一物理行；Back返回台账不承诺details展开态恢复，不认全读屏/file/跨浏览器/生产权限事务。"
+    },
     "changeRequestInitialAmount": {
       "round": 10,
       "assumption": "H21仅新OC改价初值，复用decimalInput普通正十进制至少0.01/最多2位/安全整数分/Number无损；合法不保证原主管可批准。",

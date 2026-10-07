@@ -377,6 +377,41 @@
   });
 
   /* ==================== 审核与异常处理 ==================== */
+  function approvalRoutableId(id) {
+    // 当前路由未解码路径片段；仅生成可按原始编号到达的站内链接。
+    if (typeof id !== 'string' || !id.trim()) return false;
+    try { return encodeURIComponent(id) === id; }
+    catch (error) { return false; }
+  }
+  // 台账只读关联：唯一对象与单证确切版本，不从事项标题猜测目标。
+  function approvalTarget(a) {
+    var unavailable = { href: null, label: '', description: '关联目标待核对 · 不可定位（' + (a.targetId || '未记录目标编号') + '）' };
+    if (!approvalRoutableId(a.targetId)) return unavailable;
+    if (a.targetType === 'order') {
+      var orders = M.orders.filter(function (o) { return o.id === a.targetId; });
+      if (orders.length !== 1) return unavailable;
+      return { href: '#/orders/' + encodeURIComponent(orders[0].id), label: '查看关联订单 ' + orders[0].id, description: '关联订单：' };
+    }
+    if (a.targetType === 'doc') {
+      var documents = M.documents.filter(function (d) { return d.id === a.targetId; });
+      if (documents.length !== 1) return unavailable;
+      var d = documents[0];
+      if (['CI', 'PL'].indexOf(d.type) < 0 || typeof d.no !== 'string' || !d.no.trim() || !Number.isSafeInteger(d.version) || d.version < 1) return unavailable;
+      if (typeof d.orderId !== 'string' || !d.orderId.trim() || M.orders.filter(function (o) { return o.id === d.orderId; }).length !== 1) return unavailable;
+      var version = d.no + ' V' + d.version;
+      return { href: '#/documents/' + encodeURIComponent(d.id), label: '查看申请对应单证 ' + version, description: '关联单证：' };
+    }
+    return unavailable;
+  }
+  function approvalContextHtml(a, target, processed) {
+    var reason = '<div class="approval-reason">' + esc(a.reason || '未记录') + '</div>';
+    return '<div class="approval-context"><div class="approval-id">申请编号 ' + esc(a.id) + '</div>' +
+      '<div class="approval-title">' + esc(a.title) + '</div>' +
+      '<div class="approval-target' + (target.href ? '' : ' approval-target-unavailable') + '">' + esc(target.description) +
+      (target.href ? '<a class="approval-link" href="' + esc(target.href) + '">' + esc(target.label) + '</a>' : '') + '</div>' +
+      (processed ? '<details class="approval-reference"><summary>原申请理由 · ' + esc(a.id) + '</summary>' + reason + '</details>' :
+        '<div class="approval-reference"><div class="approval-reason-label">原申请理由</div>' + reason + '</div>') + '</div>';
+  }
   Views.approvals = function (ctx) {
     var role = ctx.user.role;
     var name = ctx.user.name;
@@ -394,36 +429,35 @@
     }
 
     var pRows = pending.map(function (a) {
-      var action;
+      var action, target = approvalTarget(a);
       if (isBoss) {
-        if (a.type === '单证审核') {
-          action = '<a class="btn btn-sm btn-primary" href="#/documents/' + a.targetId + '">处理</a>';
-        } else if (a.applicant === name) {
+        if (a.applicant === name) {
           action = '<span class="readonly-hint">不能自审</span>';
+        } else if (a.type === '单证审核') {
+          action = a.targetType === 'doc' && target.href ? '<a class="btn btn-sm btn-primary" href="' + esc(target.href) + '">处理</a>' : '<span class="readonly-hint">目标待核对</span>';
         } else {
-          action = '<button class="btn btn-sm btn-primary" data-action="ap-handle" data-id="' + a.id + '">处理</button>';
+          action = '<button class="btn btn-sm btn-primary" data-action="ap-handle" data-id="' + esc(a.id) + '">处理</button>';
         }
       } else {
         action = '<span class="readonly-hint">等待主管处理</span>';
       }
-      return '<tr><td class="center">' + tag(a.type) + '</td><td>' + esc(a.title) +
-        (a.reason ? '<div class="muted small mt8">' + esc(a.reason) + '</div>' : '') + '</td>' +
+      return '<tr data-approval-id="' + esc(a.id) + '"><td class="center">' + tag(a.type) + '</td><td class="approval-context-cell">' + approvalContextHtml(a, target, false) + '</td>' +
         '<td class="cell-person">' + esc(a.applicant) + '</td><td class="cell-date">' + esc(a.applyTime) + '</td><td class="center">' + tag(a.status) + '</td><td>' + action + '</td></tr>';
     }).join('') || U.emptyRow(6, isBoss ? '当前没有待处理事项' : '您没有审批中的申请');
 
     var dRows = done.map(function (a) {
-      return '<tr><td class="center">' + tag(a.type) + '</td><td>' + esc(a.title) + '</td>' +
+      return '<tr data-approval-id="' + esc(a.id) + '"><td class="center">' + tag(a.type) + '</td><td class="approval-context-cell">' + approvalContextHtml(a, approvalTarget(a), true) + '</td>' +
         '<td class="cell-person">' + esc(a.applicant) + '</td><td class="cell-date">' + esc(a.applyTime) + '</td><td class="center">' + tag(a.status) + '</td>' +
-        '<td class="cell-person">' + esc(a.handler || '—') + '</td><td class="cell-date">' + esc(a.handleTime || '—') + '</td><td>' + esc(a.opinion || '—') + '</td></tr>';
+        '<td class="cell-person">' + esc(a.handler || '—') + '</td><td class="cell-date">' + esc(a.handleTime || '—') + '</td><td class="approval-opinion">' + esc(a.opinion || '—') + '</td></tr>';
     }).join('') || U.emptyRow(8, '暂无已处理记录');
 
     return '<div class="page-head"><h2>审核与异常处理</h2>' +
       '<span class="muted small">' + (isBoss ? '业务主管视角：单证审核在单证详情页完成；改价 / 取消 / 重新制单在此处理；不能自制自审' : '您可以看到自己提交的申请及处理结果') + '</span></div>' +
-      '<div class="card"><div class="card-title">' + title + '<span class="sub">共 ' + pending.length + ' 项</span></div>' +
-      '<div class="table-wrap"><table class="table"><thead><tr><th class="center">类型</th><th>事项</th><th>申请人</th><th>申请时间</th><th class="center">状态</th><th>处理</th></tr></thead>' +
+      '<div class="card approval-pending"><div class="card-title">' + title + '<span class="sub">共 ' + pending.length + ' 项</span></div>' +
+      '<div class="table-wrap"><table class="table approval-table approval-pending-table"><thead><tr><th class="center">类型</th><th>事项</th><th>申请人</th><th>申请时间</th><th class="center">状态</th><th>处理</th></tr></thead>' +
       '<tbody>' + pRows + '</tbody></table></div></div>' +
-      '<div class="card"><div class="card-title">已处理记录</div>' +
-      '<div class="table-wrap"><table class="table"><thead><tr><th class="center">类型</th><th>事项</th><th>申请人</th><th>申请时间</th><th class="center">结果</th><th>处理人</th><th>处理时间</th><th>处理意见</th></tr></thead>' +
+      '<div class="card approval-done"><div class="card-title">已处理记录</div>' +
+      '<div class="table-wrap"><table class="table approval-table approval-done-table"><thead><tr><th class="center">类型</th><th>事项</th><th>申请人</th><th>申请时间</th><th class="center">结果</th><th>处理人</th><th>处理时间</th><th>处理意见</th></tr></thead>' +
       '<tbody>' + dRows + '</tbody></table></div></div>';
   };
 

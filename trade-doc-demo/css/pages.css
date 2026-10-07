@@ -552,3 +552,17 @@
 .modal-draft-dialog h3 { font-size: 18px; margin: 0 0 12px; }
 .modal-draft-dialog p { font-size: 14px; line-height: 1.8; margin: 0; overflow-wrap: anywhere; }
 .modal-draft-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+/* 第11轮：审批事项、关联查阅与原理由分层，原结果意见完整保留。 */
+.approval-context { text-align: left; overflow-wrap: anywhere; }
+.approval-context > * + * { margin-top: 4px; }
+.approval-id { color: var(--text-sub); font-size: 13px; font-variant-numeric: tabular-nums; }
+.approval-title { color: var(--text); font-size: 14px; font-weight: 600; line-height: 1.5; }
+.approval-target { color: var(--text-sub); font-size: 13px; line-height: 1.6; }
+.approval-target-unavailable { color: var(--orange); }
+.approval-link { display: inline-block; min-height: 28px; padding: 3px 0; line-height: 1.6; vertical-align: baseline; }
+.approval-reference { font-size: 13px; line-height: 1.6; }
+.approval-reference summary { min-height: 28px; padding: 4px 0; color: var(--text-sub); cursor: pointer; }
+.approval-reason-label { color: var(--text-sub); font-size: 13px; }
+.approval-reason { margin-top: 4px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.approval-opinion { white-space: pre-wrap; overflow-wrap: anywhere; }
