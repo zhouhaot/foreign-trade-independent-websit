@@ -550,3 +550,9 @@ fin UI worker独占Views局部/verify-approval-context/分材料，中枢单写�
 真实HTTP9native、45角色路由/90两宽最终0fail/console[]/两tableoverflow0，26JPEG8过程18终版；UI逐18图两发现Resolved/SHIP，审计8/1/0。sales退回→SO2执行Back/键盘SO1，doc原受控修订造V3后AP1仍V2历史/原通过记录/导出disabled，重制reason计划V2仍PL4V1；主管主处理cleanCancel和次查阅Back，fin空/admin拒权实际保。矩阵先刷新还原V3，历史终图额外状态，不称全部状态矩阵。
 
 boss第五1280 top990需纵滚，结果854/784等非首屏0；同parent链自然折行非一物理行。early动画基线保process，后capture查opacity1/transformnone，即时不稳拒存；details孩子snapshot省略但actualopen/视觉完整，旧导出按钮可见disabled误要求不存在已纠正，未改资格。JPEG按真实字节.jpg与缩图像素另记，Back不承诺details展开态。第12轮只读候选独立未暂存，当前本轮Git待正常推送回读，不预写同步完成，用户持续授权有效。
+
+### 第11轮GitHub同步回执（2026-10-07）
+
+实现提交 `cfb74ebea25471449f29eebcc9590432b64015d2`，标题 `Expose approval context and exact target viewing paths`，78文件：十项前后说明、现实/岗位/两代码/两轮UI材料、28脚本日志、38语法、9原生组/45角色路由90两宽、26JPEG8过程18终版与规范。67专项、两独立APPROVE（JS44含34真点链接）、UI18图实读SHIP、审计8/1/0；原Actions/金额支付/Mock/共享与10组件保。
+
+fetch前HEAD与origin/main为0/0，正常快进push后独立ls-remote main完整SHA与本地HEAD相等。工作区仅留第12轮只读规划未跟踪，已排除本轮暂存，不称整个工作区干净。当前成功后回执另作正常文档提交/推送并再次回读；未强推、部署、改凭据或系统配置。第12轮依据现实候选核对制单员待办与当前可办理资格，用户持续多agent开发/逐轮推送授权有效。
