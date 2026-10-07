@@ -526,3 +526,9 @@ sales worker独占views-sales局部、verify-change-request-amount及逐项说�
 真实HTTP IAB7native、25角色路由/50两宽最终0fail console[]；18截图8process/10final，UI首5/终10及唯一新1440补图实读SHIP。长提示重复只缩hint，原fieldError保；键序和14正确拒权页heading假fail留原/纠正，resize旧1280帧保过程补拍1440。截图实际JPEG沿.png命名，2结果1432x994为实际缩图；不以DOM尺寸代像素或同id/raw代nodeidentity。
 
 Mock/utils/app/fin/三CSS/index无差异，OC前quotation/generate源码与schema2/10原components精确保；审计8/1/0。24000合法申请因24010候选差额仍原审批拒绝，隐藏24000.001取消成功不清旧target/title/history。第11轮只读审批结果回目标候选独立未暂存；本轮Git尚待正常push和独立完整SHA回读，用户持续授权有效。
+
+### 第10轮GitHub同步回执（2026-10-07）
+
+实现提交 `4185b82a353b7dcc2fd84f5033f145f449632060`，标题 `Validate initial repricing request amounts and preserve actionable errors`，69文件：9项前后说明、现实/财务/代码/JS/两轮UI材料、27脚本日志、37语法、7原生组/25角色路由50两宽、18截图8过程10终版及规范。原7初值RED→GREEN/58专项，独立APPROVE含66边界与4883整数oracle/16动作，UI最终SHIP、审计8/1/0；Mock/共享/fin/CSS/入口与10原组件保留，合法输入仍原审批。
+
+fetch前HEAD与origin/main为0/0；正常快进push后独立ls-remote main完整SHA与本地HEAD一致。工作区仅留第11轮只读规划文档未跟踪，已排除本轮暂存，因此不称整个工作区干净。此成功后回执另作正常文档提交/推送并再次回读。未强推、部署、改凭据或系统配置；第11轮按现实候选补审核结果回关联作业UI，用户持续授权有效。
