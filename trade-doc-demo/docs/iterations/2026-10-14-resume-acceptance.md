@@ -46,3 +46,7 @@
 ## 证据入口
 
 `.impeccable/review/2026-10-14-acceptance/` 保存基线与最终 Node 结果、独立主流程诊断、首次标签冻结失败记录、浏览器业务观察、权限/布局矩阵与实际截图。`browser-matrix.mjs` 供已授权的 Ego Browser TaskSpace 内复跑；先设置 `globalThis.TRADE_QA_SPACE` 与输出目录后求值，不会自行创建/接管浏览器空间。
+
+## GitHub同步
+
+实现提交 `f59656d537c55a32630d08fc705c4149b4a89dc4` 已正常快进推送 `main`，远端SHA回读与本地一致；目录树为 `fe31f2b88bbea371cf746242c893a3816521a51e`。此成功回执另以文档提交保存，最终提交号见Git历史；首制P1仍未实施，没有部署。
