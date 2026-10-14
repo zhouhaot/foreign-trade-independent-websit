@@ -42,11 +42,11 @@
 
 /* ========== 订单详情顶部 ========== */
 .order-head-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-panel);padding:24px;margin-bottom:24px;}
-.order-head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px;}
+.order-head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px;}
 .order-head-top .oh-title{font-size:22px;font-weight:600;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .order-head-top .oh-sub{font-size:12.5px;color:var(--text-sub);margin-top:6px;display:flex;gap:16px;flex-wrap:wrap;}
 .order-head-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.progress-triple{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;padding-top:24px;border-top:1px solid var(--border);}
+.progress-triple{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding-top:16px;border-top:1px solid var(--border);}
 .pt-block .pt-label{font-size:12.5px;color:var(--text-sub);margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
 .pt-block .pt-label b{color:var(--text);font-weight:600;}
 
@@ -306,10 +306,10 @@
 
 /* 详情、审核与分析沿用同一表面；文书保留纸张式严谨排版。 */
 .route-orders .order-head-card,.route-documents .doc-list-panel,.route-documents .doc-action-panel,.route-payments>.card:first-of-type,.route-approvals>.card,.route-system>.card{border-radius:var(--radius-panel);}
-.order-head-card{padding:26px!important;}
+.order-head-card{padding:18px 20px!important;}
 .order-head-top .oh-title{font-size:25px;letter-spacing:-.02em;}
 .order-head-top .oh-sub{margin-top:10px;}
-.order-summary{padding-block:22px;}
+.order-summary{padding-block:12px;}
 .tabs{gap:5px;border:0;background:var(--gray-bg);border-radius:10px;padding:5px;width:fit-content;max-width:100%;margin-bottom:22px;}
 .tab{padding:10px 18px;border:0;border-radius:7px;margin:0;transition:background-color var(--duration-fast),color var(--duration-fast);font-size:13px;}
 .tab:hover{background:var(--surface-subtle);}
@@ -356,22 +356,23 @@
 .orders-view-switch .btn[aria-pressed="true"]{background:var(--blue-bg);color:var(--primary);}
 .orders-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 20px;align-items:start;}
 .orders-stage .orders-view-bar{grid-column:1/-1;grid-row:1;}
-.orders-stage .orders-filter{grid-column:1;grid-row:2;margin:0;border-radius:var(--radius-panel) var(--radius-panel) 0 0;grid-template-columns:minmax(0,1fr);gap:12px;padding:20px 24px;}
+.orders-stage .orders-filter{grid-column:1/-1;grid-row:2;margin:0 0 16px;border-radius:var(--radius-panel);grid-template-columns:minmax(0,1fr) auto;gap:18px;padding:20px 24px;}
+.orders-stage .filter-primary{grid-template-columns:repeat(3,minmax(180px,1fr));}
 .orders-stage .orders-filter .filter-actions{justify-content:flex-end;}
 .orders-filter .btn-text{min-height:30px;padding-inline:8px;}
 .orders-stage .filter-advanced{grid-template-columns:repeat(2,minmax(0,1fr));}
 .orders-stage .filter-summary{grid-column:1/-1;margin:0;}
 .order-workspace{display:contents;}
 .order-selection{grid-column:1;grid-row:3;}
-.orders-stage:not(.table-mode) .order-selection{border-top:0;border-radius:0 0 var(--radius-panel) var(--radius-panel);}
-.order-inspector{grid-column:2;grid-row:2/span 2;}
+.orders-stage:not(.table-mode) .order-selection{border-radius:var(--radius-panel);}
+.order-inspector{grid-column:2;grid-row:3;}
 .orders-stage.table-mode{display:block;}
 .orders-stage.table-mode .orders-filter{margin-bottom:16px;border-radius:var(--radius-panel);grid-template-columns:minmax(0,1fr) auto;}
 .order-selection,.order-inspector{border:1px solid var(--border);background:var(--card);border-radius:var(--radius-panel);overflow:hidden;min-width:0;}
 .order-selection-title{display:flex;align-items:center;gap:12px;padding:22px 24px;border-bottom:1px solid var(--border);}
 .order-selection-title h3{font-size:18px;}
 .order-list-hint{margin-left:auto;font-size:11px;color:var(--text-sub);}
-.order-pick-list{max-height:510px;overflow-y:auto;scrollbar-gutter:stable;}
+.order-pick-list{overflow:visible;}
 .order-pick{display:block;width:100%;border:0;border-bottom:1px solid var(--border);padding:20px 24px;background:var(--card);color:var(--text);text-align:left;font:inherit;cursor:pointer;transition:background-color var(--duration-fast);}
 .order-pick:last-child{border-bottom:0;}
 .order-pick:hover{background:var(--surface-subtle);}
@@ -431,15 +432,18 @@
 .dashboard-metrics{gap:0;border:1px solid var(--border);border-radius:var(--radius-panel);overflow:hidden;background:var(--card);}
 .dashboard-metrics .stat-card{border:0;border-right:1px solid var(--border);border-radius:0;min-height:110px;padding:16px 22px;gap:5px;}
 .dashboard-metrics .stat-card:last-child{border-right:0;}
-.dashboard-metrics .stat-card:first-child,.dashboard-metrics .stat-card:first-child:hover{background:var(--blue-bg);border-color:var(--border);}
-.dashboard-metrics .stat-card:first-child .sc-value{color:var(--primary);}
+.dashboard-metrics .stat-card:first-child,.dashboard-metrics .stat-card:first-child:hover{background:var(--card);border-color:var(--border);}
+.dashboard-metrics .stat-card.accent-blue .sc-value{color:var(--primary);}
+.dashboard-metrics .stat-card.accent-red .sc-value{color:var(--red);}
+.dashboard-metrics .stat-card.accent-orange .sc-value{color:var(--orange);}
+.dashboard-metrics .stat-card.accent-green .sc-value{color:var(--green);}
 .dashboard-metrics .stat-card:first-child .sc-label,.dashboard-metrics .stat-card:first-child .sc-foot,.dashboard-metrics .stat-card:first-child .metric-icon,.dashboard-metrics .stat-card:first-child .sc-footer>.ui-icon{color:var(--text-sub);}
 .dashboard-metrics .stat-card .sc-value{font-size:27px;}
-.pt-block{border-radius:var(--radius-control);padding:16px;background:var(--surface-subtle);}
+.pt-block{border-radius:var(--radius-control);padding:12px;background:var(--surface-subtle);}
 .pt-block:nth-child(2){background:var(--blue-bg);}
 .pt-block:nth-child(3){background:var(--mint-bg);}
 @media(max-width:1360px){.orders-stage{column-gap:16px;}.orders-stage .orders-filter{padding:18px;}.order-pick{padding:18px;}.order-pick-head>strong{font-size:15px;}.order-pick-amount{font-size:13px;}.inspector-heading{padding:20px;}.inspector-heading h3{font-size:21px;}.inspector-total strong{font-size:17px;}.track-money strong{font-size:14px;}}
-@media(max-width:1100px){.orders-stage{display:block;}.orders-stage .orders-filter{grid-template-columns:minmax(0,1fr);}.order-inspector{position:static;margin-top:18px;}.order-pick-list{max-height:430px;}.progress-triple{grid-template-columns:minmax(0,1fr);}.topbar .current-role{display:none;}}
+@media(max-width:1100px){.orders-stage{display:block;}.orders-stage .orders-filter{grid-template-columns:minmax(0,1fr);}.order-inspector{position:static;margin-top:18px;}.progress-triple{grid-template-columns:minmax(0,1fr);}.topbar .current-role{display:none;}}
 
 /* 第2轮：保留字号与点击区，通过留白把常见业务操作带回桌面首屏。 */
 .route-orders{padding-top:22px;}
@@ -579,3 +583,23 @@
 .doc-work-reference > .home-text-link { max-width: 130px; line-height: 1.6; }
 .doc-work-summary .home-empty .icon { background: var(--surface-subtle); color: var(--text-sub); }
 .doc-work-references { scroll-margin-top: 96px; }
+
+/* 2026-10-14 岗位评审：操作与输入紧邻，纸张列宽不承载长说明。 */
+.amount-input-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.amount-input-row>.input{flex:1 1 140px;min-width:120px;width:0;}
+.amount-input-row>.btn{flex:0 0 auto;}
+.payment-completion{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-bottom:18px;}
+.payment-completion>span{flex:1 1 400px;}
+.success-box{padding:16px 18px;border:1px solid var(--green);border-radius:var(--radius-control);background:var(--green-bg);color:var(--green);font-size:14px;line-height:1.7;}
+.packing-form-notes{margin-top:10px;max-width:100%;text-align:left;}
+.packing-form-notes .field-error{font-size:12px;line-height:1.6;white-space:normal;overflow-wrap:anywhere;}
+.packing-form-notes .field-error:empty{display:none;}
+.packing-field .edit-field{min-width:0;max-width:100%;}
+.doc-order-context{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+.doc-compact-directory{display:none;}
+@media(min-width:1001px) and (max-width:1360px){
+  .doc-compact-directory{display:inline-flex;}
+  .doc-layout .doc-list-panel{display:none;}
+  .doc-layout.is-directory-open:not(.is-focused) .doc-list-panel{display:flex;}
+  .doc-layout.is-focused{grid-template-columns:minmax(0,1fr) 210px;}
+}

@@ -1,0 +1,3745 @@
+{
+  "routes": [
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "ok": true,
+      "hash": "#/dashboard",
+      "forbidden": false,
+      "text": 415
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "ok": true,
+      "hash": "#/customers",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "ok": true,
+      "hash": "#/customers/C001",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "ok": true,
+      "hash": "#/products",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "ok": true,
+      "hash": "#/products/P001",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "ok": true,
+      "hash": "#/inquiries",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "hash": "#/inquiries/INQ2026001",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "ok": true,
+      "hash": "#/quotes",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "hash": "#/quotes/Q2026001",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004/edit",
+      "ok": true,
+      "hash": "#/quotes/Q2026004/edit",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "ok": true,
+      "hash": "#/orders",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "hash": "#/orders/SO2026001",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "ok": true,
+      "hash": "#/documents",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "hash": "#/documents/D-CI2026001-V1",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "ok": true,
+      "hash": "#/payments",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "ok": true,
+      "hash": "#/approvals",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "ok": true,
+      "hash": "#/stats",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "ok": true,
+      "hash": "#/system/users",
+      "forbidden": false,
+      "text": 462
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "ok": true,
+      "hash": "#/system/roles",
+      "forbidden": false,
+      "text": 455
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "ok": true,
+      "hash": "#/system/dicts",
+      "forbidden": false,
+      "text": 524
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "ok": true,
+      "hash": "#/dashboard",
+      "forbidden": false,
+      "text": 881
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "ok": true,
+      "hash": "#/customers",
+      "forbidden": false,
+      "text": 547
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "ok": true,
+      "hash": "#/customers/C001",
+      "forbidden": false,
+      "text": 313
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "ok": true,
+      "hash": "#/products",
+      "forbidden": false,
+      "text": 544
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "ok": true,
+      "hash": "#/products/P001",
+      "forbidden": false,
+      "text": 297
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "ok": true,
+      "hash": "#/inquiries",
+      "forbidden": false,
+      "text": 627
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "hash": "#/inquiries/INQ2026001",
+      "forbidden": false,
+      "text": 595
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "ok": true,
+      "hash": "#/quotes",
+      "forbidden": false,
+      "text": 710
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "hash": "#/quotes/Q2026001",
+      "forbidden": false,
+      "text": 432
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004/edit",
+      "ok": true,
+      "hash": "#/quotes/Q2026004/edit",
+      "forbidden": false,
+      "text": 259
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "ok": true,
+      "hash": "#/orders",
+      "forbidden": false,
+      "text": 1116
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "hash": "#/orders/SO2026001",
+      "forbidden": false,
+      "text": 653
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "ok": true,
+      "hash": "#/documents",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "hash": "#/documents/D-CI2026001-V1",
+      "forbidden": false,
+      "text": 1316
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "ok": true,
+      "hash": "#/payments",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "ok": true,
+      "hash": "#/approvals",
+      "forbidden": false,
+      "text": 721
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "ok": true,
+      "hash": "#/stats",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "ok": true,
+      "hash": "#/system/users",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "ok": true,
+      "hash": "#/system/roles",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "ok": true,
+      "hash": "#/system/dicts",
+      "forbidden": true,
+      "text": 70
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "ok": true,
+      "hash": "#/dashboard",
+      "forbidden": false,
+      "text": 1074
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "ok": true,
+      "hash": "#/customers",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "ok": true,
+      "hash": "#/customers/C001",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "ok": true,
+      "hash": "#/products",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "ok": true,
+      "hash": "#/products/P001",
+      "forbidden": false,
+      "text": 297
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "ok": true,
+      "hash": "#/inquiries",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "hash": "#/inquiries/INQ2026001",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "ok": true,
+      "hash": "#/quotes",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "hash": "#/quotes/Q2026001",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004/edit",
+      "ok": true,
+      "hash": "#/quotes/Q2026004/edit",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "ok": true,
+      "hash": "#/orders",
+      "forbidden": false,
+      "text": 1108
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "hash": "#/orders/SO2026001",
+      "forbidden": false,
+      "text": 648
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "ok": true,
+      "hash": "#/documents",
+      "forbidden": false,
+      "text": 655
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "hash": "#/documents/D-CI2026001-V1",
+      "forbidden": false,
+      "text": 1301
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "ok": true,
+      "hash": "#/payments",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "ok": true,
+      "hash": "#/approvals",
+      "forbidden": false,
+      "text": 661
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "ok": true,
+      "hash": "#/stats",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "ok": true,
+      "hash": "#/system/users",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "ok": true,
+      "hash": "#/system/roles",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "ok": true,
+      "hash": "#/system/dicts",
+      "forbidden": true,
+      "text": 68
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "ok": true,
+      "hash": "#/dashboard",
+      "forbidden": false,
+      "text": 970
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "ok": true,
+      "hash": "#/customers",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "ok": true,
+      "hash": "#/customers/C001",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "ok": true,
+      "hash": "#/products",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "ok": true,
+      "hash": "#/products/P001",
+      "forbidden": false,
+      "text": 297
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "ok": true,
+      "hash": "#/inquiries",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "hash": "#/inquiries/INQ2026001",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "ok": true,
+      "hash": "#/quotes",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "hash": "#/quotes/Q2026001",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004/edit",
+      "ok": true,
+      "hash": "#/quotes/Q2026004/edit",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "ok": true,
+      "hash": "#/orders",
+      "forbidden": false,
+      "text": 1108
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "hash": "#/orders/SO2026001",
+      "forbidden": false,
+      "text": 646
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "ok": true,
+      "hash": "#/documents",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "hash": "#/documents/D-CI2026001-V1",
+      "forbidden": false,
+      "text": 1316
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "ok": true,
+      "hash": "#/payments",
+      "forbidden": false,
+      "text": 1889
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "ok": true,
+      "hash": "#/approvals",
+      "forbidden": false,
+      "text": 126
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "ok": true,
+      "hash": "#/stats",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "ok": true,
+      "hash": "#/system/users",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "ok": true,
+      "hash": "#/system/roles",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "ok": true,
+      "hash": "#/system/dicts",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "ok": true,
+      "hash": "#/dashboard",
+      "forbidden": false,
+      "text": 1081
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "ok": true,
+      "hash": "#/customers",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "ok": true,
+      "hash": "#/customers/C001",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "ok": true,
+      "hash": "#/products",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "ok": true,
+      "hash": "#/products/P001",
+      "forbidden": false,
+      "text": 297
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "ok": true,
+      "hash": "#/inquiries",
+      "forbidden": false,
+      "text": 624
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "hash": "#/inquiries/INQ2026001",
+      "forbidden": false,
+      "text": 595
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "ok": true,
+      "hash": "#/quotes",
+      "forbidden": false,
+      "text": 704
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "hash": "#/quotes/Q2026001",
+      "forbidden": false,
+      "text": 432
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004/edit",
+      "ok": true,
+      "hash": "#/quotes/Q2026004/edit",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "ok": true,
+      "hash": "#/orders",
+      "forbidden": false,
+      "text": 1103
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "hash": "#/orders/SO2026001",
+      "forbidden": false,
+      "text": 648
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "ok": true,
+      "hash": "#/documents",
+      "forbidden": false,
+      "text": 657
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "hash": "#/documents/D-CI2026001-V1",
+      "forbidden": false,
+      "text": 1322
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "ok": true,
+      "hash": "#/payments",
+      "forbidden": false,
+      "text": 1497
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "ok": true,
+      "hash": "#/approvals",
+      "forbidden": false,
+      "text": 1286
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "ok": true,
+      "hash": "#/stats",
+      "forbidden": false,
+      "text": 907
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "ok": true,
+      "hash": "#/system/users",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "ok": true,
+      "hash": "#/system/roles",
+      "forbidden": true,
+      "text": 69
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "ok": true,
+      "hash": "#/system/dicts",
+      "forbidden": true,
+      "text": 69
+    }
+  ],
+  "layouts": [
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "firstTodoBottom": 557.484375,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004/edit",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scroll": 1440,
+      "fields": [],
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "expected": {
+        "width": 1366,
+        "height": 768
+      },
+      "width": 1366,
+      "height": 768,
+      "scroll": 1366,
+      "fields": [],
+      "ok": true
+    }
+  ],
+  "tabs": [
+    {
+      "role": "sales",
+      "key": "items",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "items"
+    },
+    {
+      "role": "sales",
+      "key": "docs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "docs"
+    },
+    {
+      "role": "sales",
+      "key": "pay",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "pay"
+    },
+    {
+      "role": "sales",
+      "key": "changes",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "changes"
+    },
+    {
+      "role": "sales",
+      "key": "logs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "logs"
+    },
+    {
+      "role": "sales",
+      "key": "overview",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "overview"
+    },
+    {
+      "role": "doc",
+      "key": "items",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "items"
+    },
+    {
+      "role": "doc",
+      "key": "docs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "docs"
+    },
+    {
+      "role": "doc",
+      "key": "pay",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "pay"
+    },
+    {
+      "role": "doc",
+      "key": "changes",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "changes"
+    },
+    {
+      "role": "doc",
+      "key": "logs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "logs"
+    },
+    {
+      "role": "doc",
+      "key": "overview",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "overview"
+    },
+    {
+      "role": "fin",
+      "key": "items",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "items"
+    },
+    {
+      "role": "fin",
+      "key": "docs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "docs"
+    },
+    {
+      "role": "fin",
+      "key": "pay",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "pay"
+    },
+    {
+      "role": "fin",
+      "key": "changes",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "changes"
+    },
+    {
+      "role": "fin",
+      "key": "logs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "logs"
+    },
+    {
+      "role": "fin",
+      "key": "overview",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "overview"
+    },
+    {
+      "role": "boss",
+      "key": "items",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "items"
+    },
+    {
+      "role": "boss",
+      "key": "docs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "docs"
+    },
+    {
+      "role": "boss",
+      "key": "pay",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "pay"
+    },
+    {
+      "role": "boss",
+      "key": "changes",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "changes"
+    },
+    {
+      "role": "boss",
+      "key": "logs",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "logs"
+    },
+    {
+      "role": "boss",
+      "key": "overview",
+      "ok": true,
+      "y": 160,
+      "expectedY": 160,
+      "sameHead": true,
+      "sameTabs": true,
+      "sameBody": true,
+      "selected": "overview"
+    }
+  ],
+  "interactions": [
+    {
+      "label": "switch-cancel-keeps-input",
+      "role": "doc",
+      "sameInput": true,
+      "raw": "未保存的演示切换验收",
+      "dirty": true
+    },
+    {
+      "label": "switch-confirm",
+      "role": "fin",
+      "dirty": false,
+      "docEditing": null
+    },
+    {
+      "label": "permission-off-menu-and-route",
+      "menuOff": true,
+      "routeOff": true
+    },
+    {
+      "label": "permission-restored",
+      "ok": true
+    },
+    {
+      "label": "logout-protected-route",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "runtimeErrors": [],
+  "result": "PASS"
+}

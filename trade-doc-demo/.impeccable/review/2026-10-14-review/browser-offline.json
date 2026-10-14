@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "scope": "file native logout/protected-route/login and same-order first CI/PL creation only",
+  "protocol": "file:",
+  "active": "df-marks",
+  "documents": [
+    {
+      "type": "CI",
+      "version": 1,
+      "snapshot": true,
+      "invoice": null
+    },
+    {
+      "type": "PL",
+      "version": 1,
+      "snapshot": true,
+      "invoice": {
+        "status": "linked",
+        "docId": "D-CI2026006-V1",
+        "no": "CI2026006",
+        "version": 1
+      }
+    }
+  ],
+  "scripts": 9,
+  "css": 3,
+  "errors": [],
+  "qaNote": "Initial selector doc-create-first was incorrect; actual delegated action doc-create used after readback, no duplicate creation."
+}

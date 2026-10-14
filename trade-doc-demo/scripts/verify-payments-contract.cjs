@@ -41,7 +41,7 @@ function fixture(orderId = 'SO2026001') {
 }
 const state = t => JSON.stringify(t.c.MOCK);
 
-(async () => {
+async function run() {
   let checks = 0;
   async function refused(setup, pattern, delay = false) {
     const t = fixture();
@@ -59,7 +59,7 @@ const state = t => JSON.stringify(t.c.MOCK);
     return t;
   }
   for (const role of ['boss', 'sales', 'doc', 'admin']) await refused(t => { t.c.App.user = t.c.U.roleUser(role); }, /财务/);
-  for (const amount of ['', '0', '-1', '0.001', '1.005', 'Infinity', '-Infinity', 'NaN', '1e2', '1,000.00', '0x10', '900719925474099.99']) {
+  for (const amount of ['', '0', '-1', '0.001', '1.005', 'Infinity', '-Infinity', 'NaN', '1e2', '1,00.00', '1,000.001', '0x10', '900719925474099.99']) {
     const t = await refused(t => { t.fields['p-amount'].value = amount; }, /收款金额/);
     assert.equal(t.fields['p-amount'].value, amount, '保留待修正输入');
     assert.equal(t.fields['p-amount'].attrs['aria-invalid'], 'true');
@@ -127,7 +127,10 @@ const state = t => JSON.stringify(t.c.MOCK);
     assert.equal((t.c.MOCK.orderLogs[id] || []).length, (before.orderLogs[id] || []).length + 1);
     assert.equal(JSON.stringify(t.c.MOCK.orders), JSON.stringify(before.orders), '收款不改订单明细或状态');
     assert.equal(JSON.stringify(t.c.MOCK.documents), JSON.stringify(before.documents), '不改历史单证快照');
-    assert.equal(t.renderCount(), 1); assert.ok(t.messages.some(m => m.text.startsWith('收款已登记')));
+    const settled = t.c.U.financialBalance(t.c.U.order(id)).outstandingCents === 0;
+    assert.equal(t.renderCount(), settled ? 0 : 1, '结清改URL后由原生hash事件渲染；不结清且原URL相同才直接重绘');
+    assert.equal(t.c.location.hash, settled ? '#/payments' : '#/payments?order=' + id);
+    assert.ok(t.messages.some(m => m.text.startsWith('收款已登记')));
     if (id !== 'SO2026005') assert.equal(t.c.U.financialBalance(t.c.U.order(id)).outstandingCents, 0, '分为单位恰好结清');
     t.submit(); await t.flush(); assert.equal(t.c.MOCK.payments.length, paymentCount + 1, '旧成功表单不能再次登记'); checks++;
   }
@@ -166,4 +169,6 @@ const state = t => JSON.stringify(t.c.MOCK);
   assert.match(html, /汇总待核对/); assert.match(html, /合计超出可无损显示/);
   assert.doesNotMatch(html, /90,071,992,547,408\.98/, '不能把丢分的聚合伪装成有效金额'); checks++;
   console.log('PASS: ' + checks + ' payment contract scenarios; real Promise/timers + native submit/change handlers (Node VM; no browser/server transaction claims)');
-})().catch(error => { console.error(error); process.exitCode = 1; });
+}
+module.exports = { fixture, run };
+if (require.main === module) run().catch(error => { console.error(error); process.exitCode = 1; });

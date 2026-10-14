@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-14",
+  "scope": "local static Demo, actual UI actions",
+  "steps": [
+    {
+      "label": "询盘生成报价：545 USD、默认有效期+15天",
+      "detail": {
+        "id": "Q2026101",
+        "date": "2026-10-14",
+        "validUntil": "2026-10-29",
+        "expectedUntil": "2026-10-29",
+        "total": 545
+      }
+    },
+    {
+      "label": "客户确认→必填交期拦截→生成同一订单",
+      "detail": {
+        "id": "SO2026008",
+        "total": 545,
+        "deliveryDate": "2026-11-13",
+        "status": "待执行",
+        "docStatus": "未开始",
+        "payStatus": "未收款",
+        "documents": 0
+      }
+    },
+    {
+      "label": "业务员改价实时预演（不提交无效目标）",
+      "detail": {
+        "error": "本次申请未提交：数量保持不变、单价保留两位小数并等比舍入后，候选金额为 545.00 USD，与目标 544.99 USD 相差 0.01 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+        "preview": "改价试算数量 × 候选单价不锈钢保温杯100 × 3.20 USDLED 露营灯50 × 4.50 USD试算未通过，请调整目标金额后再提交。试用可行金额 545.00 USD仅供与客户重新协商；点击后重新试算，不会自动提交。",
+        "disabled": true
+      }
+    }
+  ],
+  "errors": [],
+  "result": "FAIL",
+  "failure": "ElementResolutionError: Selector .modal [data-close] matched 2 elements (2 visible, 0 hidden). Candidates: 1. button \"关闭弹窗\" (visible); 2. button \"取消\" (visible). Use a current snapshot ref or a more specific role, text, or CSS selector.\n    at ambiguityError (file:////[eval1]:10631:12)\n    at rawSelectorCountError (file:////[eval1]:10176:12)\n    at async findUniqueRawSelectorContext (file:////[eval1]:10111:19)\n    at async resolveRawSelectorObjectId (file:////[eval1]:10080:19)\n    at async clickInPage (file:////[eval1]:14065:20)\n    at async #retryElementAction (file:////[eval1]:18867:24)\n    at async file:////[eval1]:18968:29\n    at async file:////[eval1]:16691:28"
+}

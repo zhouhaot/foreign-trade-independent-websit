@@ -7,6 +7,7 @@ const { fixture } = require('./verify-document-workspace.cjs');
 const root = path.resolve(__dirname, '..');
 const baseline = '77deae8ae937c0c1d005d4b3b019d5d150e623b8';
 const baselineSource = name => execFileSync('git', ['show', baseline + ':trade-doc-demo/js/' + name + '.js'], { cwd: root, encoding: 'utf8' });
+const publishedSource = name => execFileSync('git', ['show', 'f8643db:trade-doc-demo/js/' + name + '.js'], { cwd: root, encoding: 'utf8' });
 function setup(sources = {}) { return fixture(['views-sales', 'views-docs', 'views-fin'], sources); }
 const data = t => JSON.stringify(t.c.MOCK);
 const nodeText = node => (node.textContent || '') + node.children.map(nodeText).join('');
@@ -80,7 +81,7 @@ async function run() {
     else if (!expectedTodos.length) { assert.match(nodeText(queue), /当前没有可办理制单事项/); assert.match(nodeText(queue), /历史|暂停|核对/); }
     cases++; return { html, summary, queue, refs };
   }
-  checkDoc(t, ['D-CI2026004-V1', 'D-PL2026004-V1'], ['D-CI2026003-V1']);
+  checkDoc(t, ['D-CI2026004-V1'], ['D-CI2026003-V1', 'D-PL2026004-V1']);
   const actualActor = setup(), actor = actualActor.c.U.roleUser('doc'), otherActor = actualActor.c.U.roleUser('sales'), summaryCalls = [];
   const summarize = actualActor.c.U.documentWorkSummary; actualActor.c.U.documentWorkSummary = user => { summaryCalls.push(user); return summarize(user); };
   actualActor.c.App.user = otherActor; const beforeActorRead = data(actualActor);
@@ -93,7 +94,7 @@ async function run() {
   t.modal.querySelector('#ap-opinion').value = '客户撤回取消，按原状态继续执行';
   t.click(t.modal.querySelector('[data-act="reject"]')); await t.flush();
   assert.equal(t.c.U.order('SO2026005').status, '执行中');
-  checkDoc(t, ['D-CI2026004-V1', 'D-PL2026004-V1'], ['D-CI2026003-V1']);
+  checkDoc(t, ['D-CI2026004-V1'], ['D-CI2026003-V1', 'D-PL2026004-V1']);
   const cancelled = setup(), request = await cancelSO5(cancelled);
   cancelled.c.App.user = cancelled.c.U.roleUser('boss'); cancelled.c.Actions['ap-handle']({ dataset: { id: request.id } });
   cancelled.click(cancelled.modal.querySelector('[data-act="approve"]')); await cancelled.flush();
@@ -103,12 +104,12 @@ async function run() {
   revision.c.App.user = revision.c.U.roleUser('doc'); revision.c.location.hash = '#/documents/' + source.id;
   revision.c.Actions['doc-revise']({ dataset: { id: source.id } }); revision.click(revision.modal.querySelector('[data-ok]')); await revision.flush();
   assert.equal(JSON.stringify(source), originalRecord, '真实受控修订保旧通过版本');
-  checkDoc(revision, ['D-CI2026004-V1', 'D-PL2026004-V1', 'D-CI2026003-V3'], ['D-CI2026003-V1']);
+  checkDoc(revision, ['D-CI2026004-V1', 'D-CI2026003-V3'], ['D-CI2026003-V1', 'D-PL2026004-V1']);
   for (const user of [{ role: 'doc', name: '', id: 'U004' }, { role: 'doc', name: '王芳', id: '' }]) checkDoc(setup(), [], [], user);
   const htmlText = setup();
   htmlText.c.MOCK.documents.filter(d => d.no === 'CI2026003').forEach(d => { d.no = '<b>历史号"&</b>" onfocus="injected()'; });
   htmlText.c.U.doc('D-CI2026004-V1').no = '<img src=x onerror=1>" onmouseover="injected()';
-  const escaped = checkDoc(htmlText, ['D-CI2026004-V1', 'D-PL2026004-V1'], ['D-CI2026003-V1']).html;
+  const escaped = checkDoc(htmlText, ['D-CI2026004-V1'], ['D-CI2026003-V1', 'D-PL2026004-V1']).html;
   assert.ok(escaped.includes('&lt;img src=x onerror=1&gt;')); assert.ok(escaped.includes('&lt;b&gt;历史号&quot;&amp;&lt;/b&gt;')); assert.ok(!escaped.includes('<img src=x onerror=1>'));
   for (const mutation of ['missing-order', 'duplicate-document', 'unroutable-id', 'lone-surrogate']) {
     const abnormal = setup(), doc = abnormal.c.U.doc('D-CI2026004-V1');
@@ -123,23 +124,45 @@ async function run() {
   }
   const unknown = setup(), unsupported = JSON.parse(JSON.stringify(unknown.c.U.doc('D-CI2026004-V1')));
   unsupported.id = 'UNKNOWN-STATUS'; unsupported.type = 'ZZ'; unsupported.status = '未知状态'; unknown.c.MOCK.documents.push(unsupported);
-  checkDoc(unknown, ['D-CI2026004-V1', 'D-PL2026004-V1'], ['D-CI2026003-V1']);
+  checkDoc(unknown, ['D-CI2026004-V1'], ['D-CI2026003-V1', 'D-PL2026004-V1']);
   for (const role of ['sales', 'fin', 'boss', 'admin']) {
-    const current = setup(), original = setup({ 'views-core': baselineSource('views-core') });
-    const before = data(current), currentHtml = render(current, current.c.U.roleUser(role)), originalHtml = render(original, original.c.U.roleUser(role));
-    // 2026-10-14 仅批准财务固定演示月标签更正；其余整页冻结断言保留。
-    let comparableHtml = currentHtml;
+    const current = setup(), original = setup({ utils: baselineSource('utils'), 'views-core': baselineSource('views-core') });
+    const published = setup({ 'mock-data': publishedSource('mock-data'), utils: publishedSource('utils'), 'views-core': publishedSource('views-core') });
+    const before = data(current), user = current.c.U.roleUser(role), currentHtml = render(current, user);
+    const originalHtml = render(original, original.c.U.roleUser(role)), publishedHtml = render(published, published.c.U.roleUser(role));
+    // 原H23“四岗整页不改”只证明已发布f8643db；当前待办前置/新增收款等用户需求不做广义归一。
+    let comparableHtml = publishedHtml;
     if (role === 'fin') {
       const oldLabel = '<span class="sc-label">本月登记收款</span>', newLabel = '<span class="sc-label">演示月登记收款</span>';
-      assert.equal(currentHtml.split(newLabel).length - 1, 1, '财务当前标签只出现一次');
+      assert.equal(publishedHtml.split(newLabel).length - 1, 1, '财务已发布标签只出现一次');
       assert.equal(originalHtml.split(oldLabel).length - 1, 1, '历史基线仍核旧标签');
-      assert.ok(!currentHtml.includes(oldLabel), '当前页面不将演示月称为本月');
-      assert.ok(currentHtml.includes('2026-09 收款笔数'), '保留固定月份脚注');
-      comparableHtml = currentHtml.replace(newLabel, oldLabel);
+      assert.ok(!publishedHtml.includes(oldLabel), '已发布页面不将演示月称为本月');
+      assert.ok(publishedHtml.includes('2026-09 收款笔数'), '已发布版本保留固定月份脚注');
+      comparableHtml = publishedHtml.replace(newLabel, oldLabel);
     }
-    assert.equal(comparableHtml, originalHtml, `${role}:除明确批准的财务标签外整页HTML完全相同`);
+    assert.equal(comparableHtml, originalHtml, `${role}:归档证明f8643db除明确批准财务标签外整页HTML完全相同`);
+    // 保当前四岗位的事实、精确指标、具名入口及非制单边界，不将当前测试退回归档。
+    current.app.innerHTML = currentHtml;
+    assert.equal(current.app.querySelector('.doc-work-summary'), null, role + '不能冒用单证员当前作业队列');
+    const metricCards = current.app.querySelector('.dashboard-metrics').querySelectorAll('.stat-card');
+    assert.equal(metricCards.length, 4); assert.ok(currentHtml.includes(current.c.U.esc(user.name)));
+    const pending = current.c.MOCK.approvals.filter(a => a.status === '待处理');
+    const recent = current.c.MOCK.orders.slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 4);
+    const salesQuoteCount = current.c.MOCK.quotes.filter(q => q.status === '待客户确认' && q.salesperson === user.name).length;
+    const salesInquiryCount = current.c.MOCK.inquiries.filter(i => i.status === '跟进中' && i.salesperson === user.name && !i.quoteId).length;
+    const expected = role === 'sales' ? [salesQuoteCount + salesInquiryCount, salesQuoteCount, current.c.MOCK.orders.filter(o => o.salesperson === user.name && o.status === '执行中').length, recent.length]
+      : role === 'fin' ? [current.c.MOCK.orders.filter(o => current.c.U.payStatus(o) !== '已结清' && o.status !== '已取消').length, current.c.U.sessionPaymentCount(), current.c.MOCK.orders.filter(o => current.c.U.payStatus(o) === '已结清').length, recent.length]
+      : role === 'boss' ? [pending.length, current.c.MOCK.documents.filter(d => d.status === '待审核').length, current.c.MOCK.orders.filter(o => current.c.U.payStatus(o) !== '已结清' && o.status !== '已取消').length, current.c.MOCK.orders.filter(o => o.status === '执行中').length]
+      : [current.c.MOCK.users.length, Object.keys(current.c.MOCK.roles).length, current.c.MOCK.dicts.length, '正常'];
+    assert.deepEqual(metricCards.map(card => nodeText(card.querySelector('.sc-value'))), Array.from(expected, String), role + '当前指标逐项核对');
+    for (const a of current.app.querySelector('.shortcut-list').querySelectorAll('a')) {
+      const href = a.getAttribute('href'); assert.ok(current.c.U.moduleEnabled(role, current.c.U.moduleForPath(href, role)), role + '入口遵循当前权限');
+    }
+    if (role === 'sales') { assert.ok(!currentHtml.includes('href="#/inquiries/INQ2026005"')); assert.ok(currentHtml.includes('href="#/inquiries/INQ2026006"')); }
+    if (role === 'fin') { assert.match(currentHtml, /本次演示新增收款/); assert.ok(!currentHtml.includes('2026-09 收款笔数')); }
+    if (role === 'admin') { assert.match(currentHtml, /管理员只维护系统配置，不参与业务审批/); assert.equal(current.app.querySelector('[data-action="doc-approve"]'), null); }
     assert.equal(data(current), before); cases++;
   }
-  console.log(`PASS: ${cases} document dashboard scenarios; actual shared API, original/currently editable distinction, cancellation reference and other-role exact output (Node fixture only)`);
+  console.log(`PASS: ${cases} document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries; archived f8643db other-role exact output (Node fixture only)`);
 }
 (process.argv.includes('--probe-original') ? probeOriginal() : run()).catch(error => { console.error(error.message); process.exitCode = 1; });

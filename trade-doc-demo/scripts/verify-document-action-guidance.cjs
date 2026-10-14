@@ -9,6 +9,8 @@ const { fixture } = require('./verify-document-workspace.cjs');
 const root = path.resolve(__dirname, '..');
 const baseline = 'ac8d5a9cb684964e59d6131ea1719cd6de4cbd6e';
 const archivedDocs = () => execFileSync('git', ['show', baseline + ':trade-doc-demo/js/views-docs.js'], { cwd: root, encoding: 'utf8' });
+// 2026-10-14新需求允许首制/包装/目录/审核连续性修改；H25“只改文案”全文证明固定在已发布R14，不吞当前新增实现。
+const publishedDocs = () => execFileSync('git', ['show', 'f8643db:trade-doc-demo/js/views-docs.js'], { cwd: root, encoding: 'utf8' });
 const text = node => (node.textContent || '') + node.children.map(text).join('');
 const model = t => JSON.stringify(t.c.MOCK);
 // 仅已授权的exact结构及有限字段文案；保对象id、版本、其它attrs/content。
@@ -40,7 +42,12 @@ function normalizeActionGuidanceSource(source) {
 function setup(original = false) {
   const t = fixture(['views-docs'], { 'views-docs': archivedDocs() });
   t.originalView = t.c.Views.docDetail;
-  if (!original) vm.runInContext(fs.readFileSync(path.join(root, 'js/views-docs.js'), 'utf8'), t.c);
+  if (!original) {
+    vm.runInContext(publishedDocs(), t.c); t.publishedView = t.c.Views.docDetail;
+    vm.runInContext(fs.readFileSync(path.join(root, 'js/views-docs.js'), 'utf8'), t.c);
+  }
+  // 本套PL4场景核7字段编辑文案；真实待重制互斥由review-documents专项保。前置移除在纯读基线捕获之前。
+  t.c.MOCK.approvals = t.c.MOCK.approvals.filter(a => !(a.type === '重新制单申请' && a.targetType === 'doc' && a.targetId === 'D-PL2026004-V1' && a.status === '待处理'));
   return t;
 }
 function mount(t, id, role = 'doc') {
@@ -85,9 +92,9 @@ async function probeOriginal() {
 async function run() {
   let cases = 0;
   function compareView(t, id) {
-    const before = model(t), html = t.app.innerHTML;
+    const before = model(t), html = t.publishedView({ params: [id], query: {}, user: t.c.App.user });
     const oldHtml = t.originalView({ params: [id], query: {}, user: t.c.App.user });
-    assert.equal(normalizeActionGuidanceHtml(html), normalizeActionGuidanceHtml(oldHtml), '仅三明确HTML槽位文案变化，原横幅/paper/源时间/历史/其它按钮attrs全文精保');
+    assert.equal(normalizeActionGuidanceHtml(html), normalizeActionGuidanceHtml(oldHtml), '归档证明：已发布R14仅三明确HTML槽位文案变化，原横幅/paper/源时间/历史/其它按钮attrs全文精保；当前行为另由本套真实Actions断言覆盖');
     assert.equal(model(t), before);
   }
   const editableIds = ['df-marks', 'df-remark'];
@@ -172,11 +179,11 @@ async function run() {
   assert.notEqual(normalizeActionGuidanceHtml(newRevise.replace(/V3/g, 'V4')), normalizeActionGuidanceHtml(oldRevise)); cases++;
   const history = '<div class="tl-opinion">编辑包装与备注；修订唛头与备注</div><div class="paper">包装原文</div><p>原因包装</p>';
   assert.equal(normalizeActionGuidanceHtml(history), history, '原历史/paper/reason不归一'); cases++;
-  const source = fs.readFileSync(path.join(root, 'js/views-docs.js'), 'utf8'), archive = archivedDocs().replace(/\r\n/g, '\n');
-  assert.equal(normalizeActionGuidanceSource(source), archive, '当前源码仅H25精确helper＋五面文案至R13全文精保'); cases++;
+  const source = publishedDocs(), archive = archivedDocs().replace(/\r\n/g, '\n');
+  assert.equal(normalizeActionGuidanceSource(source), archive, '归档证明：f8643db已发布R14仅H25精确helper＋五面文案至R13全文精保，不把新需求泛归一'); cases++;
   assert.notEqual(normalizeActionGuidanceSource(source + '\nwindow.unexpectedCommit = true;\n'), archive, '源码范围检查不能吞新增写逻辑'); cases++;
   assert.notEqual(normalizeActionGuidanceSource(source.replace("nd.status = '草稿';", "nd.status = '已通过';")), archive, '受控新状态修改会被精保检查抓住'); cases++;
-  console.log(`PASS ${cases} document action guidance scenarios: actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards, strict H25 HTML/source scope (Node fixture only)`);
+  console.log(`PASS ${cases} document action guidance scenarios: current actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards; archived f8643db H25 HTML/source scope (Node fixture only)`);
 }
-module.exports = { archivedDocs, normalizeActionGuidanceHtml, normalizeActionGuidanceSource };
+module.exports = { archivedDocs, publishedDocs, normalizeActionGuidanceHtml, normalizeActionGuidanceSource };
 if (require.main === module) (process.argv.includes('--probe-original') ? probeOriginal() : run()).catch(error => { console.error(error.message); process.exitCode = 1; });

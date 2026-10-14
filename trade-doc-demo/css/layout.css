@@ -174,3 +174,6 @@ kbd{font:inherit;font-size:10px;border:1px solid var(--border-control);border-ra
 .login-box{background:var(--card);border:1px solid var(--border);padding:36px;border-radius:var(--radius-panel);max-width:470px;}
 @media(max-width:1360px){.topbar{padding-inline:24px;gap:12px;}.topbar .breadcrumb{display:none;}.topbar-right{gap:12px;}.search-trigger{min-width:210px;}}
 @media(max-width:1150px){.search-trigger{min-width:36px;}.workspace-brand{font-size:18px;}}
+.demo-switch{display:inline-flex;min-width:0;}
+.demo-switch .select{width:166px;max-width:100%;height:34px;font-size:12px;padding-inline:9px;}
+@media(max-width:1440px){.topbar .breadcrumb{display:none;}.topbar .current-role{display:none;}.topbar-right{gap:12px;}}

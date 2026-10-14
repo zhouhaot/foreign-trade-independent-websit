@@ -9,18 +9,11 @@
   var processingApprovals = Object.create(null);
 
   // 金额使用安全整数分校验；不靠展示舍入隐藏目标与明细之间的差额。
-  function amountCents(value) {
-    if (typeof value !== 'number' && typeof value !== 'string') return null;
-    var text = String(value).trim();
-    if (!/^\d+(?:\.\d{1,2})?$/.test(text)) return null;
-    var parts = text.split('.');
-    var cents = Number(parts[0] + ((parts[1] || '') + '00').slice(0, 2));
-    return Number.isSafeInteger(cents) && cents > 0 ? cents : null;
-  }
 
   function approvalPermissionError(a, actor) {
     var user = window.App.user;
     if (!user || user.role !== 'boss') return '仅业务主管可以处理申请，请重新登录主管账号。';
+    if (!U.moduleEnabled(user.role, '审核与异常')) return '当前角色的审核与异常模块权限已关闭，请联系管理员。';
     if (actor && (actor.id !== user.id || actor.name !== user.name)) return '当前账号已改变，请关闭弹窗后重新处理申请。';
     if (!a || a.status !== '待处理') return '该申请已处理或不存在，请刷新后查看处理结果。';
     if (a.applicant === user.name) return '申请人不能自审，请由其他有审批权限的主管处理。';
@@ -68,55 +61,7 @@
     return current.some(function (value, index) { return !Object.is(value, openedContext[index]); });
   }
 
-  function prepareRepricing(a) {
-    var order = a.targetType === 'order' ? U.order(a.targetId) : null;
-    if (!order) return { error: '关联订单不存在，不能批准改价。' };
-    if (order.status === '已取消') return { error: '关联订单已取消，不能批准改价。' };
-    if (!order.currency || (a.currency && a.currency !== order.currency) || (a.targetCurrency && a.targetCurrency !== order.currency)) {
-      return { error: '申请币种与订单币种不一致，不能批准改价。' };
-    }
-    var target = amountCents(a.targetAmount);
-    if (target === null) return { error: '目标金额必须为大于 0、最多两位小数且在安全计算范围内的有限金额。' };
-    if (!Array.isArray(order.items) || !order.items.length) return { error: '订单没有明细，不能计算改价。' };
-    var current = 0, prices = [], error = '';
-    order.items.forEach(function (it, index) {
-      var price = amountCents(it.price);
-      if (!Number.isSafeInteger(it.qty) || it.qty <= 0) error = '第 ' + (index + 1) + ' 行数量必须为正整数；当前数量精度尚不支持改价。';
-      else if (price === null) error = '第 ' + (index + 1) + ' 行单价必须为大于 0、最多两位小数的有限金额。';
-      else if (!Number.isSafeInteger(it.qty * price) || !Number.isSafeInteger(current + it.qty * price)) error = '订单明细金额超出安全计算范围。';
-      else { current += it.qty * price; prices.push(price); }
-    });
-    if (error) return { error: error };
-    var received = 0;
-    M.payments.filter(function (p) { return p.orderId === order.id; }).forEach(function (p) {
-      var cents = amountCents(p.amount);
-      if (p.currency !== order.currency) error = '关联收款存在不同币种，不能合并金额或批准改价，请先核对收款币种。';
-      else if (cents === null || !Number.isSafeInteger(received + cents)) error = '关联收款金额或精度无效，请先核对收款记录。';
-      else received += cents;
-    });
-    if (error) return { error: error };
-    if (target < received) return { error: '目标金额 ' + U.fmt(target / 100) + ' ' + order.currency + ' 低于已收 ' + U.fmt(received / 100) + ' ' + order.currency + '，退款规则未确认，不能批准改价。' };
-    var total = 0;
-    var items = order.items.map(function (it, index) {
-      var cents = Math.round(prices[index] * (target / current));
-      if (!Number.isSafeInteger(cents) || cents <= 0 || !Number.isSafeInteger(cents * it.qty) || !Number.isSafeInteger(total + cents * it.qty)) {
-        error = '第 ' + (index + 1) + ' 行改价后单价或金额超出支持范围，不能批准。';
-      }
-      total += cents * it.qty;
-      var candidate = Object.assign({}, it);
-      candidate.price = cents / 100;
-      if (amountCents(candidate.price) !== cents) error = '第 ' + (index + 1) + ' 行改价后单价无法以当前数值精度保存，不能批准。';
-      return candidate;
-    });
-    if (error) return { error: error };
-    var result = { order: order, items: items, total: total / 100, target: target / 100 };
-    if (total !== target) {
-      result.error = '数量保持不变、单价保留两位小数并等比舍入后，候选金额为 ' + U.fmt(total / 100) + ' ' + order.currency +
-        '，与目标 ' + U.fmt(target / 100) + ' ' + order.currency + ' 相差 ' + U.fmt(Math.abs(total - target) / 100) + ' ' + order.currency +
-        '。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。';
-    }
-    return result;
-  }
+  function prepareRepricing(a) { return U.prepareRepricing(a); }
 
   /* ==================== 收款与应收 ==================== */
   var processingPayments = Object.create(null);
@@ -124,6 +69,11 @@
 
   function paymentMethods() {
     return M.dicts.filter(function (d) { return d.group === '收款方式' && d.enabled; }).map(function (d) { return d.label; }).concat(['其他']);
+  }
+  function paymentAmount(value) {
+    var text = typeof value === 'string' ? value.trim() : value;
+    if (typeof text === 'string' && /^\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?$/.test(text)) text = text.replace(/,/g, '');
+    return U.decimalInput(text, '收款金额');
   }
   function paymentOrderError(order) {
     if (!order) return '关联订单不存在，请重新选择可收款订单。';
@@ -163,12 +113,13 @@
     var errors = [], order = U.order(payload.order);
     var user = window.App.user;
     if (!user || user.role !== 'fin') errors.push({ field: 'order', error: '仅财务人员可以登记收款，请重新登录财务账号。' });
+    else if (!U.moduleEnabled(user.role, '收款与应收')) errors.push({ field: 'order', error: '当前收款模块权限已关闭，请联系管理员核对。' });
     var sel = form.querySelector('#p-order'), opt = sel.options[sel.selectedIndex];
     if (!opt || opt.disabled || opt.value !== payload.order) errors.push({ field: 'order', error: '订单选项与当前选择不一致，请重新选择订单。' });
     var orderError = paymentOrderError(order);
     if (orderError) errors.push({ field: 'order', error: orderError });
     if (order && payload.currency !== order.currency) errors.push({ field: 'currency', error: '收款币种与当前订单币种不一致，请重新选择订单核对币种。' });
-    var money = U.decimalInput(payload.amount, '收款金额');
+    var money = paymentAmount(payload.amount);
     if (!money.ok) errors.push({ field: 'amount', error: money.error });
     var balance = order ? U.financialBalance(order) : null;
     if (money.ok && balance && balance.ok && money.units > balance.outstandingCents) errors.push({ field: 'amount', error: '收款金额不能超过实时未收 ' + U.fmt(balance.outstanding) + ' ' + order.currency + '。' });
@@ -220,7 +171,7 @@
         (payableOrders.length ?
         '<form id="pay-form"><div class="form-grid">' +
           '<div class="form-item"><label class="required" for="p-order">选择订单</label><select class="select" id="p-order">' + opts + '</select><div class="field-error"></div></div>' +
-          U.formItem('收款金额', '<input class="input" id="p-amount" inputmode="decimal" aria-describedby="p-out-hint" placeholder="如 1200.50"><div class="readonly-hint" id="p-out-hint">' + (first ? '实时未收 ' + U.fmt(U.financialBalance(first).outstanding) + ' ' + first.currency : '请选择订单后核对未收金额') + '</div>', { required: true }) +
+          U.formItem('收款金额', '<div class="amount-input-row"><input class="input" id="p-amount" inputmode="decimal" aria-describedby="p-out-hint p-amount-help" placeholder="如 12,100.00"><button type="button" class="btn btn-sm" data-action="pay-fill-balance">填入全部未收</button></div><div class="readonly-hint" id="p-out-hint">' + (first ? '实时未收 ' + U.fmt(U.financialBalance(first).outstanding) + ' ' + first.currency : '请选择订单后核对未收金额') + '</div><div class="readonly-hint" id="p-amount-help">支持粘贴标准千分位金额，如 12,100.00。</div>', { required: true }) +
           U.formItem('币种', '<input class="input" id="p-currency" value="' + (first ? esc(first.currency) : '') + '" readonly><div class="readonly-hint">币种随订单带入，不可修改</div>') +
           '<div class="form-item"><label class="required" for="p-method">收款方式</label><select class="select" id="p-method">' +
             paymentMethods().map(function (m) { return '<option>' + esc(m) + '</option>'; }).join('') +
@@ -275,7 +226,12 @@
         '<td class="center">' + (outstanding > 20000 ? tag('高风险', 'red') : outstanding > 5000 ? tag('关注', 'orange') : tag('正常', 'green')) + '</td></tr>';
     }).join('') || U.emptyRow(6, '当前没有未收款项');
 
+    var completion = window.AppUI.paymentCompletion;
+    var completedOrder = completion && U.order(completion.orderId);
+    var completedBalance = completedOrder && U.financialBalance(completedOrder);
+    var completed = role === 'fin' && completion && completion.actorId === ctx.user.id && completedBalance && completedBalance.ok && completedBalance.outstandingCents === 0;
     return '<div class="page-head"><h2>收款与应收</h2></div>' +
+      (completed ? '<div class="success-box payment-completion" role="status"><strong>' + esc(completedOrder.id) + ' 已全部结清</strong><span>最后一笔 ' + U.fmt(completion.amount) + ' ' + esc(completedOrder.currency) + ' 已登记，已收与应收一致。可继续选择下一笔待收款订单。</span><a href="#/orders/' + esc(completedOrder.id) + '?tab=pay">查看完整收款记录</a><button class="btn btn-sm" data-action="pay-dismiss-completion" aria-label="关闭结清提示">关闭</button></div>' : '') +
       formHtml +
       '<div class="card"><div class="card-title">收款记录</div>' +
       '<div id="pay-records-content">' + paymentRecordsHtml() + '</div></div>' +
@@ -286,6 +242,24 @@
       (excluded ? '<div class="readonly-hint">' + excluded + ' 笔金额异常订单未纳入此汇总；请在订单应收汇总核对完整原因。</div>' : '') +
       '<div class="table-wrap"><table class="table"><thead><tr><th>客户</th><th class="center">币种</th><th class="center">未收订单数</th><th class="num">未收合计</th><th>最早订单日期</th><th class="center">账龄风险</th></tr></thead>' +
       '<tbody>' + custRows + '</tbody></table></div></div>';
+  };
+  Actions['pay-dismiss-completion'] = function () {
+    delete window.AppUI.paymentCompletion;
+    var card = document.querySelector('.payment-completion');
+    if (card) card.remove();
+  };
+  Actions['pay-fill-balance'] = function (el) {
+    var form = document.getElementById('pay-form'), user = window.App.user;
+    if (!form || !el || !form.contains(el) || !user || user.role !== 'fin' || !U.moduleEnabled('fin', '收款与应收')) return;
+    if (form.querySelector('.is-loading')) { U.toast('正在登记，请等待处理结果。', 'warning'); return; }
+    var order = U.order(form.querySelector('#p-order').value), error = paymentOrderError(order);
+    if (error) { paymentFailure(form, [{ field: 'order', error: error }]); return; }
+    var amount = form.querySelector('#p-amount');
+    amount.value = U.financialBalance(order).outstanding.toFixed(2);
+    U.clearErrors(amount.closest('.form-item'));
+    form.querySelector('#pay-effect-error').textContent = '';
+    amount.dispatchEvent(new Event('input', { bubbles: true }));
+    amount.focus({ preventScroll: true });
   };
   Actions['pay-page'] = function (el) {
     var container = document.getElementById && document.getElementById('pay-records-content');
@@ -366,8 +340,11 @@
       completedPaymentForms.add(form);
       delete processingPayments[paymentOrderId];
       if (window.App.markDraftClean) window.App.markDraftClean();
-      U.toast('收款已登记，订单已收/未收金额已更新');
-      var destination = '#/payments?order=' + encodeURIComponent(paymentOrderId);
+      var isSettled = U.financialBalance(order).outstandingCents === 0;
+      if (isSettled) window.AppUI.paymentCompletion = { orderId: order.id, amount: rec.amount, actorId: actor.id };
+      else delete window.AppUI.paymentCompletion;
+      U.toast(isSettled ? '收款已登记，' + order.id + ' 已全部结清' : '收款已登记，订单已收/未收金额已更新');
+      var destination = isSettled ? '#/payments' : '#/payments?order=' + encodeURIComponent(paymentOrderId);
       if (window.location && location.hash !== destination) {
         if (window.App.requestNavigation) window.App.requestNavigation(destination);
         else location.hash = destination;
@@ -434,9 +411,9 @@
         if (a.applicant === name) {
           action = '<span class="readonly-hint">不能自审</span>';
         } else if (a.type === '单证审核') {
-          action = a.targetType === 'doc' && target.href ? '<a class="btn btn-sm btn-primary" href="' + esc(target.href) + '">处理</a>' : '<span class="readonly-hint">目标待核对</span>';
+          action = a.targetType === 'doc' && target.href ? '<a class="btn btn-sm btn-primary" href="' + esc(target.href) + '">去审单 ' + U.icon('arrow') + '</a>' : '<span class="readonly-hint">目标待核对</span>';
         } else {
-          action = '<button class="btn btn-sm btn-primary" data-action="ap-handle" data-id="' + esc(a.id) + '">处理</button>';
+          action = '<button class="btn btn-sm btn-primary" data-action="ap-handle" data-id="' + esc(a.id) + '">审批</button>';
         }
       } else {
         action = '<span class="readonly-hint">等待主管处理</span>';
@@ -494,8 +471,8 @@
       dangerNote + amountSummary + '<div class="field-error mt8" id="ap-effect-error" role="alert">' + esc(repricing && repricing.error || '') + '</div>' +
       '<div class="form-item mt8"><label for="ap-opinion">处理意见（退回时必填）</label><textarea class="textarea" id="ap-opinion" aria-describedby="ap-opinion-hint"></textarea><div class="readonly-hint" id="ap-opinion-hint">退回需填写具体处理意见；未提交的填写可继续保留或明确放弃。</div><div class="field-error" id="ap-opinion-error"></div></div>';
     var footer = '<button class="btn" data-close="1">取消</button>' +
-      '<button class="btn btn-danger" data-act="reject">退 回</button>' +
-      '<button class="btn btn-success" data-act="approve">通 过</button>';
+      '<button class="btn ' + (repricing && repricing.error ? 'btn-primary' : 'btn-danger') + '" data-act="reject">退回修改</button>' +
+      '<button class="btn btn-success" data-act="approve"' + (repricing && repricing.error ? ' disabled title="改价候选校验未通过，请退回修改"' : '') + '>通 过</button>';
     var overlay = U.openModal({ title: '处理申请 · ' + a.id, body: body, footer: footer, large: true, persistent: true });
     var opinionInput = overlay.querySelector('#ap-opinion');
     if (!U.bindModalDraft(overlay, { label: '申请 ' + approvalId + ' 的处理意见', controls: [opinionInput] })) return;
@@ -504,6 +481,7 @@
       btn.addEventListener('click', function () {
         if (!U.isModalCurrent(overlay) || processingApprovals[approvalId] || a.status !== '待处理') return;
         var pass = btn.dataset.act === 'approve';
+        if (pass && (btn.disabled || repricing && repricing.error)) return;
         var opinionEl = overlay.querySelector('#ap-opinion');
         if (opinionEl !== opinionInput || !opinionInput.isConnected) {
           overlay.querySelector('#ap-effect-error').textContent = '处理意见输入节点已变化，本次未处理，请关闭弹窗并重新打开申请核对。';

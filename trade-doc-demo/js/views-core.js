@@ -114,7 +114,7 @@
       cards.push(statCard('通过单证记录', M.documents.filter(function (d) { return d.status === '已通过'; }).length, '含历史版本 · 导出资格看单证页', '#/documents', 'accent-green'));
     } else if (role === 'fin') {
       cards.push(statCard('待收款订单', unpaidOrders.length, '存在未收金额', '#/payments', 'accent-red'));
-      cards.push(statCard('演示月登记收款', M.payments.filter(function (p) { return p.date.slice(0, 7) === '2026-09'; }).length, '2026-09 收款笔数', '#/payments', 'accent-blue'));
+      cards.push(statCard('本次演示新增收款', U.sessionPaymentCount(), '即时更新 · 刷新后归零', '#/payments', 'accent-blue'));
       cards.push(statCard('已结清订单', M.orders.filter(function (o) { return U.payStatus(o) === '已结清'; }).length, '全部收讫', '#/payments', 'accent-green'));
       cards.push(statCard('近期新增订单', recentOrders.length, '近 4 笔新订单', '#/orders', 'accent-orange'));
     } else if (role === 'sales') {
@@ -174,7 +174,8 @@
       doc: [['单证制作', '#/documents', 'edit'], ['订单查询', '#/orders', 'file']],
       fin: [['收款与应收', '#/payments', 'wallet'], ['订单查询', '#/orders', 'file']],
       boss: [['审核与异常', '#/approvals', 'shield'], ['订单查询', '#/orders', 'file'], ['统计分析', '#/stats', 'chart']]
-    }[role];
+    }[role].filter(function (s) { return U.moduleEnabled(role, U.moduleForPath(s[1], role)); });
+    if (!shortcuts.length) shortcuts = [['工作台', '#/dashboard', 'home']];
     var shortcutHtml = shortcuts.map(function (s) {
       return '<a class="shortcut-link" href="' + s[1] + '">' + U.icon(s[2]) + '<span>' + s[0] + '</span>' + U.icon('arrow') + '</a>';
     }).join('');
@@ -182,7 +183,7 @@
     var orderRows = recentOrders.map(function (o) {
       var fin = U.orderFin(o);
       return '<tr><td><a href="#/orders/' + o.id + '"><b>' + o.id + '</b></a><div class="cell-secondary">' + esc(o.createdAt) + '</div></td>' +
-        '<td>' + esc(U.customerName(o.customerId).split('（')[0]) + '</td>' +
+        '<td title="' + esc(U.customerName(o.customerId)) + '">' + esc(U.customerName(o.customerId).split('（')[0]) + '</td>' +
         '<td class="num">' + U.fmt(fin.total) + ' ' + esc(o.currency) + '</td>' +
         '<td>' + tag(o.status) + '</td><td>' + tag(o.docStatus) + '</td><td>' + tag(U.payStatus(o)) + '</td></tr>';
     }).join('');
@@ -202,9 +203,10 @@
       '<div class="dashboard-metrics" aria-label="当前业务概览">' + cards.join('') + '</div>' +
       '<div class="dash-grid">' +
         '<div class="dash-main">' +
+          '<section class="card work-queue' + (docWork ? ' doc-work-summary' : '') + '"><div class="card-title home-card-head"><div><h3>' + (docWork ? '当前可办理制单事项' : '待处理事项') + '<span class="record-count">' + myTodos.length + ' 项</span></h3><p>' + (docWork ? '仅列具备当前编辑资格的版本，不代表个人分派。' : '从这里接续你的业务工作') + '</p></div></div>' + todoHtml + '</section>' +
           (role !== 'admin' ? '<section class="card recent-orders"><div class="card-title home-card-head"><div><h3>近期订单</h3><p>四笔最新订单，三类进度独立跟踪</p></div><a class="home-text-link" href="#/orders">全部订单' + U.icon('arrow') + '</a></div><div class="table-wrap"><table class="table"><thead><tr><th>订单 / 创建日期</th><th>客户</th><th class="num">成交金额</th><th>订单进度</th><th>单证进度</th><th>收款进度</th></tr></thead><tbody>' + orderRows + '</tbody></table></div></section>' :
             '<section class="card recent-orders"><div class="card-title home-card-head"><div><h3>演示账号</h3><p>按角色检查权限与页面呈现</p></div><a class="home-text-link" href="#/system/users">用户管理' + U.icon('arrow') + '</a></div><div class="table-wrap"><table class="table"><thead><tr><th>姓名</th><th>角色</th><th>部门</th><th>状态</th></tr></thead><tbody>' + userRows + '</tbody></table></div></section>') +
-          '<section class="card work-queue' + (docWork ? ' doc-work-summary' : '') + '"><div class="card-title home-card-head"><div><h3>' + (docWork ? '当前可办理制单事项' : '待处理事项') + '<span class="record-count">' + myTodos.length + ' 项</span></h3><p>' + (docWork ? '仅列具备当前编辑资格的版本，不代表个人分派。' : '从这里接续你的业务工作') + '</p></div></div>' + todoHtml + '</section>' + referenceHtml +
+          referenceHtml +
         '</div>' +
         '<aside class="dash-side"><section class="card home-shortcuts"><div class="card-title"><h3>业务入口</h3></div><div class="shortcut-list">' + shortcutHtml + '</div></section>' +
           '<section class="card home-monthly"><div class="card-title"><h3>月度订单</h3><span class="sub">样例 · 笔</span></div>' + monthChart + '</section>' +
@@ -240,7 +242,7 @@
     }).join('');
     if (!rows) rows = U.emptyRow(7, f.kw || f.country ? '没有符合筛选条件的结果' : '暂无客户记录');
     return '<div class="page-head"><h2>客户管理</h2><div class="actions">' +
-      (window.App.user.role === 'sales' ? '<button class="btn btn-primary" data-action="cust-new">新建客户</button>' : '') +
+      (window.App.user.role === 'sales' ? '<button class="btn btn-unavailable" disabled title="当前原型只支持维护已有客户">新建客户 · 演示只读</button>' : '') +
       '</div></div>' +
       '<div class="filter-bar">' +
       filterInput('客户名称/联系人', 'f-kw', f.kw, '输入关键字') +
@@ -274,7 +276,7 @@
   Views.customerDetail = function (ctx) {
     var c = U.customer(ctx.params[0]);
     if (!c) return Views.notFound('客户不存在：' + ctx.params[0]);
-    var editable = ctx.user.role === 'sales';
+    var editable = ctx.user.role === 'sales' && U.moduleEnabled('sales', '客户与商品');
     customerEditTicket = editable ? { token: 'customer-' + (++customerEditSequence), id: c.id, customer: c, content: JSON.stringify(c),
       actor: window.App.user, actorId: ctx.user.id, actorName: ctx.user.name, actorRole: ctx.user.role, route: location.hash } : null;
     var token = customerEditTicket ? customerEditTicket.token : '';
@@ -322,6 +324,7 @@
     var errors = [], ticket = customerEditTicket, actor = window.App.user;
     function issue(key, error) { errors.push({ key: key, error: error }); }
     if (!actor || actor.role !== 'sales') issue('id', '仅外贸业务员可以保存客户资料，请重新登录业务员账号。');
+    else if (!U.moduleEnabled('sales', '客户与商品')) issue('id', '客户与商品模块权限已关闭，本次未保存；请联系管理员核对。');
     if (!ticket || form.dataset.customerToken !== ticket.token || form.dataset.customerId !== ticket.id) issue('id', '客户表单与资料绑定已失效，请重新打开需要修改的客户。');
     if (ticket) {
       if (actor !== ticket.actor || !actor || actor.id !== ticket.actorId || actor.name !== ticket.actorName || actor.role !== ticket.actorRole) issue('id', '当前业务员账号或会话已变化，请重新打开客户资料后核对。');

@@ -26,12 +26,12 @@ function fixture() {
   context.U.markModalDraftClean = overlay => { overlay.cleaned = true; };
   context.U.closeModal = overlay => { if (!overlay || currentOverlay === overlay) currentOverlay = null; };
   context.U.openModal = options => {
-    const error = { textContent: '' };
+    const error = { textContent: (options.body.match(/id="ap-effect-error"[^>]*>([^<]*)<\/div>/) || [])[1] || '' };
     const item = { querySelector: () => error };
     const opinion = { id: 'ap-opinion', isConnected: true, value: '', classList: { add() {}, remove() {} }, setAttribute() {}, removeAttribute() {}, focus() {}, closest: () => item, parentElement: item };
     const buttons = ['approve', 'reject'].map(act => {
       const classes = new Set();
-      return { dataset: { act }, innerHTML: act, disabled: false,
+      return { dataset: { act }, innerHTML: act, disabled: act === 'approve' && /data-act="approve" disabled/.test(options.footer),
         classList: { add: x => classes.add(x), remove: x => classes.delete(x), contains: x => classes.has(x) },
         addEventListener(type, fn) { this.click = fn; } };
     });
@@ -54,13 +54,14 @@ const snapshot = test => JSON.stringify(test.c.MOCK);
 async function refused(setup, pattern) {
   const t = fixture(); setup(t);
   const before = snapshot(t), overlay = t.open();
-  if (overlay) overlay.buttons[0].click();
+  if (overlay) overlay.buttons[0].click(); // Includes adversarial direct dispatch on a disabled native control.
   await t.flush();
   assert.equal(snapshot(t), before, '失败不更改订单/申请/单证/收款/任何日志');
-  assert.ok(t.messages.some(m => m.type === 'error'), '拒绝时提供错误反馈');
+  if (!overlay || !overlay.buttons[0].disabled) assert.ok(t.messages.some(m => m.type === 'error'), '提交后拒绝时提供错误反馈');
+  else assert.match(overlay.options.footer, /data-act="approve" disabled/, '开窗已在按钮旁呈现错误并原生禁用通过');
   const details = overlay ? overlay.querySelector('#ap-effect-error').textContent : t.messages.map(m => m.message).join('\n');
   assert.match(details, pattern, '明确错误仍完整显示：' + pattern);
-  if (overlay) assert.equal(t.messages.at(-1).message, '审批未生效，请查看弹窗中的处理说明。', 'Toast 简短，详情留在弹窗避免遮住按钮');
+  if (overlay && !overlay.buttons[0].disabled) assert.equal(t.messages.at(-1).message, '审批未生效，请查看弹窗中的处理说明。', 'Toast 简短，详情留在弹窗避免遮住按钮');
   return t;
 }
 

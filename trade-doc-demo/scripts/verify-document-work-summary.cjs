@@ -31,8 +31,10 @@ async function run() {
   }
   assert.equal(typeof initial.c.U.documentWorkSummary, 'function', 'new API availability (separate from original business RED)');
   const s = read(initial);
-  assert.deepEqual(ids(s.todos), ['D-CI2026004-V1', 'D-PL2026004-V1']);
-  assert.deepEqual(ids(s.references), ['D-CI2026003-V1']);
+  assert.deepEqual(ids(s.todos), ['D-CI2026004-V1']);
+  assert.deepEqual(ids(s.references), ['D-CI2026003-V1', 'D-PL2026004-V1']);
+  assert.match(s.references[1].reason, /重新制单申请/);
+  assert.equal(s.references[1].kind, '暂不可办理', '待处理重制原版不再误列当前可编辑待办');
   assert.match(s.references[0].reason, /历史旧版/);
   assert.equal(s.references[0].kind, '历史查阅');
   assert.equal(s.references[0].link, '#/documents/D-CI2026003-V1');
@@ -107,7 +109,7 @@ async function run() {
     t.click(t.modal.querySelector('[data-act="' + decision + '"]')); await t.flush();
     c.App.user = c.U.roleUser('doc');
     const after = read(t);
-    assert.equal(after.todos.length, decision === 'reject' ? 2 : 0);
+    assert.equal(after.todos.length, decision === 'reject' ? 1 : 0, '取消退回只恢复原资格，不能绕过仍待处理的重制申请');
     assert.equal(c.U.order('SO2026005').status, decision === 'reject' ? '执行中' : '已取消');
     assert.equal(JSON.stringify(c.MOCK.documents), documents); assert.equal(JSON.stringify(c.MOCK.payments), payments); cases++;
   }

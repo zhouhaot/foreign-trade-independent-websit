@@ -1,0 +1,82 @@
+{
+  "scope": "Independent Node fixtures; no browser/source/test writes",
+  "beforeHashes": {
+    "utils": "5bc7ca462b7b667f0a78818187e2679b25c237900efd4f2daa8348ff6f91fbcd",
+    "app": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+    "views-fin": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+    "views-system": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef"
+  },
+  "afterHashes": {
+    "utils": "5bc7ca462b7b667f0a78818187e2679b25c237900efd4f2daa8348ff6f91fbcd",
+    "app": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+    "views-fin": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+    "views-system": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef"
+  },
+  "records": [
+    {
+      "name": "route matrix revocation and immutable static ceilings",
+      "result": "PASS",
+      "assertions": 6
+    },
+    {
+      "name": "system mutation actor guard and legitimate matrix change",
+      "result": "PASS",
+      "assertions": 2
+    },
+    {
+      "name": "search excludes closed sales routes",
+      "result": "PASS",
+      "sampledLinks": [
+        "#/dashboard",
+        "#/customers",
+        "#/products",
+        "#/orders",
+        "#/approvals",
+        "#/orders/SO2026001",
+        "#/orders/SO2026002",
+        "#/orders/SO2026003",
+        "#/orders/SO2026004"
+      ]
+    },
+    {
+      "name": "shared repricing independent quotient/remainder oracle and read purity",
+      "result": "PASS",
+      "cases": 720
+    },
+    {
+      "name": "comma balance settlement clears old query and is exact-once",
+      "result": "PASS",
+      "assertions": 5
+    },
+    {
+      "name": "partial payment context and malformed grouping atomic refusal",
+      "result": "PASS",
+      "cases": 6
+    },
+    {
+      "name": "payment permission revoked between submit and commit",
+      "result": "PASS",
+      "assertions": 2
+    },
+    {
+      "name": "same-order tab preserves workspace/body identity and scroll",
+      "result": "PASS",
+      "assertions": 5,
+      "fixtureAdapter": "provided getBoundingClientRect for tab-body only"
+    },
+    {
+      "name": "switch rejection after target disabled",
+      "result": "PASS",
+      "beforeDirty": true,
+      "afterDirty": true,
+      "actorRole": "doc",
+      "raw": "UNSAVED QA DRAFT",
+      "messages": [
+        {
+          "text": "演示身份或目标账号已变化，本次未切换，请重新选择。",
+          "type": "warning"
+        }
+      ]
+    }
+  ]
+}

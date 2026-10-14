@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "scope": "Actual same-order UI export demo logs; no PDF",
+  "orderId": "SO2026008",
+  "documents": [
+    {
+      "id": "D-CI2026006-V1",
+      "status": "已通过",
+      "exportEvents": [
+        {
+          "time": "2026-10-14 14:17",
+          "person": "王芳",
+          "action": "导出 PDF（演示）",
+          "opinion": ""
+        }
+      ],
+      "snapshotPresent": true
+    },
+    {
+      "id": "D-PL2026006-V1",
+      "status": "已通过",
+      "exportEvents": [
+        {
+          "time": "2026-10-14 14:18",
+          "person": "王芳",
+          "action": "导出 PDF（演示）",
+          "opinion": ""
+        }
+      ],
+      "snapshotPresent": true
+    }
+  ],
+  "total": 545,
+  "payments": [
+    {
+      "amount": 100,
+      "currency": "USD"
+    },
+    {
+      "amount": 445,
+      "currency": "USD"
+    }
+  ],
+  "errors": [],
+  "qaNote": "Both exports succeeded. Two observation errors were corrected: chronological history array and nonexistent U.received helper. No export was repeated."
+}

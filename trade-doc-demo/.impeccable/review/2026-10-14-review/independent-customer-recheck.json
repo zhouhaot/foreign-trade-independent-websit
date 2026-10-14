@@ -1,0 +1,11 @@
+{
+  "finding": "IR2",
+  "status": "Resolved",
+  "sourceSha256": "9c7b91d5155bbbff91ead58ba8583124e87e159a3bdcd64f8bd68be107f1e25b",
+  "moduleAllowed": false,
+  "fullMockUnchanged": true,
+  "cleanCount": 0,
+  "rawRetained": "QA REVOKED WRITE",
+  "detailSaveControlAbsent": true,
+  "error": "客户与商品模块权限已关闭，本次未保存；请联系管理员核对。"
+}

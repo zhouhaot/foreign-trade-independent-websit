@@ -38,6 +38,8 @@ async function run() {
   for (const discard of [false, true]) {
     const t = setup('#/documents/D-CI2026003-V1');
     t.c.U.order('SO2026005').status = '执行中';
+    // 独立dirty导航场景需真实可编辑；不绕过当前pending重制互斥政策，另有review-documents专项拒权。
+    t.c.MOCK.approvals = t.c.MOCK.approvals.filter(a => !(a.type === '重新制单申请' && a.targetType === 'doc' && a.targetId === 'D-PL2026004-V1' && a.status === '待处理'));
     t.c.App.requestNavigation('#/documents/D-PL2026004-V1');
     t.click(t.app.querySelector('[data-action="doc-edit"]'));
     const workspace = t.app.querySelector('.workspace'), mark = t.document.getElementById('df-marks');

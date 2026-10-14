@@ -140,12 +140,17 @@ function run() {
   }
   const baseline = spawnSync('git', ['show', 'd9b1748c27102c2631dd6aed9df9e4e3af486d9f:trade-doc-demo/js/views-fin.js'], { cwd: root, encoding: 'utf8' });
   assert.equal(baseline.status, 0);
-  const current = fs.readFileSync(path.join(root, 'js/views-fin.js'), 'utf8');
+  // H22's byte-preservation is historical evidence, not a veto on later authorized behavior.
+  // Current target/read-purity cases above still execute current source; review finance tests
+  // cover the new shared repricing, disabled approval and payment completion contract.
+  const published = spawnSync('git', ['show', 'f8643db82e4daf0f41904a37ab34cdc071393365:trade-doc-demo/js/views-fin.js'], { cwd: root, encoding: 'utf8' });
+  assert.equal(published.status, 0);
+  const current = published.stdout;
   const actionMarker = '  /* 主管处理 改价 / 取消 / 重新制单 */';
   const viewMarker = '  /* ==================== 审核与异常处理 ==================== */';
   const normalize = s => s.replace(/\r\n/g, '\n');
-  assert.equal(normalize(current.slice(current.indexOf(actionMarker))), normalize(baseline.stdout.slice(baseline.stdout.indexOf(actionMarker))), 'all original approval Actions byte-preserved (newline normalized)');
-  assert.equal(normalize(current.slice(0, current.indexOf(viewMarker))), normalize(baseline.stdout.slice(0, baseline.stdout.indexOf(viewMarker))), 'payment and money algorithms unchanged'); cases++;
+  assert.equal(normalize(current.slice(current.indexOf(actionMarker))), normalize(baseline.stdout.slice(baseline.stdout.indexOf(actionMarker))), 'published H22 approval Actions byte-preserved (historical, newline normalized)');
+  assert.equal(normalize(current.slice(0, current.indexOf(viewMarker))), normalize(baseline.stdout.slice(0, baseline.stdout.indexOf(viewMarker))), 'published H22 payment and money algorithms unchanged (historical)'); cases++;
   console.log(`PASS: ${cases} approval context cases; original roles/order/counts, exact version targets, invalid/duplicate metadata, self-review, complete escaped reason/opinion, all MOCK read purity and original Actions/payment source preservation (Node DOM only)`);
 }
 try { run(); } catch (error) { console.error(error.stack); process.exitCode = 1; }

@@ -39,9 +39,12 @@
   window.__syncOrderDocStatus = syncOrderDocStatus;
 
   /* ==================== 单证列表 ==================== */
-  Views.documents = function () {
-    var s = ui('documents'), f = s.filters;
+  Views.documents = function (ctx) {
+    var s = ui('documents'), f = Object.assign({}, s.filters), orderId = ctx && ctx.query && ctx.query.order;
+    if (ctx && ctx.query && ctx.query.status) f.status = ctx.query.status;
+    var selectedOrder = orderId ? U.order(orderId) : null;
     var list = sortedDocs().filter(function (d) {
+      if (orderId && d.orderId !== orderId) return false;
       if (f.kw && (d.no + d.orderId).toLowerCase().indexOf(f.kw.toLowerCase()) < 0) return false;
       if (f.type && d.type !== f.type) return false;
       if (f.status && d.status !== f.status) return false;
@@ -67,6 +70,10 @@
     }
     return '<div class="page-head"><h2>单证管理</h2><div class="actions">' +
       '<span class="muted small">支持商业发票与装箱单；审核通过后方可导出</span></div></div>' +
+      (orderId ? '<div class="card doc-order-context"><b>订单 ' + esc(orderId) + '</b><span>仅显示本订单单证版本</span>' +
+        (selectedOrder && window.App.user.role === 'doc' && ['CI', 'PL'].some(function (type) { return !M.documents.some(function (d) { return d.orderId === orderId && d.type === type; }); })
+          ? '<button class="btn btn-primary" data-action="doc-create" data-order="' + esc(orderId) + '">创建缺失的 CI / PL 草稿</button>' : '') +
+        (!selectedOrder ? '<span class="field-error">关联订单不存在，无法首制。</span>' : '') + '<a href="#/documents" class="btn">全部订单单证</a></div>' : '') +
       '<div class="filter-bar">' +
       window.__filterInput('单证编号/订单号', 'f-kw', f.kw, '输入关键字') +
       '<div class="form-item"><label>单证类型</label>' + sel('f-type', f.type, ['CI', 'PL'], ['商业发票', '装箱单']) + '</div>' +
@@ -78,9 +85,105 @@
       '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
       U.pagination(pg, 'doc-page');
   };
-  Actions['doc-filter'] = function () { var s = ui('documents'); s.filters = { kw: val('f-kw'), type: val('f-type'), status: val('f-status') }; s.page = 1; window.App.rerender(); };
-  Actions['doc-reset'] = function () { window.AppUI.documents = { page: 1, filters: {} }; window.App.rerender(); };
+  Actions['doc-filter'] = function () {
+    var s = ui('documents'); s.filters = { kw: val('f-kw'), type: val('f-type'), status: val('f-status') }; s.page = 1;
+    // 待审快捷入口只提供初始筛选；之后仍允许用户主动切换筛选条件。
+    var parts = location.hash.split('?'), query = (parts[1] || '').split('&').filter(function (part) { return part && part.split('=')[0] !== 'status'; });
+    var destination = parts[0] + (query.length ? '?' + query.join('&') : '');
+    if (destination !== location.hash) location.hash = destination; else window.App.rerender();
+  };
+  Actions['doc-reset'] = function () { window.AppUI.documents = { page: 1, filters: {} }; if (location.hash.indexOf('?') >= 0) location.hash = '#/documents'; else window.App.rerender(); };
   Actions['doc-page'] = function (el) { ui('documents').page = +el.dataset.page; window.App.rerender(); };
+
+  /* 首制只补缺失类型；完整候选及来源复核通过后，一次追加，不触碰已有任何版本。 */
+  var firstCreateInFlight = Object.create(null);
+  function firstCreatePolicy(orderId, actor) {
+    var order = U.order(orderId);
+    var identities = actor && M.users.filter(function (user) { return user.id === actor.id; });
+    var identity = identities && identities.length === 1 ? identities[0] : null;
+    var error = !identity || !identity.enabled || identity.name !== actor.name || identity.role !== actor.role || actor.role !== 'doc'
+      ? '仅有效的已启用单证员身份可创建单证。'
+      : U.moduleEnabled && !U.moduleEnabled('doc', '单证管理') ? '当前单证员未获单证管理权限。'
+      : !order || M.orders.filter(function (o) { return o.id === orderId; }).length !== 1 ? '关联订单不存在或编号不唯一，请核对。'
+      : ['待执行', '执行中'].indexOf(order.status) < 0 ? '订单' + order.status + '，不能初始化单证。'
+      : M.approvals.some(function (a) { return a.type === '取消申请' && a.targetType === 'order' && a.targetId === orderId && a.status === '待处理'; }) ? '订单已有待处理取消申请，首制暂停。' : '';
+    var quote = order && U.quote(order.quoteId);
+    if (!error && (!quote || M.quotes.filter(function (q) { return q.id === order.quoteId; }).length !== 1 || quote.status !== '已确认' || quote.orderId !== order.id || quote.customerId !== order.customerId || quote.currency !== order.currency)) error = '订单缺少唯一对应的同客户、同币种已确认报价，请核对来源。';
+    if (!error && M.customers.filter(function (c) { return c.id === order.customerId; }).length !== 1) error = '订单客户不存在或编号不唯一，请补齐有效主数据。';
+    if (!error && (!U.currencyEnabled(order.currency) || !U.transactionAmounts(order.items).ok)) error = '订单币种或明细金额无效，请先核对。';
+    if (!error && order.items.some(function (item) { return M.products.filter(function (p) { return p.id === item.productId; }).length !== 1; })) error = '订单商品不存在或编号不唯一，无法冻结交易数据。';
+    if (!error && (!M.seller || !M.seller.nameEn)) error = '卖方资料缺失，无法冻结交易数据。';
+    var existing = order ? M.documents.filter(function (d) { return d.orderId === order.id; }) : [];
+    if (!error && existing.some(function (d) { return U.documentPolicy(d, actor).versionConflict || M.documents.filter(function (other) { return other.id === d.id; }).length !== 1; })) error = '已有单证版本或编号冲突，请核对后首制。';
+    return { order: order, identity: identity, quote: quote, existing: existing, error: error };
+  }
+  function firstCreateSource(policy) {
+    return JSON.stringify({ order: policy.order, quote: policy.quote, identity: policy.identity,
+      customer: U.customer(policy.order.customerId), seller: M.seller,
+      products: policy.order.items.map(function (item) { return U.product(item.productId); }),
+      documents: M.documents, approvals: M.approvals.filter(function (a) { return a.targetType === 'order' && a.targetId === policy.order.id; }) });
+  }
+  function nextFirstNumber(type) {
+    var prefix = type + U.today().slice(0, 4), maximum = 0;
+    M.documents.forEach(function (d) {
+      if (typeof d.no !== 'string' || d.no.indexOf(prefix) !== 0) return;
+      var suffix = d.no.slice(prefix.length);
+      if (/^\d+$/.test(suffix) && Number.isSafeInteger(Number(suffix))) maximum = Math.max(maximum, Number(suffix));
+    });
+    if (!Number.isSafeInteger(maximum + 1)) throw new Error('单证编号超出安全范围，请核对。');
+    var next = maximum + 1, no;
+    do {
+      no = prefix + String(next++).padStart(3, '0');
+      if (!Number.isSafeInteger(next)) throw new Error('单证编号超出安全范围，请核对。');
+    } while (M.documents.some(function (d) { return d.no === no || d.id === 'D-' + no + '-V1'; }));
+    return no;
+  }
+  function enterFirstDocument(d) {
+    if (U.documentPolicy(d, window.App.user).canEdit) window.AppUI.docStartEditing = { id: d.id, actorSignature: JSON.stringify(window.App.user) };
+    var destination = '#/documents/' + encodeURIComponent(d.id);
+    if (location.hash === destination) window.App.rerender();
+    else if (window.App.requestNavigation) window.App.requestNavigation(destination);
+    else location.hash = destination;
+  }
+  Actions['doc-create'] = function (el) {
+    var orderId = el.dataset.order, actor = window.App.user, policy = firstCreatePolicy(orderId, actor);
+    if (policy.error) { U.toast(policy.error, 'warning'); return; }
+    var sourcePath = location.hash.split('?')[0];
+    if (['#/orders', '#/orders/' + encodeURIComponent(orderId), '#/documents'].indexOf(sourcePath) < 0) { U.toast('请从该订单或单证台账的首制入口操作。', 'warning'); return; }
+    if (firstCreateInFlight[orderId]) { U.toast('本订单首制正在处理中，请勿重复操作。', 'warning'); return; }
+    var missing = ['CI', 'PL'].filter(function (type) { return !policy.existing.some(function (d) { return d.type === type; }); });
+    if (!missing.length) {
+      var latest = policy.existing.filter(function (d) { return U.documentPolicy(d, actor).isLatest; });
+      enterFirstDocument(latest.find(function (d) { return d.type === 'CI'; }) || latest[0]); return;
+    }
+    var source = firstCreateSource(policy), sourceHash = location.hash, orderRef = policy.order;
+    firstCreateInFlight[orderId] = true;
+    U.withLoading(el, function () {
+      try {
+        var current = firstCreatePolicy(orderId, window.App.user);
+        var error = current.error || (window.App.user !== actor || current.order !== orderRef || location.hash !== sourceHash || el.isConnected === false || el.dataset.order !== orderId || firstCreateSource(current) !== source ? '身份、页面、订单或交易来源已变化，请核对后重新首制。' : '');
+        if (error) { U.toast(error, 'warning'); return; }
+        var candidates = missing.map(function (type) {
+          var no = nextFirstNumber(type);
+          var d = { id: 'D-' + no + '-V1', no: no, type: type, version: 1, orderId: orderId, status: '草稿',
+            maker: actor.name, createdAt: U.today(), updatedAt: U.today(), submittedAt: null, approver: null, approvedAt: null, opinion: null,
+            marks: '', packing: { cartons: '', package: '', gw: '', nw: '', meas: '' }, remark: '',
+            history: [{ time: U.now(), person: actor.name, action: '创建单证 V1（首次制单，包装资料待核对）', opinion: '' }] };
+          return d;
+        });
+        var relatedDocuments = M.documents.concat(candidates);
+        candidates.forEach(function (d) { U.captureDocumentSnapshot(d, 'creation', relatedDocuments); });
+        // 所有候选（包括各自独立冻结的快照）成功后才写入业务集合。
+        Array.prototype.push.apply(M.documents, candidates);
+        syncOrderDocStatus(orderId);
+        M.orderLogs[orderId] = (M.orderLogs[orderId] || []).concat([{ time: U.now(), person: actor.name, content: '首次制单：创建 ' + candidates.map(function (d) { return d.no + ' V1'; }).join('、') + ' 草稿；唛头与包装须按实物核对。' }]);
+        U.toast('已创建 ' + candidates.map(function (d) { return d.type; }).join(' / ') + ' 草稿；包装资料待补齐。');
+        var target = M.documents.filter(function (d) { return d.orderId === orderId && d.type === 'CI'; }).sort(function (a, b) { return b.version - a.version; })[0] || candidates[0];
+        enterFirstDocument(target);
+      } catch (error) { U.toast('首制未完成：' + error.message, 'error'); }
+      finally { delete firstCreateInFlight[orderId]; }
+    });
+  };
 
   /* ==================== 单证预览与审核（三栏） ==================== */
   Views.docDetail = function (ctx) {
@@ -89,6 +192,13 @@
     var snapshot = U.documentSnapshot(d), order = snapshot.order;
     var policy = U.documentPolicy(d, ctx.user);
     var role = ctx.user.role;
+    var startEditing = window.AppUI.docStartEditing;
+    if (startEditing) {
+      delete window.AppUI.docStartEditing;
+      if (startEditing.id === d.id && role === 'doc' && ctx.user.id && ctx.user.name && startEditing.actorSignature === JSON.stringify(ctx.user) && policy.canEdit) {
+        window.AppUI.docEditing = d.id; window.AppUI.docFocusOnMount = d.id;
+      }
+    }
     var editing = canEditDoc(d, ctx.user) && window.AppUI.docEditing === d.id;
     var canReadLedger = ['doc', 'boss'].indexOf(role) >= 0;
     var returnDestination = canReadLedger ? '#/documents' : '#/orders/' + d.orderId;
@@ -127,9 +237,9 @@
 
     return '<div class="page-head"><div><h2>' + U.docTypeName(d.type) + ' · ' + d.no + ' <span class="doc-version">V' + d.version + '</span> ' + tag(d.status) + '</h2>' +
       '<p class="page-description">关联订单 ' + d.orderId + ' · 制单人 ' + esc(d.maker) + ' · 本版本交易数据已冻结</p></div>' +
-      '<div class="actions"><button class="btn" data-action="doc-focus" aria-pressed="' + !!window.AppUI.docFocus + '">' + U.icon('expand') + '<span>' + (window.AppUI.docFocus ? '显示单证目录' : '专注预览') + '</span></button><a class="btn" href="' + returnDestination + '" data-action="doc-leave" data-destination="' + returnDestination + '">' + (canReadLedger ? '全部单证台账' : '返回订单') + '</a></div></div>' +
+      '<div class="actions"><button class="btn doc-compact-directory" data-action="doc-directory" aria-controls="doc-version-directory" aria-expanded="false">版本目录 · ' + siblings.length + ' 份</button><button class="btn" data-action="doc-focus" aria-pressed="' + !!window.AppUI.docFocus + '">' + U.icon('expand') + '<span>' + (window.AppUI.docFocus ? '显示单证目录' : '专注预览') + '</span></button><a class="btn" href="' + returnDestination + '" data-action="doc-leave" data-destination="' + returnDestination + '">' + (canReadLedger ? '全部单证台账' : '返回订单') + '</a></div></div>' +
       '<div class="doc-layout ' + (window.AppUI.docFocus ? 'is-focused' : '') + '">' +
-        '<nav class="doc-list-panel" aria-label="本订单单证版本"><div class="panel-head">本订单单证<span class="muted small">' + d.orderId + ' · ' + siblings.length + ' 份</span></div>' + leftItems + '</nav>' +
+        '<nav class="doc-list-panel" id="doc-version-directory" aria-label="本订单单证版本"><div class="panel-head">本订单单证<span class="muted small">' + d.orderId + ' · ' + siblings.length + ' 份</span></div>' + leftItems + '</nav>' +
         '<div class="doc-center">' + banner +
           '<div class="preview-toolbar"><b>单证预览</b><span>' + (editing ? '编辑' + editableDocFields(d) : '交易字段只读') + '</span></div>' +
           '<div class="doc-preview-wrap"><div class="paper-wrap">' + paper + (d.status === '已通过' ? '<div class="p-stamp">审核通过<br>APPROVED</div>' : '') + '</div></div>' +
@@ -160,9 +270,26 @@
   Actions['doc-leave'] = function (el, event) { if (event) event.preventDefault(); leaveDocument(el.dataset.destination); };
   Actions['doc-focus'] = function (el) {
     window.AppUI.docFocus = !window.AppUI.docFocus;
-    document.querySelector('.doc-layout').classList.toggle('is-focused', window.AppUI.docFocus);
+    var layout = document.querySelector('.doc-layout');
+    layout.classList.toggle('is-focused', window.AppUI.docFocus);
+    // 窄桌面的默认专注由CSS实现；手动“显示目录”仍应确实恢复原目录。
+    layout.classList.toggle('is-directory-open', !window.AppUI.docFocus);
+    var directoryButton = document.querySelector('[data-action="doc-directory"]');
+    if (directoryButton) directoryButton.setAttribute('aria-expanded', !window.AppUI.docFocus);
     el.setAttribute('aria-pressed', window.AppUI.docFocus);
     el.querySelector('span').textContent = window.AppUI.docFocus ? '显示单证目录' : '专注预览';
+  };
+  Actions['doc-directory'] = function (el) {
+    var layout = document.querySelector('.doc-layout');
+    if (!layout) return;
+    var open = !layout.classList.contains('is-directory-open');
+    layout.classList.toggle('is-directory-open', open);
+    if (open) {
+      layout.classList.remove('is-focused'); window.AppUI.docFocus = false;
+      var focusButton = document.querySelector('[data-action="doc-focus"]');
+      if (focusButton) { focusButton.setAttribute('aria-pressed', 'false'); focusButton.querySelector('span').textContent = '专注预览'; }
+    }
+    el.setAttribute('aria-expanded', open);
   };
 
   function rightPanel(d, order, role, editing) {
@@ -194,7 +321,9 @@
           '<button class="btn" data-action="doc-revise" data-id="' + d.id + '" aria-label="修订' + editableDocFields(d) + '，生成新版本 V' + nextDocVersion(d) + '">修订' + editableDocFields(d) + ' · V' + nextDocVersion(d) + '</button>' +
           '<div class="readonly-hint">沿用原交易快照，原版本保留；新版本重新审核。</div></div>';
       } else if (d.status === '制作中' || d.status === '草稿' || d.status === '已退回') {
-        if (editing) {
+        if (!policy.canEdit || !policy.canSubmit) {
+          html += '<div class="ablock"><div class="ab-title">制单暂缓</div><div class="readonly-hint">' + esc(policy.reasons.edit || policy.reasons.submit) + '</div></div>';
+        } else if (editing) {
           html += '<div class="ablock"><div class="ab-title">编辑中</div>' +
             '<button class="btn" data-action="doc-save-draft" data-id="' + d.id + '">保存草稿</button>' +
             '<button class="btn btn-primary" data-action="doc-submit" data-id="' + d.id + '">提交审核</button>' +
@@ -221,7 +350,10 @@
             '<button class="btn btn-danger" data-action="doc-reject" data-id="' + d.id + '">退回修改</button></div>';
         }
       } else {
-        html += '<div class="ablock"><div class="ab-title">审核操作</div><div class="readonly-hint">当前状态为「' + d.status + '」，无需审核。</div></div>';
+        var next = siblingsForReview(d, window.App.user);
+        html += '<div class="ablock"><div class="ab-title">审核操作</div><div class="readonly-hint">当前状态为「' + d.status + '」，无需审核。</div>' +
+          (next ? '<button class="btn btn-primary" data-action="doc-goto" data-id="' + esc(next.id) + '">继续审核 ' + esc(next.no) + ' V' + next.version + '</button>' : '') +
+          '<a class="btn" href="#/documents?status=待审核" data-action="doc-leave" data-destination="#/documents?status=待审核">返回待审列表</a></div>';
       }
     } else {
       html += '<div class="ablock"><div class="ab-title">操作</div><div class="readonly-hint">当前角色对单证为只读查看。</div></div>';
@@ -234,6 +366,9 @@
       '<button class="btn ' + (canExport ? 'btn-primary' : '') + '" data-action="doc-export" data-id="' + d.id + '" ' + (canExport ? '' : 'disabled') + '>导出 PDF（演示）</button>' +
       '<div class="readonly-hint">' + (canExport ? '满足当前资格；演示仅留痕，不生成文件。' : esc(policy.reasons.export)) + '</div></div>';
     return html + reference;
+  }
+  function siblingsForReview(d, user) {
+    return sortedDocs().find(function (other) { return other.orderId === d.orderId && other.id !== d.id && U.documentPolicy(other, user).canAudit; }) || null;
   }
 
   /* 仅解释当前查看版本的审核状态；旧决定保留在历史，不作为本次批准人。 */
@@ -315,11 +450,19 @@
     var pk = d.packing || {};
     function pf(key, val) {
       var labels = { cartons: '包装件数', package: '包装方式', gw: '毛重', nw: '净重', meas: '体积' };
-      var hints = { cartons: '普通正整数，如 140', package: '包装方式，如纸箱', gw: 'KG/KGS，最多 3 位小数，如 1,680 KGS', nw: 'KG/KGS，最多 3 位小数，不能大于毛重', meas: 'CBM，最多 3 位小数，如 8.6 CBM' };
       return editing ? '<div class="form-item packing-field"><label class="sr-only" for="df-pk-' + key + '">' + labels[key] + '</label>' +
-        '<input class="edit-field" type="text" id="df-pk-' + key + '"' + (key === 'cartons' ? ' inputmode="numeric"' : '') + ' aria-describedby="df-pk-' + key + '-hint df-pk-' + key + '-error" value="' + esc(val) + '">' +
-        '<span class="packing-hint" id="df-pk-' + key + '-hint">' + hints[key] + '</span><div class="field-error" id="df-pk-' + key + '-error"></div></div>' : val == null || String(val).trim() === '' ? '<span class="packing-pending">待补</span>' : esc(val);
+        '<input class="edit-field" type="text" id="df-pk-' + key + '"' + (key === 'cartons' ? ' inputmode="numeric"' : key !== 'package' ? ' inputmode="decimal"' : '') + ' aria-describedby="df-pk-' + key + '-hint df-pk-' + key + '-error" value="' + esc(val) + '"></div>' : val == null || String(val).trim() === '' ? '<span class="packing-pending">待补</span>' : esc(val);
     }
+    var packingHelp = editing ? '<div class="packing-form-notes"><div class="packing-hint">' +
+      '<span id="df-pk-cartons-hint">箱数填正整数；</span><span id="df-pk-package-hint">包装方式填实际材料；</span>' +
+      '<span id="df-pk-gw-hint">毛重可直接填数字，默认 KGS；</span><span id="df-pk-nw-hint">净重默认 KGS，且不大于毛重；</span>' +
+      '<span id="df-pk-meas-hint">体积默认 CBM。度量最多 3 位小数，支持标准千分位。</span>草稿可留空待补，送审须齐全。</div>' +
+      ['cartons', 'package', 'gw', 'nw', 'meas'].map(function (key) { return '<div class="field-error" id="df-pk-' + key + '-error"></div>'; }).join('') + '</div>' : '';
+    // 发票关联是本版本冻结事实；主数据/CI链后续改名、删除或冲突不能改写旧PL纸张。
+    var invoiceReference = snapshot.invoiceReference;
+    var invoiceNo = invoiceReference && invoiceReference.status === 'linked' && typeof invoiceReference.no === 'string' && invoiceReference.no.trim()
+      ? invoiceReference.no : invoiceReference && invoiceReference.status === 'missing' ? '未创建关联商业发票'
+      : invoiceReference && invoiceReference.status === 'conflict' ? '关联发票编号冲突，待核对' : '关联发票信息待核对';
     var marksHtml = editing
       ? '<textarea class="edit-area" id="df-marks" aria-label="唛头">' + esc(d.marks) + '</textarea>'
       : esc(d.marks);
@@ -338,14 +481,14 @@
         '<td><div class="k">装箱单号 P/L No.</div>' + d.no + '</td>' +
         '<td><div class="k">日期 Date</div>' + esc(d.updatedAt) + '</td>' +
         '<td><div class="k">订单号 Order No.</div>' + order.id + '</td>' +
-        '<td><div class="k">发票号 Invoice No.</div>' + d.no.replace('PL', 'CI') + '</td>' +
+        '<td><div class="k">发票号 Invoice No.</div>' + esc(invoiceNo) + '</td>' +
       '</tr></table>' +
       '<div class="pb-label">唛头 Shipping Marks</div><div class="p-marks">' + marksHtml + '</div>' +
       '<table class="p-items"><thead><tr><th style="width:36px">NO.</th><th>品名描述 DESCRIPTION</th><th style="width:110px">数量 QTY</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table>' +
       '<table class="p-items"><thead><tr><th>包装件数 PACKAGES</th><th>包装方式 PACKAGE</th><th>毛重 G.W. (KG/KGS)</th><th>净重 N.W. (KG/KGS)</th><th>体积 MEAS. (CBM)</th></tr></thead>' +
       '<tbody><tr><td class="c">' + pf('cartons', pk.cartons) + '</td><td class="c">' + pf('package', pk.package) + '</td>' +
-      '<td class="c">' + pf('gw', pk.gw) + '</td><td class="c">' + pf('nw', pk.nw) + '</td><td class="c">' + pf('meas', pk.meas) + '</td></tr></tbody></table>' +
+      '<td class="c">' + pf('gw', pk.gw) + '</td><td class="c">' + pf('nw', pk.nw) + '</td><td class="c">' + pf('meas', pk.meas) + '</td></tr></tbody></table>' + packingHelp +
       '<div class="pb-label">备注 Remark</div><div class="p-remark">' + remarkHtml + '</div>' +
       '<div class="p-sign"><div><div>制单 Prepared by：' + esc(d.maker) + '</div><div class="s-line">' + esc(S.nameEn) + '</div></div>' +
       renderDocumentReview(d) + '</div>' +
@@ -456,8 +599,12 @@
     (candidate.errors || []).forEach(function (item) {
       var input = document.getElementById('df-pk-' + item.field);
       if (input) {
-        U.fieldError(input, relation && (item.field === 'gw' || item.field === 'nw') ? '毛重不能小于净重，请核对两项重量。' : item.error);
-        input.setAttribute('aria-describedby', 'df-pk-' + item.field + '-hint df-pk-' + item.field + '-error');
+        var message = relation && (item.field === 'gw' || item.field === 'nw') ? '毛重不能小于净重，请核对两项重量。' : item.error;
+        // 毛净关系只展示一次；两个字段仍各自标错并关联同一完整说明。
+        var errorId = 'df-pk-' + (relation && (item.field === 'gw' || item.field === 'nw') ? 'gw' : item.field) + '-error', error = document.getElementById(errorId);
+        if (error) error.textContent = message;
+        U.fieldError(input, message, errorId);
+        input.setAttribute('aria-describedby', 'df-pk-' + item.field + '-hint ' + errorId);
         first = first || input;
       }
     });
@@ -484,6 +631,11 @@
     if (!ticket) return;
     window.AppUI.docEditing = ticket.doc.id;
     window.App.rerender();
+    var first = document.getElementById('df-marks');
+    if (first) {
+      first.focus({ preventScroll: true });
+      if (first.scrollIntoView) first.scrollIntoView({ block: 'center', behavior: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    }
     U.toast('已进入编辑模式：仅' + editableDocFields(ticket.doc) + '字段可修改，订单带入数据只读', 'info');
   };
   Actions['doc-cancel-edit'] = function () {
@@ -587,7 +739,8 @@
     if (!ticket) return;
     var d = ticket.doc;
     U.confirm({ title: '申请重新制单',
-      message: '将针对 <b>' + esc(d.no + ' V' + d.version) + '</b> 提交「重新制单申请」，由业务主管审批后按当前交易生成新版本。退回意见：' + esc(d.opinion || ''),
+      message: '将针对 <b>' + esc(d.no + ' V' + d.version) + '</b> 提交「重新制单申请」，由业务主管审批后按当前交易生成新版本。申请待处理期间，原退回版停止编辑与送审。' +
+        (window.AppUI.docEditing === d.id ? '<br><b>当前未保存的编辑不会带入申请；确认申请即放弃本次未保存内容。</b>' : '') + '<br>退回意见：' + esc(d.opinion || ''),
       okText: '提交申请',
       onOk: function () {
         return commitDocAction(ticket, function (doc) {

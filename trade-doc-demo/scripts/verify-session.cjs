@@ -6,7 +6,8 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 const appSource = fs.readFileSync(path.join(root, 'js/app.js'), 'utf8');
-assert.ok(!appSource.includes('role-switcher'), '运行代码已移除直接角色切换入口及处理器');
+assert.ok(!appSource.includes('role-switcher'), '旧的不受保护角色切换处理器仍已移除');
+assert.ok(appSource.includes('demo-role-switch'), '2026-10-14明确采用受未保存保护的演示切换');
 
 function fixture() {
   const handlers = {}, timers = [], elements = {};
@@ -79,7 +80,8 @@ for (const role of ['admin', 'sales', 'doc', 'fin', 'boss']) {
   const original = c.U.currentUser();
   assert.equal(original.role, role, role + ': 通过登录动作进入');
   assert.match(app.innerHTML, /class="current-role"/, role + ': 角色仅作为文本展示');
-  assert.ok(!app.innerHTML.includes('role-switcher'), role + ': 没有直接角色控件');
+  assert.ok(!app.innerHTML.includes('role-switcher'), role + ': 没有旧的无保护角色控件');
+  assert.ok(app.innerHTML.includes('id="demo-role-switch"'), role + ': 有具名演示快捷切换（实际切换保护另由review-shared覆盖）');
   const profile = c.U.roleUser(role);
   assert.ok(app.innerHTML.includes('>' + profile.initials + '</span>'), role + ': 保留姓名缩写');
   assert.ok(app.innerHTML.includes('>' + profile.account + '</span>'), role + ': 保留既有账号');
@@ -120,4 +122,4 @@ for (const role of ['admin', 'sales', 'doc', 'fin', 'boss']) {
   test.login(role === 'boss' ? 'sales' : 'boss');
   assert.notEqual(c.U.currentUser().id, original.id, role + ': 重新提交登录后才得到新身份');
 }
-console.log('PASS: five-role read-only identity, cancellation/logout, storage and transient state clearing, protected-route return, and re-login (Node VM)');
+console.log('PASS: five-role identity text + protected demo-switch presence, cancellation/logout, storage/transient clearing, protected-route return and re-login (Node VM)');

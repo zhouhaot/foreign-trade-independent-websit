@@ -44,8 +44,8 @@ async function run() {
     assert.ok(all(t) === before, `${action}: 编辑入口缺失${missing}控件不得回退旧模型值`); assert.equal(t.cleanCount, 0); count++;
   }
   const invalid = { cartons: ['1e3', '0x10', '1.2', '0', '-0', '-1', 'Infinity', 'NaN', '9007199254740992'],
-    gw: ['bad', '100', '1,23 KGS', '1e3 KGS', '0 KGS', '-0 KGS', 'Infinity KGS', '1.0001 KGS'],
-    nw: ['-1 KG', '2,34.5 kg', 'NaN kg'], meas: ['8', '0 CBM', 'Infinity CBM', '1.0001 CBM'], package: ['\u200b', '\u2060'] };
+    gw: ['bad', '1,23 KGS', '1e3 KGS', '0 KGS', '-0 KGS', 'Infinity KGS', '1.0001 KGS'],
+    nw: ['-1 KG', '2,34.5 kg', 'NaN kg'], meas: ['0 CBM', 'Infinity CBM', '1.0001 CBM'], package: ['\u200b', '\u2060'] };
   for (const action of ['save', 'submit']) for (const [key, samples] of Object.entries(invalid)) for (const value of samples) {
     const t = setup(); fill(t, normal); fill(t, { [key]: value }); const input = field(t, key), before = all(t);
     await (action === 'save' ? save(t) : submit(t));
@@ -55,12 +55,21 @@ async function run() {
     assert.ok(t.document.getElementById('doc-packing-feedback').textContent, 'sidebar 完整原因');
     assert.equal(t.document.activeElement, input, '首错获得焦点'); assert.equal(t.cleanCount, 0); count++;
   }
+  // 原裸数字拒例转为真实保存/送审成功默认后缀；原100毛重需配不超重的净重，不能放松毛净关系。
+  for (const action of ['save', 'submit']) {
+    const t = setup(); fill(t, { gw: '100', nw: '100', meas: '8' });
+    await (action === 'save' ? save(t) : submit(t));
+    assert.equal(t.d.packing.gw, '100 KGS'); assert.equal(t.d.packing.nw, '100 KGS'); assert.equal(t.d.packing.meas, '8 CBM'); count++;
+  }
   for (const editing of [true, false]) {
     const t = setup('PL', editing); if (editing) fill(t, { gw: '10 KGS', nw: '11 kg' }); else { t.d.packing.gw = '10 KGS'; t.d.packing.nw = '11 kg'; }
     const before = all(t); await submit(t); assert.ok(all(t) === before, '毛重小于净重拒绝'); count++;
     if (editing) {
       assert.equal(field(t, 'gw').getAttribute('aria-invalid'), 'true'); assert.equal(field(t, 'nw').getAttribute('aria-invalid'), 'true');
-      assert.equal(t.document.getElementById('df-pk-gw-error').textContent, t.document.getElementById('df-pk-nw-error').textContent, '关系错误两字段同一原因');
+      assert.ok(t.document.getElementById('df-pk-gw-error').textContent, '毛净关系统一说明可读');
+      assert.equal(t.document.getElementById('df-pk-nw-error').textContent, '', '表下不重复堆同一关系说明');
+      assert.match(field(t, 'gw').getAttribute('aria-describedby'), /df-pk-gw-error/);
+      assert.match(field(t, 'nw').getAttribute('aria-describedby'), /df-pk-gw-error/, '两字段同时关联同一完整原因');
     }
   }
   for (const action of ['save', 'submit']) {
@@ -106,7 +115,8 @@ async function run() {
     other.status = '草稿'; t.c.U.order(other.orderId).status = '执行中';
     t.mount(other, 'doc', true);
     const currentGw = field(t, 'gw'); currentGw.value = 'bad';
-    t.c.U.fieldError(currentGw, '本页毛重格式错误'); currentGw.focus();
+    const currentError = t.document.getElementById('df-pk-gw-error'); currentError.textContent = '本页毛重格式错误';
+    t.c.U.fieldError(currentGw, '本页毛重格式错误', currentError.id); currentGw.focus();
     const feedback = t.document.getElementById('doc-packing-feedback'); feedback.textContent = '本页待修正，请保留';
     const before = all(t), description = currentGw.getAttribute('aria-describedby'), cleanBefore = t.cleanCount;
     if (oldOk) t.click(oldOk); await t.flush();

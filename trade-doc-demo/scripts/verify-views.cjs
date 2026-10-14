@@ -47,17 +47,28 @@ const { Actions } = context.window;
 let confirmation;
 U.confirm = opts => { confirmation = opts; };
 U.toast = () => {};
-context.window.App.user = U.roleUser('sales');
-const quote = { ...data.quotes[0], id: 'Q-VERIFY', orderId: null };
-data.quotes.push(quote);
-const orderCount = data.orders.length;
-Actions['quote-gen-order']({ dataset: { id: quote.id } });
-assert.equal(data.orders.length, orderCount, '取消生成订单不改变数据');
-confirmation.onOk();
-assert.equal(data.orders.length, orderCount + 1, '确认后仅新增一笔订单');
-assert.equal(U.orderTotal(data.orders.at(-1)), U.quoteTotal(quote), '新增订单与报价金额一致');
-Actions['quote-gen-order']({ dataset: { id: quote.id } });
-assert.equal(data.orders.length, orderCount + 1, '重复生成不新增订单');
+// 生成订单现含必填交期与Modal草稿：使用真实DOM/Promise，不再拦截无输入U.confirm。
+async function verifyOrderGeneration() {
+  const t = require('./verify-document-workspace.cjs').fixture(['views-sales', 'app']);
+  t.c.App.user = t.c.U.roleUser('sales');
+  const quote = { ...t.c.MOCK.quotes[0], id: 'Q-VERIFY', orderId: null };
+  t.c.MOCK.quotes.push(quote); t.c.location.hash = '#/quotes/' + quote.id;
+  const orderCount = t.c.MOCK.orders.length;
+  t.c.Actions['quote-gen-order']({ dataset: { id: quote.id } });
+  assert.equal(t.c.MOCK.orders.length, orderCount, '打开未确认生成订单不改变数据');
+  t.click(t.modal.querySelector('[data-close]')); await t.flush();
+  assert.equal(t.c.MOCK.orders.length, orderCount, '取消生成订单不改变数据');
+  t.c.Actions['quote-gen-order']({ dataset: { id: quote.id } });
+  const delivery = t.modal.querySelector('#qg-delivery'); assert.ok(delivery, '真实生成订单Modal采集交期');
+  delivery.value = '2027-02-01';
+  t.click(t.modal.querySelector('[data-ok]')); t.click(t.modal.querySelector('[data-ok]')); await t.flush();
+  assert.equal(t.c.MOCK.orders.length, orderCount + 1, '确认后仅新增一笔订单');
+  assert.equal(t.c.U.orderTotal(t.c.MOCK.orders.at(-1)), t.c.U.quoteTotal(quote), '新增订单与报价金额一致');
+  assert.equal(t.c.MOCK.orders.at(-1).deliveryDate, '2027-02-01', '交期来自真实输入');
+  t.c.Actions['quote-gen-order']({ dataset: { id: quote.id } });
+  assert.equal(t.c.MOCK.orders.length, orderCount + 1, '重复生成不新增订单');
+  console.log('PASS: actual order Modal cancellation, required delivery input, reconciliation, and repeat guards');
+}
 
 context.window.App.user = U.roleUser('doc');
 const approved = data.documents.find(d => d.status === '已通过' && !data.documents.some(x => x.no === d.no && x.version === d.version + 1));
@@ -72,7 +83,7 @@ assert.equal(JSON.stringify(approved), original, '原版本未覆盖');
 assert.equal(data.documents.at(-1).version, approved.version + 1, '版本号递增');
 confirmation.onOk();
 assert.equal(data.documents.length, docCount + 1, '重复确认不新增同版单证');
-console.log('PASS: quotation/order and controlled document revision cancellation, reconciliation, and repeat guards');
+console.log('PASS: controlled document revision cancellation, original-version retention, and repeat guards');
 
 /* 连续切换角色时保留残余编辑状态，并验证保存动作本身拒绝越权写入。 */
 const editFields = {
@@ -161,3 +172,4 @@ for (const type of ['CI', 'PL']) {
   U.withLoading = (button, fn) => fn();
 }
 console.log('PASS: CI/PL document editing and saving enforce role, version status, and deferred role changes');
+verifyOrderGeneration().catch(error => { console.error(error); process.exitCode = 1; });

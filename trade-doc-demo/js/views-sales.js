@@ -28,7 +28,7 @@
   /* 与现行 ROUTES 一致：只对可访问岗位展示链接，其余保留来源文字。 */
   function contextLink(hash, text, roles, role) {
     role = role || window.App.user.role;
-    return roles.indexOf(role) >= 0 ? '<a href="' + esc(hash) + '">' + esc(text) + '</a>' : '<span>' + esc(text) + '</span>';
+    return roles.indexOf(role) >= 0 && U.moduleEnabled(role, U.moduleForPath(hash, role)) ? '<a href="' + esc(hash) + '">' + esc(text) + '</a>' : '<span>' + esc(text) + '</span>';
   }
   var inquiryBusy = {};
   function inquirySourceMatches(id, hash) {
@@ -87,8 +87,9 @@
   }
 
   /* ==================== 询盘列表 ==================== */
-  Views.inquiries = function () {
+  Views.inquiries = function (ctx) {
     var s = ui('inquiries'), f = s.filters;
+    if (!Object.prototype.hasOwnProperty.call(f, 'status') && ctx && ctx.query && ['跟进中', '已报价'].indexOf(ctx.query.status) >= 0) f.status = ctx.query.status;
     var list = M.inquiries.filter(function (i) {
       if (f.kw && (i.id + U.customerName(i.customerId)).toLowerCase().indexOf(f.kw.toLowerCase()) < 0) return false;
       if (f.status && i.status !== f.status) return false;
@@ -119,7 +120,7 @@
       U.pagination(pg, 'inq-page');
   };
   Actions['inq-filter'] = function () { var s = ui('inquiries'); s.filters = { kw: val('f-kw'), status: val('f-status') }; s.page = 1; window.App.rerender(); };
-  Actions['inq-reset'] = function () { window.AppUI.inquiries = { page: 1, filters: {} }; window.App.rerender(); };
+  Actions['inq-reset'] = function () { window.AppUI.inquiries = { page: 1, filters: { status: '' } }; window.App.rerender(); };
   Actions['inq-page'] = function (el) { ui('inquiries').page = +el.dataset.page; window.App.rerender(); };
 
   /* ==================== 询盘详情 ==================== */
@@ -157,7 +158,7 @@
   Actions['inq-start-quote'] = function (el) {
     var iq = U.inquiry(el.dataset.id);
     var actor = window.App.user;
-    if (!actor || actor.role !== 'sales' || !actor.id || !actor.name) { inquiryError('只有已登录的外贸业务员可生成报价草稿。'); return; }
+    if (!actor || actor.role !== 'sales' || !actor.id || !actor.name || !U.moduleEnabled(actor.role, '销售业务')) { inquiryError('只有已登录且启用销售业务权限的外贸业务员可生成报价草稿。'); return; }
     var relation = inquiryRelation(iq);
     if (relation.error || relation.existing) { inquiryError(relation.error || '该询盘已有报价 ' + relation.existing.id + '，请查看已有报价，不重复生成。'); return; }
     if (!inquirySourceMatches(iq.id, location.hash)) { inquiryError('请从当前询盘详情打开并核对报价草稿，来源页面不一致，本次未生成报价。'); return; }
@@ -168,6 +169,7 @@
     var overlay = null;
     function contextError() {
       if (context.invalidated) return context.invalidated;
+      if (!U.moduleEnabled(actor.role, '销售业务')) return '销售业务权限已关闭，本次未生成报价。';
       if (location.hash !== context.sourceHash || !inquirySourceMatches(context.id, location.hash)) {
         context.invalidated = '询盘来源页面已变化，本次未生成报价；请返回该询盘详情重新打开并核对草稿。';
         return context.invalidated;
@@ -184,7 +186,7 @@
       title: '生成报价草稿',
       message: (iq.demoSynthetic ? tag('合成演示样例', 'gray') + '<br>' : '') + '基于询盘 <b>' + esc(iq.id) + '</b> 的需求生成报价草稿。客户：' + esc(U.customerName(iq.customerId)) + '。<br>确认后进入报价编辑页，参考价与默认条款仍需核对；本操作不登记客户确认或生成订单。',
       extra: '<div class="inquiry-confirm-summary"><p><b>参考合计 ' + U.fmt(candidate.total) + ' ' + esc(candidate.currency) + '</b></p><div class="table-wrap"><table class="table"><thead><tr><th>商品</th><th class="num">数量</th><th class="num">参考单价</th><th class="num">金额</th></tr></thead><tbody>' + reviewRows + '</tbody></table></div>' +
-        '<p class="readonly-hint">草稿默认贸易术语：' + esc(candidate.tradeTerm) + '<br>草稿默认付款条款：' + esc(candidate.paymentTerm) + '<br>草稿日期与有效期初值均为创建当天，请在编辑页按实际需求调整。</p><div class="field-error inquiry-action-error" data-inquiry-error="1" role="alert"></div></div>',
+        '<p class="readonly-hint">草稿默认贸易术语：' + esc(candidate.tradeTerm) + '<br>草稿默认付款条款：' + esc(candidate.paymentTerm) + '<br>报价日期默认为创建当天，有效期至默认为 15 天后，请按实际需求调整。</p><div class="field-error inquiry-action-error" data-inquiry-error="1" role="alert"></div></div>',
       okText: '生成报价草稿',
       onOk: function () {
         if (context.submitted || inquiryBusy[context.id] || overlay && !overlay.isConnected) return false;
@@ -194,7 +196,7 @@
         if (!qid || M.quotes.some(function (q) { return q.id === qid; })) { inquiryError('报价编号无法安全生成或已冲突，请先核对现有报价编号。', overlay); return false; }
         var newQ = {
           id: qid, inquiryId: context.id, customerId: iq.customerId, salesperson: actor.name,
-          date: U.today(), validUntil: U.today(), currency: candidate.currency, tradeTerm: candidate.tradeTerm,
+          date: U.today(), validUntil: U.addDays(U.today(), 15), currency: candidate.currency, tradeTerm: candidate.tradeTerm,
           paymentTerm: candidate.paymentTerm, status: '待客户确认', orderId: null, confirmDate: null,
           items: candidate.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
           remark: iq.demoSynthetic ? '由合成询盘 ' + iq.id + ' 参考生成（演示，非真实客户需求）' : '由询盘 ' + iq.id + ' 生成（演示）'
@@ -263,12 +265,14 @@
   }
   function quoteEligibility(q, actor, status) {
     if (!actor || actor.role !== 'sales' || !actor.id || !actor.name) return '只有已登录的外贸业务员可办理报价操作。';
+    if (!U.moduleEnabled(actor.role, '销售业务')) return '销售业务权限已关闭，不能办理报价操作。';
     if (!q || M.quotes.filter(function (other) { return other.id === q.id; }).length !== 1 || U.quote(q.id) !== q) return '报价不存在或编号冲突，请重新核对。';
     if (q.status !== status) return '当前报价状态为' + q.status + '，仅' + status + '报价可办理此操作。';
     if (q.orderId || M.orders.some(function (o) { return o.quoteId === q.id; })) return '该报价已经关联订单，请查看已有订单。';
     return '';
   }
   function quoteContextError(context, status) {
+    if (context.sourceHash && location.hash !== context.sourceHash) return '报价来源页面已变化，请返回原报价重新打开并核对。';
     if (window.App.user !== context.actor || JSON.stringify(context.actor) !== context.actorContent || U.quote(context.id) !== context.quote ||
         context.quote.id !== context.id || quoteContent(context.quote) !== context.content) return '账号、报价或关联资料已变化，请重新打开后核对。';
     return quoteEligibility(context.quote, context.actor, status);
@@ -278,6 +282,7 @@
     if (M.customers.filter(function (c) { return c.id === q.customerId; }).length !== 1) return { ok: false, error: '客户关联缺失或冲突，请先核对客户资料。', field: 'customer' };
     if (!U.validCalendarDate(q.date)) return { ok: false, error: '报价日期不是有效的日历日期，请先核对报价来源。', field: 'date' };
     if (!U.validCalendarDate(changes.validUntil)) return { ok: false, error: '有效期至必须为有效的日历日期。', field: 'validUntil' };
+    if (changes.validUntil < q.date) return { ok: false, error: '有效期至不得早于报价日期 ' + q.date + '。', field: 'validUntil' };
     if (!U.currencyEnabled(changes.currency)) return { ok: false, error: '币种必须为当前启用的字典项。', field: 'currency' };
     if (typeof changes.tradeTerm !== 'string' || !changes.tradeTerm.trim()) return { ok: false, error: '贸易术语必须为非空文本。', field: 'tradeTerm' };
     if (typeof changes.paymentTerm !== 'string' || !changes.paymentTerm.trim()) return { ok: false, error: '付款方式必须为非空文本。', field: 'paymentTerm' };
@@ -405,44 +410,61 @@
     if (eligibility) { U.toast(eligibility, 'warning'); return; }
     var candidate = quoteCandidate(q);
     if (!candidate.ok || !U.validCalendarDate(q.confirmDate)) { U.toast('不能生成订单：' + (!candidate.ok ? candidate.error : '客户确认日期无效，请核对确认记录。'), 'warning'); return; }
-    var context = quoteContext(q, actor), overlay = null;
-    U.confirm({
-      title: '生成订单',
-      message: '将基于已确认报价 <b>' + esc(q.id) + '</b> 生成新订单，客户、商品明细与金额将由报价带入。' + quoteReview(q, candidate) +
-        '<p>订单成立后，单证与收款两条支线并行推进、互不阻塞。</p><div class="field-error quote-form-error" data-quote-error="1" role="alert"></div>',
-      okText: '生成订单',
-      onOk: function () {
-        if (context.submitted || quoteBusy[context.id] || overlay && !overlay.isConnected) return false;
-        var error = quoteContextError(context, '已确认');
-        if (error) { quoteError(document.getElementById('modal-root'), error); return false; }
-        var nums = M.orders.map(function (o) { return parseInt(o.id.slice(2), 10); });
-        var number = nums.length ? Math.max.apply(null, nums) + 1 : 2026001;
-        if (!Number.isSafeInteger(number) || M.orders.some(function (o) { return !/^SO\d+$/.test(o.id); })) {
-          quoteError(document.getElementById('modal-root'), '现有订单编号无法安全生成下一编号，请先核对。'); return false;
-        }
-        var oid = 'SO' + number;
-        if (M.orders.some(function (o) { return o.id === oid; })) { quoteError(document.getElementById('modal-root'), '订单编号冲突，请先核对。'); return false; }
-        var newOrder = {
-          id: oid, quoteId: q.id, customerId: q.customerId, salesperson: q.salesperson,
-          currency: q.currency, tradeTerm: q.tradeTerm, paymentTerm: q.paymentTerm,
-          status: '待执行', docStatus: '未开始', createdAt: U.today(), deliveryDate: '',
-          items: candidate.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
-          remark: '由报价 ' + q.id + ' 生成（演示）'
-        };
-        var log = [{ time: U.now(), person: actor.name, content: '报价 ' + q.id + ' 经客户确认，生成订单 ' + oid }];
-        quoteBusy[context.id] = true;
-        M.orders.push(newOrder);
-        q.orderId = oid;
-        M.orderLogs[oid] = log;
-        context.submitted = true; delete quoteBusy[context.id];
-        if (window.App.markDraftClean) window.App.markDraftClean();
-        U.toast('订单 ' + oid + ' 已生成');
-        if (window.App.requestNavigation) window.App.requestNavigation('#/orders/' + oid);
-        else location.hash = '#/orders/' + oid;
-      }
+    var context = quoteContext(q, actor);
+    context.sourceHash = location.hash;
+    var overlay = U.openModal({ title: '生成订单 · ' + q.id, persistent: true,
+      body: '<div class="warn-box">将基于已确认报价 <b>' + esc(q.id) + '</b> 生成新订单，客户、商品明细与金额由报价带入。</div>' + quoteReview(q, candidate) +
+        '<form id="qg-form">' + U.formItem('交货日期', '<input class="input" type="date" id="qg-delivery" value="' + U.addDays(U.today(), 30) + '">', { required: true }) +
+        '<p class="readonly-hint">默认为今天后 30 天，请按客户约定核对。订单成立后，单证与收款并行推进、互不阻塞。</p>' +
+        '<div class="field-error quote-form-error" data-quote-error="1" role="alert"></div></form>',
+      footer: '<button class="btn" data-close="1">取消</button><button class="btn btn-primary" data-ok="1">生成订单</button>' });
+    var controls = modalInputs(overlay, ['qg-delivery']);
+    if (!U.bindModalDraft(overlay, { label: '生成订单 ' + q.id, controls: controls })) return;
+    overlay.querySelector('[data-ok]').addEventListener('click', function (e) {
+      if (e.currentTarget.classList.contains('is-loading') || context.submitted || quoteBusy[context.id] || !U.isModalCurrent(overlay)) return;
+      if (!modalControlsCurrent(overlay, controls)) { quoteError(overlay, '交货日期控件已变化，请重新打开并核对。'); return; }
+      U.clearErrors(overlay);
+      var date = controls[0], deliveryDate = date.value;
+      if (!U.validCalendarDate(deliveryDate)) { U.fieldError(date, '交货日期必须为有效的日历日期。'); date.focus(); return; }
+      var error = quoteContextError(context, '已确认');
+      if (error) { quoteError(overlay, error); return; }
+      var captured = modalInputSnapshot(controls);
+      if (!U.setModalBusy(overlay, true)) return;
+      var disabled = disableModalInputs(controls);
+      quoteBusy[context.id] = true;
+      U.withLoading(e.currentTarget, function () {
+        try {
+          if (context.submitted || !U.isModalCurrent(overlay)) return;
+          if (!modalInputsMatch(overlay, captured)) { quoteError(overlay, '交货日期输入已变化，请核对后重新生成订单。'); return; }
+          var delayedError = quoteContextError(context, '已确认');
+          if (delayedError) { quoteError(overlay, delayedError); return; }
+          var nums = M.orders.map(function (o) { return parseInt(o.id.slice(2), 10); });
+          var number = nums.length ? Math.max.apply(null, nums) + 1 : 2026001;
+          if (!Number.isSafeInteger(number) || M.orders.some(function (o) { return !/^SO\d+$/.test(o.id); })) {
+            quoteError(overlay, '现有订单编号无法安全生成下一编号，请先核对。'); return;
+          }
+          var oid = 'SO' + number;
+          if (M.orders.some(function (o) { return o.id === oid; })) { quoteError(overlay, '订单编号冲突，请先核对。'); return; }
+          var newOrder = {
+            id: oid, quoteId: q.id, customerId: q.customerId, salesperson: q.salesperson,
+            currency: q.currency, tradeTerm: q.tradeTerm, paymentTerm: q.paymentTerm,
+            status: '待执行', docStatus: '未开始', createdAt: U.today(), deliveryDate: deliveryDate,
+            items: candidate.items.map(function (it) { return { productId: it.productId, qty: it.qty, price: it.price }; }),
+            remark: '由报价 ' + q.id + ' 生成（演示）'
+          };
+          var log = [{ time: U.now(), person: actor.name, content: '报价 ' + q.id + ' 经客户确认，生成订单 ' + oid }];
+          M.orders.push(newOrder);
+          q.orderId = oid;
+          M.orderLogs[oid] = log;
+          context.submitted = true;
+          U.markModalDraftClean(overlay); U.closeModal(overlay);
+          if (window.App.markDraftClean) window.App.markDraftClean();
+          U.toast('订单 ' + oid + ' 已生成');
+          if (window.App.requestNavigation) window.App.requestNavigation('#/orders/' + oid);
+          else location.hash = '#/orders/' + oid;
+        } finally { delete quoteBusy[context.id]; U.setModalBusy(overlay, false); restoreModalInputs(overlay, controls, disabled); }
+      });
     });
-    var modalRoot = document.getElementById && document.getElementById('modal-root');
-    overlay = modalRoot ? modalRoot.firstElementChild : null;
   };
 
   /* ==================== 报价编辑 ==================== */
@@ -533,6 +555,7 @@
   }
   /* 报价编辑：纯数字候选预览，非法值不伪装成零。 */
   document.addEventListener('input', function (e) {
+    if (e.target.id === 'oc-amount' && orderChangePreview && orderChangePreview.overlay.contains(e.target)) { orderChangePreview.refresh(); return; }
     if (!e.target.closest || !e.target.classList || !e.target.classList.contains('qe-input') && e.target.id !== 'qe-currency') return;
     var form = e.target.closest('#qe-form'); if (!form) return;
     U.clearErrors(form); quotePreview(form);
@@ -597,7 +620,7 @@
       var customer = U.customer(o.customerId);
       return '<tr><td><a href="#/orders/' + o.id + '"><b>' + o.id + '</b></a>' +
         '<span class="cell-secondary">报价 ' + contextLink('#/quotes/' + o.quoteId, o.quoteId, ['sales', 'boss']) + '</span></td>' +
-        '<td><span>' + esc(customer ? customer.nameCn : o.customerId) + '</span><span class="cell-secondary">' + esc(customer ? customer.nameEn : '') + '</span></td>' +
+        '<td><span>' + esc(customer ? customer.nameCn : o.customerId) + '</span><span class="cell-secondary" title="' + esc(customer ? customer.nameEn : '') + '">' + esc(customer ? customer.nameEn : '') + '</span></td>' +
         '<td>' + esc(o.salesperson) + '</td>' +
         '<td class="num">' + U.fmt(fin.total) + ' ' + o.currency + '</td>' +
         '<td class="center">' + tag(o.status) + '</td>' +
@@ -622,11 +645,11 @@
       return '<button type="button" class="order-pick' + (o.id === s.selectedId ? ' selected' : '') + '" data-action="orders-select" data-id="' + esc(o.id) + '" aria-pressed="' + (o.id === s.selectedId) + '" aria-controls="order-inspector">' +
         '<span class="order-pick-head"><strong>' + esc(o.id) + '</strong><span class="order-pick-amount">' + U.money(U.orderTotal(o), o.currency) + '</span></span>' +
         '<span class="order-pick-customer">' + esc(U.customerName(o.customerId)) + '</span>' +
-        '<span class="order-pick-meta">' + esc(o.salesperson) + ' · 创建 ' + esc(o.createdAt) + ' · 交期 ' + esc(o.deliveryDate) + '</span>' +
+        '<span class="order-pick-meta">' + esc(o.salesperson) + ' · 创建 ' + esc(o.createdAt) + ' · 交期 ' + esc(o.deliveryDate || '待排期') + '</span>' +
         '<span class="order-pick-status"><span><small>订单</small>' + tag(o.status) + '</span><span><small>单证</small>' + tag(o.docStatus) + '</span><span><small>收款</small>' + tag(U.payStatus(o)) + '</span></span></button>';
     }).join('') || '<div class="empty-state">' + (hasFilter ? '没有符合筛选条件的结果，请调整筛选条件' : '暂无订单记录') + '</div>';
     return '<div class="page-head"><div><div class="workspace-eyebrow">订单协同 / ORDER WORKSPACE</div><h2>订单工作区 <span class="tag tag-gray">原型样例</span></h2><p class="page-description">选择订单，同屏核对订单、单证与收款的独立进度。</p></div><div class="actions">' +
-      (window.App.user.role === 'sales' ? '<a class="btn btn-primary" href="#/quotes">新建报价</a>' : '') +
+      (window.App.user.role === 'sales' ? '<a class="btn btn-primary" href="#/inquiries?status=' + encodeURIComponent('跟进中') + '">从询盘新建报价</a>' : '') +
       '</div></div>' +
       '<div class="orders-stage' + (s.tableView ? ' table-mode' : '') + '" id="orders-stage">' +
       '<div class="filter-bar orders-filter"><div class="filter-primary">' +
@@ -665,10 +688,12 @@
       return d.orderId === o.id && !M.documents.some(function (other) { return other.no === d.no && other.version > d.version; });
     }).sort(function (a, b) { return documentPriority(b) - documentPriority(a) || b.version - a.version; })[0];
     var next = '<a class="btn" href="#/orders/' + esc(o.id) + '">查看完整订单' + U.icon('arrow') + '</a>';
+    if (role === 'sales' && ['待执行', '执行中'].indexOf(o.status) >= 0) next += '<button class="btn btn-primary" data-action="order-apply-change" data-id="' + esc(o.id) + '">申请变更</button>';
+    if (role === 'doc' && !cancelled && orderNeedsDocuments(o)) next += '<button class="btn btn-primary" data-action="doc-create" data-order="' + esc(o.id) + '">制作单证</button>';
     if (doc && (role === 'boss' || role === 'doc')) next += '<a class="btn btn-primary" href="#/documents/' + esc(doc.id) + '">' + (role === 'boss' && doc.status === '待审核' ? '查看待审单证' : role === 'doc' && doc.status === '已退回' ? '修订退回单证' : '查看关联单证') + '</a>';
     if (role === 'fin' && fin.outstanding > 0.005 && o.status !== '已取消') next += '<a class="btn btn-primary" href="#/payments?order=' + esc(o.id) + '">登记收款</a>';
     return '<div class="inspector-heading"><div><span>当前订单</span><h3>' + esc(o.id) + '</h3></div><div class="inspector-total"><span>订单金额</span><strong>' + U.money(fin.total, o.currency) + '</strong></div></div>' +
-      '<div class="inspector-context"><span>' + esc(U.customerName(o.customerId)) + '</span><span>来源报价 ' + esc(o.quoteId) + ' · 交期 ' + esc(o.deliveryDate) + '</span></div>' +
+      '<div class="inspector-context"><span>' + esc(U.customerName(o.customerId)) + '</span><span>来源报价 ' + esc(o.quoteId) + ' · 交期 ' + esc(o.deliveryDate || '待排期') + '</span></div>' +
       '<div class="inspector-tracks"><section class="inspector-track track-order"><div class="track-title"><h4>订单进度</h4>' + tag(o.status) + '</div>' + stepsHtml(['待执行', '执行中', '已完成'], cancelled ? '' : o.status, {}) + (cancelled ? '<p class="track-note">' + (o.status === '已取消' ? '订单已取消，关联业务终止。' : '取消申请审批中，订单暂缓执行。') + '</p>' : '') + '</section>' +
       '<section class="inspector-track track-doc"><div class="track-title"><h4>单证进度</h4>' + tag(o.docStatus) + '</div>' + documentStages(o) + '</section>' +
       '<section class="inspector-track track-pay"><div class="track-title"><h4>收款进度</h4>' + tag(paySt) + '</div><div class="progress" role="progressbar" aria-label="订单收款比例" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><div class="bar' + (paySt === '已结清' ? ' green' : '') + '" style="width:' + pct + '%"></div></div><div class="track-money"><div><span>已收</span><strong>' + U.money(fin.received, o.currency) + '</strong></div><div><span>未收</span><strong>' + U.money(fin.outstanding, o.currency) + '</strong></div></div></section></div>' +
@@ -729,6 +754,9 @@
     { key: 'changes', name: '审核与变更记录' },
     { key: 'logs', name: '操作日志' }
   ];
+  function orderNeedsDocuments(o) {
+    return ['CI', 'PL'].some(function (type) { return !M.documents.some(function (d) { return d.orderId === o.id && d.type === type; }); });
+  }
 
   Views.orderDetail = function (ctx) {
     var o = U.order(ctx.params[0]);
@@ -741,8 +769,10 @@
 
     /* 头部操作按钮：按角色 + 状态 */
     var btns = ['sales', 'boss'].indexOf(role) >= 0 ? '<a class="btn" href="#/quotes/' + esc(o.quoteId) + '">查看来源报价</a>' : '';
-    if (role === 'doc' && o.docStatus !== '已通过' && o.status !== '取消申请中' && o.status !== '已取消') {
-      btns += '<a class="btn btn-primary" href="#/documents">制作单证</a>';
+    if (role === 'doc' && (orderNeedsDocuments(o) || o.docStatus !== '已通过') && o.status !== '取消申请中' && o.status !== '已取消') {
+      var linkedDoc = M.documents.filter(function (d) { return d.orderId === o.id; }).sort(function (a, b) { return b.version - a.version; })[0];
+      btns += orderNeedsDocuments(o) ? '<button class="btn btn-primary" data-action="doc-create" data-order="' + esc(o.id) + '">制作单证</button>'
+        : linkedDoc ? '<a class="btn btn-primary" href="#/documents/' + esc(linkedDoc.id) + '">查看关联单证</a>' : '';
     }
     if (role === 'fin' && fin.outstanding > 0.005 && o.status !== '已取消') {
       btns += '<a class="btn btn-primary" href="#/payments?order=' + o.id + '">登记收款</a>';
@@ -777,7 +807,7 @@
       '<div class="order-head-top">' +
         '<div><h2 class="oh-title">订单 ' + o.id + ' ' + tag(o.status) + '</h2>' +
         '<div class="oh-sub"><span>客户：' + contextLink('#/customers/' + o.customerId, U.customerName(o.customerId), ['sales'], role) + '</span>' +
-        '<span>业务员：' + esc(o.salesperson) + '</span><span>创建：' + o.createdAt + '</span></div></div>' +
+        '<span>业务员：' + esc(o.salesperson) + '</span><span>创建：' + o.createdAt + '</span><span>来源报价：' + contextLink('#/quotes/' + o.quoteId, o.quoteId, ['sales', 'boss'], role) + '</span></div></div>' +
         '<div class="order-head-actions">' + btns + '</div>' +
       '</div>' +
       '<div class="order-summary"><div><span>订单金额</span><strong>' + U.money(fin.total, o.currency) + '</strong></div>' +
@@ -793,6 +823,11 @@
   };
   Actions['order-tab'] = function (el) {
     location.hash = '#/orders/' + el.dataset.id + '?tab=' + el.dataset.tab;
+  };
+  Views.orderTabBody = function (ctx, tab) {
+    var o = U.order(ctx.params[0]);
+    if (!o) return Views.notFound('订单不存在：' + ctx.params[0]);
+    return orderTabBody(o, ORDER_TABS.some(function (t) { return t.key === tab; }) ? tab : 'overview', ctx);
   };
 
   function stepsHtml(steps, current, warnMap) {
@@ -838,23 +873,13 @@
   function orderTabBody(o, tab, ctx) {
     var fin = U.orderFin(o);
     if (tab === 'overview') {
-      var q = U.quote(o.quoteId);
+      var recent = (M.orderLogs[o.id] || []).slice().reverse().sort(function (a, b) { return b.time.localeCompare(a.time); }).slice(0, 3);
       return '<div class="card"><div class="card-title">订单概况</div><div class="desc-grid">' +
-        '<div class="di"><div class="dt">客户</div><div class="dd">' + contextLink('#/customers/' + o.customerId, U.customerName(o.customerId), ['sales'], ctx.user.role) + '</div></div>' +
-        descItem('业务员', o.salesperson) +
-        '<div class="di"><div class="dt">来源报价</div><div class="dd">' + contextLink('#/quotes/' + o.quoteId, o.quoteId, ['sales', 'boss'], ctx.user.role) +
-          (q && q.inquiryId ? '（询盘 ' + contextLink('#/inquiries/' + q.inquiryId, q.inquiryId, ['sales', 'boss'], ctx.user.role) + '）' : '') + '</div></div>' +
-        descItem('创建时间', o.createdAt) +
-        descItem('要求交期', o.deliveryDate || '—') +
-        descItem('币种', o.currency) +
-        '<div class="di"><div class="dt">订单金额</div><div class="dd num"><b>' + U.fmt(fin.total) + ' ' + o.currency + '</b></div></div>' +
-        descItem('付款方式', o.paymentTerm) +
-        descItem('贸易术语', o.tradeTerm) +
-        descItem('订单状态', o.status) +
-        descItem('单证状态', o.docStatus) +
+        descItem('交货日期', o.deliveryDate || '待排期') +
+        descItem('合同附件', '未提供合同附件（当前原型未接入附件管理）') +
         descItem('备注', o.remark || '—') +
-        '</div>' +
-        '<div class="muted small mt8">提示：订单核心交易数据（客户、商品、金额、条款）由报价带入，单证员与财务人员均为只读；金额变更须走「申请变更」审批流程。</div></div>';
+        '</div></div><div class="card"><div class="card-title">最近动态<span class="sub">最近 3 条 · 完整记录见操作日志</span></div><div class="timeline">' +
+        (recent.map(function (l) { return '<div class="tl-item"><div class="tl-meta"><span>' + esc(l.time) + '</span><span>' + esc(l.person) + '</span></div><div class="tl-content">' + esc(l.content) + '</div></div>'; }).join('') || '<div class="empty-state">暂无操作日志</div>') + '</div></div>';
     }
     if (tab === 'items') {
       var rows = o.items.map(function (it, i) {
@@ -925,14 +950,23 @@
   }
 
   /* 申请变更（改价 / 取消） */
+  var orderChangePreview = null;
+  Actions['order-price-suggestion'] = function (el) {
+    var context = orderChangePreview;
+    if (!context || window.App.user !== context.actor || context.actor.role !== 'sales' || !U.isModalCurrent(context.overlay) || !context.overlay.contains(el) || !modalControlsCurrent(context.overlay, context.controls) || context.controls[1].disabled || !U.moduleEnabled('sales', '订单详情')) return;
+    var checked = U.prepareRepricing({ targetType: 'order', targetId: context.order.id, targetAmount: el.dataset.amount });
+    if (checked.error) { context.refresh(); return; }
+    context.controls[1].value = checked.target.toFixed(2);
+    context.refresh(); context.controls[1].focus();
+  };
   Actions['order-apply-change'] = function (el) {
     var o = U.order(el.dataset.id);
     var actor = window.App.user;
-    if (!o || !actor || actor.role !== 'sales' || ['待执行', '执行中'].indexOf(o.status) < 0) {
+    if (!o || !actor || actor.role !== 'sales' || !U.moduleEnabled(actor.role, '订单详情') || ['待执行', '执行中'].indexOf(o.status) < 0) {
       U.toast('仅业务员可对待执行或执行中的订单申请变更', 'warning');
       return;
     }
-    var openedStatus = o.status, openedCurrency = o.currency, actorContent = JSON.stringify(actor), submitted = false;
+    var openedStatus = o.status, openedCurrency = o.currency, openedOrderContent = JSON.stringify(o), actorContent = JSON.stringify(actor), submitted = false;
     var fin = U.orderFin(o);
     var body =
       '<form id="oc-form">' +
@@ -941,7 +975,7 @@
       '<div class="field-error"></div></div>' +
       '<div class="form-item mt8" id="oc-amount-wrap">' + '<label class="required" for="oc-amount">变更后订单金额（' + o.currency + '）</label>' +
       '<input class="input" id="oc-amount" inputmode="decimal" aria-describedby="oc-amount-help" value="' + fin.total.toFixed(2) + '">' +
-      '<div class="readonly-hint" id="oc-amount-help">当前订单金额：' + U.fmt(fin.total) + ' ' + o.currency + '<br>填写至少0.01的金额，最多2位小数，例如24000.00。</div><div class="field-error"></div></div>' +
+      '<div class="readonly-hint" id="oc-amount-help">当前订单金额：' + U.fmt(fin.total) + ' ' + o.currency + '<br>至少0.01，最多2位小数；数量不变，明细单价按比例保留两位小数。</div><div class="field-error"></div><div id="oc-repricing"></div></div>' +
       '<div class="form-item mt8"><label class="required" for="oc-reason">申请原因</label>' +
       '<textarea class="textarea" id="oc-reason" placeholder="请说明变更背景、与客户的协商结果"></textarea><div class="field-error"></div></div>' +
       '<div id="oc-danger"></div>' +
@@ -952,6 +986,30 @@
     var controls = modalInputs(overlay, ['oc-type', 'oc-amount', 'oc-reason']);
     if (!U.bindModalDraft(overlay, { label: '订单变更 ' + o.id, controls: controls })) return;
     var typeSel = overlay.querySelector('#oc-type');
+    function refreshRepricing() {
+      if (!U.isModalCurrent(overlay) || !modalControlsCurrent(overlay, controls)) return null;
+      var preview = overlay.querySelector('#oc-repricing'), amount = controls[1], okBtn = overlay.querySelector('[data-ok]');
+      U.clearErrors(overlay.querySelector('#oc-amount-wrap'));
+      if (typeSel.value === '取消申请') { preview.innerHTML = ''; okBtn.disabled = false; return null; }
+      var decimal = U.decimalInput(amount.value, '变更后订单金额');
+      var plan = decimal.ok ? U.prepareRepricing({ targetType: 'order', targetId: o.id, targetAmount: decimal.value }) : { error: decimal.error };
+      okBtn.disabled = !!plan.error;
+      var suggestion = '';
+      if (plan.error) {
+        U.fieldError(amount, '本次申请未提交：' + plan.error);
+        if (Number.isFinite(plan.total) && plan.total > 0) {
+          var alternative = U.prepareRepricing({ targetType: 'order', targetId: o.id, targetAmount: plan.total });
+          if (!alternative.error) suggestion = '<button type="button" class="btn btn-sm" data-action="order-price-suggestion" data-amount="' + alternative.target.toFixed(2) + '">试用可行金额 ' + U.fmt(alternative.target) + ' ' + esc(o.currency) + '</button><p class="readonly-hint">仅供与客户重新协商；点击后重新试算，不会自动提交。</p>';
+        }
+      }
+      preview.innerHTML = (plan.items ? '<div class="table-wrap mt8"><table class="table"><thead><tr><th>改价试算</th><th class="num">数量 × 候选单价</th></tr></thead><tbody>' + plan.items.map(function (it) {
+        var p = U.product(it.productId);
+        return '<tr><td>' + esc(p ? p.nameCn : it.productId) + '</td><td class="num">' + esc(it.qty) + ' × ' + U.fmt(it.price) + ' ' + esc(o.currency) + '</td></tr>';
+      }).join('') + '</tbody></table></div>' : '') +
+        '<p class="readonly-hint" role="status">' + (plan.error ? '试算未通过，请调整目标金额后再提交。' : '试算通过：明细合计 ' + U.fmt(plan.total) + ' ' + esc(o.currency) + '，与目标一致。') + '</p>' + suggestion;
+      return plan;
+    }
+    orderChangePreview = { overlay: overlay, order: o, actor: actor, controls: controls, refresh: refreshRepricing };
     function refreshType() {
       var isCancel = typeSel.value === '取消申请';
       overlay.querySelector('#oc-amount-wrap').style.display = isCancel ? 'none' : '';
@@ -961,6 +1019,7 @@
         : '';
       var okBtn = overlay.querySelector('[data-ok]');
       okBtn.className = 'btn ' + (isCancel ? 'btn-danger' : 'btn-primary');
+      refreshRepricing();
     }
     typeSel.addEventListener('change', refreshType);
     refreshType();
@@ -968,9 +1027,11 @@
       if (e.currentTarget.classList.contains('is-loading')) return;
       if (submitted || !U.isModalCurrent(overlay)) return;
       if (!modalControlsCurrent(overlay, controls)) { overlay.querySelector('#oc-feedback').textContent = '订单变更控件已变化，请重新打开并核对。'; return; }
+      if (!U.moduleEnabled(actor.role, '订单详情')) { overlay.querySelector('#oc-feedback').textContent = '订单详情权限已关闭，本次申请未提交。'; return; }
       var btn = e.currentTarget;
       var form = overlay.querySelector('#oc-form');
       U.clearErrors(form);
+      if (['改价申请', '取消申请'].indexOf(typeSel.value) < 0) { U.fieldError(typeSel, '请选择改价申请或取消申请。'); typeSel.focus(); return; }
       var isCancel = typeSel.value === '取消申请';
       var requestedAmount = null;
       if (!isCancel) {
@@ -978,6 +1039,8 @@
         var amountCandidate = U.decimalInput(amount.value, '变更后订单金额');
         if (!amountCandidate.ok) { U.fieldError(amount, amountCandidate.error); amount.focus(); return; }
         requestedAmount = amountCandidate.value;
+        var plan = refreshRepricing();
+        if (!plan || plan.error) { amount.focus(); return; }
       }
       var rules = [{ el: form.querySelector('#oc-reason'), label: '申请原因', required: true }];
       if (!U.validate(rules)) return;
@@ -991,13 +1054,17 @@
           if (!U.isModalCurrent(overlay)) return;
           if (submitted) return;
           if (!modalInputsMatch(overlay, captured)) { overlay.querySelector('#oc-feedback').textContent = '订单变更输入已变化，请核对当前内容后重新提交。'; U.toast('订单变更输入已变化，请核对当前内容后重新提交。', 'warning'); return; }
-          if (window.App.user !== actor || JSON.stringify(actor) !== actorContent || actor.role !== 'sales' || U.order(o.id) !== o || o.status !== openedStatus || o.currency !== openedCurrency) {
+          if (window.App.user !== actor || JSON.stringify(actor) !== actorContent || actor.role !== 'sales' || !U.moduleEnabled(actor.role, '订单详情') || U.order(o.id) !== o || JSON.stringify(o) !== openedOrderContent || o.status !== openedStatus || o.currency !== openedCurrency) {
             U.toast('账号或订单状态已变化，请关闭弹窗后重新核对申请', 'warning');
             return;
           }
           if (M.approvals.some(function (a) { return a.type === requestedType && a.targetId === o.id && a.status === '待处理'; })) {
             U.toast('该订单已有待处理' + requestedType + '，请查看已有申请', 'warning');
             return;
+          }
+          if (!isCancel) {
+            var finalPlan = U.prepareRepricing({ targetType: 'order', targetId: o.id, targetAmount: requestedAmount });
+            if (finalPlan.error) { U.fieldError(controls[1], '本次申请未提交：' + finalPlan.error); overlay.querySelector('#oc-feedback').textContent = '订单或收款已变化，请重新试算后提交。'; return; }
           }
           var title = isCancel
             ? '订单 ' + o.id + ' 申请取消'

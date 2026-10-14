@@ -1,0 +1,149 @@
+{
+  "date": "2026-10-14",
+  "scope": "local static Demo, actual UI actions",
+  "steps": [
+    {
+      "label": "询盘生成报价：545 USD、默认有效期+15天",
+      "detail": {
+        "id": "Q2026101",
+        "date": "2026-10-14",
+        "validUntil": "2026-10-29",
+        "expectedUntil": "2026-10-29",
+        "total": 545
+      }
+    },
+    {
+      "label": "客户确认→必填交期拦截→生成同一订单",
+      "detail": {
+        "id": "SO2026008",
+        "total": 545,
+        "deliveryDate": "2026-11-13",
+        "status": "待执行",
+        "docStatus": "未开始",
+        "payStatus": "未收款",
+        "documents": 0
+      }
+    },
+    {
+      "label": "业务员改价实时预演（不提交无效目标）",
+      "detail": {
+        "error": "本次申请未提交：数量保持不变、单价保留两位小数并等比舍入后，候选金额为 545.00 USD，与目标 544.99 USD 相差 0.01 USD。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。",
+        "preview": "改价试算数量 × 候选单价不锈钢保温杯100 × 3.20 USDLED 露营灯50 × 4.50 USD试算未通过，请调整目标金额后再提交。试用可行金额 545.00 USD仅供与客户重新协商；点击后重新试算，不会自动提交。",
+        "disabled": true
+      }
+    },
+    {
+      "label": "单证未开始时可独立收款；超收拒绝后登记100",
+      "detail": {
+        "received": 100,
+        "outstanding": 445,
+        "documents": 0,
+        "sessionCount": 1
+      }
+    },
+    {
+      "label": "同单首制CI/PL V1，独立快照、真实关联与编辑焦点",
+      "detail": [
+        {
+          "id": "D-CI2026006-V1",
+          "no": "CI2026006",
+          "type": "CI",
+          "version": 1,
+          "status": "草稿",
+          "frozen": true,
+          "invoice": null,
+          "packing": {
+            "cartons": "",
+            "package": "",
+            "gw": "",
+            "nw": "",
+            "meas": ""
+          }
+        },
+        {
+          "id": "D-PL2026006-V1",
+          "no": "PL2026006",
+          "type": "PL",
+          "version": 1,
+          "status": "草稿",
+          "frozen": true,
+          "invoice": {
+            "status": "linked",
+            "docId": "D-CI2026006-V1",
+            "no": "CI2026006",
+            "version": 1
+          },
+          "packing": {
+            "cartons": "",
+            "package": "",
+            "gw": "",
+            "nw": "",
+            "meas": ""
+          }
+        }
+      ]
+    },
+    {
+      "label": "PL纯数字自动单位，非法重量零写后修正送审",
+      "detail": {
+        "packing": {
+          "cartons": 10,
+          "package": "合成验收包装，非实物数据",
+          "gw": "1680 KGS",
+          "nw": "1600 KGS",
+          "meas": "8 CBM"
+        },
+        "status": "待审核",
+        "invoice": {
+          "status": "linked",
+          "docId": "D-CI2026006-V1",
+          "no": "CI2026006",
+          "version": 1
+        }
+      }
+    },
+    {
+      "label": "主管CI审核→继续同单PL→双单通过",
+      "detail": {
+        "order": "已通过",
+        "documents": [
+          {
+            "type": "CI",
+            "status": "已通过",
+            "approver": "周建国"
+          },
+          {
+            "type": "PL",
+            "status": "已通过",
+            "approver": "周建国"
+          }
+        ]
+      }
+    },
+    {
+      "label": "尾款快捷填入→结清正向反馈→自动下一单",
+      "detail": {
+        "hash": "#/payments",
+        "text": "SO2026008 已全部结清最后一笔 445.00 USD 已登记，已收与应收一致。可继续选择下一笔待收款订单。查看完整收款记录关闭",
+        "nextOrder": "SO2026001",
+        "count": 2,
+        "errorStyle": false
+      }
+    },
+    {
+      "label": "千分位粘贴结清另一笔，首页即时新增3笔",
+      "detail": {
+        "label": "本次演示新增收款",
+        "value": "3"
+      }
+    }
+  ],
+  "errors": [],
+  "orderId": "SO2026008",
+  "quoteId": "Q2026101",
+  "documentIds": {
+    "ci": "D-CI2026006-V1",
+    "pl": "D-PL2026006-V1"
+  },
+  "result": "PASS"
+}

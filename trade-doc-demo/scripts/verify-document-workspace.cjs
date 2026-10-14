@@ -170,6 +170,8 @@ async function run() {
   t.click(t.document.querySelector('[data-action="doc-leave"]')); assert.equal(c.location.hash, '#/documents');
   assert.equal(t.modal.firstElementChild, null, '未修改表单普通跳转无确认');
   const packingDoc = c.MOCK.documents.find(x => x.type === 'PL' && x.status === '已退回');
+  // 2026-10-14：本例只核可编辑包装的离开保护；同源待重制互斥另由review-documents专项验证。
+  c.MOCK.approvals = c.MOCK.approvals.filter(a => !(a.type === '重新制单申请' && a.targetType === 'doc' && a.targetId === packingDoc.id && a.status === '待处理'));
   t.mount(packingDoc, 'doc', true);
   const cartons = t.document.getElementById('df-pk-cartons'); cartons.value = String(packingDoc.packing.cartons + 1);
   const packingRoute = c.location.hash;

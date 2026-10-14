@@ -3,10 +3,16 @@
 const assert = require('node:assert/strict');
 const { fixture } = require('./verify-document-workspace.cjs');
 const initialInvalid = ['1e3', '2.4e4', '0x10', 'Infinity', '1e309', '24000.001', '9007199254740991.99'];
-function setup(raw, type = '改价申请') {
+function setup(raw, type = '改价申请', numericFixture = false) {
   const t = fixture(['views-sales', 'app']);
   t.c.App.user = t.c.U.roleUser('sales');
   const order = t.c.U.order('SO2026001');
+  // 仅数值合法表示loop使用明确qty1/零收款模型，让0.01至大额均可精确分摊。
+  // 真实preview/Action仍运行，不stub shared helper，也不放宽原数值边界断言。
+  if (numericFixture) {
+    order.items = [{ productId: order.items[0].productId, qty: 1, price: 1 }];
+    t.c.MOCK.payments = t.c.MOCK.payments.filter(p => p.orderId !== order.id);
+  }
   t.c.location.hash = '#/orders/' + order.id;
   t.c.Actions['order-apply-change']({ dataset: { id: order.id } });
   const overlay = t.modal.firstElementChild;
@@ -56,7 +62,9 @@ async function run() {
   function storedCents(number) { const parts = String(number).split('.'); return BigInt(parts[0]) * 100n + BigInt(((parts[1] || '') + '00').slice(0, 2)); }
   const valid = [['0.01', 0.01, 1n], ['1', 1, 100n], ['19.5', 19.5, 1950n], ['24000.00', 24000, 2400000n], [' 00012.50 ', 12.5, 1250n], ['0.29', 0.29, 29n], ['90071992547409.90', 90071992547409.9, 9007199254740990n], ['45035996273704.95', 45035996273704.95, 4503599627370495n]];
   for (const [raw, expected, cents] of valid) {
-    const t = setup(raw), before = JSON.parse(data(t)), oldRequests = JSON.stringify(before.approvals);
+    const t = setup(raw, '改价申请', true), before = JSON.parse(data(t)), oldRequests = JSON.stringify(before.approvals);
+    assert.equal(t.ok.disabled, false, '数值fixture必须通过真实前置试算，不能绕过新版提交门槛');
+    assert.ok(t.overlay.querySelector('#oc-repricing').innerHTML.includes('与目标一致'), '真实preview已核对明细候选与目标');
     const legacy = t.c.MOCK.approvals.slice(); t.click(t.ok); t.click(t.ok); await t.flush();
     assert.equal(t.c.MOCK.approvals.length, before.approvals.length + 1);
     const request = t.c.MOCK.approvals[0]; assert.equal(request.targetAmount, expected); assert.equal(storedCents(request.targetAmount), cents);
@@ -75,10 +83,10 @@ async function run() {
   correction.click(correction.modal.querySelector('[data-modal-draft-continue]'));
   assert.equal(correction.modal.firstElementChild, correction.overlay); assert.equal(correction.overlay.querySelector('#oc-amount'), correction.amount);
   assert.equal(correction.amount.value, '24000.001'); assert.equal(correction.amount.getAttribute('aria-invalid'), 'true');
-  correction.amount.value = '24000.00'; correction.click(correction.ok);
+  correction.amount.value = '24100.00'; correction.click(correction.ok);
   assert.equal(correction.amount.getAttribute('aria-invalid'), null); assert.equal(correction.amount.getAttribute('aria-describedby'), 'oc-amount-help');
-  await correction.flush(); assert.equal(correction.c.MOCK.approvals[0].targetAmount, 24000); assert.equal(correction.reason.value, '客户已核对目标，说明原文保留'); cases++;
-  const missingReason = setup('24000.00'); missingReason.reason.value = ''; const beforeReason = data(missingReason);
+  await correction.flush(); assert.equal(correction.c.MOCK.approvals[0].targetAmount, 24100); assert.equal(correction.reason.value, '客户已核对目标，说明原文保留'); cases++;
+  const missingReason = setup('24100.00'); missingReason.reason.value = ''; const beforeReason = data(missingReason);
   missingReason.click(missingReason.ok); await missingReason.flush(); assert.equal(data(missingReason), beforeReason);
   assert.equal(missingReason.reason.getAttribute('aria-invalid'), 'true'); assert.equal(missingReason.document.activeElement, missingReason.reason); noSuccess(missingReason); cases++;
   for (const raw of initialInvalid) {
@@ -95,7 +103,7 @@ async function run() {
   toggle.typeNode.value = '改价申请'; for (const fn of toggle.typeNode.listeners.change || []) fn({ target: toggle.typeNode });
   toggle.click(toggle.ok); await toggle.flush(); assert.equal(data(toggle), beforeToggle); assert.equal(toggle.amount.getAttribute('aria-invalid'), 'true'); noSuccess(toggle); cases++;
   for (const change of ['raw', 'node', 'actor', 'actor-fields', 'object', 'status', 'currency', 'source']) {
-    const t = setup('24000.00'); t.click(t.ok); let replacement;
+    const t = setup('24100.00'); t.click(t.ok); let replacement;
     if (change === 'raw') t.amount.value = '25000.00';
     if (change === 'node') { const node = t.document.createElement('input'); node.id = t.amount.id; node.value = t.amount.value; t.amount.parentElement.insertBefore(node, t.amount); t.amount.remove(); }
     if (change === 'actor') t.c.App.user = t.c.U.roleUser('fin');
@@ -107,9 +115,9 @@ async function run() {
     const before = data(t); await t.flush(); assert.equal(data(t), before, `${change}: H20延迟拒绝完整MOCK不变`); noSuccess(t); assert.deepEqual(t.cleaned, []); assert.deepEqual(t.pageCleaned, []);
     if (replacement) assert.equal(t.modal.firstElementChild, replacement); cases++;
   }
-  const delayed = setup('24000.00'); delayed.click(delayed.ok); await Promise.resolve();
+  const delayed = setup('24100.00'); delayed.click(delayed.ok); await Promise.resolve();
   const later = delayed.c.U.openModal({ title: '后来的金额草稿', body: '<input id="amount-new" value="原文保留">', persistent: true });
-  await delayed.flush(); assert.equal(delayed.modal.firstElementChild, later, '合法commit后的480ms回调不关闭新窗'); assert.equal(delayed.c.MOCK.approvals[0].targetAmount, 24000); cases++;
+  await delayed.flush(); assert.equal(delayed.modal.firstElementChild, later, '合法commit后的480ms回调不关闭新窗'); assert.equal(delayed.c.MOCK.approvals[0].targetAmount, 24100); cases++;
   console.log(`PASS: ${cases} initial change-request amount scenarios; seven illegal initial writes refused, safe cents/number roundtrip, corrections, H20 context/source guards and invalid hidden cancellation amount (Node DOM fixture only)`);
 }
 (process.argv.includes('--probe-initial') ? probeInitial() : run()).catch(error => { console.error(error.message); process.exitCode = 1; });

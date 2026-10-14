@@ -19,7 +19,7 @@ const data = t => JSON.stringify(t.c.MOCK);
 function dirty(t) { input(t, t.kind === 'qc' ? 'qc-remark' : 'oc-reason').value = '未提交的销售说明'; }
 function ready(t) {
   if (t.kind === 'qc') { input(t, 'qc-date').value = '2026-10-07'; input(t, 'qc-remark').value = '客户确认接受条款'; }
-  else { input(t, 'oc-amount').value = '24000.00'; input(t, 'oc-reason').value = '客户已核对并申请变更'; }
+  else { input(t, 'oc-amount').value = '24100.00'; input(t, 'oc-reason').value = '客户已核对并申请变更'; } // 可精确分摊，确保真正到达原草稿/busy/异步守卫。
 }
 function close(t, way) {
   if (way === 'esc') for (const fn of t.handlers.keydown || []) fn({ key: 'Escape', target: input(t, t.controls.at(-1)), preventDefault() {} });
@@ -102,6 +102,11 @@ async function run() {
   }
   for (const kind of ['qc', 'oc']) {
     const t = setup(kind); ready(t);
+    // 清空原因会回到原空值；用另一个已验证可分摊金额保留这条“dirty错误继续填写”原覆盖。
+    if (kind === 'oc') {
+      input(t, 'oc-amount').value = '12050.00';
+      assert.ok(!t.c.U.prepareRepricing({ targetType: 'order', targetId: t.source.id, targetAmount: 12050 }).error);
+    }
     const invalid = input(t, kind === 'qc' ? 'qc-date' : 'oc-reason'); invalid.value = kind === 'qc' ? '2026-02-30' : '';
     const before = data(t); t.click(t.overlay.querySelector('[data-ok]')); await t.flush();
     assert.equal(invalid.getAttribute('aria-invalid'), 'true'); const errorId = invalid.getAttribute('aria-describedby');

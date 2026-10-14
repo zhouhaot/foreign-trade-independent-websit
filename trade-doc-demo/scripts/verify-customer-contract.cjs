@@ -44,6 +44,7 @@ const state = t => JSON.stringify(t.c.MOCK);
   // 首个 RED: 携 C001 表单、管理员身份、C002 当前 route 必须零写入。
   refused(t => { t.c.App.user = t.c.U.roleUser('admin'); t.c.location.hash = '#/customers/C002'; t.fields['c-nameCn'].value = '管理员错写'; }, /业务员|页面|客户/);
   for (const role of ['boss', 'doc', 'fin', 'admin']) refused(t => { t.c.App.user = t.c.U.roleUser(role); }, /业务员|账号/);
+  refused(t => { t.fields['c-nameCn'].value = '撤权后不可写'; t.c.MOCK.permMatrix.sales = t.c.MOCK.permMatrix.sales.filter(m => m !== '客户与商品'); }, /权限已关闭/);
   refused(t => { t.c.App.user = { ...t.c.App.user }; }, /账号|会话/);
   refused(t => { t.c.App.user.name = '另一业务员'; }, /账号|会话/);
   refused(t => { t.c.App.user.id = 'OTHER'; }, /账号|会话/);

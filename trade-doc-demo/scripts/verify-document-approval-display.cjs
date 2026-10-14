@@ -68,6 +68,8 @@ async function run() {
   }
   // 真实 PL4 退回→重送→通过，不清旧处理人/意见，也不更改交易和收款。
   const t = fixture(), { c } = t, d = c.U.doc('D-PL2026004-V1');
+  // 2026-10-14：本链只核原版重送的签署表达；同源待重制需先解除，真实pending拒权由review-documents专项保。
+  c.MOCK.approvals = c.MOCK.approvals.filter(a => !(a.type === '重新制单申请' && a.targetType === 'doc' && a.targetId === d.id && a.status === '待处理'));
   const oldApprover = d.approver, oldDate = d.approvedAt, oldOpinion = d.opinion, oldHistory = JSON.stringify(d.history), frozen = JSON.stringify(d.snapshot), payments = JSON.stringify(c.MOCK.payments);
   t.mount(d, 'doc', false); t.click(t.document.querySelector('[data-action="doc-submit"]')); t.click(t.modal.querySelector('[data-ok]')); await t.flush();
   assert.equal(d.status, '待审核'); assert.equal(d.approver, oldApprover); assert.equal(d.approvedAt, oldDate); assert.equal(d.opinion, oldOpinion);

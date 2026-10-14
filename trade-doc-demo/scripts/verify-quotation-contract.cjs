@@ -93,10 +93,10 @@ async function run() {
     const before = data(t); t.mountQuote(); t.submit(); await t.flush(); assert.equal(data(t), before, problem); noSuccess(t); cases++;
   }
   for (const currency of ['USD', 'EUR']) {
-    const t = setup(); t.mountQuote(); const documents = JSON.stringify(t.c.MOCK.documents), payments = JSON.stringify(t.c.MOCK.payments);
+    const t = setup(); t.q.date = '2024-02-01'; t.mountQuote(); const documents = JSON.stringify(t.c.MOCK.documents), payments = JSON.stringify(t.c.MOCK.payments);
     rowInput(t, 'qty').value = '0.01'; rowInput(t, 'price').value = '1.00';
     rowInput(t, 'qty', 1).value = '10.25'; rowInput(t, 'price', 1).value = '4.00';
-    t.document.getElementById('qe-valid').value = '2024-02-29'; // No unsupported future-date requirement.
+    t.document.getElementById('qe-valid').value = '2024-02-29'; // Past dates remain valid, but validity must follow this explicit past quotation date.
     t.document.getElementById('qe-currency').value = currency; t.emit('input', t.document.getElementById('qe-currency'));
     assert.equal(t.document.getElementById('qe-total').textContent, '41.01');
     assert.equal(t.document.getElementById('qe-total-currency').textContent, currency);
@@ -112,7 +112,13 @@ async function run() {
     t.modal.querySelector('#qc-remark').value = '客户确认本次展示的内容'; return t.modal.querySelector('[data-ok]');
   };
   const makeConfirmed = t => { t.q.status = '已确认'; t.q.confirmDate = '2024-02-29'; };
-  const openOrder = t => { t.c.Actions['quote-gen-order']({ dataset: { id: t.q.id } }); return t.modal.querySelector('[data-ok]'); };
+  const openOrder = t => {
+    t.c.location.hash = '#/quotes/' + t.q.id;
+    t.c.Actions['quote-gen-order']({ dataset: { id: t.q.id } });
+    const delivery = t.modal.querySelector('#qg-delivery'); assert.ok(delivery, 'actual order modal requires delivery date');
+    delivery.value = '2027-02-01';
+    return t.modal.querySelector('[data-ok]');
+  };
   for (const action of ['confirm', 'order']) {
     for (const role of ['doc', 'fin', 'boss', 'admin']) {
       const t = setup(); if (action === 'order') makeConfirmed(t); t.c.App.user = t.c.U.roleUser(role);
@@ -141,11 +147,24 @@ async function run() {
       const origin = t.modal.firstElementChild;
       if (afterClick) t.click(ok); t.click(t.modal.querySelector('[data-close]'));
       const discard = t.modal.querySelector('[data-modal-draft-discard]'); if (discard) t.click(discard);
-      if (action === 'confirm' && afterClick) {
-        assert.equal(t.modal.firstElementChild, origin, 'H20 客户确认busy期间close拒绝');
+      if (afterClick) {
+        assert.equal(t.modal.firstElementChild, origin, '客户确认/生成订单busy期间close拒绝，不能将处理中误当可撤销');
         await t.flush(); assert.equal(t.q.status, '已确认');
-        assert.equal(t.messages.filter(m => /已登记客户确认/.test(m.text)).length, 1);
-        assert.equal(JSON.stringify(t.c.MOCK.orders), JSON.stringify(JSON.parse(before).orders), '客户确认不直接生成订单');
+        if (action === 'confirm') {
+          assert.equal(t.messages.filter(m => /已登记客户确认/.test(m.text)).length, 1);
+          assert.equal(JSON.stringify(t.c.MOCK.orders), JSON.stringify(JSON.parse(before).orders), '客户确认不直接生成订单');
+        } else {
+          const created = t.c.MOCK.orders.filter(o => o.quoteId === t.q.id);
+          assert.equal(created.length, 1, '生成订单提交后busy拒绝关闭且只生成一笔');
+          assert.equal(created[0].deliveryDate, '2027-02-01');
+          assert.equal(t.c.U.orderTotal(created[0]), t.c.U.quoteTotal(t.q));
+          assert.equal(t.messages.filter(m => /订单 .* 已生成/.test(m.text)).length, 1);
+          const after = JSON.parse(data(t)), original = JSON.parse(before);
+          after.orders.splice(after.orders.findIndex(o => o.id === created[0].id), 1);
+          after.quotes.find(q => q.id === t.q.id).orderId = original.quotes.find(q => q.id === t.q.id).orderId;
+          delete after.orderLogs[created[0].id];
+          assert.deepEqual(after, original, 'qg处理成功仅新增本订单/日志与报价反链，其余完整MOCK保留');
+        }
       } else {
         await t.flush(); assert.equal(data(t), before, `${action}: cancel ${afterClick ? 'after' : 'before'} queued Promise`); noSuccess(t);
       }
@@ -186,6 +205,7 @@ async function run() {
     assert.equal(t.q.orderId, orders[0].id); assert.equal(orders[0].currency, currency);
     assert.equal(JSON.stringify(orders[0].items), JSON.stringify(t.q.items)); assert.notEqual(orders[0].items, t.q.items);
     assert.equal(t.c.U.transactionAmounts(orders[0].items).totalCents, 4101);
+    assert.equal(orders[0].deliveryDate, '2027-02-01');
     assert.equal(t.c.MOCK.orders.length, before.orders.length + 1); assert.equal(t.c.MOCK.orderLogs[orders[0].id].length, 1);
     assert.equal(JSON.stringify(t.c.MOCK.documents), JSON.stringify(before.documents)); assert.equal(JSON.stringify(t.c.MOCK.payments), JSON.stringify(before.payments));
     assert.equal(t.messages.filter(m => /订单 .* 已生成/.test(m.text)).length, 1); cases++;

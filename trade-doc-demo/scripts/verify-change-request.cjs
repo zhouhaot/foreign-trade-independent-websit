@@ -20,7 +20,7 @@ function open(t, type = '改价申请') {
   const selector = t.modal.querySelector('#oc-type'); assert.ok(selector, '实际 openModal 生成变更表单');
   selector.value = type;
   t.modal.querySelector('#oc-reason').value = '已与客户协商并核对';
-  t.modal.querySelector('#oc-amount').value = '24000.00';
+  t.modal.querySelector('#oc-amount').value = '24100.00'; // 原额可精确分摊；本脚本继续隔离pending/身份/对象/重复守卫。
   return t.modal.querySelector('[data-ok]');
 }
 function assertNoSuccess(t) { assert.ok(!t.messages.some(m => /已提交/.test(m.text)), '拒绝不能假成功'); }

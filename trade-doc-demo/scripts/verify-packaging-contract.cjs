@@ -25,7 +25,12 @@ for (const value of ['140', '000140', ' 140 ', 140, Number.MAX_SAFE_INTEGER]) {
 for (const field of ['gw', 'nw', 'meas']) {
   const unit = field === 'meas' ? 'CBM' : 'KGS';
   for (const raw of ['0', '-1', '+1', '1e3', '0x10', 'NaN', 'Infinity', '1.2345', '.001', '1.', '1,68', '12,34,567', '1 000', '9007199254740.992']) reject(field, raw + ' ' + unit);
-  for (const value of [1, true, {}, [], '1', '1 LB', '1 TON', '1 M3', '1\n' + unit, '1\u0000' + unit]) reject(field, value);
+  for (const value of [1, true, {}, [], '1 LB', '1 TON', '1 M3', '1\n' + unit, '1\u0000' + unit]) reject(field, value);
+}
+// 2026-10-14用户明确允许文本框裸数字；仅补默认单位，精度/非文本/乱单位与毛净关系不放宽。
+for (const raw of ['1', '001.010', '1,680.001']) {
+  const p = check({ ...full, gw: raw, nw: raw, meas: raw }); assert.equal(p.ok, true, p.error);
+  assert.equal(p.packing.gw, raw + ' KGS'); assert.equal(p.packing.nw, raw + ' KGS'); assert.equal(p.packing.meas, raw + ' CBM');
 }
 for (const raw of ['1680.000kg', ' 001680.010 kGs ', '1,680.001 KGS', '9007199254740.991 KG']) {
   const p = check({ ...full, gw: raw }); assert.equal(p.ok, true, p.error); assert.equal(p.packing.gw, raw.trim());
@@ -60,4 +65,4 @@ for (let i = 1; i <= 500; i++) {
 }
 assert.equal(JSON.stringify(M), before, '查询不写样例、快照或任何业务状态');
 assert.equal(U.decimalInput('1.234', '数量').ok, false, '包装三位假设不改变H12交易两位');
-console.log(`PASS ${cases} packaging candidates: original PL text, explicit units/3dp, positive safe cartons, empty draft/complete submit, exact gross-net comparisons, no source writes or H12 drift (Node only)`);
+console.log(`PASS ${cases} packaging candidates: original PL text, explicit or default units/3dp, positive safe cartons, empty draft/complete submit, exact gross-net comparisons, no source writes or H12 drift (Node only)`);

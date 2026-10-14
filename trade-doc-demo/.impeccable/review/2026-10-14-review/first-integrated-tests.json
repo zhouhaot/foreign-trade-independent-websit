@@ -1,0 +1,191 @@
+{
+  "result": "FAIL",
+  "count": 37,
+  "results": [
+    {
+      "file": "scripts/verify-demo.cjs",
+      "status": 0,
+      "output": "{\n  \"result\": \"PASS\",\n  \"resources\": 12,\n  \"quotes\": 9,\n  \"documents\": 11,\n  \"amounts\": [\n    {\n      \"order\": \"SO2026001\",\n      \"currency\": \"USD\",\n      \"total\": 24100,\n      \"received\": 12000,\n      \"outstanding\": 12100\n    },\n    {\n      \"order\": \"SO2026002\",\n      \"currency\": \"USD\",\n      \"total\": 28400,\n      \"received\": 28400,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026003\",\n      \"currency\": \"EUR\",\n      \"total\": 19500,\n      \"received\": 0,\n      \"outstanding\": 19500\n    },\n    {\n      \"order\": \"SO2026004\",\n      \"currency\": \"EUR\",\n      \"total\": 30500,\n      \"received\": 30500,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026005\",\n      \"currency\": \"USD\",\n      \"total\": 28150,\n      \"received\": 0,\n      \"outstanding\": 28150\n    },\n    {\n      \"order\": \"SO2026006\",\n      \"currency\": \"EUR\",\n      \"total\": 20000,\n      \"received\": 6000,\n      \"outstanding\": 14000\n    },\n    {\n      \"order\": \"SO2026007\",\n      \"currency\": \"USD\",\n      \"total\": 41550,\n      \"received\": 20000,\n      \"outstanding\": 21550\n    }\n  ],\n  \"scope\": \"静态资源、语法及样例金额；不替代浏览器与业务流程验收\"\n}\n"
+    },
+    {
+      "file": "scripts/verify-views.cjs",
+      "status": 0,
+      "output": "PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)\nPASS: controlled document revision cancellation, original-version retention, and repeat guards\nPASS: CI/PL document editing and saving enforce role, version status, and deferred role changes\nPASS: actual order Modal cancellation, required delivery input, reconciliation, and repeat guards\n"
+    },
+    {
+      "file": "scripts/verify-login.cjs",
+      "status": 0,
+      "output": "PASS: five-role dropdown template, default selection, label and department hint\nPASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state\nPASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard\nPASS: account/password required validation and no login on invalid fields\nPASS: invalid-role submit rejection, feedback and focus\nScope: Node VM template/action checks only; native select interaction and visual layout require browser verification.\n"
+    },
+    {
+      "file": "scripts/verify-session.cjs",
+      "status": 0,
+      "output": "PASS: five-role identity text + protected demo-switch presence, cancellation/logout, storage/transient clearing, protected-route return and re-login (Node VM)\n"
+    },
+    {
+      "file": "scripts/verify-order-workspace.cjs",
+      "status": 0,
+      "output": "PASS: A workspace role actions, independent progress and currencies, selection/page/filter empty state, view toggles, draft-input preservation, and unchanged business data (Node VM)\n"
+    },
+    {
+      "file": "scripts/verify-repricing.cjs",
+      "status": 0,
+      "output": "PASS: atomic repricing, precision/non-finite input, USD/EUR isolation, received floor, roles/self-review, duplicate/reject/cancel and deferred revalidation (Node VM)\n"
+    },
+    {
+      "file": "scripts/verify-document-snapshots.cjs",
+      "status": 1,
+      "output": "node:assert:150\n  throw new AssertionError(obj);\n  ^\n\nAssertionError [ERR_ASSERTION]: 主数据删除后历史纸张仍可读\n+ actual - expected\n\n+ '<div class=\"paper\"><div class=\"p-title\">装 箱 单</div><div class=\"p-title-en\">PACKING LIST</div><div class=\"p-two-col\"><div class=\"p-box\"><div class=\"pb-label\">发货人 Shipper</div><div class=\"pb-name\">NINGBO YUANHANG IMP. &amp; EXP. CO., LTD.</div><div class=\"pb-line\">18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINA</div></div><div class=\"p-box\"><div class=\"pb-label\">收货人 Consignee</div><div class=\"pb-name\">Pacific Imports LLC</div><div class=\"pb-line\">2100 Harbor Blvd, Los Angeles, CA 90021, USA</div></div></div><table class=\"p-meta\"><tr><td><div class=\"k\">装箱单号 P/L No.</div>PL2026002</td><td><div class=\"k\">日期 Date</div>2026-02-20</td><td><div class=\"k\">订单号 Order No.</div>SO2026002</td><td><div class=\"k\">发票号 Invoice No.</div>关联发票编号冲突，待核对</td></tr></table><div class=\"pb-label\">唛头 Shipping Marks</div><div class=\"p-marks\">PACIFIC\\n' +\n- '<div class=\"paper\"><div class=\"p-title\">装 箱 单</div><div class=\"p-title-en\">PACKING LIST</div><div class=\"p-two-col\"><div class=\"p-box\"><div class=\"pb-label\">发货人 Shipper</div><div class=\"pb-name\">NINGBO YUANHANG IMP. &amp; EXP. CO., LTD.</div><div class=\"pb-line\">18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINA</div></div><div class=\"p-box\"><div class=\"pb-label\">收货人 Consignee</div><div class=\"pb-name\">Pacific Imports LLC</div><div class=\"pb-line\">2100 Harbor Blvd, Los Angeles, CA 90021, USA</div></div></div><table class=\"p-meta\"><tr><td><div class=\"k\">装箱单号 P/L No.</div>PL2026002</td><td><div class=\"k\">日期 Date</div>2026-02-20</td><td><div class=\"k\">订单号 Order No.</div>SO2026002</td><td><div class=\"k\">发票号 Invoice No.</div>CI2026002</td></tr></table><div class=\"pb-label\">唛头 Shipping Marks</div><div class=\"p-marks\">PACIFIC\\n' +\n    'SO2026002\\n' +\n    'LOS ANGELES\\n' +\n    'C/NO. 1-500</div><table class=\"p-items\"><thead><tr><th style=\"width:36px\">NO.</th><th>品名描述 DESCRIPTION</th><th style=\"width:110px\">数量 QTY</th></tr></thead><tbody><tr><td class=\"c\">1</td><td>Ceramic Mug<br><span style=\"color:#5a6378\">陶瓷马克杯 · 350ml / 釉下彩</span></td><td class=\"c\">20000 个</td></tr></tbody></table><table class=\"p-items\"><thead><tr><th>包装件数 PACKAGES</th><th>包装方式 PACKAGE</th><th>毛重 G.W. (KG/KGS)</th><th>净重 N.W. (KG/KGS)</th><th>体积 MEAS. (CBM)</th></tr></thead><tbody><tr><td class=\"c\">500</td><td class=\"c\">纸箱</td><td class=\"c\">4,200 KGS</td><td class=\"c\">3,900 KGS</td><td class=\"c\">22.5 CBM</td></tr></tbody></table><div class=\"pb-label\">备注 Remark</div><div class=\"p-remark\">—</div><div class=\"p-sign\"><div><div>制单 Prepared by：王芳</div><div class=\"s-line\">NINGBO YUANHANG IMP. &amp; EXP. CO., LTD.</div></div><div><div>审核 Approved by：周建国</div><div class=\"s-line\">授权签字 Authorized Signature</div></div></div></div><div class=\"p-stamp\">审核通过<br>APPROVED</div></div></div>'\n\n    at Object.<anonymous> (/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/scripts/verify-document-snapshots.cjs:194:59)\n    at Module._compile (node:internal/modules/cjs/loader:1781:14)\n    at Object..js (node:internal/modules/cjs/loader:1913:10)\n    at Module.load (node:internal/modules/cjs/loader:1505:32)\n    at Function._load (node:internal/modules/cjs/loader:1309:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: '<div class=\"paper\"><div class=\"p-title\">装 箱 单</div><div class=\"p-title-en\">PACKING LIST</div><div class=\"p-two-col\"><div class=\"p-box\"><div class=\"pb-label\">发货人 Shipper</div><div class=\"pb-name\">NINGBO YUANHANG IMP. &amp; EXP. CO., LTD.</div><div class=\"pb-line\">18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINA</div></div><div class=\"p-box\"><div class=\"pb-label\">收货人 Consignee</div><div class=\"pb-name\">Pacific Imports LLC</div><div class=\"pb-line\">2100 Harbor Blvd, Los Angeles, CA 90021, USA</div></div></div><table class=\"p-meta\"><tr><td><div class=\"k\">装箱单号 P/L No.</div>PL2026002</td><td><div class=\"k\">日期 Date</div>2026-02-20</td><td><div class=\"k\">订单号 Order No.</div>SO2026002</td><td><div class=\"k\">发票号 Invoice No.</div>关联发票编号冲突，待核对</td></tr></table><div class=\"pb-label\">唛头 Shipping Marks</div><div class=\"p-marks\">PACIFIC\\n' +\n    'SO2026002\\n' +\n    'LOS ANGELES\\n' +\n    'C/NO. 1-500</div><table class=\"p-items\"><thead><tr><th style=\"width:36px\">NO.</th><th>品名描述 DESCRIPTION</th><th style=\"width:110px\">数量 QTY</th></tr></thead><tbody><tr><td class=\"c\">1</td><td>Ceramic Mug<br><span style=\"color:#5a6378\">陶瓷马克杯 · 350ml / 釉下彩</span></td><td class=\"c\">20000 个</td></tr></tbody></table><table class=\"p-items\"><thead><tr><th>包装件数 PACKAGES</th><th>包装方式 PACKAGE</th><th>毛重 G.W. (KG/KGS)</th><th>净重 N.W. (KG/KGS)</th><th>体积 MEAS. (CBM)</th></tr></thead><tbody><tr><td class=\"c\">500</td><td class=\"c\">纸箱</td><td class=\"c\">4,200 KGS</td><td class=\"c\">3,900 KGS</td><td class=\"c\">22.5 CBM</td></tr></tbody></table><div class=\"pb-label\">备注 Remark</div><div class=\"p-remark\">—</div><div class=\"p-sign\"><div><div>制单 Prepared by：王芳</div><div class=\"s-line\">NINGBO YUANHANG IMP. &amp; EXP. CO., LTD.</div></div><div><div>审核 Approved by：周建国</div><div class=\"s-line\">授权签字 Authorized Signature</div></div></div></div><div class=\"p-stamp\">审核通过<br>APPROVED</div></div></div>',\n  expected: '<div class=\"paper\"><div class=\"p-title\">装 箱 单</div><div class=\"p-title-en\">PACKING LIST</div><div class=\"p-two-col\"><div class=\"p-box\"><div class=\"pb-label\">发货人 Shipper</div><div class=\"pb-name\">NINGBO YUANHANG IMP. &amp; EXP. CO., LTD.</div><div class=\"pb-line\">18F, HAIYUN BUILDING, SHOUNAN STREET, YINZHOU, NINGBO, CHINA</div></div><div class=\"p-box\"><div class=\"pb-label\">收货人 Consignee</div><div class=\"pb-name\">Pacific Imports LLC</div><div class=\"pb-line\">2100 Harbor Blvd, Los Angeles, CA 90021, USA</div></div></div><table class=\"p-meta\"><tr><td><div class=\"k\">装箱单号 P/L No.</div>PL2026002</td><td><div class=\"k\">日期 Date</div>2026-02-20</td><td><div class=\"k\">订单号 Order No.</div>SO2026002</td><td><div class=\"k\">发票号 Invoice No.</div>CI2026002</td></tr></table><div class=\"pb-label\">唛头 Shipping Marks</div><div class=\"p-marks\">PACIFIC\\n' +\n    'SO2026002\\n' +\n    'LOS ANGELES\\n' +\n    'C/NO. 1-500</div><table class=\"p-items\"><thead><tr><th style=\"width:36px\">NO.</th><th>品名描述 DESCRIPTION</th><th style=\"width:110px\">数量 QTY</th></tr></thead><tbody><tr><td class=\"c\">1</td><td>Ceramic Mug<br><span style=\"color:#5a6378\">陶瓷马克杯 · 350ml / 釉下彩</span></td><td class=\"c\">20000 个</td></tr></tbody></table><table class=\"p-items\"><thead><tr><th>包装件数 PACKAGES</th><th>包装方式 PACKAGE</th><th>毛重 G.W. (KG/KGS)</th><th>净重 N.W. (KG/KGS)</th><th>体积 MEAS. (CBM)</th></tr></thead><tbody><tr><td class=\"c\">500</td><td class=\"c\">纸箱</td><td class=\"c\">4,200 KGS</td><td class=\"c\">3,900 KGS</td><td class=\"c\">22.5 CBM</td></tr></tbody></table><div class=\"pb-label\">备注 Remark</div><div class=\"p-remark\">—</div><div class=\"p-sign\"><div><div>制单 Prepared by：王芳</div><div class=\"s-line\">NINGBO YUANHANG IMP. &amp; EXP. CO., LTD.</div></div><div><div>审核 Approved by：周建国</div><div class=\"s-line\">授权签字 Authorized Signature</div></div></div></div><div class=\"p-stamp\">审核通过<br>APPROVED</div></div></div>',\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1\n"
+    },
+    {
+      "file": "scripts/verify-progress-stages.cjs",
+      "status": 0,
+      "output": "PASS: no-document, mixed returned/drafting, all reviewing, export eligibility, latest-version aggregate and shared detail stages; payment facts unchanged (Node VM)\n"
+    },
+    {
+      "file": "scripts/verify-document-lifecycle.cjs",
+      "status": 0,
+      "output": "PASS: document lifecycle 90 async role/state/cancellation/race cases + normal transitions, immutable snapshots, finance isolation, latest/conflict/reform/audit/export rules (Node VM only)\n"
+    },
+    {
+      "file": "scripts/verify-cancellation.cjs",
+      "status": 0,
+      "output": "PASS cancellation/re-document approval, history preservation, delayed guards, duplicate decisions and snapshot creation\n"
+    },
+    {
+      "file": "scripts/verify-document-workspace.cjs",
+      "status": 0,
+      "output": "PASS: document workspace local version directory/current/latest/history, action precedence, source disclosure, real app delegated anchor preventDefault, dirty audit/packing cancel-confirm navigation, focus node/input preservation (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-change-request.cjs",
+      "status": 0,
+      "output": "PASS: sales change request 25 modal/Promise cases; pending/duplicates, roles/order eligibility, delayed actor/object/status/currency guard, cancellation prior state, immutable submitted inputs, full MOCK refusal atomicity (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-change-request-amount.cjs",
+      "status": 0,
+      "output": "PASS: 58 initial change-request amount scenarios; seven illegal initial writes refused, safe cents/number roundtrip, corrections, H20 context/source guards and invalid hidden cancellation amount (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-decimal-contract.cjs",
+      "status": 0,
+      "output": "PASS decimal inputs, fractional quantities/exact lines, overflow, calendar dates, pure calculations and currency/overpayment diagnostics\n"
+    },
+    {
+      "file": "scripts/verify-quotation-contract.cjs",
+      "status": 0,
+      "output": "PASS: quotation contract 103 actual input/submit/modal/Promise cases; decimal preview, fractional-cent/overflow atomic refusal, dates/dictionary/associations, actor/object/content drift, cancel/duplicates, USD/EUR fractional quantity source-consistent order (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-payments-contract.cjs",
+      "status": 0,
+      "output": "PASS: 72 payment contract scenarios; real Promise/timers + native submit/change handlers (Node VM; no browser/server transaction claims)\n"
+    },
+    {
+      "file": "scripts/verify-navigation-drafts.cjs",
+      "status": 0,
+      "output": "PASS: 33 draft navigation scenarios (actual app handlers; asynchronous Node DOM/history fixture, not browser history certification)\n"
+    },
+    {
+      "file": "scripts/verify-context-navigation.cjs",
+      "status": 0,
+      "output": "PASS: context navigation 194 permitted-link/source cases and 15 successful-clean/failed-dirty integration cases (actual views, submit/modal/Promise Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-draft-adapters.cjs",
+      "status": 0,
+      "output": "PASS: 17 draft adapter scenarios; real app click delegation / submit handlers / Promise timers, local pagination node/input/error/focus preservation (Node DOM fixture; shared guard semantics separately verified)\n"
+    },
+    {
+      "file": "scripts/verify-customer-contract.cjs",
+      "status": 0,
+      "output": "PASS: 52 customer form contracts: native submit, actor/object/content/DOM/route binding, atomic text/email/level validation, no-write failures, exact-once commit/clean; Node VM only\n"
+    },
+    {
+      "file": "scripts/verify-inquiry-contract.cjs",
+      "status": 0,
+      "output": "PASS: inquiry contract 114 actual modal/Promise cases; canonical source/query and exact hash drift with invalidated tickets, sales roles, bidirectional source, full candidate/ref currency/precision, actor/session/object/content drift, cancel/duplicates, collision-safe USD/EUR fractional source-consistent draft (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-packaging-contract.cjs",
+      "status": 0,
+      "output": "PASS 644 packaging candidates: original PL text, explicit or default units/3dp, positive safe cartons, empty draft/complete submit, exact gross-net comparisons, no source writes or H12 drift (Node only)\n"
+    },
+    {
+      "file": "scripts/verify-packaging-actions.cjs",
+      "status": 0,
+      "output": "PASS: 109 packaging action cases; PL atomic partial-save/complete-submit, raw units/text, field+role alerts/focus, async valid/invalid drift, snapshots/finance/clean/CI isolation (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-document-approval-display.cjs",
+      "status": 1,
+      "output": "点击入口存在\n"
+    },
+    {
+      "file": "scripts/verify-modal-drafts.cjs",
+      "status": 0,
+      "output": "PASS: 45 shared modal draft cases; clean/dirty/busy/source identity, original DOM/errors/focus/selection/scroll and explicit discard (Node fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-sales-modal-drafts.cjs",
+      "status": 0,
+      "output": "PASS: 40 sales modal draft scenarios; real qc/oc DOM, X/cancel/Escape continue-discard, busy lock, source-window async isolation, quote/order eligibility and no page-clean side effects (Node fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-approval-modal-drafts.cjs",
+      "status": 0,
+      "output": "PASS: 21 approval modal draft cases: actual actions/modal/keyboard handlers and Promise, source node/value/error/focus/scroll preservation, busy/failure/commit/stale/duplicate (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-approval-context.cjs",
+      "status": 0,
+      "output": "PASS: 67 approval context cases; original roles/order/counts, exact version targets, invalid/duplicate metadata, self-review, complete escaped reason/opinion, all MOCK read purity and original Actions/payment source preservation (Node DOM only)\n"
+    },
+    {
+      "file": "scripts/verify-document-work-summary.cjs",
+      "status": 0,
+      "output": "PASS: 32 shared document-work summary scenarios; current policy, actual identity, safe exact routes, lifecycle pause/restore, historical references and whole-model read purity (Node fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-document-dashboard.cjs",
+      "status": 0,
+      "output": "PASS: 18 document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries; archived f8643db other-role exact output (Node fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-document-work-bell.cjs",
+      "status": 1,
+      "output": "AssertionError [ERR_ASSERTION]: 点击入口存在\n    at Object.click (/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/scripts/verify-document-workspace.cjs:109:14)\n    at run (/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/scripts/verify-document-work-bell.cjs:42:7)\n    at Object.<anonymous> (/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/scripts/verify-document-work-bell.cjs:57:1)\n    at Module._compile (node:internal/modules/cjs/loader:1781:14)\n    at Object..js (node:internal/modules/cjs/loader:1913:10)\n    at Module.load (node:internal/modules/cjs/loader:1505:32)\n    at Function._load (node:internal/modules/cjs/loader:1309:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49\n"
+    },
+    {
+      "file": "scripts/verify-document-status-guidance.cjs",
+      "status": 0,
+      "output": "PASS 34 document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts; archived f8643db outside-banner equality (Node fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-document-action-guidance.cjs",
+      "status": 0,
+      "output": "PASS 29 document action guidance scenarios: current actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards; archived f8643db H25 HTML/source scope (Node fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-review-sales.cjs",
+      "status": 0,
+      "output": "PASS: 60 sales review cases (real Actions / Views, minimal DOM; browser layout excluded)\n"
+    },
+    {
+      "file": "scripts/verify-review-documents.cjs",
+      "status": 0,
+      "output": "PASS: review document first-create, guards, snapshots, invoice association, edit focus, reform exclusivity and next-review: 77 checks (Node DOM fixture only)\n"
+    },
+    {
+      "file": "scripts/verify-review-shared.cjs",
+      "status": 0,
+      "output": "PASS: 64 review shared scenarios (real app/actions, Node fixture; no pixel claims)\n"
+    },
+    {
+      "file": "scripts/verify-review-finance.cjs",
+      "status": 0,
+      "output": "PASS: 15 review finance scenarios (actual submit and input-fill; Node fixture only)\n"
+    }
+  ]
+}

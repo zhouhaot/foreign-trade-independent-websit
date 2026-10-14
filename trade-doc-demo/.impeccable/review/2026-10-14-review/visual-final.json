@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "scope": "Final confirmation after one visual correction batch; no broader browser or accessibility certification",
+  "images": [
+    {
+      "file": "dashboard-fin-final-1440.jpg",
+      "format": "JPEG",
+      "actualPixels": [1432, 895],
+      "domViewport": [1440, 900],
+      "firstTodoBottom": 557.484375,
+      "workspaceOpacity": "1",
+      "toastCount": 0,
+      "review": "Main agent inspected: todo first, semantic numbers, quick role select visible"
+    },
+    {
+      "file": "pl-edit-errors-final-1280.jpg",
+      "format": "JPEG",
+      "actualPixels": [1272, 795],
+      "domViewport": [1280, 800],
+      "error": "毛重不能小于净重，请核对两项重量。",
+      "grossDescribedBy": "df-pk-gw-hint df-pk-gw-error",
+      "netDescribedBy": "df-pk-nw-hint df-pk-gw-error",
+      "review": "Main and independent reviewer inspected: one relationship error under table; no long message inside cells; action panel repeats error intentionally"
+    }
+  ],
+  "processOnly": ["dashboard-fin-1366.png", "pl-edit-errors-1280.png"],
+  "legacyImageNote": "Earlier .png files contain JPEG bytes and are preserved, filenames are not pixel or format evidence.",
+  "cleanup": "Ego TaskSpace7 finish called once with keep=[]; IAB deliverable marked and viewport override reset"
+}

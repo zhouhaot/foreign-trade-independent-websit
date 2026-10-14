@@ -93,14 +93,21 @@
     }
     return null;
   }
+  function canVisit(hash, role) {
+    var parsed = parseHash(hash), matched = !parsed.error && matchRoute(parsed.segs);
+    if (!matched || matched.route.bare) return false;
+    return (!matched.route.roles || matched.route.roles.indexOf(role) >= 0) && U.moduleEnabled(role, U.moduleForPath(parsed.segs, role));
+  }
 
   /* ---------------- 框架渲染 ---------------- */
   function renderSidebar(role, segs) {
     var html = '';
     MENUS.forEach(function (m) {
       if (m.roles.indexOf(role) < 0) return;
+      var items = (m.children || [m]).filter(function (item) { return canVisit(item.hash, role); });
+      if (!items.length) return;
       if (m.children) html += '<div class="nav-group-label">' + esc(m.label) + '</div>';
-      (m.children || [m]).forEach(function (item) {
+      items.forEach(function (item) {
         var active = matchActive(item.match, segs);
         var icons = { customers: 'users', products: 'box', inquiries: 'briefcase', quotes: 'file', orders: 'file', users: 'users', roles: 'shield', dicts: 'settings' };
         var key = item.match[item.match.length - 1];
@@ -151,6 +158,10 @@
       '<div class="topbar-right">' +
         '<button class="search-trigger" data-action="search-open" aria-label="搜索页面、订单或单证">' + U.icon('search') + '<span>搜索页面、订单、单证</span><kbd>Ctrl K</kbd></button>' +
         '<span class="current-role" aria-label="当前角色：' + esc(M.roles[user.role]) + '">' + esc(M.roles[user.role]) + '</span>' +
+        '<label class="demo-switch"><span class="sr-only">快速切换演示角色</span><select class="select" id="demo-role-switch" data-action="demo-role-switch" aria-label="快速切换演示角色" title="仅演示环境 · 切换前保护未保存输入">' + Object.keys(M.roles).map(function (role) {
+          var available = U.roleUser(role);
+          return '<option value="' + role + '"' + (role === user.role ? ' selected' : '') + (available ? '' : ' disabled') + '>切换：' + esc(M.roles[role]) + '</option>';
+        }).join('') + '</select></label>' +
         '<div class="bell" id="bell"><button class="icon-btn" id="bell-toggle" aria-label="待办提醒，' + todos.length + ' 项" aria-expanded="false"><span class="bell-ico">' + U.icon('bell') + '</span></button>' + (todos.length ? '<span class="badge">' + todos.length + '</span>' : '') +
           '<div class="bell-dropdown" id="bell-dd"><div class="dd-head">待办提醒<span class="muted small">' + todos.length + ' 项</span></div>' + ddItems + '</div>' +
         '</div>' +
@@ -168,7 +179,7 @@
       admin: [['用户', '#/system/users', 'users'], ['角色权限', '#/system/roles', 'roles'], ['基础字典', '#/system/dicts', 'dicts']]
     };
     var note = role === 'sales' ? '客户确认报价后生成订单' : role === 'doc' ? '交易数据只读 · 版本修订留痕' : role === 'fin' ? '按订单币种登记收款' : role === 'boss' ? '审核与申请人分离' : '演示环境 · 配置仅本次会话生效';
-    return '<nav class="flowbar" aria-label="业务路径"><span class="flowbar-label">业务路径</span><div class="flowbar-links">' + flows[role].map(function (item, i) {
+    return '<nav class="flowbar" aria-label="业务路径"><span class="flowbar-label">业务路径</span><div class="flowbar-links">' + flows[role].filter(function (item) { return canVisit(item[1], role); }).map(function (item, i) {
       var active = segs[0] === (role === 'admin' ? 'system' : item[2]) && (role !== 'admin' || segs[1] === item[2]);
       return '<a class="flow-step' + (active ? ' active' : '') + '" href="' + item[1] + '"' + (active ? ' aria-current="page"' : '') + '><span class="flow-index">' + (i + 1) + '</span>' + item[0] + '</a>';
     }).join('') + '</div><span class="flow-note">' + note + '</span></nav>';
@@ -210,7 +221,7 @@
     if (role === 'sales') M.customers.forEach(function (c) {
       entries.push({ title: c.nameCn, sub: c.nameEn + ' · ' + c.id, link: '#/customers/' + c.id, icon: 'users' });
     });
-    return entries;
+    return entries.filter(function (item) { return canVisit(item.link, role); });
   }
   function renderSearch(value) {
     var term = value.trim().toLowerCase();
@@ -231,6 +242,40 @@
     renderSearch('');
   };
   Actions['search-goto'] = function (el) { U.closeModal(); window.App.requestNavigation(el.dataset.link); };
+  function clearIdentityState() {
+    Object.keys(window.AppUI).forEach(function (key) {
+      if (key !== 'sidebarCollapsed') delete window.AppUI[key];
+    });
+  }
+  Actions['demo-role-switch'] = function (el) {
+    var actor = window.App.user, role = el.value;
+    if (actor) el.value = actor.role;
+    if (!actor || !Object.prototype.hasOwnProperty.call(M.roles, role) || role === actor.role) return;
+    if (document.querySelector('.modal')) { U.toast('请先完成或关闭当前弹窗，再切换演示身份。', 'warning'); return; }
+    var target = U.roleUser(role);
+    if (!target) { U.toast('该角色没有启用的演示账号，无法切换。', 'warning'); return; }
+    var source = U.currentUser();
+    if (!source || source.id !== actor.id || source.role !== actor.role) { U.toast('当前会话已变化，请重新登录或刷新身份。', 'warning'); return; }
+    function switchStillValid() {
+      var current = U.currentUser(), available = U.roleUser(role);
+      if (!current || current.id !== source.id || current.role !== source.role || window.App.user !== actor || available !== target || !target.enabled) {
+        U.toast('演示身份或目标账号已变化，本次未切换，请重新选择。', 'warning'); return false;
+      }
+      return true;
+    }
+    confirmDiscard(function () {
+      if (!switchStillValid()) return;
+      markDraftClean(); clearIdentityState(); U.closeModal();
+      U.setUser({ id: target.id, name: target.name, role: target.role, roleName: M.roles[target.role], dept: target.dept });
+      window.App.user = U.currentUser();
+      // replace 而不保留旧身份编辑地址；浏览器历史的每次访问仍重新鉴权。
+      acceptedHash = '#/dashboard'; acceptedIndex = 0;
+      navigationEpoch = String(Date.now()) + '-' + Math.random().toString(36).slice(2);
+      if (historyAvailable()) stampHistory(); else location.hash = acceptedHash;
+      render();
+      U.toast('已切换演示角色：' + M.roles[role] + '（' + target.name + '）');
+    }, { title: '切换演示角色？', message: '当前有未提交输入。切换会清除本页草稿与原身份临时状态；已提交的演示业务记录保留至刷新前。', okText: '放弃输入并切换', beforeDiscard: switchStillValid });
+  };
   Actions['logout'] = function () {
     U.confirm({
       title: '退出登录',
@@ -242,9 +287,7 @@
         U.clearUser();
         window.App.user = null;
         // 保留布局偏好，清除上一身份的编辑、筛选、搜索及登录选择等临时状态。
-        Object.keys(window.AppUI).forEach(function (key) {
-          if (key !== 'sidebarCollapsed') delete window.AppUI[key];
-        });
+        clearIdentityState();
         location.hash = '#/login';
         render();
       }
@@ -332,6 +375,7 @@
       onOk: function () {
         if (restoringHistory || approvedHistory) { U.toast('正在恢复当前页面，请稍候再确认离开。', 'warning'); return false; }
         if (generation !== draftGeneration || sourceHash !== acceptedHash) { U.toast('当前页面已变化，请重新核对后离开。', 'warning'); return false; }
+        if (options.beforeDiscard && options.beforeDiscard() === false) return false;
         markDraftClean(); callback();
       }
     });
@@ -462,9 +506,29 @@
     if (window.AppUI.sidebarCollapsed === undefined) window.AppUI.sidebarCollapsed = true;
 
     var ctx = { params: matched.params, query: parsed.query, user: user };
+    var allowed = canVisit(location.hash, user.role);
+    // 同单仅切换页签：保留头部、页签按钮、滚动及焦点，不重播整页动效。
+    var prior = parseHash(lastRoute), priorMatch = !prior.error && matchRoute(prior.segs);
+    function withoutTab(query) { var copy = {}; Object.keys(query).sort().forEach(function (key) { if (key !== 'tab') copy[key] = query[key]; }); return JSON.stringify(copy); }
+    var tabBody = document.getElementById('order-tab-body');
+    if (allowed && route.view === 'orderDetail' && priorMatch && priorMatch.route.view === 'orderDetail' &&
+      lastUser === user.id && lastRoute !== location.hash && prior.segs.join('/') === segs.join('/') &&
+      withoutTab(prior.query) === withoutTab(parsed.query) && tabBody && Views.orderTabBody) {
+      var tab = parsed.query.tab || 'overview', tabKeys = ['overview', 'items', 'docs', 'pay', 'changes', 'logs'];
+      if (tabKeys.indexOf(tab) < 0) tab = 'overview';
+      var x = window.scrollX || 0, y = window.scrollY || 0;
+      tabBody.style.minHeight = Math.max(tabBody.getBoundingClientRect ? tabBody.getBoundingClientRect().height : 0, parseFloat(tabBody.style.minHeight) || 0) + 'px';
+      tabBody.innerHTML = Views.orderTabBody(ctx, tab);
+      document.querySelectorAll('[data-action="order-tab"]').forEach(function (button) {
+        var active = button.dataset.tab === tab;
+        button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active));
+      });
+      lastRoute = location.hash; acceptedHash = location.hash; stampHistory();
+      window.scrollTo(x, y); markDraftClean(); return;
+    }
     var body;
-    if (route.roles && route.roles.indexOf(user.role) < 0) {
-      body = Views.forbidden('当前角色「' + M.roles[user.role] + '」无权访问该模块。如需使用其他账号，请先退出登录，再重新登录。');
+    if (!allowed) {
+      body = Views.forbidden('当前角色「' + M.roles[user.role] + '」无权访问该模块，或该模块已由管理员关闭。可快速切换演示角色，或联系管理员核对本次会话权限。');
     } else {
       body = Views[route.view](ctx);
     }
@@ -512,6 +576,15 @@
     }
     lastRoute = location.hash; lastUser = user.id;
     acceptedHash = location.hash; stampHistory(); installDraftStatus();
+    var focusDocId = window.AppUI.docFocusOnMount;
+    if (focusDocId) {
+      delete window.AppUI.docFocusOnMount;
+      var focusDoc = U.doc(focusDocId), marks = document.getElementById('df-marks');
+      if (user.role === 'doc' && segs[0] === 'documents' && matched.params[0] === focusDocId && window.AppUI.docEditing === focusDocId && focusDoc && U.documentPolicy(focusDoc, user).canEdit && marks) {
+        marks.focus({ preventScroll: true });
+        if (marks.scrollIntoView) marks.scrollIntoView({ block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }
+    }
     if (parsed.query.focus === 'doc-work-references') focusDocumentWorkReferences(user);
   }
 
@@ -521,7 +594,8 @@
     requestNavigation: requestNavigation,
     confirmDiscard: confirmDiscard,
     markDraftClean: markDraftClean,
-    hasDraftChanges: draftDirty
+    hasDraftChanges: draftDirty,
+    canVisit: canVisit
   };
 
   /* ---------------- 全局事件 ---------------- */
@@ -553,12 +627,13 @@
       document.getElementById('bell-toggle').setAttribute('aria-expanded', dd.classList.contains('show'));
     }
   });
-  /* 仅登录页允许选择演示身份；已登录工作区不提供直接角色切换。 */
+  /* 登录与工作区演示切换均用原生change，不在确认下拉选项时提交登录。 */
   document.addEventListener('change', function (e) {
     if (e.target.dataset.action === 'login-pick-role') {
       Actions['login-pick-role'](e.target, e);
       return;
     }
+    if (e.target.dataset.action === 'demo-role-switch') Actions['demo-role-switch'](e.target, e);
   });
   document.addEventListener('input', function (e) {
     if (e.target.id === 'workspace-search') renderSearch(e.target.value);

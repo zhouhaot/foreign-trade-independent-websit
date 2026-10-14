@@ -5,6 +5,8 @@
   'use strict';
   var M = window.MOCK;
   var U = {};
+  var initialPayments = new Set(M.payments);
+  U.sessionPaymentCount = function () { return M.payments.filter(function (p) { return !initialPayments.has(p); }).length; };
 
   /* ---------- 转义与格式化 ---------- */
   U.esc = function (s) {
@@ -36,6 +38,37 @@
     return c ? c.nameCn + '（' + c.nameEn + '）' : id;
   };
 
+  /* 矩阵仅在既有岗位上限内收放模块；不能将查询权限提升为业务写权。 */
+  U.moduleRoles = {
+    '工作台': ['admin', 'sales', 'doc', 'fin', 'boss'],
+    '客户与商品': ['sales'], '销售业务': ['sales', 'boss'],
+    '订单详情': ['sales', 'doc', 'fin', 'boss'], '单证管理': ['doc', 'boss'],
+    '收款与应收': ['fin', 'boss'], '审核与异常': ['sales', 'doc', 'fin', 'boss'],
+    '统计分析': ['boss'], '系统管理': ['admin']
+  };
+  U.moduleLocked = function (role, module) {
+    return module === '工作台' || role === 'admin' && module === '系统管理';
+  };
+  U.moduleEnabled = function (role, module) {
+    var ceiling = U.moduleRoles[module];
+    return !!ceiling && ceiling.indexOf(role) >= 0 &&
+      (U.moduleLocked(role, module) || (M.permMatrix[role] || []).indexOf(module) >= 0);
+  };
+  U.moduleForPath = function (segs, role) {
+    if (typeof segs === 'string') segs = segs.replace(/^#/, '').split('?')[0].split('/').filter(Boolean);
+    var head = segs[0];
+    if (head === 'dashboard') return '工作台';
+    if (head === 'system') return '系统管理';
+    if (head === 'orders') return '订单详情';
+    if (head === 'payments') return '收款与应收';
+    if (head === 'approvals') return '审核与异常';
+    if (head === 'stats') return '统计分析';
+    if (head === 'inquiries' || head === 'quotes') return '销售业务';
+    if (head === 'documents') return segs.length > 1 && (role === 'sales' || role === 'fin') ? '订单详情' : '单证管理';
+    if (head === 'products' && segs.length > 1 && role !== 'sales') return '订单详情';
+    return head === 'customers' || head === 'products' ? '客户与商品' : '';
+  };
+
   /* ---------- 单证版本交易快照（仅当前页面内存） ---------- */
   function copySnapshot(value) { return JSON.parse(JSON.stringify(value)); }
   function freezeSnapshot(value) {
@@ -52,7 +85,7 @@
     });
     return doc.snapshot;
   }
-  U.captureDocumentSnapshot = function (doc, basis) {
+  U.captureDocumentSnapshot = function (doc, basis, relatedDocuments) {
     var order = U.order(doc.orderId);
     if (!order) throw new Error('无法冻结单证：关联订单不存在 ' + doc.orderId);
     var customer = U.customer(order.customerId);
@@ -65,11 +98,22 @@
       line.product = copySnapshot(product);
       return line;
     });
+    var invoiceReference = null;
+    if (doc.type === 'PL') {
+      var invoices = (relatedDocuments || M.documents).filter(function (d) { return d.orderId === doc.orderId && d.type === 'CI'; });
+      var last = invoices.reduce(function (n, d) { return Math.max(n, d.version); }, 0);
+      var latestInvoices = invoices.filter(function (d) { return d.version === last; });
+      var distinctNos = invoices.map(function (d) { return d.no; }).filter(function (n, i, a) { return a.indexOf(n) === i; });
+      var valid = invoices.every(function (d) { return typeof d.no === 'string' && d.no.trim() && typeof d.id === 'string' && d.id.trim() && Number.isSafeInteger(d.version) && d.version > 0; });
+      invoiceReference = !invoices.length ? { status: 'missing' }
+        : !valid || distinctNos.length !== 1 || latestInvoices.length !== 1 ? { status: 'conflict' }
+        : { status: 'linked', docId: latestInvoices[0].id, no: latestInvoices[0].no, version: latestInvoices[0].version };
+    }
     return attachSnapshot(doc, {
       schemaVersion: 1,
       basis: basis === 'demo-baseline' ? 'demo-baseline' : 'creation',
       capturedAt: new Date().toISOString(),
-      seller: M.seller, customer: customer, order: transaction
+      seller: M.seller, customer: customer, order: transaction, invoiceReference: invoiceReference
     });
   };
   U.documentSnapshot = function (doc) {
@@ -107,6 +151,8 @@
       if (!error && action === 'export' && ['sales', 'doc', 'fin', 'boss'].indexOf(user.role) < 0) error = '当前角色无单证导出演示权限。';
       if (!error && action !== 'export' && user.role !== (action === 'audit' ? 'boss' : 'doc')) error = action === 'audit' ? '仅业务主管可审核单证。' : '仅单证员可执行该制单操作。';
       if (!error && ['edit', 'submit'].indexOf(action) >= 0 && ['草稿', '制作中', '已退回'].indexOf(doc.status) < 0) error = '当前单证为' + doc.status + '，仅草稿、制作中或已退回版本可编辑或送审。';
+      if (!error && ['edit', 'submit'].indexOf(action) >= 0 && doc.status === '已退回' && M.approvals.some(function (a) { return a.type === '重新制单申请' && a.targetType === 'doc' && a.targetId === doc.id && a.status === '待处理'; })) error = '该退回版本的重新制单申请正在审批，暂不编辑或送审原版；待审批结果后继续，避免两条恢复路径同时推进。';
+      if (!error && !U.moduleEnabled(user.role, action === 'export' && (user.role === 'sales' || user.role === 'fin') ? '订单详情' : '单证管理')) error = '当前角色的单证相关模块权限已关闭，请联系管理员核对演示权限。';
       if (!error && ['revise', 'export'].indexOf(action) >= 0 && doc.status !== '已通过') error = '当前单证为' + doc.status + '，仅最新审核通过版本可修订或导出演示。';
       if (!error && action === 'reform' && doc.status !== '已退回') error = '仅已退回的最新单证可申请重新制单。';
       if (!error && action === 'reform' && M.approvals.some(function (a) { return a.type === '重新制单申请' && a.targetId === doc.id && a.status === '待处理'; })) error = '该单证已有待处理的重新制单申请，请勿重复提交。';
@@ -119,6 +165,68 @@
       canEdit: !reasons.edit, canSubmit: !reasons.submit, canRevise: !reasons.revise,
       canReform: !reasons.reform, canAudit: !reasons.audit, canExport: !reasons.export };
   };
+
+  /* 销售预演与主管批准共用同一无写入改价候选，金额/精度/已收约束一致。 */
+  function repricingCents(value) {
+    if (typeof value !== 'number' && typeof value !== 'string') return null;
+    var text = String(value).trim();
+    if (!/^\d+(?:\.\d{1,2})?$/.test(text)) return null;
+    var parts = text.split('.');
+    var cents = Number(parts[0] + ((parts[1] || '') + '00').slice(0, 2));
+    return Number.isSafeInteger(cents) && cents > 0 ? cents : null;
+  }
+
+  U.prepareRepricing = function (a) {
+    var order = a.targetType === 'order' ? U.order(a.targetId) : null;
+    if (!order) return { error: '关联订单不存在，不能批准改价。' };
+    if (order.status === '已取消') return { error: '关联订单已取消，不能批准改价。' };
+    if (!order.currency || (a.currency && a.currency !== order.currency) || (a.targetCurrency && a.targetCurrency !== order.currency)) {
+      return { error: '申请币种与订单币种不一致，不能批准改价。' };
+    }
+    var target = repricingCents(a.targetAmount);
+    if (target === null) return { error: '目标金额必须为大于 0、最多两位小数且在安全计算范围内的有限金额。' };
+    if (!Array.isArray(order.items) || !order.items.length) return { error: '订单没有明细，不能计算改价。' };
+    var current = 0, prices = [], error = '';
+    order.items.forEach(function (it, index) {
+      var price = repricingCents(it.price);
+      if (!Number.isSafeInteger(it.qty) || it.qty <= 0) error = '第 ' + (index + 1) + ' 行数量必须为正整数；当前数量精度尚不支持改价。';
+      else if (price === null) error = '第 ' + (index + 1) + ' 行单价必须为大于 0、最多两位小数的有限金额。';
+      else if (!Number.isSafeInteger(it.qty * price) || !Number.isSafeInteger(current + it.qty * price)) error = '订单明细金额超出安全计算范围。';
+      else { current += it.qty * price; prices.push(price); }
+    });
+    if (error) return { error: error };
+    var received = 0;
+    M.payments.filter(function (p) { return p.orderId === order.id; }).forEach(function (p) {
+      var cents = repricingCents(p.amount);
+      if (p.currency !== order.currency) error = '关联收款存在不同币种，不能合并金额或批准改价，请先核对收款币种。';
+      else if (cents === null || !Number.isSafeInteger(received + cents)) error = '关联收款金额或精度无效，请先核对收款记录。';
+      else received += cents;
+    });
+    if (error) return { error: error };
+    if (target < received) return { error: '目标金额 ' + U.fmt(target / 100) + ' ' + order.currency + ' 低于已收 ' + U.fmt(received / 100) + ' ' + order.currency + '，退款规则未确认，不能批准改价。' };
+    var total = 0;
+    var items = order.items.map(function (it, index) {
+      var numerator = BigInt(prices[index]) * BigInt(target), denominator = BigInt(current);
+      var cents = Number((numerator * 2n + denominator) / (denominator * 2n));
+      if (!Number.isSafeInteger(cents) || cents <= 0 || !Number.isSafeInteger(cents * it.qty) || !Number.isSafeInteger(total + cents * it.qty)) {
+        error = '第 ' + (index + 1) + ' 行改价后单价或金额超出支持范围，不能批准。';
+      }
+      total += cents * it.qty;
+      var candidate = Object.assign({}, it);
+      candidate.price = cents / 100;
+      if (repricingCents(candidate.price) !== cents) error = '第 ' + (index + 1) + ' 行改价后单价无法以当前数值精度保存，不能批准。';
+      return candidate;
+    });
+    if (error) return { error: error };
+    var result = { order: order, items: items, total: total / 100, target: target / 100 };
+    if (total !== target) {
+      result.error = '数量保持不变、单价保留两位小数并等比舍入后，候选金额为 ' + U.fmt(total / 100) + ' ' + order.currency +
+        '，与目标 ' + U.fmt(target / 100) + ' ' + order.currency + ' 相差 ' + U.fmt(Math.abs(total - target) / 100) + ' ' + order.currency +
+        '。当前精度与分摊规则不能达到该目标，请重新协商可实现的目标；本次未批准，订单、收款、单证和日志保持不变。';
+    }
+    return result;
+  };
+
 
   /* H18：仅PL包装候选；度量三位精度与H12交易数量/金额分开，合法单位原文保留。 */
   U.packagingCandidate = function (packing, options) {
@@ -147,8 +255,12 @@
         else result[key] = Number(cartons);
         return;
       }
-      var match = /^((?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,3})?)\s*(kg|kgs|cbm)$/i.exec(text);
       var unit = key === 'meas' ? 'CBM' : 'KGS';
+      if (/^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,3})?$/.test(text)) {
+        text += ' ' + unit;
+        result[key] = text;
+      }
+      var match = /^((?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,3})?)\s*(kg|kgs|cbm)$/i.exec(text);
       if (!match || (key === 'meas' ? match[2].toLowerCase() !== 'cbm' : !/^kgs?$/i.test(match[2]))) {
         issue(key, '格式须为普通正数与明确单位 ' + unit + '，最多 3 位小数，逗号仅作标准千分分组。'); return;
       }
@@ -218,6 +330,12 @@
     if (year < 1 || month < 1 || month > 12 || day < 1) return false;
     var leap = year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
     return day <= [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+  };
+  U.addDays = function (date, days) {
+    if (!U.validCalendarDate(date) || !Number.isInteger(days)) return '';
+    var d = new Date(date + 'T12:00:00Z');
+    d.setUTCDate(d.getUTCDate() + days);
+    return d.toISOString().slice(0, 10);
   };
   U.financialBalance = function (order) {
     var result = { ok: false, error: '', totalCents: null, receivedCents: null, balanceCents: null, outstandingCents: null,
@@ -667,7 +785,7 @@
         todos.push({ kind: a.type, text: a.title, sub: a.applicant + ' · ' + a.applyTime, link: '#/approvals' });
       });
     } else if (role === 'doc') {
-      return U.documentWorkSummary(arguments.length >= 3 ? user : U.currentUser()).todos;
+      return U.moduleEnabled(role, '单证管理') ? U.documentWorkSummary(arguments.length >= 3 ? user : U.currentUser()).todos : [];
     } else if (role === 'fin') {
       M.orders.filter(function (o) { return U.payStatus(o) !== '已结清' && o.status !== '取消申请中' && o.status !== '已取消'; }).forEach(function (o) {
         var fin = U.orderFin(o);
@@ -677,13 +795,13 @@
       M.quotes.filter(function (q) { return q.status === '待客户确认' && q.salesperson === userName; }).forEach(function (q) {
         todos.push({ kind: '报价待确认', text: q.id + ' · ' + U.customerName(q.customerId).split('（')[0], sub: '有效期至 ' + q.validUntil, link: '#/quotes/' + q.id });
       });
-      M.inquiries.filter(function (i) { return i.status === '跟进中' && i.salesperson === userName; }).forEach(function (i) {
+      M.inquiries.filter(function (i) { return i.status === '跟进中' && !i.quoteId && !M.quotes.some(function (q) { return q.inquiryId === i.id; }) && i.salesperson === userName; }).forEach(function (i) {
         todos.push({ kind: '询盘跟进', text: i.id + ' · ' + U.customerName(i.customerId).split('（')[0], sub: i.date, link: '#/inquiries/' + i.id });
       });
     } else if (role === 'admin') {
       todos.push({ kind: '系统', text: '演示环境账号巡检', sub: '每周例行', link: '#/system/users' });
     }
-    return todos;
+    return todos.filter(function (t) { return U.moduleEnabled(role, U.moduleForPath(t.link, role)); });
   };
 
   /* ---------- 会话用户 ---------- */

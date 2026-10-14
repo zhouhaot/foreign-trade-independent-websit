@@ -118,13 +118,17 @@ async function run() {
       x.c.Actions[action === 'confirm' ? 'quote-confirm' : 'quote-gen-order']({ dataset: { id: q.id } });
       const sourceOverlay = x.modal.firstElementChild;
       if (action === 'confirm') x.modal.querySelector('#qc-date').value = '2026-10-07';
-      if (outcome === 'cancel') x.click(x.modal.querySelector('[data-close]'));
+      else { const delivery = x.modal.querySelector('#qg-delivery'); assert.ok(delivery); delivery.value = '2027-02-01'; }
+      if (outcome === 'cancel') {
+        x.click(x.modal.querySelector('[data-close]'));
+        const discard = x.modal.querySelector('[data-modal-draft-discard]'); if (discard) x.click(discard);
+      }
       else {
         x.click(x.modal.querySelector('[data-ok]'));
         if (outcome === 'drift') q.items[0].price = 1.5;
       }
       await x.flush();
-      assert.deepEqual(sourceClean, action === 'confirm' && outcome === 'success' ? [sourceOverlay] : [], '仅成功客户确认清本次来源弹窗');
+      assert.deepEqual(sourceClean, outcome === 'success' ? [sourceOverlay] : [], 'qc/qg仅成功时精确清本次真实来源弹窗，取消/漂移不能清');
       assert.deepEqual(sequence, outcome !== 'success' ? [] : action === 'confirm' ? ['rerender'] : ['clean'], 'H20 confirm只清来源弹窗，order保原page-clean契约'); cleanCases++;
     }
   }
@@ -140,7 +144,9 @@ async function run() {
         x.submit(x.document.getElementById('qe-form'));
       } else {
         q.status = '已确认'; q.confirmDate = '2026-10-07'; x.c.location.hash = '#/quotes/' + q.id;
-        x.c.Actions['quote-gen-order']({ dataset: { id: q.id } }); x.click(x.modal.querySelector('[data-ok]'));
+        x.c.Actions['quote-gen-order']({ dataset: { id: q.id } });
+        const delivery = x.modal.querySelector('#qg-delivery'); assert.ok(delivery); delivery.value = '2027-02-01';
+        x.click(x.modal.querySelector('[data-ok]'));
         if (outcome === 'failure') q.items[0].price = 1.5;
       }
       await x.flush();

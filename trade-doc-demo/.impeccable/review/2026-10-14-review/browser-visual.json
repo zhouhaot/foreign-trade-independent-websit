@@ -1,0 +1,185 @@
+{
+  "browser": "Codex in-app browser fallback after Ego capture timeouts",
+  "checks": [
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 900,
+      "role": "admin",
+      "scrollWidth": 1432,
+      "scrollY": 0,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 561.8817138671875,
+      "height": 900,
+      "role": "sales",
+      "scrollWidth": 1432,
+      "scrollY": 0,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 900,
+      "role": "doc",
+      "scrollWidth": 1432,
+      "scrollY": 0,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 900,
+      "role": "fin",
+      "scrollWidth": 1432,
+      "scrollY": 0,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 900,
+      "role": "boss",
+      "scrollWidth": 1432,
+      "scrollY": 0,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 768,
+      "role": "admin",
+      "scrollWidth": 1358,
+      "scrollY": 0,
+      "width": 1366,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 768,
+      "role": "sales",
+      "scrollWidth": 1358,
+      "scrollY": 0,
+      "width": 1366,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 768,
+      "role": "doc",
+      "scrollWidth": 1358,
+      "scrollY": 0,
+      "width": 1366,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 768,
+      "role": "fin",
+      "scrollWidth": 1358,
+      "scrollY": 0,
+      "width": 1366,
+      "pass": true
+    },
+    {
+      "kind": "dashboard-first-todo",
+      "firstTodoBottom": 564.484375,
+      "height": 768,
+      "role": "boss",
+      "scrollWidth": 1358,
+      "scrollY": 0,
+      "width": 1366,
+      "pass": true
+    },
+    {
+      "kind": "orders-filter-full-row",
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "filter": "1 / -1",
+      "height": 768,
+      "inspectorTop": 411.796875,
+      "scroll": 1358,
+      "selectionTop": 411.796875,
+      "width": 1366,
+      "pass": true
+    },
+    {
+      "kind": "orders-filter-full-row",
+      "fields": [
+        280,
+        280,
+        280
+      ],
+      "filter": "1 / -1",
+      "height": 900,
+      "inspectorTop": 411.796875,
+      "scroll": 1432,
+      "selectionTop": 411.796875,
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "kind": "order-detail-first-screen",
+      "bodyTop": 591.640625,
+      "headerHeight": 352.140625,
+      "height": 900,
+      "tabsBottom": 569.640625,
+      "width": 1440
+    },
+    {
+      "kind": "order-detail-first-screen",
+      "bodyTop": 591.640625,
+      "headerHeight": 352.140625,
+      "height": 768,
+      "tabsBottom": 569.640625,
+      "width": 1366
+    },
+    {
+      "kind": "compact-doc-directory",
+      "directory": "none",
+      "paperTop": 366.390625,
+      "paperWidth": 760,
+      "scroll": 1272,
+      "toggle": "flex",
+      "width": 1280
+    },
+    {
+      "kind": "packing-error-outside-cells",
+      "cells": [
+        124.4140625,
+        122.671875,
+        122.3984375,
+        122.3984375,
+        118.1171875
+      ],
+      "errors": "箱数填正整数；包装方式填实际材料；毛重可直接填数字，默认 KGS；净重默认 KGS，且不大于毛重；体积默认 CBM。度量最多 3 位小数，支持标准千分位。草稿可留空待补，送审须齐全。毛重不能小于净重，请核对两项重量。毛重不能小于净重，请核对两项重量。",
+      "errorsInCells": 0,
+      "scroll": 1272,
+      "width": 1280
+    }
+  ],
+  "screenshots": [
+    "dashboard-fin-1440.png",
+    "dashboard-fin-1366.png",
+    "dashboard-fin-1366-final.png",
+    "orders-sales-1366.png",
+    "orders-sales-1440.png",
+    "order-detail-sales-1440.png",
+    "order-detail-sales-1366.png",
+    "pl-draft-1280.png",
+    "pl-edit-errors-1280.png"
+  ]
+}

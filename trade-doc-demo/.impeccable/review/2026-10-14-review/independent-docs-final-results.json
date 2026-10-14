@@ -1,0 +1,42 @@
+{
+  "scope": "Independent Node probes only; no source/test writes",
+  "hashes": {
+    "utils": "5bc7ca462b7b667f0a78818187e2679b25c237900efd4f2daa8348ff6f91fbcd",
+    "app": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+    "views-core": "9c7b91d5155bbbff91ead58ba8583124e87e159a3bdcd64f8bd68be107f1e25b",
+    "views-sales": "84dd9ad87934d49f214c6670db8d874d1546db541134dc19cc24cb4d7022782b",
+    "views-docs": "ff2e47e44845724e4a81be2d164fd7bb15d9d5920a4e5f67bd5e376128738572",
+    "views-fin": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+    "views-system": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef"
+  },
+  "records": [
+    {
+      "name": "first-create exact pair/unique IDs/independent frozen invoice association/old data retention",
+      "result": "PASS"
+    },
+    {
+      "name": "first-create permission",
+      "result": "PASS"
+    },
+    {
+      "name": "first-create disabled-actor",
+      "result": "PASS"
+    },
+    {
+      "name": "first-create quote-object",
+      "result": "PASS"
+    },
+    {
+      "name": "first-create id-collision",
+      "result": "PASS"
+    },
+    {
+      "name": "first-create second-snapshot",
+      "result": "PASS"
+    },
+    {
+      "name": "PL relation error single paper summary/two accessible field references/atomic raw retention",
+      "result": "PASS"
+    }
+  ]
+}
