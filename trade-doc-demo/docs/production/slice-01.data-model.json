@@ -1,0 +1,172 @@
+{
+  "contractVersion": "0.1.0",
+  "status": "design-not-implemented",
+  "databaseEngine": "undecided",
+  "ddlExecuted": false,
+  "scope": "认证、共享商品、本人客户/询盘/报价、确认与首次成单；不包含后续订单推进、修订、单证、收款或账号管理接口",
+  "confirmedDecisions": {
+    "deployment": "server",
+    "salesDataScope": "owner-only",
+    "supervisorDataScope": "all-read-only-in-this-slice",
+    "historicalImport": false,
+    "confirmationAttachmentRequired": false,
+    "confirmationRecordRequired": ["method", "confirmedOn", "note"],
+    "quantityScale": 2,
+    "unitPriceScale": 2,
+    "lineAmountPolicy": "reject-fractional-minor-unit",
+    "productCatalogScope": "company-shared"
+  },
+  "engineeringProposals": {
+    "identifiers": "服务端生成UUID；业务编号规则另定，不能以名称、时间戳或数组下标作为主键",
+    "decimalStorage": "DECIMAL(20,2)，18位整数+2位小数；持久化前严格检查乘积/总和上界，不依赖DB截断或隐式舍入",
+    "roleCardinality": "首切片单一有效岗位；账号管理开放前确认兼岗需求，不因主管全量读取授予销售写权限",
+    "businessTimeZone": "候选Asia/Shanghai；部署配置并固定审计，禁止读取浏览器时钟决定过期",
+    "idempotencyRetention": "首切片不复用、不自动清理幂等键；清理策略另立ADR",
+    "expiredConfirmedQuote": "业务规则未定，暂拒绝过期已确认报价成单；该拒绝为保守门禁而非已批准新业务规则",
+    "confirmationDates": "候选quote_date<=confirmed_on<=valid_until且confirmed_on<=服务器业务今天，过期补录/过期已确认成单政策在实现前确认；报价创建日由服务器只读生成",
+    "attachments": "附件可选已确认；上传/扫描/下载接口不在本切片，客户确认允许不带附件，非空attachmentIds拒绝而非忽略"
+  },
+  "types": {
+    "uuid": "不透明UUID字符串，存储表示在数据库选型时确定",
+    "decimal20_2": "精确十进制；API使用普通十进制字符串，禁止JSON number、指数、逗号、负数与静默舍入",
+    "utcInstant": "服务端产生的UTC时间点，API使用带时区RFC3339；业务日期另用date",
+    "snapshot": "版本化结构化值，必须包含schemaVersion；冻结后只读，不含密码、会话或认证令牌"
+  },
+  "commonColumns": {
+    "created_at": {"type": "utcInstant", "generated": "server"},
+    "created_by": {"type": "uuid", "generated": "authenticated-user-or-bootstrap", "references": "app_user.id"},
+    "updated_at": {"type": "utcInstant", "generated": "server"},
+    "row_version": {"type": "positiveInteger", "generated": "server-increment", "initial": 1}
+  },
+  "tables": {
+    "app_user": {
+      "columns": {
+        "id": {"type": "uuid"}, "login_key": {"type": "text", "maxLength": 100},
+        "display_name": {"type": "text", "maxLength": 100}, "password_hash": {"type": "text", "maxLength": 512, "sensitive": true},
+        "role_code": {"type": "enum", "values": ["admin", "sales", "doc", "fin", "boss"]},
+        "enabled": {"type": "boolean"}, "auth_version": {"type": "positiveInteger"},
+        "created_at": {"type": "utcInstant"}, "row_version": {"type": "positiveInteger"}
+      },
+      "primaryKey": ["id"], "unique": [["login_key"]], "foreignKeys": [],
+      "checks": ["login_key按明确规范化规则唯一；不对密码trim/大小写转换", "密码只存自适应单向编码；禁止明文/可逆加密/普通摘要"],
+      "policy": "auth-private",
+      "immutability": "id不变；禁用或凭据/权限变化必须提升auth_version并撤销受影响会话"
+    },
+    "user_session": {
+      "columns": {
+        "id": {"type": "uuid"}, "session_key_hash": {"type": "text", "maxLength": 128, "sensitive": true},
+        "user_id": {"type": "uuid"}, "auth_version": {"type": "positiveInteger"},
+        "created_at": {"type": "utcInstant"}, "expires_at": {"type": "utcInstant"},
+        "last_seen_at": {"type": "utcInstant"}, "revoked_at": {"type": "utcInstant", "nullable": true}
+      },
+      "primaryKey": ["id"], "unique": [["session_key_hash"]],
+      "foreignKeys": [{"columns": ["user_id"], "table": "app_user", "target": ["id"]}],
+      "checks": ["expires_at>created_at；每个受保护请求检查enabled/auth_version/失效时间", "不得记录原始Cookie或CSRF令牌"],
+      "policy": "auth-private"
+    },
+    "currency_catalog": {
+      "columns": {"code": {"type": "text", "maxLength": 3}, "display_name": {"type": "text", "maxLength": 100}, "amount_scale": {"type": "integer"}, "enabled": {"type": "boolean"}, "row_version": {"type": "positiveInteger"}},
+      "primaryKey": ["code"], "unique": [], "foreignKeys": [],
+      "checks": ["code为3位大写字母且由公司批准维护，不据此声称ISO有效性", "本切片仅接受amount_scale=2的启用币种；不做自动换汇，不限定仅有样例USD/EUR"],
+      "policy": "reference-read-only"
+    },
+    "company_profile": {
+      "common": ["created_at", "created_by", "updated_at", "row_version"],
+      "columns": {"id": {"type": "uuid"}, "name_cn": {"type": "text", "maxLength": 200}, "name_en": {"type": "text", "maxLength": 200}, "legal_name": {"type": "text", "maxLength": 200}, "address": {"type": "text", "maxLength": 1000}, "contact": {"type": "text", "maxLength": 100}, "email": {"type": "text", "maxLength": 254}, "phone": {"type": "text", "maxLength": 50}, "profile_key": {"type": "text", "maxLength": 30}},
+      "primaryKey": ["id"], "unique": [["profile_key"]], "foreignKeys": [],
+      "checks": ["profile_key固定为PRIMARY_COMPANY，最多一份公司配置；不得自动填入演示公司资料"],
+      "policy": "bootstrap-only-in-this-slice"
+    },
+    "product": {
+      "common": ["created_at", "created_by", "updated_at", "row_version"],
+      "columns": {"id": {"type": "uuid"}, "sku": {"type": "text", "maxLength": 64}, "name_cn": {"type": "text", "maxLength": 200}, "name_en": {"type": "text", "maxLength": 200}, "spec": {"type": "text", "maxLength": 1000}, "unit": {"type": "text", "maxLength": 30}, "ref_price": {"type": "decimal20_2"}, "currency": {"type": "text", "maxLength": 3}, "enabled": {"type": "boolean"}, "hs_code": {"type": "text", "maxLength": 30}, "remark": {"type": "text", "maxLength": 2000}},
+      "primaryKey": ["id"], "unique": [["sku"]], "foreignKeys": [{"columns": ["currency"], "table": "currency_catalog", "target": ["code"]}],
+      "checks": ["公司共用目录，不设owner；sku规范化及大小写规则实现前锁定", "创建enabled=true由服务器生成，ref_price>=0且currency必须在启用两位金额币种目录；参考价不自动代表成交价", "引用后的物理删除不提供接口；修改不回写已捕获快照"],
+      "policy": "company-catalog",
+      "indexes": [["sku"], ["name_en", "id"]]
+    },
+    "customer": {
+      "common": ["created_at", "created_by", "updated_at", "row_version"],
+      "columns": {"id": {"type": "uuid"}, "owner_user_id": {"type": "uuid"}, "name_cn": {"type": "text", "maxLength": 200}, "name_en": {"type": "text", "maxLength": 200}, "country": {"type": "text", "maxLength": 100}, "address": {"type": "text", "maxLength": 1000}, "contact": {"type": "text", "maxLength": 100}, "email": {"type": "text", "maxLength": 254}, "phone": {"type": "text", "maxLength": 50}, "remark": {"type": "text", "maxLength": 2000}},
+      "primaryKey": ["id"], "unique": [["id", "owner_user_id"]],
+      "foreignKeys": [{"columns": ["owner_user_id"], "table": "app_user", "target": ["id"]}],
+      "checks": ["owner来自已认证sales用户；不接受客户端owner；本切片无归属转移/删除接口"],
+      "policy": "owner-or-boss", "indexes": [["owner_user_id", "created_at", "id"]]
+    },
+    "inquiry": {
+      "common": ["created_at", "created_by", "updated_at", "row_version"],
+      "columns": {"id": {"type": "uuid"}, "owner_user_id": {"type": "uuid"}, "customer_id": {"type": "uuid"}, "inquiry_date": {"type": "date"}, "status": {"type": "enum", "values": ["FOLLOWING", "QUOTED"]}, "source": {"type": "text", "maxLength": 100}, "message": {"type": "text", "maxLength": 5000}, "customer_version_at_creation": {"type": "positiveInteger"}},
+      "primaryKey": ["id"], "unique": [["id", "owner_user_id"], ["id", "owner_user_id", "customer_id"]],
+      "foreignKeys": [{"columns": ["customer_id", "owner_user_id"], "table": "customer", "target": ["id", "owner_user_id"]}],
+      "checks": ["创建至少1行，整张最多100行；customerVersion与行productVersion重查后原子捕获", "quote创建与QUOTED转换同事务；不存在quote时不得只改成QUOTED"],
+      "policy": "owner-or-boss", "indexes": [["owner_user_id", "created_at", "id"]]
+    },
+    "inquiry_line": {
+      "columns": {"id": {"type": "uuid"}, "inquiry_id": {"type": "uuid"}, "line_no": {"type": "positiveInteger"}, "product_id": {"type": "uuid"}, "product_version": {"type": "positiveInteger"}, "product_snapshot": {"type": "snapshot"}, "quantity": {"type": "decimal20_2"}},
+      "primaryKey": ["id"], "unique": [["inquiry_id", "line_no"], ["inquiry_id", "id"]],
+      "foreignKeys": [{"columns": ["inquiry_id"], "table": "inquiry", "target": ["id"]}, {"columns": ["product_id"], "table": "product", "target": ["id"]}],
+      "checks": ["quantity>0；product_snapshot包含sku/中英文名称/spec/unit和schemaVersion；快照捕获后不随目录变化"],
+      "policy": "inherit-inquiry", "immutability": "本切片没有询盘明细更新接口；更改需求的流程后续定义"
+    },
+    "quote": {
+      "common": ["created_at", "created_by", "updated_at", "row_version"],
+      "columns": {"id": {"type": "uuid"}, "inquiry_id": {"type": "uuid"}, "owner_user_id": {"type": "uuid"}, "customer_id": {"type": "uuid"}, "state": {"type": "enum", "values": ["DRAFT", "AWAITING_CUSTOMER", "CONFIRMED"]}, "quote_date": {"type": "date"}, "valid_until": {"type": "date", "nullable": true}, "currency": {"type": "text", "maxLength": 3}, "trade_term": {"type": "text", "maxLength": 200}, "payment_term": {"type": "text", "maxLength": 500}, "remark": {"type": "text", "maxLength": 2000}, "total_amount": {"type": "decimal20_2", "nullable": true}, "issued_snapshot": {"type": "snapshot", "nullable": true}, "issued_at": {"type": "utcInstant", "nullable": true}, "converted_at": {"type": "utcInstant", "nullable": true}},
+      "primaryKey": ["id"], "unique": [["inquiry_id"], ["id", "owner_user_id"], ["id", "inquiry_id"]],
+      "foreignKeys": [{"columns": ["inquiry_id", "owner_user_id", "customer_id"], "table": "inquiry", "target": ["id", "owner_user_id", "customer_id"]}, {"columns": ["currency"], "table": "currency_catalog", "target": ["code"]}],
+      "checks": ["草稿valid_until默认服务器quote_date+15日，沿用已评审默认；DRAFT允许暂清空，非空时>=quote_date，submit起须非空；服务器业务日期判有效期", "DRAFT允许未填unitPrice及total为空；submit前每行/币种/条款/公司信息完整，total=sum(lines)", "首切片每询盘一份报价，不提供修订；成单后state仍CONFIRMED，关联订单为唯一事实来源"],
+      "policy": "owner-or-boss", "indexes": [["owner_user_id", "state", "created_at", "id"]],
+      "immutability": "submit捕获完整issued_snapshot；AWAITING_CUSTOMER/CONFIRMED禁止通用写交易字段，确认与成单复用该快照"
+    },
+    "quote_line": {
+      "columns": {"id": {"type": "uuid"}, "quote_id": {"type": "uuid"}, "inquiry_id": {"type": "uuid"}, "inquiry_line_id": {"type": "uuid"}, "line_no": {"type": "positiveInteger"}, "product_snapshot": {"type": "snapshot"}, "quantity": {"type": "decimal20_2"}, "unit_price": {"type": "decimal20_2", "nullable": true}, "line_amount": {"type": "decimal20_2", "nullable": true}},
+      "primaryKey": ["id"], "unique": [["quote_id", "line_no"], ["quote_id", "inquiry_line_id"], ["quote_id", "id"]],
+      "foreignKeys": [{"columns": ["quote_id", "inquiry_id"], "table": "quote", "target": ["id", "inquiry_id"]}, {"columns": ["inquiry_id", "inquiry_line_id"], "table": "inquiry_line", "target": ["inquiry_id", "id"]}],
+      "checks": ["草稿修改必须提交原完整稳定lineNo集合，禁止漏行/重复/换商品；lineNo经当前quote_id定位，不接受其他报价的内部行ID；quantity>0且已填unit_price>0", "精确整数分规则见SECURITY_AND_TRANSACTIONS.md；总额和行金额均服务端计算"],
+      "policy": "inherit-quote", "immutability": "只允许父报价DRAFT下更新数量/单价；送出后不可改"
+    },
+    "quote_confirmation": {
+      "columns": {"id": {"type": "uuid"}, "quote_id": {"type": "uuid"}, "method": {"type": "text", "maxLength": 100}, "confirmed_on": {"type": "date"}, "note": {"type": "text", "maxLength": 2000}, "confirmed_snapshot": {"type": "snapshot"}, "recorded_at": {"type": "utcInstant"}, "recorded_by": {"type": "uuid"}},
+      "primaryKey": ["id"], "unique": [["quote_id"]],
+      "foreignKeys": [{"columns": ["quote_id"], "table": "quote", "target": ["id"]}, {"columns": ["recorded_by"], "table": "app_user", "target": ["id"]}],
+      "checks": ["method/confirmed_on/note必填；附件可选；confirmed_on不晚于服务器业务日期，且在quote_date..valid_until内", "本切片过期报价不确认；confirmed_snapshot逐值复制issued_snapshot，不从当前主数据补写"],
+      "policy": "inherit-quote", "immutability": "append-only；与quote变CONFIRMED同事务，重复确认不得新增记录"
+    },
+    "sales_order": {
+      "common": ["created_at", "created_by", "updated_at", "row_version"],
+      "columns": {"id": {"type": "uuid"}, "source_quote_id": {"type": "uuid"}, "owner_user_id": {"type": "uuid"}, "order_progress": {"type": "enum", "values": ["PENDING_EXECUTION"]}},
+      "primaryKey": ["id"], "unique": [["source_quote_id"], ["id", "source_quote_id"]],
+      "foreignKeys": [{"columns": ["source_quote_id", "owner_user_id"], "table": "quote", "target": ["id", "owner_user_id"]}, {"columns": ["source_quote_id"], "table": "quote_confirmation", "target": ["quote_id"]}],
+      "checks": ["每来源报价最多一张订单；无直接POST/orders/通用PUT订单接口", "单证与收款进度来自各自事实；本切片尚无记录，返回NOT_STARTED/UNPAID，不把三种状态合并"],
+      "policy": "owner-or-boss", "indexes": [["owner_user_id", "created_at", "id"]]
+    },
+    "order_version": {
+      "columns": {"id": {"type": "uuid"}, "order_id": {"type": "uuid"}, "source_quote_id": {"type": "uuid"}, "version_no": {"type": "positiveInteger"}, "delivery_date": {"type": "date"}, "currency": {"type": "text", "maxLength": 3}, "total_amount": {"type": "decimal20_2"}, "confirmed_snapshot": {"type": "snapshot"}, "created_at": {"type": "utcInstant"}, "created_by": {"type": "uuid"}},
+      "primaryKey": ["id"], "unique": [["order_id", "version_no"], ["id", "source_quote_id"]],
+      "foreignKeys": [{"columns": ["order_id", "source_quote_id"], "table": "sales_order", "target": ["id", "source_quote_id"]}, {"columns": ["currency"], "table": "currency_catalog", "target": ["code"]}, {"columns": ["created_by"], "table": "app_user", "target": ["id"]}],
+      "checks": ["首切片version_no=1；delivery_date为有效日历日期且创建时必填", "confirmed_snapshot必须来自该source_quote_id的确认快照，包含卖方/客户/商品/币种/条款/明细及schemaVersion"],
+      "policy": "inherit-order", "immutability": "append-only；本切片无版本新增/替换接口，无循环current_version外键"
+    },
+    "order_line": {
+      "columns": {"id": {"type": "uuid"}, "order_version_id": {"type": "uuid"}, "source_quote_id": {"type": "uuid"}, "source_quote_line_id": {"type": "uuid"}, "line_no": {"type": "positiveInteger"}, "product_snapshot": {"type": "snapshot"}, "quantity": {"type": "decimal20_2"}, "unit_price": {"type": "decimal20_2"}, "line_amount": {"type": "decimal20_2"}},
+      "primaryKey": ["id"], "unique": [["order_version_id", "line_no"], ["order_version_id", "source_quote_line_id"]],
+      "foreignKeys": [{"columns": ["order_version_id", "source_quote_id"], "table": "order_version", "target": ["id", "source_quote_id"]}, {"columns": ["source_quote_id", "source_quote_line_id"], "table": "quote_line", "target": ["quote_id", "id"]}],
+      "checks": ["逐行复制确认快照，不从可变商品目录/客户端重建；合计与version.total_amount相同"],
+      "policy": "inherit-order", "immutability": "append-only"
+    },
+    "idempotency_record": {
+      "columns": {"id": {"type": "uuid"}, "actor_user_id": {"type": "uuid"}, "idempotency_key": {"type": "text", "maxLength": 128}, "operation_id": {"type": "text", "maxLength": 100}, "request_hash": {"type": "text", "maxLength": 128}, "resource_id": {"type": "uuid"}, "response_status": {"type": "integer"}, "created_at": {"type": "utcInstant"}},
+      "primaryKey": ["id"], "unique": [["actor_user_id", "idempotency_key"]],
+      "foreignKeys": [{"columns": ["actor_user_id"], "table": "app_user", "target": ["id"]}],
+      "checks": ["事务内创建并只随成功业务提交；失败全部回滚后允许同key重试；response_status记首次状态，重放成功统一200", "哈希包含operationId/path/query/规范化业务body，排除Cookie/CSRF/密码；字段顺序与十进制等值规范化规则固定", "跨endpoint同key或不同body重用409；重放前重新鉴权及检查数据归属，不持久化敏感完整响应", "重放只保证不重复业务效果，返回resource_id对应当前授权表示；不承诺原始响应字节或旧版本内容，带Idempotency-Replayed标记"],
+      "policy": "actor-private", "immutability": "append-only in this slice"
+    },
+    "audit_event": {
+      "columns": {"id": {"type": "uuid"}, "actor_user_id": {"type": "uuid"}, "operation_id": {"type": "text", "maxLength": 100}, "resource_type": {"type": "text", "maxLength": 50}, "resource_id": {"type": "uuid"}, "request_id": {"type": "uuid"}, "before_version": {"type": "integer", "nullable": true}, "after_version": {"type": "positiveInteger"}, "occurred_at": {"type": "utcInstant"}, "reason": {"type": "text", "maxLength": 2000, "nullable": true}},
+      "primaryKey": ["id"], "unique": [],
+      "foreignKeys": [{"columns": ["actor_user_id"], "table": "app_user", "target": ["id"]}],
+      "checks": ["成功业务事件与业务同事务；失败/登录安全事件另写受限脱敏运维日志，不伪装业务成功", "不存密码、Cookie、CSRF令牌或完整联系人记录；无业务删除/覆盖接口"],
+      "policy": "not-public-in-this-slice", "indexes": [["resource_type", "resource_id", "occurred_at", "id"]],
+      "immutability": "application-append-only；不宣称可防数据库管理员篡改"
+    }
+  }
+}

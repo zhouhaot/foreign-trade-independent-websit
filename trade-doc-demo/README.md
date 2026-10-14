@@ -4,6 +4,8 @@
 
 2026-10-14 已完成五岗位评审改进：补齐新订单首制 CI/PL、改价实时预演、交期/有效期、财务快捷登记与即时指标、动态权限及演示角色快捷切换；调整工作台、通栏筛选、详情页签与单证编辑动线。新单同订单链路已实际走通，详见[本轮实施与验收](docs/iterations/2026-10-14-review.md)。此前[接续验收](docs/iterations/2026-10-14-resume-acceptance.md)记录的是修复前缺口。Mac 正式工作目录为仓库克隆内的 `trade-doc-demo/`，原旧目录保留。
 
+后续已进入[生产化契约设计](docs/production/README.md)：服务器、本人数据隔离与新业务等输入已确认，16张逻辑表、25个API操作及权限事务设计已整理。当前仍未运行后端或执行数据库迁移；不改变本Demo的运行方式。设计检查单独运行`node scripts/verify-production-contract.cjs`，不计入下方37组原型产品回归。
+
 ## 在另一台电脑继续
 
 对应仓库：[zhouhaot/foreign-trade-independent-websit](https://github.com/zhouhaot/foreign-trade-independent-websit)，分支 `main`。本 Demo 位于仓库的 `trade-doc-demo/` 子目录；根目录的早期需求与架构草案原样保留，不代表已批准实施。

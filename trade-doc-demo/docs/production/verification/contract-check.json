@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "scope": "Static contract consistency and checker negative probes only; NO server/database/browser integration executed",
+  "errors": [],
+  "checks": 1835,
+  "refs": 355,
+  "operations": 25,
+  "schemas": 47,
+  "tables": 16,
+  "plannedCases": 49,
+  "mutationProbes": 35,
+  "schemaSubsetSamples": 21,
+  "plannedIntegrationCasesExecuted": 0,
+  "sourceHashes": {
+    "index.html": "b486a70b43f5507b50e477c02e84ad277a3ae7362688e6a43f22c7483884a356",
+    "js/app.js": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+    "js/mock-data.js": "1ca72b696b0058537cc204a88812f0221d73fe90ba1431951e37bb29161ce52f",
+    "js/utils.js": "5bc7ca462b7b667f0a78818187e2679b25c237900efd4f2daa8348ff6f91fbcd",
+    "js/views-core.js": "9c7b91d5155bbbff91ead58ba8583124e87e159a3bdcd64f8bd68be107f1e25b",
+    "js/views-docs.js": "ff2e47e44845724e4a81be2d164fd7bb15d9d5920a4e5f67bd5e376128738572",
+    "js/views-fin.js": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+    "js/views-sales.js": "84dd9ad87934d49f214c6670db8d874d1546db541134dc19cc24cb4d7022782b",
+    "js/views-stats.js": "015138f0555722b9011962b4c40bc5b355ecbe512ed435e0b0f326c9a7950cb3",
+    "js/views-system.js": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef",
+    "css/base.css": "aadd5cf0f91bef3114660b227e53f45069e3c08505d8e9e425e0d97f020858ae",
+    "css/layout.css": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+    "css/pages.css": "17b943f99fb47354334322b1baba911500b0d7803a73af30fd2c22275ddaf431"
+  }
+}

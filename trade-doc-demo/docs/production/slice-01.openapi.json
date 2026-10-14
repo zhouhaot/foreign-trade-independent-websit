@@ -1,0 +1,4247 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "外贸订单与单证管理系统 — 首个真实业务切片契约",
+    "version": "0.1.0-design",
+    "description": "2026-10-14设计稿，尚无运行后端、数据库或生产验收。范围：真实登录→公司商品/本人客户→询盘→报价草稿→提交冻结→客户确认→唯一成单→回读。所有接口供独立生产应用使用，不能接入/破坏现有file://静态Demo。服务器规格、真实账号开通、公司信息初始化与币种配置仍待工程实施；业务流水号规则未批准所以DTO businessNo可选。数量/单价最多两位且逐行精确到分已确认；服务器业务时区拟Asia/Shanghai，属可撤销工程假设而非服务器实测。首切片不包括报价修订、订单推进/取消、附件上传下载、单证/收款、统计/导出、角色快切、账号管理写API。过期已确认报价首次成单暂拒绝为未决保守门禁，不宣称业务已批准。 英文状态码只是既有中文业务状态的技术映射，不扩展业务状态；报价成单后仍为CONFIRMED，以orderId/convertedAt独立表达已转换。 询盘只保存客户引用/创建版本，不冻结客户内容；报价草稿客户/公司为受权实时预览，submit以用户刚审阅版本为条件同事务冻结。确认/询盘日期及交期区间仍属未决保守设计候选，实施前确认。"
+  },
+  "servers": [
+    {
+      "url": "/api/v1",
+      "description": "与正式前端同源，生产环境HTTPS；不在Demo中启动或调用。"
+    }
+  ],
+  "security": [
+    {
+      "CookieAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth"
+    },
+    {
+      "name": "reference"
+    },
+    {
+      "name": "products"
+    },
+    {
+      "name": "customers"
+    },
+    {
+      "name": "inquiries"
+    },
+    {
+      "name": "quotes"
+    },
+    {
+      "name": "orders"
+    }
+  ],
+  "x-contract-stage": "design-only-not-implemented",
+  "x-global-invariants": [
+    "所有对象及嵌套请求严格拒绝additionalProperties；unknown字段400，字段/业务语义422。",
+    "Cookie会话真实鉴权、请求级与服务级岗位控制、数据查询归属限定共同执行；前端隐藏按钮不构成权限。",
+    "所有业务写CookieAuth+X-CSRF-TOKEN+Idempotency-Key；login仅CSRF+凭据，logout Cookie+CSRF无需业务幂等键。",
+    "幂等作用域actor_user_id+key跨端点唯一，长期不可复用；命令规范化保留method/path/body摘要及结果资源引用，不持久化完整敏感响应；同成功命令只保证不重复业务效果，重放200及Idempotency-Replayed:true，返回同资源当前已授权表示，不保证首次body/version字节一致；事务失败不留成功记录。",
+    "幂等重放先鉴权、岗位与对象范围；停用/撤权不得重放。相同成功命令可在状态/版本变化后回读当前已授权表示；不同key的唯一来源成单按规范化deliveryDate一致性处理。",
+    "手机号、客户联系人和地址仅返回获授权用户；认证、CSRF、幂等、密码、Cookie不写日志，不提供包含秘密的示例。",
+    "金额API全部string，无JSON浮点；十进制运算、18整数/2小数边界、精确到分和单币种总额均服务端验证。",
+    "全部HTTP响应（包括错误、成功、幂等重放）必须Cache-Control:no-store；只在成功重放时添加Idempotency-Replayed:true。"
+  ],
+  "paths": {
+    "/auth/csrf": {
+      "get": {
+        "operationId": "getCsrf",
+        "summary": "取得当前匿名/登录会话CSRF令牌",
+        "description": "取得当前匿名/登录会话CSRF令牌",
+        "tags": [
+          "auth"
+        ],
+        "x-roles": [],
+        "x-scope": [
+          "public"
+        ],
+        "x-permission": [
+          "auth:csrf"
+        ],
+        "x-invariants": [
+          "令牌仅响应体传输且Cache-Control:no-store；不输出秘密示例；跨域默认拒绝。"
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CsrfToken"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "login",
+        "summary": "使用真实账号登录",
+        "description": "使用真实账号登录",
+        "tags": [
+          "auth"
+        ],
+        "x-roles": [],
+        "x-scope": [
+          "public"
+        ],
+        "x-permission": [
+          "auth:login"
+        ],
+        "x-invariants": [
+          "公开登录仍要求预取X-CSRF-TOKEN；不接受客户端role或actor。",
+          "登录成功轮换会话及CSRF；账号启用检查及限流；非首切片账号开通接口。"
+        ],
+        "security": [
+          {
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            },
+            "headers": {
+              "Set-Cookie": {
+                "description": "更新会话ID防固定攻击；TRADE_SESSION为HttpOnly/Secure/SameSite=Lax/Path=/api/v1，不能由脚本读取。登录后CSRF令牌轮换，写前重新GET/auth/csrf。",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "operationId": "getMe",
+        "summary": "查询当前真实身份",
+        "description": "查询当前真实身份",
+        "tags": [
+          "auth"
+        ],
+        "x-roles": [
+          "admin",
+          "sales",
+          "doc",
+          "fin",
+          "boss"
+        ],
+        "x-scope": [
+          "self"
+        ],
+        "x-permission": [
+          "auth:me"
+        ],
+        "x-invariants": [
+          "身份来自有效服务器会话；每次检查账号启用。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "logout",
+        "summary": "注销当前会话",
+        "description": "注销当前会话",
+        "tags": [
+          "auth"
+        ],
+        "x-roles": [
+          "admin",
+          "sales",
+          "doc",
+          "fin",
+          "boss"
+        ],
+        "x-scope": [
+          "self"
+        ],
+        "x-permission": [
+          "auth:logout"
+        ],
+        "x-invariants": [
+          "要求Cookie与CSRF；成功后服务器端旧会话失效；不要求业务幂等键。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功，无响应体。",
+            "headers": {
+              "Set-Cookie": {
+                "description": "使当前服务端会话失效并以Path=/api/v1清除TRADE_SESSION；旧会话不能继续访问。",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        }
+      }
+    },
+    "/reference/currencies": {
+      "get": {
+        "operationId": "listCurrencies",
+        "summary": "读取启用的两位金额币种目录",
+        "description": "读取启用的两位金额币种目录",
+        "tags": [
+          "reference"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "company-catalog"
+        ],
+        "x-permission": [
+          "currency:read"
+        ],
+        "x-invariants": [
+          "仅返回enabled且amountScale=2目录；目录为空时不得猜测USD等默认币种。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyList"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "operationId": "listProducts",
+        "summary": "分页查询公司共用商品",
+        "description": "分页查询公司共用商品",
+        "tags": [
+          "products"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "company-catalog"
+        ],
+        "x-permission": [
+          "listProducts"
+        ],
+        "x-invariants": [
+          "sales/boss共享同一公司目录；boss只读，其他角色本切片拒权。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductPage"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ]
+      },
+      "post": {
+        "operationId": "createProduct",
+        "summary": "创建共用商品",
+        "description": "创建共用商品",
+        "tags": [
+          "products"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "company-catalog"
+        ],
+        "x-permission": [
+          "createProduct"
+        ],
+        "x-invariants": [
+          "仅sales维护共用目录，不建立业务员私有商品；操作审计由服务器记录。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功命令重放：不重复业务效果，返回同资源当前已授权表示，不保证首次body/version不变。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "首次创建成功；相同成功命令重放不再创建，改用200返回同资源当前已授权表示。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "operationId": "getProduct",
+        "summary": "查询共用商品详情",
+        "description": "查询共用商品详情",
+        "tags": [
+          "products"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "company-catalog"
+        ],
+        "x-permission": [
+          "getProduct"
+        ],
+        "x-invariants": [
+          "必须认证且角色sales/boss；商品更新不追溯覆盖交易快照。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateProduct",
+        "summary": "按版本完整更新共用商品",
+        "description": "按版本完整更新共用商品",
+        "tags": [
+          "products"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "company-catalog"
+        ],
+        "x-permission": [
+          "updateProduct"
+        ],
+        "x-invariants": [
+          "仅sales维护公司目录。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "expectedVersion与持久化版本不符409；成功递增版本；原快照不被主数据更新覆盖。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductUpdate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "operationId": "listCustomers",
+        "summary": "分页查询本人/主管全部客户",
+        "description": "分页查询本人/主管全部客户",
+        "tags": [
+          "customers"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "listCustomers"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerPage"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ]
+      },
+      "post": {
+        "operationId": "createCustomer",
+        "summary": "创建本人客户",
+        "description": "创建本人客户",
+        "tags": [
+          "customers"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "createCustomer"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功命令重放：不重复业务效果，返回同资源当前已授权表示，不保证首次body/version不变。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "首次创建成功；相同成功命令重放不再创建，改用200返回同资源当前已授权表示。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "operationId": "getCustomer",
+        "summary": "查询客户详情",
+        "description": "查询客户详情",
+        "tags": [
+          "customers"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "getCustomer"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateCustomer",
+        "summary": "按版本完整更新本人客户",
+        "description": "按版本完整更新本人客户",
+        "tags": [
+          "customers"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "updateCustomer"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "expectedVersion与持久化版本不符409；成功递增版本；原快照不被主数据更新覆盖。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerUpdate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inquiries": {
+      "get": {
+        "operationId": "listInquiries",
+        "summary": "分页查询询盘",
+        "description": "分页查询询盘",
+        "tags": [
+          "inquiries"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "listInquiries"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InquiryPage"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ]
+      },
+      "post": {
+        "operationId": "createInquiry",
+        "summary": "创建本人询盘并捕获主数据快照",
+        "description": "创建本人询盘并捕获主数据快照",
+        "tags": [
+          "inquiries"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "createInquiry"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "按customerVersion和各productVersion同事务验证，版本不符409；客户归属不符404；商品停用422；记录customerId/创建版本并冻结商品快照，初态FOLLOWING，不冻结客户内容。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功命令重放：不重复业务效果，返回同资源当前已授权表示，不保证首次body/version不变。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inquiry"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "首次创建成功；相同成功命令重放不再创建，改用200返回同资源当前已授权表示。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inquiry"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InquiryCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inquiries/{id}": {
+      "get": {
+        "operationId": "getInquiry",
+        "summary": "查询询盘及商品来源快照",
+        "description": "查询询盘、客户引用/创建版本及冻结商品明细，不把询盘客户版本当成交快照。",
+        "tags": [
+          "inquiries"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "getInquiry"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inquiry"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          }
+        ]
+      }
+    },
+    "/inquiries/{id}/quotes": {
+      "post": {
+        "operationId": "createQuote",
+        "summary": "从本人未报价询盘生成唯一报价草稿",
+        "description": "从本人未报价询盘生成唯一报价草稿",
+        "tags": [
+          "inquiries"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "createQuote"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "锁定FOLLOWING询盘及expectedVersion；每inquiry_id最多一份报价（唯一约束）；来源转QUOTED及quoteId同事务。",
+          "仅复制询盘既有商品/quantity快照及customerId；成交单价初始null，不live重取商品参考价。草稿GET客户和公司资料为受权实时预览，sourceVersions与预览同一次一致读取。",
+          "沿用已评审默认：草稿quoteDate为服务器业务日期，validUntil默认该日+15个日历日；条款/备注初始空字符串。有效期可在DRAFT修改或暂清空，submit前必须补齐。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功命令重放：不重复业务效果，返回同资源当前已授权表示，不保证首次body/version不变。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "首次创建成功；相同成功命令重放不再创建，改用200返回同资源当前已授权表示。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quotes": {
+      "get": {
+        "operationId": "listQuotes",
+        "summary": "分页查询报价",
+        "description": "分页查询报价",
+        "tags": [
+          "quotes"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "listQuotes"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuotePage"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ]
+      }
+    },
+    "/quotes/{id}": {
+      "get": {
+        "operationId": "getQuote",
+        "summary": "查询报价及提交冻结快照",
+        "description": "查询报价及提交冻结快照",
+        "tags": [
+          "quotes"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "getQuote"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。",
+          "DRAFT客户/公司按授权实时一致预览并返回sourceVersions；公司未配置返回companySnapshot=null和companyProfileVersion=null。提交后严格读取冻结快照，不跟主数据更新。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          }
+        ]
+      },
+      "put": {
+        "operationId": "updateQuote",
+        "summary": "按版本更新本人报价草稿完整候选",
+        "description": "按版本更新本人报价草稿完整候选",
+        "tags": [
+          "quotes"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "updateQuote"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "仅DRAFT且expectedVersion匹配可改，成功递增版本；提交后无修订接口，不覆盖提交冻结快照。",
+          "items精确覆盖继承行，禁止换product、客户或归属；计算全部非null行金额并检验精确到分；未填单价时总额null。",
+          "currency必须启用且amountScale=2；合计仅同币种，不汇兑、不静默round；所有计算用十进制定点。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteUpdate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quotes/{id}/submit": {
+      "post": {
+        "operationId": "submitQuote",
+        "summary": "提交完整报价等待客户确认并冻结交易",
+        "description": "提交完整报价等待客户确认并冻结交易",
+        "tags": [
+          "quotes"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "submitQuote"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；版本、冻结快照、状态、审计及幂等结果同事务，失败整体回滚。",
+          "仅DRAFT且expectedVersion匹配；validUntil>=服务器业务日期。固定商品快照沿用询盘，不重取最新目录。",
+          "必须锁定并比对expectedCustomerVersion与expectedCompanyProfileVersion对应的当前资料；与刚审阅预览有漂移409 VERSION_CONFLICT，不静默用最新值替换。真实公司资料未配置返回422 COMPANY_PROFILE_REQUIRED，不用Demo卖方。",
+          "所有单价/quantity>0，每行精确到分且行/合计不溢出；交易条件、真实有效期完整。",
+          "同事务冻结用户刚审阅的客户/真实公司/固定商品/交易完整TradeSnapshot，状态AWAITING_CUSTOMER；后续确认和成单只能基于该快照。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteSubmitRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quotes/{id}/customer-confirmations": {
+      "post": {
+        "operationId": "recordCustomerConfirmation",
+        "summary": "登记客户对提交冻结版本的确认",
+        "description": "登记客户对提交冻结版本的确认",
+        "tags": [
+          "quotes"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "recordCustomerConfirmation"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；CSRF及幂等头必需；所有关联/版本/状态/快照/审计/幂等记录同事务或一致性提交，失败整体回滚。",
+          "仅AWAITING_CUSTOMER且expectedVersion匹配；确认方式/真实日期/说明必填；日期在quoteDate..min(validUntil,业务日期)内且当前业务日期未过期。",
+          "确认绑定提交时已冻结snapshotVersion，不重新冻结或live查询主数据；一报价一确认，状态CONFIRMED。",
+          "attachmentIds可省略或[]；非空明确422 FEATURE_NOT_IN_SLICE，不静默丢附件；未提供上传或下载端点。",
+          "上述日期区间为未决保守候选，正式实现前需确认，不把用户已确认的附件/精度规则扩张为日期政策批准。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmationCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quotes/{id}/orders": {
+      "post": {
+        "operationId": "createOrderFromQuote",
+        "summary": "由本人已确认报价生成唯一订单",
+        "description": "首次成功201；同成功命令重放返回同资源当前已授权表示，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致。已成单且同来源/同规范化交期的不同幂等键重试也返回200已有订单，并带Idempotency-Replayed:true。重放须先鉴权和对象范围，再查幂等/已有订单，再检查首次成单状态与版本；并发唯一冲突捕获后也按此语义回读。不持久化完整敏感响应。",
+        "tags": [
+          "quotes"
+        ],
+        "x-roles": [
+          "sales"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "createOrderFromQuote"
+        ],
+        "x-invariants": [
+          "仅sales可写本人业务；owner与actor从服务器会话产生，不接受客户端授权字段。",
+          "严格DTO未知字段拒绝；Cookie/CSRF及幂等头必需；来源关联、订单、快照、审计、幂等结果一致提交，失败整体回滚。",
+          "禁止直接新建订单及客户端重传交易数据；source_quote_id唯一约束保证并发最多一张订单。",
+          "新成单锁定CONFIRMED且尚无orderId报价并校验expectedVersion、冻结确认版本和交期；当前业务日期超过validUntil时暂422 QUOTE_EXPIRED，是否允许过期已确认成单仍待批准。",
+          "原子复制已确认TradeSnapshot、创建独立订单/三进度/来源关联、报价写orderId及convertedAt且保留CONFIRMED状态，并写审计；任一步失败全部回滚。",
+          "同actor+幂等key同成功命令：重新鉴权后读取同资源当前已授权表示并返回HTTP200及Idempotency-Replayed:true，先于当前状态/expectedVersion/时效门禁；不重复业务效果，不保证原始body/version字节一致；同key异path/method/payload返回409，不持久化完整敏感响应。",
+          "不同key但同source_quote_id：重新鉴权后先读取既有订单；规范化deliveryDate相同返回200既有订单，即使报价已关联订单、版本已增或后来过期；交期不同409 SOURCE_ALREADY_CONVERTED，不另建订单。",
+          "同成功命令幂等重放先重新鉴权及对象范围，再返回同资源当前已授权表示；不重复业务效果，HTTP200及Idempotency-Replayed:true，不保证首次body/version字节一致；不持久化完整敏感响应。"
+        ],
+        "security": [
+          {
+            "CookieAuth": [],
+            "CsrfHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "同来源已成单且规范化deliveryDate相同，返回已有订单；不再次修改来源或审计成单。 同一成功命令重放也用200，并返回资源当前已授权表示，不保证首次body/version不变。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              },
+              "Idempotency-Replayed": {
+                "description": "仅成功重放时返回true；返回同一资源当前已授权表示，不保证与首次响应body或version字节一致。",
+                "schema": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "首次创建成功；相同成功命令重放不再创建，改用200返回同资源当前已授权表示。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "operationId": "listOrders",
+        "summary": "分页查询本人/主管全部订单",
+        "description": "分页查询本人/主管全部订单",
+        "tags": [
+          "orders"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "listOrders"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderPage"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ]
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "operationId": "getOrder",
+        "summary": "查询订单及不可变成交快照",
+        "description": "查询订单及不可变成交快照",
+        "tags": [
+          "orders"
+        ],
+        "x-roles": [
+          "sales",
+          "boss"
+        ],
+        "x-scope": [
+          "owner-or-boss"
+        ],
+        "x-permission": [
+          "getOrder"
+        ],
+        "x-invariants": [
+          "sales查询必须在SQL/持久化查询中限定owner_user_id=当前身份；boss只读全部授权业务。",
+          "admin/doc/fin在首切片拒绝销售对象；详情缺失/无权统一404，不先泄漏存在性。",
+          "交易快照来自已确认来源；主数据修改/服务重启不改变内容；三类进度独立返回。"
+        ],
+        "security": [
+          {
+            "CookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "description": "全部成功及错误响应禁止缓存。",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "CookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "TRADE_SESSION",
+        "description": "服务器端会话，不使用Demo角色选择或客户端owner/role授权；HttpOnly/Secure/SameSite=Lax；登录轮换、注销失效。 Cookie Path=/api/v1；注销按同Path清除。"
+      },
+      "CsrfHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-CSRF-TOKEN",
+        "description": "从GET/auth/csrf响应体读取，与当前匿名/真实会话绑定。login也必须校验，登录后轮换；不得放URL或日志。"
+      }
+    },
+    "parameters": {
+      "ResourceId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Id"
+        }
+      },
+      "Page": {
+        "name": "page",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        }
+      },
+      "PageSize": {
+        "name": "pageSize",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 20
+        }
+      },
+      "Search": {
+        "name": "q",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100
+        },
+        "description": "仅索引当前授权范围内字段；不得用跨归属匹配数、提示或排序泄漏其他业务。"
+      },
+      "IdempotencyKey": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid",
+          "minLength": 36,
+          "maxLength": 36
+        },
+        "description": "客户端每个独立业务命令生成新UUID。相同actor+key跨端点唯一、长期保留不可复用；同键相同规范化path/method/body只保证不重复业务效果，重放HTTP200、Idempotency-Replayed:true并返回同资源当前已授权表示，不保证原始body/version字节一致；同键异命令409。记录命令摘要及结果资源引用，不持久化完整敏感响应；响应前重查真实身份、岗位及当前对象范围，禁用账号/撤权不得重放。"
+      }
+    },
+    "responses": {
+      "Error400": {
+        "description": "语法/类型/未知字段或缺少必需头：MALFORMED_REQUEST；不忽略额外字段。",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "headers": {
+          "Cache-Control": {
+            "description": "全部成功及错误响应禁止缓存。",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          }
+        }
+      },
+      "Error401": {
+        "description": "UNAUTHENTICATED或INVALID_CREDENTIALS；会话缺失/过期/已注销/账号停用。",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "headers": {
+          "Cache-Control": {
+            "description": "全部成功及错误响应禁止缓存。",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          }
+        }
+      },
+      "Error403": {
+        "description": "FORBIDDEN_ROLE或CSRF_INVALID；角色拒权或CSRF失败。",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "headers": {
+          "Cache-Control": {
+            "description": "全部成功及错误响应禁止缓存。",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          }
+        }
+      },
+      "Error404": {
+        "description": "NOT_FOUND；不存在或不在当前数据范围的对象统一返回，不暴露存在性。",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "headers": {
+          "Cache-Control": {
+            "description": "全部成功及错误响应禁止缓存。",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          }
+        }
+      },
+      "Error409": {
+        "description": "VERSION_CONFLICT / STATE_CONFLICT / IDEMPOTENCY_CONFLICT / SOURCE_ALREADY_CONVERTED / DUPLICATE_SKU；无部分提交。",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "headers": {
+          "Cache-Control": {
+            "description": "全部成功及错误响应禁止缓存。",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          }
+        }
+      },
+      "Error422": {
+        "description": "VALIDATION_ERROR / AMOUNT_NOT_EXACT / AMOUNT_OVERFLOW / QUOTE_EXPIRED / COMPANY_PROFILE_REQUIRED / FEATURE_NOT_IN_SLICE等字段或业务校验。",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "headers": {
+          "Cache-Control": {
+            "description": "全部成功及错误响应禁止缓存。",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          }
+        }
+      },
+      "Error429": {
+        "description": "RATE_LIMITED；Retry-After秒数由服务端给出。",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "headers": {
+          "Retry-After": {
+            "description": "可重试前等待的秒数。",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "Cache-Control": {
+            "description": "全部成功及错误响应禁止缓存。",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Id": {
+        "type": "string",
+        "format": "uuid",
+        "description": "服务器生成的不透明UUID，不能从编号、姓名或前端样例ID推导。"
+      },
+      "Version": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 2147483647
+      },
+      "DecimalString": {
+        "type": "string",
+        "maxLength": 21,
+        "pattern": "^(?:0|[1-9][0-9]{0,17})(?:\\.[0-9]{1,2})?$",
+        "description": "无符号普通十进制字符串，最多18位整数、2位小数；拒绝指数、逗号、空白、十六进制及JSON number。数量/成交单价必须>0；每行quantity×unitPrice须能精确表示为分，不做静默舍入；乘积及总额不得溢出DECIMAL(20,2)。"
+      },
+      "Date": {
+        "type": "string",
+        "format": "date",
+        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+        "maxLength": 10,
+        "description": "真实日历YYYY-MM-DD，后端须另验闰年/月份天数；业务日期以服务器配置的公司业务时区计算，不信任客户端时钟。"
+      },
+      "DateTime": {
+        "type": "string",
+        "format": "date-time",
+        "maxLength": 35,
+        "description": "服务端生成的带时区时间戳。"
+      },
+      "CurrencyCode": {
+        "type": "string",
+        "pattern": "^[A-Z]{3}$",
+        "maxLength": 3,
+        "description": "必须存在于启用币种目录且amountScale=2；不因符合正则就接受任意币种；不执行汇率换算。"
+      },
+      "Role": {
+        "type": "string",
+        "enum": [
+          "admin",
+          "sales",
+          "doc",
+          "fin",
+          "boss"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "username": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role"
+          }
+        },
+        "required": [
+          "id",
+          "username",
+          "displayName",
+          "role"
+        ]
+      },
+      "Session": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "required": [
+          "user"
+        ],
+        "description": "仅返回当前真实身份，不接受选择/切换角色。每次请求检查账号启用与会话有效性；不返回密码摘要或会话ID。"
+      },
+      "CsrfToken": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          }
+        },
+        "required": [
+          "token"
+        ],
+        "description": "与当前匿名或已登录会话绑定的CSRF令牌；禁止写入URL、日志或示例；响应Cache-Control:no-store。"
+      },
+      "LoginRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "username": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "writeOnly": true
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ],
+        "description": "不接受role/actor/owner。错误用户名、错误密码、停用账号统一凭据错误提示，不泄露账号是否存在。"
+      },
+      "FieldError": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "description": "JSON Pointer，例如字段位置；不回显敏感提交值。"
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "path",
+          "code",
+          "message"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "type": "integer",
+            "enum": [
+              400,
+              401,
+              403,
+              404,
+              409,
+              422,
+              429
+            ]
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "fieldErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldError"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "currentVersion": {
+            "$ref": "#/components/schemas/Version"
+          }
+        },
+        "required": [
+          "status",
+          "code",
+          "message",
+          "requestId",
+          "fieldErrors"
+        ],
+        "description": "统一错误结构；不得泄露无权对象是否存在、其他归属或敏感信息。currentVersion仅可用于已授权对象的版本冲突。"
+      },
+      "Currency": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "amountScale": {
+            "type": "integer",
+            "const": 2
+          }
+        },
+        "required": [
+          "code",
+          "displayName",
+          "amountScale"
+        ]
+      },
+      "CurrencyList": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Currency"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          }
+        },
+        "required": [
+          "items"
+        ]
+      },
+      "ProductCreate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sku": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "spec": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 1000
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "refPrice": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "hsCode": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 30
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "sku",
+          "nameCn",
+          "nameEn",
+          "spec",
+          "unit",
+          "refPrice",
+          "currency",
+          "hsCode",
+          "remark"
+        ],
+        "description": "公司共用商品。sku经服务端规范化并受唯一约束，重复409；参考价可为0但不可代替成交单价。编号规则未批准，不承诺自动生成SKU。"
+      },
+      "ProductUpdate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "sku": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "spec": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 1000
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "refPrice": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "hsCode": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 30
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "expectedVersion",
+          "sku",
+          "nameCn",
+          "nameEn",
+          "spec",
+          "unit",
+          "refPrice",
+          "currency",
+          "hsCode",
+          "remark",
+          "enabled"
+        ]
+      },
+      "Product": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "sku": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "spec": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 1000
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "refPrice": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "hsCode": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 30
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/DateTime"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "sku",
+          "nameCn",
+          "nameEn",
+          "spec",
+          "unit",
+          "refPrice",
+          "currency",
+          "hsCode",
+          "remark",
+          "enabled",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ProductSnapshot": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "productId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "productVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "sku": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "spec": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 1000
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          "hsCode": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 30
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "minimum": 1,
+            "const": 1,
+            "description": "本JSON快照结构的版本，当前为1；不同于TradeSnapshot.snapshotVersion业务冻结版本。"
+          }
+        },
+        "required": [
+          "productId",
+          "productVersion",
+          "sku",
+          "nameCn",
+          "nameEn",
+          "spec",
+          "unit",
+          "hsCode",
+          "schemaVersion"
+        ],
+        "description": "只读服务器快照；读取历史交易不得实时联表覆盖这些字段。"
+      },
+      "CustomerCreate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "country": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "contact": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 254
+          },
+          "phone": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "nameCn",
+          "nameEn",
+          "country",
+          "contact",
+          "email",
+          "phone",
+          "address",
+          "remark"
+        ],
+        "description": "owner由真实sales会话分配。空email/phone允许；非空email另作格式验证。不自动录入Demo客户，不提供转交归属接口。"
+      },
+      "CustomerUpdate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "country": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "contact": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 254
+          },
+          "phone": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "expectedVersion",
+          "nameCn",
+          "nameEn",
+          "country",
+          "contact",
+          "email",
+          "phone",
+          "address",
+          "remark"
+        ]
+      },
+      "Customer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "ownerUserId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "country": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "contact": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 254
+          },
+          "phone": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/DateTime"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "ownerUserId",
+          "nameCn",
+          "nameEn",
+          "country",
+          "contact",
+          "email",
+          "phone",
+          "address",
+          "remark",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CustomerSnapshot": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "customerVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "nameCn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "nameEn": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "country": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "contact": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 254
+          },
+          "phone": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "minimum": 1,
+            "const": 1,
+            "description": "本JSON快照结构的版本，当前为1；不同于TradeSnapshot.snapshotVersion业务冻结版本。"
+          }
+        },
+        "required": [
+          "customerId",
+          "customerVersion",
+          "nameCn",
+          "nameEn",
+          "country",
+          "contact",
+          "email",
+          "phone",
+          "address",
+          "schemaVersion"
+        ],
+        "description": "服务器受权客户内容快照：草稿阶段作为当前客户资料预览，sourceVersions对应其版本；报价提交时冻结后不得被主数据更新追溯替换。"
+      },
+      "InquiryItemInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "productId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "productVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/DecimalString"
+          }
+        },
+        "required": [
+          "productId",
+          "productVersion",
+          "quantity"
+        ],
+        "description": "商品必须启用且版本匹配；quantity>0。"
+      },
+      "InquiryItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lineNo": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductSnapshot"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/DecimalString"
+          }
+        },
+        "required": [
+          "lineNo",
+          "product",
+          "quantity"
+        ]
+      },
+      "InquiryCreate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "customerVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "inquiryDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 5000
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InquiryItemInput"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "customerId",
+          "customerVersion",
+          "inquiryDate",
+          "source",
+          "message",
+          "items"
+        ],
+        "description": "customer必须属当前sales；原子检验customerVersion和各productVersion及启用状态。记录客户引用/创建版本，捕获商品快照，不冻结客户内容；允许同商品多行；服务器为每行分配稳定且唯一的lineNo，后续报价更新不得遗漏或重复lineNo。询盘日期不晚于服务器业务日期为当前保守设计候选，正式实现前确认。"
+      },
+      "Inquiry": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "businessNo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "ownerUserId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "inquiryDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 5000
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InquiryItem"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "FOLLOWING",
+              "QUOTED"
+            ]
+          },
+          "quoteId": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "customerId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "customerVersion": {
+            "$ref": "#/components/schemas/Version"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "ownerUserId",
+          "inquiryDate",
+          "source",
+          "message",
+          "items",
+          "status",
+          "quoteId",
+          "createdAt",
+          "updatedAt",
+          "customerId",
+          "customerVersion"
+        ],
+        "description": "创建时记录customerId及当时customerVersion，客户内容不在询盘冻结；商品/单位快照在询盘明细固定。报价草稿按关联客户当前资料预览，提交时校核用户所见版本才冻结。"
+      },
+      "QuoteCreate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          }
+        },
+        "required": [
+          "expectedVersion",
+          "currency"
+        ],
+        "description": "expectedVersion针对来源询盘。仅从本人FOLLOWING询盘起草一份报价；固定customerId，复制原商品和quantity快照。成交单价初始null；客户/公司内容由草稿GET受权预览。不接受items、customerId、owner、status或totalAmount。"
+      },
+      "QuoteItemUpdate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lineNo": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "unitPrice": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DecimalString"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "lineNo",
+          "quantity",
+          "unitPrice"
+        ],
+        "description": "仅更新询盘继承的现有行，必须恰好覆盖全部lineNo且唯一；不得添加/删除或替换product。quantity>0；非null单价>0且乘积精确到分。"
+      },
+      "QuoteUpdate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "validUntil": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "tradeTerm": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 200
+          },
+          "paymentTerm": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuoteItemUpdate"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "expectedVersion",
+          "validUntil",
+          "currency",
+          "tradeTerm",
+          "paymentTerm",
+          "remark",
+          "items"
+        ],
+        "description": "仅DRAFT完整候选更新；未知/只读字段拒绝，不局部忽略。quoteDate由createQuote按服务器业务日生成且只读，传入quoteDate返回400；空交易条件、null有效期或单价仅允许保留草稿，提交前须补齐。非null validUntil不早于服务器保存的quoteDate。"
+      },
+      "QuoteItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lineNo": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductSnapshot"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "unitPrice": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DecimalString"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lineAmount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DecimalString"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "lineNo",
+          "product",
+          "quantity",
+          "unitPrice",
+          "lineAmount"
+        ],
+        "description": "服务器计算lineAmount；任何未定单价对应null，不冒充0。"
+      },
+      "CompanySnapshot": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyProfileId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "companyProfileVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "legalName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "contact": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 254
+          },
+          "phone": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "minimum": 1,
+            "const": 1,
+            "description": "本JSON快照结构的版本，当前为1；不同于TradeSnapshot.snapshotVersion业务冻结版本。"
+          }
+        },
+        "required": [
+          "companyProfileId",
+          "companyProfileVersion",
+          "legalName",
+          "address",
+          "contact",
+          "email",
+          "phone",
+          "schemaVersion"
+        ],
+        "description": "来源真实公司配置，不自动带入Demo卖方。首切片不提供公司资料写接口。"
+      },
+      "TradeSnapshot": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "snapshotVersion": {
+            "$ref": "#/components/schemas/Version",
+            "description": "本报价不可变业务快照版本；不能与schemaVersion结构版本或主数据version混淆。"
+          },
+          "submittedQuoteVersion": {
+            "$ref": "#/components/schemas/Version",
+            "description": "提交事务成功后对应的报价版本；不是客户端expectedVersion。"
+          },
+          "seller": {
+            "$ref": "#/components/schemas/CompanySnapshot"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/CustomerSnapshot"
+          },
+          "quoteDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "validUntil": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "tradeTerm": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "paymentTerm": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TradeSnapshotItem"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          },
+          "totalAmount": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "frozenAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "minimum": 1,
+            "const": 1,
+            "description": "本JSON快照结构的版本，当前为1；不同于TradeSnapshot.snapshotVersion业务冻结版本。"
+          }
+        },
+        "required": [
+          "snapshotVersion",
+          "submittedQuoteVersion",
+          "seller",
+          "customer",
+          "quoteDate",
+          "validUntil",
+          "currency",
+          "tradeTerm",
+          "paymentTerm",
+          "remark",
+          "items",
+          "totalAmount",
+          "frozenAt",
+          "schemaVersion"
+        ],
+        "description": "submit成功时一次性冻结完整交易/真实公司资料；确认记录和订单只能引用/复制此版本，不能在确认或成单时live查询主数据替换。snapshotVersion是本报价不可变快照版本，不是主数据版本。"
+      },
+      "TradeSnapshotItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lineNo": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "product": {
+            "$ref": "#/components/schemas/ProductSnapshot"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "unitPrice": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "lineAmount": {
+            "$ref": "#/components/schemas/DecimalString"
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "minimum": 1,
+            "const": 1,
+            "description": "本JSON快照结构的版本，当前为1；不同于TradeSnapshot.snapshotVersion业务冻结版本。"
+          }
+        },
+        "required": [
+          "lineNo",
+          "product",
+          "quantity",
+          "unitPrice",
+          "lineAmount",
+          "schemaVersion"
+        ]
+      },
+      "CustomerConfirmation": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "quoteSnapshotVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "confirmedOn": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "attachmentIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Id"
+            },
+            "maxItems": 0
+          },
+          "recordedBy": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "recordedAt": {
+            "$ref": "#/components/schemas/DateTime"
+          }
+        },
+        "required": [
+          "id",
+          "quoteSnapshotVersion",
+          "method",
+          "confirmedOn",
+          "note",
+          "attachmentIds",
+          "recordedBy",
+          "recordedAt"
+        ],
+        "description": "客户确认事实由业务员登记，不等于主管审批或客户端签名认证。附件可选；首切片尚无上传接口，所以此处只能空数组。"
+      },
+      "Quote": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "businessNo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "ownerUserId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "inquiryId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "quoteDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "validUntil": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "tradeTerm": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 200
+          },
+          "paymentTerm": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 500
+          },
+          "remark": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 2000
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuoteItem"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          },
+          "totalAmount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DecimalString"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "AWAITING_CUSTOMER",
+              "CONFIRMED"
+            ]
+          },
+          "submittedSnapshot": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TradeSnapshot"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customerConfirmation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerConfirmation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "orderId": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "convertedAt": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTime"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "customerId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "customerSnapshot": {
+            "$ref": "#/components/schemas/CustomerSnapshot"
+          },
+          "companySnapshot": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompanySnapshot"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceVersions": {
+            "$ref": "#/components/schemas/SourceVersions"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "ownerUserId",
+          "inquiryId",
+          "quoteDate",
+          "validUntil",
+          "currency",
+          "tradeTerm",
+          "paymentTerm",
+          "remark",
+          "items",
+          "totalAmount",
+          "status",
+          "submittedSnapshot",
+          "customerConfirmation",
+          "orderId",
+          "createdAt",
+          "updatedAt",
+          "convertedAt",
+          "customerId",
+          "customerSnapshot",
+          "companySnapshot",
+          "sourceVersions"
+        ],
+        "description": "DRAFT可有null价格/有效期/总额；AWAITING_CUSTOMER及后继必须有完整submittedSnapshot。CONFIRMED必须有确认记录；成单仍保持CONFIRMED，同时orderId/convertedAt非null，不引入新业务状态。合计由服务端按同币种逐行求和。 DRAFT GET客户/公司字段是当前受权预览且与sourceVersions一致，不是冻结成交事实；提交时必须带刚审阅版本。提交后customerSnapshot/companySnapshot/sourceVersions仅来自submittedSnapshot，不在确认或成单时抓最新主数据。"
+      },
+      "ExpectedVersion": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          }
+        },
+        "required": [
+          "expectedVersion"
+        ]
+      },
+      "ConfirmationCreate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "confirmedOn": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "attachmentIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Id"
+            },
+            "maxItems": 0,
+            "description": "附件为业务上可选，但上传/关联文件不在首切片；省略或[]有效。非空必须返回422 FEATURE_NOT_IN_SLICE，不能忽略。"
+          }
+        },
+        "required": [
+          "expectedVersion",
+          "method",
+          "confirmedOn",
+          "note"
+        ],
+        "description": "仅AWAITING_CUSTOMER；method/note修剪后非空，confirmedOn不得早于quoteDate，不晚于服务器业务日期/validUntil。服务端按当前业务日期判断报价仍有效。客户实际确认时间不能通过倒填日期绕过过期门禁。 确认日期可接受区间与服务器业务时区属于当前保守工程候选，不伪装成已批准的正式业务日期政策；正式实施前需确认。"
+      },
+      "OrderCreate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "deliveryDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        },
+        "required": [
+          "expectedVersion",
+          "deliveryDate"
+        ],
+        "description": "仅接收来源报价版本与交期；所有交易/客户/公司/明细/金额来自已冻结确认快照，拒绝重传交易数据。首切片交期不得早于服务器业务日期及confirmedOn。已确认后过期是否允许成单尚未批准，因此首次成单暂拒422 QUOTE_EXPIRED；不自动延期、不篡改确认。 交期不早于业务日期/confirmedOn为当前保守设计候选，正式实施前确认。"
+      },
+      "Order": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "businessNo": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "ownerUserId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "sourceQuoteId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "sourceQuoteSnapshotVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "customerConfirmationId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "deliveryDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "trade": {
+            "$ref": "#/components/schemas/TradeSnapshot"
+          },
+          "orderProgress": {
+            "type": "string",
+            "enum": [
+              "PENDING_EXECUTION"
+            ]
+          },
+          "documentProgress": {
+            "type": "string",
+            "enum": [
+              "NOT_STARTED"
+            ]
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "paymentProgress": {
+            "type": "string",
+            "enum": [
+              "UNPAID"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "ownerUserId",
+          "sourceQuoteId",
+          "sourceQuoteSnapshotVersion",
+          "customerConfirmationId",
+          "deliveryDate",
+          "trade",
+          "orderProgress",
+          "documentProgress",
+          "paymentProgress",
+          "createdAt",
+          "updatedAt"
+        ],
+        "description": "三个进度独立；此切片仅创建/读取，不提供推进/取消、单证或收款写入。sourceQuoteId数据库唯一；订单金额沿确认快照，不从主数据重算。"
+      },
+      "ProductPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "total",
+          "totalPages"
+        ],
+        "description": "总数、页数、关键字查询均仅在本次授权范围内计算；筛选完全无匹配时items=[]、total=0、totalPages=0；page超出最后页时items=[]，但total与totalPages仍为同一授权筛选的真实值，不重置为0且不返回400。稳定排序createdAt DESC,id DESC。"
+      },
+      "CustomerPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Customer"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "total",
+          "totalPages"
+        ],
+        "description": "总数、页数、关键字查询均仅在本次授权范围内计算；筛选完全无匹配时items=[]、total=0、totalPages=0；page超出最后页时items=[]，但total与totalPages仍为同一授权筛选的真实值，不重置为0且不返回400。稳定排序createdAt DESC,id DESC。"
+      },
+      "InquiryPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Inquiry"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "total",
+          "totalPages"
+        ],
+        "description": "总数、页数、关键字查询均仅在本次授权范围内计算；筛选完全无匹配时items=[]、total=0、totalPages=0；page超出最后页时items=[]，但total与totalPages仍为同一授权筛选的真实值，不重置为0且不返回400。稳定排序createdAt DESC,id DESC。"
+      },
+      "QuotePage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Quote"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "total",
+          "totalPages"
+        ],
+        "description": "总数、页数、关键字查询均仅在本次授权范围内计算；筛选完全无匹配时items=[]、total=0、totalPages=0；page超出最后页时items=[]，但total与totalPages仍为同一授权筛选的真实值，不重置为0且不返回400。稳定排序createdAt DESC,id DESC。"
+      },
+      "OrderPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Order"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "total",
+          "totalPages"
+        ],
+        "description": "总数、页数、关键字查询均仅在本次授权范围内计算；筛选完全无匹配时items=[]、total=0、totalPages=0；page超出最后页时items=[]，但total与totalPages仍为同一授权筛选的真实值，不重置为0且不返回400。稳定排序createdAt DESC,id DESC。"
+      },
+      "SourceVersions": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "companyProfileVersion": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Version"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "customerVersion",
+          "companyProfileVersion"
+        ],
+        "description": "草稿GET返回与customerSnapshot/companySnapshot预览一致的当前主数据版本；缺公司配置时companyProfileVersion及companySnapshot均null。提交后这些版本固定为已提交快照来源，不跟主数据更新。"
+      },
+      "QuoteSubmitRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "expectedVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "expectedCustomerVersion": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "expectedCompanyProfileVersion": {
+            "$ref": "#/components/schemas/Version"
+          }
+        },
+        "required": [
+          "expectedVersion",
+          "expectedCustomerVersion",
+          "expectedCompanyProfileVersion"
+        ],
+        "description": "必须基于刚审阅的草稿及客户/公司预览版本。后端同事务锁定/校验对应主数据版本才冻结；版本漂移409，不静默刷新替换。公司未配置422 COMPANY_PROFILE_REQUIRED；不能以Demo卖方兜底。"
+      }
+    }
+  }
+}
