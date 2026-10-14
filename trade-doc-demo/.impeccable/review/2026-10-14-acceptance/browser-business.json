@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-14",
+  "baseCommit": "3c05aa1590923a9e3cb2b6f8200d8c1461cd9c4f",
+  "method": "Actual UI actions; page evaluation only reads state and stores test observations",
+  "quoteId": "Q2026101",
+  "orderId": "SO2026008",
+  "checks": [
+    {
+      "step": "inquiry-to-quote",
+      "quoteId": "Q2026101",
+      "inquiryId": "INQ2026006",
+      "status": "待客户确认",
+      "total": 545,
+      "currency": "USD",
+      "orderId": null
+    },
+    {
+      "step": "quote-customer-confirmation",
+      "quoteId": "Q2026101",
+      "status": "已确认",
+      "total": 545,
+      "orderId": null
+    },
+    {
+      "step": "confirmed-quote-to-order",
+      "quoteId": "Q2026101",
+      "orderId": "SO2026008",
+      "total": 545,
+      "quoteTotal": 545,
+      "currency": "USD",
+      "status": "待执行",
+      "documentCount": 0,
+      "received": 0,
+      "progressTracks": 3
+    },
+    {
+      "step": "document-list-has-no-first-create-entry",
+      "route": "#/documents",
+      "buttons": [
+        "查 询",
+        "重 置",
+        "上一页",
+        "1",
+        "2",
+        "下一页"
+      ],
+      "documentActions": [
+        "doc-filter",
+        "doc-reset",
+        "doc-page"
+      ]
+    },
+    {
+      "step": "new-order-overpayment-rejected",
+      "received": 0,
+      "raw": "546",
+      "invalid": "true",
+      "error": "收款金额不能超过实时未收 545.00 USD。"
+    },
+    {
+      "step": "new-order-parallel-payment",
+      "orderId": "SO2026008",
+      "currency": "USD",
+      "total": 545,
+      "received": 100,
+      "outstanding": 445,
+      "documentCount": 0
+    },
+    {
+      "step": "existing-ci-edit-save",
+      "id": "D-CI2026004-V1",
+      "status": "制作中",
+      "marks": "LOCAL ACCEPTANCE 2026-10-14",
+      "snapshotUnchanged": true,
+      "paymentsUnchanged": true
+    },
+    {
+      "step": "existing-ci-submit",
+      "status": "待审核",
+      "approvalCreated": true,
+      "paymentsUnchanged": true
+    },
+    {
+      "step": "supervisor-approve-ci",
+      "status": "已通过",
+      "maker": "王芳",
+      "approver": "周建国",
+      "canExport": true,
+      "snapshotUnchanged": true,
+      "paymentsUnchanged": true
+    },
+    {
+      "step": "approved-ci-export-demo",
+      "status": "已通过",
+      "lastExport": {
+        "time": "2026-10-14 09:51",
+        "person": "周建国",
+        "action": "导出 PDF（演示）",
+        "opinion": ""
+      },
+      "paymentsUnchanged": true
+    },
+    {
+      "step": "controlled-revision",
+      "newId": "D-CI2026004-V2",
+      "status": "草稿",
+      "version": 2,
+      "oldVersionUnchanged": true,
+      "snapshotInherited": true,
+      "paymentsUnchanged": true
+    },
+    {
+      "step": "pl-invalid-weights-rejected",
+      "status": "已退回",
+      "rawNetWeight": "3000 KGS",
+      "modalOpened": false,
+      "fieldErrors": [
+        "毛重不能小于净重，请核对两项重量。",
+        "毛重不能小于净重，请核对两项重量。",
+        "毛重不能小于净重，请核对两项重量。"
+      ]
+    },
+    {
+      "step": "pl-resubmit",
+      "status": "待审核",
+      "paymentsUnchanged": true
+    },
+    {
+      "step": "supervisor-approve-pl",
+      "status": "已通过",
+      "approver": "周建国",
+      "paymentsUnchanged": true,
+      "ciV2Status": "草稿",
+      "orderDocStatus": "制作中"
+    },
+    {
+      "step": "supervisor-payments-readonly",
+      "formPresent": false,
+      "explanation": "业务主管视角为只读：收款登记由财务人员操作。"
+    },
+    {
+      "step": "supervisor-statistics-currencies",
+      "currencies": [
+        "EUR",
+        "USD"
+      ]
+    },
+    {
+      "step": "admin-user-management",
+      "tableRows": 7,
+      "approvalMenuPresent": false
+    },
+    {
+      "step": "admin-no-business-approval",
+      "forbidden": true,
+      "approvalControls": 0
+    }
+  ],
+  "issues": [
+    {
+      "priority": "P1",
+      "step": "new-order-first-document",
+      "orderId": "SO2026008",
+      "documentCount": 0,
+      "emptyText": "关联单证\n同一单证号的多个版本会分别列出，受控修订生成新版本\n类型\t单证编号\t版本\t审核状态\t制单人\t更新时间\t操作\n\n▤\n该订单尚未创建单证",
+      "creationLinks": [
+        {
+          "label": "制作单证",
+          "href": "#/documents"
+        }
+      ]
+    }
+  ],
+  "runtimeErrors": [],
+  "verdict": "PARTIAL: new-order first CI/PL creation is unavailable",
+  "limits": [
+    "Synthetic in-memory test data only; reload resets",
+    "Export is a log-only demo; no PDF",
+    "No production backend or identity validation"
+  ]
+}

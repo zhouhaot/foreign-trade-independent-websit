@@ -126,7 +126,18 @@ async function run() {
   checkDoc(unknown, ['D-CI2026004-V1', 'D-PL2026004-V1'], ['D-CI2026003-V1']);
   for (const role of ['sales', 'fin', 'boss', 'admin']) {
     const current = setup(), original = setup({ 'views-core': baselineSource('views-core') });
-    const before = data(current); assert.equal(render(current, current.c.U.roleUser(role)), render(original, original.c.U.roleUser(role)), `${role}:原工作台整页HTML完全相同`);
+    const before = data(current), currentHtml = render(current, current.c.U.roleUser(role)), originalHtml = render(original, original.c.U.roleUser(role));
+    // 2026-10-14 仅批准财务固定演示月标签更正；其余整页冻结断言保留。
+    let comparableHtml = currentHtml;
+    if (role === 'fin') {
+      const oldLabel = '<span class="sc-label">本月登记收款</span>', newLabel = '<span class="sc-label">演示月登记收款</span>';
+      assert.equal(currentHtml.split(newLabel).length - 1, 1, '财务当前标签只出现一次');
+      assert.equal(originalHtml.split(oldLabel).length - 1, 1, '历史基线仍核旧标签');
+      assert.ok(!currentHtml.includes(oldLabel), '当前页面不将演示月称为本月');
+      assert.ok(currentHtml.includes('2026-09 收款笔数'), '保留固定月份脚注');
+      comparableHtml = currentHtml.replace(newLabel, oldLabel);
+    }
+    assert.equal(comparableHtml, originalHtml, `${role}:除明确批准的财务标签外整页HTML完全相同`);
     assert.equal(data(current), before); cases++;
   }
   console.log(`PASS: ${cases} document dashboard scenarios; actual shared API, original/currently editable distinction, cancellation reference and other-role exact output (Node fixture only)`);

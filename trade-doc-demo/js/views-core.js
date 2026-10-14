@@ -114,7 +114,7 @@
       cards.push(statCard('通过单证记录', M.documents.filter(function (d) { return d.status === '已通过'; }).length, '含历史版本 · 导出资格看单证页', '#/documents', 'accent-green'));
     } else if (role === 'fin') {
       cards.push(statCard('待收款订单', unpaidOrders.length, '存在未收金额', '#/payments', 'accent-red'));
-      cards.push(statCard('本月登记收款', M.payments.filter(function (p) { return p.date.slice(0, 7) === '2026-09'; }).length, '2026-09 收款笔数', '#/payments', 'accent-blue'));
+      cards.push(statCard('演示月登记收款', M.payments.filter(function (p) { return p.date.slice(0, 7) === '2026-09'; }).length, '2026-09 收款笔数', '#/payments', 'accent-blue'));
       cards.push(statCard('已结清订单', M.orders.filter(function (o) { return U.payStatus(o) === '已结清'; }).length, '全部收讫', '#/payments', 'accent-green'));
       cards.push(statCard('近期新增订单', recentOrders.length, '近 4 笔新订单', '#/orders', 'accent-orange'));
     } else if (role === 'sales') {

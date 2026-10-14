@@ -1,0 +1,29 @@
+{
+  "images": [
+    {
+      "name": "finance-dashboard-1280.png",
+      "width": 1280,
+      "height": 1000,
+      "bytes": 158810
+    },
+    {
+      "name": "finance-dashboard-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 162485
+    },
+    {
+      "name": "new-order-no-first-document-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 120296
+    },
+    {
+      "name": "pl-approved-1440.png",
+      "width": 2880,
+      "height": 2000,
+      "bytes": 498496
+    }
+  ],
+  "note": "Dimensions are read from PNG IHDR. Finance screenshots match the recorded CSS viewport at 1x. The PL screenshot is high-resolution; its filename is not evidence of its pixel dimensions."
+}

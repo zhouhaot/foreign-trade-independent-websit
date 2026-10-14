@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-14",
+  "protocol": "file:",
+  "role": "doc",
+  "route": "#/documents/D-PL2026004-V1",
+  "scripts": [
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    },
+    {
+      "protocol": "file:",
+      "module": false
+    }
+  ],
+  "styles": [
+    "file:",
+    "file:",
+    "file:"
+  ],
+  "primary": "#6542d9",
+  "paperContainsPackingList": true,
+  "hasEditAction": true,
+  "protectedRouteAfterLogout": "redirected to login",
+  "runtimeErrors": [],
+  "result": "PASS"
+}

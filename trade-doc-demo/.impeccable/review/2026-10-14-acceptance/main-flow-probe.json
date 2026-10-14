@@ -1,0 +1,83 @@
+{
+  "summary": {
+    "baseline": "3c05aa1590923a9e3cb2b6f8200d8c1461cd9c4f",
+    "scope": "Node VM fixture: copied already-confirmed quote with unique fixture ID and no order; no browser or production claim",
+    "generatedOrder": "SO2026008",
+    "total": 24100,
+    "currency": "USD",
+    "associatedDocumentCount": 0,
+    "detailSaysNoDocuments": true,
+    "detailMakeDocumentDestination": "#/documents",
+    "ledgerCreateActionPresent": false,
+    "docActionNames": [
+      "doc-filter",
+      "doc-reset",
+      "doc-page",
+      "doc-goto",
+      "doc-leave",
+      "doc-focus",
+      "doc-edit",
+      "doc-cancel-edit",
+      "doc-save-draft",
+      "doc-submit",
+      "doc-revise",
+      "doc-reform",
+      "doc-approve",
+      "doc-reject",
+      "doc-export"
+    ]
+  },
+  "readOnly": {
+    "inquiries": [
+      {
+        "id": "INQ2026001",
+        "quoteId": "Q2026001",
+        "quotes": [
+          "Q2026001"
+        ]
+      },
+      {
+        "id": "INQ2026002",
+        "quoteId": "Q2026002",
+        "quotes": [
+          "Q2026002"
+        ]
+      },
+      {
+        "id": "INQ2026003",
+        "quoteId": "Q2026003",
+        "quotes": [
+          "Q2026003"
+        ]
+      },
+      {
+        "id": "INQ2026004",
+        "quoteId": "Q2026004",
+        "quotes": [
+          "Q2026004"
+        ]
+      },
+      {
+        "id": "INQ2026005",
+        "quoteId": "Q2026005",
+        "quotes": [
+          "Q2026005"
+        ]
+      },
+      {
+        "id": "INQ2026006",
+        "quoteId": null,
+        "quotes": []
+      }
+    ],
+    "paymentCountsByMonth": {
+      "2026-09": 1,
+      "2026-10": 0
+    },
+    "ordersWithoutDocuments": [
+      "SO2026003",
+      "SO2026006",
+      "SO2026008"
+    ]
+  }
+}

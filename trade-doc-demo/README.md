@@ -2,6 +2,8 @@
 
 现代化桌面前端 Demo，2026-10-07 已实现 A 方案及第14轮 CI/PL 操作字段文案一致性；每轮改进、验证、复盘见 `docs/iterations/`。
 
+2026-10-14 已在 Mac 接续最新版并进行五角色业务验收，修正财务固定演示月标签。发现新订单首份 CI/PL 创建尚无入口，完整新单流程仍待补齐；已通过的预置单证路径与该缺口分别说明，见[本轮验收与下一批事项](docs/iterations/2026-10-14-resume-acceptance.md)。Mac 正式工作目录现在为仓库克隆内的 `trade-doc-demo/`，原旧目录保留。
+
 ## 在另一台电脑继续
 
 对应仓库：[zhouhaot/foreign-trade-independent-websit](https://github.com/zhouhaot/foreign-trade-independent-websit)，分支 `main`。本 Demo 位于仓库的 `trade-doc-demo/` 子目录；根目录的早期需求与架构草案原样保留，不代表已批准实施。

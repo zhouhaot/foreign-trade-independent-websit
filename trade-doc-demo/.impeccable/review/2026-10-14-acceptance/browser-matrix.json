@@ -1,0 +1,2543 @@
+{
+  "date": "2026-10-14",
+  "roles": [
+    "admin",
+    "sales",
+    "doc",
+    "fin",
+    "boss"
+  ],
+  "routes": [
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 415,
+      "title": "工作台 · 贸易协同",
+      "header": "系统管理员，欢迎回来"
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "客户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "客户详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "商品管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "商品详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "询盘管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "询盘详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "报价管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "报价详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026005/edit",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "编辑报价 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "订单列表 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "订单详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "单证列表 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "单证预览与审核 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "收款与应收 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "审核与异常处理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "统计分析 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 455,
+      "title": "用户管理 · 贸易协同",
+      "header": "用户管理"
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 376,
+      "title": "角色权限 · 贸易协同",
+      "header": "角色权限"
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 517,
+      "title": "基础字典 · 贸易协同",
+      "header": "基础字典"
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 922,
+      "title": "工作台 · 贸易协同",
+      "header": "陈明，欢迎回来"
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 540,
+      "title": "客户管理 · 贸易协同",
+      "header": "客户管理"
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 313,
+      "title": "客户详情 · 贸易协同",
+      "header": "维护客户资料 · 环球贸易公司"
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 544,
+      "title": "商品管理 · 贸易协同",
+      "header": "商品管理"
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 297,
+      "title": "商品详情 · 贸易协同",
+      "header": "商品详情 · 不锈钢保温杯"
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 627,
+      "title": "询盘管理 · 贸易协同",
+      "header": "询盘管理"
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 595,
+      "title": "询盘详情 · 贸易协同",
+      "header": "询盘 INQ2026001 已报价"
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 710,
+      "title": "报价管理 · 贸易协同",
+      "header": "报价管理"
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 432,
+      "title": "报价详情 · 贸易协同",
+      "header": "报价详情 · Q2026001 已确认"
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026005/edit",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 227,
+      "title": "编辑报价 · 贸易协同",
+      "header": "编辑报价 · Q2026005"
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1108,
+      "title": "订单列表 · 贸易协同",
+      "header": "订单工作区 原型样例"
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 648,
+      "title": "订单详情 · 贸易协同",
+      "header": "订单 SO2026001 执行中"
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "单证列表 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1316,
+      "title": "单证预览与审核 · 贸易协同",
+      "header": "商业发票 · CI2026001 V1 待审核"
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "收款与应收 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 721,
+      "title": "审核与异常处理 · 贸易协同",
+      "header": "审核与异常处理"
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "统计分析 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "用户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "角色权限 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 55,
+      "title": "基础字典 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1021,
+      "title": "工作台 · 贸易协同",
+      "header": "王芳，欢迎回来"
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "客户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "客户详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "商品管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 297,
+      "title": "商品详情 · 贸易协同",
+      "header": "商品详情 · 不锈钢保温杯"
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "询盘管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "询盘详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "报价管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "报价详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026005/edit",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "编辑报价 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1103,
+      "title": "订单列表 · 贸易协同",
+      "header": "订单工作区 原型样例"
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 641,
+      "title": "订单详情 · 贸易协同",
+      "header": "订单 SO2026001 执行中"
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 655,
+      "title": "单证列表 · 贸易协同",
+      "header": "单证管理"
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1301,
+      "title": "单证预览与审核 · 贸易协同",
+      "header": "商业发票 · CI2026001 V1 待审核"
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "收款与应收 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 661,
+      "title": "审核与异常处理 · 贸易协同",
+      "header": "审核与异常处理"
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "统计分析 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "用户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "角色权限 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 53,
+      "title": "基础字典 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 969,
+      "title": "工作台 · 贸易协同",
+      "header": "赵倩，欢迎回来"
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "客户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "客户详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "商品管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 297,
+      "title": "商品详情 · 贸易协同",
+      "header": "商品详情 · 不锈钢保温杯"
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "询盘管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "询盘详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "报价管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "报价详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026005/edit",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "编辑报价 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1108,
+      "title": "订单列表 · 贸易协同",
+      "header": "订单工作区 原型样例"
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 641,
+      "title": "订单详情 · 贸易协同",
+      "header": "订单 SO2026001 执行中"
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "单证列表 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1316,
+      "title": "单证预览与审核 · 贸易协同",
+      "header": "商业发票 · CI2026001 V1 待审核"
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1857,
+      "title": "收款与应收 · 贸易协同",
+      "header": "收款与应收"
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 126,
+      "title": "审核与异常处理 · 贸易协同",
+      "header": "审核与异常处理"
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "统计分析 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "用户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "角色权限 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "基础字典 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1081,
+      "title": "工作台 · 贸易协同",
+      "header": "周建国，欢迎回来"
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "客户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "客户详情 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "商品管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 297,
+      "title": "商品详情 · 贸易协同",
+      "header": "商品详情 · 不锈钢保温杯"
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 624,
+      "title": "询盘管理 · 贸易协同",
+      "header": "询盘管理"
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 595,
+      "title": "询盘详情 · 贸易协同",
+      "header": "询盘 INQ2026001 已报价"
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 704,
+      "title": "报价管理 · 贸易协同",
+      "header": "报价管理"
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 432,
+      "title": "报价详情 · 贸易协同",
+      "header": "报价详情 · Q2026001 已确认"
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026005/edit",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "编辑报价 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1103,
+      "title": "订单列表 · 贸易协同",
+      "header": "订单工作区 原型样例"
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 643,
+      "title": "订单详情 · 贸易协同",
+      "header": "订单 SO2026001 执行中"
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 657,
+      "title": "单证列表 · 贸易协同",
+      "header": "单证管理"
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1322,
+      "title": "单证预览与审核 · 贸易协同",
+      "header": "商业发票 · CI2026001 V1 待审核"
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1497,
+      "title": "收款与应收 · 贸易协同",
+      "header": "收款与应收"
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 1282,
+      "title": "审核与异常处理 · 贸易协同",
+      "header": "审核与异常处理"
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "ok": true,
+      "forbidden": false,
+      "textLength": 907,
+      "title": "统计分析 · 贸易协同",
+      "header": "统计分析"
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "用户管理 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "角色权限 · 贸易协同",
+      "header": "无访问权限"
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "ok": true,
+      "forbidden": true,
+      "textLength": 54,
+      "title": "基础字典 · 贸易协同",
+      "header": "无访问权限"
+    }
+  ],
+  "layouts": [
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026005/edit",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-CI2026001-V1",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1272,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1432,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 1000,
+      "scroll": 1280,
+      "ok": true
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 1000,
+      "scroll": 1440,
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "screenshots": [
+    {
+      "path": "finance-dashboard-1280.png",
+      "width": 1280,
+      "height": 1000,
+      "metric": {
+        "label": "演示月登记收款",
+        "value": "1",
+        "foot": "2026-09 收款笔数",
+        "labelWidth": 91,
+        "labelScroll": 91
+      }
+    },
+    {
+      "path": "finance-dashboard-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "metric": {
+        "label": "演示月登记收款",
+        "value": "1",
+        "foot": "2026-09 收款笔数",
+        "labelWidth": 91,
+        "labelScroll": 91
+      }
+    }
+  ],
+  "runtimeErrors": [],
+  "result": "PASS"
+}

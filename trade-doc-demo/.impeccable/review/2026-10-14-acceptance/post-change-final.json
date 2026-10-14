@@ -1,0 +1,446 @@
+{
+  "nodeVersion": "v22.23.1",
+  "head": "3c05aa1590923a9e3cb2b6f8200d8c1461cd9c4f",
+  "commandCount": 33,
+  "scriptPass": 33,
+  "syntaxCount": 43,
+  "syntaxPass": 43,
+  "sourceHashChanged": [],
+  "review": {
+    "core": "Only approved finance label changed; fixed month filter/count/foot unchanged",
+    "test": "Only exact finance sc-label span normalization; once-only new and baseline old labels asserted; current old label forbidden; fixed month foot asserted; full HTML comparison and full Mock purity retained; other roles unchanged",
+    "verdict": "APPROVE"
+  },
+  "testedHashes": {
+    "js/views-core.js": "d152682a5e0bb8a07e04ffccb272d75200958831afeff9691b565023827f83dd",
+    "scripts/verify-document-dashboard.cjs": "50074a4b11d60b16f4ff450042905cf465931c1175aec09c8e8b9ef997c85213"
+  },
+  "priorFailureRecordPreserved": true,
+  "results": [
+    {
+      "command": "node scripts/verify-demo.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-views.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-login.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-session.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-order-workspace.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-repricing.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-snapshots.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-progress-stages.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-lifecycle.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-cancellation.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-workspace.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-change-request.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-change-request-amount.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-decimal-contract.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-quotation-contract.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-payments-contract.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-navigation-drafts.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-context-navigation.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-draft-adapters.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-customer-contract.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-inquiry-contract.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-packaging-contract.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-packaging-actions.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-approval-display.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-modal-drafts.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-sales-modal-drafts.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-approval-modal-drafts.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-approval-context.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-work-summary.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-dashboard.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-work-bell.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-status-guidance.cjs",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "node scripts/verify-document-action-guidance.cjs",
+      "exitCode": 0,
+      "error": null
+    }
+  ],
+  "syntax": [
+    {
+      "file": "js/app.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/mock-data.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/utils.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/views-core.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/views-docs.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/views-fin.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/views-sales.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/views-stats.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "js/views-system.js",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-approval-context.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-approval-modal-drafts.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-browser.mjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-cancellation.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-change-request-amount.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-change-request.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-context-navigation.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-customer-contract.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-decimal-contract.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-demo.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-action-guidance.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-approval-display.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-dashboard.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-lifecycle.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-snapshots.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-status-guidance.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-work-bell.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-work-summary.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-document-workspace.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-draft-adapters.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-inquiry-contract.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-login.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-modal-drafts.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-navigation-drafts.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-order-workspace.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-packaging-actions.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-packaging-contract.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-payments-contract.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-progress-stages.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-quotation-contract.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-repricing.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-sales-modal-drafts.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-session.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    },
+    {
+      "file": "scripts/verify-views.cjs",
+      "exitCode": 0,
+      "error": null,
+      "output": ""
+    }
+  ]
+}

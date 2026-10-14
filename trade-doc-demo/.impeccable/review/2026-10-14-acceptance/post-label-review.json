@@ -1,0 +1,65 @@
+{
+  "baseline": "3c05aa1590923a9e3cb2b6f8200d8c1461cd9c4f",
+  "sourceScope": "exact label-only replacement",
+  "coreSha256": "d152682a5e0bb8a07e04ffccb272d75200958831afeff9691b565023827f83dd",
+  "roles": [
+    {
+      "role": "fin",
+      "wholePageEqualExceptApprovedLabel": true,
+      "fullMockUnchanged": true,
+      "rawWholePageEqual": false,
+      "fixedMonth": "2026-09",
+      "cardCount": 1,
+      "labelOccurrences": 1
+    },
+    {
+      "role": "sales",
+      "wholePageEqualExceptApprovedLabel": true,
+      "fullMockUnchanged": true,
+      "rawWholePageEqual": true
+    },
+    {
+      "role": "doc",
+      "wholePageEqualExceptApprovedLabel": true,
+      "fullMockUnchanged": true,
+      "rawWholePageEqual": true
+    },
+    {
+      "role": "boss",
+      "wholePageEqualExceptApprovedLabel": true,
+      "fullMockUnchanged": true,
+      "rawWholePageEqual": true
+    },
+    {
+      "role": "admin",
+      "wholePageEqualExceptApprovedLabel": true,
+      "fullMockUnchanged": true,
+      "rawWholePageEqual": true
+    }
+  ],
+  "targetedCommandCount": 4,
+  "results": [
+    {
+      "command": "node --check js/views-core.js",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "node scripts/verify-views.cjs",
+      "exitCode": 0,
+      "output": "PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)\nPASS: quotation/order and controlled document revision cancellation, reconciliation, and repeat guards\nPASS: CI/PL document editing and saving enforce role, version status, and deferred role changes\n"
+    },
+    {
+      "command": "node scripts/verify-demo.cjs",
+      "exitCode": 0,
+      "output": "{\n  \"result\": \"PASS\",\n  \"resources\": 12,\n  \"quotes\": 9,\n  \"documents\": 11,\n  \"amounts\": [\n    {\n      \"order\": \"SO2026001\",\n      \"currency\": \"USD\",\n      \"total\": 24100,\n      \"received\": 12000,\n      \"outstanding\": 12100\n    },\n    {\n      \"order\": \"SO2026002\",\n      \"currency\": \"USD\",\n      \"total\": 28400,\n      \"received\": 28400,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026003\",\n      \"currency\": \"EUR\",\n      \"total\": 19500,\n      \"received\": 0,\n      \"outstanding\": 19500\n    },\n    {\n      \"order\": \"SO2026004\",\n      \"currency\": \"EUR\",\n      \"total\": 30500,\n      \"received\": 30500,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026005\",\n      \"currency\": \"USD\",\n      \"total\": 28150,\n      \"received\": 0,\n      \"outstanding\": 28150\n    },\n    {\n      \"order\": \"SO2026006\",\n      \"currency\": \"EUR\",\n      \"total\": 20000,\n      \"received\": 6000,\n      \"outstanding\": 14000\n    },\n    {\n      \"order\": \"SO2026007\",\n      \"currency\": \"USD\",\n      \"total\": 41550,\n      \"received\": 20000,\n      \"outstanding\": 21550\n    }\n  ],\n  \"scope\": \"静态资源、语法及样例金额；不替代浏览器与业务流程验收\"\n}\n"
+    },
+    {
+      "command": "node scripts/verify-document-dashboard.cjs",
+      "exitCode": 1,
+      "output": "100%\"></span></span><b>2</b></li></ul></section><section class=\"card activity-ledger\"><div class=\"card-title\"><h3>最近动态</h3><span class=\"sub\">订单留痕</span></div><div class=\"activity-item\"><span class=\"a-dot\" aria-hidden=\"true\"></span><div class=\"a-body\"><a href=\"#/orders/SO2026006\">SO2026006</a><div class=\"a-content\">提交取消申请 AP20260904：客户资金链问题</div><div class=\"a-time\">陈明 · 2026-09-18 10:30</div></div></div><div class=\"activity-item\"><span class=\"a-dot\" aria-hidden=\"true\"></span><div class=\"a-body\"><a href=\"#/orders/SO2026005\">SO2026005</a><div class=\"a-content\">PL2026004 退回修改：唛头与信用证条款不符</div><div class=\"a-time\">周建国 · 2026-09-17 14:22</div></div></div><div class=\"activity-item\"><span class=\"a-dot\" aria-hidden=\"true\"></span><div class=\"a-body\"><a href=\"#/orders/SO2026005\">SO2026005</a><div class=\"a-content\">提交改价申请 AP20260903：整体降价 3%</div><div class=\"a-time\">陈明 · 2026-09-16 14:05</div></div></div><div class=\"activity-item\"><span class=\"a-dot\" aria-hidden=\"true\"></span><div class=\"a-body\"><a href=\"#/orders/SO2026001\">SO2026001</a><div class=\"a-content\">商业发票 CI2026001、装箱单 PL2026001 提交审核</div><div class=\"a-time\">王芳 · 2026-09-15 09:40</div></div></div></section><div class=\"dashboard-note\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3 3 7v6c0 5 9 9 9 9s9-4 9-9V7Z\"/><path d=\"m8 12 3 3 5-6\"/></svg><span>订单成立后，单证与收款并行推进；在订单详情分别查看三类状态。</span></div></aside></div>'\n\n"
+    }
+  ],
+  "methodCorrection": "First custom probe incorrectly assumed adjacent spans; rejected before existing scripts ran. Corrected probe reads actual stat-card wrapper; no product change.",
+  "scope": "Independent Node VM read-only check; no browser claims or product/test edits"
+}
