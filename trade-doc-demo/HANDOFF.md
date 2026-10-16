@@ -747,3 +747,9 @@ fetch前0/0，正常push快进后独立ls-remote main完整SHA与本地HEAD一�
 - 首批／终批两轮视觉后停止打磨，主代理及独立终评实读三张有效终图，结论SHIP、无必须fix/recapture/rebuild。`first-us-1440.jpg`为焦点滚动后取错clip的过程，不当终图；fixture键顺序假失败亦记录并纠正。正式图为`final-1280.jpg`、`final-1440.jpg`、`final-us-1440.jpg`，尺寸及方法详见本轮材料。
 - 资料：`docs/iterations/2026-10-16-order-origin.md`及`.impeccable/review/2026-10-16-order-origin/`。file协议本轮被浏览器安全策略拒绝，未换工具绕过、未继承历史通过；真实起运维护、实际物流与生产部署均未交付。Ego TaskSpace12已finish一次，视口／媒体／目标页缓存诊断覆盖已恢复，原本地HTTP体验服务保留，非生产部署。规范核对及Git正常同步实际回读后补记。
 - 独立规范核对已完成DOCUMENTED、无必须冲突：复用原A token，320/300px右栏、90px行高/270px滚区、路线0.7/1.4px属局部规则；DESIGN.md与sidecar无改动，不修旧drift。主代理已回读终评与规范两报告；所有产品检查已通过后停止继续打磨，远端正常同步回执另记。
+
+### 2026-10-16 | GitHub同步回执：逐单起运地纠正
+
+- 实现提交`d22648037cbf4a72dc890555a9a2f93592c22ab2`，标题`fix: draw dashboard flows from explicit per-order origins`，22个文件，包含逐单合成起点与校验/流向、局部样式和缓存版本、53专项、方向契约/交接/轮次说明以及过程/终图和两独立报告。
+- 推送前fetch确认本地与origin/main为0/0；正常push `b86a1c4..d226480`成功，无强推。ls-remote与GitHub提交API回读main SHA均与本地一致，根树均为`ae472ca8434e2348fa1756baaeca93e00982c8f7`，推送后工作区干净。首次误用git/commits/main接口404，改用支持分支解析的commits/main后成功；此为回读方法纠正，不是产品或推送失败。
+- 本成功回执另作后续文档提交；最终SHA以实际Git历史/回读为准，不伪造自身未来SHA。没有创建PR、云端发布、生产部署、真实数据库/账号或远程权限变更。原Mac目录保留；正式克隆继续为唯一开发源。
