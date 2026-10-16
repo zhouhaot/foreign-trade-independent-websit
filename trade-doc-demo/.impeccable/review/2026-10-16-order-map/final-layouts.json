@@ -1,0 +1,29 @@
+[
+  {
+    "chartTop": 415.09375,
+    "contentOpacity": "1",
+    "imageLoaded": true,
+    "listHeight": 204,
+    "role": "sales",
+    "scrollWidth": 1272,
+    "width": 1280
+  },
+  {
+    "chartTop": 417.09375,
+    "contentOpacity": "1",
+    "imageLoaded": true,
+    "listHeight": 204,
+    "role": "sales",
+    "scrollWidth": 1358,
+    "width": 1366
+  },
+  {
+    "chartTop": 417.09375,
+    "contentOpacity": "1",
+    "imageLoaded": true,
+    "listHeight": 204,
+    "role": "sales",
+    "scrollWidth": 1432,
+    "width": 1440
+  }
+]

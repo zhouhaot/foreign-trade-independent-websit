@@ -90,6 +90,109 @@
   };
 
   /* ==================== 工作台 ==================== */
+  // Approximate country anchors, never customer addresses or shipping origins.
+  var mapCountries = [
+    { key: 'US', name: '美国', lon: -99, lat: 39, dx: 22, dy: -30 },
+    { key: 'DE', name: '德国', lon: 10, lat: 51, dx: 30, dy: -27 },
+    { key: 'FR', name: '法国', lon: 2, lat: 46, dx: -35, dy: 22 },
+    { key: 'EG', name: '埃及', lon: 30, lat: 27, dx: 30, dy: 20 },
+    { key: 'CL', name: '智利', lon: -71, lat: -33, dx: 27, dy: 18 },
+    { key: 'GB', name: '英国', lon: -3, lat: 55, dx: -45, dy: -36 }
+  ];
+  U.orderMapData = function (user) {
+    var data = { orders: [], groups: [], totals: [], missing: 0, located: 0 };
+    if (!user || !U.moduleEnabled(user.role, '订单详情')) return data;
+    data.orders = M.orders.slice();
+    data.groups = mapCountries.map(function (c) { return Object.assign({}, c, { orders: [] }); });
+    var unknown = { key: 'unknown', name: '地点待补', orders: [] };
+    data.orders.forEach(function (o) {
+      var customers = M.customers.filter(function (c) { return c.id === o.customerId; });
+      var country = customers.length === 1 && typeof customers[0].country === 'string' ? customers[0].country.trim() : '';
+      var group = data.groups.find(function (g) { return g.name === country; }) || unknown;
+      group.orders.push(o);
+    });
+    data.groups = data.groups.filter(function (g) { return g.orders.length; });
+    data.located = data.groups.length; data.missing = unknown.orders.length;
+    if (unknown.orders.length) data.groups.push(unknown);
+    data.totals = mapTotals(data.orders);
+    return data;
+  };
+  function mapTotals(orders) {
+    var totals = Object.create(null);
+    orders.forEach(function (o) {
+      var currency = typeof o.currency === 'string' && /^[A-Z]{3}$/.test(o.currency) && M.dicts.some(function (d) { return d.group === '币种' && d.code === o.currency; }) ? o.currency : '币种待核对';
+      if (!totals[currency]) totals[currency] = { currency: currency, cents: 0, error: currency === '币种待核对' };
+      var entry = totals[currency], amount = U.transactionAmounts(o.items);
+      if (!amount.ok || !Number.isSafeInteger(entry.cents + amount.totalCents)) entry.error = true;
+      else entry.cents += amount.totalCents;
+      var parsed = U.decimalInput(entry.cents / 100, '地图汇总', true);
+      if (!parsed.ok || parsed.units !== entry.cents) entry.error = true;
+    });
+    return Object.keys(totals).sort().map(function (key) { return totals[key]; });
+  }
+  function mapDetail(data, key) {
+    var group = data.groups.find(function (g) { return g.key === key; });
+    var orders = group ? group.orders : data.orders;
+    var title = group ? group.name : '全部国家';
+    var totals = mapTotals(orders);
+    var html = '<div class="order-map-detail-head"><h4>' + esc(title) + '</h4><span>' + orders.length + ' 笔订单</span></div>' +
+      '<dl class="order-map-totals">' + totals.map(function (t) {
+        return '<div><dt>' + esc(t.currency) + '</dt><dd>' + (t.error ? '金额待核对' : U.fmt(t.cents / 100)) + '</dd></div>';
+      }).join('') + '</dl>';
+    if (!orders.length) return html + '<p class="order-map-empty">暂无订单记录</p>';
+    return html + '<p class="order-map-list-hint">订单明细' + (orders.length > 3 ? ' · 向下滚动查看全部' : '') + '</p><div class="order-map-list" aria-label="' + esc(title) + '订单">' + orders.map(function (o) {
+      var amount = U.transactionAmounts(o.items);
+      return '<a class="order-map-order" href="#/orders/' + encodeURIComponent(o.id) + '"><span><b>' + esc(o.id) + '</b><span>' + esc(U.customerName(o.customerId).split('（')[0]) + '</span></span><span class="order-map-order-end"><strong>' + (amount.ok ? U.fmt(amount.total) + ' ' + esc(o.currency) : '金额待核对') + '</strong>' + tag(o.status) + '</span></a>';
+    }).join('') + '</div>';
+  }
+  function orderMap(user) {
+    if (!U.moduleEnabled(user.role, '订单详情')) return '';
+    var data = U.orderMapData(user), state = window.AppUI.orderMap || {};
+    var selected = data.groups.some(function (g) { return g.key === state.country; }) ? state.country : '';
+    var countries = data.groups.filter(function (g) { return g.key !== 'unknown'; });
+    var lines = countries.map(function (g, i) {
+      var x = (g.lon + 180) / 360 * 1000, y = (85 - g.lat) / 145 * 430;
+      // A short visual trail has no geographic origin or asserted route.
+      var path = 'M' + (x - 105) + ',' + (y + 48) + 'Q' + (x - 45) + ',' + (y - 55) + ' ' + x + ',' + y;
+      return '<path class="order-map-trail" d="' + path + '"/><path class="order-map-flow" style="animation-delay:' + i * 120 + 'ms" pathLength="1" d="' + path + '"/>' +
+        '<circle class="order-map-halo" cx="' + x + '" cy="' + y + '" r="13"/><circle class="order-map-dot" cx="' + x + '" cy="' + y + '" r="4"/>' +
+        '<path class="order-map-leader" d="M' + x + ',' + y + 'l' + g.dx + ',' + g.dy + '"/>';
+    }).join('');
+    var points = countries.map(function (g) {
+      return '<button type="button" class="order-map-pin' + (selected === g.key ? ' is-selected' : '') + '" style="left:' + ((g.lon + 180) / 360 * 100 + g.dx / 10) + '%;top:' + ((85 - g.lat) / 145 * 100 + g.dy / 4.3) + '%" data-action="order-map-country" data-country="' + g.key + '" aria-pressed="' + (selected === g.key) + '" aria-controls="order-map-detail">' + g.name + '<b>' + g.orders.length + '</b></button>';
+    }).join('');
+    return '<section class="card order-map" id="order-map" aria-labelledby="order-map-title"><div class="order-map-head"><div><h3 id="order-map-title">全球订单<span class="record-count">' + data.orders.length + ' 笔 · ' + data.located + ' 个国家</span></h3><p>按客户国家分布 · 演示全量样例 · 含所有订单状态</p></div><button class="btn btn-sm" type="button" data-action="order-map-replay">重播光迹</button></div>' +
+      '<div class="order-map-layout"><div class="order-map-visual"><div class="order-map-canvas"><img src="assets/maps/world-land.svg" alt="" aria-hidden="true"><svg viewBox="0 0 1000 430" aria-hidden="true" focusable="false">' + lines + '</svg>' + points +
+      (!data.orders.length ? '<p class="order-map-no-points">暂无订单分布</p>' : !countries.length ? '<p class="order-map-no-points">地点待补，订单仍可在右侧查阅</p>' : '') +
+      '</div><div class="order-map-countries" aria-label="按国家筛选订单"><button type="button" class="btn btn-sm" data-action="order-map-country" data-country="" aria-pressed="' + !selected + '" aria-controls="order-map-detail">全部</button>' + data.groups.map(function (g) {
+        return '<button type="button" class="btn btn-sm" data-action="order-map-country" data-country="' + g.key + '" aria-pressed="' + (selected === g.key) + '" aria-controls="order-map-detail">' + esc(g.name) + ' ' + g.orders.length + '</button>';
+      }).join('') + '</div><p class="order-map-caption">国家锚点为示意位置；连线为视觉效果，不表示物流路线。' + (data.missing ? ' ' + data.missing + ' 笔地点待补。' : '') + '</p></div>' +
+      '<div class="order-map-detail" id="order-map-detail">' + mapDetail(data, selected) + '</div></div><div class="sr-only" role="status" id="order-map-status"></div></section>';
+  }
+  Actions['order-map-country'] = function (el) {
+    var user = window.App && window.App.user, root = document.getElementById('order-map');
+    if (!root || !root.contains(el) || !user || !U.moduleEnabled(user.role, '订单详情')) return;
+    var data = U.orderMapData(user), key = el.dataset.country || '';
+    var group = data.groups.find(function (g) { return g.key === key; });
+    if (key && !group) return;
+    window.AppUI.orderMap = { country: key };
+    root.querySelectorAll('[data-action="order-map-country"]').forEach(function (button) {
+      var picked = button.dataset.country === key;
+      button.setAttribute('aria-pressed', String(picked)); button.classList.toggle('is-selected', picked);
+    });
+    document.getElementById('order-map-detail').innerHTML = mapDetail(data, key);
+    document.getElementById('order-map-status').textContent = '已显示' + (group ? group.name : '全部国家') + '，' + (group ? group.orders.length : data.orders.length) + '笔订单';
+  };
+  Actions['order-map-replay'] = function (el) {
+    var user = window.App && window.App.user, root = document.getElementById('order-map');
+    if (!root || !root.contains(el) || !user || !U.moduleEnabled(user.role, '订单详情')) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.getElementById('order-map-status').textContent = '已启用减少动态效果，保留静态订单分布。'; return;
+    }
+    var chart = root.querySelector('.order-map-canvas');
+    chart.classList.add('motion-reset'); void chart.offsetWidth; chart.classList.remove('motion-reset');
+    document.getElementById('order-map-status').textContent = '正在重播一次订单分布光迹。';
+  };
   Views.dashboard = function (ctx) {
     var role = ctx.user.role, name = ctx.user.name;
 
@@ -201,6 +304,7 @@
       '<div class="home-identity">' + esc(M.roles[role]) + '<span aria-hidden="true">·</span>' + esc(ctx.user.dept) + '</div></div>' +
       '<a class="btn btn-primary" href="' + shortcuts[0][1] + '">' + shortcuts[0][0] + U.icon('arrow') + '</a></div>' +
       '<div class="dashboard-metrics" aria-label="当前业务概览">' + cards.join('') + '</div>' +
+      orderMap(ctx.user) +
       '<div class="dash-grid">' +
         '<div class="dash-main">' +
           '<section class="card work-queue' + (docWork ? ' doc-work-summary' : '') + '"><div class="card-title home-card-head"><div><h3>' + (docWork ? '当前可办理制单事项' : '待处理事项') + '<span class="record-count">' + myTodos.length + ' 项</span></h3><p>' + (docWork ? '仅列具备当前编辑资格的版本，不代表个人分派。' : '从这里接续你的业务工作') + '</p></div></div>' + todoHtml + '</section>' +

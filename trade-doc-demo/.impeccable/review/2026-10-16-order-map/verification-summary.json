@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-16",
+  "product": "static trade-document demo dashboard order map",
+  "nodeRegression": { "scripts": 39, "failed": 0, "result": "PASS" },
+  "mapAcceptance": { "groups": 30, "result": "PASS", "method": "independent Node DOM fixture, not browser or database" },
+  "syntax": { "files": 49, "result": "PASS", "includes": "9 runtime JS and 40 CJS including offline generator" },
+  "browser": { "interactionGroups": 15, "roleWidthLayouts": 15, "widths": [1280, 1366, 1440], "result": "PASS", "fileScope": "local SVG loading and Chile filter" },
+  "baseline": { "orders": 7, "countries": 5, "totals": { "USD": "122200.00", "EUR": "70000.00" }, "mockChanged": false },
+  "unchanged": ["index.html", "js/mock-data.js", "DESIGN.md", ".impeccable/design.json"],
+  "finalVisualEvidence": ["final-1280.jpg", "final-1366.jpg", "final-1440.jpg", "final-selected-map-1440.jpg"],
+  "processOnly": ["first-1280.jpg", "first-1366.jpg", "first-1440.jpg", "final-selected-1440.jpg"],
+  "finishReview": "SHIP, limited to the static map extension",
+  "limits": ["no backend or database integration", "not real logistics or addresses", "demo-wide order visibility, not production identity isolation", "not complete accessibility, mobile or cross-browser certification"],
+  "note": "This summary records commands already executed; original native results and layouts are in browser-checks.json and final-layouts.json. No tests were rerun merely to write this summary."
+}

@@ -582,6 +582,53 @@
 .doc-work-reference > .btn, .doc-work-reference > .home-text-link { align-self: center; min-height: 32px; }
 .doc-work-reference > .home-text-link { max-width: 130px; line-height: 1.6; }
 .doc-work-summary .home-empty .icon { background: var(--surface-subtle); color: var(--text-sub); }
+
+/* Country distribution: local data geometry, not live shipping. */
+.order-map { padding:22px; margin-bottom:24px; }
+.order-map-head { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
+.order-map-head h3 { display:flex; align-items:center; gap:12px; font-size:15px; }
+.order-map-head p { color:var(--text-sub); font-size:12px; margin-top:6px; }
+.order-map-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:24px; }
+.order-map-visual { min-width:0; }
+.order-map-canvas { position:relative; aspect-ratio:1000/430; background:var(--surface-subtle); border-radius:8px; isolation:isolate; }
+.order-map-canvas>img,.order-map-canvas>svg { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.order-map-trail { fill:none; stroke:var(--primary); stroke-opacity:.4; stroke-width:1; stroke-dasharray:3 5; }
+.order-map-flow { fill:none; stroke:var(--primary); stroke-width:2.5; stroke-linecap:round; stroke-dasharray:.12 .88; stroke-dashoffset:1; opacity:0; animation:order-map-flow 2800ms cubic-bezier(.16,1,.3,1) 1; }
+.order-map-halo { fill:var(--primary); fill-opacity:.13; stroke:var(--primary); stroke-opacity:.25; }
+.order-map-dot { fill:var(--primary); }
+.order-map-leader { fill:none; stroke:var(--primary); stroke-width:1; }
+.order-map-pin { position:absolute; transform:translate(-50%,-50%); display:inline-flex; align-items:center; gap:6px; min-height:28px; padding:2px 8px; white-space:nowrap; border:1px solid var(--border-control); border-radius:5px; background:var(--card); color:var(--primary-dark); cursor:pointer; font:inherit; font-size:12px; z-index:1; }
+.order-map-pin b { font-variant-numeric:tabular-nums; }
+.order-map-pin:hover { background:var(--selection-bg); }
+.order-map-pin[aria-pressed="true"] { color:var(--card); background:var(--primary); border-color:var(--primary); z-index:2; }
+.order-map-pin:focus-visible { outline:2px solid var(--primary); outline-offset:3px; z-index:3; }
+.order-map-countries { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+.order-map-countries [aria-pressed="true"] { color:var(--card); background:var(--primary); border-color:var(--primary); }
+.order-map-caption { color:var(--text-sub); font-size:12px; line-height:1.6; margin-top:10px; }
+.order-map-detail { min-width:0; border-left:1px solid var(--border); padding-left:24px; }
+.order-map-detail-head { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.order-map-detail-head h4 { font-size:15px; font-weight:600; }
+.order-map-detail-head>span { color:var(--text-sub); font-size:12px; }
+.order-map-totals { padding:12px 0; margin:0; border-bottom:1px solid var(--border); }
+.order-map-totals>div { display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:3px 0; }
+.order-map-totals dt { color:var(--text-sub); font-size:12px; }
+.order-map-totals dd { margin:0; font-size:27px; font-weight:600; font-variant-numeric:tabular-nums; color:var(--primary-dark); }
+.order-map-list-hint { font-size:12px; color:var(--text-sub); margin:12px 0 4px; }
+.order-map-list { max-height:204px; overflow:auto; scrollbar-color:var(--border-control) var(--surface-subtle); scrollbar-gutter:stable; }
+.order-map-order { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:68px; padding:10px 2px; border-bottom:1px solid var(--border); color:var(--text); }
+.order-map-order:hover { background:var(--surface-subtle); color:var(--primary); }
+.order-map-order>span { display:flex; flex-direction:column; min-width:0; gap:5px; }
+.order-map-order b { font-size:12px; font-weight:600; }
+.order-map-order>span>span:not(.tag) { font-size:12px; color:var(--text-sub); overflow-wrap:anywhere; }
+.order-map-order-end { flex-shrink:0; align-items:flex-end; }
+.order-map-order strong { font-size:12px; font-weight:500; font-variant-numeric:tabular-nums; }
+.order-map-order .tag { height:21px; font-size:12px; }
+.order-map-empty { color:var(--text-sub); font-size:13px; padding:22px 0; }
+.order-map-no-points { position:absolute; left:20px; bottom:18px; color:var(--text-sub); font-size:13px; }
+.motion-reset .order-map-flow { animation:none; }
+@keyframes order-map-flow { 0% { stroke-dashoffset:1; opacity:0; } 12% { opacity:1; } 85% { opacity:1; } 100% { stroke-dashoffset:0; opacity:0; } }
+@media (max-width:1360px) { .order-map-layout { grid-template-columns:minmax(0,1fr) 270px; gap:18px; } .order-map-detail { padding-left:18px; } }
+@media (prefers-reduced-motion:reduce) { .order-map-flow { animation:none; } }
 .doc-work-references { scroll-margin-top: 96px; }
 
 /* 2026-10-14 岗位评审：操作与输入紧邻，纸张列宽不承载长说明。 */
