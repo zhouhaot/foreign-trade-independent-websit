@@ -1,0 +1,107 @@
+{
+  "checks": [
+    {
+      "name": "keyboard US distinct origins",
+      "detail": "美国\n2 笔订单\nUSD\n52,500.00\n\n订单明细\n\nSO2026001\n太平洋进口公司\n起运：上海港（演示）\n24,100.00 USD\n执行中\nSO2026002\n太平洋进口公司\n起运：深圳盐田港（演示）\n28,400.00 USD\n执行中",
+      "focus": "US",
+      "active": [
+        "SO2026001",
+        "SO2026002"
+      ]
+    },
+    {
+      "name": "normal replay",
+      "animation": "order-map-flow"
+    },
+    {
+      "name": "reduced motion",
+      "animation": "none",
+      "status": "已启用减少动态效果，保留静态订单分布。"
+    },
+    {
+      "name": "order link",
+      "hash": "#/orders/SO2026002"
+    },
+    {
+      "name": "missing origins temporary fixture",
+      "routes": 0,
+      "disabled": true,
+      "summary": "起运地 → 客户国家 · 0 笔可显示流向 · 7 笔起运地待补／待核对"
+    }
+  ],
+  "layouts": [
+    {
+      "role": "admin",
+      "width": 1280,
+      "scroll": 1272,
+      "routes": 0,
+      "origins": 0
+    },
+    {
+      "role": "admin",
+      "width": 1440,
+      "scroll": 1432,
+      "routes": 0,
+      "origins": 0
+    },
+    {
+      "role": "sales",
+      "width": 1280,
+      "scroll": 1272,
+      "routes": 7,
+      "origins": 3
+    },
+    {
+      "role": "sales",
+      "width": 1440,
+      "scroll": 1432,
+      "routes": 7,
+      "origins": 3
+    },
+    {
+      "role": "doc",
+      "width": 1280,
+      "scroll": 1272,
+      "routes": 7,
+      "origins": 3
+    },
+    {
+      "role": "doc",
+      "width": 1440,
+      "scroll": 1432,
+      "routes": 7,
+      "origins": 3
+    },
+    {
+      "role": "fin",
+      "width": 1280,
+      "scroll": 1272,
+      "routes": 7,
+      "origins": 3
+    },
+    {
+      "role": "fin",
+      "width": 1440,
+      "scroll": 1432,
+      "routes": 7,
+      "origins": 3
+    },
+    {
+      "role": "boss",
+      "width": 1280,
+      "scroll": 1272,
+      "routes": 7,
+      "origins": 3
+    },
+    {
+      "role": "boss",
+      "width": 1440,
+      "scroll": 1432,
+      "routes": 7,
+      "origins": 3
+    }
+  ],
+  "result": "PASS",
+  "file": "Not tested: file protocol blocked; no workaround attempted",
+  "methodCorrection": "Earlier temporary fixture deleted and re-added keys; values restored but JSON key order changed. Final fixture uses null and preserves order; not a product defect."
+}

@@ -5,7 +5,9 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 const entry = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const assets = [...entry.matchAll(/(?:src|href)="([^"]+)"/g)].map(m => m[1]);
+const resourceUrls = [...entry.matchAll(/(?:src|href)="([^"]+)"/g)].map(m => m[1]);
+for (const url of resourceUrls) assert.ok(!/^(?:https?:)?\/\//.test(url), '禁止外部运行时资源：' + url);
+const assets = resourceUrls.map(url => url.split(/[?#]/)[0]); // local cache revision is not part of the file path
 assert.equal(assets.length, 12, '入口应有 3 个 CSS 和 9 个 JS');
 for (const asset of assets) {
   assert.ok(!/^(?:https?:)?\/\//.test(asset), '禁止外部运行时资源：' + asset);

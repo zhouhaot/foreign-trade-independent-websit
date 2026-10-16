@@ -100,7 +100,7 @@
     { key: 'GB', name: '英国', lon: -3, lat: 55, dx: -45, dy: -36 }
   ];
   U.orderMapData = function (user) {
-    var data = { orders: [], groups: [], totals: [], missing: 0, located: 0 };
+    var data = { orders: [], groups: [], totals: [], missing: 0, located: 0, routes: [], originPending: 0, originSynthetic: 0, routePending: 0 };
     if (!user || !U.moduleEnabled(user.role, '订单详情')) return data;
     data.orders = M.orders.slice();
     data.groups = mapCountries.map(function (c) { return Object.assign({}, c, { orders: [] }); });
@@ -110,11 +110,19 @@
       var country = customers.length === 1 && typeof customers[0].country === 'string' ? customers[0].country.trim() : '';
       var group = data.groups.find(function (g) { return g.name === country; }) || unknown;
       group.orders.push(o);
+      var origin = U.orderShippingOrigin(o);
+      if (!origin.ok) data.originPending++;
+      else {
+        if (origin.demoSynthetic) data.originSynthetic++;
+        var segments = U.orderMapRouteSegments(origin, group);
+        if (group !== unknown && segments.length) data.routes.push({ orderId: o.id, country: group.key, origin: origin, segments: segments });
+      }
     });
     data.groups = data.groups.filter(function (g) { return g.orders.length; });
     data.located = data.groups.length; data.missing = unknown.orders.length;
     if (unknown.orders.length) data.groups.push(unknown);
     data.totals = mapTotals(data.orders);
+    data.routePending = data.orders.length - data.routes.length;
     return data;
   };
   function mapTotals(orders) {
@@ -141,8 +149,8 @@
       }).join('') + '</dl>';
     if (!orders.length) return html + '<p class="order-map-empty">暂无订单记录</p>';
     return html + '<p class="order-map-list-hint">订单明细' + (orders.length > 3 ? ' · 向下滚动查看全部' : '') + '</p><div class="order-map-list" aria-label="' + esc(title) + '订单">' + orders.map(function (o) {
-      var amount = U.transactionAmounts(o.items);
-      return '<a class="order-map-order" href="#/orders/' + encodeURIComponent(o.id) + '"><span><b>' + esc(o.id) + '</b><span>' + esc(U.customerName(o.customerId).split('（')[0]) + '</span></span><span class="order-map-order-end"><strong>' + (amount.ok ? U.fmt(amount.total) + ' ' + esc(o.currency) : '金额待核对') + '</strong>' + tag(o.status) + '</span></a>';
+      var amount = U.transactionAmounts(o.items), origin = U.orderShippingOrigin(o);
+      return '<a class="order-map-order" href="#/orders/' + encodeURIComponent(o.id) + '"><span><b>' + esc(o.id) + '</b><span>' + esc(U.customerName(o.customerId).split('（')[0]) + '</span><span class="order-map-origin-text">' + (origin.ok ? '起运：' + esc(origin.name) + (origin.demoSynthetic ? '（演示）' : '') : esc(origin.error)) + '</span></span><span class="order-map-order-end"><strong>' + (amount.ok ? U.fmt(amount.total) + ' ' + esc(o.currency) : '金额待核对') + '</strong>' + tag(o.status) + '</span></a>';
     }).join('') + '</div>';
   }
   function orderMap(user) {
@@ -150,23 +158,34 @@
     var data = U.orderMapData(user), state = window.AppUI.orderMap || {};
     var selected = data.groups.some(function (g) { return g.key === state.country; }) ? state.country : '';
     var countries = data.groups.filter(function (g) { return g.key !== 'unknown'; });
-    var lines = countries.map(function (g, i) {
+    var lines = countries.map(function (g) {
       var x = (g.lon + 180) / 360 * 1000, y = (85 - g.lat) / 145 * 430;
-      // A short visual trail has no geographic origin or asserted route.
-      var path = 'M' + (x - 105) + ',' + (y + 48) + 'Q' + (x - 45) + ',' + (y - 55) + ' ' + x + ',' + y;
-      return '<path class="order-map-trail" d="' + path + '"/><path class="order-map-flow" style="animation-delay:' + i * 120 + 'ms" pathLength="1" d="' + path + '"/>' +
-        '<circle class="order-map-halo" cx="' + x + '" cy="' + y + '" r="13"/><circle class="order-map-dot" cx="' + x + '" cy="' + y + '" r="4"/>' +
+      return '<circle class="order-map-halo" cx="' + x + '" cy="' + y + '" r="13"/><circle class="order-map-dot" cx="' + x + '" cy="' + y + '" r="4"/>' +
         '<path class="order-map-leader" d="M' + x + ',' + y + 'l' + g.dx + ',' + g.dy + '"/>';
+    }).join('');
+    var routeHtml = data.routes.map(function (route, i) {
+      return '<g data-order-map-route="' + esc(route.orderId) + '" data-country="' + route.country + '"' + (selected && selected !== route.country ? ' class="is-dimmed"' : '') + '><title>' + esc(route.orderId + ' · ' + route.origin.name + ' → ' + data.groups.find(function (g) { return g.key === route.country; }).name + (route.origin.demoSynthetic ? '（合成演示起运地）' : '')) + '</title>' + route.segments.map(function (segment) {
+        return '<path class="order-map-trail" d="' + segment.d + '"' + (segment.arrives ? ' marker-end="url(#order-map-arrow)"' : '') + '/><path class="order-map-flow" style="animation-delay:' + Math.round(i * 120 + segment.startT * 2800) + 'ms;animation-duration:' + Math.round((segment.endT - segment.startT) * 2800) + 'ms" pathLength="1" d="' + segment.d + '"/>';
+      }).join('') + '</g>';
+    }).join('');
+    var origins = [];
+    data.routes.forEach(function (route) { if (!origins.some(function (o) { return o.name === route.origin.name && o.lon === route.origin.lon && o.lat === route.origin.lat; })) origins.push(route.origin); });
+    origins.sort(function (a, b) { return b.lat - a.lat; });
+    var originLabels = origins.map(function (origin, i) {
+      var x = (origin.lon + 180) / 360 * 1000, y = (85 - origin.lat) / 145 * 430, dy = (i - (origins.length - 1) / 2) * 42;
+      lines += '<path class="order-map-origin-leader" d="M' + x + ',' + y + 'l60,' + dy + '"/><rect class="order-map-origin-dot" x="' + (x - 3.5) + '" y="' + (y - 3.5) + '" width="7" height="7"/>';
+      return '<span class="order-map-origin-label" style="left:' + (x / 10 + 6) + '%;top:' + ((y + dy) / 4.3) + '%">起运 · ' + esc(origin.name) + '</span>';
     }).join('');
     var points = countries.map(function (g) {
       return '<button type="button" class="order-map-pin' + (selected === g.key ? ' is-selected' : '') + '" style="left:' + ((g.lon + 180) / 360 * 100 + g.dx / 10) + '%;top:' + ((85 - g.lat) / 145 * 100 + g.dy / 4.3) + '%" data-action="order-map-country" data-country="' + g.key + '" aria-pressed="' + (selected === g.key) + '" aria-controls="order-map-detail">' + g.name + '<b>' + g.orders.length + '</b></button>';
     }).join('');
-    return '<section class="card order-map" id="order-map" aria-labelledby="order-map-title"><div class="order-map-head"><div><h3 id="order-map-title">全球订单<span class="record-count">' + data.orders.length + ' 笔 · ' + data.located + ' 个国家</span></h3><p>按客户国家分布 · 演示全量样例 · 含所有订单状态</p></div><button class="btn btn-sm" type="button" data-action="order-map-replay">重播光迹</button></div>' +
-      '<div class="order-map-layout"><div class="order-map-visual"><div class="order-map-canvas"><img src="assets/maps/world-land.svg" alt="" aria-hidden="true"><svg viewBox="0 0 1000 430" aria-hidden="true" focusable="false">' + lines + '</svg>' + points +
+    return '<section class="card order-map" id="order-map" aria-labelledby="order-map-title"><div class="order-map-head"><div><h3 id="order-map-title">全球订单<span class="record-count">' + data.orders.length + ' 笔 · ' + data.located + ' 个国家</span></h3><p>按客户国家分布 · 演示全量样例 · 含所有订单状态</p></div><button class="btn btn-sm" type="button" data-action="order-map-replay" aria-describedby="order-map-origin-summary"' + (data.routes.length ? '' : ' disabled') + '>重播流向</button></div>' +
+      '<p class="order-map-origin-summary" id="order-map-origin-summary">起运地 → 客户国家 · ' + data.routes.length + ' 笔可显示流向' + (data.originPending ? ' · ' + data.originPending + ' 笔起运地待补／待核对' : '') + (data.routePending > data.originPending ? ' · ' + (data.routePending - data.originPending) + ' 笔目的地／显示范围待核对' : '') + (data.originSynthetic ? ' · ' + data.originSynthetic + ' 笔起运地为合成演示样例' : '') + '</p>' +
+      '<div class="order-map-layout"><div class="order-map-visual"><div class="order-map-canvas"><img src="assets/maps/world-land.svg" alt="" aria-hidden="true"><svg viewBox="0 0 1000 430" aria-hidden="true" focusable="false"><defs><marker id="order-map-arrow" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,-3L7,0L0,3" fill="none" stroke="currentColor" stroke-width="1.2"/></marker></defs>' + routeHtml + lines + '</svg>' + points + originLabels +
       (!data.orders.length ? '<p class="order-map-no-points">暂无订单分布</p>' : !countries.length ? '<p class="order-map-no-points">地点待补，订单仍可在右侧查阅</p>' : '') +
       '</div><div class="order-map-countries" aria-label="按国家筛选订单"><button type="button" class="btn btn-sm" data-action="order-map-country" data-country="" aria-pressed="' + !selected + '" aria-controls="order-map-detail">全部</button>' + data.groups.map(function (g) {
         return '<button type="button" class="btn btn-sm" data-action="order-map-country" data-country="' + g.key + '" aria-pressed="' + (selected === g.key) + '" aria-controls="order-map-detail">' + esc(g.name) + ' ' + g.orders.length + '</button>';
-      }).join('') + '</div><p class="order-map-caption">国家锚点为示意位置；连线为视觉效果，不表示物流路线。' + (data.missing ? ' ' + data.missing + ' 笔地点待补。' : '') + '</p></div>' +
+      }).join('') + '</div><p class="order-map-caption">方点为订单记录的起运地，圆点为客户国家示意；连线不表示物流路线，缺起运地不连线。' + (data.missing ? ' ' + data.missing + ' 笔客户国家地点待补。' : '') + '</p></div>' +
       '<div class="order-map-detail" id="order-map-detail">' + mapDetail(data, selected) + '</div></div><div class="sr-only" role="status" id="order-map-status"></div></section>';
   }
   Actions['order-map-country'] = function (el) {
@@ -180,12 +199,14 @@
       var picked = button.dataset.country === key;
       button.setAttribute('aria-pressed', String(picked)); button.classList.toggle('is-selected', picked);
     });
+    root.querySelectorAll('[data-order-map-route]').forEach(function (route) { route.classList.toggle('is-dimmed', !!key && route.dataset.country !== key); });
     document.getElementById('order-map-detail').innerHTML = mapDetail(data, key);
     document.getElementById('order-map-status').textContent = '已显示' + (group ? group.name : '全部国家') + '，' + (group ? group.orders.length : data.orders.length) + '笔订单';
   };
   Actions['order-map-replay'] = function (el) {
     var user = window.App && window.App.user, root = document.getElementById('order-map');
     if (!root || !root.contains(el) || !user || !U.moduleEnabled(user.role, '订单详情')) return;
+    if (!U.orderMapData(user).routes.length) { document.getElementById('order-map-status').textContent = '没有可显示的流向，请先补充订单起运地并核对客户国家。'; return; }
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.getElementById('order-map-status').textContent = '已启用减少动态效果，保留静态订单分布。'; return;
     }

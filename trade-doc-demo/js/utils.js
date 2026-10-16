@@ -38,6 +38,43 @@
     return c ? c.nameCn + '（' + c.nameEn + '）' : id;
   };
 
+  /* 明确记录的起运地；不读取贸易术语、公司地址或其它订单作为默认值。 */
+  U.orderShippingOrigin = function (order) {
+    var origin = order && order.shippingOrigin;
+    function invalid(error) { return { ok: false, error: error, name: '', demoSynthetic: false }; }
+    if (!origin) return invalid('起运地待补');
+    if (typeof origin !== 'object' || Array.isArray(origin) || typeof origin.name !== 'string' || !origin.name.trim() || !/\S/u.test(origin.name.replace(/[\u200B-\u200F\u2060\uFEFF]/g, '')) || ['城市', '港口'].indexOf(origin.kind) < 0) return invalid('起运地待核对');
+    if (typeof origin.lon !== 'number' || !Number.isFinite(origin.lon) || origin.lon < -180 || origin.lon > 180 || typeof origin.lat !== 'number' || !Number.isFinite(origin.lat) || origin.lat < -90 || origin.lat > 90) return invalid('起运坐标待核对');
+    if (origin.demoSynthetic !== undefined && typeof origin.demoSynthetic !== 'boolean') return invalid('起运地来源标记待核对');
+    return { ok: true, error: '', name: origin.name.trim(), kind: origin.kind, lon: origin.lon, lat: origin.lat, demoSynthetic: origin.demoSynthetic === true };
+  };
+  /* 简化经纬流向而非实际航路；反经线处用De Casteljau精确切开，保持方向。 */
+  U.orderMapRouteSegments = function (origin, target) {
+    function drawable(p) { return p && typeof p.lon === 'number' && Number.isFinite(p.lon) && Math.abs(p.lon) <= 180 && typeof p.lat === 'number' && Number.isFinite(p.lat) && p.lat >= -60 && p.lat <= 85; }
+    if (!drawable(origin) || !drawable(target)) return [];
+    var start = { x: (origin.lon + 180) / 360 * 1000, y: (85 - origin.lat) / 145 * 430 };
+    var end = { x: (target.lon + 180) / 360 * 1000, y: (85 - target.lat) / 145 * 430 };
+    if (end.x - start.x > 500) end.x -= 1000;
+    else if (start.x - end.x > 500) end.x += 1000;
+    if (Math.abs(end.x - start.x) + Math.abs(end.y - start.y) < .001) return [];
+    var control = { x: (start.x + end.x) / 2, y: Math.max(8, Math.min(start.y, end.y) - Math.min(85, Math.abs(end.x - start.x) * .3)) };
+    function round(n) { return +n.toFixed(3); }
+    function segment(a, b, c, from, to, arrives) {
+      return { startX: a.x, startY: a.y, controlX: b.x, controlY: b.y, endX: c.x, endY: c.y, startT: from, endT: to, arrives: arrives,
+        d: 'M' + round(a.x) + ',' + round(a.y) + 'Q' + round(b.x) + ',' + round(b.y) + ' ' + round(c.x) + ',' + round(c.y) };
+    }
+    if (end.x >= 0 && end.x <= 1000) return [segment(start, control, end, 0, 1, true)];
+    var edge = end.x > 1000 ? 1000 : 0, shift = end.x > 1000 ? -1000 : 1000;
+    var t = (edge - start.x) / (end.x - start.x);
+    function lerp(a, b) { return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t }; }
+    function wrapped(p) { return { x: p.x + shift, y: p.y }; }
+    var left = lerp(start, control), right = lerp(control, end), split = lerp(left, right);
+    var parts = [];
+    if (t > .000001) parts.push(segment(start, left, split, 0, t, false));
+    if (1 - t > .000001) parts.push(segment(wrapped(split), wrapped(right), wrapped(end), t, 1, true));
+    return parts;
+  };
+
   /* 矩阵仅在既有岗位上限内收放模块；不能将查询权限提升为业务写权。 */
   U.moduleRoles = {
     '工作台': ['admin', 'sales', 'doc', 'fin', 'boss'],
