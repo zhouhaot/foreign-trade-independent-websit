@@ -404,7 +404,7 @@
         '<td>' + esc(p.nameEn) + '<br><span style="color:#5a6378">' + esc(p.nameCn) + ' · ' + esc(p.spec) + '</span></td>' +
         '<td class="c">' + it.qty + ' ' + esc(p.unit) + '</td>' +
         '<td class="r">' + U.fmt(it.price) + '</td>' +
-        '<td class="r">' + U.fmt(it.qty * it.price) + '</td></tr>';
+        '<td class="r">' + U.fmt(U.transactionAmounts([it]).total) + '</td></tr>';
     }).join('');
     var marksHtml = editing
       ? '<textarea class="edit-area" id="df-marks" aria-label="唛头">' + esc(d.marks) + '</textarea>'

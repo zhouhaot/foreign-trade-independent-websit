@@ -12,6 +12,12 @@ const clone = value => JSON.parse(JSON.stringify(value));
 const methods = new Set(['get', 'post', 'put', 'patch', 'delete']);
 const allRoles = ['admin', 'sales', 'doc', 'fin', 'boss'];
 const decimalRef = '#/components/schemas/DecimalString';
+const storageMoneyFields = [
+  ['product', 'ref_price'], ['inquiry_line', 'quantity'], ['quote', 'total_amount'],
+  ['quote_line', 'quantity'], ['quote_line', 'unit_price'], ['quote_line', 'line_amount'],
+  ['order_version', 'total_amount'], ['order_line', 'quantity'],
+  ['order_line', 'unit_price'], ['order_line', 'line_amount']
+];
 const sourceRelations = [
   ['inquiry', ['customer_id','owner_user_id'], 'customer', ['id','owner_user_id']],
   ['quote', ['inquiry_id','owner_user_id','customer_id'], 'inquiry', ['id','owner_user_id','customer_id']],
@@ -132,6 +138,9 @@ function validate(api, model, matrix) {
     dto+'.'+field+' exact string-decimal contract');
   }
   const getCols = table => ({ ...Object.fromEntries((table.common || []).map(k => [k, model.commonColumns[k]])), ...table.columns });
+  for (const [table, column] of storageMoneyFields) {
+    check(model.tables[table]?.columns?.[column]?.type === 'decimal20_2', table + '.' + column + ' exact storage decimal type');
+  }
   for (const [name, table] of Object.entries(model.tables)) {
     const cols = getCols(table), keys = [table.primaryKey, ...table.unique];
     check(table.primaryKey.length > 0, name + ' primary key');
@@ -236,6 +245,10 @@ function run() {
     ['api-unit-price-number', a => { a.components.schemas.QuoteItemUpdate.properties.unitPrice = {anyOf:[{type:'number'},{type:'null'}]}; }],
     ['api-quantity-number', a => { a.components.schemas.InquiryItemInput.properties.quantity = {type:'number'}; }],
     ['api-decimal-base-number', a => { a.components.schemas.DecimalString = {type:'number'}; }],
+    ...storageMoneyFields.map(([table, column]) => [
+      'storage-decimal-type-' + table + '-' + column,
+      (a,m) => { m.tables[table].columns[column].type = 'binaryFloat'; }
+    ]),
     ...sourceRelations.map(([table,columns,target,destination]) => [
       'source-relation-'+table+'-'+columns.join('-'),
       (a,m) => { m.tables[table].foreignKeys = m.tables[table].foreignKeys.filter(f => !(f.table === target && JSON.stringify(f.columns) === JSON.stringify(columns) && JSON.stringify(f.target) === JSON.stringify(destination))); }

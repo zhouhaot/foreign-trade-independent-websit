@@ -409,10 +409,10 @@
 
   /* ---------- 金额勾稽 ---------- */
   U.orderTotal = function (order) {
-    return order.items.reduce(function (s, it) { return s + it.qty * it.price; }, 0);
+    return U.transactionAmounts(order && order.items).total;
   };
   U.quoteTotal = function (quote) {
-    return quote.items.reduce(function (s, it) { return s + it.qty * it.price; }, 0);
+    return U.transactionAmounts(quote && quote.items).total;
   };
   U.orderReceived = function (orderId) {
     return U.financialBalance(U.order(orderId)).received;
@@ -740,7 +740,18 @@
   };
   U.today = function () { return U.now().slice(0, 10); };
   U.seq = 100;
-  U.newId = function (prefix) { return prefix + new Date().getFullYear() + String(++U.seq).padStart(4, '0'); };
+  var allocatedIds = new Set();
+  U.newId = function (prefix) {
+    var id;
+    do {
+      if (!Number.isSafeInteger(U.seq + 1)) throw new Error('业务编号超出安全范围，请核对。');
+      id = prefix + new Date().getFullYear() + String(++U.seq).padStart(4, '0');
+    } while (allocatedIds.has(id) || Object.keys(M).some(function (key) {
+      return Array.isArray(M[key]) && M[key].some(function (record) { return record && record.id === id; });
+    }));
+    allocatedIds.add(id);
+    return id;
+  };
 
   /* ---------- SVG 柱状图（纯手绘，无依赖） ---------- */
   U.barChart = function (data, opts) {

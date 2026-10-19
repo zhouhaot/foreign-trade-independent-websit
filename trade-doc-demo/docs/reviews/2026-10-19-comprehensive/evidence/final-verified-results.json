@@ -1,0 +1,799 @@
+{
+  "timestamp": "2026-10-19T02:23:31.881Z",
+  "clientReviewDate": "2026-10-19",
+  "node": "v22.23.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "head": "4c674496667fd31078194ca81c0d0a4f081eda21",
+  "label": "final-verified",
+  "before": {
+    "index.html": "7e87b3a30b348fc8552de98f983edff1ab2926f968c34e68f9a69d7bbcb7f392",
+    "js/app.js": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+    "js/mock-data.js": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f",
+    "js/utils.js": "a646d813f68a2ccd35650dd0a0309d26ce41261ac091b273070ec265c5763536",
+    "js/views-core.js": "0ddbbbd64f8217d8a69a84d21eb1b3428f1a0b8c4c26f69097303bcfaa51f9c6",
+    "js/views-docs.js": "89ca87ea670eec10cecf2ec7b7102871b24a375008ac5805a0b42af39a8b853b",
+    "js/views-fin.js": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+    "js/views-sales.js": "44ba2526f83af23abc0c243c280961fdc65bf686403bc4106baeef29e5f749d4",
+    "js/views-stats.js": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40",
+    "js/views-system.js": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef",
+    "css/base.css": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765",
+    "css/layout.css": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+    "css/pages.css": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3"
+  },
+  "after": {
+    "index.html": "7e87b3a30b348fc8552de98f983edff1ab2926f968c34e68f9a69d7bbcb7f392",
+    "js/app.js": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+    "js/mock-data.js": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f",
+    "js/utils.js": "a646d813f68a2ccd35650dd0a0309d26ce41261ac091b273070ec265c5763536",
+    "js/views-core.js": "0ddbbbd64f8217d8a69a84d21eb1b3428f1a0b8c4c26f69097303bcfaa51f9c6",
+    "js/views-docs.js": "89ca87ea670eec10cecf2ec7b7102871b24a375008ac5805a0b42af39a8b853b",
+    "js/views-fin.js": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+    "js/views-sales.js": "44ba2526f83af23abc0c243c280961fdc65bf686403bc4106baeef29e5f749d4",
+    "js/views-stats.js": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40",
+    "js/views-system.js": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef",
+    "css/base.css": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765",
+    "css/layout.css": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+    "css/pages.css": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3"
+  },
+  "unchanged": true,
+  "results": [
+    {
+      "file": "verify-approval-context.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 363,
+      "stdout": "PASS: 67 approval context cases; original roles/order/counts, exact version targets, invalid/duplicate metadata, self-review, complete escaped reason/opinion, all MOCK read purity and original Actions/payment source preservation (Node DOM only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-approval-modal-drafts.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 656,
+      "stdout": "PASS: 21 approval modal draft cases: actual actions/modal/keyboard handlers and Promise, source node/value/error/focus/scroll preservation, busy/failure/commit/stale/duplicate (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-cancellation.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 142,
+      "stdout": "PASS cancellation/re-document approval, history preservation, delayed guards, duplicate decisions and snapshot creation\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-change-request-amount.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 2621,
+      "stdout": "PASS: 58 initial change-request amount scenarios; seven illegal initial writes refused, safe cents/number roundtrip, corrections, H20 context/source guards and invalid hidden cancellation amount (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-change-request.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1200,
+      "stdout": "PASS: sales change request 25 modal/Promise cases; pending/duplicates, roles/order eligibility, delayed actor/object/status/currency guard, cancellation prior state, immutable submitted inputs, full MOCK refusal atomicity (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-context-navigation.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 673,
+      "stdout": "PASS: context navigation 194 permitted-link/source cases and 15 successful-clean/failed-dirty integration cases (actual views, submit/modal/Promise Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-customer-contract.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 167,
+      "stdout": "PASS: 52 customer form contracts: native submit, actor/object/content/DOM/route binding, atomic text/email/level validation, no-write failures, exact-once commit/clean; Node VM only\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-decimal-contract.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 51,
+      "stdout": "PASS decimal inputs, fractional quantities/exact lines, overflow, calendar dates, pure calculations and currency/overpayment diagnostics\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-demo.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 40,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"resources\": 12,\n  \"quotes\": 9,\n  \"documents\": 11,\n  \"amounts\": [\n    {\n      \"order\": \"SO2026001\",\n      \"currency\": \"USD\",\n      \"total\": 24100,\n      \"received\": 12000,\n      \"outstanding\": 12100\n    },\n    {\n      \"order\": \"SO2026002\",\n      \"currency\": \"USD\",\n      \"total\": 28400,\n      \"received\": 28400,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026003\",\n      \"currency\": \"EUR\",\n      \"total\": 19500,\n      \"received\": 0,\n      \"outstanding\": 19500\n    },\n    {\n      \"order\": \"SO2026004\",\n      \"currency\": \"EUR\",\n      \"total\": 30500,\n      \"received\": 30500,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026005\",\n      \"currency\": \"USD\",\n      \"total\": 28150,\n      \"received\": 0,\n      \"outstanding\": 28150\n    },\n    {\n      \"order\": \"SO2026006\",\n      \"currency\": \"EUR\",\n      \"total\": 20000,\n      \"received\": 6000,\n      \"outstanding\": 14000\n    },\n    {\n      \"order\": \"SO2026007\",\n      \"currency\": \"USD\",\n      \"total\": 41550,\n      \"received\": 20000,\n      \"outstanding\": 21550\n    }\n  ],\n  \"scope\": \"静态资源、语法及样例金额；不替代浏览器与业务流程验收\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-disabled-login.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 658,
+      "stdout": "{\"result\":\"PASS\",\"cases\":11,\"scope\":\"disabled/empty role login and delayed identity recheck; Node DOM only\"}\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-action-guidance.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 918,
+      "stdout": "PASS 29 document action guidance scenarios: current actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards; archived f8643db H25 HTML/source scope (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-approval-display.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 360,
+      "stdout": "PASS: 137 CI/PL approval display role/state/history cases; real returned-resubmit-approve flow, current status vs history/export, escaped visible names, full MOCK read purity and snapshot/payment preservation (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-dashboard.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 693,
+      "stdout": "PASS: 18 document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries; archived f8643db other-role exact output (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-lifecycle.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 4838,
+      "stdout": "PASS: document lifecycle 90 async role/state/cancellation/race cases + normal transitions, immutable snapshots, finance isolation, latest/conflict/reform/audit/export rules (Node VM only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-snapshots.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 90,
+      "stdout": "PASS: all demo CI/PL snapshots survive seller/customer/product/order mutation; inherited revision, finance recreation, immutable detached copies, role edit bounds, totals/currency, refresh reset (Node VM only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-status-guidance.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 879,
+      "stdout": "PASS 34 document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts; archived f8643db outside-banner equality (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-work-bell.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 152,
+      "stdout": "PASS: 4 document-work bell reference navigation scenarios; same-page source/focus, exact cross-page destination, original dirty cancel/confirm and full-model purity (Node fixture; native scroll not claimed)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-work-summary.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 265,
+      "stdout": "PASS: 32 shared document-work summary scenarios; current policy, actual identity, safe exact routes, lifecycle pause/restore, historical references and whole-model read purity (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-document-workspace.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 276,
+      "stdout": "PASS: document workspace local version directory/current/latest/history, action precedence, source disclosure, real app delegated anchor preventDefault, dirty audit/packing cancel-confirm navigation, focus node/input preservation (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-draft-adapters.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 512,
+      "stdout": "PASS: 17 draft adapter scenarios; real app click delegation / submit handlers / Promise timers, local pagination node/input/error/focus preservation (Node DOM fixture; shared guard semantics separately verified)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-inquiry-contract.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 5218,
+      "stdout": "PASS: inquiry contract 114 actual modal/Promise cases; canonical source/query and exact hash drift with invalidated tickets, sales roles, bidirectional source, full candidate/ref currency/precision, actor/session/object/content drift, cancel/duplicates, collision-safe USD/EUR fractional source-consistent draft (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-login.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 62,
+      "stdout": "PASS: five-role dropdown template, default selection, label and department hint\nPASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state\nPASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard\nPASS: account/password required validation and no login on invalid fields\nPASS: invalid-role submit rejection, feedback and focus\nScope: Node VM template/action checks only; native select interaction and visual layout require browser verification.\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-modal-drafts.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 81,
+      "stdout": "PASS: 45 shared modal draft cases; clean/dirty/busy/source identity, original DOM/errors/focus/selection/scroll and explicit discard (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-navigation-drafts.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 860,
+      "stdout": "PASS: 33 draft navigation scenarios (actual app handlers; asynchronous Node DOM/history fixture, not browser history certification)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-order-map-origin.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 276,
+      "stdout": "PASS: 53 explicit order-origin scenarios; exact seven demo origins, malformed/missing data, no trade-term inference, per-order routing, independent quadratic seam geometry, polar/coincident pending, escaping, roles/revocation, actual new-order default and model purity (Node DOM fixture only; no browser/logistics accuracy claims)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-order-map.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 254,
+      "stdout": "PASS: 30 order-map acceptance scenarios; real view/actions, five roles and revocation, independent expected cents/countries, missing/ambiguous locations, invalid/unsafe amounts, escaping, local node/input/focus preservation and Mock immutability (Node DOM fixture only; no browser/database claims)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-order-workspace.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 55,
+      "stdout": "PASS: A workspace role actions, independent progress and currencies, selection/page/filter empty state, view toggles, draft-input preservation, and unchanged business data (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-packaging-actions.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 4948,
+      "stdout": "PASS: 109 packaging action cases; PL atomic partial-save/complete-submit, raw units/text, field+role alerts/focus, async valid/invalid drift, snapshots/finance/clean/CI isolation (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-packaging-contract.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 51,
+      "stdout": "PASS 644 packaging candidates: original PL text, explicit or default units/3dp, positive safe cartons, empty draft/complete submit, exact gross-net comparisons, no source writes or H12 drift (Node only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-payments-contract.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 3488,
+      "stdout": "PASS: 72 payment contract scenarios; real Promise/timers + native submit/change handlers (Node VM; no browser/server transaction claims)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-production-contract.cjs",
+      "category": "design-static",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 126,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Static contract consistency and checker negative probes only; NO server/database/browser integration executed\",\n  \"errors\": [],\n  \"checks\": 1845,\n  \"refs\": 355,\n  \"operations\": 25,\n  \"schemas\": 47,\n  \"tables\": 16,\n  \"plannedCases\": 49,\n  \"mutationProbes\": 45,\n  \"schemaSubsetSamples\": 21,\n  \"plannedIntegrationCasesExecuted\": 0,\n  \"sourceHashes\": {\n    \"index.html\": \"7e87b3a30b348fc8552de98f983edff1ab2926f968c34e68f9a69d7bbcb7f392\",\n    \"js/app.js\": \"a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d\",\n    \"js/mock-data.js\": \"4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f\",\n    \"js/utils.js\": \"a646d813f68a2ccd35650dd0a0309d26ce41261ac091b273070ec265c5763536\",\n    \"js/views-core.js\": \"0ddbbbd64f8217d8a69a84d21eb1b3428f1a0b8c4c26f69097303bcfaa51f9c6\",\n    \"js/views-docs.js\": \"89ca87ea670eec10cecf2ec7b7102871b24a375008ac5805a0b42af39a8b853b\",\n    \"js/views-fin.js\": \"a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46\",\n    \"js/views-sales.js\": \"44ba2526f83af23abc0c243c280961fdc65bf686403bc4106baeef29e5f749d4\",\n    \"js/views-stats.js\": \"40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40\",\n    \"js/views-system.js\": \"89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef\",\n    \"css/base.css\": \"262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765\",\n    \"css/layout.css\": \"06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879\",\n    \"css/pages.css\": \"c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-progress-stages.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 53,
+      "stdout": "PASS: no-document, mixed returned/drafting, all reviewing, export eligibility, latest-version aggregate and shared detail stages; payment facts unchanged (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-quotation-contract.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 4603,
+      "stdout": "PASS: quotation contract 103 actual input/submit/modal/Promise cases; decimal preview, fractional-cent/overflow atomic refusal, dates/dictionary/associations, actor/object/content drift, cancel/duplicates, USD/EUR fractional quantity source-consistent order (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-repricing.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 145,
+      "stdout": "PASS: atomic repricing, precision/non-finite input, USD/EUR isolation, received floor, roles/self-review, duplicate/reject/cancel and deferred revalidation (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-review-documents.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1783,
+      "stdout": "PASS: review document first-create, guards, snapshots, invoice association, edit focus, reform exclusivity and next-review: 109 checks (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-review-finance.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1007,
+      "stdout": "PASS: 15 review finance scenarios (actual submit and input-fill; Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-review-integrity.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 325,
+      "stdout": "{\n  \"mode\": \"current-GREEN\",\n  \"checks\": [\n    {\n      \"name\": \"IDs avoid all existing approval records\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"IDs avoid reserved session IDs even if seq resets\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"actual document submit creates a unique approval\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"actual reform application creates a unique approval\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"order and quote totals equal independent BigInt cents\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"actual quote/order/CI preserve exact line and total displays\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats use exact cents for repeated small decimal sums\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats refuse aggregate cents that lose precision on display\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats refuse unsafe received/method aggregation\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats preserve USD/EUR separation and baseline status filter\",\n      \"status\": \"PASS\"\n    }\n  ],\n  \"total\": 10,\n  \"passed\": 10,\n  \"failed\": 0,\n  \"boundary\": \"Node VM only; actual Actions; no browser/backend claim.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-review-sales.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 1126,
+      "stdout": "PASS: 60 sales review cases (real Actions / Views, minimal DOM; browser layout excluded)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-review-shared.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 499,
+      "stdout": "PASS: 64 review shared scenarios (real app/actions, Node fixture; no pixel claims)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-sales-modal-drafts.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 2716,
+      "stdout": "PASS: 40 sales modal draft scenarios; real qc/oc DOM, X/cancel/Escape continue-discard, busy lock, source-window async isolation, quote/order eligibility and no page-clean side effects (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-session.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 90,
+      "stdout": "PASS: five-role identity text + protected demo-switch presence, cancellation/logout, storage/transient clearing, protected-route return and re-login (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "file": "verify-views.cjs",
+      "category": "demo-contract",
+      "status": 0,
+      "signal": null,
+      "elapsedMs": 162,
+      "stdout": "PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)\nPASS: controlled document revision cancellation, original-version retention, and repeat guards\nPASS: CI/PL document editing and saving enforce role, version status, and deferred role changes\nPASS: actual order Modal cancellation, required delivery input, reconciliation, and repeat guards\n",
+      "stderr": ""
+    }
+  ],
+  "syntax": [
+    {
+      "file": "js/app.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/mock-data.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/utils.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/views-core.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/views-docs.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/views-fin.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/views-sales.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/views-stats.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "js/views-system.js",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/build-world-map.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-approval-context.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-approval-modal-drafts.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-browser.mjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-cancellation.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-change-request-amount.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-change-request.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-context-navigation.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-customer-contract.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-decimal-contract.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-demo.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-disabled-login.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-action-guidance.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-approval-display.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-dashboard.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-lifecycle.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-snapshots.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-status-guidance.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-work-bell.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-work-summary.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-document-workspace.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-draft-adapters.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-inquiry-contract.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-login.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-modal-drafts.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-navigation-drafts.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-order-map-origin.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-order-map.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-order-workspace.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-packaging-actions.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-packaging-contract.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-payments-contract.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-production-contract.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-progress-stages.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-quotation-contract.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-repricing.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-review-documents.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-review-finance.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-review-integrity.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-review-sales.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-review-shared.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-sales-modal-drafts.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-session.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "scripts/verify-views.cjs",
+      "status": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "summary": {
+    "scripts": 42,
+    "scriptFailures": 0,
+    "syntax": 53,
+    "syntaxFailures": 0
+  }
+}

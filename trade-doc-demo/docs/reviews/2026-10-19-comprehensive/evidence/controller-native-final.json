@@ -1,0 +1,21 @@
+{
+  "date":"2026-10-19",
+  "SEC-01": {
+    "egoNativeAfterFix":{"hasFix":true,"hasAttemptGuard":true,"hash":"#/login","user":null,"docEnabled":false,"oldAdminTablePresent":false,"disabledOption":{"value":"doc","text":"单证员 · 无启用账号"}},
+    "iabIndependentNative":{"method":"select admin, focus/Space on user checkbox, logout dialog confirm, read native AX","loginRendered":true,"disabledRole":"单证员 · 无启用账号","otherAdminLoginWithoutReload":true,"submittedMockStateRetainedUntilExplicitReload":true},
+    "result":"PASS"
+  },
+  "images":[
+    {"file":"login-final-1280.png","format":"JPEG","pixels":[1280,800],"sourceViewport":[1280,800],"role":"login after disabled doc","validFinal":true},
+    {"file":"stats-final-1440.png","format":"JPEG","pixels":[1432,1781],"sourceViewport":[1440,900],"validFinal":false,"reason":"transient success toasts cover data; process only"},
+    {"file":"stats-clean-final-1440.jpg","format":"JPEG","pixels":[1432,1781],"sourceViewport":[1440,900],"role":"boss","validFinal":true},
+    {"file":"invoice-final-1280.jpg","format":"JPEG","pixels":[1272,1624],"sourceViewport":[1280,800],"role":"boss","validFinal":true}
+  ],
+  "methodCorrections":[
+    "Ego captureScreenshot timed out once; no repeated screenshot retries. IAB used only for authorized HTTP screenshot/native verification, not to bypass file protocol policy.",
+    "A hidden checkbox visibility wait timed out though the control existed; native focus+Space used after state observation.",
+    "Generic logout/user links matched multiple elements; observed dialog/state then targeted exact scoped controls.",
+    "Hash-only goto retained the prior disabled-account fixture. Matrix and business harnesses now explicitly reload before each independent scenario. attempt-1 retains the initial method failure; not a product defect.",
+    "Quality search expected order-only but ArrowDown legitimately selected a related CI. Harness now captures the selected permitted result before Enter, rather than changing product search behavior."
+  ]
+}

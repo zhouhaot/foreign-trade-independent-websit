@@ -1,0 +1,3214 @@
+{
+  "date": "2026-10-19",
+  "phase": "baseline",
+  "routeChecks": [
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "pass": true,
+      "forbidden": false,
+      "text": 415,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026006",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004/edit",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-PL2026004-V1",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "pass": true,
+      "forbidden": false,
+      "text": 462,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "pass": true,
+      "forbidden": false,
+      "text": 455,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "pass": true,
+      "forbidden": false,
+      "text": 524,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "pass": true,
+      "forbidden": false,
+      "text": 1488,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "pass": true,
+      "forbidden": false,
+      "text": 547,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "pass": true,
+      "forbidden": false,
+      "text": 313,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "pass": true,
+      "forbidden": false,
+      "text": 544,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "pass": true,
+      "forbidden": false,
+      "text": 297,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "pass": true,
+      "forbidden": false,
+      "text": 627,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026006",
+      "pass": true,
+      "forbidden": false,
+      "text": 595,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "pass": true,
+      "forbidden": false,
+      "text": 710,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004",
+      "pass": true,
+      "forbidden": false,
+      "text": 396,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004/edit",
+      "pass": true,
+      "forbidden": false,
+      "text": 259,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "pass": true,
+      "forbidden": false,
+      "text": 1116,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "pass": true,
+      "forbidden": false,
+      "text": 653,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-PL2026004-V1",
+      "pass": true,
+      "forbidden": false,
+      "text": 1306,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "pass": true,
+      "forbidden": false,
+      "text": 721,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "pass": true,
+      "forbidden": true,
+      "text": 70,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "pass": true,
+      "forbidden": false,
+      "text": 1681,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "pass": true,
+      "forbidden": false,
+      "text": 297,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026006",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004/edit",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "pass": true,
+      "forbidden": false,
+      "text": 1108,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "pass": true,
+      "forbidden": false,
+      "text": 648,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "pass": true,
+      "forbidden": false,
+      "text": 655,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-PL2026004-V1",
+      "pass": true,
+      "forbidden": false,
+      "text": 1476,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "pass": true,
+      "forbidden": false,
+      "text": 661,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "pass": true,
+      "forbidden": true,
+      "text": 68,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "pass": true,
+      "forbidden": false,
+      "text": 1577,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "pass": true,
+      "forbidden": false,
+      "text": 297,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026006",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004/edit",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "pass": true,
+      "forbidden": false,
+      "text": 1108,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "pass": true,
+      "forbidden": false,
+      "text": 646,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-PL2026004-V1",
+      "pass": true,
+      "forbidden": false,
+      "text": 1306,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "pass": true,
+      "forbidden": false,
+      "text": 1889,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "pass": true,
+      "forbidden": false,
+      "text": 126,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "pass": true,
+      "forbidden": false,
+      "text": 1688,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "pass": true,
+      "forbidden": false,
+      "text": 297,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "pass": true,
+      "forbidden": false,
+      "text": 624,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026006",
+      "pass": true,
+      "forbidden": false,
+      "text": 584,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "pass": true,
+      "forbidden": false,
+      "text": 704,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004",
+      "pass": true,
+      "forbidden": false,
+      "text": 384,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004/edit",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "pass": true,
+      "forbidden": false,
+      "text": 1103,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "pass": true,
+      "forbidden": false,
+      "text": 648,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "pass": true,
+      "forbidden": false,
+      "text": 657,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-PL2026004-V1",
+      "pass": true,
+      "forbidden": false,
+      "text": 1320,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "pass": true,
+      "forbidden": false,
+      "text": 1497,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "pass": true,
+      "forbidden": false,
+      "text": 1286,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "pass": true,
+      "forbidden": false,
+      "text": 907,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "pass": true,
+      "forbidden": true,
+      "text": 69,
+      "errors": []
+    }
+  ],
+  "layouts": [
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/products",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "admin",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/products",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "sales",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/products",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "doc",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/products",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "fin",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/dashboard",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/customers",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/customers/C001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/products",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/products/P001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/inquiries/INQ2026006",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/quotes/Q2026004/edit",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/orders",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/orders/SO2026001",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/documents",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/documents/D-PL2026004-V1",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/payments",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/approvals",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/stats",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/system/users",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/system/roles",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "width": 1280,
+      "height": 800,
+      "scroll": 1272,
+      "main": 1172
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "width": 1366,
+      "height": 768,
+      "scroll": 1358,
+      "main": 1258
+    },
+    {
+      "role": "boss",
+      "route": "#/system/dicts",
+      "width": 1440,
+      "height": 900,
+      "scroll": 1432,
+      "main": 1332
+    }
+  ],
+  "failures": [],
+  "semantics": [],
+  "limits": [
+    "DOM layout is not visual or screen-reader certification",
+    "Single Chromium engine; no production API"
+  ]
+}

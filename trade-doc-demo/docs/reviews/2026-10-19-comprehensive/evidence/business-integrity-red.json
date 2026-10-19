@@ -1,0 +1,57 @@
+{
+  "mode": "frozen-baseline-RED",
+  "checks": [
+    {
+      "name": "IDs avoid all existing approval records",
+      "status": "FAIL",
+      "error": "new IDs must not collide with baseline AP20260101/AP20260102"
+    },
+    {
+      "name": "IDs avoid reserved session IDs even if seq resets",
+      "status": "FAIL",
+      "error": "Expected \"actual\" to be strictly unequal to:\n\n'TEST20260101'"
+    },
+    {
+      "name": "actual document submit creates a unique approval",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\n8 !== 9\n"
+    },
+    {
+      "name": "actual reform application creates a unique approval",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\n8 !== 9\n"
+    },
+    {
+      "name": "order and quote totals equal independent BigInt cents",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '55,555,555,555,556.01'\n- '55,555,555,555,556.00'\n                       ^\n"
+    },
+    {
+      "name": "actual quote/order/CI preserve exact line and total displays",
+      "status": "FAIL",
+      "error": "order item amount must match exact cents"
+    },
+    {
+      "name": "stats use exact cents for repeated small decimal sums",
+      "status": "PASS"
+    },
+    {
+      "name": "stats refuse aggregate cents that lose precision on display",
+      "status": "FAIL",
+      "error": "must not present a lost cent as a valid aggregate"
+    },
+    {
+      "name": "stats refuse unsafe received/method aggregation",
+      "status": "FAIL",
+      "error": "The expression evaluated to a falsy value:\n\n  assert.ok(!html.includes('90,071,992,547,408.98'))\n"
+    },
+    {
+      "name": "stats preserve USD/EUR separation and baseline status filter",
+      "status": "PASS"
+    }
+  ],
+  "total": 10,
+  "passed": 2,
+  "failed": 8,
+  "boundary": "Node VM only; actual Actions; no browser/backend claim."
+}

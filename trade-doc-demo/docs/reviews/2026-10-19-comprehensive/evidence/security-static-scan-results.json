@@ -1,0 +1,8 @@
+{
+  "scope": "tracked text files in project subtree; no archive/binary/history scan",
+  "scanned": 324,
+  "skipped": 623,
+  "credentialFilenameMatches": [],
+  "highConfidencePatternFindings": [],
+  "note": "Pattern absence is not proof of absence of secrets. Demo login values excluded."
+}

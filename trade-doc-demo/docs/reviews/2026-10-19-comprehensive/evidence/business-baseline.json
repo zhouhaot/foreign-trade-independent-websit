@@ -1,0 +1,183 @@
+{
+  "productBaseline": "4c674496667fd31078194ca81c0d0a4f081eda21",
+  "environment": {
+    "node": "v22.23.1",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "boundary": "Node VM and minimal DOM only; no browser, backend, file export, or database verification.",
+  "counts": {
+    "cases": 14,
+    "PASS": 12,
+    "FAIL": 2
+  },
+  "results": [
+    {
+      "case": "BUS-01",
+      "status": "FAIL",
+      "kind": "reproduced-product-defect",
+      "initialFixture": "unmodified baseline",
+      "before": [
+        {
+          "id": "AP20260901",
+          "targetId": "D-CI2026001-V1",
+          "status": "待处理"
+        },
+        {
+          "id": "AP20260902",
+          "targetId": "D-PL2026001-V1",
+          "status": "待处理"
+        },
+        {
+          "id": "AP20260903",
+          "targetId": "SO2026005",
+          "status": "待处理"
+        },
+        {
+          "id": "AP20260904",
+          "targetId": "SO2026006",
+          "status": "待处理"
+        },
+        {
+          "id": "AP20260905",
+          "targetId": "D-PL2026004-V1",
+          "status": "待处理"
+        },
+        {
+          "id": "AP20260801",
+          "targetId": "SO2026001",
+          "status": "已通过"
+        },
+        {
+          "id": "AP20260101",
+          "targetId": "D-CI2026003-V2",
+          "status": "已通过"
+        },
+        {
+          "id": "AP20260102",
+          "targetId": "SO2026002",
+          "status": "已退回"
+        }
+      ],
+      "afterCount": 9,
+      "conflictingApprovals": [
+        {
+          "id": "AP20260101",
+          "targetId": "D-CI2026004-V1",
+          "status": "待处理"
+        },
+        {
+          "id": "AP20260101",
+          "targetId": "D-CI2026003-V2",
+          "status": "已通过"
+        }
+      ]
+    },
+    {
+      "case": "BUS-02",
+      "status": "FAIL",
+      "kind": "reproduced-product-defect",
+      "input": [
+        {
+          "qty": "50",
+          "price": "1111111111111.11"
+        },
+        {
+          "qty": "1",
+          "price": "0.50"
+        }
+      ],
+      "quoteId": "Q2026004",
+      "orderId": "SO2026008",
+      "invoiceId": "D-CI2026006-V1",
+      "expectedCents": "5555555555555600",
+      "expectedDisplay": "55,555,555,555,556.00",
+      "orderDisplay": "55,555,555,555,556.01",
+      "invoiceTotal": "55,555,555,555,556.01",
+      "financialBalanceDisplay": "55,555,555,555,556.00",
+      "note": "All writes use actual quote save/confirm/order and doc-create actions; extreme but accepted values."
+    },
+    {
+      "case": "GUARD-unconfirmed",
+      "status": "PASS",
+      "zeroBusinessWrite": true
+    },
+    {
+      "case": "GUARD-quote-side-link",
+      "status": "PASS",
+      "zeroBusinessWrite": true
+    },
+    {
+      "case": "GUARD-order-side-link",
+      "status": "PASS",
+      "zeroBusinessWrite": true
+    },
+    {
+      "case": "GUARD-duplicate-quote-id",
+      "status": "PASS",
+      "zeroBusinessWrite": true
+    },
+    {
+      "case": "CHAIN-inquiry-quote-confirm-order-unique",
+      "status": "PASS",
+      "inquiryId": "INQ2026006",
+      "quoteId": "Q2026101",
+      "orderId": "SO2026008",
+      "expectedCents": "54500"
+    },
+    {
+      "case": "CHAIN-payment-before-documents",
+      "status": "PASS",
+      "receivedCents": 10000,
+      "outstandingCents": 44500,
+      "orderStatus": "待执行",
+      "documentStatus": "未开始"
+    },
+    {
+      "case": "CHAIN-overpayment-refusal",
+      "status": "PASS",
+      "zeroBusinessWrite": true
+    },
+    {
+      "case": "CHAIN-first-CI-PL-after-partial-payment",
+      "status": "PASS",
+      "invoiceId": "D-CI2026006-V1",
+      "packingId": "D-PL2026006-V1",
+      "invoiceReference": {
+        "status": "linked",
+        "docId": "D-CI2026006-V1",
+        "no": "CI2026006",
+        "version": 1
+      }
+    },
+    {
+      "case": "CHAIN-incomplete-PL-refusal",
+      "status": "PASS",
+      "zeroBusinessWrite": true
+    },
+    {
+      "case": "CHAIN-both-docs-approved-with-unpaid-balance",
+      "status": "PASS",
+      "orderStatus": "待执行",
+      "documentStatus": "已通过",
+      "outstandingCents": 44500
+    },
+    {
+      "case": "CHAIN-final-payment-independent-statuses",
+      "status": "PASS",
+      "receivedCents": 54500,
+      "outstandingCents": 0,
+      "orderStatus": "待执行",
+      "documentStatus": "已通过",
+      "paymentStatus": "已结清"
+    },
+    {
+      "case": "CHAIN-controlled-revision-retains-original-and-snapshot",
+      "status": "PASS",
+      "oldId": "D-CI2026006-V1",
+      "newId": "D-CI2026006-V2",
+      "newVersion": 2,
+      "oldExportAllowed": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "reviewDate": "2026-10-19",
+  "taskSpace": 17,
+  "baseline": "4c674496667fd31078194ca81c0d0a4f081eda21",
+  "SEC-01": {
+    "method": "native admin quick switch, user route, focus U004 checkbox and Space, logout and confirm",
+    "docEnabledAfterSpace": false,
+    "afterLogout": {"hash":"#/login","user":null,"loginControlPresent":false,"oldAdminTablePresent":true},
+    "errors":["Uncaught TypeError: Cannot read properties of undefined (reading 'name')","TypeError: Cannot read properties of undefined (reading 'name')"],
+    "result":"FAIL independently reproduced"
+  },
+  "methods": [
+    "Direct pointer action on visually hidden checkbox timed out; observed unchanged enabled state, then used native focus and Space. Not a product repair.",
+    "Initial warm-cache load showed empty body and App undefined. Original exception not captured. Test-page cache disabled and reload restored App; root cause not proven. Cache override will be restored at completion."
+  ]
+}

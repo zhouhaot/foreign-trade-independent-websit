@@ -1,0 +1,238 @@
+{
+  "baseline": "4c674496667fd31078194ca81c0d0a4f081eda21",
+  "environment": {
+    "node": "v22.23.1",
+    "platform": "darwin"
+  },
+  "counts": {
+    "REPRODUCED": 5,
+    "PASS": 27,
+    "OBSERVATION": 2
+  },
+  "results": [
+    {
+      "id": "SEC-01-login-missing-doc",
+      "status": "REPRODUCED",
+      "path": "admin sys-toggle-user -> logout -> Views.login",
+      "affectedRole": "doc",
+      "disabledAccountCount": 1,
+      "actual": "TypeError: Cannot read properties of undefined (reading 'name')",
+      "expected": "Render enabled role choices and preserve login for other roles"
+    },
+    {
+      "id": "SEC-01-login-missing-fin",
+      "status": "REPRODUCED",
+      "path": "admin sys-toggle-user -> logout -> Views.login",
+      "affectedRole": "fin",
+      "disabledAccountCount": 1,
+      "actual": "TypeError: Cannot read properties of undefined (reading 'name')",
+      "expected": "Render enabled role choices and preserve login for other roles"
+    },
+    {
+      "id": "SEC-01-login-missing-boss",
+      "status": "REPRODUCED",
+      "path": "admin sys-toggle-user -> logout -> Views.login",
+      "affectedRole": "boss",
+      "disabledAccountCount": 1,
+      "actual": "TypeError: Cannot read properties of undefined (reading 'name')",
+      "expected": "Render enabled role choices and preserve login for other roles"
+    },
+    {
+      "id": "SEC-01-login-missing-sales",
+      "status": "REPRODUCED",
+      "path": "admin sys-toggle-user -> logout -> Views.login",
+      "affectedRole": "sales",
+      "disabledAccountCount": 2,
+      "actual": "TypeError: Cannot read properties of undefined (reading 'name')",
+      "expected": "Render enabled role choices and preserve login for other roles"
+    },
+    {
+      "id": "SEC-01-full-logout-path",
+      "status": "REPRODUCED",
+      "actual": {
+        "error": "TypeError: Cannot read properties of undefined (reading 'name')",
+        "currentUser": null,
+        "appUser": null,
+        "hash": "#/login",
+        "oldAdminMarkupRemains": true
+      },
+      "expected": "Complete logout with usable login page"
+    },
+    {
+      "id": "role-route-ceilings",
+      "status": "PASS",
+      "combinations": 100,
+      "kind": "VM canVisit predicate, not browser route rendering"
+    },
+    {
+      "id": "direct-audit-denial-admin",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "direct-audit-denial-sales",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "direct-audit-denial-doc",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "direct-audit-denial-fin",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "direct-quote-denial-admin",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "direct-quote-denial-doc",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "direct-quote-denial-fin",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "direct-quote-denial-boss",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "self-audit-document",
+      "status": "PASS",
+      "zeroWrite": true,
+      "caveat": "Current demo compares maker/applicant name, not production stable IDs"
+    },
+    {
+      "id": "self-audit-approval",
+      "status": "PASS",
+      "zeroWrite": true,
+      "caveat": "Current demo compares maker/applicant name, not production stable IDs"
+    },
+    {
+      "id": "delayed-document-module-revoke",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "delayed-document-new-actor",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "delayed-document-clear-actor",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "delayed-quote-module-revoke",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "delayed-quote-new-actor",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "delayed-quote-clear-actor",
+      "status": "PASS",
+      "zeroWrite": true
+    },
+    {
+      "id": "invalid-profile-after-open",
+      "status": "OBSERVATION",
+      "actual": "Synthetic disabling of current boss profile after opening confirmation still permits document approval",
+      "reachability": "No ordinary single-page UI sequence identified; demo shares no business memory between tabs",
+      "candidateOnly": true
+    },
+    {
+      "id": "customer-edit-html-attribute-text",
+      "status": "PASS",
+      "actualSubmit": true,
+      "sinks": [
+        "customer form/title labels",
+        "dashboard recent orders/map text"
+      ],
+      "kind": "generated HTML inspection, no browser execution"
+    },
+    {
+      "id": "quote-remark-html-text",
+      "status": "PASS",
+      "actualSubmit": true,
+      "kind": "generated HTML inspection, no browser execution"
+    },
+    {
+      "id": "document-field-allowlist-html-text",
+      "status": "PASS",
+      "actualSave": true,
+      "coreOrderUnchanged": true,
+      "snapshotUnchanged": true,
+      "forgedInputIgnored": "df-price",
+      "kind": "generated HTML inspection, no browser execution"
+    },
+    {
+      "id": "module-ui-sales-销售业务",
+      "status": "PASS",
+      "menuHidden": true,
+      "initialSearchExcluded": true,
+      "routeDenied": true
+    },
+    {
+      "id": "module-ui-sales-客户与商品",
+      "status": "PASS",
+      "menuHidden": true,
+      "initialSearchExcluded": true,
+      "routeDenied": true
+    },
+    {
+      "id": "module-ui-sales-订单详情",
+      "status": "PASS",
+      "menuHidden": true,
+      "initialSearchExcluded": true,
+      "routeDenied": true
+    },
+    {
+      "id": "module-ui-doc-单证管理",
+      "status": "PASS",
+      "menuHidden": true,
+      "initialSearchExcluded": true,
+      "routeDenied": true
+    },
+    {
+      "id": "module-ui-fin-收款与应收",
+      "status": "PASS",
+      "menuHidden": true,
+      "initialSearchExcluded": true,
+      "routeDenied": true
+    },
+    {
+      "id": "module-ui-boss-审核与异常",
+      "status": "PASS",
+      "menuHidden": true,
+      "initialSearchExcluded": true,
+      "routeDenied": true
+    },
+    {
+      "id": "module-ui-boss-统计分析",
+      "status": "PASS",
+      "menuHidden": true,
+      "initialSearchExcluded": true,
+      "routeDenied": true
+    },
+    {
+      "id": "toast-raw-html-sink",
+      "status": "OBSERVATION",
+      "actual": "U.toast interprets message as HTML",
+      "candidateOnly": true,
+      "reachability": "Reviewed current callers; editable fields do not reach this sink as raw text in an identified normal UI path"
+    }
+  ]
+}

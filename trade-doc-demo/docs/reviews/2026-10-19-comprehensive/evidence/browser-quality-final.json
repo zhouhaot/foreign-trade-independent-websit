@@ -1,0 +1,267 @@
+{
+  "date": "2026-10-19",
+  "checks": [
+    {
+      "name": "1360/1361 desktop boundaries",
+      "result": "PASS",
+      "observations": [
+        {
+          "width": 1360,
+          "bodyWidth": 1352,
+          "outlineButtonVisible": true,
+          "pageWidth": 760
+        },
+        {
+          "width": 1361,
+          "bodyWidth": 1353,
+          "outlineButtonVisible": false,
+          "pageWidth": 701
+        }
+      ]
+    },
+    {
+      "name": "map US keyboard/native country filter",
+      "result": "PASS"
+    },
+    {
+      "name": "runtime reduced motion keeps static map",
+      "result": "PASS"
+    },
+    {
+      "name": "search keyboard opens selected permitted result",
+      "result": "PASS",
+      "selected": "#/documents/D-CI2026001-V1"
+    },
+    {
+      "name": "search focus return",
+      "result": "PASS"
+    },
+    {
+      "name": "UI-01 toast pointer transparency and ARIA retained",
+      "result": "PASS",
+      "wrap": "none",
+      "items": [
+        {
+          "pointer": "none",
+          "role": "status"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "One Chromium engine",
+    "No real screen reader or full WCAG audit",
+    "Warm synthetic dataset performance only; no capacity or leak certification"
+  ],
+  "breakpoints": [
+    {
+      "width": 1360,
+      "bodyWidth": 1352,
+      "outlineButtonVisible": true,
+      "pageWidth": 760
+    },
+    {
+      "width": 1361,
+      "bodyWidth": 1353,
+      "outlineButtonVisible": false,
+      "pageWidth": 701
+    }
+  ],
+  "performance": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "orders": 7,
+    "documents": 11,
+    "samples": [
+      {
+        "route": "#/dashboard",
+        "ms": 0
+      },
+      {
+        "route": "#/orders",
+        "ms": 7.399999976158142
+      },
+      {
+        "route": "#/stats",
+        "ms": 3.299999952316284
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 5.600000023841858
+      },
+      {
+        "route": "#/orders",
+        "ms": 4.800000071525574
+      },
+      {
+        "route": "#/stats",
+        "ms": 3.799999952316284
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 3.600000023841858
+      },
+      {
+        "route": "#/orders",
+        "ms": 4.399999976158142
+      },
+      {
+        "route": "#/stats",
+        "ms": 4
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 3.600000023841858
+      },
+      {
+        "route": "#/orders",
+        "ms": 4.600000023841858
+      },
+      {
+        "route": "#/stats",
+        "ms": 3.399999976158142
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 3.600000023841858
+      },
+      {
+        "route": "#/orders",
+        "ms": 4.5
+      },
+      {
+        "route": "#/stats",
+        "ms": 3.799999952316284
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 3.799999952316284
+      },
+      {
+        "route": "#/orders",
+        "ms": 4.300000071525574
+      },
+      {
+        "route": "#/stats",
+        "ms": 4.099999904632568
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 3.700000047683716
+      },
+      {
+        "route": "#/orders",
+        "ms": 4.799999952316284
+      },
+      {
+        "route": "#/stats",
+        "ms": 4.800000071525574
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 4.5
+      },
+      {
+        "route": "#/orders",
+        "ms": 5.299999952316284
+      },
+      {
+        "route": "#/stats",
+        "ms": 3.799999952316284
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 3.5
+      },
+      {
+        "route": "#/orders",
+        "ms": 4.100000023841858
+      },
+      {
+        "route": "#/stats",
+        "ms": 6.200000047683716
+      },
+      {
+        "route": "#/dashboard",
+        "ms": 5
+      },
+      {
+        "route": "#/orders",
+        "ms": 5
+      },
+      {
+        "route": "#/stats",
+        "ms": 4.299999952316284
+      }
+    ],
+    "heapBefore": 4746566,
+    "heapAfter": 5452364,
+    "resources": [
+      {
+        "url": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+        "duration": 7,
+        "bytes": 20245
+      },
+      {
+        "url": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+        "duration": 1.600000023841858,
+        "bytes": 16505
+      },
+      {
+        "url": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+        "duration": 3,
+        "bytes": 50264
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "duration": 2.200000047683716,
+        "bytes": 36413
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "duration": 6.300000071525574,
+        "bytes": 56300
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "duration": 8.399999976158142,
+        "bytes": 52090
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "duration": 5.600000023841858,
+        "bytes": 43250
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "duration": 10.399999976158142,
+        "bytes": 8282
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "duration": 10.5,
+        "bytes": 92887
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "duration": 10.700000047683716,
+        "bytes": 62270
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "duration": 5,
+        "bytes": 10310
+      },
+      {
+        "url": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+        "duration": 6.299999952316284,
+        "bytes": 43845
+      },
+      {
+        "url": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+        "duration": 1.100000023841858,
+        "bytes": 29932
+      }
+    ]
+  },
+  "result": "PASS"
+}

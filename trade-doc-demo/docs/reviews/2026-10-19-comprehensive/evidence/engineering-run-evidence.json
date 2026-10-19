@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-19",
+  "baseline": "4c674496667fd31078194ca81c0d0a4f081eda21",
+  "runtime": "Node.js v22.23.1",
+  "productionCheck": {
+    "command": "node scripts/verify-production-contract.cjs",
+    "timesExecutedByThisAuthor": 1,
+    "result": "PASS",
+    "errors": [],
+    "checks": 1835,
+    "refs": 355,
+    "operations": 25,
+    "schemas": 47,
+    "tables": 16,
+    "plannedCases": 49,
+    "mutationProbes": 35,
+    "schemaSubsetSamples": 21,
+    "plannedIntegrationCasesExecuted": 0,
+    "wroteReport": false
+  },
+  "firstIndependentProbeRun": {
+    "result": "FAIL_METHOD_ASSUMPTION",
+    "firstProbe": "existingVerifier PASS; reordered utils before mock throws TypeError reading payments",
+    "secondProbe": "existingVerifier PASS; duplicate utils replacing app throws TypeError Cannot redefine property: snapshot",
+    "failedProbeAssertion": "Expected runtimeError null, got TypeError at js/utils.js",
+    "correction": "Change review-only probe assertion to require the observed duplicate-initialization TypeError; product files unchanged"
+  },
+  "finalIndependentProbeRun": {
+    "command": "node docs/reviews/2026-10-19-comprehensive/evidence/engineering-negative-probes.cjs",
+    "exitCode": 0,
+    "entryProbes": [
+      {"probe":"entry-utils-before-mock","existingVerifier":"PASS","runtimeError":{"asset":"js/utils.js","name":"TypeError","message":"Cannot read properties of undefined (reading 'payments')"},"appDefinedAfterDeclaredScripts":false},
+      {"probe":"entry-duplicate-utils-omits-app","existingVerifier":"PASS","runtimeError":{"asset":"js/utils.js","name":"TypeError","message":"Cannot redefine property: snapshot"},"appDefinedAfterDeclaredScripts":false}
+    ],
+    "storageProbes": [
+      {"table":"quote_line","column":"unit_price","actualType":"decimal20_2","mutatedType":"binaryFloat","checkerErrors":[],"checks":1835},
+      {"table":"quote","column":"total_amount","actualType":"decimal20_2","mutatedType":"binaryFloat","checkerErrors":[],"checks":1835},
+      {"table":"order_line","column":"line_amount","actualType":"decimal20_2","mutatedType":"binaryFloat","checkerErrors":[],"checks":1835}
+    ],
+    "meaning": "Five probes reproduced assurance gaps. Not current product faults or database execution.",
+    "productFilesModified": false
+  },
+  "authorizedFixVerification": {
+    "authorization": "Root independently reproduced baseline probes and explicitly authorized the two checkers and current README/PRODUCT corrections",
+    "syntaxChecks": {"files": ["scripts/verify-demo.cjs", "scripts/verify-production-contract.cjs", "docs/reviews/2026-10-19-comprehensive/evidence/engineering-negative-probes.cjs"], "result": "PASS"},
+    "verifyDemo": {"result":"PASS","resources":12,"quotes":9,"documents":11,"reconciledOrders":7},
+    "productionCheck": {"result":"PASS","checks":1845,"refs":355,"mutationProbes":45,"schemaSubsetSamples":21,"operations":25,"schemas":47,"tables":16,"plannedCases":49,"plannedIntegrationCasesExecuted":0},
+    "probeBaseline": {"result":"PASS","gitSource":"4c674496667fd31078194ca81c0d0a4f081eda21","expectedAssuranceGapsReproduced":5},
+    "probeCurrent": {"result":"PASS","entryMutationsRejected":2,"storageMutationsRejected":3},
+    "documentationInventory": {
+      "result": "PASS against baseline manifest",
+      "readmePrototypeCommands": 39,
+      "baselineCheckers": 40,
+      "baselineCheckerListedSeparately": "verify-production-contract.cjs",
+      "methodCorrections": ["Initial live-directory count also included other agents' newly added validators; final check compares the requested baseline manifest", "Git tree enumeration from the project subdirectory was prefix-filtered; corrected to repository-root cwd"],
+      "rootToFinalize": "Other agents added verify-disabled-login.cjs and verify-review-integrity.cjs during review; final current count and README commands require root integration"
+    },
+    "note": "The review probe performs no writes. Only explicitly authorized checker/document edits were made by this author; root owns the full regression."
+  },
+  "notExecuted": ["full 40-script baseline/final regression by this author; owned by root", "browser", "file protocol", "database", "server", "external writes", "shallow clone experiment"]
+}

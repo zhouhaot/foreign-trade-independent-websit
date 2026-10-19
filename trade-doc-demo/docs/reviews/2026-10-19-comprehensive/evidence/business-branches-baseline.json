@@ -1,0 +1,68 @@
+{
+  "productBaseline": "4c674496667fd31078194ca81c0d0a4f081eda21",
+  "environment": {
+    "node": "v22.23.1",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "boundary": "Node VM and minimal DOM only; no browser, backend, file export, or database verification.",
+  "counts": {
+    "cases": 7,
+    "PASS": 7,
+    "FAIL": 0
+  },
+  "results": [
+    {
+      "case": "BRANCH-repricing-valid",
+      "status": "PASS",
+      "targetAmount": 14075,
+      "zeroBusinessWrite": false,
+      "beforeCents": "2815000",
+      "afterCents": "1407500"
+    },
+    {
+      "case": "BRANCH-repricing-unallocatable",
+      "status": "PASS",
+      "targetAmount": 27305.5,
+      "zeroBusinessWrite": true,
+      "beforeCents": "2815000",
+      "afterCents": "2815000"
+    },
+    {
+      "case": "BRANCH-repricing-below-received",
+      "status": "PASS",
+      "targetAmount": 1,
+      "zeroBusinessWrite": true,
+      "beforeCents": "2410000",
+      "afterCents": "2410000"
+    },
+    {
+      "case": "BRANCH-cancellation-approved",
+      "status": "PASS",
+      "orderStatus": "已取消",
+      "documentsUnchanged": true,
+      "paymentsUnchanged": true,
+      "note": "No fictional refund or historical document overwrite."
+    },
+    {
+      "case": "BRANCH-cancellation-rejected",
+      "status": "PASS",
+      "orderStatus": "执行中",
+      "documentsUnchanged": true,
+      "paymentsUnchanged": true,
+      "note": "Legacy priorOrderStatus is absent; explicit documented fallback to 执行中."
+    },
+    {
+      "case": "BRANCH-self-review-application",
+      "status": "PASS",
+      "zeroBusinessWrite": true,
+      "fixtureMutation": "applicant or maker set to current boss name before invocation"
+    },
+    {
+      "case": "BRANCH-self-review-document",
+      "status": "PASS",
+      "zeroBusinessWrite": true,
+      "fixtureMutation": "applicant or maker set to current boss name before invocation"
+    }
+  ]
+}

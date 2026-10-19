@@ -1,0 +1,15 @@
+topic,reviewed_scope,evidence,remaining_boundary
+业务闭环,实际同一新单询盘到结清与CI修订,evidence/browser-business-final.json,未穷尽全部角色状态组合
+角色权限,五岗路由与拒绝及在途撤权,security-review.md,无服务端鉴权认证
+精确金额,独立BigInt与实际Actions及统计拒绝失真,business-review.md,无真实数据库精度
+单证历史,首制审批快照修订及11旧纸张对照,evidence/business-fix-independent-review.md,无真实文件导出
+异常竞争,VM延迟和来源守卫及新登录所有权,evidence/security-fix-review.md,非真实多用户并发
+页面连续性,既有专项及搜索焦点和原生链,evidence/final-verified-results.json,非全输入历史组合
+地图统计,两专项加原生筛选及减少动效,evidence/browser-quality-final.json,无真实起运维护
+主数据系统,权限与禁用后重登及现有契约,security-review.md,占位维护仍为演示只读
+安全隐私,注入转义候选与文本敏感模式扫描,security-review.md,非完整渗透或全仓无秘密证明
+界面可访问性,三终图及DOM标签与键盘局部,evidence/finish-ui-review.md,未做真实读屏与完整对比度
+性能兼容,三宽临界点及30同步渲染样本,evidence/browser-quality-final.json,未做长时容量跨引擎或file实测
+工程测试,40基线及两门禁独立反例,engineering-production-review.md,仍有四个历史Git默认依赖
+生产设计,模型API权限49计划矩阵交叉核对,engineering-production-review.md,未运行真实服务数据库或部署
+交付文档,README清单与部署当前说明,findings.md,旧ZIP和历史文件按历史口径保留

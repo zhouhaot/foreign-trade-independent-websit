@@ -1,0 +1,17 @@
+case_id,unit,count,status,evidence
+BASE-SCRIPTS,原有脚本,40,PASS,evidence/baseline-results.json
+BASE-SYNTAX,运行与工具JS,51,PASS,evidence/baseline-results.json
+FINAL-SCRIPTS,原型41加生产静态1,42,PASS,evidence/final-verified-results.json
+FINAL-SYNTAX,运行与工具JS,53,PASS,evidence/final-verified-results.json
+LOGIN-NEW,新增回归场景,11,PASS,../../../scripts/verify-disabled-login.cjs
+BUSINESS-RED,新业务专项基线,8,FAIL,evidence/business-integrity-red.json
+BUSINESS-GREEN,新业务专项当前,10,PASS,../../../scripts/verify-review-integrity.cjs
+ROUTES,五岗受限路由访问,100,PASS,evidence/browser-final.json
+LAYOUT,三宽布局观察,300,PASS,evidence/browser-final.json
+BUSINESS-NATIVE,连续原生链组,8,PASS,evidence/browser-business-final.json
+QUALITY-NATIVE,边界键盘动效与指针组,6,PASS,evidence/browser-quality-final.json
+PRODUCTION-INTEGRATION,设计计划真实场景,49,NOT_RUN,engineering-production-review.md
+FILE-PROTOCOL,运行协议,1,BLOCKED,README.md
+CROSS-ENGINE,其他浏览器引擎,0,NOT_RUN,README.md
+SCREEN-READER,真实辅助技术,0,NOT_RUN,README.md
+SERVER-RESTORE,目标服务器及恢复,0,BLOCKED,production-readiness.md

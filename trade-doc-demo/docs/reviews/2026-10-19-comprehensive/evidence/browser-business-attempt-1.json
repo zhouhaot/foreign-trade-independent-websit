@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-19",
+  "checks": [
+    {
+      "name": "fresh inquiry/quote/confirmation/order",
+      "result": "PASS",
+      "qid": "Q2026101",
+      "orderId": "SO2026008",
+      "totalCents": "54500",
+      "shippingOriginAbsent": true
+    },
+    {
+      "name": "overpayment rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "partial payment before documents",
+      "result": "PASS",
+      "receivedCents": 10000
+    }
+  ],
+  "boundary": "Native form/button/select actions with DOM and synthetic memory readback; no real files/DB",
+  "result": "FAIL",
+  "error": "page.waitForFunction timed out after 10000ms on page p1; last URL was \"http://127.0.0.1:8014/index.html?review=20261019-final#/payments?order=SO2026008\"; last title was \"收款与应收 · 贸易协同\"."
+}

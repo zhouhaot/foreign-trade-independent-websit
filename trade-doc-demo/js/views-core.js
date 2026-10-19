@@ -20,11 +20,11 @@
   Views.login = function () {
     var roles = Object.keys(M.roles);
     var picked = window.AppUI.loginRole || 'sales';
-    if (roles.indexOf(picked) < 0) picked = 'sales';
+    if (roles.indexOf(picked) < 0 || !U.roleUser(picked)) picked = U.roleUser('sales') ? 'sales' : roles.find(function (r) { return !!U.roleUser(r); }) || '';
     var options = roles.map(function (r) {
       var user = U.roleUser(r);
-      var identity = M.roles[r] + (user.name === M.roles[r] ? '' : ' · ' + user.name);
-      return '<option value="' + esc(r) + '"' + (r === picked ? ' selected' : '') + '>' + esc(identity) + '</option>';
+      var identity = M.roles[r] + (user ? (user.name === M.roles[r] ? '' : ' · ' + user.name) : ' · 无启用账号');
+      return '<option value="' + esc(r) + '"' + (r === picked ? ' selected' : '') + (user ? '' : ' disabled') + '>' + esc(identity) + '</option>';
     }).join('');
     var selectedUser = U.roleUser(picked);
     return '<div class="login-page">' +
@@ -47,8 +47,8 @@
       '<div class="login-role-quick"><label class="lr-title" for="login-role">演示角色</label>' +
       '<div class="login-role-control"><select class="select login-role-select" id="login-role" data-action="login-pick-role" aria-describedby="login-role-hint">' + options + '</select>' +
       '<span class="login-role-chevron" aria-hidden="true">' + U.icon('chevron') + '</span></div>' +
-      '<div class="login-role-hint" id="login-role-hint" aria-live="polite">演示部门：' + esc(selectedUser.dept) + '</div></div>' +
-      '<button type="button" class="btn btn-primary login-btn" data-action="login-submit">进入工作台' + U.icon('arrow') + '</button>' +
+      '<div class="login-role-hint" id="login-role-hint" aria-live="polite">' + (selectedUser ? '演示部门：' + esc(selectedUser.dept) : '暂无启用的演示账号，请联系管理员核对账号状态。') + '</div></div>' +
+      '<button type="button" class="btn btn-primary login-btn" data-action="login-submit"' + (selectedUser ? '' : ' disabled') + '>进入工作台' + U.icon('arrow') + '</button>' +
       '<div class="login-tip">' + U.icon('shield') + '<span>这是原型演示环境，不校验真实账号密码。选择角色后即可体验对应工作台。</span></div>' +
       '</div></section></div>';
   };
@@ -56,12 +56,13 @@
     if (el.disabled || (event && event.type === 'click')) return;
     var picked = el.value;
     if (!Object.prototype.hasOwnProperty.call(M.roles, picked)) return;
-    window.AppUI.loginRole = picked;
     var user = U.roleUser(picked);
+    if (!user) { U.toast('该角色没有启用的演示账号，请选择其他角色。', 'warning'); return; }
+    window.AppUI.loginRole = picked;
     document.getElementById('login-role-hint').textContent = '演示部门：' + user.dept;
   };
   Actions['login-submit'] = function (el) {
-    if (el.classList.contains('is-loading')) return;
+    if (el.disabled || el.classList.contains('is-loading')) return;
     var scope = document.querySelector('.login-box');
     U.clearErrors(scope);
     var acc = document.getElementById('login-account');
@@ -77,13 +78,26 @@
       picker.focus();
       return;
     }
-    window.AppUI.loginRole = role;
     var user = U.roleUser(role);
+    if (!user) { U.toast('该角色没有启用的演示账号，请选择其他角色。', 'warning'); picker.focus(); return; }
+    window.AppUI.loginRole = role;
+    var entered = false, loginIdentity = null;
+    var sourceIdentity = window.__demoUser, sourceSession = JSON.stringify(U.currentUser());
+    function available() { return document.getElementById('login-role') === picker && picker.value === role && U.roleUser(role) === user && user.enabled; }
     picker.disabled = true;
     U.withLoading(el, function () {
-      U.setUser({ id: user.id, name: user.name, role: user.role, roleName: M.roles[user.role], dept: user.dept });
+      if (!available() || window.__demoUser !== sourceIdentity || JSON.stringify(U.currentUser()) !== sourceSession) return;
+      loginIdentity = { id: user.id, name: user.name, role: user.role, roleName: M.roles[user.role], dept: user.dept };
+      U.setUser(loginIdentity);
+      entered = true;
     }, 500);
     setTimeout(function () {
+      var current = U.currentUser();
+      if (!entered || !available() || window.__demoUser !== loginIdentity || !current || JSON.stringify(current) !== JSON.stringify(loginIdentity)) {
+        if (entered && window.__demoUser === loginIdentity && document.getElementById('login-role') === picker && current && JSON.stringify(current) === JSON.stringify(loginIdentity)) U.clearUser();
+        if (document.getElementById('login-role') === picker) { picker.disabled = false; U.toast('演示账号或登录页面已变化，请重新选择角色后登录。', 'warning'); }
+        return;
+      }
       U.toast('登录成功，当前角色：' + M.roles[role] + '（' + user.name + '）');
       location.hash = '#/dashboard';
     }, 520);

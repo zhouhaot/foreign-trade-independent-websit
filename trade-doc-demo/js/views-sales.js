@@ -886,7 +886,7 @@
         var p = U.product(it.productId);
         return '<tr><td>' + (i + 1) + '</td><td><a href="#/products/' + esc(p.id) + '?order=' + esc(encodeURIComponent(o.id)) + '">' + esc(p.nameCn) + '（' + esc(p.nameEn) + '）</a></td>' +
           '<td>' + esc(p.spec) + '</td><td class="num">' + it.qty + ' ' + esc(p.unit) + '</td>' +
-          '<td class="num">' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(it.qty * it.price) + '</td></tr>';
+          '<td class="num">' + U.fmt(it.price) + '</td><td class="num">' + U.fmt(U.transactionAmounts([it]).total) + '</td></tr>';
       }).join('');
       return '<div class="card"><div class="card-title">商品明细</div>' +
         '<div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>商品名称</th><th>规格</th><th class="num">数量</th><th class="num">成交单价（' + o.currency + '）</th><th class="num">金额（' + o.currency + '）</th></tr></thead>' +

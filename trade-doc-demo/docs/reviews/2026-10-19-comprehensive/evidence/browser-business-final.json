@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-19",
+  "checks": [
+    {
+      "name": "fresh inquiry/quote/confirmation/order",
+      "result": "PASS",
+      "qid": "Q2026101",
+      "orderId": "SO2026008",
+      "totalCents": "54500",
+      "shippingOriginAbsent": true
+    },
+    {
+      "name": "overpayment rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "partial payment before documents",
+      "result": "PASS",
+      "receivedCents": 10000
+    },
+    {
+      "name": "first CI/PL, incomplete refusal and unique submission IDs",
+      "result": "PASS",
+      "ci": "D-CI2026006-V1",
+      "pl": "D-PL2026006-V1"
+    },
+    {
+      "name": "both approved while balance unpaid",
+      "result": "PASS",
+      "order": "待执行",
+      "docs": "已通过",
+      "received": 10000,
+      "remaining": 44500
+    },
+    {
+      "name": "final payment settled",
+      "result": "PASS"
+    },
+    {
+      "name": "approved CI export is demonstration only",
+      "result": "PASS"
+    },
+    {
+      "name": "controlled V2 retains V1",
+      "result": "PASS"
+    }
+  ],
+  "boundary": "Native form/button/select actions with DOM and synthetic memory readback; no real files/DB",
+  "result": "PASS",
+  "errors": []
+}

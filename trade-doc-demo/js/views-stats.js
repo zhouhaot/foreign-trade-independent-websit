@@ -8,6 +8,20 @@
   var Views = window.Views;
   var esc = U.esc, tag = U.tag;
 
+  function moneyBucket() { return { cents: 0, error: false }; }
+  function addCents(bucket, cents) {
+    if (!Number.isSafeInteger(cents) || !Number.isSafeInteger(bucket.cents + cents)) bucket.error = true;
+    else bucket.cents += cents;
+  }
+  function bucketValue(bucket) {
+    var parsed = U.decimalInput(bucket.cents / 100, '金额汇总', true);
+    return !bucket.error && parsed.ok && parsed.units === bucket.cents ? parsed.value : NaN;
+  }
+  function bucketText(bucket) {
+    var value = bucketValue(bucket);
+    return Number.isFinite(value) ? U.fmt(value) : '汇总待核对';
+  }
+
   Views.stats = function (ctx) {
     if (ctx.user.role !== 'boss') return Views.forbidden('「统计分析」仅对业务主管开放');
 
@@ -16,10 +30,10 @@
     /* ---- 汇总卡片（币种分列，不合并） ---- */
     var byCur = {};
     validOrders.forEach(function (o) {
-      var fin = U.orderFin(o);
-      if (!byCur[o.currency]) byCur[o.currency] = { total: 0, received: 0, count: 0 };
-      byCur[o.currency].total += fin.total;
-      byCur[o.currency].received += fin.received;
+      var fin = U.financialBalance(o);
+      if (!byCur[o.currency]) byCur[o.currency] = { total: moneyBucket(), received: moneyBucket(), count: 0 };
+      addCents(byCur[o.currency].total, fin.totalCents);
+      addCents(byCur[o.currency].received, fin.receivedCents);
       byCur[o.currency].count++;
     });
     function curText(fn) {
@@ -27,7 +41,9 @@
     }
     var rateText = Object.keys(byCur).sort().map(function (c) {
       var b = byCur[c];
-      return '<span class="currency-metric"><small>' + c + '</small><b>' + (b.total > 0 ? Math.round(b.received / b.total * 100) : 0) + '%</b></span>';
+      var total = bucketValue(b.total), received = bucketValue(b.received);
+      var rate = !Number.isFinite(total) || !Number.isFinite(received) ? '汇总待核对' : (total > 0 ? Math.round(received / total * 100) : 0) + '%';
+      return '<span class="currency-metric"><small>' + c + '</small><b>' + rate + '</b></span>';
     }).join('');
 
     /* ---- 订单统计：按月订单数 + 状态分布 ---- */
@@ -44,29 +60,37 @@
     function topCustomers(cur) {
       var map = {};
       validOrders.filter(function (o) { return o.currency === cur; }).forEach(function (o) {
-        map[o.customerId] = (map[o.customerId] || 0) + U.orderTotal(o);
+        if (!map[o.customerId]) map[o.customerId] = moneyBucket();
+        addCents(map[o.customerId], U.transactionAmounts(o.items).totalCents);
       });
-      return Object.keys(map).map(function (k) { return { id: k, val: map[k] }; })
-        .sort(function (a, b) { return b.val - a.val; }).slice(0, 5);
+      return Object.keys(map).map(function (k) { return { id: k, val: bucketValue(map[k]) }; })
+        .sort(function (a, b) {
+          if (!Number.isFinite(a.val)) return Number.isFinite(b.val) ? -1 : 0;
+          return Number.isFinite(b.val) ? b.val - a.val : 1;
+        }).slice(0, 5);
     }
     function hbarHtml(list, cur) {
       if (!list.length) return '<div class="empty-state">暂无数据</div>';
-      var max = list[0].val;
+      var max = list.reduce(function (value, item) { return Number.isFinite(item.val) ? Math.max(value, item.val) : value; }, 0);
       return list.map(function (it) {
         var c = U.customer(it.id);
-        var pct = Math.max(4, Math.round(it.val / max * 100));
+        var pct = Number.isFinite(it.val) && max > 0 ? Math.max(4, Math.round(it.val / max * 100)) : 0;
         return '<div class="hbar-row"><span class="hb-label" title="' + esc(U.customerName(it.id)) + '">' + esc(c ? c.nameCn : it.id) + '</span>' +
           '<span class="hb-track"><span class="hb-fill" style="width:' + pct + '%"></span></span>' +
-          '<span class="hb-val">' + U.fmt(it.val) + ' ' + cur + '</span></div>';
+          '<span class="hb-val">' + (Number.isFinite(it.val) ? U.fmt(it.val) : '汇总待核对') + ' ' + cur + '</span></div>';
       }).join('');
     }
 
     /* ---- 收款统计：按订单收款率简表 + 收款方式分布 ---- */
     var methodMap = {};
-    M.payments.forEach(function (p) { var k = p.method + '|' + p.currency; methodMap[k] = (methodMap[k] || 0) + p.amount; });
+    M.payments.forEach(function (p) {
+      var k = p.method + '|' + p.currency;
+      if (!methodMap[k]) methodMap[k] = moneyBucket();
+      addCents(methodMap[k], U.decimalInput(p.amount, '收款金额').units);
+    });
     var methodRows = Object.keys(methodMap).sort().map(function (k) {
       var parts = k.split('|');
-      return '<tr><td>' + esc(parts[0]) + '</td><td class="center">' + parts[1] + '</td><td class="num">' + U.fmt(methodMap[k]) + '</td></tr>';
+      return '<tr><td>' + esc(parts[0]) + '</td><td class="center">' + parts[1] + '</td><td class="num">' + bucketText(methodMap[k]) + '</td></tr>';
     }).join('');
     var payRows = validOrders.map(function (o) {
       var fin = U.orderFin(o);
@@ -82,8 +106,8 @@
     return '<div class="page-head"><h2>统计分析</h2><span class="muted small">多币种口径：不同币种分别统计，不合并折算</span></div>' +
       '<div class="stat-cards">' +
         '<div class="stat-card accent-blue"><span class="sc-label">订单总数</span><span class="sc-value">' + validOrders.length + '</span><span class="sc-foot">不含已取消订单</span></div>' +
-        '<div class="stat-card accent-blue"><span class="sc-label">订单总金额</span><span class="sc-value num" style="font-size:17px">' + curText(function (b) { return U.fmt(b.total); }) + '</span><span class="sc-foot">按币种分列</span></div>' +
-        '<div class="stat-card accent-green"><span class="sc-label">累计已收款</span><span class="sc-value num" style="font-size:17px">' + curText(function (b) { return U.fmt(b.received); }) + '</span><span class="sc-foot">收款记录勾稽合计</span></div>' +
+        '<div class="stat-card accent-blue"><span class="sc-label">订单总金额</span><span class="sc-value num" style="font-size:17px">' + curText(function (b) { return bucketText(b.total); }) + '</span><span class="sc-foot">按币种分列</span></div>' +
+        '<div class="stat-card accent-green"><span class="sc-label">累计已收款</span><span class="sc-value num" style="font-size:17px">' + curText(function (b) { return bucketText(b.received); }) + '</span><span class="sc-foot">收款记录勾稽合计</span></div>' +
         '<div class="stat-card accent-orange"><span class="sc-label">整体收款率</span><span class="sc-value" style="font-size:22px">' + rateText + '</span><span class="sc-foot">已收 / 应收（分币种）</span></div>' +
       '</div>' +
       '<div class="chart-grid">' +

@@ -6,9 +6,13 @@ const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
 const entry = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const resourceUrls = [...entry.matchAll(/(?:src|href)="([^"]+)"/g)].map(m => m[1]);
-for (const url of resourceUrls) assert.ok(!/^(?:https?:)?\/\//.test(url), '禁止外部运行时资源：' + url);
+for (const url of resourceUrls) assert.ok(!/^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|\\)/i.test(url), '必须使用本地相对运行时资源：' + url);
 const assets = resourceUrls.map(url => url.split(/[?#]/)[0]); // local cache revision is not part of the file path
-assert.equal(assets.length, 12, '入口应有 3 个 CSS 和 9 个 JS');
+const expectedAssets = ['css/base.css', 'css/layout.css', 'css/pages.css',
+  'js/mock-data.js', 'js/utils.js', 'js/views-core.js', 'js/views-sales.js',
+  'js/views-docs.js', 'js/views-fin.js', 'js/views-stats.js', 'js/views-system.js', 'js/app.js'];
+assert.equal(new Set(assets).size, assets.length, '入口资源不得重复或替代核心脚本');
+assert.deepEqual(assets, expectedAssets, '入口必须按依赖顺序加载确切的 3 个 CSS 和 9 个 JS');
 for (const asset of assets) {
   assert.ok(!/^(?:https?:)?\/\//.test(asset), '禁止外部运行时资源：' + asset);
   assert.ok(fs.existsSync(path.join(root, asset)), '资源缺失：' + asset);
