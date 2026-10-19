@@ -558,7 +558,7 @@
       } else if (order.status === '取消申请中') {
         var recorded = ['待执行', '执行中'].indexOf(a.priorOrderStatus) >= 0;
         order.status = recorded ? a.priorOrderStatus : '执行中';
-        pushLog(order.id, '取消申请 ' + a.id + ' 被退回，订单恢复「' + order.status + '」' + (recorded ? '' : '（旧样例未记录取消前状态，按原型默认恢复执行中）') + '：' + (a.opinion || ''));
+        pushLog(order.id, '取消申请 ' + a.id + ' 被退回，订单恢复「' + order.status + '」' + (recorded ? '' : '（旧记录未提供取消前状态，按当前默认规则恢复执行中）') + '：' + (a.opinion || ''));
       }
     }
     if (a.type === '重新制单申请' && pass) {

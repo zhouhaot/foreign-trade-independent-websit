@@ -10,7 +10,7 @@ const { pathToFileURL } = require('node:url');
 (async () => {
   const root = path.resolve(__dirname, '..');
   const mod = await import(pathToFileURL(path.join(__dirname, 'verify-browser.mjs')).href);
-  const folder = path.join(root, 'docs/reviews/2026-10-19-round-02/evidence');
+  const folder = process.env.TRADE_QA_CONTRACT_DIR ? path.resolve(process.env.TRADE_QA_CONTRACT_DIR) : path.join(root, 'docs/reviews/2026-10-19-round-02/evidence');
   await fs.mkdir(folder, { recursive: true });
   const prefix = path.join(folder, 'browser-author-contract-' + Date.now() + '-' + process.pid);
   const records = [];

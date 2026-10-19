@@ -28,7 +28,7 @@ async function run() {
   }
   const empty = enter('admin', '#/system/users'); empty.c.MOCK.users.forEach(u => { u.enabled = false; });
   empty.c.U.clearUser(); empty.c.App.user = null;
-  assert.match(empty.c.Views.login(), /暂无启用的演示账号/);
+  assert.match(empty.c.Views.login(), /暂无启用的账号/);
   assert.match(empty.c.Views.login(), /data-action="login-submit" disabled/); cases++;
   for (const when of ['before-submit', 'before-microtask', 'before-navigation']) {
     const t = enter('admin', '#/system/users'); t.c.U.clearUser(); t.c.App.user = null;

@@ -178,19 +178,19 @@
     var orderBlocked = !!order && ['取消申请中', '已取消'].indexOf(order.status) >= 0;
     var blockedReason = !doc || U.doc(doc.id) !== doc ? '单证不存在或对象已变化，请刷新后重新操作。'
       : !order ? '关联订单不存在，单证仅可查阅历史内容。'
-      : orderBlocked ? '订单' + order.status + '，单证业务操作与导出演示暂停；历史审核事实保留。'
+      : orderBlocked ? '订单' + order.status + '，单证业务操作与登记导出记录暂停；历史审核事实保留。'
       : versionConflict ? '同订单及单证类型存在多编号或最高版本重复冲突，请先核对版本，不能继续操作。'
       : !isLatest ? '当前为历史旧版，仅可查阅；请前往最新版本 V' + latest.version + ' 操作。' : '';
     var reasons = {};
     ['edit', 'submit', 'revise', 'reform', 'audit', 'export'].forEach(function (action) {
       var error = blockedReason;
-      if (!error && (!user || !user.id || !user.name)) error = '请先登录有效的演示身份。';
-      if (!error && action === 'export' && ['sales', 'doc', 'fin', 'boss'].indexOf(user.role) < 0) error = '当前角色无单证导出演示权限。';
+      if (!error && (!user || !user.id || !user.name)) error = '请先登录有效的身份。';
+      if (!error && action === 'export' && ['sales', 'doc', 'fin', 'boss'].indexOf(user.role) < 0) error = '当前角色无登记单证导出记录权限。';
       if (!error && action !== 'export' && user.role !== (action === 'audit' ? 'boss' : 'doc')) error = action === 'audit' ? '仅业务主管可审核单证。' : '仅单证员可执行该制单操作。';
       if (!error && ['edit', 'submit'].indexOf(action) >= 0 && ['草稿', '制作中', '已退回'].indexOf(doc.status) < 0) error = '当前单证为' + doc.status + '，仅草稿、制作中或已退回版本可编辑或送审。';
       if (!error && ['edit', 'submit'].indexOf(action) >= 0 && doc.status === '已退回' && M.approvals.some(function (a) { return a.type === '重新制单申请' && a.targetType === 'doc' && a.targetId === doc.id && a.status === '待处理'; })) error = '该退回版本的重新制单申请正在审批，暂不编辑或送审原版；待审批结果后继续，避免两条恢复路径同时推进。';
-      if (!error && !U.moduleEnabled(user.role, action === 'export' && (user.role === 'sales' || user.role === 'fin') ? '订单详情' : '单证管理')) error = '当前角色的单证相关模块权限已关闭，请联系管理员核对演示权限。';
-      if (!error && ['revise', 'export'].indexOf(action) >= 0 && doc.status !== '已通过') error = '当前单证为' + doc.status + '，仅最新审核通过版本可修订或导出演示。';
+      if (!error && !U.moduleEnabled(user.role, action === 'export' && (user.role === 'sales' || user.role === 'fin') ? '订单详情' : '单证管理')) error = '当前角色的单证相关模块权限已关闭，请联系管理员核对本次会话权限。';
+      if (!error && ['revise', 'export'].indexOf(action) >= 0 && doc.status !== '已通过') error = '当前单证为' + doc.status + '，仅最新审核通过版本可修订或登记导出记录。';
       if (!error && action === 'reform' && doc.status !== '已退回') error = '仅已退回的最新单证可申请重新制单。';
       if (!error && action === 'reform' && M.approvals.some(function (a) { return a.type === '重新制单申请' && a.targetId === doc.id && a.status === '待处理'; })) error = '该单证已有待处理的重新制单申请，请勿重复提交。';
       if (!error && action === 'audit' && doc.status !== '待审核') error = '当前单证为' + doc.status + '，仅最新待审核版本可审核。';
@@ -796,7 +796,7 @@
   U.documentWorkSummary = function (user) {
     var result = { todos: [], references: [], identityError: '' };
     if (!user || user.role !== 'doc' || !user.id || !user.name) {
-      result.identityError = '请先登录有效的制单员演示身份。';
+      result.identityError = '请先登录有效的制单员身份。';
       return result;
     }
     function routable(id) {
@@ -847,7 +847,7 @@
         todos.push({ kind: '询盘跟进', text: i.id + ' · ' + U.customerName(i.customerId).split('（')[0], sub: i.date, link: '#/inquiries/' + i.id });
       });
     } else if (role === 'admin') {
-      todos.push({ kind: '系统', text: '演示环境账号巡检', sub: '每周例行', link: '#/system/users' });
+      todos.push({ kind: '系统', text: '账号巡检', sub: '每周例行', link: '#/system/users' });
     }
     return todos.filter(function (t) { return U.moduleEnabled(role, U.moduleForPath(t.link, role)); });
   };

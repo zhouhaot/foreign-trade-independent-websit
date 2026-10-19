@@ -158,7 +158,7 @@
       '<div class="topbar-right">' +
         '<button class="search-trigger" data-action="search-open" aria-label="搜索页面、订单或单证">' + U.icon('search') + '<span>搜索页面、订单、单证</span><kbd>Ctrl K</kbd></button>' +
         '<span class="current-role" aria-label="当前角色：' + esc(M.roles[user.role]) + '">' + esc(M.roles[user.role]) + '</span>' +
-        '<label class="demo-switch"><span class="sr-only">快速切换演示角色</span><select class="select" id="demo-role-switch" data-action="demo-role-switch" aria-label="快速切换演示角色" title="仅演示环境 · 切换前保护未保存输入">' + Object.keys(M.roles).map(function (role) {
+        '<label class="demo-switch"><span class="sr-only">快速切换岗位</span><select class="select" id="demo-role-switch" data-action="demo-role-switch" aria-label="快速切换岗位" title="本地会话 · 切换前保护未保存输入">' + Object.keys(M.roles).map(function (role) {
           var available = U.roleUser(role);
           return '<option value="' + role + '"' + (role === user.role ? ' selected' : '') + (available ? '' : ' disabled') + '>切换：' + esc(M.roles[role]) + '</option>';
         }).join('') + '</select></label>' +
@@ -178,7 +178,7 @@
       boss: [['待审事项', '#/approvals', 'approvals'], ['订单跟踪', '#/orders', 'orders'], ['单证审核', '#/documents', 'documents'], ['业务分析', '#/stats', 'stats']],
       admin: [['用户', '#/system/users', 'users'], ['角色权限', '#/system/roles', 'roles'], ['基础字典', '#/system/dicts', 'dicts']]
     };
-    var note = role === 'sales' ? '客户确认报价后生成订单' : role === 'doc' ? '交易数据只读 · 版本修订留痕' : role === 'fin' ? '按订单币种登记收款' : role === 'boss' ? '审核与申请人分离' : '演示环境 · 配置仅本次会话生效';
+    var note = role === 'sales' ? '客户确认报价后生成订单' : role === 'doc' ? '交易数据只读 · 版本修订留痕' : role === 'fin' ? '按订单币种登记收款' : role === 'boss' ? '审核与申请人分离' : '配置仅本次会话生效';
     return '<nav class="flowbar" aria-label="业务路径"><span class="flowbar-label">业务路径</span><div class="flowbar-links">' + flows[role].filter(function (item) { return canVisit(item[1], role); }).map(function (item, i) {
       var active = segs[0] === (role === 'admin' ? 'system' : item[2]) && (role !== 'admin' || segs[1] === item[2]);
       return '<a class="flow-step' + (active ? ' active' : '') + '" href="' + item[1] + '"' + (active ? ' aria-current="page"' : '') + '><span class="flow-index">' + (i + 1) + '</span>' + item[0] + '</a>';
@@ -251,15 +251,15 @@
     var actor = window.App.user, role = el.value;
     if (actor) el.value = actor.role;
     if (!actor || !Object.prototype.hasOwnProperty.call(M.roles, role) || role === actor.role) return;
-    if (document.querySelector('.modal')) { U.toast('请先完成或关闭当前弹窗，再切换演示身份。', 'warning'); return; }
+    if (document.querySelector('.modal')) { U.toast('请先完成或关闭当前弹窗，再切换岗位。', 'warning'); return; }
     var target = U.roleUser(role);
-    if (!target) { U.toast('该角色没有启用的演示账号，无法切换。', 'warning'); return; }
+    if (!target) { U.toast('该岗位没有启用的账号，无法切换。', 'warning'); return; }
     var source = U.currentUser();
     if (!source || source.id !== actor.id || source.role !== actor.role) { U.toast('当前会话已变化，请重新登录或刷新身份。', 'warning'); return; }
     function switchStillValid() {
       var current = U.currentUser(), available = U.roleUser(role);
       if (!current || current.id !== source.id || current.role !== source.role || window.App.user !== actor || available !== target || !target.enabled) {
-        U.toast('演示身份或目标账号已变化，本次未切换，请重新选择。', 'warning'); return false;
+        U.toast('当前身份或目标账号已变化，本次未切换，请重新选择。', 'warning'); return false;
       }
       return true;
     }
@@ -273,13 +273,13 @@
       navigationEpoch = String(Date.now()) + '-' + Math.random().toString(36).slice(2);
       if (historyAvailable()) stampHistory(); else location.hash = acceptedHash;
       render();
-      U.toast('已切换演示角色：' + M.roles[role] + '（' + target.name + '）');
-    }, { title: '切换演示角色？', message: '当前有未提交输入。切换会清除本页草稿与原身份临时状态；已提交的演示业务记录保留至刷新前。', okText: '放弃输入并切换', beforeDiscard: switchStillValid });
+      U.toast('已切换岗位：' + M.roles[role] + '（' + target.name + '）');
+    }, { title: '切换岗位？', message: '当前有未提交输入。切换会清除本页草稿与原身份临时状态；已提交的本地业务记录保留至刷新前。', okText: '放弃输入并切换', beforeDiscard: switchStillValid });
   };
   Actions['logout'] = function () {
     U.confirm({
       title: '退出登录',
-      message: '退出后需重新登录才能进入工作台或使用其他账号。未保存的页面输入将清除；演示期间已提交的内存数据保留到页面刷新前。',
+      message: '退出后需重新登录才能进入工作台或使用其他账号。未保存的页面输入将清除；本次会话已提交的内存数据保留到页面刷新前。',
       okText: '退出登录',
       onOk: function () {
         markDraftClean();
@@ -528,7 +528,7 @@
     }
     var body;
     if (!allowed) {
-      body = Views.forbidden('当前角色「' + M.roles[user.role] + '」无权访问该模块，或该模块已由管理员关闭。可快速切换演示角色，或联系管理员核对本次会话权限。');
+      body = Views.forbidden('当前角色「' + M.roles[user.role] + '」无权访问该模块，或该模块已由管理员关闭。可快速切换岗位，或联系管理员核对本次会话权限。');
     } else {
       body = Views[route.view](ctx);
     }
@@ -541,7 +541,7 @@
         '<aside class="sidebar">' +
           '<a class="logo" href="#/dashboard" aria-label="贸易协同工作台"><span class="badge-logo">' + U.icon('briefcase') + '</span><span class="logo-text">贸易协同<small>订单与单证管理</small></span></a>' +
           '<nav class="nav" aria-label="主导航">' + renderSidebar(user.role, segs) + '</nav>' +
-          '<div class="sidebar-note"><span class="workspace-dot"></span><span class="nav-label">演示工作区<small>刷新后恢复样例数据</small></span></div>' +
+          '<div class="sidebar-note"><span class="workspace-dot"></span><span class="nav-label">本地工作区<small>刷新后恢复样例数据</small></span></div>' +
         '</aside>' +
         '<div class="main">' +
           '<header class="topbar">' + renderTopbar(user, route.crumb) + '</header>' +

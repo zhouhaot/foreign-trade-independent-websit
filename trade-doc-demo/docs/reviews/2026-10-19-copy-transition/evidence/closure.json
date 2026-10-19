@@ -1,0 +1,206 @@
+{
+  "timestamp": "2026-10-19T03:48:10.372Z",
+  "result": "PASS",
+  "testedSourceHashes": {
+    "index.html": "c2dd2967b8f122fb3510982ac777804a4911a27eed93932358b62ca02111f8f5",
+    "js/app.js": "cb485533b753c63fa4a1d7a251af92122c4e38d522c60b1f3cd0af195c986e8b",
+    "js/mock-data.js": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f",
+    "js/utils.js": "618ff4a4f3d3794eddb76493a865fea7e84cbb4c477c921e69f132715209a0da",
+    "js/views-core.js": "f8dfee682e870dea71072c7cd87f63e21e0d3765522d55669dd0f31b14d0e393",
+    "js/views-docs.js": "2e67ae8fd82373c58175c9e4c2a77b02416f2bce4659352b72f9d6ed7f100a1d",
+    "js/views-fin.js": "e1006fe380262e11fa41edc0b9849ddabcfb3ac39db7d58be56661f78c15d7e3",
+    "js/views-sales.js": "684ee7581e797156d4c9e5206102c1c032855398d20895747943a21b20d5d17a",
+    "js/views-stats.js": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40",
+    "js/views-system.js": "a040d76c25c773bd261505ef31bb5ac3dc623075be5eb42dfe8261388ae0b1b4",
+    "css/base.css": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765",
+    "css/layout.css": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+    "css/pages.css": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3",
+    "scripts/build-world-map.cjs": "7f5ccdcb4806fd5f802c5d8a0a473540067001c5d8d44b762a15cee2534f9b93",
+    "scripts/history-gate.cjs": "b0971a05f1f6988231b9c76f45cd193201acf730b04a6347446edcb28e818519",
+    "scripts/verify-approval-context.cjs": "9e36f1cf480acac926cc51d6ab7310d2a030c98324f90fa860b348dff940e427",
+    "scripts/verify-approval-modal-drafts.cjs": "e8875897cf53257c09c0c15c1adfcc2c911d8b5b4cccae7ad52d354719b375fb",
+    "scripts/verify-browser-contract.cjs": "f5d2d7a87e604b198b4dd64d9bf4c187323753d9538ff3a893ce69ff2d3e22d2",
+    "scripts/verify-browser.mjs": "c693eb5215cf1d86376db9b2ba3a3c79f1b0cc50fba3c449fb4a55726e40339a",
+    "scripts/verify-cancellation.cjs": "a04ab748dc003110b545d4fe7ed501dd8c2b553b9e085c2697e62ed8756ce688",
+    "scripts/verify-change-request-amount.cjs": "4129ea0007437fd04f78d45289228b5defa822bb2714754f39862adf61261d6b",
+    "scripts/verify-change-request.cjs": "015d5bac1034b856481956ed66115e26accc7d3d4ddc83e49c8b14e91f4dd5da",
+    "scripts/verify-context-navigation.cjs": "5c26ce07d3b0c0fcc9a7eca7cbc424de1f7f6ce53c697b99aab666cd7edbc257",
+    "scripts/verify-customer-contract.cjs": "0ef28956296f6a81106f9a1a8f6e446f7e13c4045aaa1fd141870a3c74ca6d04",
+    "scripts/verify-decimal-contract.cjs": "7aebaf9fdaf61dedf703b65e6c8229a19401e11f3c19c0b47932f4c8cffddbc1",
+    "scripts/verify-demo.cjs": "daad51f7c2c948425f37ab70e7f2b522067b099ee3dd27b5520ddaa557b7e451",
+    "scripts/verify-disabled-login.cjs": "7ddd09cf5014bd8977c61a75859c17a8ec1edd753998a4fff08a3993c6c7184f",
+    "scripts/verify-document-action-guidance.cjs": "04fa03fd921981db4f29d6332c69927c00aceb097f93244460849030fca05474",
+    "scripts/verify-document-approval-display.cjs": "3bbe12d43ec1d3fc7a6bdb354ddeeed5ee142ef305505839408b34af52ea8283",
+    "scripts/verify-document-dashboard.cjs": "426779913ed2f599a9b6cb534c6a2e767de9589b5a9bb281b6f174b8b7ceff85",
+    "scripts/verify-document-lifecycle.cjs": "01bb36ba6034efbe3f5edecc6a8422cb98da44cb4a55e09c6ca6d7d9657ce3da",
+    "scripts/verify-document-snapshots.cjs": "f5820c4fa842667e3e092bff0ec06e22ced146c045bbab8ff0d3e728165da3b9",
+    "scripts/verify-document-status-guidance.cjs": "195cedfc8afc0214ea48ccbbe3b1fb91122a71cc1709ea4c2db2192526c6f6b2",
+    "scripts/verify-document-work-bell.cjs": "cbf511757051d34aaa8a082b3ca300c7f83ddf83cf6575714b15c174ed1aada7",
+    "scripts/verify-document-work-summary.cjs": "e18d1940d4b1f9a0733c8f8682dad150ab79b3a13d3b793cf8c19e0043aef1d4",
+    "scripts/verify-document-workspace.cjs": "8a23607b2b3b9922d8db913893e54e11703feacfec664a45287a278c28c502ae",
+    "scripts/verify-draft-adapters.cjs": "a644341f7b1e2951c9dfd0ec115a75bc87a50a62ae4cad21910934be804d2e9a",
+    "scripts/verify-history-gates.cjs": "d2a0a973b9830ecb7fa168287a63c9a2b887f565e9e20fba082177c4afe88f9d",
+    "scripts/verify-inquiry-contract.cjs": "984ccae5833f7c5047ffbb9f523df0d75ea7458bba4ae3ecb75257213b4c8776",
+    "scripts/verify-login.cjs": "b647519f6d5b4fb7cae1b6aded5149e64eb13646541876946bfe540a6d4ecd3a",
+    "scripts/verify-modal-drafts.cjs": "77033a5befec8e0b7c7845c9775c1a7a1e6da29b9a5769410498c27e4b35b8d9",
+    "scripts/verify-navigation-drafts.cjs": "195355226bce2ad7b209ba4996be6ab5b64040c369dd5bb54b5b415d88be46d8",
+    "scripts/verify-order-map-origin.cjs": "be1d764de80c5abedf26d15454603bb2a22551e8450bcd689c54589d7eb1387d",
+    "scripts/verify-order-map.cjs": "481bb6dfb0697cb436e14f07e2565c3af9e55df4e6272b23d8aa6248bf5a6deb",
+    "scripts/verify-order-workspace.cjs": "75a1380fcabda1ed7e39294d41030ddbd5214fca45ff3b701e775643daff6ee5",
+    "scripts/verify-packaging-actions.cjs": "dab8e0a4e0c77116d8e1479759ceacd53cc1def9cea07010c37c9fe5cc53fd8c",
+    "scripts/verify-packaging-contract.cjs": "d64e7fa48a4cc620b31cb7250459c3fdfc62427cd3dae0d6696f1e15d802260a",
+    "scripts/verify-payments-contract.cjs": "9777a94c4c7a5922762de1256e53dd65cf40da8fe2572545ca3db7a10fd6c787",
+    "scripts/verify-product-copy.cjs": "30a93c8f426387816ca8ac72fdb643ec9c8ec80c8c847f08efea6c73479c42e2",
+    "scripts/verify-production-contract.cjs": "1d34f010192fc7e6a2e9974660be8ca67baa4d41853dfc8ccdeac7fa95729e8f",
+    "scripts/verify-progress-stages.cjs": "878647a96fc9ace55ed214050fcfb25bbbf9085ce3ae56d0532755cb82265da3",
+    "scripts/verify-quotation-contract.cjs": "957a534ce86a60af0093fceb17870f679c586bfddb48a0b1dafc19dda09fa474",
+    "scripts/verify-repricing.cjs": "49452e5cd804a86cae40606b79ab8d02103c113ef320c5352d8bead50085143f",
+    "scripts/verify-review-documents.cjs": "4b47bab632172004480d528af887b11ed0ea75132a10cd5cd7fbe387e6c8ee76",
+    "scripts/verify-review-finance.cjs": "83747226beb3e2ff91d8634bb9ec19793f4120ef807822d3b60e0b0d84a2fb02",
+    "scripts/verify-review-integrity.cjs": "3432530e69055066f9fd07fb94cdbfeb7d5819d278def45ab5356f11a3c555ea",
+    "scripts/verify-review-sales.cjs": "170b80db7d8cf68dd4e18b90629d6fdc4eeca4edcc91e76f059ec3514558c1b4",
+    "scripts/verify-review-shared.cjs": "9b37c4495588429db52d456ca4a48c95b3f3557fff9bfe6acb493c33315812c5",
+    "scripts/verify-sales-modal-drafts.cjs": "74243a84e2475c49f70dee7f215ed9b1c7bed23dafd6934540a0b69ef3424f2c",
+    "scripts/verify-session.cjs": "f26fca092a2d174d99916483eab66d2373599b1745ce9e2b6bf51b2a41e22b0f",
+    "scripts/verify-views.cjs": "1be79b969fd6f63a6175000141df8d09e68ec6044fb37a934d1f9c0129e4691f"
+  },
+  "sourceMismatches": [],
+  "mockAndCssUnchanged": true,
+  "entryResources": [
+    "css/base.css",
+    "css/layout.css",
+    "css/pages.css",
+    "js/mock-data.js",
+    "js/utils.js",
+    "js/views-core.js",
+    "js/views-sales.js",
+    "js/views-docs.js",
+    "js/views-fin.js",
+    "js/views-stats.js",
+    "js/views-system.js",
+    "js/app.js"
+  ],
+  "localLinksChecked": 38,
+  "evidenceSyntax": [
+    "browser-copy.mjs",
+    "closure-check.cjs",
+    "reviewer-probes.cjs",
+    "run-checks.cjs"
+  ],
+  "firstBrowserResult": "FAIL",
+  "firstBrowserStages": [
+    {
+      "name": "matrix",
+      "result": "PASS",
+      "checks": 100
+    },
+    {
+      "name": "business",
+      "result": "PASS",
+      "checks": 8
+    },
+    {
+      "name": "quality",
+      "result": "FAIL",
+      "checks": 11
+    }
+  ],
+  "qualityRecheckResult": "PASS",
+  "copyAcceptanceResult": "PASS",
+  "images": [
+    {
+      "filename": "login-iab-1280.jpg",
+      "sha256": "16fa1a37e78bfd709c2f959db634362092c928a58b13cdccc0d858876377d186",
+      "width": 1280,
+      "height": 900,
+      "engine": "Codex IAB",
+      "viewportRequested": {
+        "width": 1280,
+        "height": 900
+      },
+      "protocol": "HTTP",
+      "visuallyReadBy": [
+        "root",
+        "copy_independent"
+      ]
+    },
+    {
+      "filename": "map-iab-1280.jpg",
+      "sha256": "e0d09f5cd736fa875f0c779d0836008d1c4a884203a05d0eb1cce8c2092b0da1",
+      "width": 1272,
+      "height": 894,
+      "engine": "Codex IAB",
+      "viewportRequested": {
+        "width": 1280,
+        "height": 900
+      },
+      "protocol": "HTTP",
+      "visuallyReadBy": [
+        "root",
+        "copy_independent"
+      ]
+    },
+    {
+      "filename": "order-iab-1280.jpg",
+      "sha256": "d23bbb7bdb00c796a13bf16ec96ec1a80c4544ae234022461c7e4c58f3a05cff",
+      "width": 1272,
+      "height": 894,
+      "engine": "Codex IAB",
+      "viewportRequested": {
+        "width": 1280,
+        "height": 900
+      },
+      "protocol": "HTTP",
+      "visuallyReadBy": [
+        "root",
+        "copy_independent"
+      ]
+    },
+    {
+      "filename": "document-iab-1280.jpg",
+      "sha256": "cafd7bfdeaac41e67bfb89fdf1cf2950550b83cdc94732f666430792156d19b9",
+      "width": 1272,
+      "height": 894,
+      "engine": "Codex IAB",
+      "viewportRequested": {
+        "width": 1280,
+        "height": 900
+      },
+      "protocol": "HTTP",
+      "visuallyReadBy": [
+        "root",
+        "copy_independent"
+      ]
+    },
+    {
+      "filename": "password-info-iab-1280.jpg",
+      "sha256": "284d65d8e297f58ed2a93ccc8a8cfed97467909b286a8dc2bb827c5211563030",
+      "width": 1280,
+      "height": 900,
+      "engine": "Codex IAB",
+      "viewportRequested": {
+        "width": 1280,
+        "height": 900
+      },
+      "protocol": "HTTP",
+      "visuallyReadBy": [
+        "root",
+        "copy_independent"
+      ]
+    }
+  ],
+  "cleanup": {
+    "egoSpace": 19,
+    "finishedOnce": true,
+    "keptPages": [],
+    "iabViewportReset": true,
+    "iabTemporaryTabClosed": true,
+    "temporary8015Stopped": true,
+    "original8014Untouched": true
+  },
+  "limits": [
+    "First browser overall FAIL retained; later quality-only PASS is separate.",
+    "Ego screenshot TOOL_ERROR retained; five saved JPEGs come from IAB.",
+    "Static frontend, not production approval; file protocol not tested."
+  ]
+}

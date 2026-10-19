@@ -38,18 +38,18 @@
           '<div class="login-flow-step is-order">' + U.icon('briefcase') + '<span>生成订单</span></div></div>' +
           '<div class="login-flow-branches"><div>' + U.icon('file') + '<span>单证制作与审核</span></div><span class="login-flow-parallel">并行推进</span><div>' + U.icon('wallet') + '<span>收款登记与跟踪</span></div></div>' +
         '</div></div>' +
-        '<div class="login-story-foot"><span class="login-local-dot" aria-hidden="true"></span>本地演示 · 数据刷新后还原</div>' +
-      '</section><section class="login-panel" aria-label="登录演示工作台"><div class="login-box">' +
+        '<div class="login-story-foot"><span class="login-local-dot" aria-hidden="true"></span>本地会话 · 刷新后恢复样例数据</div>' +
+      '</section><section class="login-panel" aria-label="登录工作台"><div class="login-box">' +
       '<h1>欢迎回来</h1>' +
       '<div class="sub-title">外贸订单与单证管理系统</div>' +
-      '<div class="form-item"><label for="login-account">账号</label><input class="input" id="login-account" value="demo" autocomplete="username"><div class="field-error"></div></div>' +
-      '<div class="form-item"><label for="login-password">密码</label><input class="input" id="login-password" type="password" value="demo123" autocomplete="current-password"><div class="field-error"></div></div>' +
-      '<div class="login-role-quick"><label class="lr-title" for="login-role">演示角色</label>' +
+      '<div class="form-item"><label for="login-account">账号</label><input class="input" id="login-account" value="sample" autocomplete="username"><div class="field-error"></div></div>' +
+      '<div class="form-item"><label for="login-password">密码</label><input class="input" id="login-password" type="password" value="sample123" autocomplete="current-password"><div class="field-error"></div></div>' +
+      '<div class="login-role-quick"><label class="lr-title" for="login-role">岗位</label>' +
       '<div class="login-role-control"><select class="select login-role-select" id="login-role" data-action="login-pick-role" aria-describedby="login-role-hint">' + options + '</select>' +
       '<span class="login-role-chevron" aria-hidden="true">' + U.icon('chevron') + '</span></div>' +
-      '<div class="login-role-hint" id="login-role-hint" aria-live="polite">' + (selectedUser ? '演示部门：' + esc(selectedUser.dept) : '暂无启用的演示账号，请联系管理员核对账号状态。') + '</div></div>' +
+      '<div class="login-role-hint" id="login-role-hint" aria-live="polite">' + (selectedUser ? '部门：' + esc(selectedUser.dept) : '暂无启用的账号，请联系管理员核对账号状态。') + '</div></div>' +
       '<button type="button" class="btn btn-primary login-btn" data-action="login-submit"' + (selectedUser ? '' : ' disabled') + '>进入工作台' + U.icon('arrow') + '</button>' +
-      '<div class="login-tip">' + U.icon('shield') + '<span>这是原型演示环境，不校验真实账号密码。选择角色后即可体验对应工作台。</span></div>' +
+      '<div class="login-tip">' + U.icon('shield') + '<span>未接入认证服务，不校验账号密码，请勿填写真实凭据。选择岗位后进入对应工作台。</span></div>' +
       '</div></section></div>';
   };
   Actions['login-pick-role'] = function (el, event) {
@@ -57,9 +57,9 @@
     var picked = el.value;
     if (!Object.prototype.hasOwnProperty.call(M.roles, picked)) return;
     var user = U.roleUser(picked);
-    if (!user) { U.toast('该角色没有启用的演示账号，请选择其他角色。', 'warning'); return; }
+    if (!user) { U.toast('该岗位没有启用的账号，请选择其他岗位。', 'warning'); return; }
     window.AppUI.loginRole = picked;
-    document.getElementById('login-role-hint').textContent = '演示部门：' + user.dept;
+    document.getElementById('login-role-hint').textContent = '部门：' + user.dept;
   };
   Actions['login-submit'] = function (el) {
     if (el.disabled || el.classList.contains('is-loading')) return;
@@ -74,12 +74,12 @@
     var picker = document.getElementById('login-role');
     var role = picker.value;
     if (!Object.prototype.hasOwnProperty.call(M.roles, role)) {
-      U.toast('请选择有效的演示角色', 'error');
+      U.toast('请选择有效的岗位', 'error');
       picker.focus();
       return;
     }
     var user = U.roleUser(role);
-    if (!user) { U.toast('该角色没有启用的演示账号，请选择其他角色。', 'warning'); picker.focus(); return; }
+    if (!user) { U.toast('该岗位没有启用的账号，请选择其他岗位。', 'warning'); picker.focus(); return; }
     window.AppUI.loginRole = role;
     var entered = false, loginIdentity = null;
     var sourceIdentity = window.__demoUser, sourceSession = JSON.stringify(U.currentUser());
@@ -95,7 +95,7 @@
       var current = U.currentUser();
       if (!entered || !available() || window.__demoUser !== loginIdentity || !current || JSON.stringify(current) !== JSON.stringify(loginIdentity)) {
         if (entered && window.__demoUser === loginIdentity && document.getElementById('login-role') === picker && current && JSON.stringify(current) === JSON.stringify(loginIdentity)) U.clearUser();
-        if (document.getElementById('login-role') === picker) { picker.disabled = false; U.toast('演示账号或登录页面已变化，请重新选择角色后登录。', 'warning'); }
+        if (document.getElementById('login-role') === picker) { picker.disabled = false; U.toast('账号或登录页面已变化，请重新选择岗位后登录。', 'warning'); }
         return;
       }
       U.toast('登录成功，当前角色：' + M.roles[role] + '（' + user.name + '）');
@@ -164,7 +164,7 @@
     if (!orders.length) return html + '<p class="order-map-empty">暂无订单记录</p>';
     return html + '<p class="order-map-list-hint">订单明细' + (orders.length > 3 ? ' · 向下滚动查看全部' : '') + '</p><div class="order-map-list" aria-label="' + esc(title) + '订单">' + orders.map(function (o) {
       var amount = U.transactionAmounts(o.items), origin = U.orderShippingOrigin(o);
-      return '<a class="order-map-order" href="#/orders/' + encodeURIComponent(o.id) + '"><span><b>' + esc(o.id) + '</b><span>' + esc(U.customerName(o.customerId).split('（')[0]) + '</span><span class="order-map-origin-text">' + (origin.ok ? '起运：' + esc(origin.name) + (origin.demoSynthetic ? '（演示）' : '') : esc(origin.error)) + '</span></span><span class="order-map-order-end"><strong>' + (amount.ok ? U.fmt(amount.total) + ' ' + esc(o.currency) : '金额待核对') + '</strong>' + tag(o.status) + '</span></a>';
+      return '<a class="order-map-order" href="#/orders/' + encodeURIComponent(o.id) + '"><span><b>' + esc(o.id) + '</b><span>' + esc(U.customerName(o.customerId).split('（')[0]) + '</span><span class="order-map-origin-text">' + (origin.ok ? '起运：' + esc(origin.name) + (origin.demoSynthetic ? '（合成数据）' : '') : esc(origin.error)) + '</span></span><span class="order-map-order-end"><strong>' + (amount.ok ? U.fmt(amount.total) + ' ' + esc(o.currency) : '金额待核对') + '</strong>' + tag(o.status) + '</span></a>';
     }).join('') + '</div>';
   }
   function orderMap(user) {
@@ -178,7 +178,7 @@
         '<path class="order-map-leader" d="M' + x + ',' + y + 'l' + g.dx + ',' + g.dy + '"/>';
     }).join('');
     var routeHtml = data.routes.map(function (route, i) {
-      return '<g data-order-map-route="' + esc(route.orderId) + '" data-country="' + route.country + '"' + (selected && selected !== route.country ? ' class="is-dimmed"' : '') + '><title>' + esc(route.orderId + ' · ' + route.origin.name + ' → ' + data.groups.find(function (g) { return g.key === route.country; }).name + (route.origin.demoSynthetic ? '（合成演示起运地）' : '')) + '</title>' + route.segments.map(function (segment) {
+      return '<g data-order-map-route="' + esc(route.orderId) + '" data-country="' + route.country + '"' + (selected && selected !== route.country ? ' class="is-dimmed"' : '') + '><title>' + esc(route.orderId + ' · ' + route.origin.name + ' → ' + data.groups.find(function (g) { return g.key === route.country; }).name + (route.origin.demoSynthetic ? '（合成数据）' : '')) + '</title>' + route.segments.map(function (segment) {
         return '<path class="order-map-trail" d="' + segment.d + '"' + (segment.arrives ? ' marker-end="url(#order-map-arrow)"' : '') + '/><path class="order-map-flow" style="animation-delay:' + Math.round(i * 120 + segment.startT * 2800) + 'ms;animation-duration:' + Math.round((segment.endT - segment.startT) * 2800) + 'ms" pathLength="1" d="' + segment.d + '"/>';
       }).join('') + '</g>';
     }).join('');
@@ -193,8 +193,8 @@
     var points = countries.map(function (g) {
       return '<button type="button" class="order-map-pin' + (selected === g.key ? ' is-selected' : '') + '" style="left:' + ((g.lon + 180) / 360 * 100 + g.dx / 10) + '%;top:' + ((85 - g.lat) / 145 * 100 + g.dy / 4.3) + '%" data-action="order-map-country" data-country="' + g.key + '" aria-pressed="' + (selected === g.key) + '" aria-controls="order-map-detail">' + g.name + '<b>' + g.orders.length + '</b></button>';
     }).join('');
-    return '<section class="card order-map" id="order-map" aria-labelledby="order-map-title"><div class="order-map-head"><div><h3 id="order-map-title">全球订单<span class="record-count">' + data.orders.length + ' 笔 · ' + data.located + ' 个国家</span></h3><p>按客户国家分布 · 演示全量样例 · 含所有订单状态</p></div><button class="btn btn-sm" type="button" data-action="order-map-replay" aria-describedby="order-map-origin-summary"' + (data.routes.length ? '' : ' disabled') + '>重播流向</button></div>' +
-      '<p class="order-map-origin-summary" id="order-map-origin-summary">起运地 → 客户国家 · ' + data.routes.length + ' 笔可显示流向' + (data.originPending ? ' · ' + data.originPending + ' 笔起运地待补／待核对' : '') + (data.routePending > data.originPending ? ' · ' + (data.routePending - data.originPending) + ' 笔目的地／显示范围待核对' : '') + (data.originSynthetic ? ' · ' + data.originSynthetic + ' 笔起运地为合成演示样例' : '') + '</p>' +
+    return '<section class="card order-map" id="order-map" aria-labelledby="order-map-title"><div class="order-map-head"><div><h3 id="order-map-title">全球订单<span class="record-count">' + data.orders.length + ' 笔 · ' + data.located + ' 个国家</span></h3><p>按客户国家分布 · 全量样例数据 · 含所有订单状态</p></div><button class="btn btn-sm" type="button" data-action="order-map-replay" aria-describedby="order-map-origin-summary"' + (data.routes.length ? '' : ' disabled') + '>重播流向</button></div>' +
+      '<p class="order-map-origin-summary" id="order-map-origin-summary">起运地 → 客户国家 · ' + data.routes.length + ' 笔可显示流向' + (data.originPending ? ' · ' + data.originPending + ' 笔起运地待补／待核对' : '') + (data.routePending > data.originPending ? ' · ' + (data.routePending - data.originPending) + ' 笔目的地／显示范围待核对' : '') + (data.originSynthetic ? ' · ' + data.originSynthetic + ' 笔合成起运数据' : '') + '</p>' +
       '<div class="order-map-layout"><div class="order-map-visual"><div class="order-map-canvas"><img src="assets/maps/world-land.svg" alt="" aria-hidden="true"><svg viewBox="0 0 1000 430" aria-hidden="true" focusable="false"><defs><marker id="order-map-arrow" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,-3L7,0L0,3" fill="none" stroke="currentColor" stroke-width="1.2"/></marker></defs>' + routeHtml + lines + '</svg>' + points + originLabels +
       (!data.orders.length ? '<p class="order-map-no-points">暂无订单分布</p>' : !countries.length ? '<p class="order-map-no-points">地点待补，订单仍可在右侧查阅</p>' : '') +
       '</div><div class="order-map-countries" aria-label="按国家筛选订单"><button type="button" class="btn btn-sm" data-action="order-map-country" data-country="" aria-pressed="' + !selected + '" aria-controls="order-map-detail">全部</button>' + data.groups.map(function (g) {
@@ -252,7 +252,7 @@
       cards.push(statCard('通过单证记录', M.documents.filter(function (d) { return d.status === '已通过'; }).length, '含历史版本 · 导出资格看单证页', '#/documents', 'accent-green'));
     } else if (role === 'fin') {
       cards.push(statCard('待收款订单', unpaidOrders.length, '存在未收金额', '#/payments', 'accent-red'));
-      cards.push(statCard('本次演示新增收款', U.sessionPaymentCount(), '即时更新 · 刷新后归零', '#/payments', 'accent-blue'));
+      cards.push(statCard('本次会话新增收款', U.sessionPaymentCount(), '即时更新 · 刷新后归零', '#/payments', 'accent-blue'));
       cards.push(statCard('已结清订单', M.orders.filter(function (o) { return U.payStatus(o) === '已结清'; }).length, '全部收讫', '#/payments', 'accent-green'));
       cards.push(statCard('近期新增订单', recentOrders.length, '近 4 笔新订单', '#/orders', 'accent-orange'));
     } else if (role === 'sales') {
@@ -264,7 +264,7 @@
       cards.push(statCard('系统用户', M.users.length, '启用 ' + M.users.filter(function (u) { return u.enabled; }).length + ' 人', '#/system/users', 'accent-blue'));
       cards.push(statCard('系统角色', Object.keys(M.roles).length, '五类业务角色', '#/system/roles', 'accent-green'));
       cards.push(statCard('字典项', M.dicts.length, '基础数据字典', '#/system/dicts', 'accent-orange'));
-      cards.push(statCard('运行状态', '正常', '演示环境', '#/dashboard', 'accent-green'));
+      cards.push(statCard('运行状态', '正常', '本地会话', '#/dashboard', 'accent-green'));
     }
 
     /* 待办列表 */
@@ -344,7 +344,7 @@
         '<div class="dash-main">' +
           '<section class="card work-queue' + (docWork ? ' doc-work-summary' : '') + '"><div class="card-title home-card-head"><div><h3>' + (docWork ? '当前可办理制单事项' : '待处理事项') + '<span class="record-count">' + myTodos.length + ' 项</span></h3><p>' + (docWork ? '仅列具备当前编辑资格的版本，不代表个人分派。' : '从这里接续你的业务工作') + '</p></div></div>' + todoHtml + '</section>' +
           (role !== 'admin' ? '<section class="card recent-orders"><div class="card-title home-card-head"><div><h3>近期订单</h3><p>四笔最新订单，三类进度独立跟踪</p></div><a class="home-text-link" href="#/orders">全部订单' + U.icon('arrow') + '</a></div><div class="table-wrap"><table class="table"><thead><tr><th>订单 / 创建日期</th><th>客户</th><th class="num">成交金额</th><th>订单进度</th><th>单证进度</th><th>收款进度</th></tr></thead><tbody>' + orderRows + '</tbody></table></div></section>' :
-            '<section class="card recent-orders"><div class="card-title home-card-head"><div><h3>演示账号</h3><p>按角色检查权限与页面呈现</p></div><a class="home-text-link" href="#/system/users">用户管理' + U.icon('arrow') + '</a></div><div class="table-wrap"><table class="table"><thead><tr><th>姓名</th><th>角色</th><th>部门</th><th>状态</th></tr></thead><tbody>' + userRows + '</tbody></table></div></section>') +
+            '<section class="card recent-orders"><div class="card-title home-card-head"><div><h3>账号列表</h3><p>按角色检查权限与页面呈现</p></div><a class="home-text-link" href="#/system/users">用户管理' + U.icon('arrow') + '</a></div><div class="table-wrap"><table class="table"><thead><tr><th>姓名</th><th>角色</th><th>部门</th><th>状态</th></tr></thead><tbody>' + userRows + '</tbody></table></div></section>') +
           referenceHtml +
         '</div>' +
         '<aside class="dash-side"><section class="card home-shortcuts"><div class="card-title"><h3>业务入口</h3></div><div class="shortcut-list">' + shortcutHtml + '</div></section>' +
@@ -381,7 +381,7 @@
     }).join('');
     if (!rows) rows = U.emptyRow(7, f.kw || f.country ? '没有符合筛选条件的结果' : '暂无客户记录');
     return '<div class="page-head"><h2>客户管理</h2><div class="actions">' +
-      (window.App.user.role === 'sales' ? '<button class="btn btn-unavailable" disabled title="当前原型只支持维护已有客户">新建客户 · 演示只读</button>' : '') +
+      (window.App.user.role === 'sales' ? '<button class="btn btn-unavailable" disabled title="客户新建服务尚未接入，仅可维护已有客户">新建客户 · 未开放</button>' : '') +
       '</div></div>' +
       '<div class="filter-bar">' +
       filterInput('客户名称/联系人', 'f-kw', f.kw, '输入关键字') +
@@ -407,7 +407,7 @@
   Actions['cust-reset'] = function () { window.AppUI.customers = { page: 1, filters: {} }; window.App.rerender(); };
   Actions['cust-page'] = function (el) { ui('customers').page = +el.dataset.page; window.App.rerender(); };
   Actions['cust-new'] = function () {
-    U.toast('演示提示：新建客户需接入主数据系统，原型中暂未开放', 'warning');
+    U.toast('新建客户尚未开放，需接入主数据服务。', 'warning');
   };
 
   /* ==================== 客户详情 / 编辑 ==================== */
@@ -495,7 +495,7 @@
     Object.assign(ticket.customer, candidate);
     savedCustomerForms.add(form);
     if (window.App.markDraftClean) window.App.markDraftClean();
-    U.toast('客户资料已保存（演示数据仅在本次会话内存中生效）');
+    U.toast('客户资料已保存（仅在本次会话内存中生效，刷新后还原）');
     window.App.rerender();
   });
 

@@ -161,19 +161,36 @@ async function run() {
   {
     const t = setup(); t.iq = t.c.U.inquiry('INQ2026006'); t.c.location.hash = '#/inquiries/' + encodeURIComponent(t.iq.id);
     assert.ok(t.iq && t.iq.demoSynthetic, 'explicit H17 fixture exists');
-    assert.match(t.c.Views.inquiries(), /合成演示样例/);
+    assert.match(t.c.Views.inquiries(), /合成数据/);
     assert.match(t.c.Views.inquiries(), /样例加入日期/);
-    assert.match(t.c.Views.inquiryDetail({ params: [t.iq.id], query: {}, user: t.c.App.user }), /合成演示样例/);
+    assert.match(t.c.Views.inquiryDetail({ params: [t.iq.id], query: {}, user: t.c.App.user }), /合成数据/);
     assert.match(t.c.Views.inquiryDetail({ params: [t.iq.id], query: {}, user: t.c.App.user }), /样例加入日期/);
     assert.match(t.c.Views.inquiryDetail({ params: [t.iq.id], query: {}, user: t.c.App.user }), />生成报价草稿<\/button>/);
-    const ok = open(t); assert.ok(ok); assert.match(t.modal.firstElementChild.innerHTML, /合成演示样例/);
+    const beforeView = data(t), detail = t.c.Views.inquiryDetail({ params: [t.iq.id], query: {}, user: t.c.App.user });
+    assert.match(detail, /非真实客户需求/); assert.doesNotMatch(detail, /合成演示/);
+    assert.equal(data(t), beforeView, 'known synthetic wording is display-only; raw fixture is preserved');
+    const ok = open(t); assert.ok(ok); assert.match(t.modal.firstElementChild.innerHTML, /合成数据/);
     t.click(ok); await t.flush(); const q = t.c.U.quote(t.iq.quoteId);
     assert.equal(q.demoSynthetic, true); assert.match(q.remark, /非真实客户需求/); assert.equal(t.c.U.transactionAmounts(q.items).totalCents, 54500);
     q.remark = '业务员编辑后的备注';
     t.c.AppUI.quotes = { page: 1, filters: { kw: q.id } };
-    assert.match(t.c.Views.quotes(), /<span class="cell-secondary"><span class="tag[^>]*">合成演示样例<\/span><\/span>/);
-    assert.match(t.c.Views.quoteDetail({ params: [q.id], query: {}, user: t.c.App.user }), /合成演示样例/);
-    assert.match(t.c.Views.quoteEdit({ params: [q.id], query: {}, user: t.c.App.user }), /合成演示样例/); cases++;
+    assert.match(t.c.Views.quotes(), /<span class="cell-secondary"><span class="tag[^>]*">合成数据<\/span><\/span>/);
+    assert.match(t.c.Views.quoteDetail({ params: [q.id], query: {}, user: t.c.App.user }), /合成数据/);
+    assert.match(t.c.Views.quoteEdit({ params: [q.id], query: {}, user: t.c.App.user }), /合成数据/); cases++;
+  }
+  {
+    const t = setup(); t.iq = t.c.U.inquiry('INQ2026006');
+    t.iq.source = '客户的演示活动'; t.iq.message = '客户要求展示方案，不应改写客户原文。';
+    const before = data(t), html = t.c.Views.inquiryDetail({ params: [t.iq.id], query: {}, user: t.c.App.user });
+    assert.match(html, /客户的演示活动/); assert.match(html, /客户要求展示方案，不应改写客户原文。/);
+    assert.equal(data(t), before, 'edited user source/message remain exact and read-only'); cases++;
+  }
+  {
+    const t = setup(); t.iq.source = '合成演示样例';
+    t.iq.message = '【合成演示，非真实客户需求】用于体验询盘生成报价：示意100个保温杯与50个露营灯；未发生客户确认、订单或单证。';
+    const before = data(t), html = t.c.Views.inquiryDetail({ params: [t.iq.id], query: {}, user: t.c.App.user });
+    assert.match(html, /合成演示样例/); assert.match(html, /用于体验询盘生成报价/);
+    assert.equal(data(t), before, 'same words on another inquiry must not trigger fixture mapping'); cases++;
   }
   console.log(`PASS: inquiry contract ${cases} actual modal/Promise cases; canonical source/query and exact hash drift with invalidated tickets, sales roles, bidirectional source, full candidate/ref currency/precision, actor/session/object/content drift, cancel/duplicates, collision-safe USD/EUR fractional source-consistent draft (Node DOM fixture only)`);
 }

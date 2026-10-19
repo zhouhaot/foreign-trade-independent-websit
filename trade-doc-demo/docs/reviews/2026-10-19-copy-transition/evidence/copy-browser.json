@@ -1,0 +1,61 @@
+{
+  "startedAt": "2026-10-19T03:40:41.907Z",
+  "engine": "ego-browser",
+  "cases": [
+    {
+      "name": "neutral login with authentication and refresh boundary",
+      "result": "PASS"
+    },
+    {
+      "name": "native login and explicit per-order synthetic origins",
+      "result": "PASS"
+    },
+    {
+      "name": "order progress and six native tabs",
+      "result": "PASS"
+    },
+    {
+      "name": "native export record, retained old history, honest no-file result",
+      "result": "PASS"
+    },
+    {
+      "name": "password explanation native confirm makes zero business writes",
+      "result": "PASS",
+      "beforeSha256": "8251fe087f64dc42fa0afa70e19f0d2e738493c96e479e5f2f1c452541feae8b"
+    }
+  ],
+  "captures": [
+    {
+      "name": "login-1280",
+      "result": "TOOL_ERROR",
+      "error": "CDP request timed out: Page.captureScreenshot"
+    },
+    {
+      "name": "map-1440",
+      "result": "SKIPPED",
+      "reason": "first screenshot API failed"
+    },
+    {
+      "name": "order-1280",
+      "result": "SKIPPED",
+      "reason": "first screenshot API failed"
+    },
+    {
+      "name": "document-1280",
+      "result": "SKIPPED",
+      "reason": "first screenshot API failed"
+    },
+    {
+      "name": "password-1366",
+      "result": "SKIPPED",
+      "reason": "first screenshot API failed"
+    }
+  ],
+  "failures": [],
+  "reset": {
+    "orders": 7,
+    "documents": 11
+  },
+  "result": "PASS",
+  "finishedAt": "2026-10-19T03:41:13.585Z"
+}

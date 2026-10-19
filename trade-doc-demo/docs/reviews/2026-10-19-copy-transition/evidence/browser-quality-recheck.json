@@ -1,0 +1,458 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T03:39:41.445Z",
+  "engine": "ego-browser",
+  "result": "PASS",
+  "stages": [
+    {
+      "name": "quality",
+      "result": "PASS",
+      "checks": [
+        {
+          "name": "1360/1361 desktop directory boundaries",
+          "result": "PASS",
+          "observations": [
+            {
+              "width": 1360,
+              "bodyWidth": 1352,
+              "directoryButtonVisible": true,
+              "paperWidth": 760
+            },
+            {
+              "width": 1361,
+              "bodyWidth": 1353,
+              "directoryButtonVisible": false,
+              "paperWidth": 701
+            }
+          ]
+        },
+        {
+          "name": "Map native country filter and keyboard",
+          "result": "PASS"
+        },
+        {
+          "name": "Runtime reduced motion and normal authored motion",
+          "result": "PASS"
+        },
+        {
+          "name": "Search role filter, IME, permitted selected result and focus return",
+          "result": "PASS",
+          "selected": "#/documents/D-CI2026001-V1"
+        },
+        {
+          "name": "Order filters/density/sidebar preserve input; six tabs retain three progress tracks",
+          "result": "PASS"
+        },
+        {
+          "name": "Document focus retains input; protected role switch removes edit controls",
+          "result": "PASS"
+        },
+        {
+          "name": "Approved revision cancel then V2 preserves V1",
+          "result": "PASS"
+        },
+        {
+          "name": "Payment validation and independent existing-order receipt sum",
+          "result": "PASS"
+        },
+        {
+          "name": "Toast pointer transparency, live-region semantics and native submit",
+          "result": "PASS",
+          "wrap": "none",
+          "items": [
+            {
+              "pointer": "none",
+              "role": "status"
+            },
+            {
+              "pointer": "none",
+              "role": "status"
+            }
+          ]
+        },
+        {
+          "name": "Disabled last document account leaves login usable; enabled admin relogs without reload",
+          "result": "PASS"
+        },
+        {
+          "name": "Thirty warm navigation diagnostics and same-origin runtime resources",
+          "result": "PASS",
+          "diagnostic": {
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+            "orders": 7,
+            "documents": 11,
+            "samples": [
+              {
+                "route": "#/dashboard",
+                "ms": 0
+              },
+              {
+                "route": "#/orders",
+                "ms": 7.399999976158142
+              },
+              {
+                "route": "#/stats",
+                "ms": 6.200000047683716
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 5.899999976158142
+              },
+              {
+                "route": "#/orders",
+                "ms": 5.300000071525574
+              },
+              {
+                "route": "#/stats",
+                "ms": 4.099999904632568
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 4.700000047683716
+              },
+              {
+                "route": "#/orders",
+                "ms": 5.399999976158142
+              },
+              {
+                "route": "#/stats",
+                "ms": 4.100000023841858
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 5.100000023841858
+              },
+              {
+                "route": "#/orders",
+                "ms": 4.699999928474426
+              },
+              {
+                "route": "#/stats",
+                "ms": 4
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 4
+              },
+              {
+                "route": "#/orders",
+                "ms": 6.200000047683716
+              },
+              {
+                "route": "#/stats",
+                "ms": 4.299999952316284
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 4.200000047683716
+              },
+              {
+                "route": "#/orders",
+                "ms": 4.799999952316284
+              },
+              {
+                "route": "#/stats",
+                "ms": 4.900000095367432
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 4.199999928474426
+              },
+              {
+                "route": "#/orders",
+                "ms": 4.600000023841858
+              },
+              {
+                "route": "#/stats",
+                "ms": 5.199999928474426
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.9000000953674316
+              },
+              {
+                "route": "#/orders",
+                "ms": 5.199999928474426
+              },
+              {
+                "route": "#/stats",
+                "ms": 4.5
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 4.700000047683716
+              },
+              {
+                "route": "#/orders",
+                "ms": 5
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.6999999284744263
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 4.200000047683716
+              },
+              {
+                "route": "#/orders",
+                "ms": 5.600000023841858
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.899999976158142
+              }
+            ],
+            "heapBefore": 5755262,
+            "heapAfter": 6383273,
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8015/css/base.css?v=20261019-review-2",
+                "duration": 11.600000023841858,
+                "bytes": 20245
+              },
+              {
+                "url": "http://127.0.0.1:8015/css/layout.css?v=20261019-review",
+                "duration": 11.099999904632568,
+                "bytes": 16505
+              },
+              {
+                "url": "http://127.0.0.1:8015/css/pages.css?v=20261019-review",
+                "duration": 13.299999952316284,
+                "bytes": 50264
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/mock-data.js?v=20261019-copy",
+                "duration": 14,
+                "bytes": 36413
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/utils.js?v=20261019-copy",
+                "duration": 15.199999928474426,
+                "bytes": 56300
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-core.js?v=20261019-copy",
+                "duration": 14.800000071525574,
+                "bytes": 52043
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-docs.js?v=20261019-copy",
+                "duration": 16.600000023841858,
+                "bytes": 62403
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-sales.js?v=20261019-copy",
+                "duration": 16.200000047683716,
+                "bytes": 93678
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-fin.js?v=20261019-copy",
+                "duration": 18.700000047683716,
+                "bytes": 43256
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-stats.js?v=20261019-copy",
+                "duration": 19.600000023841858,
+                "bytes": 8282
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-system.js?v=20261019-copy",
+                "duration": 20.399999976158142,
+                "bytes": 10239
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/app.js?v=20261019-copy",
+                "duration": 21,
+                "bytes": 43784
+              },
+              {
+                "url": "http://127.0.0.1:8015/assets/maps/world-land.svg",
+                "duration": 2.8000000715255737,
+                "bytes": 29932
+              }
+            ]
+          }
+        }
+      ],
+      "startedAt": "2026-10-19T03:39:41.490Z",
+      "finishedAt": "2026-10-19T03:40:29.883Z"
+    }
+  ],
+  "failures": [],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "PASS"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "PASS"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "PASS"
+    }
+  ],
+  "resets": [
+    {
+      "name": "quality:1360/1361 desktop directory boundaries",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Map native country filter and keyboard",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Runtime reduced motion and normal authored motion",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Search role filter, IME, permitted selected result and focus return",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Order filters/density/sidebar preserve input; six tabs retain three progress tracks",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Document focus retains input; protected role switch removes edit controls",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Approved revision cancel then V2 preserves V1",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Payment validation and independent existing-order receipt sum",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Toast pointer transparency, live-region semantics and native submit",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Disabled last document account leaves login usable; enabled admin relogs without reload",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Thirty warm navigation diagnostics and same-origin runtime resources",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    }
+  ],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 19,
+  "page": "p1",
+  "base": "http://127.0.0.1:8015/index.html",
+  "requestedPhases": [
+    "quality"
+  ],
+  "notRequested": [
+    "matrix",
+    "business"
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-copy-transition/evidence/browser-quality-recheck.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "media": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "viewport": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "listener": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    }
+  },
+  "finishedAt": "2026-10-19T03:40:30.061Z"
+}

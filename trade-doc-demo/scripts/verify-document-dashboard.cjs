@@ -162,7 +162,7 @@ async function run() {
       const href = a.getAttribute('href'); assert.ok(current.c.U.moduleEnabled(role, current.c.U.moduleForPath(href, role)), role + '入口遵循当前权限');
     }
     if (role === 'sales') { assert.ok(!currentHtml.includes('href="#/inquiries/INQ2026005"')); assert.ok(currentHtml.includes('href="#/inquiries/INQ2026006"')); }
-    if (role === 'fin') { assert.match(currentHtml, /本次演示新增收款/); assert.ok(!currentHtml.includes('2026-09 收款笔数')); }
+    if (role === 'fin') { assert.match(currentHtml, /本次会话新增收款/); assert.ok(!currentHtml.includes('2026-09 收款笔数')); }
     if (role === 'admin') { assert.match(currentHtml, /管理员只维护系统配置，不参与业务审批/); assert.equal(current.app.querySelector('[data-action="doc-approve"]'), null); }
     assert.equal(data(current), before); cases++;
   }

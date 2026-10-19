@@ -69,7 +69,7 @@
         opts.map(function (v, i) { return '<option value="' + v + '" ' + (cur === v ? 'selected' : '') + '>' + (labels ? labels[i] : v) + '</option>'; }).join('') + '</select>';
     }
     return '<div class="page-head"><h2>单证管理</h2><div class="actions">' +
-      '<span class="muted small">支持商业发票与装箱单；审核通过后方可导出</span></div></div>' +
+      '<span class="muted small">支持商业发票与装箱单；审核通过后可登记导出记录</span></div></div>' +
       (orderId ? '<div class="card doc-order-context"><b>订单 ' + esc(orderId) + '</b><span>仅显示本订单单证版本</span>' +
         (selectedOrder && window.App.user.role === 'doc' && ['CI', 'PL'].some(function (type) { return !M.documents.some(function (d) { return d.orderId === orderId && d.type === type; }); })
           ? '<button class="btn btn-primary" data-action="doc-create" data-order="' + esc(orderId) + '">创建缺失的 CI / PL 草稿</button>' : '') +
@@ -218,7 +218,7 @@
     /* 中：状态横幅 + 纸张预览 */
     var banner = '';
     if (d.status === '已退回') banner = '<div class="doc-status-banner reject"><b>已退回：</b>' + esc(d.opinion || '') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）' + (policy.canEdit && policy.canSubmit ? '<br>请按意见修订后重新提交审核。<br>' + (policy.canReform ? '也可申请重新制单生成新版本。' : esc(policy.reasons.reform)) : '<br>当前只读：' + esc(policy.reasons.edit)) + '</div>';
-    else if (d.status === '已通过') banner = '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (policy.canExport ? '当前满足导出演示条件。' : '历史审核结果保留，当前导出资格见操作区。') + '</div>';
+    else if (d.status === '已通过') banner = '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (policy.canExport ? '当前可登记导出记录。' : '历史审核结果保留，当前登记资格见操作区。') + '</div>';
     else if (d.status === '待审核') banner = '<div class="doc-status-banner review"><b>待审核：</b>制单人 ' + esc(d.maker) + ' 已于 ' + esc(d.submittedAt) + ' 提交审核，等待业务主管处理。</div>';
     else if (d.status === '草稿' || d.status === '制作中') banner = '<div class="doc-status-banner draft"><b>' + (d.status === '草稿' ? '草稿' : '制作中') + '：</b>单证尚未送审。订单带入的客户、商品、金额等交易数据只读；' + (policy.canEdit ? (d.type === 'CI' ? '唛头与备注字段可编辑。' : '唛头、包装与备注字段可编辑。') : '当前只读：' + esc(policy.reasons.edit)) + '</div>';
     else banner = '<div class="doc-status-banner draft"><b>状态待核对：</b>当前版本状态为「' + esc(d.status) + '」，不能据此推断审核决定。</div>';
@@ -228,7 +228,7 @@
     /* 审核留痕 */
     var history = d.history.slice().reverse().sort(function (a, b) { return b.time.localeCompare(a.time); }).map(function (h) {
       return '<div class="tl-item"><div class="tl-meta"><span>' + esc(h.time) + '</span><span>' + esc(h.person) + '</span></div>' +
-        '<div class="tl-content">' + esc(h.action) + '</div>' +
+        '<div class="tl-content">' + esc(h.action === '导出 PDF（演示）' ? '登记导出记录（未生成文件）' : h.action) + '</div>' +
         (h.opinion ? '<div class="tl-opinion">' + esc(h.opinion) + '</div>' : '') + '</div>';
     }).join('');
 
@@ -360,11 +360,11 @@
     }
     if (d.type === 'PL' && role === 'doc') html += '<div id="doc-packing-feedback" class="field-error packing-feedback" role="alert" tabindex="-1"></div>';
 
-    /* 审核历史与实时订单/版本资格分开判断；导出仍为内存演示。 */
+    /* 审核历史与实时订单/版本资格分开判断；当前仅登记内存留痕，不生成文件。 */
     var canExport = policy.canExport;
-    html += '<div class="ablock"><div class="ab-title">导出</div>' +
-      '<button class="btn ' + (canExport ? 'btn-primary' : '') + '" data-action="doc-export" data-id="' + d.id + '" ' + (canExport ? '' : 'disabled') + '>导出 PDF（演示）</button>' +
-      '<div class="readonly-hint">' + (canExport ? '满足当前资格；演示仅留痕，不生成文件。' : esc(policy.reasons.export)) + '</div></div>';
+    html += '<div class="ablock"><div class="ab-title">登记导出记录</div>' +
+      '<button class="btn ' + (canExport ? 'btn-primary' : '') + '" data-action="doc-export" data-id="' + d.id + '" ' + (canExport ? '' : 'disabled') + '>登记导出记录</button>' +
+      '<div class="readonly-hint">' + (canExport ? '仅记录操作，不生成文件。' : esc(policy.reasons.export) + ' 当前不生成文件。') + '</div></div>';
     return html + reference;
   }
   function siblingsForReview(d, user) {
@@ -763,7 +763,7 @@
       U.toast('退回修改必须填写具体审核意见', 'error'); return;
     }
     U.confirm({ title: pass ? '审核通过确认' : '退回修改确认', danger: !pass,
-      message: pass ? '确认通过 <b>' + esc(U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version) + '</b>？通过后仅最新版本具有导出演示资格，后续修改须走受控修订。'
+      message: pass ? '确认通过 <b>' + esc(U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version) + '</b>？通过后仅最新版本可登记导出记录，后续修改须走受控修订。'
         : '确认退回 <b>' + esc(U.docTypeName(d.type) + ' ' + d.no + ' V' + d.version) + '</b>？退回后制单人需按意见修订并重新送审。<br><br>意见：' + esc(opinion),
       okText: pass ? '审核通过' : '退回修改',
       onOk: function () {
@@ -778,7 +778,7 @@
           M.orderLogs[doc.orderId] = (M.orderLogs[doc.orderId] || []).concat([{ time: U.now(), person: ticket.actor.name,
             content: '单证 ' + doc.no + ' V' + doc.version + (pass ? ' 审核通过' : ' 退回修改') + (opinion ? '：' + opinion : '') }]);
           if (window.App.markDraftClean) window.App.markDraftClean();
-          U.toast(pass ? '审核已通过，最新版本具有导出演示资格' : '已退回制单人修改'); window.App.rerender();
+          U.toast(pass ? '审核已通过，最新版本可登记导出记录' : '已退回制单人修改'); window.App.rerender();
         });
       }
     });
@@ -794,10 +794,10 @@
         setTimeout(function () {
           delete documentInFlight[ticket.doc.id];
           var success = commitDocAction(ticket, function (d) {
-            d.history.push({ time: U.now(), person: ticket.actor.name, action: '导出 PDF（演示）', opinion: '' });
+            d.history.push({ time: U.now(), person: ticket.actor.name, action: '登记导出记录（未生成文件）', opinion: '' });
           });
           if (success) {
-            U.toast(ticket.doc.no + ' V' + ticket.doc.version + ' 导出演示已完成，未生成真实文件');
+            U.toast(ticket.doc.no + ' V' + ticket.doc.version + ' 导出记录已登记，未生成文件');
             if (location.hash.split('?')[0] === '#/documents/' + ticket.doc.id) window.App.rerender();
           }
           resolve();

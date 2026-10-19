@@ -315,8 +315,8 @@ async function business(c, s) {
     await p.fill('#p-amount', '445'); await p.click('#pay-form button[type="submit"]'); await p.waitForFunction(n => MOCK.payments.length === n + 1, n);
     const rows = await p.evaluate(id => MOCK.payments.filter(p => p.orderId === id), order.id); assert(rows.every(p => p.currency === 'USD') && receiptCents(rows) === total, 'Independent final receipt sum mismatch'); return { receivedCents: String(receiptCents(rows)), remainingCents: '0' };
   });
-  await c.check(s, 'Approved CI export is demonstration only', async () => {
-    await c.role('doc'); await c.go('#/documents/' + ci.id); await p.click('[data-action="doc-export"]'); await p.waitForFunction(id => MOCK.documents.find(d => d.id === id).history.some(h => h.action === '导出 PDF（演示）'), ci.id); return { realFileExport: false };
+  await c.check(s, 'Approved CI records export operation without generating a file', async () => {
+    await c.role('doc'); await c.go('#/documents/' + ci.id); await p.click('[data-action="doc-export"]'); await p.waitForFunction(id => MOCK.documents.find(d => d.id === id).history.some(h => h.action === '登记导出记录（未生成文件）'), ci.id); return { realFileExport: false };
   });
   await c.check(s, 'Controlled V2 retains exact V1', async () => {
     const original = await p.evaluate(id => JSON.stringify(MOCK.documents.find(d => d.id === id)), ci.id); await p.click('[data-action="doc-revise"]'); await c.confirm();

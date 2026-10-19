@@ -21,7 +21,7 @@ async function run() {
       assert.doesNotMatch(html, /<option value="SO2026001"/); assert.match(html, /id="p-currency" value="EUR"/);
     } else { assert.doesNotMatch(html, /class="success-box payment-completion"/); assert.match(html, /<option value="SO2026001" selected/); }
     const dash = t.c.Views.dashboard({ user: t.c.App.user });
-    assert.match(dash, /本次演示新增收款/); assert.match(dash, /即时更新 · 刷新后归零/); pass();
+    assert.match(dash, /本次会话新增收款/); assert.match(dash, /即时更新 · 刷新后归零/); pass();
   }
   for (const raw of ['1,00.00', ',100.00', '1,000,00', '1,234.567', '12,100.01', '1 000.00', '1,000e2']) {
     const t = fixture(), before = snapshot(t); t.fields['p-amount'].value = raw; t.submit(); await t.flush();

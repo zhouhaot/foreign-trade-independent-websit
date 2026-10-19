@@ -3,6 +3,13 @@
   "generatedAt": "2026-10-14",
   "title": "Design System: 外贸订单与单证管理系统（前端 Demo）",
   "extensions": {
+    "copy20261019": {
+      "precedence": "用户授权的可见文案修订，覆盖旧轮次同题标签，不改颜色或历史事实。",
+      "identity": "岗位、快速切换岗位、部门；未接入认证服务，不校验账号密码，勿填真实凭据。",
+      "sources": "合成数据和非真实客户需求保持可见；仅精确适配内置旧字串，不全局清洗业务原文。",
+      "actions": "登记导出记录只记内存留痕、不生成文件；密码服务说明不修改密码、不发送通知。",
+      "state": "当前会话内存写入、刷新还原；本次会话新增收款刷新归零。"
+    },
     "review20261014": {
       "precedence": "本字段为最新评审增量，覆盖旧轮次同题叙述；旧记录保留追溯。",
       "dashboard": "角色待办先于近期订单；指标恢复语义色；财务统计本次演示新增成功收款，刷新归零。",
@@ -1043,11 +1050,11 @@
       "css": ".ds-card{padding:20px 22px;border:1px solid var(--border,#e6e2ef);border-radius:var(--radius-panel,12px);background:var(--card,#fff);color:var(--text,#211d38);font-family:inherit;font-size:14px;line-height:1.5}.ds-card-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border,#e6e2ef);font-size:15px;font-weight:600}.ds-card-title span{color:var(--text-sub,#6b647d);font-size:12px;font-weight:400}.ds-card-description{margin:0;font-size:13px;color:var(--text-sub,#6b647d)}"
     },
     {
-      "name": "登录角色下拉框",
+      "name": "登录岗位下拉框",
       "kind": "input",
       "refersTo": "login-role-select",
-      "description": "与账号、密码同宽的46px原生下拉框；选项为角色与演示姓名，管理员同名去重。运行页更新下方演示部门，保留输入，提交中禁用选择器。",
-      "html": "<div class=\"ds-role-field\"><label class=\"ds-role-label\" for=\"ds-login-role\">演示角色</label><div class=\"ds-role-control\"><select class=\"ds-login-role-select\" id=\"ds-login-role\" aria-describedby=\"ds-role-hint\"><option value=\"admin\">系统管理员</option><option value=\"sales\" selected>外贸业务员 · 陈明</option><option value=\"doc\">单证员 · 王芳</option><option value=\"fin\">财务人员 · 赵倩</option><option value=\"boss\">业务主管 · 周建国</option></select><span class=\"ds-role-chevron\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 5 7 7-7 7\"/></svg></span></div><p class=\"ds-role-hint\" id=\"ds-role-hint\" aria-live=\"polite\">演示部门：外贸一部</p></div>",
+      "description": "与账号、密码同宽的46px原生下拉框；选项为岗位与样例姓名，管理员同名去重。运行页更新下方部门，保留输入，提交中禁用选择器。登录附近须明确未接认证且勿填真实凭据。",
+      "html": "<div class=\"ds-role-field\"><label class=\"ds-role-label\" for=\"ds-login-role\">岗位</label><div class=\"ds-role-control\"><select class=\"ds-login-role-select\" id=\"ds-login-role\" aria-describedby=\"ds-role-hint\"><option value=\"admin\">系统管理员</option><option value=\"sales\" selected>外贸业务员 · 陈明</option><option value=\"doc\">单证员 · 王芳</option><option value=\"fin\">财务人员 · 赵倩</option><option value=\"boss\">业务主管 · 周建国</option></select><span class=\"ds-role-chevron\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 5 7 7-7 7\"/></svg></span></div><p class=\"ds-role-hint\" id=\"ds-role-hint\" aria-live=\"polite\">部门：外贸一部</p></div>",
       "css": ".ds-role-field{width:100%;max-width:470px;font-family:inherit;color:var(--text,#211d38)}.ds-role-label{display:block;font-size:13px;margin-bottom:9px}.ds-role-control{position:relative}.ds-login-role-select{width:100%;height:46px;padding:0 44px 0 14px;border:1px solid #8b809f;border-radius:var(--radius-control,8px);background:#faf9fd;color:var(--text,#211d38);font-family:inherit;font-size:14px;appearance:none;outline:none;cursor:pointer;transition:border-color var(--duration-fast,140ms),background-color var(--duration-fast,140ms)}.ds-login-role-select:hover:not(:disabled){border-color:#6542d9}.ds-login-role-select:focus,.ds-login-role-select:focus-visible{border-color:var(--primary,#6542d9);background:#fff;box-shadow:0 0 0 2px rgba(101,66,217,.16)}.ds-login-role-select:disabled{opacity:.55;cursor:wait}.ds-role-chevron{position:absolute;right:14px;top:50%;display:flex;transform:translateY(-50%) rotate(90deg);color:var(--text-sub,#6b647d);pointer-events:none}.ds-role-chevron svg{width:16px;height:16px}.ds-role-hint{font-size:12px;margin:12px 0 0;color:var(--text-sub,#6b647d);min-height:18px}@media(prefers-reduced-motion:reduce){.ds-login-role-select{transition:none}}"
     }
   ],

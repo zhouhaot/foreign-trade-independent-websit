@@ -23,7 +23,7 @@ let html = track('SO2026003');
 assert.match(html, />制作<span/);
 assert.match(html, />送审<span/);
 assert.match(html, />审核<span/);
-assert.match(html, />可导出<span/);
+assert.match(html, />可登记导出记录<span/);
 assert.match(html, /role="list" aria-label="单证阶段"/);
 assert.match(html, /条件尚未满足/);
 assert.equal(count(html, 'done'), 0, '没有单证不能画已完成');

@@ -71,7 +71,7 @@ function fixture() {
   U.setUser = user => { users.push(user); setUser(user); };
   U.toast = text => toasts.push(text);
   context.AppUI.loginRole = 'sales';
-  hint.textContent = '演示部门：' + U.roleUser('sales').dept;
+  hint.textContent = '部门：' + U.roleUser('sales').dept;
   return {
     context, U, Views, Actions, MOCK, account, password, select, hint, submit, users, toasts,
     get rerenders() { return rerenders; },
@@ -97,7 +97,7 @@ function loginOptions(html) {
   assert.equal(selects.length, 1, '登录页只有一个角色下拉选择器');
   assert.match(selects[0][1], /data-action="login-pick-role"/, '通过统一动作委托选择角色');
   assert.match(selects[0][1], /aria-describedby="login-role-hint"/, '下拉控件关联部门说明');
-  assert.match(html, /<label\b[^>]*for="login-role"[^>]*>演示角色<\/label>/, '原生选择器有明确标签');
+  assert.match(html, /<label\b[^>]*for="login-role"[^>]*>岗位<\/label>/, '原生选择器有明确标签');
   assert.match(html, /id="login-role-hint"[^>]*aria-live="polite"/, '部门变更有非打断式播报');
   assert.doesNotMatch(html, /class="login-role-button(?:\s|")|\bonclick\s*=/, '不保留旧分段按钮或内联点击');
   return [...selects[0][2].matchAll(/<option\b([^>]*)>([\s\S]*?)<\/option>/g)].map(match => ({
@@ -123,7 +123,7 @@ async function main() {
       const name = f.U.roleUser(option.value).name, roleName = f.MOCK.roles[option.value];
       assert.equal(option.text, name === roleName ? roleName : `${roleName} · ${name}`, '选项显示角色与姓名，同名不重复');
     }
-    assert.ok(html.includes('演示部门：' + f.U.roleUser(expectedRole).dept), '初始说明与选中角色一致');
+    assert.ok(html.includes('部门：' + f.U.roleUser(expectedRole).dept), '初始说明与选中角色一致');
   }
   console.log('PASS: five-role dropdown template, default selection, label and department hint');
 
@@ -134,7 +134,7 @@ async function main() {
     f.select.value = role;
     f.Actions['login-pick-role'](f.select, { type: 'change' });
     assert.equal(f.context.AppUI.loginRole, role, '选择更新当前角色状态');
-    assert.equal(f.hint.textContent, '演示部门：' + f.U.roleUser(role).dept, '部门说明跟随角色');
+    assert.equal(f.hint.textContent, '部门：' + f.U.roleUser(role).dept, '部门说明跟随角色');
     assert.equal(f.context.document.getElementById('login-account'), accountNode, '保留账号节点');
     assert.equal(f.context.document.getElementById('login-password'), passwordNode, '保留密码节点');
     assert.equal(f.account.value, 'preserve-account', '保留账号输入');
@@ -208,7 +208,7 @@ async function main() {
     assert.equal(login.context.AppUI.loginRole, 'sales', '无效角色不写入状态');
     assert.equal(login.select.disabled, false, '无效角色可重新选择');
     assert.equal(login.focus, 'login-role', '无效角色聚焦选择器');
-    assert.deepEqual(login.toasts, ['请选择有效的演示角色'], '无效角色有明确错误提示');
+    assert.deepEqual(login.toasts, ['请选择有效的岗位'], '无效角色有明确错误提示');
   }
   console.log('PASS: invalid-role submit rejection, feedback and focus');
   console.log('Scope: Node VM template/action checks only; native select interaction and visual layout require browser verification.');

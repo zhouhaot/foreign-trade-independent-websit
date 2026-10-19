@@ -75,12 +75,13 @@ async function run() {
       // Current regression has its own exact expected facts; it needs no archive object.
       const d = view.doc, esc = t.c.U.esc;
       const expected = d.status === '已通过'
-        ? '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (view.policy.canExport ? '当前满足导出演示条件。' : '历史审核结果保留，当前导出资格见操作区。') + '</div>'
+        ? '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (view.policy.canExport ? '当前可登记导出记录。' : '历史审核结果保留，当前登记资格见操作区。') + '</div>'
         : d.status === '待审核'
           ? '<div class="doc-status-banner review"><b>待审核：</b>制单人 ' + esc(d.maker) + ' 已于 ' + esc(d.submittedAt) + ' 提交审核，等待业务主管处理。</div>'
           : '<div class="doc-status-banner draft"><b>状态待核对：</b>当前版本状态为「' + esc(d.status) + '」，不能据此推断审核决定。</div>';
       assert.equal(bannerHtml(view.html), expected, '通过/待审核/未知分支完整当前事实');
-      if (archiveEnabled()) assert.equal(bannerHtml(view.html), bannerHtml(t.originalView({ params: [id], query: {}, user: view.user })), '通过/待审核/未知分支原HTML精确保留');
+      // 本轮明确更新当前通过分支的记录登记文案；历史全文证明仍固定比较两份原始Git对象，不归一新文案。
+      if (archiveEnabled()) assert.equal(bannerHtml(t.publishedView({ params: [id], query: {}, user: view.user })), bannerHtml(t.originalView({ params: [id], query: {}, user: view.user })), '归档证明：已发布R14通过/待审核/未知分支与原58基线HTML精确保留；当前分支由上方完整新期望独立校验');
     }
     cases++; return view;
   }
@@ -126,6 +127,17 @@ async function run() {
   assert.ok(bannerHtml(reason.html).includes(reasonSafety.c.U.esc(reason.policy.reasons.edit)));
   for (const [id, role] of [['D-CI2026003-V2', 'doc'], ['D-CI2026002-V1', 'boss'], ['D-CI2026001-V1', 'boss'], ['D-PL2026001-V1', 'doc']]) check(setup(), id, role);
   const unknown = setup(); unknown.c.U.doc('D-CI2026004-V1').status = '未知<&>状态'; check(unknown, 'D-CI2026004-V1', 'doc');
+  const historyCopy = setup(), historyDoc = historyCopy.c.U.doc('D-CI2026003-V2');
+  historyDoc.history.push({ time: '2026-10-19 12:00:00', person: '记录人', action: '导出 PDF（演示）', opinion: '原始意见保留' });
+  const originalHistory = JSON.stringify(historyDoc.history), historyView = render(historyCopy, historyDoc.id, 'doc');
+  assert.match(historyView.html, /登记导出记录（未生成文件）/);
+  assert.doesNotMatch(historyView.html, /导出 PDF（演示）/);
+  assert.equal(JSON.stringify(historyDoc.history), originalHistory, '已知旧动作仅适配显示，不修改存储历史'); cases++;
+  historyDoc.history.push({ time: '2026-10-19 12:00:01', person: '记录人', action: '导出 PDF（演示）<img src=x>', opinion: '客户要求展示说明' });
+  const customHistory = JSON.stringify(historyDoc.history), customView = render(historyCopy, historyDoc.id, 'doc');
+  assert.ok(customView.html.includes(historyCopy.c.U.esc('导出 PDF（演示）<img src=x>')), '非完全匹配旧动作保原文并转义，不泛洗历史');
+  assert.ok(customView.html.includes('客户要求展示说明'));
+  assert.equal(JSON.stringify(historyDoc.history), customHistory); cases++;
   async function requestCancel(f) {
     f.c.App.user = f.c.U.roleUser('sales'); f.c.Actions['order-apply-change']({ dataset: { id: 'SO2026005' } });
     const type = f.modal.querySelector('#oc-type'); type.value = '取消申请'; for (const listener of type.listeners.change || []) listener({ target: type });

@@ -108,14 +108,18 @@ async function confirm(c) { await c.confirmations.at(-1).onOk(); await pause(); 
       if (mutation === 'new-version') c.MOCK.documents.push({ ...d, id: 'NEW-ASYNC', version: d.version + 1 });
       const before = business(c); await pause();
       assert.equal(business(c), before, `${action}/${mutation}: 异步重查拒绝`);
-      assert.ok(!c.toasts.some(t => t.type !== 'warning' && t.type !== 'error' && /已保存|已导出|导出演示已完成/.test(t.text))); checks++;
+      assert.ok(!c.toasts.some(t => t.type !== 'warning' && t.type !== 'error' && /已保存|已导出|导出演示已完成|导出记录已登记/.test(t.text))); checks++;
     }
   }
   for (const role of ['doc', 'boss', 'fin', 'sales']) {
     const c = load(); const d = doc(c, '已通过'); c.App.user = c.U.roleUser(role); const before = d.history.length;
+    const originalHistory = JSON.stringify(d.history), originalFinance = finance(c);
     c.Actions['doc-export'](button(d)); c.Actions['doc-export'](button(d)); await pause();
     assert.equal(d.history.length, before + 1, `${role}: 跨按钮重复导出只留一次`);
-    assert.ok(c.toasts.some(t => /未生成真实文件/.test(t.text))); checks++;
+    assert.equal(d.history.at(-1).action, '登记导出记录（未生成文件）', '新事件准确描述history追加，不冒称生成PDF');
+    assert.equal(JSON.stringify(d.history.slice(0, -1)), originalHistory, '登记不重写原历史');
+    assert.equal(finance(c), originalFinance, '登记不联动交易或收款');
+    assert.ok(c.toasts.some(t => /导出记录已登记，未生成文件/.test(t.text))); checks++;
   }
   // 旧版、版本冲突、重制待处理以及不能自制自审。
   const c = load(); const d = doc(c, '已通过'); const old = d;

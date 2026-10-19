@@ -1,0 +1,1278 @@
+{
+  "timestamp": "2026-10-19T03:36:43.680Z",
+  "node": "v22.23.1",
+  "baseline": "f6ab20721c6f8642933713bceddbb6cf8b12e2f2",
+  "summary": {
+    "scripts": 45,
+    "failures": 2,
+    "archives": 5,
+    "archiveFailures": 0,
+    "syntax": 57,
+    "syntaxFailures": 0
+  },
+  "before": {
+    "index.html": "c2dd2967b8f122fb3510982ac777804a4911a27eed93932358b62ca02111f8f5",
+    "js/app.js": "cb485533b753c63fa4a1d7a251af92122c4e38d522c60b1f3cd0af195c986e8b",
+    "js/mock-data.js": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f",
+    "js/utils.js": "618ff4a4f3d3794eddb76493a865fea7e84cbb4c477c921e69f132715209a0da",
+    "js/views-core.js": "f8dfee682e870dea71072c7cd87f63e21e0d3765522d55669dd0f31b14d0e393",
+    "js/views-docs.js": "2e67ae8fd82373c58175c9e4c2a77b02416f2bce4659352b72f9d6ed7f100a1d",
+    "js/views-fin.js": "e1006fe380262e11fa41edc0b9849ddabcfb3ac39db7d58be56661f78c15d7e3",
+    "js/views-sales.js": "684ee7581e797156d4c9e5206102c1c032855398d20895747943a21b20d5d17a",
+    "js/views-stats.js": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40",
+    "js/views-system.js": "a040d76c25c773bd261505ef31bb5ac3dc623075be5eb42dfe8261388ae0b1b4",
+    "css/base.css": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765",
+    "css/layout.css": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+    "css/pages.css": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3",
+    "scripts/build-world-map.cjs": "7f5ccdcb4806fd5f802c5d8a0a473540067001c5d8d44b762a15cee2534f9b93",
+    "scripts/history-gate.cjs": "b0971a05f1f6988231b9c76f45cd193201acf730b04a6347446edcb28e818519",
+    "scripts/verify-approval-context.cjs": "9e36f1cf480acac926cc51d6ab7310d2a030c98324f90fa860b348dff940e427",
+    "scripts/verify-approval-modal-drafts.cjs": "e8875897cf53257c09c0c15c1adfcc2c911d8b5b4cccae7ad52d354719b375fb",
+    "scripts/verify-browser-contract.cjs": "f5d2d7a87e604b198b4dd64d9bf4c187323753d9538ff3a893ce69ff2d3e22d2",
+    "scripts/verify-browser.mjs": "c693eb5215cf1d86376db9b2ba3a3c79f1b0cc50fba3c449fb4a55726e40339a",
+    "scripts/verify-cancellation.cjs": "bfc32a467469ccf975f5cdc3a8a3472b5a0d29c09bba63b956fdf794544508e2",
+    "scripts/verify-change-request-amount.cjs": "4129ea0007437fd04f78d45289228b5defa822bb2714754f39862adf61261d6b",
+    "scripts/verify-change-request.cjs": "015d5bac1034b856481956ed66115e26accc7d3d4ddc83e49c8b14e91f4dd5da",
+    "scripts/verify-context-navigation.cjs": "5c26ce07d3b0c0fcc9a7eca7cbc424de1f7f6ce53c697b99aab666cd7edbc257",
+    "scripts/verify-customer-contract.cjs": "0ef28956296f6a81106f9a1a8f6e446f7e13c4045aaa1fd141870a3c74ca6d04",
+    "scripts/verify-decimal-contract.cjs": "7aebaf9fdaf61dedf703b65e6c8229a19401e11f3c19c0b47932f4c8cffddbc1",
+    "scripts/verify-demo.cjs": "daad51f7c2c948425f37ab70e7f2b522067b099ee3dd27b5520ddaa557b7e451",
+    "scripts/verify-disabled-login.cjs": "7ddd09cf5014bd8977c61a75859c17a8ec1edd753998a4fff08a3993c6c7184f",
+    "scripts/verify-document-action-guidance.cjs": "04fa03fd921981db4f29d6332c69927c00aceb097f93244460849030fca05474",
+    "scripts/verify-document-approval-display.cjs": "3bbe12d43ec1d3fc7a6bdb354ddeeed5ee142ef305505839408b34af52ea8283",
+    "scripts/verify-document-dashboard.cjs": "426779913ed2f599a9b6cb534c6a2e767de9589b5a9bb281b6f174b8b7ceff85",
+    "scripts/verify-document-lifecycle.cjs": "01bb36ba6034efbe3f5edecc6a8422cb98da44cb4a55e09c6ca6d7d9657ce3da",
+    "scripts/verify-document-snapshots.cjs": "f5820c4fa842667e3e092bff0ec06e22ced146c045bbab8ff0d3e728165da3b9",
+    "scripts/verify-document-status-guidance.cjs": "195cedfc8afc0214ea48ccbbe3b1fb91122a71cc1709ea4c2db2192526c6f6b2",
+    "scripts/verify-document-work-bell.cjs": "cbf511757051d34aaa8a082b3ca300c7f83ddf83cf6575714b15c174ed1aada7",
+    "scripts/verify-document-work-summary.cjs": "e18d1940d4b1f9a0733c8f8682dad150ab79b3a13d3b793cf8c19e0043aef1d4",
+    "scripts/verify-document-workspace.cjs": "8a23607b2b3b9922d8db913893e54e11703feacfec664a45287a278c28c502ae",
+    "scripts/verify-draft-adapters.cjs": "a644341f7b1e2951c9dfd0ec115a75bc87a50a62ae4cad21910934be804d2e9a",
+    "scripts/verify-history-gates.cjs": "d2a0a973b9830ecb7fa168287a63c9a2b887f565e9e20fba082177c4afe88f9d",
+    "scripts/verify-inquiry-contract.cjs": "984ccae5833f7c5047ffbb9f523df0d75ea7458bba4ae3ecb75257213b4c8776",
+    "scripts/verify-login.cjs": "b647519f6d5b4fb7cae1b6aded5149e64eb13646541876946bfe540a6d4ecd3a",
+    "scripts/verify-modal-drafts.cjs": "77033a5befec8e0b7c7845c9775c1a7a1e6da29b9a5769410498c27e4b35b8d9",
+    "scripts/verify-navigation-drafts.cjs": "195355226bce2ad7b209ba4996be6ab5b64040c369dd5bb54b5b415d88be46d8",
+    "scripts/verify-order-map-origin.cjs": "be1d764de80c5abedf26d15454603bb2a22551e8450bcd689c54589d7eb1387d",
+    "scripts/verify-order-map.cjs": "481bb6dfb0697cb436e14f07e2565c3af9e55df4e6272b23d8aa6248bf5a6deb",
+    "scripts/verify-order-workspace.cjs": "75a1380fcabda1ed7e39294d41030ddbd5214fca45ff3b701e775643daff6ee5",
+    "scripts/verify-packaging-actions.cjs": "dab8e0a4e0c77116d8e1479759ceacd53cc1def9cea07010c37c9fe5cc53fd8c",
+    "scripts/verify-packaging-contract.cjs": "d64e7fa48a4cc620b31cb7250459c3fdfc62427cd3dae0d6696f1e15d802260a",
+    "scripts/verify-payments-contract.cjs": "9777a94c4c7a5922762de1256e53dd65cf40da8fe2572545ca3db7a10fd6c787",
+    "scripts/verify-product-copy.cjs": "30a93c8f426387816ca8ac72fdb643ec9c8ec80c8c847f08efea6c73479c42e2",
+    "scripts/verify-production-contract.cjs": "1d34f010192fc7e6a2e9974660be8ca67baa4d41853dfc8ccdeac7fa95729e8f",
+    "scripts/verify-progress-stages.cjs": "878647a96fc9ace55ed214050fcfb25bbbf9085ce3ae56d0532755cb82265da3",
+    "scripts/verify-quotation-contract.cjs": "957a534ce86a60af0093fceb17870f679c586bfddb48a0b1dafc19dda09fa474",
+    "scripts/verify-repricing.cjs": "49452e5cd804a86cae40606b79ab8d02103c113ef320c5352d8bead50085143f",
+    "scripts/verify-review-documents.cjs": "4b47bab632172004480d528af887b11ed0ea75132a10cd5cd7fbe387e6c8ee76",
+    "scripts/verify-review-finance.cjs": "ffccb8d5f371c0ea2581b500da37b32cc3b0bf9797c5b074002a394ea293269c",
+    "scripts/verify-review-integrity.cjs": "3432530e69055066f9fd07fb94cdbfeb7d5819d278def45ab5356f11a3c555ea",
+    "scripts/verify-review-sales.cjs": "170b80db7d8cf68dd4e18b90629d6fdc4eeca4edcc91e76f059ec3514558c1b4",
+    "scripts/verify-review-shared.cjs": "9b37c4495588429db52d456ca4a48c95b3f3557fff9bfe6acb493c33315812c5",
+    "scripts/verify-sales-modal-drafts.cjs": "74243a84e2475c49f70dee7f215ed9b1c7bed23dafd6934540a0b69ef3424f2c",
+    "scripts/verify-session.cjs": "f26fca092a2d174d99916483eab66d2373599b1745ce9e2b6bf51b2a41e22b0f",
+    "scripts/verify-views.cjs": "1be79b969fd6f63a6175000141df8d09e68ec6044fb37a934d1f9c0129e4691f"
+  },
+  "after": {
+    "index.html": "c2dd2967b8f122fb3510982ac777804a4911a27eed93932358b62ca02111f8f5",
+    "js/app.js": "cb485533b753c63fa4a1d7a251af92122c4e38d522c60b1f3cd0af195c986e8b",
+    "js/mock-data.js": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f",
+    "js/utils.js": "618ff4a4f3d3794eddb76493a865fea7e84cbb4c477c921e69f132715209a0da",
+    "js/views-core.js": "f8dfee682e870dea71072c7cd87f63e21e0d3765522d55669dd0f31b14d0e393",
+    "js/views-docs.js": "2e67ae8fd82373c58175c9e4c2a77b02416f2bce4659352b72f9d6ed7f100a1d",
+    "js/views-fin.js": "e1006fe380262e11fa41edc0b9849ddabcfb3ac39db7d58be56661f78c15d7e3",
+    "js/views-sales.js": "684ee7581e797156d4c9e5206102c1c032855398d20895747943a21b20d5d17a",
+    "js/views-stats.js": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40",
+    "js/views-system.js": "a040d76c25c773bd261505ef31bb5ac3dc623075be5eb42dfe8261388ae0b1b4",
+    "css/base.css": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765",
+    "css/layout.css": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+    "css/pages.css": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3",
+    "scripts/build-world-map.cjs": "7f5ccdcb4806fd5f802c5d8a0a473540067001c5d8d44b762a15cee2534f9b93",
+    "scripts/history-gate.cjs": "b0971a05f1f6988231b9c76f45cd193201acf730b04a6347446edcb28e818519",
+    "scripts/verify-approval-context.cjs": "9e36f1cf480acac926cc51d6ab7310d2a030c98324f90fa860b348dff940e427",
+    "scripts/verify-approval-modal-drafts.cjs": "e8875897cf53257c09c0c15c1adfcc2c911d8b5b4cccae7ad52d354719b375fb",
+    "scripts/verify-browser-contract.cjs": "f5d2d7a87e604b198b4dd64d9bf4c187323753d9538ff3a893ce69ff2d3e22d2",
+    "scripts/verify-browser.mjs": "c693eb5215cf1d86376db9b2ba3a3c79f1b0cc50fba3c449fb4a55726e40339a",
+    "scripts/verify-cancellation.cjs": "bfc32a467469ccf975f5cdc3a8a3472b5a0d29c09bba63b956fdf794544508e2",
+    "scripts/verify-change-request-amount.cjs": "4129ea0007437fd04f78d45289228b5defa822bb2714754f39862adf61261d6b",
+    "scripts/verify-change-request.cjs": "015d5bac1034b856481956ed66115e26accc7d3d4ddc83e49c8b14e91f4dd5da",
+    "scripts/verify-context-navigation.cjs": "5c26ce07d3b0c0fcc9a7eca7cbc424de1f7f6ce53c697b99aab666cd7edbc257",
+    "scripts/verify-customer-contract.cjs": "0ef28956296f6a81106f9a1a8f6e446f7e13c4045aaa1fd141870a3c74ca6d04",
+    "scripts/verify-decimal-contract.cjs": "7aebaf9fdaf61dedf703b65e6c8229a19401e11f3c19c0b47932f4c8cffddbc1",
+    "scripts/verify-demo.cjs": "daad51f7c2c948425f37ab70e7f2b522067b099ee3dd27b5520ddaa557b7e451",
+    "scripts/verify-disabled-login.cjs": "7ddd09cf5014bd8977c61a75859c17a8ec1edd753998a4fff08a3993c6c7184f",
+    "scripts/verify-document-action-guidance.cjs": "04fa03fd921981db4f29d6332c69927c00aceb097f93244460849030fca05474",
+    "scripts/verify-document-approval-display.cjs": "3bbe12d43ec1d3fc7a6bdb354ddeeed5ee142ef305505839408b34af52ea8283",
+    "scripts/verify-document-dashboard.cjs": "426779913ed2f599a9b6cb534c6a2e767de9589b5a9bb281b6f174b8b7ceff85",
+    "scripts/verify-document-lifecycle.cjs": "01bb36ba6034efbe3f5edecc6a8422cb98da44cb4a55e09c6ca6d7d9657ce3da",
+    "scripts/verify-document-snapshots.cjs": "f5820c4fa842667e3e092bff0ec06e22ced146c045bbab8ff0d3e728165da3b9",
+    "scripts/verify-document-status-guidance.cjs": "195cedfc8afc0214ea48ccbbe3b1fb91122a71cc1709ea4c2db2192526c6f6b2",
+    "scripts/verify-document-work-bell.cjs": "cbf511757051d34aaa8a082b3ca300c7f83ddf83cf6575714b15c174ed1aada7",
+    "scripts/verify-document-work-summary.cjs": "e18d1940d4b1f9a0733c8f8682dad150ab79b3a13d3b793cf8c19e0043aef1d4",
+    "scripts/verify-document-workspace.cjs": "8a23607b2b3b9922d8db913893e54e11703feacfec664a45287a278c28c502ae",
+    "scripts/verify-draft-adapters.cjs": "a644341f7b1e2951c9dfd0ec115a75bc87a50a62ae4cad21910934be804d2e9a",
+    "scripts/verify-history-gates.cjs": "d2a0a973b9830ecb7fa168287a63c9a2b887f565e9e20fba082177c4afe88f9d",
+    "scripts/verify-inquiry-contract.cjs": "984ccae5833f7c5047ffbb9f523df0d75ea7458bba4ae3ecb75257213b4c8776",
+    "scripts/verify-login.cjs": "b647519f6d5b4fb7cae1b6aded5149e64eb13646541876946bfe540a6d4ecd3a",
+    "scripts/verify-modal-drafts.cjs": "77033a5befec8e0b7c7845c9775c1a7a1e6da29b9a5769410498c27e4b35b8d9",
+    "scripts/verify-navigation-drafts.cjs": "195355226bce2ad7b209ba4996be6ab5b64040c369dd5bb54b5b415d88be46d8",
+    "scripts/verify-order-map-origin.cjs": "be1d764de80c5abedf26d15454603bb2a22551e8450bcd689c54589d7eb1387d",
+    "scripts/verify-order-map.cjs": "481bb6dfb0697cb436e14f07e2565c3af9e55df4e6272b23d8aa6248bf5a6deb",
+    "scripts/verify-order-workspace.cjs": "75a1380fcabda1ed7e39294d41030ddbd5214fca45ff3b701e775643daff6ee5",
+    "scripts/verify-packaging-actions.cjs": "dab8e0a4e0c77116d8e1479759ceacd53cc1def9cea07010c37c9fe5cc53fd8c",
+    "scripts/verify-packaging-contract.cjs": "d64e7fa48a4cc620b31cb7250459c3fdfc62427cd3dae0d6696f1e15d802260a",
+    "scripts/verify-payments-contract.cjs": "9777a94c4c7a5922762de1256e53dd65cf40da8fe2572545ca3db7a10fd6c787",
+    "scripts/verify-product-copy.cjs": "30a93c8f426387816ca8ac72fdb643ec9c8ec80c8c847f08efea6c73479c42e2",
+    "scripts/verify-production-contract.cjs": "1d34f010192fc7e6a2e9974660be8ca67baa4d41853dfc8ccdeac7fa95729e8f",
+    "scripts/verify-progress-stages.cjs": "878647a96fc9ace55ed214050fcfb25bbbf9085ce3ae56d0532755cb82265da3",
+    "scripts/verify-quotation-contract.cjs": "957a534ce86a60af0093fceb17870f679c586bfddb48a0b1dafc19dda09fa474",
+    "scripts/verify-repricing.cjs": "49452e5cd804a86cae40606b79ab8d02103c113ef320c5352d8bead50085143f",
+    "scripts/verify-review-documents.cjs": "4b47bab632172004480d528af887b11ed0ea75132a10cd5cd7fbe387e6c8ee76",
+    "scripts/verify-review-finance.cjs": "ffccb8d5f371c0ea2581b500da37b32cc3b0bf9797c5b074002a394ea293269c",
+    "scripts/verify-review-integrity.cjs": "3432530e69055066f9fd07fb94cdbfeb7d5819d278def45ab5356f11a3c555ea",
+    "scripts/verify-review-sales.cjs": "170b80db7d8cf68dd4e18b90629d6fdc4eeca4edcc91e76f059ec3514558c1b4",
+    "scripts/verify-review-shared.cjs": "9b37c4495588429db52d456ca4a48c95b3f3557fff9bfe6acb493c33315812c5",
+    "scripts/verify-sales-modal-drafts.cjs": "74243a84e2475c49f70dee7f215ed9b1c7bed23dafd6934540a0b69ef3424f2c",
+    "scripts/verify-session.cjs": "f26fca092a2d174d99916483eab66d2373599b1745ce9e2b6bf51b2a41e22b0f",
+    "scripts/verify-views.cjs": "1be79b969fd6f63a6175000141df8d09e68ec6044fb37a934d1f9c0129e4691f"
+  },
+  "unchanged": true,
+  "results": [
+    {
+      "args": [
+        "scripts/verify-approval-context.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 300,
+      "stdout": "PASS CURRENT: 66 approval context cases; original roles/order/counts, exact version targets, invalid/duplicate metadata, self-review, complete escaped reason/opinion, all MOCK read purity (Node DOM only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-approval-context.cjs --archive for the separate historical gate\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-approval-modal-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 633,
+      "stdout": "PASS: 21 approval modal draft cases: actual actions/modal/keyboard handlers and Promise, source node/value/error/focus/scroll preservation, busy/failure/commit/stale/duplicate (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-browser-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 82,
+      "stdout": "{\"result\":\"PASS\",\"kind\":\"Node harness contract only; no actual Ego/Page executions\",\"checks\":42,\"evidence\":\"/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-copy-transition/evidence/browser-author-contract-1792380945212-61926-summary.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-cancellation.cjs"
+      ],
+      "exitCode": 1,
+      "signal": null,
+      "elapsedMs": 62,
+      "stdout": "",
+      "stderr": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /旧样例未记录/. Input:\n\n'[{\"time\":\"2026-07-02 10:15\",\"person\":\"陈明\",\"content\":\"报价 Q2026006 经客户确认，生成订单 SO2026006\"},{\"time\":\"2026-07-20 11:40\",\"person\":\"赵倩\",\"content\":\"登记收款 6,000.00 EUR（预付款）\"},{\"time\":\"2026-09-18 10:30\",\"person\":\"陈明\",\"content\":\"提交取消申请 AP20260904：客户资金链问题\"},{\"time\":\"2026-10-19 11:35\",\"person\":\"周建国\",\"content\":\"取消申请 AP20260904 被退回，订单恢复「执行中」（旧记录未提供取消前状态，按当前默认规则恢复执行中）：核对完成\"}]'\n\n    at /Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/scripts/verify-cancellation.cjs:68:27 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: '[{\"time\":\"2026-07-02 10:15\",\"person\":\"陈明\",\"content\":\"报价 Q2026006 经客户确认，生成订单 SO2026006\"},{\"time\":\"2026-07-20 11:40\",\"person\":\"赵倩\",\"content\":\"登记收款 6,000.00 EUR（预付款）\"},{\"time\":\"2026-09-18 10:30\",\"person\":\"陈明\",\"content\":\"提交取消申请 AP20260904：客户资金链问题\"},{\"time\":\"2026-10-19 11:35\",\"person\":\"周建国\",\"content\":\"取消申请 AP20260904 被退回，订单恢复「执行中」（旧记录未提供取消前状态，按当前默认规则恢复执行中）：核对完成\"}]',\n  expected: /旧样例未记录/,\n  operator: 'match',\n  diff: 'simple'\n}\n"
+    },
+    {
+      "args": [
+        "scripts/verify-change-request-amount.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 2530,
+      "stdout": "PASS: 58 initial change-request amount scenarios; seven illegal initial writes refused, safe cents/number roundtrip, corrections, H20 context/source guards and invalid hidden cancellation amount (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-change-request.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 1170,
+      "stdout": "PASS: sales change request 25 modal/Promise cases; pending/duplicates, roles/order eligibility, delayed actor/object/status/currency guard, cancellation prior state, immutable submitted inputs, full MOCK refusal atomicity (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-context-navigation.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 666,
+      "stdout": "PASS: context navigation 194 permitted-link/source cases and 15 successful-clean/failed-dirty integration cases (actual views, submit/modal/Promise Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-customer-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 195,
+      "stdout": "PASS: 52 customer form contracts: native submit, actor/object/content/DOM/route binding, atomic text/email/level validation, no-write failures, exact-once commit/clean; Node VM only\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-decimal-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 53,
+      "stdout": "PASS decimal inputs, fractional quantities/exact lines, overflow, calendar dates, pure calculations and currency/overpayment diagnostics\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-demo.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 44,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"resources\": 12,\n  \"quotes\": 9,\n  \"documents\": 11,\n  \"amounts\": [\n    {\n      \"order\": \"SO2026001\",\n      \"currency\": \"USD\",\n      \"total\": 24100,\n      \"received\": 12000,\n      \"outstanding\": 12100\n    },\n    {\n      \"order\": \"SO2026002\",\n      \"currency\": \"USD\",\n      \"total\": 28400,\n      \"received\": 28400,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026003\",\n      \"currency\": \"EUR\",\n      \"total\": 19500,\n      \"received\": 0,\n      \"outstanding\": 19500\n    },\n    {\n      \"order\": \"SO2026004\",\n      \"currency\": \"EUR\",\n      \"total\": 30500,\n      \"received\": 30500,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026005\",\n      \"currency\": \"USD\",\n      \"total\": 28150,\n      \"received\": 0,\n      \"outstanding\": 28150\n    },\n    {\n      \"order\": \"SO2026006\",\n      \"currency\": \"EUR\",\n      \"total\": 20000,\n      \"received\": 6000,\n      \"outstanding\": 14000\n    },\n    {\n      \"order\": \"SO2026007\",\n      \"currency\": \"USD\",\n      \"total\": 41550,\n      \"received\": 20000,\n      \"outstanding\": 21550\n    }\n  ],\n  \"scope\": \"静态资源、语法及样例金额；不替代浏览器与业务流程验收\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-disabled-login.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 648,
+      "stdout": "{\"result\":\"PASS\",\"cases\":11,\"scope\":\"disabled/empty role login and delayed identity recheck; Node DOM only\"}\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-action-guidance.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 325,
+      "stdout": "PASS CURRENT 26 document action guidance scenarios: current actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards (Node fixture only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-document-action-guidance.cjs --archive for the separate historical gate\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-approval-display.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 422,
+      "stdout": "PASS: 137 CI/PL approval display role/state/history cases; real returned-resubmit-approve flow, current status vs history/export, escaped visible names, full MOCK read purity and snapshot/payment preservation (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-dashboard.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 393,
+      "stdout": "PASS CURRENT: 18 document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries (Node fixture only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-document-dashboard.cjs --archive for the separate historical gate\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-lifecycle.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 4777,
+      "stdout": "PASS: document lifecycle 90 async role/state/cancellation/race cases + normal transitions, immutable snapshots, finance isolation, latest/conflict/reform/audit/export rules (Node VM only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-snapshots.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 86,
+      "stdout": "PASS: all demo CI/PL snapshots survive seller/customer/product/order mutation; inherited revision, finance recreation, immutable detached copies, role edit bounds, totals/currency, refresh reset (Node VM only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-status-guidance.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 283,
+      "stdout": "PASS CURRENT 36 document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts (Node fixture only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-document-status-guidance.cjs --archive for the separate historical gate\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-work-bell.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 154,
+      "stdout": "PASS: 4 document-work bell reference navigation scenarios; same-page source/focus, exact cross-page destination, original dirty cancel/confirm and full-model purity (Node fixture; native scroll not claimed)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-work-summary.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 258,
+      "stdout": "PASS: 32 shared document-work summary scenarios; current policy, actual identity, safe exact routes, lifecycle pause/restore, historical references and whole-model read purity (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-workspace.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 270,
+      "stdout": "PASS: document workspace local version directory/current/latest/history, action precedence, source disclosure, real app delegated anchor preventDefault, dirty audit/packing cancel-confirm navigation, focus node/input preservation (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-draft-adapters.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 519,
+      "stdout": "PASS: 17 draft adapter scenarios; real app click delegation / submit handlers / Promise timers, local pagination node/input/error/focus preservation (Node DOM fixture; shared guard semantics separately verified)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-history-gates.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 2251,
+      "stdout": "PASS gate boundary: approval-context current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS gate boundary: document-dashboard current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS gate boundary: document-status-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS gate boundary: document-action-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS: 12 history gate scenarios; temporary copy removed after checks\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-history-gates.cjs --archive for the separate historical gate\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-inquiry-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 5265,
+      "stdout": "PASS: inquiry contract 116 actual modal/Promise cases; canonical source/query and exact hash drift with invalidated tickets, sales roles, bidirectional source, full candidate/ref currency/precision, actor/session/object/content drift, cancel/duplicates, collision-safe USD/EUR fractional source-consistent draft (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-login.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 63,
+      "stdout": "PASS: five-role dropdown template, default selection, label and department hint\nPASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state\nPASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard\nPASS: account/password required validation and no login on invalid fields\nPASS: invalid-role submit rejection, feedback and focus\nScope: Node VM template/action checks only; native select interaction and visual layout require browser verification.\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-modal-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 79,
+      "stdout": "PASS: 45 shared modal draft cases; clean/dirty/busy/source identity, original DOM/errors/focus/selection/scroll and explicit discard (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-navigation-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 879,
+      "stdout": "PASS: 33 draft navigation scenarios (actual app handlers; asynchronous Node DOM/history fixture, not browser history certification)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-order-map-origin.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 327,
+      "stdout": "PASS: 53 explicit order-origin scenarios; exact seven demo origins, malformed/missing data, no trade-term inference, per-order routing, independent quadratic seam geometry, polar/coincident pending, escaping, roles/revocation, actual new-order default and model purity (Node DOM fixture only; no browser/logistics accuracy claims)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-order-map.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 268,
+      "stdout": "PASS: 30 order-map acceptance scenarios; real view/actions, five roles and revocation, independent expected cents/countries, missing/ambiguous locations, invalid/unsafe amounts, escaping, local node/input/focus preservation and Mock immutability (Node DOM fixture only; no browser/database claims)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-order-workspace.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 54,
+      "stdout": "PASS: A workspace role actions, independent progress and currencies, selection/page/filter empty state, view toggles, draft-input preservation, and unchanged business data (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-packaging-actions.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 5359,
+      "stdout": "PASS: 109 packaging action cases; PL atomic partial-save/complete-submit, raw units/text, field+role alerts/focus, async valid/invalid drift, snapshots/finance/clean/CI isolation (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-packaging-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 50,
+      "stdout": "PASS 644 packaging candidates: original PL text, explicit or default units/3dp, positive safe cartons, empty draft/complete submit, exact gross-net comparisons, no source writes or H12 drift (Node only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-payments-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 3399,
+      "stdout": "PASS: 72 payment contract scenarios; real Promise/timers + native submit/change handlers (Node VM; no browser/server transaction claims)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-product-copy.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 121,
+      "stdout": "PASS: 100 five-role current views + five shells/login; neutral built-in UI, preserved source/snapshots, explicit missing services and synthetic provenance (Node DOM only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-production-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 180,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"scope\": \"Static contract consistency and checker negative probes only; NO server/database/browser integration executed\",\n  \"errors\": [],\n  \"checks\": 1845,\n  \"refs\": 355,\n  \"operations\": 25,\n  \"schemas\": 47,\n  \"tables\": 16,\n  \"plannedCases\": 49,\n  \"mutationProbes\": 45,\n  \"schemaSubsetSamples\": 21,\n  \"plannedIntegrationCasesExecuted\": 0,\n  \"sourceHashes\": {\n    \"index.html\": \"c2dd2967b8f122fb3510982ac777804a4911a27eed93932358b62ca02111f8f5\",\n    \"js/app.js\": \"cb485533b753c63fa4a1d7a251af92122c4e38d522c60b1f3cd0af195c986e8b\",\n    \"js/mock-data.js\": \"4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f\",\n    \"js/utils.js\": \"618ff4a4f3d3794eddb76493a865fea7e84cbb4c477c921e69f132715209a0da\",\n    \"js/views-core.js\": \"f8dfee682e870dea71072c7cd87f63e21e0d3765522d55669dd0f31b14d0e393\",\n    \"js/views-docs.js\": \"2e67ae8fd82373c58175c9e4c2a77b02416f2bce4659352b72f9d6ed7f100a1d\",\n    \"js/views-fin.js\": \"e1006fe380262e11fa41edc0b9849ddabcfb3ac39db7d58be56661f78c15d7e3\",\n    \"js/views-sales.js\": \"684ee7581e797156d4c9e5206102c1c032855398d20895747943a21b20d5d17a\",\n    \"js/views-stats.js\": \"40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40\",\n    \"js/views-system.js\": \"a040d76c25c773bd261505ef31bb5ac3dc623075be5eb42dfe8261388ae0b1b4\",\n    \"css/base.css\": \"262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765\",\n    \"css/layout.css\": \"06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879\",\n    \"css/pages.css\": \"c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-progress-stages.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 76,
+      "stdout": "PASS: no-document, mixed returned/drafting, all reviewing, export eligibility, latest-version aggregate and shared detail stages; payment facts unchanged (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-quotation-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 4594,
+      "stdout": "PASS: quotation contract 103 actual input/submit/modal/Promise cases; decimal preview, fractional-cent/overflow atomic refusal, dates/dictionary/associations, actor/object/content drift, cancel/duplicates, USD/EUR fractional quantity source-consistent order (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-repricing.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 169,
+      "stdout": "PASS: atomic repricing, precision/non-finite input, USD/EUR isolation, received floor, roles/self-review, duplicate/reject/cancel and deferred revalidation (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-review-documents.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 1732,
+      "stdout": "PASS: review document first-create, guards, snapshots, invoice association, edit focus, reform exclusivity and next-review: 109 checks (Node DOM fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-review-finance.cjs"
+      ],
+      "exitCode": 1,
+      "signal": null,
+      "elapsedMs": 101,
+      "stdout": "",
+      "stderr": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /本次演示新增收款/. Input:\n\n'<div class=\"page-head dashboard-head home-hero\"><div><h2>赵倩，欢迎回来</h2><p class=\"page-description\">跟踪应收与每笔到账，按币种核对订单收款进度。</p><div class=\"home-identity\">财务人员<span aria-hidden=\"true\">·</span>财务部</div></div><a class=\"btn btn-primary\" href=\"#/payments\">收款与应收<svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></a></div><div class=\"dashboard-metrics\" aria-label=\"当前业务概览\"><a class=\"stat-card accent-red\" href=\"#/payments\"><span class=\"metric-top\"><span class=\"sc-label\">待收款订单</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"15\" rx=\"2\"/><path d=\"M17 10h4v6h-4a3 3 0 0 1 0-6Z\"/><circle cx=\"17\" cy=\"13\" r=\".7\"/></svg></span></span><span class=\"sc-value\">4</span><span class=\"sc-footer\"><span class=\"sc-foot\">存在未收金额</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a><a class=\"stat-card accent-blue\" href=\"#/payments\"><span class=\"metric-top\"><span class=\"sc-label\">本次会话新增收款</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"15\" rx=\"2\"/><path d=\"M17 10h4v6h-4a3 3 0 0 1 0-6Z\"/><circle cx=\"17\" cy=\"13\" r=\".7\"/></svg></span></span><span class=\"sc-value\">1</span><span class=\"sc-footer\"><span class=\"sc-foot\">即时更新 · 刷新后归零</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a><a class=\"stat-card accent-green\" href=\"#/payments\"><span class=\"metric-top\"><span class=\"sc-label\">已结清订单</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"15\" rx=\"2\"/><path d=\"M17 10h4v6h-4a3 3 0 0 1 0-6Z\"/><circle cx=\"17\" cy=\"13\" r=\".7\"/></svg></span></span><span class=\"sc-value\">3</span><span class=\"sc-footer\"><span class=\"sc-foot\">全部收讫</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a><a class=\"stat-card accent-orange\" href=\"#/orders\"><span class=\"metric-top\"><span class=\"sc-label\">近期新增订单</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"7\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M8 7V4h8v3M3 12a20 20 0 0 0 18 0M10 12h4v3h-4z\"/></svg></span></span><span class=\"sc-value\">4</span><span class=\"sc-footer\"><span class=\"sc-foot\">近 4 笔新订单</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a></div><section class=\"card order-map\" id=\"order-map\" aria-labelledby=\"order-map-title\"><div class=\"order-map-head\"><div><h3 id=\"order-map-title\">全球订单<span class=\"record-count\">7 笔 · 5 个国家</span></h3><p>按客户国家分布 · 全量样例数据 · 含所有订单状态</p></div><button class=\"btn btn-sm\" type=\"button\" data-action=\"order-map-replay\" aria-describedby=\"order-map-origin-summary\">重播流向</button></div><p class=\"order-map-origin-summary\" id=\"order-map-origin-summary\">起运地 → 客户国家 · 7 笔可显示流向 · 7 笔合成起运数据</p><div class=\"order-map-layout\"><div class=\"order-map-visual\"><div class=\"order-map-canvas\"><img src=\"assets/maps/world-land.svg\" alt=\"\" aria-hidden=\"true\"><svg viewBox=\"0 0 1000 430\" aria-hidden=\"true\" focusable=\"false\"><defs><marker id=\"order-map-arrow\" viewBox=\"0 -4 8 8\" refX=\"8\" refY=\"0\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto\"><path d=\"M0,-3L7,0L0,3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></marker></defs><g data-order-map-route=\"SO2026001\" data-country=\"US\"><title>SO2026001 · 上海港 → 美国（合成数据）</title><path class=\"order-map-trail\" d=\"M839.074,161.225Q919.537,115.435 1000,103.519\"/><path class=\"order-map-flow\" style=\"animation-delay:0ms;animation-duration:1168ms\" pathLength=\"1\" d=\"M839.074,161.225Q919.537,115.435 1000,103.519\"/><path class=\"order-map-trail\" d=\"M0,103.519Q112.5,86.858 225,136.414\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:1168ms;animation-duration:1632ms\" pathLength=\"1\" d=\"M0,103.519Q112.5,86.858 225,136.414\"/></g><g data-order-map-route=\"SO2026002\" data-country=\"US\"><title>SO2026002 · 深圳盐田港 → 美国（合成数据）</title><path class=\"order-map-trail\" d=\"M817.5,185.048Q908.75,125.2 1000,109.203\"/><path class=\"order-map-flow\" style=\"animation-delay:120ms;animation-duration:1254ms\" pathLength=\"1\" d=\"M817.5,185.048Q908.75,125.2 1000,109.203\"/><path class=\"order-map-trail\" d=\"M0,109.203Q112.5,89.481 225,136.414\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:1374ms;animation-duration:1546ms\" pathLength=\"1\" d=\"M0,109.203Q112.5,89.481 225,136.414\"/></g><g data-order-map-route=\"SO2026003\" data-country=\"DE\"><title>SO2026003 · 宁波市 → 德国（合成数据）</title><path class=\"order-map-trail\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:240ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\"/></g><g data-order-map-route=\"SO2026004\" data-country=\"DE\"><title>SO2026004 · 宁波市 → 德国（合成数据）</title><path class=\"order-map-trail\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:360ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\"/></g><g data-order-map-route=\"SO2026005\" data-country=\"CL\"><title>SO2026005 · 上海港 → 智利（合成数据）</title><path class=\"order-map-trail\" d=\"M839.074,161.225Q919.537,131.726 1000,145.43\"/><path class=\"order-map-flow\" style=\"animation-delay:480ms;animation-duration:972ms\" pathLength=\"1\" d=\"M839.074,161.225Q919.537,131.726 1000,145.43\"/><path class=\"order-map-trail\" d=\"M0,145.43Q151.389,171.213 302.778,349.931\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:1452ms;animation-duration:1828ms\" pathLength=\"1\" d=\"M0,145.43Q151.389,171.213 302.778,349.931\"/></g><g data-order-map-route=\"SO2026006\" data-country=\"EG\"><title>SO2026006 · 上海港 → 埃及（合成数据）</title><path class=\"order-map-trail\" d=\"M839.074,161.225Q711.204,84.503 583.333,172\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:600ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M839.074,161.225Q711.204,84.503 583.333,172\"/></g><g data-order-map-route=\"SO2026007\" data-country=\"FR\"><title>SO2026007 · 深圳盐田港 → 法国（合成数据）</title><path class=\"order-map-trail\" d=\"M817.5,185.048Q661.528,30.655 505.556,115.655\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:720ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M817.5,185.048Q661.528,30.655 505.556,115.655\"/></g><circle class=\"order-map-halo\" cx=\"225\" cy=\"136.41379310344828\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"225\" cy=\"136.41379310344828\" r=\"4\"/><path class=\"order-map-leader\" d=\"M225,136.41379310344828l22,-30\"/><circle class=\"order-map-halo\" cx=\"527.7777777777778\" cy=\"100.82758620689656\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"527.7777777777778\" cy=\"100.82758620689656\" r=\"4\"/><path class=\"order-map-leader\" d=\"M527.7777777777778,100.82758620689656l30,-27\"/><circle class=\"order-map-halo\" cx=\"505.55555555555554\" cy=\"115.6551724137931\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"505.55555555555554\" cy=\"115.6551724137931\" r=\"4\"/><path class=\"order-map-leader\" d=\"M505.55555555555554,115.6551724137931l-35,22\"/><circle class=\"order-map-halo\" cx=\"583.3333333333334\" cy=\"172\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"583.3333333333334\" cy=\"172\" r=\"4\"/><path class=\"order-map-leader\" d=\"M583.3333333333334,172l30,20\"/><circle class=\"order-map-halo\" cx=\"302.77777777777777\" cy=\"349.9310344827586\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"302.77777777777777\" cy=\"349.9310344827586\" r=\"4\"/><path class=\"order-map-leader\" d=\"M302.77777777777777,349.9310344827586l27,18\"/><path class=\"order-map-origin-leader\" d=\"M839.074075,161.2252883448276l60,-42\"/><rect class=\"order-map-origin-dot\" x=\"835.574075\" y=\"157.7252883448276\" width=\"7\" height=\"7\"/><path class=\"order-map-origin-leader\" d=\"M837.6388888888889,163.4988495862069l60,0\"/><rect class=\"order-map-origin-dot\" x=\"834.1388888888889\" y=\"159.9988495862069\" width=\"7\" height=\"7\"/><path class=\"order-map-origin-leader\" d=\"M817.5,185.04827586206898l60,42\"/><rect class=\"order-map-origin-dot\" x=\"814\" y=\"181.54827586206898\" width=\"7\" height=\"7\"/></svg><button type=\"button\" class=\"order-map-pin\" style=\"left:24.7%;top:24.747393744987974%\" data-action=\"order-map-country\" data-country=\"US\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">美国<b>2</b></button><button type=\"button\" class=\"order-map-pin\" style=\"left:55.77777777777778%;top:17.169206094627103%\" data-action=\"order-map-country\" data-country=\"DE\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">德国<b>2</b></button><button type=\"button\" class=\"order-map-pin\" style=\"left:47.05555555555556%;top:32.01283079390537%\" data-action=\"order-map-country\" data-country=\"FR\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">法国<b>1</b></button><button type=\"button\" class=\"order-map-pin\" style=\"left:61.333333333333336%;'... 10432 more characters\n\n    at run (/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/scripts/verify-review-finance.cjs:24:12) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: '<a class=\"stat-card accent-red\" href=\"#/payments\"><span class=\"metric-top\"><span class=\"sc-label\">待收款订单</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"15\" rx=\"2\"/><path d=\"M17 10h4v6h-4a3 3 0 0 1 0-6Z\"/><circle cx=\"17\" cy=\"13\" r=\".7\"/></svg></span></span><span class=\"sc-value\">4</span><span class=\"sc-footer\"><span class=\"sc-foot\">存在未收金额</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a><a class=\"stat-card accent-blue\" href=\"#/payments\"><span class=\"metric-top\"><span class=\"sc-label\">本次会话新增收款</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"15\" rx=\"2\"/><path d=\"M17 10h4v6h-4a3 3 0 0 1 0-6Z\"/><circle cx=\"17\" cy=\"13\" r=\".7\"/></svg></span></span><span class=\"sc-value\">1</span><span class=\"sc-footer\"><span class=\"sc-foot\">即时更新 · 刷新后归零</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a><a class=\"stat-card accent-green\" href=\"#/payments\"><span class=\"metric-top\"><span class=\"sc-label\">已结清订单</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"15\" rx=\"2\"/><path d=\"M17 10h4v6h-4a3 3 0 0 1 0-6Z\"/><circle cx=\"17\" cy=\"13\" r=\".7\"/></svg></span></span><span class=\"sc-value\">3</span><span class=\"sc-footer\"><span class=\"sc-foot\">全部收讫</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a><a class=\"stat-card accent-orange\" href=\"#/orders\"><span class=\"metric-top\"><span class=\"sc-label\">近期新增订单</span><span class=\"metric-icon\"><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"7\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M8 7V4h8v3M3 12a20 20 0 0 0 18 0M10 12h4v3h-4z\"/></svg></span></span><span class=\"sc-value\">4</span><span class=\"sc-footer\"><span class=\"sc-foot\">近 4 笔新订单</span><svg class=\"ui-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg></span></a></div><section class=\"card order-map\" id=\"order-map\" aria-labelledby=\"order-map-title\"><div class=\"order-map-head\"><div><h3 id=\"order-map-title\">全球订单<span class=\"record-count\">7 笔 · 5 个国家</span></h3><p>按客户国家分布 · 全量样例数据 · 含所有订单状态</p></div><button class=\"btn btn-sm\" type=\"button\" data-action=\"order-map-replay\" aria-describedby=\"order-map-origin-summary\">重播流向</button></div><p class=\"order-map-origin-summary\" id=\"order-map-origin-summary\">起运地 → 客户国家 · 7 笔可显示流向 · 7 笔合成起运数据</p><div class=\"order-map-layout\"><div class=\"order-map-visual\"><div class=\"order-map-canvas\"><img src=\"assets/maps/world-land.svg\" alt=\"\" aria-hidden=\"true\"><svg viewBox=\"0 0 1000 430\" aria-hidden=\"true\" focusable=\"false\"><defs><marker id=\"order-map-arrow\" viewBox=\"0 -4 8 8\" refX=\"8\" refY=\"0\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto\"><path d=\"M0,-3L7,0L0,3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></marker></defs><g data-order-map-route=\"SO2026001\" data-country=\"US\"><title>SO2026001 · 上海港 → 美国（合成数据）</title><path class=\"order-map-trail\" d=\"M839.074,161.225Q919.537,115.435 1000,103.519\"/><path class=\"order-map-flow\" style=\"animation-delay:0ms;animation-duration:1168ms\" pathLength=\"1\" d=\"M839.074,161.225Q919.537,115.435 1000,103.519\"/><path class=\"order-map-trail\" d=\"M0,103.519Q112.5,86.858 225,136.414\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:1168ms;animation-duration:1632ms\" pathLength=\"1\" d=\"M0,103.519Q112.5,86.858 225,136.414\"/></g><g data-order-map-route=\"SO2026002\" data-country=\"US\"><title>SO2026002 · 深圳盐田港 → 美国（合成数据）</title><path class=\"order-map-trail\" d=\"M817.5,185.048Q908.75,125.2 1000,109.203\"/><path class=\"order-map-flow\" style=\"animation-delay:120ms;animation-duration:1254ms\" pathLength=\"1\" d=\"M817.5,185.048Q908.75,125.2 1000,109.203\"/><path class=\"order-map-trail\" d=\"M0,109.203Q112.5,89.481 225,136.414\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:1374ms;animation-duration:1546ms\" pathLength=\"1\" d=\"M0,109.203Q112.5,89.481 225,136.414\"/></g><g data-order-map-route=\"SO2026003\" data-country=\"DE\"><title>SO2026003 · 宁波市 → 德国（合成数据）</title><path class=\"order-map-trail\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:240ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\"/></g><g data-order-map-route=\"SO2026004\" data-country=\"DE\"><title>SO2026004 · 宁波市 → 德国（合成数据）</title><path class=\"order-map-trail\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:360ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M837.639,163.499Q682.708,15.828 527.778,100.828\"/></g><g data-order-map-route=\"SO2026005\" data-country=\"CL\"><title>SO2026005 · 上海港 → 智利（合成数据）</title><path class=\"order-map-trail\" d=\"M839.074,161.225Q919.537,131.726 1000,145.43\"/><path class=\"order-map-flow\" style=\"animation-delay:480ms;animation-duration:972ms\" pathLength=\"1\" d=\"M839.074,161.225Q919.537,131.726 1000,145.43\"/><path class=\"order-map-trail\" d=\"M0,145.43Q151.389,171.213 302.778,349.931\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:1452ms;animation-duration:1828ms\" pathLength=\"1\" d=\"M0,145.43Q151.389,171.213 302.778,349.931\"/></g><g data-order-map-route=\"SO2026006\" data-country=\"EG\"><title>SO2026006 · 上海港 → 埃及（合成数据）</title><path class=\"order-map-trail\" d=\"M839.074,161.225Q711.204,84.503 583.333,172\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:600ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M839.074,161.225Q711.204,84.503 583.333,172\"/></g><g data-order-map-route=\"SO2026007\" data-country=\"FR\"><title>SO2026007 · 深圳盐田港 → 法国（合成数据）</title><path class=\"order-map-trail\" d=\"M817.5,185.048Q661.528,30.655 505.556,115.655\" marker-end=\"url(#order-map-arrow)\"/><path class=\"order-map-flow\" style=\"animation-delay:720ms;animation-duration:2800ms\" pathLength=\"1\" d=\"M817.5,185.048Q661.528,30.655 505.556,115.655\"/></g><circle class=\"order-map-halo\" cx=\"225\" cy=\"136.41379310344828\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"225\" cy=\"136.41379310344828\" r=\"4\"/><path class=\"order-map-leader\" d=\"M225,136.41379310344828l22,-30\"/><circle class=\"order-map-halo\" cx=\"527.7777777777778\" cy=\"100.82758620689656\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"527.7777777777778\" cy=\"100.82758620689656\" r=\"4\"/><path class=\"order-map-leader\" d=\"M527.7777777777778,100.82758620689656l30,-27\"/><circle class=\"order-map-halo\" cx=\"505.55555555555554\" cy=\"115.6551724137931\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"505.55555555555554\" cy=\"115.6551724137931\" r=\"4\"/><path class=\"order-map-leader\" d=\"M505.55555555555554,115.6551724137931l-35,22\"/><circle class=\"order-map-halo\" cx=\"583.3333333333334\" cy=\"172\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"583.3333333333334\" cy=\"172\" r=\"4\"/><path class=\"order-map-leader\" d=\"M583.3333333333334,172l30,20\"/><circle class=\"order-map-halo\" cx=\"302.77777777777777\" cy=\"349.9310344827586\" r=\"13\"/><circle class=\"order-map-dot\" cx=\"302.77777777777777\" cy=\"349.9310344827586\" r=\"4\"/><path class=\"order-map-leader\" d=\"M302.77777777777777,349.9310344827586l27,18\"/><path class=\"order-map-origin-leader\" d=\"M839.074075,161.2252883448276l60,-42\"/><rect class=\"order-map-origin-dot\" x=\"835.574075\" y=\"157.7252883448276\" width=\"7\" height=\"7\"/><path class=\"order-map-origin-leader\" d=\"M837.6388888888889,163.4988495862069l60,0\"/><rect class=\"order-map-origin-dot\" x=\"834.1388888888889\" y=\"159.9988495862069\" width=\"7\" height=\"7\"/><path class=\"order-map-origin-leader\" d=\"M817.5,185.04827586206898l60,42\"/><rect class=\"order-map-origin-dot\" x=\"814\" y=\"181.54827586206898\" width=\"7\" height=\"7\"/></svg><button type=\"button\" class=\"order-map-pin\" style=\"left:24.7%;top:24.747393744987974%\" data-action=\"order-map-country\" data-country=\"US\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">美国<b>2</b></button><button type=\"button\" class=\"order-map-pin\" style=\"left:55.77777777777778%;top:17.169206094627103%\" data-action=\"order-map-country\" data-country=\"DE\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">德国<b>2</b></button><button type=\"button\" class=\"order-map-pin\" style=\"left:47.05555555555556%;top:32.01283079390537%\" data-action=\"order-map-country\" data-country=\"FR\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">法国<b>1</b></button><button type=\"button\" class=\"order-map-pin\" style=\"left:61.333333333333336%;top:44.651162790697676%\" data-action=\"order-map-country\" data-country=\"EG\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">埃及<b>1</b></button><button type=\"button\" class=\"order-map-pin\" style=\"left:32.977777777777774%;top:85.5653568564555%\" data-action=\"order-map-country\" data-country=\"CL\" aria-pressed=\"false\" aria-controls=\"order-map-detail\">智利<b>1</b></button><span class=\"order-map-origin-label\" style=\"left:89.9074075%;top:27.72681124298316%\">起运 · 上海港</span><span class=\"order-map-origin-label\" style'... 9923 more characters,\n  expected: /本次演示新增收款/,\n  operator: 'match',\n  diff: 'simple'\n}\n"
+    },
+    {
+      "args": [
+        "scripts/verify-review-integrity.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 328,
+      "stdout": "{\n  \"mode\": \"current-GREEN\",\n  \"checks\": [\n    {\n      \"name\": \"IDs avoid all existing approval records\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"IDs avoid reserved session IDs even if seq resets\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"actual document submit creates a unique approval\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"actual reform application creates a unique approval\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"order and quote totals equal independent BigInt cents\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"actual quote/order/CI preserve exact line and total displays\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats use exact cents for repeated small decimal sums\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats refuse aggregate cents that lose precision on display\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats refuse unsafe received/method aggregation\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"name\": \"stats preserve USD/EUR separation and baseline status filter\",\n      \"status\": \"PASS\"\n    }\n  ],\n  \"total\": 10,\n  \"passed\": 10,\n  \"failed\": 0,\n  \"boundary\": \"Node VM only; actual Actions; no browser/backend claim.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-review-sales.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 1108,
+      "stdout": "PASS: 60 sales review cases (real Actions / Views, minimal DOM; browser layout excluded)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-review-shared.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 594,
+      "stdout": "PASS: 64 review shared scenarios (real app/actions, Node fixture; no pixel claims)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-sales-modal-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 2935,
+      "stdout": "PASS: 40 sales modal draft scenarios; real qc/oc DOM, X/cancel/Escape continue-discard, busy lock, source-window async isolation, quote/order eligibility and no page-clean side effects (Node fixture only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-session.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 95,
+      "stdout": "PASS: five-role identity text + protected demo-switch presence, cancellation/logout, storage/transient clearing, protected-route return and re-login (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-views.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 186,
+      "stdout": "PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)\nPASS: controlled document revision cancellation, original-version retention, and repeat guards\nPASS: CI/PL document editing and saving enforce role, version status, and deferred role changes\nPASS: actual order Modal cancellation, required delivery input, reconciliation, and repeat guards\n",
+      "stderr": ""
+    }
+  ],
+  "archives": [
+    {
+      "args": [
+        "scripts/verify-approval-context.cjs",
+        "--archive"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 423,
+      "stdout": "PASS CURRENT: 66 approval context cases; original roles/order/counts, exact version targets, invalid/duplicate metadata, self-review, complete escaped reason/opinion, all MOCK read purity (Node DOM only)\nPASS ARCHIVE: all historical assertions executed for verify-approval-context.cjs\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-dashboard.cjs",
+        "--archive"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 816,
+      "stdout": "PASS CURRENT: 18 document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries (Node fixture only)\nPASS ARCHIVE: all historical assertions executed for verify-document-dashboard.cjs\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-status-guidance.cjs",
+        "--archive"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 1294,
+      "stdout": "PASS CURRENT 36 document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts (Node fixture only)\nPASS ARCHIVE: all historical assertions executed for verify-document-status-guidance.cjs\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-document-action-guidance.cjs",
+        "--archive"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 1124,
+      "stdout": "PASS CURRENT 26 document action guidance scenarios: current actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards (Node fixture only)\nPASS ARCHIVE: all historical assertions executed for verify-document-action-guidance.cjs\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-history-gates.cjs",
+        "--archive"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 9767,
+      "stdout": "PASS gate boundary: approval-context current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: approval-context all original objects executed, history mutation FAIL=1\nPASS gate boundary: document-dashboard current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: document-dashboard all original objects executed, history mutation FAIL=1\nPASS gate boundary: document-status-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: document-status-guidance all original objects executed, history mutation FAIL=1\nPASS gate boundary: document-action-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: document-action-guidance all original objects executed, history mutation FAIL=1\nPASS: 20 history gate scenarios; temporary copy removed after checks\nPASS ARCHIVE: all historical assertions executed for verify-history-gates.cjs\n",
+      "stderr": ""
+    }
+  ],
+  "syntax": [
+    {
+      "args": [
+        "--check",
+        "js/app.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 34,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/mock-data.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 38,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/utils.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 36,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/views-core.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/views-docs.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/views-fin.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/views-sales.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 37,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/views-stats.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/views-system.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/build-world-map.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/history-gate.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-approval-context.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-approval-modal-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-browser-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 34,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-browser.mjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 34,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-cancellation.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-change-request-amount.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-change-request.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-context-navigation.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-customer-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-decimal-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 37,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-demo.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 36,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-disabled-login.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-action-guidance.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-approval-display.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 37,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-dashboard.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 37,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-lifecycle.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-snapshots.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 31,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-status-guidance.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-work-bell.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-work-summary.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 37,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-document-workspace.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-draft-adapters.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 31,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-history-gates.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-inquiry-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-login.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 31,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-modal-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-navigation-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-order-map-origin.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 31,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-order-map.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-order-workspace.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-packaging-actions.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-packaging-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-payments-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-product-copy.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 31,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-production-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 37,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-progress-stages.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-quotation-contract.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-repricing.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 32,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-review-documents.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 40,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-review-finance.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 39,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-review-integrity.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 34,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-review-sales.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-review-shared.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 43,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-sales-modal-drafts.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 43,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-session.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 35,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-views.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 33,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

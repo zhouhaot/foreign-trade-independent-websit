@@ -91,8 +91,8 @@ async function run() {
       assert.equal(t.document.querySelectorAll('[data-order-map-route]').length, 7);
       assert.equal(t.document.querySelectorAll('.order-map-origin-label').length, 3);
       const rows = t.document.querySelectorAll('.order-map-origin-text'); assert.equal(rows.length, 7);
-      assert.ok(rows.every(n => /起运：.+（演示）/.test(text(n))));
-      assert.match(text(t.document.getElementById('order-map-origin-summary')), /7 笔起运地为合成演示样例/);
+      assert.ok(rows.every(n => /起运：.+（合成数据）/.test(text(n))));
+      assert.match(text(t.document.getElementById('order-map-origin-summary')), /7 笔合成起运数据/);
       assert.match(text(t.document.getElementById('order-map')), /不表示物流路线，缺起运地不连线/);
     }
     assert.equal(model(t), before);

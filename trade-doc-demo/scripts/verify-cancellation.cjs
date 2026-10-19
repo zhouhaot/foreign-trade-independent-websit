@@ -65,7 +65,7 @@ async function blocked(id, setup, mutate, pattern) {
     if (previous) a.priorOrderStatus = previous;
     r.open(a.id).buttons[1].click(); await r.flush();
     assert.equal(r.c.U.order(a.targetId).status, previous || '执行中');
-    if (!previous) assert.match(json(r.c.MOCK.orderLogs[a.targetId]), /旧样例未记录/);
+    if (!previous) assert.match(json(r.c.MOCK.orderLogs[a.targetId]), /旧记录未提供取消前状态/);
   }
   await blocked(request.id, x => { x.c.U.order(request.targetId).status = '已取消'; }, null, /不是取消申请中/);
   await blocked(request.id, null, x => { x.c.U.order(request.targetId).status = '已取消'; }, /订单状态.*已变化/);

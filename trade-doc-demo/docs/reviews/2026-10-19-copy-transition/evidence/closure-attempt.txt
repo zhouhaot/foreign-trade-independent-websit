@@ -1,0 +1,4 @@
+2026-10-19: initial closure-check exited 1 before writing closure.json.
+Cause: blanket JSON.parse included intentional contract no-overwrite fixtures whose content is "existing evidence".
+Correction: parse the five actual root acceptance reports explicitly; preserve negative fixtures unchanged.
+No product source or test assertions changed. Final result is in closure.json.
