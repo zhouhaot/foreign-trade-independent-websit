@@ -1,0 +1,103 @@
+{
+  "timestamp": "2026-10-19T05:12:51.030Z",
+  "result": "PASS",
+  "baseline": "d44edae504a2fced26b8143dc021693d1d5413f6",
+  "before": {
+    "js/views-core.js": "8dd7fad6ea833e2e4382d93589e37db31ecf9622e83571ff35716f01b16f3a5b",
+    "index.html": "6169c1550461480f1c29245fc99baf7db9fcc90c1f2294c21b4b8280b46e8e7b",
+    "scripts/verify-login.cjs": "aa94bb48cc22132f24f02fb847a6ffacc16e0943af6ea99c5dc6518c71e83566",
+    "scripts/verify-product-copy.cjs": "ad4d37b8f1e258e332b1d66ddee40bddeeb77c9f09f7c21c17144c4cd82fa835"
+  },
+  "after": {
+    "js/views-core.js": "8dd7fad6ea833e2e4382d93589e37db31ecf9622e83571ff35716f01b16f3a5b",
+    "index.html": "6169c1550461480f1c29245fc99baf7db9fcc90c1f2294c21b4b8280b46e8e7b",
+    "scripts/verify-login.cjs": "aa94bb48cc22132f24f02fb847a6ffacc16e0943af6ea99c5dc6518c71e83566",
+    "scripts/verify-product-copy.cjs": "ad4d37b8f1e258e332b1d66ddee40bddeeb77c9f09f7c21c17144c4cd82fa835"
+  },
+  "unchanged": true,
+  "mockAndCssUnchanged": true,
+  "entryComplete": true,
+  "results": [
+    {
+      "args": [
+        "scripts/verify-login.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS: five-role dropdown template, default selection, label and department hint\nPASS: role changes preserve inputs; clicks, disabled and invalid selections cannot mutate state\nPASS: five-role login identity, visible selection as source of truth, and duplicate-submit guard\nPASS: account/password required validation and no login on invalid fields\nPASS: invalid-role submit rejection, feedback and focus\nScope: Node VM template/action checks only; native select interaction and visual layout require browser verification.\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-disabled-login.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"result\":\"PASS\",\"cases\":11,\"scope\":\"disabled/empty role login and delayed identity recheck; Node DOM only\"}\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-product-copy.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS: 100 five-role current views + five shells/login; neutral built-in UI, preserved source/snapshots, explicit missing services and synthetic provenance (Node DOM only)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-demo.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"resources\": 12,\n  \"quotes\": 9,\n  \"documents\": 11,\n  \"amounts\": [\n    {\n      \"order\": \"SO2026001\",\n      \"currency\": \"USD\",\n      \"total\": 24100,\n      \"received\": 12000,\n      \"outstanding\": 12100\n    },\n    {\n      \"order\": \"SO2026002\",\n      \"currency\": \"USD\",\n      \"total\": 28400,\n      \"received\": 28400,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026003\",\n      \"currency\": \"EUR\",\n      \"total\": 19500,\n      \"received\": 0,\n      \"outstanding\": 19500\n    },\n    {\n      \"order\": \"SO2026004\",\n      \"currency\": \"EUR\",\n      \"total\": 30500,\n      \"received\": 30500,\n      \"outstanding\": 0\n    },\n    {\n      \"order\": \"SO2026005\",\n      \"currency\": \"USD\",\n      \"total\": 28150,\n      \"received\": 0,\n      \"outstanding\": 28150\n    },\n    {\n      \"order\": \"SO2026006\",\n      \"currency\": \"EUR\",\n      \"total\": 20000,\n      \"received\": 6000,\n      \"outstanding\": 14000\n    },\n    {\n      \"order\": \"SO2026007\",\n      \"currency\": \"USD\",\n      \"total\": 41550,\n      \"received\": 20000,\n      \"outstanding\": 21550\n    }\n  ],\n  \"scope\": \"静态资源、语法及样例金额；不替代浏览器与业务流程验收\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-views.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS: 100 role/view render combinations (Node VM; no browser layout or interaction)\nPASS: controlled document revision cancellation, original-version retention, and repeat guards\nPASS: CI/PL document editing and saving enforce role, version status, and deferred role changes\nPASS: actual order Modal cancellation, required delivery input, reconciliation, and repeat guards\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "scripts/verify-session.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS: five-role identity text + protected demo-switch presence, cancellation/logout, storage/transient clearing, protected-route return and re-login (Node VM)\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "js/views-core.js"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-login.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--check",
+        "scripts/verify-product-copy.cjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "scope": "Six scoped checks, three syntax checks; not a full-suite/browser/production approval.",
+  "processCorrections": [
+    "New workspace disclosure assertion exposed previous fixture missing hash dispatch. First attempt used wrong options argument; corrected to third fixture parameter and real history navigation. Previous five-shell claim was incomplete; now actual five shells render.",
+    "Initial resource command referred to nonexistent verify-resources.cjs; corrected to existing verify-demo.cjs.",
+    "Design sidecar patch initially ordered hunks backwards and was rejected without writes; corrected patch order."
+  ]
+}

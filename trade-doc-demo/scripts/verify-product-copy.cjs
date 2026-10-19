@@ -2,7 +2,7 @@
 // Current UI language contract. Node DOM only, not authentication or file export.
 const assert = require('node:assert/strict');
 const { fixture } = require('./verify-document-workspace.cjs');
-const t = fixture(['views-sales', 'views-docs', 'views-fin', 'views-stats', 'views-system', 'app']);
+const t = fixture(['views-sales', 'views-docs', 'views-fin', 'views-stats', 'views-system', 'app'], {}, { history:true });
 const { Views, U, MOCK, App } = t.c;
 const before = JSON.stringify(MOCK);
 const plain = html => html.replace(/<[^>]*>/g, ' ') + ' ' + [...html.matchAll(/\s(?:aria-label|aria-description|title|placeholder|value)="([^"]*)"/g)].map(m => m[1]).join(' ');
@@ -18,12 +18,17 @@ for (const role of ['admin', 'sales', 'doc', 'fin', 'boss']) {
     const html = Views[view]({params: id ? [id] : [], query: {}, user});
     assert.ok(html.length > 50); neutral(html, role + '/' + view); renders++;
   }
-  App.requestNavigation('#/dashboard'); neutral(t.app.innerHTML, role + '/shell');
+  App.requestNavigation('#/orders'); App.requestNavigation('#/dashboard');
+  neutral(t.app.innerHTML, role + '/shell');
+  assert.match(t.app.innerHTML, /刷新后恢复样例数据/, 'workspace retains refresh disclosure');
 }
 App.user = null; U.clearUser(); t.c.AppUI = {};
 const login = Views.login(); neutral(login, 'login');
 assert.match(login, /未接入认证服务/); assert.match(login, /不校验账号密码/); assert.match(login, /请勿填写真实凭据/);
-assert.match(login, /刷新后恢复样例数据/);
+const loginFooter = login.match(/class="login-story-foot">([\s\S]*?)<\/div>/)[1].replace(/<[^>]*>/g, '').trim();
+assert.equal(loginFooter, '本地会话', 'login footer has no suffix or separator');
+const roleOptions = login.match(/id="login-role"[\s\S]*?<\/select>/)[0];
+for (const user of MOCK.users) if (user.name !== MOCK.roles[user.role]) assert.ok(!roleOptions.includes(user.name), 'role options do not name individuals');
 assert.equal(JSON.stringify(MOCK), before, 'all views preserve original data, including source strings and frozen snapshots');
 const user = U.roleUser('doc'); App.user = user; U.setUser(user);
 const d = U.doc('D-CI2026002-V1'), html = Views.docDetail({params:[d.id], query:{}, user});

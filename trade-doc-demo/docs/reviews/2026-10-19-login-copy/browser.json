@@ -1,0 +1,61 @@
+{
+  "startedAt": "2026-10-19T05:12:51.368Z",
+  "engine": "ego-browser",
+  "spaceId": 21,
+  "cases": [
+    {
+      "name": "footer has no suffix; five role-only options; authentication warning retained",
+      "result": "PASS",
+      "footer": "本地会话",
+      "options": [
+        {
+          "value": "admin",
+          "text": "系统管理员"
+        },
+        {
+          "value": "sales",
+          "text": "外贸业务员"
+        },
+        {
+          "value": "doc",
+          "text": "单证员"
+        },
+        {
+          "value": "fin",
+          "text": "财务人员"
+        },
+        {
+          "value": "boss",
+          "text": "业务主管"
+        }
+      ]
+    },
+    {
+      "name": "native selection admin preserves inputs and department hint",
+      "result": "PASS"
+    },
+    {
+      "name": "native selection sales preserves inputs and department hint",
+      "result": "PASS"
+    },
+    {
+      "name": "native selection doc preserves inputs and department hint",
+      "result": "PASS"
+    },
+    {
+      "name": "native selection fin preserves inputs and department hint",
+      "result": "PASS"
+    },
+    {
+      "name": "native selection boss preserves inputs and department hint",
+      "result": "PASS"
+    },
+    {
+      "name": "role-only selected position logs in to expected boss workspace",
+      "result": "PASS"
+    }
+  ],
+  "failures": [],
+  "result": "PASS",
+  "finishedAt": "2026-10-19T05:12:56.558Z"
+}

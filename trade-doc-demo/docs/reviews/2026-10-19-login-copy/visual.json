@@ -1,0 +1,25 @@
+{
+  "engine": "Codex IAB",
+  "url": "http://127.0.0.1:8014/index.html#/login",
+  "file": "login-final-iab.jpg",
+  "width": 1280,
+  "height": 900,
+  "sha256": "454a7bec903be03e756334b76abd84b6d91df951dba3bd5fa30e8faea7d48d17",
+  "reviewedBy": "root",
+  "verdict": "SHIP for two scoped text changes",
+  "observed": [
+    "footer exactly 本地会话",
+    "selected role 外贸业务员 without individual name",
+    "authentication warning remains readable"
+  ],
+  "limits": [
+    "closed select; all five options verified separately by native browser checks",
+    "not a production or full accessibility approval"
+  ],
+  "cleanup": {
+    "iabTemporaryTabClosed": true,
+    "iabViewportReset": true,
+    "egoSpace": 21,
+    "egoFinishedOnce": true
+  }
+}

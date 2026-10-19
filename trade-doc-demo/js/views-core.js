@@ -23,7 +23,7 @@
     if (roles.indexOf(picked) < 0 || !U.roleUser(picked)) picked = U.roleUser('sales') ? 'sales' : roles.find(function (r) { return !!U.roleUser(r); }) || '';
     var options = roles.map(function (r) {
       var user = U.roleUser(r);
-      var identity = M.roles[r] + (user ? (user.name === M.roles[r] ? '' : ' · ' + user.name) : ' · 无启用账号');
+      var identity = M.roles[r] + (user ? '' : ' · 无启用账号');
       return '<option value="' + esc(r) + '"' + (r === picked ? ' selected' : '') + (user ? '' : ' disabled') + '>' + esc(identity) + '</option>';
     }).join('');
     var selectedUser = U.roleUser(picked);
@@ -38,7 +38,7 @@
           '<div class="login-flow-step is-order">' + U.icon('briefcase') + '<span>生成订单</span></div></div>' +
           '<div class="login-flow-branches"><div>' + U.icon('file') + '<span>单证制作与审核</span></div><span class="login-flow-parallel">并行推进</span><div>' + U.icon('wallet') + '<span>收款登记与跟踪</span></div></div>' +
         '</div></div>' +
-        '<div class="login-story-foot"><span class="login-local-dot" aria-hidden="true"></span>本地会话 · 刷新后恢复样例数据</div>' +
+        '<div class="login-story-foot"><span class="login-local-dot" aria-hidden="true"></span>本地会话</div>' +
       '</section><section class="login-panel" aria-label="登录工作台"><div class="login-box">' +
       '<h1>欢迎回来</h1>' +
       '<div class="sub-title">外贸订单与单证管理系统</div>' +

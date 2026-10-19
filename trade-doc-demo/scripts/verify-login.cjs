@@ -120,8 +120,8 @@ async function main() {
     const expectedRole = roles.includes(role) ? role : 'sales';
     assert.deepEqual(options.filter(option => option.selected).map(option => option.value), [expectedRole], '默认或已有角色恰好选中一项，非法状态回退业务员');
     for (const option of options) {
-      const name = f.U.roleUser(option.value).name, roleName = f.MOCK.roles[option.value];
-      assert.equal(option.text, name === roleName ? roleName : `${roleName} · ${name}`, '选项显示角色与姓名，同名不重复');
+      const roleName = f.MOCK.roles[option.value];
+      assert.equal(option.text, roleName, '岗位选项只显示岗位名，不绑定某位人员姓名');
     }
     assert.ok(html.includes('部门：' + f.U.roleUser(expectedRole).dept), '初始说明与选中角色一致');
   }

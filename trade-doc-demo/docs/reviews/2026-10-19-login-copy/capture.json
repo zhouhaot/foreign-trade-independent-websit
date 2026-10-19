@@ -1,0 +1,6 @@
+{
+  "engine": "ego-browser",
+  "spaceId": 21,
+  "result": "TOOL_ERROR",
+  "error": "CDP request timed out: Page.captureScreenshot"
+}

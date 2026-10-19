@@ -1,0 +1,23 @@
+'use strict';
+const fs = require('node:fs'), path = require('node:path'), cp = require('node:child_process'), crypto = require('node:crypto');
+const root = path.resolve(__dirname,'../../..');
+const files = ['js/views-core.js','index.html','scripts/verify-login.cjs','scripts/verify-product-copy.cjs'];
+const hashes = () => Object.fromEntries(files.map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex')]));
+const before=hashes();
+const commands=['verify-login','verify-disabled-login','verify-product-copy','verify-demo','verify-views','verify-session'].map(name=>['scripts/'+name+'.cjs']);
+commands.push(...files.filter(file=>file.endsWith('.js')||file.endsWith('.cjs')).map(file=>['--check',file]));
+const results=commands.map(args=> {
+  const value=cp.spawnSync(process.execPath,args,{cwd:root,encoding:'utf8'});
+  return {args,exitCode:value.status,stdout:value.stdout,stderr:value.stderr};
+});
+const after=hashes(),unchanged=JSON.stringify(before)===JSON.stringify(after);
+const preserved=cp.spawnSync('git',['diff','--exit-code','--','js/mock-data.js','css'],{cwd:root});
+const entry=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const resources=[...entry.matchAll(/(?:src|href)="([^"]+)"/g)].map(match=>match[1].split('?')[0]);
+const entryComplete=resources.length===12 && resources.every(file=>fs.existsSync(path.join(root,file)));
+JSON.parse(fs.readFileSync(path.join(root,'.impeccable/design.json'),'utf8'));
+const pass=results.every(result=>result.exitCode===0)&&unchanged&&preserved.status===0&&entryComplete;
+const report={timestamp:new Date().toISOString(),result:pass?'PASS':'FAIL',baseline:cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),before,after,unchanged,mockAndCssUnchanged:preserved.status===0,entryComplete,results,scope:'Six scoped checks, three syntax checks; not a full-suite/browser/production approval.',processCorrections:['New workspace disclosure assertion exposed previous fixture missing hash dispatch. First attempt used wrong options argument; corrected to third fixture parameter and real history navigation. Previous five-shell claim was incomplete; now actual five shells render.','Initial resource command referred to nonexistent verify-resources.cjs; corrected to existing verify-demo.cjs.','Design sidecar patch initially ordered hunks backwards and was rejected without writes; corrected patch order.']};
+fs.writeFileSync(path.join(__dirname,'checks.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({result:report.result,checks:results.length,unchanged,entryComplete}));
+if(!pass)process.exitCode=1;
