@@ -804,3 +804,9 @@ fetch前0/0，正常push快进后独立ls-remote main完整SHA与本地HEAD一�
 - 真实`browser-final.json`：五岗20路由100访问、1280×800／1366×768／1440×900共300布局，8组545USD同SO8连续链与11质量组全PASS／failures[]。17处独立fixture边界reload，同单不reload，原有效输入保护／六页签／取消生成／修订／focus／收款场景有映射。30次导航仅诊断，不认证容量／读屏／跨引擎。
 - 原8014 run01三个ready启动普通工具超时，业务8PASS但矩阵60／180与质量9／11不足；旧汇总伪product已修来源推导，补只读bootState、不自动retry／改导航。10次原／加load等待探针均READY，原环境根因未知，日志积压／服务负载仅假设。保8014体验，另本机安静8015同源服务最终全通过；不得反推原环境根因已解决。
 - 最终回读cache／media／viewport／listener所有attempted项restored=true、7单11单证合成内存恢复；Ego18已finish一次／无保留页，临时8015服务已停止，原8014保留，未升级工具。file策略仍未绕过。下一批依原计划第3项先隔离长内容／规模和辅助技术，未创建生产工程、写真实DB或账号、安装依赖或部署。Git正常同步及远端回读另记。
+
+### 2026-10-19 | GitHub同步回执 第2轮工程验收改进
+
+- 实现与完整证据提交`4382435706b69998528eecc5348f2fb4784a77d7`，标题`test: unify browser regression and separate historical archive gates`。包含统一入口／四当前历史门禁／两工具契约、作者及非作者报告、主控真实失败与最终回执、README与交接；运行业务源未改。
+- 首fetch遇TLS连接失败，单命令HTTP/1.1 fetch随后成功；推送前HEAD与origin/main为0/0且独立GitHub分支API为基线50328f7。正常push `50328f7..4382435`成功，ls-remote回读main SHA与本地一致，GitHub提交API回读根树`f9982d088f5ee4bcdc59e606aee6bd5ac12ff3db`一致；推送后工作区干净。无强推、全局网络配置／账号权限变更、PR或部署。
+- 本成功回执另作后续文档提交，最终SHA以实际Git历史／远端回读为准，不伪造自身未来SHA。原8014启动超时根因未知和生产49真实集成未执行仍保留；下一轮长内容／规模／辅助技术按既有门槛推进，不把工程批准扩成生产放行。
