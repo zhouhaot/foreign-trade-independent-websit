@@ -779,3 +779,9 @@ fetch前0/0，正常push快进后独立ls-remote main完整SHA与本地HEAD一�
 - 三有效终图login-final-1280.png实际JPEG1280×800、stats-clean-final-1440.jpg 1432×1781、invoice-final-1280.jpg 1272×1624，主控/独立均实读SHIP；旧stats-final含Toast遮挡仅过程，不把全页图当首屏或闭合下拉图当禁用选项证明。DESIGN/sidecar未改，唯一CSS为非交互Toast不拦点击。
 - 完整摘要／问题清单／主控批复／基线／覆盖CSV／上线准备度与脱敏证据在`docs/reviews/2026-10-19-comprehensive/`。后续计划在`docs/iterations/2026-10-19-review-iteration.md`：优先整合浏览器回归、分离历史Git门禁，再补规模／辅助技术，生产工程先有决策与环境。file策略阻断、跨引擎／真实读屏／长时容量未验，不称全面穷尽或生产放行。Git正常同步及浏览器清理完成后另记实际回执。
 - UI追加后全42/53的latest回执及最终100/300矩阵已实际再执行，质量6组含Toast指针保ARIA通过；8份本轮证据脚本语法、摘要/迭代文档链接、diff空白检查通过。Ego17已finish一次，目标页缓存／视口／媒体诊断覆盖恢复；IAB视口已重置，旧临时tab自动失效后仅复用原browser新建交付预览页并保留。HTTP本地服务保留供体验，非正式部署；未升级浏览器工具。
+
+### 2026-10-19 | GitHub同步回执：全面审查首轮迭代
+
+- 实现提交`2adfb1b7be61865d087770d85dd96b5d3625c339`，标题`fix: resolve first comprehensive review findings with independent regression evidence`，61个文件。产品最小修复、两新增专项、两检查器补强、现行规则和说明、原方案／新批复与改进计划、基线／失败／最终原始证据及独立报告一并保存；大部分新增行为审查证据，不是批量新建业务代码。
+- 推送前fetch确认HEAD与origin/main为0/0；正常push `4c67449..2adfb1b`成功。ls-remote及GitHub提交API回读main SHA均与本地一致，根树`980a5a58fb7f7a7575ed4b9ac157d11f0d77fe67`一致，推送后工作区干净。没有强推、PR、云端发布或生产部署。
+- 此成功回执另作后续文档提交，最终SHA以实际Git历史／回读为准，不伪造自身未来SHA。下一批按迭代计划顺序推进；未定业务、目标环境与真实身份／事务／恢复门槛仍保留，不用本轮静态验收代替。
