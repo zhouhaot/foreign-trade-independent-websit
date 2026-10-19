@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:44:17.297Z",
+  "engine": "contract-double",
+  "result": "BLOCKED",
+  "stages": [],
+  "failures": [
+    {
+      "phase": "preflight",
+      "name": "configuration/report reservation",
+      "category": "method",
+      "error": "TRADE_QA_BASE is required and must be a loopback HTTP index.html URL"
+    }
+  ],
+  "cleanup": [],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-author-contract-1792377857295-33793-blocked.json",
+  "finishedAt": "2026-10-19T02:44:17.297Z"
+}

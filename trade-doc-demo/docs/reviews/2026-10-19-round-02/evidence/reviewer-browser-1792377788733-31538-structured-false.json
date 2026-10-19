@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:43:08.736Z",
+  "engine": "contract-double",
+  "result": "BLOCKED",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "BLOCKED",
+      "checks": [
+        {
+          "name": "independent structured-false",
+          "result": "BLOCKED",
+          "phase": "matrix",
+          "category": "blocked",
+          "error": "Evaluation timeout with structured safety status",
+          "executionStopped": false,
+          "pageResponsive": false,
+          "mayHaveLateEffects": false
+        }
+      ],
+      "startedAt": "2026-10-19T02:43:08.736Z",
+      "finishedAt": "2026-10-19T02:43:08.736Z"
+    },
+    {
+      "name": "business",
+      "result": "NOT_RUN",
+      "checks": []
+    },
+    {
+      "name": "quality",
+      "result": "NOT_RUN",
+      "checks": []
+    }
+  ],
+  "failures": [
+    {
+      "phase": "matrix",
+      "name": "independent structured-false",
+      "category": "blocked",
+      "error": "Evaluation timeout with structured safety status",
+      "executionStopped": false,
+      "pageResponsive": false,
+      "mayHaveLateEffects": false
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html",
+  "requestedPhases": [
+    "matrix",
+    "business",
+    "quality"
+  ],
+  "notRequested": [],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/reviewer-browser-1792377788733-31538-structured-false.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": true,
+      "applied": true,
+      "restored": false
+    },
+    "media": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "viewport": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "listener": {
+      "attempted": true,
+      "applied": true,
+      "restored": false
+    }
+  },
+  "finishedAt": "2026-10-19T02:43:08.736Z"
+}

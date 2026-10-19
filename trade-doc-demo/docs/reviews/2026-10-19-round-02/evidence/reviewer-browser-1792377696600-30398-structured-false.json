@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:41:36.604Z",
+  "engine": "contract-double",
+  "result": "FAIL",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "FAIL",
+      "checks": [
+        {
+          "name": "independent structured-false",
+          "result": "FAIL",
+          "phase": "matrix",
+          "category": "tool",
+          "error": "Evaluation timeout with structured safety status"
+        }
+      ],
+      "startedAt": "2026-10-19T02:41:36.604Z",
+      "finishedAt": "2026-10-19T02:41:36.605Z"
+    },
+    {
+      "name": "business",
+      "result": "CONTRACT_PASS",
+      "checks": [],
+      "startedAt": "2026-10-19T02:41:36.605Z",
+      "finishedAt": "2026-10-19T02:41:36.605Z"
+    },
+    {
+      "name": "quality",
+      "result": "CONTRACT_PASS",
+      "checks": [],
+      "startedAt": "2026-10-19T02:41:36.605Z",
+      "finishedAt": "2026-10-19T02:41:36.605Z"
+    }
+  ],
+  "failures": [
+    {
+      "phase": "matrix",
+      "name": "independent structured-false",
+      "category": "tool",
+      "error": "Evaluation timeout with structured safety status",
+      "pageState": {
+        "hash": "#/dashboard",
+        "role": "sales",
+        "fieldErrors": [],
+        "toasts": [],
+        "errors": []
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Runner did not set this diagnostic"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Runner did not set this diagnostic"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "CONTRACT_PASS"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html",
+  "requestedPhases": [
+    "matrix",
+    "business",
+    "quality"
+  ],
+  "notRequested": [],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/reviewer-browser-1792377696600-30398-structured-false.json",
+  "finishedAt": "2026-10-19T02:41:36.605Z"
+}

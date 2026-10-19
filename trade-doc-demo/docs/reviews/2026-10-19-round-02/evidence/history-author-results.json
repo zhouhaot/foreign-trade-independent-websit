@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-19",
+  "baseHead": "50328f7",
+  "scope": "Author-only limited verification; root owns full regression and independent review",
+  "results": [
+    {
+      "command": "node scripts/verify-approval-context.cjs",
+      "chunk_id": "eea4ff",
+      "wall_time_seconds": 0.647145125,
+      "exit_code": 0,
+      "original_token_count": 84,
+      "output": "PASS CURRENT: 66 approval context cases; original roles/order/counts, exact version targets, invalid/duplicate metadata, self-review, complete escaped reason/opinion, all MOCK read purity (Node DOM only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-approval-context.cjs --archive for the separate historical gate\n"
+    },
+    {
+      "command": "node scripts/verify-approval-context.cjs --archive",
+      "chunk_id": "75cc7e",
+      "wall_time_seconds": 0.716638875,
+      "exit_code": 0,
+      "original_token_count": 72,
+      "output": "PASS CURRENT: 66 approval context cases; original roles/order/counts, exact version targets, invalid/duplicate metadata, self-review, complete escaped reason/opinion, all MOCK read purity (Node DOM only)\nPASS ARCHIVE: all historical assertions executed for verify-approval-context.cjs\n"
+    },
+    {
+      "command": "node scripts/verify-document-dashboard.cjs",
+      "chunk_id": "546fed",
+      "wall_time_seconds": 0.496277417,
+      "exit_code": 0,
+      "original_token_count": 84,
+      "output": "PASS CURRENT: 18 document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries (Node fixture only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-document-dashboard.cjs --archive for the separate historical gate\n"
+    },
+    {
+      "command": "node scripts/verify-document-dashboard.cjs --archive",
+      "chunk_id": "0790fd",
+      "wall_time_seconds": 1.104490291,
+      "exit_code": 0,
+      "original_token_count": 71,
+      "output": "PASS CURRENT: 18 document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries (Node fixture only)\nPASS ARCHIVE: all historical assertions executed for verify-document-dashboard.cjs\n"
+    },
+    {
+      "command": "node scripts/verify-document-status-guidance.cjs",
+      "chunk_id": "35a561",
+      "wall_time_seconds": 0.495022834,
+      "exit_code": 0,
+      "original_token_count": 82,
+      "output": "PASS CURRENT 34 document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts (Node fixture only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-document-status-guidance.cjs --archive for the separate historical gate\n"
+    },
+    {
+      "command": "node scripts/verify-document-status-guidance.cjs --archive",
+      "chunk_id": "25a0de",
+      "wall_time_seconds": 1.472743208,
+      "exit_code": 0,
+      "original_token_count": 69,
+      "output": "PASS CURRENT 34 document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts (Node fixture only)\nPASS ARCHIVE: all historical assertions executed for verify-document-status-guidance.cjs\n"
+    },
+    {
+      "command": "node scripts/verify-document-action-guidance.cjs",
+      "chunk_id": "70e371",
+      "wall_time_seconds": 0.619110167,
+      "exit_code": 0,
+      "original_token_count": 83,
+      "output": "PASS CURRENT 26 document action guidance scenarios: current actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards (Node fixture only)\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-document-action-guidance.cjs --archive for the separate historical gate\n"
+    },
+    {
+      "command": "node scripts/verify-document-action-guidance.cjs --archive",
+      "chunk_id": "cea887",
+      "wall_time_seconds": 1.403199292,
+      "exit_code": 0,
+      "original_token_count": 71,
+      "output": "PASS CURRENT 26 document action guidance scenarios: current actual CI/PL fields and five display surfaces, full model read purity, controlled cancel/commit and role guards (Node fixture only)\nPASS ARCHIVE: all historical assertions executed for verify-document-action-guidance.cjs\n"
+    },
+    {
+      "command": "node scripts/verify-history-gates.cjs",
+      "chunk_id": "5b9073",
+      "wall_time_seconds": 2.741985959,
+      "exit_code": 0,
+      "original_token_count": 158,
+      "output": "PASS gate boundary: approval-context current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS gate boundary: document-dashboard current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS gate boundary: document-status-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS gate boundary: document-action-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS: 12 history gate scenarios; temporary copy removed after checks\nARCHIVE NOT_REQUESTED: current checks only; run node scripts/verify-history-gates.cjs --archive for the separate historical gate\n"
+    },
+    {
+      "command": "node scripts/verify-history-gates.cjs --archive",
+      "chunk_id": "cb1ccf",
+      "wall_time_seconds": 7.518021167,
+      "exit_code": 0,
+      "original_token_count": 245,
+      "output": "PASS gate boundary: approval-context current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: approval-context all original objects executed, history mutation FAIL=1\nPASS gate boundary: document-dashboard current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: document-dashboard all original objects executed, history mutation FAIL=1\nPASS gate boundary: document-status-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: document-status-guidance all original objects executed, history mutation FAIL=1\nPASS gate boundary: document-action-guidance current/no-Git, missing history BLOCKED=2, current mutation FAIL=1\nPASS archive boundary: document-action-guidance all original objects executed, history mutation FAIL=1\nPASS: 20 history gate scenarios; temporary copy removed after checks\nPASS ARCHIVE: all historical assertions executed for verify-history-gates.cjs\n"
+    },
+    {
+      "command": "node --check scripts/history-gate.cjs",
+      "chunk_id": "b64d65",
+      "wall_time_seconds": 0.010809958,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "command": "node --check scripts/verify-history-gates.cjs",
+      "chunk_id": "6f2fcb",
+      "wall_time_seconds": 0.016829417,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "command": "node --check scripts/verify-approval-context.cjs",
+      "chunk_id": "795d7b",
+      "wall_time_seconds": 0.000016875,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "command": "node --check scripts/verify-document-dashboard.cjs",
+      "chunk_id": "1a747b",
+      "wall_time_seconds": 0.000008417,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "command": "node --check scripts/verify-document-status-guidance.cjs",
+      "chunk_id": "098146",
+      "wall_time_seconds": 0.0000155,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "command": "node --check scripts/verify-document-action-guidance.cjs",
+      "chunk_id": "0bdc79",
+      "wall_time_seconds": 0.000007625,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  ],
+  "fingerprints": "b0971a05f1f6988231b9c76f45cd193201acf730b04a6347446edcb28e818519  scripts/history-gate.cjs\nd2a0a973b9830ecb7fa168287a63c9a2b887f565e9e20fba082177c4afe88f9d  scripts/verify-history-gates.cjs\n9e36f1cf480acac926cc51d6ab7310d2a030c98324f90fa860b348dff940e427  scripts/verify-approval-context.cjs\n0d874c4dfb8aa05150f0e62721d95899f7e7c224cef48c6ad2dc68f7dcbea206  scripts/verify-document-dashboard.cjs\nf43e824b6c35a0ad8553e28dfecdde6b1490ff6539c895fbea25c09076c635f9  scripts/verify-document-status-guidance.cjs\n04fa03fd921981db4f29d6332c69927c00aceb097f93244460849030fca05474  scripts/verify-document-action-guidance.cjs\n50328f7dacf31a7d96187e0091ca364df07f31dd\n",
+  "methodCorrections": [
+    {
+      "stage": "first self-test",
+      "error": "assert.ok(current.trace.currentReads > 0)",
+      "cause": "macOS temporary directory symbolic path differed from the real module path",
+      "fix": "realpath the unique temporary directory before tracing runtime reads"
+    },
+    {
+      "stage": "second self-test",
+      "error": "action-guidance currentReads=0",
+      "cause": "require(entry) did not execute a require.main guarded entry; three ungated entries had executed",
+      "fix": "compile as real main Module with process.mainModule set; retain nonzero read and mutation assertions"
+    }
+  ]
+}

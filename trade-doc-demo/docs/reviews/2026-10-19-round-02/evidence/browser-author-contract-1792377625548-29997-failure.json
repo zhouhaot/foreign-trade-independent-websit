@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:40:25.555Z",
+  "engine": "contract-double",
+  "result": "FAIL",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "FAIL",
+      "checks": [
+        {
+          "name": "completed contract step",
+          "result": "CONTRACT_PASS",
+          "partial": true
+        },
+        {
+          "name": "original product failure",
+          "result": "FAIL",
+          "phase": "matrix",
+          "category": "product",
+          "error": "injected product assertion"
+        }
+      ],
+      "startedAt": "2026-10-19T02:40:25.555Z",
+      "finishedAt": "2026-10-19T02:40:25.556Z"
+    }
+  ],
+  "failures": [
+    {
+      "phase": "matrix",
+      "name": "original product failure",
+      "category": "product",
+      "error": "injected product assertion",
+      "pageState": {
+        "hash": "#/dashboard",
+        "role": "sales",
+        "fieldErrors": [],
+        "toasts": [],
+        "errors": []
+      }
+    },
+    {
+      "phase": "cleanup",
+      "name": "reset media override",
+      "category": "tool",
+      "error": "Injected cleanup/setup protocol failure: Emulation.setEmulatedMedia"
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "FAIL",
+      "category": "tool",
+      "error": "Injected cleanup/setup protocol failure: Emulation.setEmulatedMedia"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "CONTRACT_PASS"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html?qa=contract",
+  "requestedPhases": [
+    "matrix"
+  ],
+  "notRequested": [
+    "business",
+    "quality"
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-author-contract-1792377625548-29997-failure.json",
+  "finishedAt": "2026-10-19T02:40:25.557Z"
+}

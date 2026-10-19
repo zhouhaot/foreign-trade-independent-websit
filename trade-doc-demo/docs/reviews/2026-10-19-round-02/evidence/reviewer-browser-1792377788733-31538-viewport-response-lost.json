@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:43:08.737Z",
+  "engine": "contract-double",
+  "result": "FAIL",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "FAIL",
+      "checks": [
+        {
+          "name": "independent viewport-response-lost",
+          "result": "FAIL",
+          "phase": "matrix",
+          "category": "tool",
+          "error": "Protocol reply dropped after application",
+          "pageState": {
+            "hash": "#/dashboard",
+            "role": "sales",
+            "fieldErrors": [],
+            "toasts": [],
+            "errors": []
+          }
+        }
+      ],
+      "startedAt": "2026-10-19T02:43:08.737Z",
+      "finishedAt": "2026-10-19T02:43:08.738Z"
+    },
+    {
+      "name": "business",
+      "result": "CONTRACT_PASS",
+      "checks": [],
+      "startedAt": "2026-10-19T02:43:08.738Z",
+      "finishedAt": "2026-10-19T02:43:08.738Z"
+    },
+    {
+      "name": "quality",
+      "result": "CONTRACT_PASS",
+      "checks": [],
+      "startedAt": "2026-10-19T02:43:08.738Z",
+      "finishedAt": "2026-10-19T02:43:08.738Z"
+    }
+  ],
+  "failures": [
+    {
+      "phase": "matrix",
+      "name": "independent viewport-response-lost",
+      "category": "tool",
+      "error": "Protocol reply dropped after application",
+      "pageState": {
+        "hash": "#/dashboard",
+        "role": "sales",
+        "fieldErrors": [],
+        "toasts": [],
+        "errors": []
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "CONTRACT_PASS"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html",
+  "requestedPhases": [
+    "matrix",
+    "business",
+    "quality"
+  ],
+  "notRequested": [],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/reviewer-browser-1792377788733-31538-viewport-response-lost.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "media": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "viewport": {
+      "attempted": true,
+      "applied": false,
+      "restored": true
+    },
+    "listener": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    }
+  },
+  "finishedAt": "2026-10-19T02:43:08.738Z"
+}

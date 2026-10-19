@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:42:26.168Z",
+  "engine": "contract-double",
+  "result": "BLOCKED",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "NOT_RUN",
+      "checks": []
+    }
+  ],
+  "failures": [
+    {
+      "phase": "setup",
+      "name": "connection/setup",
+      "category": "blocked",
+      "error": "Explicit existing agent-owned TaskSpace unavailable; no create/claim/takeover allowed"
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html?qa=contract",
+  "requestedPhases": [
+    "matrix"
+  ],
+  "notRequested": [
+    "business",
+    "quality"
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-author-contract-1792377746163-31063-space-1.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "media": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "viewport": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "listener": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    }
+  },
+  "finishedAt": "2026-10-19T02:42:26.168Z"
+}

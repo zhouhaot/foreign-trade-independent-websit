@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:43:25.154Z",
+  "engine": "contract-double",
+  "result": "BLOCKED",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "BLOCKED",
+      "checks": [
+        {
+          "name": "control stop",
+          "result": "BLOCKED",
+          "phase": "matrix",
+          "category": "blocked",
+          "error": "user has taken control"
+        }
+      ],
+      "startedAt": "2026-10-19T02:43:25.155Z",
+      "stopped": true,
+      "finishedAt": "2026-10-19T02:43:25.155Z"
+    },
+    {
+      "name": "business",
+      "result": "NOT_RUN",
+      "checks": []
+    }
+  ],
+  "failures": [
+    {
+      "phase": "matrix",
+      "name": "control stop",
+      "category": "blocked",
+      "error": "user has taken control"
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "SKIPPED",
+      "reason": "Control/policy/safety receipt stopped Page actions; restoration requires controller assessment"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html?qa=contract",
+  "requestedPhases": [
+    "matrix",
+    "business"
+  ],
+  "notRequested": [
+    "quality"
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-author-contract-1792377805143-31627-control.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": true,
+      "applied": true,
+      "restored": false
+    },
+    "media": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "viewport": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "listener": {
+      "attempted": true,
+      "applied": true,
+      "restored": false
+    }
+  },
+  "finishedAt": "2026-10-19T02:43:25.155Z"
+}

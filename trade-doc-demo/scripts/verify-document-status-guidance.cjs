@@ -4,12 +4,12 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const { execFileSync } = require('node:child_process');
+const { archiveEnabled, historySource, reportFailure, reportArchive } = require('./history-gate.cjs');
 const { fixture } = require('./verify-document-workspace.cjs');
 const { archivedDocs, publishedDocs, normalizeActionGuidanceHtml, normalizeActionGuidanceSource } = require('./verify-document-action-guidance.cjs');
 const root = path.resolve(__dirname, '..');
 const baseline = '58a65822e400fcd75398b642456648bd558a8e24';
-const originalDocs = () => execFileSync('git', ['show', baseline + ':trade-doc-demo/js/views-docs.js'], { cwd: root, encoding: 'utf8' });
+const originalDocs = () => historySource(baseline, 'views-docs');
 const text = node => (node.textContent || '') + node.children.map(text).join('');
 const model = t => JSON.stringify(t.c.MOCK);
 const bannerHtml = html => html.match(/<div class="doc-status-banner[^\"]*">[\s\S]*?<\/div>/)[0];
@@ -34,21 +34,26 @@ async function run() {
   let cases = 0;
   const setup = () => {
     const t = fixture(['views-sales', 'views-docs', 'views-fin']);
+    if (archiveEnabled()) {
     vm.runInContext(originalDocs(), t.c); t.originalView = t.c.Views.docDetail;
     vm.runInContext(publishedDocs(), t.c); t.publishedView = t.c.Views.docDetail;
     vm.runInContext(fs.readFileSync(path.join(root, 'js/views-docs.js'), 'utf8'), t.c);
+    }
     return t;
   };
   function check(t, id, role) {
     const view = render(t, id, role), content = text(view.banner), before = model(t);
+    if (archiveEnabled()) {
     const oldHtml = t.originalView({ params: [id], query: {}, user: view.user });
     const publishedHtml = t.publishedView({ params: [id], query: {}, user: view.user });
     assert.equal(model(t), before, '新旧真实Views在同一快照/模型中均纯读');
     assert.equal(normalizeActionGuidanceHtml(publishedHtml.replace(bannerHtml(publishedHtml), '')), normalizeActionGuidanceHtml(oldHtml.replace(bannerHtml(oldHtml), '')), '归档证明：f8643db已发布R14除横幅与H25三个文案槽位外整页精保；当前新需求行为不归一，本套仍核current事实/资格/Actions');
+    }
     let guidance = bannerHtml(view.html);
     if (view.doc.status === '已退回') {
-      const prefix = bannerHtml(oldHtml).split('<br>')[0].replace(/<\/div>$/, '');
+      const prefix = '<div class="doc-status-banner reject"><b>已退回：</b>' + t.c.U.esc(view.doc.opinion || '') + '（' + t.c.U.esc(view.doc.approver || '') + ' · ' + t.c.U.esc(view.doc.approvedAt || '') + '）';
       assert.ok(guidance.startsWith(prefix), '原退回意见/姓名/日期事实前缀逐字保留');
+      if (archiveEnabled()) assert.equal(prefix, bannerHtml(t.originalView({ params: [id], query: {}, user: view.user })).split('<br>')[0].replace(/<\/div>$/, ''), '归档退回事实前缀仍与原HTML精确相等');
       guidance = guidance.slice(prefix.length);
     }
     if (['草稿', '制作中', '已退回'].includes(view.doc.status)) {
@@ -66,7 +71,17 @@ async function run() {
         assert.ok(content.includes('字段可编辑'));
         assert.equal(content.includes('包装'), view.doc.type === 'PL', 'CI不指导隐藏的包装字段');
       }
-    } else assert.equal(bannerHtml(view.html), bannerHtml(oldHtml), '通过/待审核/未知分支原HTML精确保留');
+    } else {
+      // Current regression has its own exact expected facts; it needs no archive object.
+      const d = view.doc, esc = t.c.U.esc;
+      const expected = d.status === '已通过'
+        ? '<div class="doc-status-banner approve"><b>该版本曾审核通过：</b>' + esc(d.opinion || '同意') + '（' + esc(d.approver || '') + ' · ' + esc(d.approvedAt || '') + '）。' + (view.policy.canExport ? '当前满足导出演示条件。' : '历史审核结果保留，当前导出资格见操作区。') + '</div>'
+        : d.status === '待审核'
+          ? '<div class="doc-status-banner review"><b>待审核：</b>制单人 ' + esc(d.maker) + ' 已于 ' + esc(d.submittedAt) + ' 提交审核，等待业务主管处理。</div>'
+          : '<div class="doc-status-banner draft"><b>状态待核对：</b>当前版本状态为「' + esc(d.status) + '」，不能据此推断审核决定。</div>';
+      assert.equal(bannerHtml(view.html), expected, '通过/待审核/未知分支完整当前事实');
+      if (archiveEnabled()) assert.equal(bannerHtml(view.html), bannerHtml(t.originalView({ params: [id], query: {}, user: view.user })), '通过/待审核/未知分支原HTML精确保留');
+    }
     cases++; return view;
   }
   const t = setup();
@@ -132,11 +147,14 @@ async function run() {
   assert.equal(cancelled.c.U.order('SO2026005').status, '已取消');
   check(cancelled, 'D-CI2026004-V1', 'doc'); check(cancelled, 'D-PL2026004-V1', 'doc');
   assert.equal(JSON.stringify(cancelled.c.MOCK.documents), savedDocuments, '取消通过不改历史单证');
+  if (archiveEnabled()) {
   const source = publishedDocs().replace(/\r\n/g, '\n'), original = originalDocs().replace(/\r\n/g, '\n');
   const removeOwnedLines = s => s.split('\n').filter(line => !line.includes("if (d.status === '已退回') banner =") && !line.includes("else if (d.status === '草稿' || d.status === '制作中') banner =")).join('\n');
   const publishedR13 = archivedDocs().replace(/\r\n/g, '\n');
   assert.equal(removeOwnedLines(publishedR13), removeOwnedLines(original), '已发布R13归档仍仅两个横幅分支，其它源码与原58基线精保');
   assert.equal(normalizeActionGuidanceSource(source), publishedR13, '归档证明：f8643db仅H25私人helper和五主链文案，与已发布R13全文精保；不阻止当前批准新增功能');
-  console.log(`PASS ${cases} document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts; archived f8643db outside-banner equality (Node fixture only)`);
+  }
+  console.log(`PASS CURRENT ${cases} document status guidance scenarios: current actual policy/Views/Actions, read-only full MOCK, cancel/restore lifecycle, escape and exact review facts (Node fixture only)`);
+  reportArchive('verify-document-status-guidance.cjs');
 }
-(process.argv.includes('--probe-original') ? probeOriginal() : run()).catch(error => { console.error(error.message); process.exitCode = 1; });
+(process.argv.includes('--probe-original') ? probeOriginal() : run()).catch(reportFailure);

@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:49:57.673Z",
+  "engine": "contract-double",
+  "result": "CONTRACT_PASS",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "CONTRACT_PASS",
+      "checks": [],
+      "startedAt": "2026-10-19T02:49:57.673Z",
+      "coverage": {
+        "expectedVisits": 100,
+        "observedVisits": 0,
+        "expectedLayouts": 300,
+        "observedLayouts": 0
+      },
+      "finishedAt": "2026-10-19T02:49:57.673Z"
+    }
+  ],
+  "failures": [],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "CONTRACT_PASS"
+    }
+  ],
+  "resets": [
+    {
+      "name": "contract reset",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "newInquiryUnquoted": true,
+      "docEnabled": true,
+      "disabled": [
+        "U007"
+      ]
+    }
+  ],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html?qa=contract",
+  "requestedPhases": [
+    "matrix"
+  ],
+  "notRequested": [
+    "business",
+    "quality"
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-author-contract-1792378197650-39029-fresh.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "media": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "viewport": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "listener": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    }
+  },
+  "finishedAt": "2026-10-19T02:49:57.674Z"
+}

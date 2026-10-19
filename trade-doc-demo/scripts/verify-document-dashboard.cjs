@@ -2,12 +2,12 @@
 /* 真实工作台/共享工具与原业务动作，最小 DOM；非实际浏览器布局或键盘认证。 */
 const assert = require('node:assert/strict');
 const path = require('node:path');
-const { execFileSync } = require('node:child_process');
+const { archiveEnabled, historySource, reportFailure, reportArchive } = require('./history-gate.cjs');
 const { fixture } = require('./verify-document-workspace.cjs');
 const root = path.resolve(__dirname, '..');
 const baseline = '77deae8ae937c0c1d005d4b3b019d5d150e623b8';
-const baselineSource = name => execFileSync('git', ['show', baseline + ':trade-doc-demo/js/' + name + '.js'], { cwd: root, encoding: 'utf8' });
-const publishedSource = name => execFileSync('git', ['show', 'f8643db:trade-doc-demo/js/' + name + '.js'], { cwd: root, encoding: 'utf8' });
+const baselineSource = name => historySource(baseline, name);
+const publishedSource = name => historySource('f8643db82e4daf0f41904a37ab34cdc071393365', name);
 function setup(sources = {}) { return fixture(['views-sales', 'views-docs', 'views-fin'], sources); }
 const data = t => JSON.stringify(t.c.MOCK);
 const nodeText = node => (node.textContent || '') + node.children.map(nodeText).join('');
@@ -126,9 +126,11 @@ async function run() {
   unsupported.id = 'UNKNOWN-STATUS'; unsupported.type = 'ZZ'; unsupported.status = '未知状态'; unknown.c.MOCK.documents.push(unsupported);
   checkDoc(unknown, ['D-CI2026004-V1'], ['D-CI2026003-V1', 'D-PL2026004-V1']);
   for (const role of ['sales', 'fin', 'boss', 'admin']) {
-    const current = setup(), original = setup({ utils: baselineSource('utils'), 'views-core': baselineSource('views-core') });
-    const published = setup({ 'mock-data': publishedSource('mock-data'), utils: publishedSource('utils'), 'views-core': publishedSource('views-core') });
+    const current = setup();
     const before = data(current), user = current.c.U.roleUser(role), currentHtml = render(current, user);
+    if (archiveEnabled()) {
+    const original = setup({ utils: baselineSource('utils'), 'views-core': baselineSource('views-core') });
+    const published = setup({ 'mock-data': publishedSource('mock-data'), utils: publishedSource('utils'), 'views-core': publishedSource('views-core') });
     const originalHtml = render(original, original.c.U.roleUser(role)), publishedHtml = render(published, published.c.U.roleUser(role));
     // 原H23“四岗整页不改”只证明已发布f8643db；当前待办前置/新增收款等用户需求不做广义归一。
     let comparableHtml = publishedHtml;
@@ -141,6 +143,7 @@ async function run() {
       comparableHtml = publishedHtml.replace(newLabel, oldLabel);
     }
     assert.equal(comparableHtml, originalHtml, `${role}:归档证明f8643db除明确批准财务标签外整页HTML完全相同`);
+    }
     // 保当前四岗位的事实、精确指标、具名入口及非制单边界，不将当前测试退回归档。
     current.app.innerHTML = currentHtml;
     assert.equal(current.app.querySelector('.doc-work-summary'), null, role + '不能冒用单证员当前作业队列');
@@ -163,6 +166,7 @@ async function run() {
     if (role === 'admin') { assert.match(currentHtml, /管理员只维护系统配置，不参与业务审批/); assert.equal(current.app.querySelector('[data-action="doc-approve"]'), null); }
     assert.equal(data(current), before); cases++;
   }
-  console.log(`PASS: ${cases} document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries; archived f8643db other-role exact output (Node fixture only)`);
+  console.log(`PASS CURRENT: ${cases} document dashboard scenarios; current shared API, pending-reform/currently editable distinction, cancellation reference, current four-role metrics/entry boundaries (Node fixture only)`);
+  reportArchive('verify-document-dashboard.cjs');
 }
-(process.argv.includes('--probe-original') ? probeOriginal() : run()).catch(error => { console.error(error.message); process.exitCode = 1; });
+(process.argv.includes('--probe-original') ? probeOriginal() : run()).catch(reportFailure);

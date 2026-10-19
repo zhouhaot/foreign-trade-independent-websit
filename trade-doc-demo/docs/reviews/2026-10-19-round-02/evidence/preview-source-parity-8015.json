@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-10-19T02:48:26.021Z",
+  "base": "http://127.0.0.1:8015/",
+  "category": "HTTP source parity only",
+  "results": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "served": "7e87b3a30b348fc8552de98f983edff1ab2926f968c34e68f9a69d7bbcb7f392",
+      "local": "7e87b3a30b348fc8552de98f983edff1ab2926f968c34e68f9a69d7bbcb7f392",
+      "baseline": "7e87b3a30b348fc8552de98f983edff1ab2926f968c34e68f9a69d7bbcb7f392"
+    },
+    {
+      "file": "js/app.js",
+      "status": 200,
+      "served": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+      "local": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d",
+      "baseline": "a0de086ca84a8e3143fa04bc9d95951a258856fbe26a5bafe338d6c6dedf654d"
+    },
+    {
+      "file": "js/mock-data.js",
+      "status": 200,
+      "served": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f",
+      "local": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f",
+      "baseline": "4fd2557f44065257ad470ea521b700a40093f9c2340ce12b30a3e5fcb0796c2f"
+    },
+    {
+      "file": "js/utils.js",
+      "status": 200,
+      "served": "a646d813f68a2ccd35650dd0a0309d26ce41261ac091b273070ec265c5763536",
+      "local": "a646d813f68a2ccd35650dd0a0309d26ce41261ac091b273070ec265c5763536",
+      "baseline": "a646d813f68a2ccd35650dd0a0309d26ce41261ac091b273070ec265c5763536"
+    },
+    {
+      "file": "js/views-core.js",
+      "status": 200,
+      "served": "0ddbbbd64f8217d8a69a84d21eb1b3428f1a0b8c4c26f69097303bcfaa51f9c6",
+      "local": "0ddbbbd64f8217d8a69a84d21eb1b3428f1a0b8c4c26f69097303bcfaa51f9c6",
+      "baseline": "0ddbbbd64f8217d8a69a84d21eb1b3428f1a0b8c4c26f69097303bcfaa51f9c6"
+    },
+    {
+      "file": "js/views-docs.js",
+      "status": 200,
+      "served": "89ca87ea670eec10cecf2ec7b7102871b24a375008ac5805a0b42af39a8b853b",
+      "local": "89ca87ea670eec10cecf2ec7b7102871b24a375008ac5805a0b42af39a8b853b",
+      "baseline": "89ca87ea670eec10cecf2ec7b7102871b24a375008ac5805a0b42af39a8b853b"
+    },
+    {
+      "file": "js/views-fin.js",
+      "status": 200,
+      "served": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+      "local": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46",
+      "baseline": "a836e6c7dabe2c2d85407c204f6ddab9303c151ea508d3560857ef41c7e94c46"
+    },
+    {
+      "file": "js/views-sales.js",
+      "status": 200,
+      "served": "44ba2526f83af23abc0c243c280961fdc65bf686403bc4106baeef29e5f749d4",
+      "local": "44ba2526f83af23abc0c243c280961fdc65bf686403bc4106baeef29e5f749d4",
+      "baseline": "44ba2526f83af23abc0c243c280961fdc65bf686403bc4106baeef29e5f749d4"
+    },
+    {
+      "file": "js/views-stats.js",
+      "status": 200,
+      "served": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40",
+      "local": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40",
+      "baseline": "40477104cc24091de6b9ffd663113d409b6c3eec82599c9a74c01da69c553b40"
+    },
+    {
+      "file": "js/views-system.js",
+      "status": 200,
+      "served": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef",
+      "local": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef",
+      "baseline": "89338aa3e80fa3daf09023a22c8360fc8df006a8a4a01f5310336932a0bf24ef"
+    },
+    {
+      "file": "css/base.css",
+      "status": 200,
+      "served": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765",
+      "local": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765",
+      "baseline": "262561fcd961bc3e8af1462c9d77492f0cbec8c25165e4af084cab10695a4765"
+    },
+    {
+      "file": "css/layout.css",
+      "status": 200,
+      "served": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+      "local": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879",
+      "baseline": "06c66ed97b2f67e31891b901926a0457f57c443a2c5ed74d4a56d2d24bb78879"
+    },
+    {
+      "file": "css/pages.css",
+      "status": 200,
+      "served": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3",
+      "local": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3",
+      "baseline": "c14ae890bd41bce74581d235f861c609c7ff62435bf8fd80b19633ffb10ff8c3"
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "result": "PASS",
+  "kind": "Node harness contract only; no actual Ego/Page executions",
+  "checks": 37,
+  "records": [
+    {
+      "name": "required TRADE_QA_SPACE",
+      "result": "PASS"
+    },
+    {
+      "name": "required TRADE_QA_PAGE",
+      "result": "PASS"
+    },
+    {
+      "name": "required TRADE_QA_DISPOSABLE",
+      "result": "PASS"
+    },
+    {
+      "name": "required TRADE_QA_BASE",
+      "result": "PASS"
+    },
+    {
+      "name": "required TRADE_QA_REPORT",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base https://127.0.0.1:8014/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://example.com:8014/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://127.1:8014/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://2130706433:8014/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://0x7f000001:8014/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://[redacted]@127.0.0.1:8014/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://127.0.0.1:8014/index.html#/orders",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base file:///tmp/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://127.0.0.1:8014/",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://127.0.0.1/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject unsafe/ambiguous base http://127.0.0.1:99999/index.html",
+      "result": "PASS"
+    },
+    {
+      "name": "reject invalid space 0",
+      "result": "PASS"
+    },
+    {
+      "name": "reject invalid space -1",
+      "result": "PASS"
+    },
+    {
+      "name": "reject invalid space 18x",
+      "result": "PASS"
+    },
+    {
+      "name": "reject invalid space 1.5",
+      "result": "PASS"
+    },
+    {
+      "name": "reject invalid space 9007199254740992",
+      "result": "PASS"
+    },
+    {
+      "name": "reject wrong page/disposable/phase/report inputs",
+      "result": "PASS"
+    },
+    {
+      "name": "all phases default and explicit subset",
+      "result": "PASS"
+    },
+    {
+      "name": "independent decimal oracle exact cents and refusal",
+      "result": "PASS"
+    },
+    {
+      "name": "missing config saves BLOCKED before any browser API",
+      "result": "PASS"
+    },
+    {
+      "name": "existing report immutable and duplicate execution refused before browser",
+      "result": "PASS"
+    },
+    {
+      "name": "missing/invalid report returns in-memory BLOCKED without invented paths",
+      "result": "PASS"
+    },
+    {
+      "name": "absent/unowned spaces blocked; no implicit creation or takeover",
+      "result": "PASS"
+    },
+    {
+      "name": "contract-double cannot produce real browser PASS; only set diagnostics cleaned",
+      "result": "PASS"
+    },
+    {
+      "name": "partial report and original product failure survive cleanup failures; later cleanup continues",
+      "result": "PASS"
+    },
+    {
+      "name": "control stop preserves evidence and forbids subsequent stages/Page cleanup",
+      "result": "PASS"
+    },
+    {
+      "name": "structured safety metadata always blocks, including all false fields and product categories",
+      "result": "PASS"
+    },
+    {
+      "name": "policy denial stops all Page actions and later phases",
+      "result": "PASS"
+    },
+    {
+      "name": "override response lost still records attempted and restores in ordinary tool failure",
+      "result": "PASS"
+    },
+    {
+      "name": "fresh explicitly reloads and clears prior runner media/viewport between independent scenarios",
+      "result": "PASS"
+    },
+    {
+      "name": "classification keeps product/tool/method/blocked separate",
+      "result": "PASS"
+    },
+    {
+      "name": "source coverage and forbidden lifecycle/global-state operations",
+      "result": "PASS"
+    }
+  ]
+}

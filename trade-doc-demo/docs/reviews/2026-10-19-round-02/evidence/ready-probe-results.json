@@ -1,0 +1,1172 @@
+[
+  {
+    "waitLoad": false,
+    "i": 0,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": false,
+    "i": 1,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": false,
+    "i": 2,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": false,
+    "i": 3,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": false,
+    "i": 4,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": true,
+    "i": 0,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": true,
+    "i": 1,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": true,
+    "i": 2,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": true,
+    "i": 3,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  },
+  {
+    "waitLoad": true,
+    "i": 4,
+    "result": "READY",
+    "state": {
+      "ready": "complete",
+      "app": true,
+      "mock": true,
+      "user": "boss",
+      "scripts": [
+        "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+        "http://127.0.0.1:8014/js/app.js?v=20261019-review"
+      ],
+      "css": [
+        {
+          "href": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "rules": 228
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "rules": 174
+        },
+        {
+          "href": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "rules": 547
+        }
+      ],
+      "body": "工作台\n订单查询\n单证管理\n询盘查询\n报价查询\n收款与应收\n审核与异常\n统计分析\n贸易协同\n搜索页面、订单、单证\nCtrl K\n快速切换演示角色\n切换：系统管理员\n切换：外贸业务员\n切换：单证员\n切换：财务人员\n切换：业务主管\n5\nZJG\nzhoujg\n退出登录\n业务路径\n1\n待审事项\n2\n订单跟踪\n3\n单证审核\n4\n业务分析\n周建国，欢迎回来\n\n聚焦审核与",
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8014/css/base.css?v=20261019-review-2",
+          "duration": 0,
+          "bytes": 20245,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/layout.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 16505,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/css/pages.css?v=20261019-review",
+          "duration": 0,
+          "bytes": 50264,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/mock-data.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 36413,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/utils.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 56300,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-core.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 52090,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-sales.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 92887,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-docs.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 62270,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-fin.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43250,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-stats.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 8282,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/views-system.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 10310,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/js/app.js?v=20261019-review",
+          "duration": 0,
+          "bytes": 43845,
+          "responseStatus": 200
+        },
+        {
+          "name": "http://127.0.0.1:8014/assets/maps/world-land.svg",
+          "duration": 0,
+          "bytes": 29932,
+          "responseStatus": 200
+        }
+      ]
+    }
+  }
+]

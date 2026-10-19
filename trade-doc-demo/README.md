@@ -132,7 +132,23 @@ node scripts/verify-disabled-login.cjs
 node scripts/verify-review-integrity.cjs
 ```
 
-前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价/快照/单证与取消、输入/历史保护、岗位上下文、申请防重复与初始金额、数字/报价/收款/客户维护/询盘/包装/纸张审核、三业务弹窗关闭、审批关联查阅、当前制单摘要/首页/铃铛接续、单证横幅资格指导及实际字段操作文案契约。四个review专项覆盖销售、首制单证、框架权限和财务改进，两地图专项覆盖国家分布与逐单起运地；末两组覆盖无启用账号登录、陈旧登录回调、编号唯一与精确金额显示。共41个原型命令，加上单独的生产契约静态检查共42个验证器，不代替浏览器；历史轮次说明与测试归档按当时范围保留，当前结果见最新迭代报告。
+前四个脚本检查资源/样例金额、100组角色视图与关键回调、登录/退出。其余检查订单工作区、改价/快照/单证与取消、输入/历史保护、岗位上下文、申请防重复与初始金额、数字/报价/收款/客户维护/询盘/包装/纸张审核、三业务弹窗关闭、审批关联查阅、当前制单摘要/首页/铃铛接续、单证横幅资格指导及实际字段操作文案契约。四个review专项覆盖销售、首制单证、框架权限和财务改进，两地图专项覆盖国家分布与逐单起运地；末两组覆盖无启用账号登录、陈旧登录回调、编号唯一与精确金额显示。以上41个原型命令，加上单独的生产契约静态检查及下方两个工具契约共44个验证器，不代替浏览器；历史轮次说明与测试归档按当时范围保留，当前结果见最新迭代报告。
+
+### 当前回归与历史归档
+
+`verify-approval-context.cjs`、`verify-document-dashboard.cjs`、`verify-document-status-guidance.cjs`和`verify-document-action-guidance.cjs`默认只执行当前源码／VM回归，不要求Git历史。保留原强历史证明，显式追加运行：
+
+```bash
+node scripts/verify-approval-context.cjs --archive
+node scripts/verify-document-dashboard.cjs --archive
+node scripts/verify-document-status-guidance.cjs --archive
+node scripts/verify-document-action-guidance.cjs --archive
+node scripts/verify-history-gates.cjs
+node scripts/verify-history-gates.cjs --archive
+node scripts/verify-browser-contract.cjs
+```
+
+归档完整且所有断言执行后才输出`PASS ARCHIVE`。源码包／浅克隆缺少要求的Git对象时输出`BLOCKED MISSING_HISTORY`并退出2；断言失败退出1，不自动fetch。默认输出`ARCHIVE NOT_REQUESTED`并非历史通过。`verify-history-gates`默认12组检查当前无Git执行、缺历史阻塞和当前变异拒绝，`--archive`再加8组真实历史执行／变异拒绝。浏览器契约脚本是Node模拟适配器测试，不能计作真实Ego或业务界面验收。
 
 第6轮体验：业务员在客户详情维护资料，错误保留输入；询盘 INQ2026006 是明确合成需求，可核对参考545USD并生成一次报价草稿，再编辑实际价格与条款。原询盘已有报价只接续查看；草稿没有登记客户确认或直接生成订单。改进与验证边界见 [第6轮材料](docs/iterations/round-06.md)。
 
@@ -152,4 +168,22 @@ node scripts/verify-review-integrity.cjs
 
 第14轮体验：CI编辑按钮、工具栏、进入反馈、受控修订按钮/ARIA与确认只描述实际唛头与备注，PL包含包装；原源版本/快照沿用/原版保留/重新审核及资格控件不变。H25只统一说明，不新增CI包装字段，详见[第14轮材料](docs/iterations/round-14.md)。
 
-`scripts/verify-browser.mjs` 是 Ego Browser 环境下的浏览器回归脚本，需由操作者提供当前授权的 TaskSpace ID，不会自行创建/接管浏览器空间。验证覆盖与已知边界见 `HANDOFF.md` 的 2026-10-04 交接记录。
+### 真实浏览器回归
+
+`scripts/verify-browser.mjs`仅在已安装、允许使用的 Ego Browser CLI 中运行。操作者按浏览器工作流新建或继续本次目标的专用空间，并明确允许丢弃`p1`页面的内存数据；不能把用户正在编辑的页面当测试fixture。脚本只连接显式存在、agent拥有的空间，不创建、认领、接管或结束空间。普通Node导入不执行真实浏览器。
+
+在正式克隆目录执行，替换当前空间ID与本次从未使用的绝对报告路径（例中占位符不能直接运行）：
+
+```bash
+ego-browser nodejs -e 'Object.assign(globalThis, {
+  TRADE_QA_SPACE: <当前空间ID>, TRADE_QA_PAGE: "p1", TRADE_QA_DISPOSABLE: 1,
+  TRADE_QA_BASE: "http://127.0.0.1:8014/index.html",
+  TRADE_QA_REPORT: "<绝对路径/本次新报告.json>"
+}); await import("file:///Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/scripts/verify-browser.mjs");'
+```
+
+上例`import`路径也须对应本机正式克隆。当前Ego CLI不会向脚本透传调用shell的自定义环境变量，实际调用须在`-e`内显式赋予`globalThis`，不能只写shell前缀变量。基址必须是显式端口的loopback HTTP `index.html`；先确认预览服务确实服务此源码，脚本不会启动服务器。默认依次执行`matrix,business,quality`，可在上述对象加`TRADE_QA_PHASES: "quality"`等选单阶段，每次必须另用新报告。矩阵目标为五岗100访问／300桌面尺寸观察；同单连续链8组含独立545USD金额真值、双单送审审批、先收100再收445与V2保V1；质量阶段覆盖目录临界点、地图、动效、搜索／焦点、输入／页签、修订、收款、Toast、禁用岗位登录及短程诊断。分阶段刷新隔离，连续同单链不刷新；不用`App.rerender()`强制掩盖路由问题。
+
+缺配置／空间不可用、断言失败与工具错误分别报告；已存在的报告拒绝覆盖。逐场景保存进展，未执行阶段不冒充通过，清理错误与原失败同时保留。结束时仅复原本轮设置的目标页诊断覆盖并刷新丢弃合成内存；用户接管／空间停用时停止页面操作。调用者仍须在本次目标成功后按工作流`finish()`一次；不要复用已结束的历史空间ID。
+
+真实浏览器结果与Node工具模拟报告分开。file协议受当前工具策略限制时保持未验证，不换工具绕过；本轮不做跨引擎、读屏或容量认证。当前说明及结果见[第2轮工程验收改进](docs/reviews/2026-10-19-round-02/README.md)，旧报告按原轮次保留。

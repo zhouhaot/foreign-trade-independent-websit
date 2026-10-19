@@ -1,0 +1,4507 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:50:21.215Z",
+  "engine": "ego-browser",
+  "result": "PASS",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "PASS",
+      "checks": [
+        {
+          "name": "admin #/dashboard",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/customers",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/customers/C001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/products",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/products/P001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/inquiries",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/inquiries/INQ2026006",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/quotes",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/quotes/Q2026004",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/quotes/Q2026004/edit",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/orders",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/orders/SO2026001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/documents",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/documents/D-PL2026004-V1",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/payments",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/approvals",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/stats",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/system/users",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/system/roles",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "admin #/system/dicts",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/dashboard",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/customers",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/customers/C001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/products",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/products/P001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/inquiries",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/inquiries/INQ2026006",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/quotes",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/quotes/Q2026004",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/quotes/Q2026004/edit",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/orders",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/orders/SO2026001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/documents",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/documents/D-PL2026004-V1",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/payments",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/approvals",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/stats",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/system/users",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/system/roles",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "sales #/system/dicts",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/dashboard",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/customers",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/customers/C001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/products",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/products/P001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/inquiries",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/inquiries/INQ2026006",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/quotes",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/quotes/Q2026004",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/quotes/Q2026004/edit",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/orders",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/orders/SO2026001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/documents",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/documents/D-PL2026004-V1",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/payments",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/approvals",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/stats",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/system/users",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/system/roles",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "doc #/system/dicts",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/dashboard",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/customers",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/customers/C001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/products",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/products/P001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/inquiries",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/inquiries/INQ2026006",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/quotes",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/quotes/Q2026004",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/quotes/Q2026004/edit",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/orders",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/orders/SO2026001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/documents",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/documents/D-PL2026004-V1",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/payments",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/approvals",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/stats",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/system/users",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/system/roles",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "fin #/system/dicts",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/dashboard",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/customers",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/customers/C001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/products",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/products/P001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/inquiries",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/inquiries/INQ2026006",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/quotes",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/quotes/Q2026004",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/quotes/Q2026004/edit",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/orders",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/orders/SO2026001",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/documents",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/documents/D-PL2026004-V1",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/payments",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/approvals",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/stats",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/system/users",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/system/roles",
+          "result": "PASS",
+          "layoutsObserved": 3
+        },
+        {
+          "name": "boss #/system/dicts",
+          "result": "PASS",
+          "layoutsObserved": 3
+        }
+      ],
+      "startedAt": "2026-10-19T02:50:21.286Z",
+      "routeChecks": [
+        {
+          "role": "admin",
+          "route": "#/dashboard",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 415
+        },
+        {
+          "role": "admin",
+          "route": "#/customers",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/customers/C001",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/products",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/products/P001",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries/INQ2026006",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004/edit",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/orders",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/orders/SO2026001",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/documents",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/documents/D-PL2026004-V1",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/payments",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/approvals",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/stats",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "admin",
+          "route": "#/system/users",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 462
+        },
+        {
+          "role": "admin",
+          "route": "#/system/roles",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 455
+        },
+        {
+          "role": "admin",
+          "route": "#/system/dicts",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 524
+        },
+        {
+          "role": "sales",
+          "route": "#/dashboard",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1488
+        },
+        {
+          "role": "sales",
+          "route": "#/customers",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 547
+        },
+        {
+          "role": "sales",
+          "route": "#/customers/C001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 313
+        },
+        {
+          "role": "sales",
+          "route": "#/products",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 544
+        },
+        {
+          "role": "sales",
+          "route": "#/products/P001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 297
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 627
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries/INQ2026006",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 595
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 710
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 396
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004/edit",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 259
+        },
+        {
+          "role": "sales",
+          "route": "#/orders",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1116
+        },
+        {
+          "role": "sales",
+          "route": "#/orders/SO2026001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 653
+        },
+        {
+          "role": "sales",
+          "route": "#/documents",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "sales",
+          "route": "#/documents/D-PL2026004-V1",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1306
+        },
+        {
+          "role": "sales",
+          "route": "#/payments",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "sales",
+          "route": "#/approvals",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 721
+        },
+        {
+          "role": "sales",
+          "route": "#/stats",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "sales",
+          "route": "#/system/users",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "sales",
+          "route": "#/system/roles",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "sales",
+          "route": "#/system/dicts",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 70
+        },
+        {
+          "role": "doc",
+          "route": "#/dashboard",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1681
+        },
+        {
+          "role": "doc",
+          "route": "#/customers",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/customers/C001",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/products",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/products/P001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 297
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries/INQ2026006",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004/edit",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/orders",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1108
+        },
+        {
+          "role": "doc",
+          "route": "#/orders/SO2026001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 648
+        },
+        {
+          "role": "doc",
+          "route": "#/documents",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 655
+        },
+        {
+          "role": "doc",
+          "route": "#/documents/D-PL2026004-V1",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1476
+        },
+        {
+          "role": "doc",
+          "route": "#/payments",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/approvals",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 661
+        },
+        {
+          "role": "doc",
+          "route": "#/stats",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/system/users",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/system/roles",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "doc",
+          "route": "#/system/dicts",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 68
+        },
+        {
+          "role": "fin",
+          "route": "#/dashboard",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1577
+        },
+        {
+          "role": "fin",
+          "route": "#/customers",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/customers/C001",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/products",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/products/P001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 297
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries/INQ2026006",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004/edit",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/orders",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1108
+        },
+        {
+          "role": "fin",
+          "route": "#/orders/SO2026001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 646
+        },
+        {
+          "role": "fin",
+          "route": "#/documents",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/documents/D-PL2026004-V1",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1306
+        },
+        {
+          "role": "fin",
+          "route": "#/payments",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1889
+        },
+        {
+          "role": "fin",
+          "route": "#/approvals",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 126
+        },
+        {
+          "role": "fin",
+          "route": "#/stats",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/system/users",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/system/roles",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "fin",
+          "route": "#/system/dicts",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "boss",
+          "route": "#/dashboard",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1688
+        },
+        {
+          "role": "boss",
+          "route": "#/customers",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "boss",
+          "route": "#/customers/C001",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "boss",
+          "route": "#/products",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "boss",
+          "route": "#/products/P001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 297
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 624
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries/INQ2026006",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 584
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 704
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 384
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004/edit",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "boss",
+          "route": "#/orders",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1103
+        },
+        {
+          "role": "boss",
+          "route": "#/orders/SO2026001",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 648
+        },
+        {
+          "role": "boss",
+          "route": "#/documents",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 657
+        },
+        {
+          "role": "boss",
+          "route": "#/documents/D-PL2026004-V1",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1320
+        },
+        {
+          "role": "boss",
+          "route": "#/payments",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1497
+        },
+        {
+          "role": "boss",
+          "route": "#/approvals",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 1286
+        },
+        {
+          "role": "boss",
+          "route": "#/stats",
+          "expectedForbidden": false,
+          "forbidden": false,
+          "textLength": 907
+        },
+        {
+          "role": "boss",
+          "route": "#/system/users",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "boss",
+          "route": "#/system/roles",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        },
+        {
+          "role": "boss",
+          "route": "#/system/dicts",
+          "expectedForbidden": true,
+          "forbidden": true,
+          "textLength": 69
+        }
+      ],
+      "layouts": [
+        {
+          "role": "admin",
+          "route": "#/dashboard",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/dashboard",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/dashboard",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/customers",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/customers",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/customers",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/customers/C001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/customers/C001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/customers/C001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/products",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/products",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/products",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/products/P001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/products/P001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/products/P001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/orders",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/orders",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/orders",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/documents",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/documents",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/documents",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/payments",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/payments",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/payments",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/approvals",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/approvals",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/approvals",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/stats",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/stats",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/stats",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/system/users",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/system/users",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/system/users",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/system/roles",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/system/roles",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/system/roles",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "admin",
+          "route": "#/system/dicts",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "admin",
+          "route": "#/system/dicts",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "admin",
+          "route": "#/system/dicts",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/dashboard",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/dashboard",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/dashboard",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/customers",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/customers",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/customers",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/customers/C001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/customers/C001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/customers/C001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/products",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/products",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/products",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/products/P001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/products/P001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/products/P001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/orders",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/orders",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/orders",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/documents",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/documents",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/documents",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/payments",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/payments",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/payments",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/approvals",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/approvals",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/approvals",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/stats",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/stats",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/stats",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/system/users",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/system/users",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/system/users",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/system/roles",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/system/roles",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/system/roles",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "sales",
+          "route": "#/system/dicts",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "sales",
+          "route": "#/system/dicts",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "sales",
+          "route": "#/system/dicts",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/dashboard",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/dashboard",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/dashboard",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/customers",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/customers",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/customers",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/customers/C001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/customers/C001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/customers/C001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/products",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/products",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/products",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/products/P001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/products/P001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/products/P001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/orders",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/orders",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/orders",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/documents",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/documents",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/documents",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/payments",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/payments",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/payments",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/approvals",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/approvals",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/approvals",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/stats",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/stats",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/stats",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/system/users",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/system/users",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/system/users",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/system/roles",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/system/roles",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/system/roles",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "doc",
+          "route": "#/system/dicts",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "doc",
+          "route": "#/system/dicts",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "doc",
+          "route": "#/system/dicts",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/dashboard",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/dashboard",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/dashboard",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/customers",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/customers",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/customers",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/customers/C001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/customers/C001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/customers/C001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/products",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/products",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/products",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/products/P001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/products/P001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/products/P001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/orders",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/orders",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/orders",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/documents",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/documents",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/documents",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/payments",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/payments",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/payments",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/approvals",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/approvals",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/approvals",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/stats",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/stats",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/stats",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/system/users",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/system/users",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/system/users",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/system/roles",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/system/roles",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/system/roles",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "fin",
+          "route": "#/system/dicts",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "fin",
+          "route": "#/system/dicts",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "fin",
+          "route": "#/system/dicts",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/dashboard",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/dashboard",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/dashboard",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/customers",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/customers",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/customers",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/customers/C001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/customers/C001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/customers/C001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/products",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/products",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/products",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/products/P001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/products/P001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/products/P001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/inquiries/INQ2026006",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/quotes/Q2026004/edit",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/orders",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/orders",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/orders",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/orders/SO2026001",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/documents",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/documents",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/documents",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/documents/D-PL2026004-V1",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/payments",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/payments",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/payments",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/approvals",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/approvals",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/approvals",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/stats",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/stats",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/stats",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/system/users",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/system/users",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/system/users",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/system/roles",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/system/roles",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/system/roles",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        },
+        {
+          "role": "boss",
+          "route": "#/system/dicts",
+          "requestedWidth": 1280,
+          "height": 800,
+          "width": 1280,
+          "scrollWidth": 1272,
+          "workspaceWidth": 1172
+        },
+        {
+          "role": "boss",
+          "route": "#/system/dicts",
+          "requestedWidth": 1366,
+          "height": 768,
+          "width": 1366,
+          "scrollWidth": 1358,
+          "workspaceWidth": 1258
+        },
+        {
+          "role": "boss",
+          "route": "#/system/dicts",
+          "requestedWidth": 1440,
+          "height": 900,
+          "width": 1440,
+          "scrollWidth": 1432,
+          "workspaceWidth": 1332
+        }
+      ],
+      "semantics": [],
+      "coverage": {
+        "expectedVisits": 100,
+        "observedVisits": 100,
+        "expectedLayouts": 300,
+        "observedLayouts": 300
+      },
+      "finishedAt": "2026-10-19T02:50:33.929Z"
+    },
+    {
+      "name": "business",
+      "result": "PASS",
+      "checks": [
+        {
+          "name": "Fresh inquiry → quote → confirm → order; current dates and independent 545 USD",
+          "result": "PASS",
+          "qid": "Q2026101",
+          "orderId": "SO2026008",
+          "totalCents": "54500",
+          "dates": {
+            "date": "2026-10-19",
+            "validUntil": "2026-11-03",
+            "form": "2026-11-03"
+          },
+          "deliveryDate": "2026-11-18",
+          "shippingOriginAbsent": true
+        },
+        {
+          "name": "Overpayment refusal makes zero business-memory writes",
+          "result": "PASS"
+        },
+        {
+          "name": "Receive 100 USD before documents",
+          "result": "PASS",
+          "receivedCents": "10000",
+          "remainingCents": "44500"
+        },
+        {
+          "name": "First CI/PL; incomplete PL zero-write refusal; packaging and unique IDs",
+          "result": "PASS",
+          "ci": "D-CI2026006-V1",
+          "pl": "D-PL2026006-V1",
+          "uniqueCollectionCounts": {
+            "inquiries": 6,
+            "quotes": 10,
+            "orders": 8,
+            "documents": 13,
+            "payments": 8,
+            "approvals": 10
+          }
+        },
+        {
+          "name": "Both approved while 445 USD unpaid; three independent progress tracks",
+          "result": "PASS",
+          "order": "待执行",
+          "docs": "已通过",
+          "receivedCents": "10000",
+          "remainingCents": "44500"
+        },
+        {
+          "name": "Final 445 USD receipt settles independent 545 USD",
+          "result": "PASS",
+          "receivedCents": "54500",
+          "remainingCents": "0"
+        },
+        {
+          "name": "Approved CI export is demonstration only",
+          "result": "PASS",
+          "realFileExport": false
+        },
+        {
+          "name": "Controlled V2 retains exact V1",
+          "result": "PASS",
+          "v1": "D-CI2026006-V1",
+          "v1Preserved": true
+        }
+      ],
+      "startedAt": "2026-10-19T02:50:33.930Z",
+      "finishedAt": "2026-10-19T02:52:02.067Z"
+    },
+    {
+      "name": "quality",
+      "result": "PASS",
+      "checks": [
+        {
+          "name": "1360/1361 desktop directory boundaries",
+          "result": "PASS",
+          "observations": [
+            {
+              "width": 1360,
+              "bodyWidth": 1352,
+              "directoryButtonVisible": true,
+              "paperWidth": 760
+            },
+            {
+              "width": 1361,
+              "bodyWidth": 1353,
+              "directoryButtonVisible": false,
+              "paperWidth": 701
+            }
+          ]
+        },
+        {
+          "name": "Map native country filter and keyboard",
+          "result": "PASS"
+        },
+        {
+          "name": "Runtime reduced motion and normal authored motion",
+          "result": "PASS"
+        },
+        {
+          "name": "Search role filter, IME, permitted selected result and focus return",
+          "result": "PASS",
+          "selected": "#/documents/D-CI2026001-V1"
+        },
+        {
+          "name": "Order filters/density/sidebar preserve input; six tabs retain three progress tracks",
+          "result": "PASS"
+        },
+        {
+          "name": "Document focus retains input; protected role switch removes edit controls",
+          "result": "PASS"
+        },
+        {
+          "name": "Approved revision cancel then V2 preserves V1",
+          "result": "PASS"
+        },
+        {
+          "name": "Payment validation and independent existing-order receipt sum",
+          "result": "PASS"
+        },
+        {
+          "name": "Toast pointer transparency, live-region semantics and native submit",
+          "result": "PASS",
+          "wrap": "none",
+          "items": [
+            {
+              "pointer": "none",
+              "role": "status"
+            },
+            {
+              "pointer": "none",
+              "role": "status"
+            }
+          ]
+        },
+        {
+          "name": "Disabled last document account leaves login usable; enabled admin relogs without reload",
+          "result": "PASS"
+        },
+        {
+          "name": "Thirty warm navigation diagnostics and same-origin runtime resources",
+          "result": "PASS",
+          "diagnostic": {
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+            "orders": 7,
+            "documents": 11,
+            "samples": [
+              {
+                "route": "#/dashboard",
+                "ms": 0
+              },
+              {
+                "route": "#/orders",
+                "ms": 8.5
+              },
+              {
+                "route": "#/stats",
+                "ms": 6.399999976158142
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 5.800000071525574
+              },
+              {
+                "route": "#/orders",
+                "ms": 5.199999928474426
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.899999976158142
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 4
+              },
+              {
+                "route": "#/orders",
+                "ms": 4.300000071525574
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.299999952316284
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.399999976158142
+              },
+              {
+                "route": "#/orders",
+                "ms": 4.399999976158142
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.3000000715255737
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.5
+              },
+              {
+                "route": "#/orders",
+                "ms": 4
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.299999952316284
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.100000023841858
+              },
+              {
+                "route": "#/orders",
+                "ms": 4
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.5
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.299999952316284
+              },
+              {
+                "route": "#/orders",
+                "ms": 4
+              },
+              {
+                "route": "#/stats",
+                "ms": 3
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.100000023841858
+              },
+              {
+                "route": "#/orders",
+                "ms": 3.899999976158142
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.4000000953674316
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.1999999284744263
+              },
+              {
+                "route": "#/orders",
+                "ms": 3.899999976158142
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.3000000715255737
+              },
+              {
+                "route": "#/dashboard",
+                "ms": 3.299999952316284
+              },
+              {
+                "route": "#/orders",
+                "ms": 3.899999976158142
+              },
+              {
+                "route": "#/stats",
+                "ms": 3.9000000953674316
+              }
+            ],
+            "heapBefore": 7589340,
+            "heapAfter": 8339291,
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8015/css/base.css?v=20261019-review-2",
+                "duration": 5.900000095367432,
+                "bytes": 20245
+              },
+              {
+                "url": "http://127.0.0.1:8015/css/layout.css?v=20261019-review",
+                "duration": 7.799999952316284,
+                "bytes": 16505
+              },
+              {
+                "url": "http://127.0.0.1:8015/css/pages.css?v=20261019-review",
+                "duration": 8.799999952316284,
+                "bytes": 50264
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/mock-data.js?v=20261019-review",
+                "duration": 11.199999928474426,
+                "bytes": 36413
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/utils.js?v=20261019-review",
+                "duration": 9.300000071525574,
+                "bytes": 56300
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-core.js?v=20261019-review",
+                "duration": 11.300000071525574,
+                "bytes": 52090
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-docs.js?v=20261019-review",
+                "duration": 13.399999976158142,
+                "bytes": 62270
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-sales.js?v=20261019-review",
+                "duration": 15.100000023841858,
+                "bytes": 92887
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-fin.js?v=20261019-review",
+                "duration": 12.599999904632568,
+                "bytes": 43250
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-stats.js?v=20261019-review",
+                "duration": 16.799999952316284,
+                "bytes": 8282
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/views-system.js?v=20261019-review",
+                "duration": 17.5,
+                "bytes": 10310
+              },
+              {
+                "url": "http://127.0.0.1:8015/js/app.js?v=20261019-review",
+                "duration": 18.300000071525574,
+                "bytes": 43845
+              },
+              {
+                "url": "http://127.0.0.1:8015/assets/maps/world-land.svg",
+                "duration": 5.200000047683716,
+                "bytes": 29932
+              }
+            ]
+          }
+        }
+      ],
+      "startedAt": "2026-10-19T02:52:02.068Z",
+      "finishedAt": "2026-10-19T02:52:43.981Z"
+    }
+  ],
+  "failures": [],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "PASS"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "PASS"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "PASS"
+    }
+  ],
+  "resets": [
+    {
+      "name": "matrix:admin",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "matrix:sales",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "matrix:doc",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "matrix:fin",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "matrix:boss",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "business:continuous-545-order",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:1360/1361 desktop directory boundaries",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Map native country filter and keyboard",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Runtime reduced motion and normal authored motion",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Search role filter, IME, permitted selected result and focus return",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Order filters/density/sidebar preserve input; six tabs retain three progress tracks",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Document focus retains input; protected role switch removes edit controls",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Approved revision cancel then V2 preserves V1",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Payment validation and independent existing-order receipt sum",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Toast pointer transparency, live-region semantics and native submit",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Disabled last document account leaves login usable; enabled admin relogs without reload",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    },
+    {
+      "name": "quality:Thirty warm navigation diagnostics and same-origin runtime resources",
+      "method": "goto + explicit reload",
+      "orders": 7,
+      "documents": 11,
+      "disabled": [
+        "U007"
+      ],
+      "newInquiryUnquoted": true
+    }
+  ],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8015/index.html",
+  "requestedPhases": [
+    "matrix",
+    "business",
+    "quality"
+  ],
+  "notRequested": [],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-final.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "media": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "viewport": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "listener": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    }
+  },
+  "finishedAt": "2026-10-19T02:52:44.160Z"
+}

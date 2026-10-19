@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:49:57.671Z",
+  "engine": "contract-double",
+  "result": "FAIL",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "FAIL",
+      "checks": [],
+      "startedAt": "2026-10-19T02:49:57.671Z",
+      "stopped": false,
+      "coverage": {
+        "expectedVisits": 100,
+        "observedVisits": 0,
+        "expectedLayouts": 300,
+        "observedLayouts": 0
+      },
+      "finishedAt": "2026-10-19T02:49:57.671Z"
+    }
+  ],
+  "failures": [
+    {
+      "phase": "matrix",
+      "name": "stage setup/execution",
+      "category": "tool",
+      "error": "page.waitForFunction timed out",
+      "bootState": {
+        "readyState": "loading",
+        "globals": {
+          "App": "undefined",
+          "MOCK": "object",
+          "U": "object"
+        },
+        "appChildCount": 0,
+        "errorListenerPresent": false,
+        "errors": null,
+        "scripts": [
+          {
+            "path": "/js/app.js",
+            "resourceTimingObserved": false
+          }
+        ],
+        "styleSheets": [
+          {
+            "cssRules": 10
+          }
+        ]
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Runner did not attempt this diagnostic"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "CONTRACT_PASS"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "CONTRACT_PASS"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html?qa=contract",
+  "requestedPhases": [
+    "matrix"
+  ],
+  "notRequested": [
+    "business",
+    "quality"
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-author-contract-1792378197650-39029-boot-state-0.json",
+  "diagnostics": {
+    "cache": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    },
+    "media": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "viewport": {
+      "attempted": false,
+      "applied": false,
+      "restored": false
+    },
+    "listener": {
+      "attempted": true,
+      "applied": true,
+      "restored": true
+    }
+  },
+  "finishedAt": "2026-10-19T02:49:57.671Z"
+}

@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "startedAt": "2026-10-19T02:40:25.557Z",
+  "engine": "contract-double",
+  "result": "BLOCKED",
+  "stages": [
+    {
+      "name": "matrix",
+      "result": "BLOCKED",
+      "checks": [
+        {
+          "name": "control stop",
+          "result": "FAIL",
+          "phase": "matrix",
+          "category": "blocked",
+          "error": "user has taken control"
+        }
+      ],
+      "startedAt": "2026-10-19T02:40:25.557Z",
+      "finishedAt": "2026-10-19T02:40:25.557Z"
+    },
+    {
+      "name": "business",
+      "result": "NOT_RUN",
+      "checks": []
+    }
+  ],
+  "failures": [
+    {
+      "phase": "matrix",
+      "name": "control stop",
+      "category": "blocked",
+      "error": "user has taken control"
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "reset media override",
+      "result": "SKIPPED",
+      "reason": "Control stopped; no further Page actions"
+    },
+    {
+      "name": "clear viewport override",
+      "result": "SKIPPED",
+      "reason": "Control stopped; no further Page actions"
+    },
+    {
+      "name": "restore target cache enabled",
+      "result": "SKIPPED",
+      "reason": "Control stopped; no further Page actions"
+    },
+    {
+      "name": "remove runtime listener registration",
+      "result": "SKIPPED",
+      "reason": "Control stopped; no further Page actions"
+    },
+    {
+      "name": "reload to discard synthetic page memory and listeners",
+      "result": "SKIPPED",
+      "reason": "Control stopped; no further Page actions"
+    }
+  ],
+  "resets": [],
+  "limits": [
+    "Synthetic static Demo only; no backend, real export or production verification.",
+    "HTTP Chromium layout/DOM checks are not file://, cross-engine, screen-reader or full WCAG certification.",
+    "Thirty warm navigations are diagnostics, not capacity/leak certification. No global storage/cache clearing or TaskSpace lifecycle operations."
+  ],
+  "spaceId": 18,
+  "page": "p1",
+  "base": "http://127.0.0.1:8014/index.html?qa=contract",
+  "requestedPhases": [
+    "matrix",
+    "business"
+  ],
+  "notRequested": [
+    "quality"
+  ],
+  "reportPath": "/Users/airuquan/foreign-trade-independent-websit/trade-doc-demo/docs/reviews/2026-10-19-round-02/evidence/browser-author-contract-1792377625548-29997-control.json",
+  "finishedAt": "2026-10-19T02:40:25.558Z"
+}
