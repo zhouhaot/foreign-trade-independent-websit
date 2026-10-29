@@ -1,0 +1,146 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Install, lint, types, unit, contract and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Unit tests
+        run: pnpm test tests/unit
+      - name: Verify contracts
+        run: node scripts/verify-contract.mjs
+      - name: Build
+        run: pnpm build
+        env:
+          DATABASE_URL: postgresql://build_only:build_only@127.0.0.1:5432/build_only
+          NEXT_TELEMETRY_DISABLED: 1
+
+  postgres-integration:
+    name: Real PostgreSQL integration
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DATABASE_URL: postgresql://trade_doc:trade_doc_ci@127.0.0.1:5432/trade_doc_test
+      TRADE_DOC_RUN_DB_TESTS: "true"
+      TRADE_DOC_ALLOW_TEST_RESET: "true"
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: trade_doc_test
+          POSTGRES_USER: trade_doc
+          POSTGRES_PASSWORD: trade_doc_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U trade_doc -d trade_doc_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Apply migrations
+        run: pnpm exec drizzle-kit migrate
+      - name: Run integration tests
+        run: pnpm test tests/integration
+
+  playwright-e2e:
+    name: Playwright E2E on production build
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      DATABASE_URL: postgresql://trade_doc:trade_doc_ci@127.0.0.1:5432/trade_doc_test
+      BUSINESS_TIME_ZONE: Asia/Shanghai
+      E2E_USERNAME: synthetic-e2e-sales
+      E2E_PASSWORD: Synthetic-E2E-Only-2026!
+      TRADE_CREATE_USER_USERNAME: synthetic-e2e-sales
+      TRADE_CREATE_USER_PASSWORD: Synthetic-E2E-Only-2026!
+      TRADE_CREATE_USER_DISPLAY_NAME: Synthetic E2E Sales
+      TRADE_CREATE_USER_ROLE: sales
+      NEXT_TELEMETRY_DISABLED: 1
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: trade_doc_test
+          POSTGRES_USER: trade_doc
+          POSTGRES_PASSWORD: trade_doc_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U trade_doc -d trade_doc_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Apply migrations
+        run: pnpm exec drizzle-kit migrate
+      - name: Create synthetic user
+        run: node scripts/create-user.mjs
+      - name: Build production application
+        run: pnpm build
+      - name: Run browser E2E
+        run: pnpm exec playwright test --config .github/e2e/playwright.config.ts
