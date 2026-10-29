@@ -186,7 +186,25 @@ async function main() {
     baseURL,
     database: "trade_doc_test",
     contract: { path: "docs/contracts/slice-01.acceptance.json", sha256: createHash("sha256").update(contractText).digest("hex") },
-    execution: { serial: true, workers: 1, browser: "chromium", realHttp: true, realPostgreSQL: true, demoModified: false },
+    execution: {
+      executor: process.env.TRADE_DOC_ACCEPTANCE_EXECUTOR ?? "local-controller",
+      applicationCommit: "5057789b182d1026a6c50acc93b98e283c2fd95a",
+      command: "node scripts/run-acceptance.mjs",
+      switches: {
+        DATABASE_URL: "[configured; redacted]",
+        TRADE_DOC_RUN_ACCEPTANCE: process.env.TRADE_DOC_RUN_ACCEPTANCE ?? null,
+        TRADE_DOC_ACCEPTANCE_RESTART: process.env.TRADE_DOC_ACCEPTANCE_RESTART ?? null,
+        AUTH_REQUEST_RATE_LIMIT: process.env.AUTH_REQUEST_RATE_LIMIT ?? null,
+        TRADE_DOC_E2E_PG_CTL: process.env.TRADE_DOC_E2E_PG_CTL ?? null,
+        TRADE_DOC_E2E_PGDATA: process.env.TRADE_DOC_E2E_PGDATA ?? null,
+      },
+      serial: true,
+      workers: 1,
+      browser: "chromium",
+      realHttp: true,
+      realPostgreSQL: true,
+      demoModified: false,
+    },
     summary: { total: 49, passed: 0, failed: 0, blocked: 49, executed: 0 },
     results: contract.cases.map((item) => ({ id: item.id, status: "BLOCKED", executed: false, evidence: { reason: "Not executed" } })),
   };
@@ -251,7 +269,6 @@ async function main() {
     report.summary.passed = report.results.filter((item) => item.status === "PASS").length;
     report.summary.failed = report.results.filter((item) => item.status === "FAIL").length;
     report.summary.blocked = 49 - report.summary.passed - report.summary.failed;
-    await publishReport();
   }
 
   report.status = report.results.every((item) => item.status === "PASS" && item.executed) ? "PASS" : report.summary.failed > 0 ? "FAIL" : "BLOCKED";

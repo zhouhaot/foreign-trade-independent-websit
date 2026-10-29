@@ -6,12 +6,19 @@
 
 ### 本机合成验收结果（2026-10-29）
 
-- 真实统一验收 `runId=b195c4f168cc` 已执行完成，49/49 项场景为 `PASS`；逐项结果见 [`2026-10-29-slice-01.json`](results/2026-10-29-slice-01.json)。
+- 真实统一验收 `runId=672c2b789791` 已执行完成，49/49 项场景为 `PASS`；逐项结果见 [`2026-10-29-slice-01.json`](results/2026-10-29-slice-01.json)。
 - 配套执行为 31 项真实 PostgreSQL 数据库集成测试和 1 个真实 Chromium 浏览器主流程，均已通过。
 - `RESTART-01` 已实际重启应用和 PostgreSQL，并完成重新登录、业务回读及同键幂等重放；不是以新建连接代替重启。
-- `TX-01` 覆盖五个业务事务在成功幂等记录或成功审计写入前发生故障时的回滚与同键重试；不声称覆盖服务内部每一个中间 SQL 步骤或进程崩溃窗口。
+- `TX-01` 已在五个业务事务的 22 个实际 INSERT/UPDATE 写步骤逐点注入 PostgreSQL 触发器故障，每点均完整回读业务行、状态/快照、关联、幂等和审计，并在移除故障后同键重试成功。
 
-权威清单仍是 [`docs/contracts/slice-01.acceptance.json`](../contracts/slice-01.acceptance.json)：其 49 项场景继续全部为 `PLANNED`，文件总状态继续为 `PLANNED-NOT-EXECUTED`，本次不改写该规划基线；实际执行结果保存在上述证据文件中。此次结果仅适用于本机合成环境，不是生产部署或生产验收；生产部署、备份与隔离恢复仍未执行。
+### 本机合成隔离恢复结果（2026-10-29）
+
+- 来源为上述 `runId=b195c4f168cc` 的本机合成验收备份，于 `2026-10-29T08:11:23Z` 恢复到新建空库 `trade_doc_restore_b195_v2`，结果为 `PASS`；备份 SHA256 为 `2ce157aaecab3d1ff23ca2707c68deefb3c1937f7f7a53e5720ecd5599a77a30`。
+- `pg_restore --exit-on-error` 实际成功，耗时 106.826 ms；迁移成功，耗时 690.239 ms。`pg_isready` 正常，独立 Next 3102 端口的 `/api/health` 与 `/api/ready` 均实际返回 HTTP 200 和 `{"status":"ok"}`。
+- 16 张业务表均查询成功；关键唯一键和外键反例分别被 `product_sku_unique`、`inquiry_line_inquiry_id_inquiry_id_fk` 拒绝，并已验证回滚。恢复后回读为 14 orders、14 versions、28 lines、231 idempotency、229 audits，金额、归属和快照不一致数均为 0。
+- 逐项脱敏证据见 [`2026-10-29-restore.json`](results/2026-10-29-restore.json)，不包含密码或连接串。本次 Next 进程已停止，隔离数据库和源备份均保留。
+
+权威清单仍是 [`docs/contracts/slice-01.acceptance.json`](../contracts/slice-01.acceptance.json)：其 49 项场景继续全部为 `PLANNED`，文件总状态继续为 `PLANNED-NOT-EXECUTED`，本次不改写该规划基线；实际执行结果保存在上述证据文件中。49/49 本机合成验收和本机合成隔离恢复均已通过，但不构成生产部署或生产验收；正式生产部署、生产备份和生产恢复仍未执行。
 
 ## 环境与安全前提
 

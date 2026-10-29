@@ -123,38 +123,85 @@ export const systemCases = {
   },
 
   "TX-01": async (ctx) => {
-    const operations = ["createInquiry", "createQuote", "submitQuote", "recordCustomerConfirmation", "createOrderFromQuote"];
+    const transactionFaults = {
+      createInquiry: [
+        { step: "insert inquiry", event: "insert", table: "inquiry" },
+        { step: "insert inquiry lines", event: "insert", table: "inquiry_line" },
+        { step: "insert idempotency", event: "insert", table: "idempotency_record" },
+        { step: "insert audit", event: "insert", table: "audit_event" },
+      ],
+      createQuote: [
+        { step: "insert quote", event: "insert", table: "quote" },
+        { step: "insert quote lines", event: "insert", table: "quote_line" },
+        { step: "update source inquiry", event: "update", table: "inquiry" },
+        { step: "insert idempotency", event: "insert", table: "idempotency_record" },
+        { step: "insert audit", event: "insert", table: "audit_event" },
+      ],
+      submitQuote: [
+        { step: "update quote and freeze snapshot", event: "update", table: "quote" },
+        { step: "insert idempotency", event: "insert", table: "idempotency_record" },
+        { step: "insert audit", event: "insert", table: "audit_event" },
+      ],
+      recordCustomerConfirmation: [
+        { step: "insert quote confirmation", event: "insert", table: "quote_confirmation" },
+        { step: "update source quote", event: "update", table: "quote" },
+        { step: "insert idempotency", event: "insert", table: "idempotency_record" },
+        { step: "insert audit", event: "insert", table: "audit_event" },
+      ],
+      createOrderFromQuote: [
+        { step: "insert sales order", event: "insert", table: "sales_order" },
+        { step: "insert order version", event: "insert", table: "order_version" },
+        { step: "insert order lines", event: "insert", table: "order_line" },
+        { step: "update source quote conversion", event: "update", table: "quote" },
+        { step: "insert idempotency", event: "insert", table: "idempotency_record" },
+        { step: "insert audit", event: "insert", table: "audit_event" },
+      ],
+    };
+    const operations = Object.keys(transactionFaults);
+    const expectedFaultPointCount = Object.values(transactionFaults).reduce((total, faults) => total + faults.length, 0);
     const evidence = [];
     const functionName = `acc_fault_${ctx.runId.replaceAll("-", "_")}`;
-    await ctx.sql.unsafe(`create function ${functionName}() returns trigger language plpgsql as $$ begin if new.operation_id = tg_argv[0] then raise exception 'synthetic acceptance fault'; end if; return new; end $$`);
+    await ctx.sql.unsafe(`create function ${functionName}() returns trigger language plpgsql as $$ begin raise exception 'synthetic acceptance fault'; end $$`);
     try {
       for (const operation of operations) {
-        for (const table of ["idempotency_record", "audit_event"]) {
+        for (const fault of transactionFaults[operation]) {
           const prepared = await prepareTransactionTarget(ctx, operation);
-          const triggerName = `acc_${table}_${ctx.runId}`.slice(0, 60);
+          const triggerName = `acc_tx_${ctx.runId}_${evidence.length}`;
           try {
-            await ctx.sql.unsafe(`create trigger ${triggerName} before insert on ${table} for each row execute function ${functionName}('${operation}')`);
-            const before = await transactionWriteCounts(ctx);
-            const failure = await ctx.http.send(prepared.logged.salesA.context, prepared.method, prepared.path, prepared.body, { key: prepared.key });
-            assert.equal(failure.status, 500, `${operation}/${table} injected write must fail`);
-            assert.equal(failure.body.code, "INTERNAL_ERROR");
-            const after = await transactionWriteCounts(ctx);
-            assert.deepEqual(after, before, `${operation}/${table} must roll back every business and success record`);
-            evidence.push({ operation, injectionPoint: table, failureStatus: failure.status, rollbackVerified: true });
+            try {
+              await ctx.sql.unsafe(`create trigger ${triggerName} before ${fault.event} on ${fault.table} for each row execute function ${functionName}()`);
+              const before = await transactionWriteSnapshot(ctx);
+              const failure = await ctx.http.send(prepared.logged.salesA.context, prepared.method, prepared.path, prepared.body, { key: prepared.key });
+              assert.equal(failure.status, 500, `${operation}/${fault.step} injected write must fail`);
+              assert.equal(failure.body.code, "INTERNAL_ERROR");
+              const after = await transactionWriteSnapshot(ctx);
+              assert.deepEqual(after, before, `${operation}/${fault.step} must roll back every business row, state, snapshot, association, idempotency and audit record`);
+              evidence.push({
+                operation,
+                step: fault.step,
+                injectionPoint: `${fault.event} ${fault.table}`,
+                failureStatus: failure.status,
+                rollbackVerified: true,
+                businessStateAssociationsIdempotencyAndAuditRolledBack: true,
+              });
+            } finally {
+              await ctx.sql.unsafe(`drop trigger if exists ${triggerName} on ${fault.table}`);
+            }
+            const retry = await ctx.http.send(prepared.logged.salesA.context, prepared.method, prepared.path, prepared.body, { key: prepared.key });
+            assert.equal(retry.status, prepared.expectedStatus, `${operation}/${fault.step} same-key retry must succeed`);
+            evidence.at(-1).sameKeyRetryStatus = retry.status;
           } finally {
-            await ctx.sql.unsafe(`drop trigger if exists ${triggerName} on ${table}`);
+            await closeSessions(prepared.logged);
           }
-          const retry = await ctx.http.send(prepared.logged.salesA.context, prepared.method, prepared.path, prepared.body, { key: prepared.key });
-          assert.equal(retry.status, prepared.expectedStatus, `${operation}/${table} same-key retry must succeed`);
-          evidence.at(-1).sameKeyRetryStatus = retry.status;
-          await closeSessions(prepared.logged);
         }
       }
+      assert.equal(evidence.length, expectedFaultPointCount);
       return {
-        coverageLevel: "REAL_HTTP_TO_POSTGRESQL_BEFORE_INSERT_TRIGGER",
+        coverageLevel: "EVERY_BUSINESS_WRITE_STEP_REAL_HTTP_TO_POSTGRESQL_TRIGGER",
         injectedOperations: operations,
-        injectionPoints: ["idempotency_record", "audit_event"],
-        limitation: "覆盖五个业务事务的成功幂等与成功审计写入故障；未声称覆盖服务内部每一个中间 SQL 步骤或进程崩溃窗口。",
+        expectedFaultPointCount,
+        faultPointCount: evidence.length,
+        fullRowRollbackComparisonTables: ["inquiry", "inquiry_line", "quote", "quote_line", "quote_confirmation", "sales_order", "order_version", "order_line", "idempotency_record", "audit_event"],
         faults: evidence,
       };
     } finally {
@@ -270,18 +317,18 @@ async function prepareTransactionTarget(ctx, operation) {
   return { fixture, logged, method: "POST", path: `/api/v1/quotes/${confirmed.value.id}/orders`, body: { expectedVersion: confirmed.value.version, deliveryDate: confirmed.value.validUntil }, key: commandKey, expectedStatus: 201 };
 }
 
-async function transactionWriteCounts(ctx) {
+async function transactionWriteSnapshot(ctx) {
   const rows = await ctx.sql`select
-    (select count(*)::int from inquiry) as inquiries,
-    (select count(*)::int from inquiry_line) as inquiry_lines,
-    (select count(*)::int from quote) as quotes,
-    (select count(*)::int from quote_line) as quote_lines,
-    (select count(*)::int from quote_confirmation) as confirmations,
-    (select count(*)::int from sales_order) as orders,
-    (select count(*)::int from order_version) as versions,
-    (select count(*)::int from order_line) as order_lines,
-    (select count(*)::int from audit_event) as audits,
-    (select count(*)::int from idempotency_record) as idempotency`;
+    (select coalesce(jsonb_agg(to_jsonb(inquiry) order by inquiry.id), '[]'::jsonb) from inquiry) as inquiries,
+    (select coalesce(jsonb_agg(to_jsonb(inquiry_line) order by inquiry_line.id), '[]'::jsonb) from inquiry_line) as inquiry_lines,
+    (select coalesce(jsonb_agg(to_jsonb(quote) order by quote.id), '[]'::jsonb) from quote) as quotes,
+    (select coalesce(jsonb_agg(to_jsonb(quote_line) order by quote_line.id), '[]'::jsonb) from quote_line) as quote_lines,
+    (select coalesce(jsonb_agg(to_jsonb(quote_confirmation) order by quote_confirmation.id), '[]'::jsonb) from quote_confirmation) as confirmations,
+    (select coalesce(jsonb_agg(to_jsonb(sales_order) order by sales_order.id), '[]'::jsonb) from sales_order) as orders,
+    (select coalesce(jsonb_agg(to_jsonb(order_version) order by order_version.id), '[]'::jsonb) from order_version) as versions,
+    (select coalesce(jsonb_agg(to_jsonb(order_line) order by order_line.id), '[]'::jsonb) from order_line) as order_lines,
+    (select coalesce(jsonb_agg(to_jsonb(audit_event) order by audit_event.id), '[]'::jsonb) from audit_event) as audits,
+    (select coalesce(jsonb_agg(to_jsonb(idempotency_record) order by idempotency_record.id), '[]'::jsonb) from idempotency_record) as idempotency`;
   return rows[0];
 }
 

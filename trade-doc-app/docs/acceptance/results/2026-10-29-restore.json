@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "environment": "LOCAL_SYNTHETIC_ISOLATED_RESTORE",
+  "sourceRunId": "b195c4f168cc",
+  "restoredAt": "2026-10-29T08:11:23Z",
+  "validationCompletedAt": "2026-10-29T08:18:20Z",
+  "backup": {
+    "path": "/tmp/trade-doc-b195c4f168cc.dump",
+    "sha256": "2ce157aaecab3d1ff23ca2707c68deefb3c1937f7f7a53e5720ecd5599a77a30",
+    "bytes": 176366,
+    "retainedAfterRun": true
+  },
+  "restoreTarget": {
+    "database": "trade_doc_restore_b195_v2",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "isolated": true,
+    "absentBeforeRun": true,
+    "emptyBeforeRestore": true,
+    "retainedAfterRun": true
+  },
+  "postgresql": {
+    "version": "17.11 (Homebrew)",
+    "pgIsready": "accepting connections"
+  },
+  "restore": {
+    "command": "pg_restore --exit-on-error --no-owner --no-privileges --dbname trade_doc_restore_b195_v2 /tmp/trade-doc-b195c4f168cc.dump",
+    "exitCode": 0,
+    "startedAt": "2026-10-29T08:11:23Z",
+    "finishedAt": "2026-10-29T08:11:23Z",
+    "durationMs": 106.826
+  },
+  "migration": {
+    "command": "pnpm exec drizzle-kit migrate",
+    "exitCode": 0,
+    "startedAt": "2026-10-29T08:11:41Z",
+    "finishedAt": "2026-10-29T08:11:42Z",
+    "durationMs": 690.239,
+    "migrationRows": 1,
+    "result": "The restored migration schema and table already existed; drizzle-kit completed successfully and retained one migration row."
+  },
+  "application": {
+    "successfulCommand": "pnpm exec next start --hostname 127.0.0.1 --port 3102",
+    "baseURL": "http://127.0.0.1:3102",
+    "health": {
+      "httpStatus": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "ready": {
+      "httpStatus": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    "stoppedAfterValidation": true,
+    "port3102ListeningAfterStop": false,
+    "startupCorrection": "An initial pnpm start argument-forwarding attempt failed because a literal -- was treated as the project directory. The successful checks used successfulCommand above."
+  },
+  "tableQueries": {
+    "expected": 16,
+    "queried": 16,
+    "allSucceeded": true,
+    "counts": {
+      "app_user": 349,
+      "user_session": 92,
+      "currency_catalog": 1,
+      "company_profile": 1,
+      "product": 121,
+      "customer": 50,
+      "inquiry": 41,
+      "inquiry_line": 80,
+      "quote": 36,
+      "quote_line": 72,
+      "quote_confirmation": 19,
+      "sales_order": 14,
+      "order_version": 14,
+      "order_line": 28,
+      "idempotency_record": 231,
+      "audit_event": 229
+    }
+  },
+  "postRestoreCounts": {
+    "orders": 14,
+    "versions": 14,
+    "lines": 28,
+    "idempotency": 231,
+    "audits": 229
+  },
+  "constraintNegativeTests": [
+    {
+      "case": "duplicate product SKU",
+      "expectedErrorClass": "unique_violation",
+      "observedConstraint": "product_sku_unique",
+      "rejected": true,
+      "rollbackExecuted": true,
+      "rollbackVerified": true,
+      "tableCountBefore": 121,
+      "tableCountAfter": 121
+    },
+    {
+      "case": "inquiry line with missing inquiry",
+      "expectedErrorClass": "foreign_key_violation",
+      "observedConstraint": "inquiry_line_inquiry_id_inquiry_id_fk",
+      "rejected": true,
+      "rollbackExecuted": true,
+      "rollbackVerified": true,
+      "tableCountBefore": 80,
+      "tableCountAfter": 80
+    }
+  ],
+  "consistencyChecks": {
+    "amountMismatches": 0,
+    "ownershipMismatches": 0,
+    "snapshotMismatches": 0,
+    "quoteLineAmountMismatches": 0,
+    "quoteTotalAmountMismatches": 0,
+    "orderLineAmountMismatches": 0,
+    "orderVersionLineTotalMismatches": 0,
+    "orderVersionQuoteAmountMismatches": 0,
+    "quoteInquiryOwnershipMismatches": 0,
+    "orderQuoteOwnershipMismatches": 0,
+    "quoteInquiryProductSnapshotMismatches": 0,
+    "confirmationQuoteSnapshotMismatches": 0,
+    "orderConfirmationSnapshotMismatches": 0,
+    "orderQuoteLineSnapshotMismatches": 0,
+    "invalidForeignKeyConstraints": 0
+  },
+  "scope": {
+    "localSyntheticAcceptance": {
+      "passed": 49,
+      "total": 49
+    },
+    "localSyntheticIsolatedRestorePassed": true,
+    "productionDeploymentExecuted": false,
+    "productionBackupExecuted": false,
+    "productionRestoreExecuted": false,
+    "rpoRtoApproved": false
+  },
+  "boundaries": [
+    "This PASS covers only the listed local synthetic restore and validation checks.",
+    "Health and readiness responses do not prove all 49 business scenarios or production disaster recovery.",
+    "The isolated database and source dump were not deleted.",
+    "Only the Next process started for this validation was stopped; PostgreSQL was left running."
+  ]
+}

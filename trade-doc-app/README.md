@@ -8,7 +8,9 @@
 
 真实统一验收 `runId=b195c4f168cc` 已完成，49/49 项场景为 `PASS`，逐项证据见 [`docs/acceptance/results/2026-10-29-slice-01.json`](docs/acceptance/results/2026-10-29-slice-01.json)。配套执行为 31 项真实 PostgreSQL 数据库集成测试和 1 个真实 Chromium 浏览器主流程，均已通过；`RESTART-01` 已实际重启应用和 PostgreSQL，并验证重新登录、业务回读与同键幂等重放。
 
-`TX-01` 仅覆盖五个业务事务在成功幂等记录或成功审计写入前发生故障时的回滚与同键重试，不声称覆盖所有中间 SQL 步骤或进程崩溃窗口。契约中的 49 项场景及总状态仍保留 `PLANNED` / `PLANNED-NOT-EXECUTED` 基线，实际结果以证据文件为准。此次为本机合成验收，不是生产部署或生产验收；生产部署、备份与隔离恢复仍未执行。
+同一来源的本机合成备份已于 `2026-10-29T08:11:23Z` 恢复到新建空库 `trade_doc_restore_b195_v2`，结果为 `PASS`。`pg_restore --exit-on-error` 耗时 106.826 ms，迁移耗时 690.239 ms；`pg_isready` 正常，独立 Next 3102 端口的 `/api/health` 与 `/api/ready` 均为 HTTP 200。16 张业务表均可查询，关键唯一键/外键反例按预期拒绝且已验证回滚；恢复后回读为 14 orders、14 versions、28 lines、231 idempotency、229 audits，金额、归属和快照不一致数均为 0。备份 SHA256 和逐项脱敏证据见 [`docs/acceptance/results/2026-10-29-restore.json`](docs/acceptance/results/2026-10-29-restore.json)。本次 Next 已停止，隔离库和源备份保留。
+
+`TX-01` 仅覆盖五个业务事务在成功幂等记录或成功审计写入前发生故障时的回滚与同键重试，不声称覆盖所有中间 SQL 步骤或进程崩溃窗口。契约中的 49 项场景及总状态仍保留 `PLANNED` / `PLANNED-NOT-EXECUTED` 基线，实际结果以证据文件为准。49/49 本机合成验收和本机合成隔离恢复均已通过，但不构成生产部署或生产验收；正式生产部署、生产备份和生产恢复仍未执行。
 
 ## 技术基线
 
