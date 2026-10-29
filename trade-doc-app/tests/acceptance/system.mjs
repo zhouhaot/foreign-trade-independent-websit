@@ -75,7 +75,7 @@ export const systemCases = {
       await ctx.http.write(flow.logged.salesA.context, "POST", "/api/v1/auth/logout", undefined, [204]);
       const revoked = await ctx.http.write(flow.logged.salesA.context, "POST", path, body, [401], { key: originalKey });
       assert.ok(![otherOwner, role, revoked].some((result) => result.text.includes(flow.order.value.id)));
-      return { outOfScope: publicResponse(otherOwner.response), roleRevoked: publicResponse(role.response), sessionRevoked: publicResponse(revoked.response), orderIdDisclosed: false };
+      return { outOfScope: publicResponse(otherOwner), roleRevoked: publicResponse(role), sessionRevoked: publicResponse(revoked), orderIdDisclosed: false };
     } finally {
       await closeSessions(flow.logged);
     }
@@ -168,9 +168,9 @@ export const systemCases = {
       const owner = flow.fixture.accounts.salesA.id;
       const otherOwner = flow.fixture.accounts.salesB.id;
       const customerId = flow.customer.value.id;
-      const inquiryId = flow.inquiry.value.id;
       const quoteId = flow.draft.value.id;
       const second = await createInquiry(ctx, flow.logged.salesA, flow.fixture, flow.customer.value);
+      const inquiryId = second.value.id;
       const rejected = [];
       await expectSqlState(ctx, "23503", async (sql) => sql`insert into inquiry (id, owner_user_id, customer_id, inquiry_date, source, message, customer_version_at_creation, created_by) values (${key()}, ${otherOwner}, ${customerId}, ${today()}, 'bad owner', 'bad owner', 1, ${otherOwner})`);
       rejected.push("inquiry_customer_owner_fk");
@@ -187,7 +187,7 @@ export const systemCases = {
       const order = await createOrder(ctx, flow.logged.salesA, confirmed.value);
       await expectSqlState(ctx, "23505", async (sql) => sql`insert into sales_order (id, source_quote_id, owner_user_id, created_by) values (${key()}, ${quoteId}, ${owner}, ${owner})`);
       rejected.push("sales_order_source_quote_id_unique");
-      await expectSqlState(ctx, "23503", async (sql) => sql`insert into order_line (id, order_version_id, source_quote_id, source_quote_line_id, line_no, product_snapshot, quantity, unit_price, line_amount) select ${key()}, order_version_id, ${key()}, source_quote_line_id, 99, product_snapshot, quantity, unit_price, line_amount from order_line where source_quote_id = ${quoteId} limit 1`);
+      await expectSqlState(ctx, "23503", async (sql) => sql`insert into order_line (id, order_version_id, source_quote_id, source_quote_line_id, line_no, product_snapshot, quantity, unit_price, line_amount) select ${key()}, order_version_id, ${key()}, ${key()}, 99, product_snapshot, quantity, unit_price, line_amount from order_line where source_quote_id = ${quoteId} limit 1`);
       rejected.push("order_line_order_version_quote_fk");
       const counts = await resourceCounts(ctx.sql, { quoteId });
       assert.equal(counts.orders, 1);
@@ -226,7 +226,9 @@ export const systemCases = {
       const page = await browserLogin(ctx, fixture.accounts.salesB);
       try {
         await page.goto(`/customers/${customer.value.id}`);
-        assert.ok((await page.getByRole("alert").textContent()).includes("HTTP 404"));
+        await page.locator(".error-panel").waitFor();
+        const alertText = await page.locator(".error-panel").textContent();
+        assert.ok(alertText.includes("HTTP 404"), `Expected browser 404 alert, got: ${alertText}`);
         assert.equal(await page.getByText(customer.value.nameCn, { exact: true }).count(), 0);
       } finally {
         await page.close();

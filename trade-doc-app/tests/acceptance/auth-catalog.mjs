@@ -188,8 +188,8 @@ export const authCatalogCases = {
 
   "CAT-01": async (ctx) => {
     const fixture = await seedFixture(ctx, "cat01");
-    const suffix = key().replaceAll("-", "").slice(0, 6).toUpperCase();
-    const codes = [`Q${suffix[0]}0`, `Q${suffix[1]}3`, `Q${suffix[2]}9`];
+    const suffix = key().replaceAll("-", "").slice(0, 3).split("").map((value) => String.fromCharCode(65 + Number.parseInt(value, 16)));
+    const codes = [`Q${suffix[0]}A`, `Q${suffix[1]}B`, `Q${suffix[2]}C`];
     try {
       await ctx.sql`insert into currency_catalog (code, display_name, amount_scale, enabled) values (${codes[0]}, 'Synthetic scale zero', 0, true), (${codes[1]}, 'Synthetic scale three', 3, true), (${codes[2]}, 'Synthetic disabled', 2, false)`;
       const logged = await sessions(ctx, fixture, ["salesA", "boss"]);

@@ -1,0 +1,1709 @@
+{
+  "schemaVersion": 1,
+  "runId": "b195c4f168cc",
+  "status": "PASS",
+  "startedAt": "2026-10-29T06:45:35.399Z",
+  "finishedAt": "2026-10-29T06:46:33.747Z",
+  "baseURL": "http://127.0.0.1:3101",
+  "database": "trade_doc_test",
+  "contract": {
+    "path": "docs/contracts/slice-01.acceptance.json",
+    "sha256": "90e389828bee2e9178f82eb19b7661198f35ebf00fa6de7dccee3c4463d4d829"
+  },
+  "execution": {
+    "serial": true,
+    "workers": 1,
+    "browser": "chromium",
+    "realHttp": true,
+    "realPostgreSQL": true,
+    "demoModified": false,
+    "postgresqlVersion": "17.11 (Homebrew)"
+  },
+  "summary": {
+    "total": 49,
+    "passed": 49,
+    "failed": 0,
+    "blocked": 0,
+    "executed": 49
+  },
+  "results": [
+    {
+      "id": "AUTH-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "anonymous": {
+          "status": 200,
+          "replayed": false
+        },
+        "authenticated": {
+          "status": 200,
+          "replayed": false
+        },
+        "databaseHashesDifferFromTokens": true,
+        "urlContainsToken": false,
+        "tokensAbsentFromAppLogs": true
+      },
+      "durationMs": 60
+    },
+    {
+      "id": "AUTH-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "login": {
+          "status": 200,
+          "replayed": false
+        },
+        "me": {
+          "status": 200,
+          "replayed": false
+        },
+        "cookieAttributes": [
+          "HttpOnly",
+          "Secure",
+          "SameSite=Lax",
+          "Path=/api/v1"
+        ],
+        "sessionAndCsrfRotated": true
+      },
+      "durationMs": 124
+    },
+    {
+      "id": "AUTH-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "logoutStatus": 204,
+        "reusedSessionStatus": 401,
+        "serverRevoked": true,
+        "cacheControl": "no-store"
+      },
+      "durationMs": 213
+    },
+    {
+      "id": "AUTH-04",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "uniformFailures": [
+          {
+            "status": 401,
+            "code": "INVALID_CREDENTIALS",
+            "requestId": "5f877c19-807e-4a7a-8019-ee5daf4e106c",
+            "replayed": false,
+            "fieldErrors": []
+          },
+          {
+            "status": 401,
+            "code": "INVALID_CREDENTIALS",
+            "requestId": "8d086971-0d10-4062-8e9c-61d7ab72b497",
+            "replayed": false,
+            "fieldErrors": []
+          },
+          {
+            "status": 401,
+            "code": "INVALID_CREDENTIALS",
+            "requestId": "0d003a34-fbc7-49a4-b282-910c26706bf7",
+            "replayed": false,
+            "fieldErrors": []
+          }
+        ],
+        "rateLimit": {
+          "status": 429,
+          "code": "RATE_LIMITED",
+          "requestId": "c9cf636c-6168-405e-b649-fff398ba1cde",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "attempted": 11,
+        "rawPasswordsAbsentFromAppLogs": true
+      },
+      "durationMs": 851
+    },
+    {
+      "id": "AUTH-05",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "loginStatus": 400,
+        "rejectedAuthorizationFields": [
+          "role",
+          "actorUserId",
+          "ownerUserId"
+        ],
+        "customerWrites": 0
+      },
+      "durationMs": 72
+    },
+    {
+      "id": "AUTH-06",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "statuses": [
+          403,
+          403,
+          403,
+          403,
+          403
+        ],
+        "identityChanged": false,
+        "customerWrites": 0
+      },
+      "durationMs": 65
+    },
+    {
+      "id": "AUTH-07",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "me": {
+          "status": 401,
+          "code": "UNAUTHENTICATED",
+          "requestId": "f66eecbd-bfe5-4f57-906d-93eed573c6d4",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "write": {
+          "status": 401,
+          "code": "UNAUTHENTICATED",
+          "requestId": "9b3564f9-ce25-4fc9-976c-8748b60cb3f5",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "authVersionChanged": true,
+        "customerWrites": 0
+      },
+      "durationMs": 52
+    },
+    {
+      "id": "CAT-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "storedCatalog": [
+          "QDA",
+          "QHB",
+          "QBC"
+        ],
+        "enabledTwoDecimalOnly": true,
+        "responses": {
+          "salesA": [
+            "USD"
+          ],
+          "boss": [
+            "USD"
+          ],
+          "emptyEnabledDirectory": {
+            "salesA": [],
+            "boss": []
+          }
+        },
+        "noDefaultCurrencyWhenDirectoryEmpty": true
+      },
+      "durationMs": 204
+    },
+    {
+      "id": "CAT-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "productId": "3ef47814-6cc1-4143-a48d-e7ecf0d468ea",
+        "sharedRead": true,
+        "version": 2,
+        "successfulAudits": 2,
+        "browserAuthenticatedReadonlyRole": "boss"
+      },
+      "durationMs": 3113
+    },
+    {
+      "id": "CAT-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "normalizedSku": "ACC-B195C4F168CC-CAT03-08094B8D  NORMALIZED",
+        "duplicate": {
+          "status": 409,
+          "code": "DUPLICATE_SKU",
+          "requestId": "971a72c6-e531-43fa-968e-2b45ee5422cc",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "databaseRows": 1
+      },
+      "durationMs": 113
+    },
+    {
+      "id": "CAT-04",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "statuses": [
+          403,
+          403,
+          403,
+          403
+        ],
+        "unauthorizedAudits": 0
+      },
+      "durationMs": 230
+    },
+    {
+      "id": "CUST-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "customerId": "20f596ec-ed95-4e77-809e-ae81b7acb574",
+        "browserCreatedAndReadBack": true,
+        "ownerFromServer": true,
+        "version": 2,
+        "successfulAudits": 2
+      },
+      "durationMs": 2407
+    },
+    {
+      "id": "CUST-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "ownerBeyondLastPage": {
+          "total": 2,
+          "totalPages": 2,
+          "items": 0
+        },
+        "otherOwnerTotal": 1,
+        "bossTotal": 3,
+        "emptyTotal": 0
+      },
+      "durationMs": 260
+    },
+    {
+      "id": "SCOPE-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "crossOwnerResponses": [
+          {
+            "status": 404,
+            "code": "NOT_FOUND",
+            "requestId": "3b08cae5-6d73-4228-b703-963ca29e9f04",
+            "replayed": false,
+            "fieldErrors": []
+          },
+          {
+            "status": 404,
+            "code": "NOT_FOUND",
+            "requestId": "3a1c11b4-52c4-433d-88b9-60cb58c0f4e1",
+            "replayed": false,
+            "fieldErrors": []
+          },
+          {
+            "status": 404,
+            "code": "NOT_FOUND",
+            "requestId": "a8cde22a-c280-4a98-b7eb-2458b3dd1308",
+            "replayed": false,
+            "fieldErrors": []
+          },
+          {
+            "status": 404,
+            "code": "NOT_FOUND",
+            "requestId": "47e1ea3b-2a0e-4137-8a19-dac684f700dd",
+            "replayed": false,
+            "fieldErrors": []
+          }
+        ],
+        "sameErrorClassAsMissing": true,
+        "sensitiveFieldsAbsent": true
+      },
+      "durationMs": 3238
+    },
+    {
+      "id": "SCOPE-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "inquiries": {
+          "ownerTotal": 1,
+          "otherOwnerTotal": 0,
+          "bossTotal": 1,
+          "ownerBeyondLastPageItems": 0
+        },
+        "quotes": {
+          "ownerTotal": 1,
+          "otherOwnerTotal": 0,
+          "bossTotal": 1,
+          "ownerBeyondLastPageItems": 0
+        },
+        "orders": {
+          "ownerTotal": 1,
+          "otherOwnerTotal": 0,
+          "bossTotal": 1,
+          "ownerBeyondLastPageItems": 0
+        }
+      },
+      "durationMs": 1412
+    },
+    {
+      "id": "SCOPE-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "defaultDeny": {
+          "admin": [
+            403,
+            403,
+            403
+          ],
+          "doc": [
+            403,
+            403,
+            403
+          ],
+          "fin": [
+            403,
+            403,
+            403
+          ]
+        }
+      },
+      "durationMs": 672
+    },
+    {
+      "id": "SCOPE-04",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "response": {
+          "status": 404,
+          "code": "NOT_FOUND",
+          "requestId": "c4e4d2bf-e24b-4743-9daf-91ddbbc443bd",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "before": {
+          "inquiries": 5,
+          "lines": 10,
+          "audits": 48,
+          "idempotency": 48
+        },
+        "after": {
+          "inquiries": 5,
+          "lines": 10,
+          "audits": 48,
+          "idempotency": 48
+        },
+        "crossOwnerReferenceRejected": true
+      },
+      "durationMs": 244
+    },
+    {
+      "id": "INQ-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "inquiryId": "de504069-6198-4bf7-b108-bac800f8feb1",
+        "browserCreated": true,
+        "lineNumbers": [
+          1,
+          2
+        ],
+        "capturedProductVersions": [
+          1,
+          1
+        ],
+        "snapshotsUnchangedAfterCatalogUpdate": true
+      },
+      "durationMs": 2382
+    },
+    {
+      "id": "INQ-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "staleCustomer": {
+          "status": 409,
+          "code": "VERSION_CONFLICT",
+          "requestId": "0ada8078-b65a-4031-8327-a54a4423919a",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/customerVersion",
+              "code": "version_conflict",
+              "message": "客户版本不匹配"
+            }
+          ],
+          "currentVersion": 1
+        },
+        "staleProduct": {
+          "status": 409,
+          "code": "VERSION_CONFLICT",
+          "requestId": "728759b3-949c-4042-a954-f3f721b7c484",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/items/0/productVersion",
+              "code": "version_conflict",
+              "message": "商品版本不匹配"
+            }
+          ],
+          "currentVersion": 1
+        },
+        "disabledProduct": {
+          "status": 422,
+          "code": "VALIDATION_ERROR",
+          "requestId": "e3603c60-3cd5-4ad2-8a36-ff965a0d4fcd",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/items/0/productId",
+              "code": "product_disabled",
+              "message": "商品已停用"
+            }
+          ]
+        },
+        "persistedInquiries": 0
+      },
+      "durationMs": 179
+    },
+    {
+      "id": "INQ-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "rejected": [
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "330222bd-8f1e-4e0a-bd97-197638ffe743",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items",
+                "code": "too_small",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "7d2aa3ad-2cd0-4c02-b1b6-349542fd91e4",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items",
+                "code": "too_big",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 400,
+            "code": "MALFORMED_REQUEST",
+            "requestId": "55e54362-1fd7-4698-863a-87180aeb8fd5",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/productId",
+                "code": "invalid_type",
+                "message": "字段类型不正确"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "ea3ffed1-705f-4312-891e-2468593b1f0c",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "not_positive",
+                "message": "数值必须大于零"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "83b0bbce-a95a-42ae-b24d-e856cdfcf9fc",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "93288fe3-0754-4a9f-92b0-13059d1c1b49",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/inquiryDate",
+                "code": "custom",
+                "message": "字段值不合法"
+              }
+            ]
+          }
+        ],
+        "duplicateProductAllowed": true,
+        "stableLineNumbers": [
+          1,
+          2
+        ],
+        "invalidWrites": 0
+      },
+      "durationMs": 134
+    },
+    {
+      "id": "QUOTE-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "quoteId": "21c050fa-16f1-4713-8ca6-dfda2bfb8228",
+        "quoteDate": "2026-10-29",
+        "validUntil": "2026-11-13",
+        "sourceStatus": "QUOTED",
+        "lineCount": 2,
+        "emptyDraftSaved": true,
+        "browserDetailRendered": true
+      },
+      "durationMs": 1077
+    },
+    {
+      "id": "QUOTE-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "statuses": [
+          201,
+          409
+        ],
+        "quoteId": "ecc16dc8-597c-4822-bf70-6ef38eae1ac0",
+        "quotes": 1,
+        "successfulAudits": 1
+      },
+      "durationMs": 120
+    },
+    {
+      "id": "QUOTE-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "quoteId": "c111bb0d-e86f-4c03-8320-b507c971c0df",
+        "lineAmounts": [
+          "500.00",
+          "45.00"
+        ],
+        "totalAmount": "545.00",
+        "version": 2,
+        "amountsAreStrings": true,
+        "browserTotalRendered": "USD 545.00"
+      },
+      "durationMs": 724
+    },
+    {
+      "id": "QUOTE-04",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "rejected": [
+          {
+            "status": 400,
+            "code": "MALFORMED_REQUEST",
+            "requestId": "d37fb6cf-616e-45ce-8418-14984cf09c6f",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/",
+                "code": "unrecognized_keys",
+                "message": "存在未知字段"
+              }
+            ]
+          },
+          {
+            "status": 400,
+            "code": "MALFORMED_REQUEST",
+            "requestId": "1bfa7a58-0cb6-4f83-92cd-b1fc1e62bac5",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/",
+                "code": "unrecognized_keys",
+                "message": "存在未知字段"
+              }
+            ]
+          },
+          {
+            "status": 400,
+            "code": "MALFORMED_REQUEST",
+            "requestId": "9d21b9e9-a1fb-471e-9505-9562121dae44",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/",
+                "code": "unrecognized_keys",
+                "message": "存在未知字段"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "579647f5-9ad1-4f57-983d-6c68f481fdff",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items",
+                "code": "incomplete_line_nos",
+                "message": "不得遗漏、重复或新增 lineNo"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "8e1c094e-bb37-4561-9cdd-de8fbf341a69",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/1/lineNo",
+                "code": "line_no_mismatch",
+                "message": "不得遗漏、重复或新增 lineNo"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "72f82b82-c751-4a5c-a5b5-ed9a5ed2b30d",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/lineNo",
+                "code": "line_no_mismatch",
+                "message": "不得遗漏、重复或新增 lineNo"
+              }
+            ]
+          }
+        ],
+        "versionUnchanged": 1,
+        "linesUnchanged": true
+      },
+      "durationMs": 510
+    },
+    {
+      "id": "MONEY-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "rejectedCount": 14,
+        "responses": [
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "5f0ec65c-b860-4a36-9a99-c9aca7a50972",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/unitPrice",
+                "code": "invalid_union",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "a9facdbc-d104-4d45-82c8-22c68f90ba88",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/unitPrice",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "9bfe28d6-569c-4071-8709-4a901fdcdeb8",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/unitPrice",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "0df1afb8-3be4-45dc-939b-d32fb2891a4d",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/unitPrice",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "3ecff8f3-5e88-4b90-9af5-2c86f1fea139",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/unitPrice",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "d365d0a9-9374-432d-b6af-eba0a12b2f85",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/unitPrice",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 400,
+            "code": "MALFORMED_REQUEST",
+            "requestId": "8af8c685-e36c-4d9f-a491-bbaeb8818871",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_type",
+                "message": "字段类型不正确"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "b17e94e1-ae55-433b-9758-1383dddfbd71",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "e23e3cc5-e652-480a-8dbd-f32af5f05e68",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "814bd592-991e-4791-b4ee-74cbe1df9c0c",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "e0fbd494-857d-4d59-92a0-13f5a3b54311",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "06dfd3c7-517f-43bc-a38e-42ecd8d5bef6",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "not_positive",
+                "message": "数值必须大于零"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "55d6c819-5250-41c1-878d-64fa3e3bb4ab",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "39a798da-ad4c-4b08-b495-63183a861b06",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/quantity",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          }
+        ],
+        "quoteTotalStillNull": true,
+        "noSilentNumberConversion": true
+      },
+      "durationMs": 471
+    },
+    {
+      "id": "MONEY-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "response": {
+          "status": 422,
+          "code": "AMOUNT_NOT_EXACT",
+          "requestId": "c16c850c-a22e-43bb-83de-42c456147ead",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/items/0/lineAmount",
+              "code": "amount_not_exact",
+              "message": "数量与单价的乘积不能精确到分"
+            }
+          ]
+        },
+        "noRoundedZeroWrite": true
+      },
+      "durationMs": 256
+    },
+    {
+      "id": "MONEY-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "lineAmounts": [
+          "0.01",
+          "0.01"
+        ],
+        "totalAmount": "0.02",
+        "normalizedDecimals": true
+      },
+      "durationMs": 183
+    },
+    {
+      "id": "MONEY-04",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "rejected": [
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "670537d9-e630-41d7-a410-a54e8f4a29c2",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/unitPrice",
+                "code": "too_big",
+                "message": "字段值不合法"
+              },
+              {
+                "path": "/items/0/unitPrice",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              },
+              {
+                "path": "/items/1/unitPrice",
+                "code": "too_big",
+                "message": "字段值不合法"
+              },
+              {
+                "path": "/items/1/unitPrice",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "AMOUNT_NOT_EXACT",
+            "requestId": "89ec9656-be32-42a0-a661-99b206311db6",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items/0/lineAmount",
+                "code": "amount_not_exact",
+                "message": "数量与单价的乘积不能精确到分"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "AMOUNT_OVERFLOW",
+            "requestId": "357eaaef-4c5c-4e62-a493-cb72c6ab9e41",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/totalAmount",
+                "code": "amount_overflow",
+                "message": "金额超过 18 位整数和 2 位小数的上限"
+              }
+            ]
+          }
+        ],
+        "versionUnchanged": 1,
+        "databaseOverflowNotUsed": true
+      },
+      "durationMs": 144
+    },
+    {
+      "id": "SUBMIT-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "quoteId": "29fab6df-0921-4d83-b255-6708be9c36ee",
+        "state": "AWAITING_CUSTOMER",
+        "submittedQuoteVersion": 3,
+        "frozenLineAmounts": [
+          "500.00",
+          "45.00"
+        ],
+        "snapshotEqualsDatabase": true,
+        "successfulAudits": 3,
+        "browserSubmittedStateRendered": true
+      },
+      "durationMs": 826
+    },
+    {
+      "id": "SUBMIT-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "response": {
+          "status": 409,
+          "code": "VERSION_CONFLICT",
+          "requestId": "fc5b4131-d105-4687-a4a4-04e993d6db2b",
+          "replayed": false,
+          "fieldErrors": [],
+          "currentVersion": 2
+        },
+        "state": "DRAFT",
+        "issuedSnapshot": null
+      },
+      "durationMs": 250
+    },
+    {
+      "id": "SUBMIT-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "rejected": [
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "7cf02211-8023-47ad-aeaf-c1554cb87058",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/tradeTerm",
+                "code": "required",
+                "message": "贸易条款不能为空"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "ea75f48f-12ef-4eaa-b1de-a7c265019346",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/items",
+                "code": "unit_price_required",
+                "message": "每一行成交单价均必填"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "f82f386e-7e87-4212-b84b-5a975a17320e",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/validUntil",
+                "code": "required",
+                "message": "提交前必须填写有效期"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "QUOTE_EXPIRED",
+            "requestId": "da7e7c1f-f53f-474a-a105-f5521a1e62f9",
+            "replayed": false,
+            "fieldErrors": []
+          },
+          {
+            "status": 422,
+            "code": "CURRENCY_NOT_AVAILABLE",
+            "requestId": "af250fd0-0cee-4348-b989-3002e6ac28a0",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/currency",
+                "code": "currency_not_available",
+                "message": "请选择启用的两位金额币种"
+              }
+            ]
+          }
+        ],
+        "missingCompany": {
+          "status": "PASS",
+          "response": {
+            "status": 422,
+            "code": "COMPANY_PROFILE_REQUIRED",
+            "requestId": "8ec01da4-61de-4d55-92e1-da4e0e62b329",
+            "replayed": false,
+            "fieldErrors": []
+          }
+        },
+        "finalState": "DRAFT",
+        "noDemoOrZeroPriceFallback": true
+      },
+      "durationMs": 3031
+    },
+    {
+      "id": "CONFIRM-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "quoteId": "df70e931-5326-4a95-95d7-85599382af88",
+        "state": "CONFIRMED",
+        "confirmationId": "225dde77-5c0b-4228-9bbe-28337527c6fc",
+        "recordedByFromServer": true,
+        "confirmedSnapshotEqualsIssued": true,
+        "attachments": [],
+        "browserConfirmedStateRendered": true
+      },
+      "durationMs": 837
+    },
+    {
+      "id": "CONFIRM-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "rejected": [
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "b5043491-a85c-4591-b5b3-388da22ecd78",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/method",
+                "code": "required",
+                "message": "确认方式不能为空"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "61f8b24d-7f6c-4796-8437-a4e4d2366ffe",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/note",
+                "code": "required",
+                "message": "确认说明不能为空"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "a6d6eb9e-d101-48b4-b932-a27864506639",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/confirmedOn",
+                "code": "date_out_of_range",
+                "message": "确认日期须在报价日期、有效期及业务今天范围内"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "d715a0a6-3d83-4b09-aa46-30fd465829a9",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/confirmedOn",
+                "code": "invalid_date",
+                "message": "必须为真实日历日期 YYYY-MM-DD"
+              }
+            ]
+          },
+          {
+            "status": 422,
+            "code": "FEATURE_NOT_IN_SLICE",
+            "requestId": "4b8a58cf-efad-44f8-884d-0bd20e7448a1",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/attachmentIds",
+                "code": "feature_not_in_slice",
+                "message": "附件上传与关联不在首切片范围"
+              }
+            ]
+          }
+        ],
+        "stateUnchanged": "AWAITING_CUSTOMER",
+        "confirmationRows": 0
+      },
+      "durationMs": 327
+    },
+    {
+      "id": "CONFIRM-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "repeatConfirmation": {
+          "status": 409,
+          "code": "STATE_CONFLICT",
+          "requestId": "2a56ca4a-e8d9-425e-ab9f-823329cb63c7",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "edit": {
+          "status": 409,
+          "code": "STATE_CONFLICT",
+          "requestId": "31ff739e-3639-427f-87fb-7b0a7be77ead",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "confirmations": 1,
+        "originalSnapshotPreserved": true
+      },
+      "durationMs": 224
+    },
+    {
+      "id": "ORDER-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "orderId": "697061d8-8f39-40f3-a4cb-e8c2c29e7e17",
+        "quoteId": "ea70cafe-040b-441e-9f73-d75a910989fd",
+        "sourceStatus": "CONFIRMED",
+        "convertedAtPresent": true,
+        "counts": {
+          "orders": 1,
+          "versions": 1,
+          "lines": 2
+        },
+        "independentProgress": [
+          "PENDING_EXECUTION",
+          "NOT_STARTED",
+          "UNPAID"
+        ],
+        "browserOrderTotal": "USD 545.00"
+      },
+      "durationMs": 1244
+    },
+    {
+      "id": "ORDER-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "unconfirmed": {
+          "status": 409,
+          "code": "STATE_CONFLICT",
+          "requestId": "e5464675-aa31-49e3-a3bd-d9f83489eb8a",
+          "replayed": false,
+          "fieldErrors": [],
+          "currentVersion": 3
+        },
+        "unknownField": {
+          "status": 400,
+          "code": "MALFORMED_REQUEST",
+          "requestId": "422781e6-ad83-43a3-9235-205a277c016d",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/",
+              "code": "unrecognized_keys",
+              "message": "存在未知字段"
+            }
+          ]
+        },
+        "missingDelivery": {
+          "status": 400,
+          "code": "MALFORMED_REQUEST",
+          "requestId": "d1891382-c2cc-41de-8037-3f906abb272a",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/deliveryDate",
+              "code": "invalid_type",
+              "message": "字段类型不正确"
+            }
+          ]
+        },
+        "invalidDelivery": {
+          "status": 422,
+          "code": "VALIDATION_ERROR",
+          "requestId": "044ac405-b2c1-48a6-9cc3-25fd1efd8d36",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/deliveryDate",
+              "code": "invalid_date",
+              "message": "必须为真实日历日期 YYYY-MM-DD"
+            }
+          ]
+        },
+        "expired": {
+          "status": 422,
+          "code": "QUOTE_EXPIRED",
+          "requestId": "9f0cbabc-7be6-4e07-87a7-da699cbd0d97",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/deliveryDate",
+              "code": "quote_expired",
+              "message": "报价已过有效期，暂不能成单"
+            }
+          ]
+        },
+        "ordersCreated": 0
+      },
+      "durationMs": 417
+    },
+    {
+      "id": "ORDER-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "statuses": [
+          200,
+          201
+        ],
+        "orderId": "f187287f-31f6-4454-a46b-4cc7b7be81bb",
+        "orders": 1,
+        "versions": 1,
+        "lines": 2,
+        "quoteAudits": 4,
+        "orderAudits": 1
+      },
+      "durationMs": 206
+    },
+    {
+      "id": "ORDER-04",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "response": {
+          "status": 409,
+          "code": "SOURCE_ALREADY_CONVERTED",
+          "requestId": "75ebf75e-48f5-486f-98ea-28e75173d82e",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "originalDeliveryDate": "2026-11-13",
+        "orders": 1
+      },
+      "durationMs": 369
+    },
+    {
+      "id": "ORDER-05",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "sameKey": {
+          "status": 200,
+          "replayed": true
+        },
+        "sameDeliveryNewKey": {
+          "status": 200,
+          "replayed": true
+        },
+        "orderId": "6f5ff18a-bf56-4692-a4de-af2e4fe3dc2f",
+        "orders": 1,
+        "versions": 1
+      },
+      "durationMs": 412
+    },
+    {
+      "id": "SNAP-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "quoteId": "f4da33fb-ed8a-405c-ab99-01b7193efb80",
+        "orderId": "e837c4a6-f6e9-4aa5-be39-b3826d50a2d0",
+        "customerProductCompanyFrozen": true,
+        "orderSnapshotEqualsIssued": true,
+        "snapshotVersion": 1,
+        "orderVersion": 1
+      },
+      "durationMs": 370
+    },
+    {
+      "id": "IDEM-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "customerId": "3663185f-ae52-45a0-85c8-23d35969e609",
+        "replay": {
+          "status": 200,
+          "replayed": true
+        },
+        "currentVersionReturned": 2,
+        "customers": 1,
+        "audits": 2,
+        "idempotency": 2
+      },
+      "durationMs": 124
+    },
+    {
+      "id": "IDEM-02",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "differentBody": {
+          "status": 409,
+          "code": "IDEMPOTENCY_CONFLICT",
+          "requestId": "7155b336-6623-4bdb-aad1-b4fa85c43c68",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "differentEndpoint": {
+          "status": 409,
+          "code": "IDEMPOTENCY_CONFLICT",
+          "requestId": "62756670-6b90-4825-8040-defda0899f5e",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "stolenResourceReturned": false
+      },
+      "durationMs": 317
+    },
+    {
+      "id": "IDEM-03",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "outOfScope": {
+          "status": 404,
+          "code": "NOT_FOUND",
+          "requestId": "05215b64-9a69-41ec-a698-891a5868932e",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "roleRevoked": {
+          "status": 403,
+          "code": "FORBIDDEN_ROLE",
+          "requestId": "1c338b66-31c5-420a-a463-8bee60e4768f",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "sessionRevoked": {
+          "status": 401,
+          "code": "UNAUTHENTICATED",
+          "requestId": "32a26cc2-610d-4792-ad12-039fd7ada326",
+          "replayed": false,
+          "fieldErrors": []
+        },
+        "orderIdDisclosed": false
+      },
+      "durationMs": 404
+    },
+    {
+      "id": "IDEM-04",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "missing": {
+          "status": 400,
+          "code": "MALFORMED_REQUEST",
+          "requestId": "fe4f41b6-328c-465d-8abb-2614b01db38f",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/Idempotency-Key",
+              "code": "required",
+              "message": "业务写请求必须提供幂等键"
+            }
+          ]
+        },
+        "invalid": {
+          "status": 400,
+          "code": "MALFORMED_REQUEST",
+          "requestId": "fbe42995-f38d-4ec4-b2b2-d5c0cd802b8e",
+          "replayed": false,
+          "fieldErrors": [
+            {
+              "path": "/Idempotency-Key",
+              "code": "invalid_format",
+              "message": "必须使用合法 UUID"
+            }
+          ]
+        },
+        "customers": 0,
+        "audits": 0,
+        "idempotency": 0
+      },
+      "durationMs": 78
+    },
+    {
+      "id": "VERSION-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "updateStatus": 200,
+        "submitStatus": 409,
+        "winner": "update",
+        "finalState": "DRAFT",
+        "snapshotAmountsConsistent": true
+      },
+      "durationMs": 106
+    },
+    {
+      "id": "TX-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "coverageLevel": "REAL_HTTP_TO_POSTGRESQL_BEFORE_INSERT_TRIGGER",
+        "injectedOperations": [
+          "createInquiry",
+          "createQuote",
+          "submitQuote",
+          "recordCustomerConfirmation",
+          "createOrderFromQuote"
+        ],
+        "injectionPoints": [
+          "idempotency_record",
+          "audit_event"
+        ],
+        "limitation": "覆盖五个业务事务的成功幂等与成功审计写入故障；未声称覆盖服务内部每一个中间 SQL 步骤或进程崩溃窗口。",
+        "faults": [
+          {
+            "operation": "createInquiry",
+            "injectionPoint": "idempotency_record",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 201
+          },
+          {
+            "operation": "createInquiry",
+            "injectionPoint": "audit_event",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 201
+          },
+          {
+            "operation": "createQuote",
+            "injectionPoint": "idempotency_record",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 201
+          },
+          {
+            "operation": "createQuote",
+            "injectionPoint": "audit_event",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 201
+          },
+          {
+            "operation": "submitQuote",
+            "injectionPoint": "idempotency_record",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 200
+          },
+          {
+            "operation": "submitQuote",
+            "injectionPoint": "audit_event",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 200
+          },
+          {
+            "operation": "recordCustomerConfirmation",
+            "injectionPoint": "idempotency_record",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 200
+          },
+          {
+            "operation": "recordCustomerConfirmation",
+            "injectionPoint": "audit_event",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 200
+          },
+          {
+            "operation": "createOrderFromQuote",
+            "injectionPoint": "idempotency_record",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 201
+          },
+          {
+            "operation": "createOrderFromQuote",
+            "injectionPoint": "audit_event",
+            "failureStatus": 500,
+            "rollbackVerified": true,
+            "sameKeyRetryStatus": 201
+          }
+        ]
+      },
+      "durationMs": 1661
+    },
+    {
+      "id": "DB-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "engine": "PostgreSQL",
+        "rejectedConstraints": [
+          "inquiry_customer_owner_fk",
+          "quote_inquiry_owner_customer_fk",
+          "quote_line_quote_inquiry_fk",
+          "sales_order_quote_confirmation_fk",
+          "inquiry_message_not_null",
+          "sales_order_source_quote_id_unique",
+          "order_line_order_version_quote_fk"
+        ],
+        "expectedSqlStates": [
+          "23503",
+          "23502",
+          "23505"
+        ],
+        "failedTransactionsPersisted": 0,
+        "ordersAfterDuplicateAttempt": 1,
+        "orderId": "fb62a754-9aa9-4a62-b6e8-e113e6e54edb"
+      },
+      "durationMs": 194
+    },
+    {
+      "id": "RESTART-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "delegatedScript": "scripts/verify-real-workflow.mjs",
+        "delegateResult": {
+          "status": "PASS",
+          "databaseRestarted": true,
+          "applicationRestarted": true,
+          "reauthenticated": true,
+          "quoteId": "9813ec35-e88b-4323-811b-df3e68b16ccd",
+          "orderId": "313f9c9d-3a08-4ce5-94c4-dcf55b96b9bf",
+          "totalAmount": "545.00",
+          "idempotencyReplayed": true,
+          "counts": {
+            "orders": 1,
+            "versions": 1,
+            "lines": 2,
+            "idempotency": 1,
+            "audits": 1
+          }
+        },
+        "databaseRestarted": true,
+        "applicationRestarted": true,
+        "reauthenticated": true,
+        "freshConnectionUsedAsRestartSubstitute": false
+      },
+      "durationMs": 20608
+    },
+    {
+      "id": "ERROR-01",
+      "status": "PASS",
+      "executed": true,
+      "evidence": {
+        "responses": [
+          {
+            "status": 404,
+            "code": "NOT_FOUND",
+            "requestId": "ec746dba-1240-4bdc-a2d0-ce802d3531dc",
+            "replayed": false,
+            "fieldErrors": []
+          },
+          {
+            "status": 409,
+            "code": "VERSION_CONFLICT",
+            "requestId": "81f62626-70b5-41d0-9728-90e996514769",
+            "replayed": false,
+            "fieldErrors": [],
+            "currentVersion": 2
+          },
+          {
+            "status": 422,
+            "code": "VALIDATION_ERROR",
+            "requestId": "aa827c55-de6e-4bfc-b13f-f052d59f3f90",
+            "replayed": false,
+            "fieldErrors": [
+              {
+                "path": "/email",
+                "code": "invalid_format",
+                "message": "字段值不合法"
+              }
+            ]
+          },
+          {
+            "status": 404,
+            "code": "NOT_FOUND",
+            "requestId": "a4d6c7bc-f933-4aca-80ea-312e7bd411f9",
+            "replayed": false,
+            "fieldErrors": []
+          }
+        ],
+        "currentVersionOnlyForAuthorizedConflict": true,
+        "logEntriesInspected": 0,
+        "secretsOrSqlInResponses": false,
+        "browserCrossOwnerDetail": 404
+      },
+      "durationMs": 4327
+    }
+  ]
+}

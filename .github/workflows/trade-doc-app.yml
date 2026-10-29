@@ -58,6 +58,40 @@ jobs:
           DATABASE_URL: postgresql://build_only:build_only@127.0.0.1:5432/build_only
           NEXT_TELEMETRY_DISABLED: 1
 
+  docker-images:
+    name: Build Docker runtime and migration images
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build runtime image
+        uses: docker/build-push-action@v6
+        with:
+          context: trade-doc-app
+          file: trade-doc-app/Dockerfile
+          target: runtime
+          tags: trade-doc-app-runtime:${{ github.sha }}
+          load: true
+          push: false
+      - name: Verify standalone runtime artifact
+        run: |
+          docker run --rm --entrypoint sh \
+            "trade-doc-app-runtime:${{ github.sha }}" \
+            -c 'test -f /app/server.js && test -d /app/.next/static && test -d /app/public'
+      - name: Build migration image
+        uses: docker/build-push-action@v6
+        with:
+          context: trade-doc-app
+          file: trade-doc-app/Dockerfile
+          target: migration
+          tags: trade-doc-app-migration:${{ github.sha }}
+          load: true
+          push: false
+
   postgres-integration:
     name: Real PostgreSQL integration
     needs: quality
@@ -100,7 +134,7 @@ jobs:
       - name: Apply migrations
         run: pnpm exec drizzle-kit migrate
       - name: Run integration tests
-        run: pnpm test tests/integration
+        run: pnpm test:integration
 
   playwright-e2e:
     name: Playwright E2E on production build

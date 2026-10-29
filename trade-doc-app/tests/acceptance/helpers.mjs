@@ -92,8 +92,8 @@ export class Http {
       headers: { "X-CSRF-TOKEN": csrf },
       data: { username: account.username, password: account.password },
     });
-    assert.equal(response.status(), 200, `Synthetic login failed for ${account.role}`);
     const body = await response.json();
+    assert.equal(response.status(), 200, `Synthetic login failed for ${account.role}: ${safeSummary(body)}`);
     const authenticatedCookie = response.headers()["set-cookie"].split(";", 1)[0];
     assert.ok(anonymousCookie && authenticatedCookie !== anonymousCookie, "Login must rotate the opaque session");
     return {
@@ -158,7 +158,7 @@ export async function seedFixture(ctx, label) {
   const accounts = Object.fromEntries(
     Object.entries(roles).map(([name, role]) => [name, {
       id: key(),
-      username: `acc-${ctx.runId}-${label}-${name}-${key().slice(0, 8)}`.slice(0, 100),
+      username: `acc-${ctx.runId}-${label}-${name}-${key().slice(0, 8)}`.toLowerCase().slice(0, 100),
       password: ctx.syntheticPassword,
       role,
     }]),

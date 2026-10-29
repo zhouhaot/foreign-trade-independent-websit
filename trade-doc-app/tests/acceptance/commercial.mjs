@@ -33,6 +33,7 @@ export const commercialCases = {
       ]);
       const id = page.url().split("/").at(-1);
       await page.reload();
+      await page.getByRole("heading", { name: input.nameCn, exact: true }).waitFor();
       assert.ok(await page.getByRole("heading", { name: input.nameCn, exact: true }).isVisible());
       const logged = await sessions(ctx, fixture);
       let updated;

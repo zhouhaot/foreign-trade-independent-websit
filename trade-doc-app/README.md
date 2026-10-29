@@ -2,7 +2,13 @@
 
 独立的 Next.js 应用，首个业务切片覆盖真实登录、公司共用商品、本人客户、询盘、报价、客户确认和唯一成单。静态 `trade-doc-demo/` 仅作历史参考，不得接入本应用或生产数据。
 
-当前代码已实现契约中的 25 个 `/api/v1` 操作和 16 张业务表，并有 130 项单元测试。实现数量和单测通过只说明代码级检查，不等同于真实 PostgreSQL 集成、浏览器端到端或生产验收通过。业务权威输入见 `docs/contracts/`；49 项场景仍须按[验收说明](docs/acceptance/README.md)取得逐项实际证据。
+当前代码已实现契约中的 25 个 `/api/v1` 操作和 16 张业务表，并有 130 项单元测试。实现数量和单测通过只说明代码级检查，不等同于真实 PostgreSQL 集成、浏览器端到端或生产验收通过。业务权威输入见 `docs/contracts/`，执行与取证规则见[验收说明](docs/acceptance/README.md)。
+
+## 本机合成验收证据（2026-10-29）
+
+真实统一验收 `runId=b195c4f168cc` 已完成，49/49 项场景为 `PASS`，逐项证据见 [`docs/acceptance/results/2026-10-29-slice-01.json`](docs/acceptance/results/2026-10-29-slice-01.json)。配套执行为 31 项真实 PostgreSQL 数据库集成测试和 1 个真实 Chromium 浏览器主流程，均已通过；`RESTART-01` 已实际重启应用和 PostgreSQL，并验证重新登录、业务回读与同键幂等重放。
+
+`TX-01` 仅覆盖五个业务事务在成功幂等记录或成功审计写入前发生故障时的回滚与同键重试，不声称覆盖所有中间 SQL 步骤或进程崩溃窗口。契约中的 49 项场景及总状态仍保留 `PLANNED` / `PLANNED-NOT-EXECUTED` 基线，实际结果以证据文件为准。此次为本机合成验收，不是生产部署或生产验收；生产部署、备份与隔离恢复仍未执行。
 
 ## 技术基线
 
@@ -137,13 +143,13 @@ unset TRADE_DOC_RUN_E2E TRADE_DOC_E2E_RESTART
 
 该脚本限制为 `trade_doc_test`，并依赖 Compose 中名为 `postgres` 的数据库服务。只有实际完成重启、重新登录、回读和同键重放并保存输出后，才能作为 `RESTART-01` 的证据。
 
-规划中的统一入口为：
+真实统一验收入口为：
 
 ```sh
 node scripts/run-acceptance.mjs
 ```
 
-该脚本尚未提供，目前不能当作可执行或已通过的验收入口；落地后仍须核对其参数、环境隔离、实际覆盖范围和逐项证据。详见[首切片验收说明](docs/acceptance/README.md)。
+执行前仍须核对其显式开关、环境隔离、实际覆盖范围和逐项证据，不能仅凭脚本存在或聚合退出码判定通过。本次 `runId=b195c4f168cc` 的结果已保存在上述证据文件中；详见[首切片验收说明](docs/acceptance/README.md)。
 
 ## 容器启动
 

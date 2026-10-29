@@ -36,6 +36,7 @@ export const lifecycleCases = {
       const page = await browserLogin(ctx, flow.fixture.accounts.salesA);
       try {
         await page.goto(`/quotes/${quote.id}`);
+        await page.getByText("待客户确认", { exact: true }).waitFor();
         assert.ok((await page.locator("main").textContent()).includes("待客户确认"));
       } finally {
         await page.close();
@@ -131,6 +132,7 @@ export const lifecycleCases = {
       const page = await browserLogin(ctx, flow.fixture.accounts.salesA);
       try {
         await page.goto(`/quotes/${quote.id}`);
+        await page.getByText("已确认", { exact: true }).first().waitFor();
         assert.ok((await page.locator("main").textContent()).includes("已确认"));
       } finally {
         await page.close();
@@ -225,7 +227,7 @@ export const lifecycleCases = {
       assert.equal(expired.response.body.code, "QUOTE_EXPIRED");
       const counts = await resourceCounts(ctx.sql, { quoteId: confirmed.value.id });
       assert.equal(counts.orders, 0);
-      return { unconfirmed: publicResponse(unconfirmed.response), unknownField: publicResponse(unknown), missingDelivery: publicResponse(missingDate), invalidDelivery: publicResponse(badDate.response), expired: publicResponse(expired.response), ordersCreated: 0 };
+      return { unconfirmed: publicResponse(unconfirmed.response), unknownField: publicResponse(unknown.response), missingDelivery: publicResponse(missingDate), invalidDelivery: publicResponse(badDate.response), expired: publicResponse(expired.response), ordersCreated: 0 };
     } finally {
       await closeSessions(flow.logged);
     }
