@@ -16,7 +16,7 @@
     "verify:contract": "node scripts/verify-contract.mjs",
     "test": "vitest run tests/unit --passWithNoTests",
     "test:watch": "vitest tests/unit",
-    "test:integration": "vitest run tests/integration --passWithNoTests",
+    "test:integration": "vitest run tests/integration --passWithNoTests --no-file-parallelism --maxWorkers=1",
     "test:e2e": "playwright test"
   },
   "dependencies": {

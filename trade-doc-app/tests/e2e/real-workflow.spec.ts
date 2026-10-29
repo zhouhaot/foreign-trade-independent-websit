@@ -141,11 +141,19 @@ test("real browser workflow, ownership, roles, idempotency and concurrency", asy
   const confirmDialog = page.getByRole("dialog", { name: "登记客户确认" });
   await confirmDialog.getByLabel("确认方式", { exact: true }).fill("Synthetic email confirmation");
   await confirmDialog.getByLabel("确认说明", { exact: true }).fill("客户已确认合成报价快照与两行金额。");
-  const confirmResponse = page.waitForResponse(
-    (response) =>
-      response.url().endsWith(`/api/v1/quotes/${quoteId}/customer-confirmations`) &&
-      response.request().method() === "POST",
-  );
+  const confirmResponse = page.waitForResponse(async (response) => {
+    if (
+      !response.url().endsWith(`/api/v1/quotes/${quoteId}/customer-confirmations`) ||
+      response.request().method() !== "POST"
+    ) {
+      return false;
+    }
+    if (response.status() === 200) return true;
+    if (response.status() === 403) {
+      expect(await response.json()).toMatchObject({ code: "CSRF_INVALID" });
+    }
+    return false;
+  });
   await confirmDialog.getByRole("button", { name: "登记确认", exact: true }).click();
   expect((await confirmResponse).status()).toBe(200);
   await expect(page.getByText("客户确认已登记，确认内容绑定提交时的冻结快照。")).toBeVisible();
@@ -247,7 +255,7 @@ test("real browser workflow, ownership, roles, idempotency and concurrency", asy
     expect(await response.text()).not.toContain(customerName);
   }
   await salesB.goto(`/customers/${customerId}`);
-  await expect(salesB.getByRole("alert")).toContainText("HTTP 404");
+  await expect(salesB.locator(".error-panel")).toContainText("HTTP 404");
   await expect(salesB.getByText(customerName, { exact: true })).toHaveCount(0);
   await salesBContext.close();
 

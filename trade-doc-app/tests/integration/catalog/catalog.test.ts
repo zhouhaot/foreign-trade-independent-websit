@@ -113,8 +113,8 @@ describeDatabase("catalog PostgreSQL integration", () => {
     expect(sameBody[0]?.result.id).toBe(sameBody[1]?.result.id);
 
     const results = await Promise.allSettled([
-      service.createProduct(identity("sales"), input, command("00000000-0000-4000-8000-000000000311", "body-a")),
-      service.createProduct(identity("sales"), { ...input, sku: "DIFFERENT-SKU" }, command("00000000-0000-4000-8000-000000000311", "body-b")),
+      service.createProduct(identity("sales"), { ...input, sku: "CONFLICT-SKU-A" }, command("00000000-0000-4000-8000-000000000311", "body-a")),
+      service.createProduct(identity("sales"), { ...input, sku: "CONFLICT-SKU-B" }, command("00000000-0000-4000-8000-000000000311", "body-b")),
     ]);
     expect(results.filter((result) => result.status === "fulfilled")).toHaveLength(1);
     expect(results.find((result) => result.status === "rejected")).toMatchObject({
