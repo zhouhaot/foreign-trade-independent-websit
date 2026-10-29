@@ -290,7 +290,22 @@ export const lifecycleCases = {
     try {
       const issued = JSON.parse(JSON.stringify(flow.quote.value.submittedSnapshot));
       await ctx.http.write(flow.logged.salesA.context, "PUT", `/api/v1/customers/${flow.customer.value.id}`, { ...flow.customer.input, nameCn: "实时客户名已改变", nameEn: "Live replacement", expectedVersion: 1 }, [200]);
-      await ctx.sql`update product set name_en = 'Live product replacement', row_version = row_version + 1 where id = ${flow.fixture.products[0].id}`;
+      const productId = flow.fixture.products[0].id;
+      const currentProduct = await ctx.http.get(flow.logged.salesA.context, `/api/v1/products/${productId}`);
+      const updatedProduct = await ctx.http.write(flow.logged.salesA.context, "PUT", `/api/v1/products/${productId}`, {
+        expectedVersion: currentProduct.body.version,
+        sku: currentProduct.body.sku,
+        nameCn: currentProduct.body.nameCn,
+        nameEn: "Live product replacement",
+        spec: currentProduct.body.spec,
+        unit: currentProduct.body.unit,
+        refPrice: currentProduct.body.refPrice,
+        currency: currentProduct.body.currency,
+        hsCode: currentProduct.body.hsCode,
+        remark: currentProduct.body.remark,
+        enabled: currentProduct.body.enabled,
+      }, [200]);
+      assert.equal(updatedProduct.body.version, currentProduct.body.version + 1);
       await ctx.sql`update company_profile set legal_name = 'Synthetic Live Replacement Ltd.', row_version = row_version + 1 where profile_key = 'PRIMARY_COMPANY'`;
       const confirmed = await confirmQuote(ctx, flow.logged.salesA, flow.quote.value);
       const order = await createOrder(ctx, flow.logged.salesA, confirmed.value);
@@ -303,6 +318,8 @@ export const lifecycleCases = {
       assert.equal(order.value.version, 1);
       const persisted = await ctx.sql`select confirmed_snapshot as snapshot from order_version where order_id = ${order.value.id}`;
       assert.deepEqual(persisted[0].snapshot, issued);
+      const readBack = await ctx.http.get(flow.logged.salesA.context, `/api/v1/orders/${order.value.id}`);
+      assert.deepEqual(readBack.body, order.value);
       return { quoteId: flow.quote.value.id, orderId: order.value.id, customerProductCompanyFrozen: true, orderSnapshotEqualsIssued: true, snapshotVersion: issued.snapshotVersion, orderVersion: order.value.version };
     } finally {
       await closeSessions(flow.logged);

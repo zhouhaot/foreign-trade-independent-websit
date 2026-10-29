@@ -206,7 +206,7 @@ export const systemCases = {
       const customer = await createCustomer(ctx, logged.salesA, fixture);
       await ctx.http.write(logged.salesA.context, "PUT", `/api/v1/customers/${customer.value.id}`, { ...customer.input, expectedVersion: 1, nameEn: "Current" }, [200]);
       const stale = await ctx.http.write(logged.salesA.context, "PUT", `/api/v1/customers/${customer.value.id}`, { ...customer.input, expectedVersion: 1 }, [409]);
-      const invalid = await ctx.http.write(logged.salesA.context, "PUT", `/api/v1/customers/${customer.value.id}`, { ...customer.input, expectedVersion: 2, email: "not-an-email" }, [400]);
+      const invalid = await ctx.http.write(logged.salesA.context, "PUT", `/api/v1/customers/${customer.value.id}`, { ...customer.input, expectedVersion: 2, email: "not-an-email" }, [422]);
       const other = await ctx.http.get(logged.salesB.context, `/api/v1/customers/${customer.value.id}`, [404]);
       for (const result of [missing, stale, invalid, other]) {
         assert.equal(result.body.status, result.status);

@@ -2,6 +2,7 @@ import console from "node:console";
 import { randomBytes, randomUUID } from "node:crypto";
 import { once } from "node:events";
 import process from "node:process";
+import { isAbsolute, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { fileURLToPath, URL } from "node:url";
@@ -81,6 +82,28 @@ async function stopApp() {
 }
 
 async function runDatabaseRestart(databaseUrl) {
+  const pgCtl = process.env.TRADE_DOC_E2E_PG_CTL;
+  const pgData = process.env.TRADE_DOC_E2E_PGDATA;
+  if (pgCtl || pgData) {
+    if (!pgCtl || !pgData) {
+      throw new Error("TRADE_DOC_E2E_PG_CTL and TRADE_DOC_E2E_PGDATA must be set together");
+    }
+    if (!isAbsolute(pgCtl) || !isAbsolute(pgData)) {
+      throw new Error("TRADE_DOC_E2E_PG_CTL and TRADE_DOC_E2E_PGDATA must be absolute paths");
+    }
+    if (resolve(pgData) === "/") {
+      throw new Error("TRADE_DOC_E2E_PGDATA must not be the filesystem root");
+    }
+    const child = spawn(pgCtl, ["-D", pgData, "-m", "fast", "restart"], {
+      cwd: projectRoot,
+      env: process.env,
+      stdio: "ignore",
+    });
+    const [code] = await once(child, "exit");
+    if (code !== 0) throw new Error("PostgreSQL restart failed");
+    return;
+  }
+
   const password = decodeURIComponent(new URL(databaseUrl).password);
   if (!password) throw new Error("DATABASE_URL must include the synthetic database password");
   const child = spawn("docker", ["compose", "restart", "postgres"], {
