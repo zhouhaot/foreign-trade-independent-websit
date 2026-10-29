@@ -1,6 +1,14 @@
 # 外贸订单与单证管理系统
 
-## 当前进度与接续入口（2026-10-06）
+## 当前进度与接续入口（2026-10-29）
+
+独立生产工程入口为 [`trade-doc-app/`](trade-doc-app/README.md)，当前分支 `feat/production-slice-01` 用于首个生产业务切片的实现与真实验收接续。技术栈为 Next.js App Router、React、TypeScript、PostgreSQL 17、Drizzle ORM 与 postgres.js，使用 Node.js 22.12+ 和 pnpm 11.24.0。当前代码已实现契约中的 25 个 `/api/v1` 操作和 16 张业务表。静态 `trade-doc-demo/` 不变，仍仅作历史参考，不接入生产工程或生产数据。
+
+2026-10-29 本机合成真实统一验收 `runId=b195c4f168cc` 已完成，49/49 项场景为 `PASS`；配套执行的 31 项真实 PostgreSQL 数据库集成测试和 1 个真实 Chromium 浏览器主流程均已通过。`RESTART-01` 已实际重启应用和 PostgreSQL，并完成重新登录、业务回读与同键幂等重放。逐项结果见 [`trade-doc-app/docs/acceptance/results/2026-10-29-slice-01.json`](trade-doc-app/docs/acceptance/results/2026-10-29-slice-01.json)。
+
+同一来源的本机合成备份已于 `2026-10-29T08:11:23Z` 恢复到新建空库 `trade_doc_restore_b195_v2`，结果为 `PASS`。`pg_restore --exit-on-error` 耗时 106.826 ms，迁移耗时 690.239 ms；`pg_isready` 正常，独立 Next 3102 端口的 `/api/health` 与 `/api/ready` 均为 HTTP 200。16 张业务表均可查询，关键唯一键/外键反例按预期拒绝且已验证回滚；恢复后回读为 14 orders、14 versions、28 lines、231 idempotency、229 audits，金额、归属和快照不一致数均为 0。备份 SHA256 和逐项脱敏证据见 [`trade-doc-app/docs/acceptance/results/2026-10-29-restore.json`](trade-doc-app/docs/acceptance/results/2026-10-29-restore.json)。本次 Next 已停止，隔离库和源备份保留。
+
+`TX-01` 覆盖五个业务事务在成功幂等记录或成功审计写入前发生故障时的回滚与同键重试，不声称覆盖所有中间 SQL 步骤或进程崩溃窗口。原契约的 `PLANNED` / `PLANNED-NOT-EXECUTED` 基线不变，实际结果存于证据文件。49/49 本机合成验收和本机合成隔离恢复均已通过，但不构成生产部署或生产验收；正式生产部署、生产备份和生产恢复仍未执行。
 
 最新可运行的静态前端位于 [`trade-doc-demo/`](trade-doc-demo/README.md)。2026-10-07 已落地 A（珍珠白 / 鸢尾紫 / 薄荷青）：浅色窄导航、订单列表与详情并排核对、完整表格切换。没有后端、真实鉴权、数据库或生产部署。每轮改进与复盘见 `trade-doc-demo/docs/iterations/`。
 
