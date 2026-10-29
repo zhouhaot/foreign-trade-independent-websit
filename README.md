@@ -1,6 +1,8 @@
 # 外贸订单与单证管理系统
 
-## 当前进度与接续入口（2026-10-06）
+## 当前进度与接续入口（2026-10-29）
+
+独立生产工程入口为 [`trade-doc-app/`](trade-doc-app/README.md)，当前分支 `feat/production-slice-01` 用于首个生产业务切片的实现与真实验收接续。技术栈为 Next.js App Router、React、TypeScript、PostgreSQL 17、Drizzle ORM 与 postgres.js，使用 Node.js 22.12+ 和 pnpm 11.24.0。当前代码已实现契约中的 25 个 `/api/v1` 操作和 16 张业务表；真实 PostgreSQL 集成、浏览器端到端与生产验收仍在进行，尚不能视为验收通过。静态 `trade-doc-demo/` 不变，仍仅作历史参考，不接入生产工程或生产数据。
 
 最新可运行的静态前端位于 [`trade-doc-demo/`](trade-doc-demo/README.md)。2026-10-07 已落地 A（珍珠白 / 鸢尾紫 / 薄荷青）：浅色窄导航、订单列表与详情并排核对、完整表格切换。没有后端、真实鉴权、数据库或生产部署。每轮改进与复盘见 `trade-doc-demo/docs/iterations/`。
 

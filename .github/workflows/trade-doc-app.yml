@@ -2,8 +2,14 @@ name: CI
 
 on:
   pull_request:
+    paths:
+      - "trade-doc-app/**"
+      - ".github/workflows/trade-doc-app.yml"
   push:
     branches: [main]
+    paths:
+      - "trade-doc-app/**"
+      - ".github/workflows/trade-doc-app.yml"
   workflow_dispatch:
 
 permissions:
@@ -12,6 +18,10 @@ permissions:
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: trade-doc-app
 
 jobs:
   quality:
@@ -24,13 +34,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
+          package_json_file: trade-doc-app/package.json
           run_install: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: trade-doc-app/pnpm-lock.yaml
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Lint
@@ -76,13 +87,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
+          package_json_file: trade-doc-app/package.json
           run_install: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: trade-doc-app/pnpm-lock.yaml
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Apply migrations
@@ -125,13 +137,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
+          package_json_file: trade-doc-app/package.json
           run_install: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: trade-doc-app/pnpm-lock.yaml
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Install Chromium
